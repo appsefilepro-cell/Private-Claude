@@ -1,0 +1,145 @@
+# Agent X2.0 - Git Ignore File
+# CRITICAL: Prevents committing sensitive credentials
+
+# Environment Variables - NEVER COMMIT THESE
+.env
+*.env
+.env.local
+.env.production
+config/.env
+
+# API Credentials
+*credentials.json
+*token.json
+*api_key*
+*secret*
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual Environment
+venv/
+env/
+ENV/
+.venv/
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Logs
+logs/*.log
+*.log
+*.log.*
+
+# Data Files (may contain PII)
+data/
+*.csv
+customer_contact_list.csv
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+
+# Temporary Files
+*.tmp
+*.temp
+*.bak
+*.backup
+
+# OS Generated
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Microsoft Office Temporary Files
+~$*
+
+# Jupyter Notebooks
+.ipynb_checkpoints/
+*.ipynb
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+*.cover
+
+# Secrets Management
+secrets/
+*.pem
+*.key
+*.cert
+*.crt
+
+# Backup Files
+*.bak
+*.backup
+*.old
+
+# Compiled Files
+*.pyc
+*.pyo
+
+# Sensitive Documents
+*password*
+*passwd*
+*secret*
+*private*
+*.pfx
+
+# Local Configuration
+local_settings.py
+settings_local.py
+
+# Trading Data
+trade_log*.csv
+trade_log*.json
+positions*.json
+
+# Legal Documents (may contain privileged info)
+# Uncomment if needed:
+# pillar-b-legal/case-management/*/Evidence/*
+# pillar-b-legal/automation-flows/output/*
+
+# Grant Data
+# pillar-d-nonprofit/grant-intelligence/pipeline.json
+
+# Federal Contracting
+# pillar-c-federal/sam-monitoring/opportunities.json
+
+# Keep template files
+!config/.env.template
+!**/.gitkeep
+
+# Allow specific config files
+!config/agent_3_config.json

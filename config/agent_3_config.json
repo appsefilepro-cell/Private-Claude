@@ -1,0 +1,122 @@
+{
+  "system_name": "Agent X2.0",
+  "version": "2.0.0",
+  "deployment_date": "2025-12-05",
+  "owner": "Thurman Malik Robinson",
+  "organization": "APPS Holdings WY Inc.",
+
+  "api_endpoints": {
+    "sharepoint_api": "https://appsholdingswyinc.sharepoint.com/_api/",
+    "zapier_webhook": "https://hooks.zapier.com/hooks/catch/YOUR_WEBHOOK_ID/",
+    "kraken_api": "https://api.kraken.com",
+    "kraken_ws": "wss://ws.kraken.com"
+  },
+
+  "risk_management": {
+    "confidence_threshold": 0.75,
+    "max_position_size": 0.02,
+    "risk_per_trade": 0.01,
+    "max_daily_loss": 0.05,
+    "max_weekly_loss": 0.10,
+    "max_open_positions": 5,
+    "emergency_halt_threshold": 0.15
+  },
+
+  "trading_pairs": [
+    "BTC/USD",
+    "ETH/USD",
+    "SOL/USD"
+  ],
+
+  "candlestick_patterns": {
+    "bullish": [
+      "HAMMER",
+      "INVERTED_HAMMER",
+      "BULLISH_ENGULFING",
+      "MORNING_STAR",
+      "THREE_WHITE_SOLDIERS",
+      "DRAGONFLY_DOJI"
+    ],
+    "bearish": [
+      "SHOOTING_STAR",
+      "HANGING_MAN",
+      "BEARISH_ENGULFING",
+      "EVENING_STAR",
+      "THREE_BLACK_CROWS",
+      "GRAVESTONE_DOJI"
+    ]
+  },
+
+  "monitoring": {
+    "check_interval_seconds": 60,
+    "health_check_interval": 300,
+    "log_retention_days": 90,
+    "alert_email": "appsefilepro@gmail.com"
+  },
+
+  "legal_operations": {
+    "templates_dir": "pillar-b-legal/templates",
+    "active_cases_dir": "pillar-b-legal/case-management",
+    "output_dir": "pillar-b-legal/automation-flows/output",
+    "evidence_keywords": ["evidence", "exhibit", "deposition", "affidavit"]
+  },
+
+  "federal_contracting": {
+    "sam_gov_api": "https://api.sam.gov/prod/opportunities/v2/search",
+    "target_naics": ["561110", "541611", "541990"],
+    "max_contract_value": 10000,
+    "set_aside_types": ["8(a)", "SDB", "SDVOSB"]
+  },
+
+  "grant_intelligence": {
+    "sources": [
+      "https://www.grants.gov/",
+      "https://www.sam.gov/",
+      "https://candid.org/"
+    ],
+    "focus_areas": [
+      "technology",
+      "small business",
+      "minority-owned",
+      "ai/automation"
+    ]
+  },
+
+  "data_ingestion": {
+    "gmail_keywords": ["1040", "Tax Return", "W-2", "W2", "Tax Document"],
+    "file_types": [".pdf", ".xlsx", ".xls", ".docx", ".csv"],
+    "max_file_size_mb": 50,
+    "deduplication_enabled": true
+  },
+
+  "compliance": {
+    "audit_logging_enabled": true,
+    "encryption_enabled": true,
+    "data_retention_days": 2555,
+    "pii_handling": "encrypted",
+    "backup_enabled": true,
+    "backup_frequency_hours": 24
+  },
+
+  "notifications": {
+    "email_enabled": true,
+    "email_recipients": ["appsefilepro@gmail.com"],
+    "slack_enabled": false,
+    "teams_enabled": true,
+    "sms_enabled": false
+  },
+
+  "microsoft_365": {
+    "tenant": "APPSHOLDINGSWYINC.onmicrosoft.com",
+    "sharepoint_site": "appsholdingswyinc.sharepoint.com",
+    "admin_email": "ThermanRobinson@APPSHOLDINGSWYINC.onmicrosoft.com"
+  },
+
+  "instructions": [
+    "This is the master configuration for Agent X2.0",
+    "Update API keys and credentials using environment variables",
+    "Never commit credentials to version control",
+    "Use .env file for sensitive values",
+    "Refer to deployment_guide.md for setup instructions"
+  ]
+}
