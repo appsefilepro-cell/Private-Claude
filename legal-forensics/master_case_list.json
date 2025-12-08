@@ -1,0 +1,334 @@
+{
+  "master_case_list": [
+    {
+      "number": 1,
+      "caption": "Thurman Malik Robinson, Jr. & APPS Holdings WY, Inc. v. City of Los Angeles; LAPD; Adilah Robinson; Does 1-50",
+      "jurisdiction": "U.S. District Court, Central District of California",
+      "claims": ["42 USC 1983", "ADA", "Assault & Battery", "IIED", "Defamation", "Negligence", "Monell", "Fraud"],
+      "keywords": ["LAPD", "police", "excessive force", "1983", "ADA", "assault", "Adilah Robinson", "City of Los Angeles", "February 19 2022"],
+      "incident_date": "2022-02-19",
+      "priority": "HIGH"
+    },
+    {
+      "number": 2,
+      "caption": "Thurman Malik Robinson, Jr. & APPS Holdings WY, Inc. v. New Forest Houston / Novu Apartments",
+      "jurisdiction": "Harris County Civil Court / Southern District of Texas",
+      "claims": ["ADA", "FHA", "Breach of Lease", "Wrongful Eviction", "IIED", "TRO"],
+      "keywords": ["Novu", "New Forest", "eviction", "apartment", "Houston", "Harris County", "ADA", "FHA"],
+      "priority": "HIGH"
+    },
+    {
+      "number": 3,
+      "caption": "Thurman Malik Robinson, Jr. & APPS Holdings WY, Inc. v. BMO Harris Bank (ADA Violations)",
+      "jurisdiction": "Southern District of Texas",
+      "claims": ["ADA Violations", "Financial Harm", "Emotional Distress", "Business Loss"],
+      "keywords": ["BMO", "BMO Harris", "bank", "ADA", "accessibility", "financial"],
+      "priority": "MEDIUM"
+    },
+    {
+      "number": 4,
+      "caption": "Thurman Malik Robinson, Jr. & APPS Holdings WY, Inc. v. Bank of America",
+      "jurisdiction": "Federal/State",
+      "claims": ["Fraud", "Identity Theft", "ADA", "IIED", "Financial Harm"],
+      "keywords": ["Bank of America", "BofA", "fraud", "identity theft"],
+      "priority": "MEDIUM"
+    },
+    {
+      "number": 5,
+      "caption": "Thurman Malik Robinson, Jr. & APPS Holdings WY, Inc. v. American Airlines",
+      "jurisdiction": "Small Claims/Federal",
+      "claims": ["Baggage Loss", "Damages", "ADA", "Emotional Distress"],
+      "keywords": ["American Airlines", "baggage", "luggage", "airline"],
+      "priority": "LOW"
+    },
+    {
+      "number": 6,
+      "caption": "Thurman Malik Robinson, Jr. & APPS Holdings WY, Inc. v. MGM Resorts",
+      "jurisdiction": "Federal/State",
+      "claims": ["Identity Theft", "FTC Settlement", "Damages"],
+      "keywords": ["MGM", "resort", "identity theft", "casino"],
+      "priority": "MEDIUM"
+    },
+    {
+      "number": 7,
+      "caption": "Thurman Malik Robinson, Jr. & APPS Holdings WY, Inc. v. BMO Harris Bank (ADA Batch 13)",
+      "jurisdiction": "Federal/State",
+      "claims": ["ADA", "Financial Harm", "Compliance"],
+      "keywords": ["BMO", "BMO Harris", "ADA", "compliance", "batch 13"],
+      "priority": "MEDIUM"
+    },
+    {
+      "number": 8,
+      "caption": "Thurman Malik Robinson, Jr. & APPS Holdings WY, Inc. v. Microsoft Corporation",
+      "jurisdiction": "Federal/State (Houston)",
+      "claims": ["Business Loss", "Service Disruption", "Damages", "ADA"],
+      "keywords": ["Microsoft", "MSFT", "service disruption", "business loss"],
+      "priority": "MEDIUM"
+    },
+    {
+      "number": 9,
+      "caption": "Thurman Malik Robinson, Jr. & APPS Holdings WY, Inc. v. BMO Harris Bank (Federal Complaint)",
+      "jurisdiction": "Southern District of Texas",
+      "claims": ["ADA", "Financial Harm", "Emotional Distress"],
+      "keywords": ["BMO", "BMO Harris", "federal", "ADA"],
+      "priority": "MEDIUM"
+    },
+    {
+      "number": 10,
+      "caption": "Thurman Malik Robinson, Jr. & APPS Holdings WY, Inc. v. FTC/Identity Theft Defendants",
+      "jurisdiction": "Federal",
+      "claims": ["Identity Theft", "Damages", "FTC Complaint"],
+      "keywords": ["FTC", "identity theft", "fraud"],
+      "priority": "MEDIUM"
+    },
+    {
+      "number": 11,
+      "caption": "Thurman Malik Robinson, Jr. & APPS Holdings WY, Inc. v. Various Creditors (Credit Dispute)",
+      "jurisdiction": "Federal/State",
+      "claims": ["Fraudulent Transactions", "Credit Reporting", "Damages"],
+      "keywords": ["credit", "creditor", "Experian", "Equifax", "TransUnion", "dispute"],
+      "priority": "LOW"
+    },
+    {
+      "number": 12,
+      "caption": "Thurman Malik Robinson, Jr. & APPS Holdings WY, Inc. v. Various Landlords (Eviction Defense)",
+      "jurisdiction": "Harris County, Texas",
+      "claims": ["Wrongful Eviction", "ADA", "Damages"],
+      "keywords": ["eviction", "landlord", "Harris County", "ADA"],
+      "priority": "MEDIUM"
+    },
+    {
+      "number": 13,
+      "caption": "Thurman Malik Robinson, Jr. & APPS Holdings WY, Inc. v. Various Airlines (Travel Disputes)",
+      "jurisdiction": "Small Claims/Federal",
+      "claims": ["Lost Luggage", "ADA", "Damages"],
+      "keywords": ["airline", "travel", "luggage", "baggage"],
+      "priority": "LOW"
+    },
+    {
+      "number": 14,
+      "caption": "Thurman Malik Robinson, Jr. & APPS Holdings WY, Inc. v. Various Medical Providers",
+      "jurisdiction": "State/Federal",
+      "claims": ["Billing Errors", "ADA", "Damages"],
+      "keywords": ["medical", "doctor", "hospital", "billing"],
+      "priority": "LOW"
+    },
+    {
+      "number": 15,
+      "caption": "Thurman Malik Robinson, Jr. & APPS Holdings WY, Inc. v. Various Financial Institutions",
+      "jurisdiction": "Federal/State",
+      "claims": ["Fraud", "Damages", "ADA"],
+      "keywords": ["bank", "financial", "fraud", "account"],
+      "priority": "MEDIUM"
+    },
+    {
+      "number": 16,
+      "caption": "Thurman Malik Robinson, Jr. & APPS Holdings WY, Inc. v. Various Insurance Companies",
+      "jurisdiction": "State/Federal",
+      "claims": ["Denied Claims", "Damages", "ADA"],
+      "keywords": ["insurance", "claim", "denial", "policy"],
+      "priority": "LOW"
+    },
+    {
+      "number": 17,
+      "caption": "Thurman Malik Robinson, Jr. & APPS Holdings WY, Inc. v. Various Utility Providers",
+      "jurisdiction": "State",
+      "claims": ["Service Disruption", "Damages", "ADA"],
+      "keywords": ["utility", "electric", "water", "gas", "internet"],
+      "priority": "LOW"
+    },
+    {
+      "number": 18,
+      "caption": "Thurman Malik Robinson, Jr. & APPS Holdings WY, Inc. v. Various Government Agencies",
+      "jurisdiction": "Federal/State",
+      "claims": ["ADA", "Section 504", "Damages"],
+      "keywords": ["government", "agency", "ADA", "Section 504", "IRS", "Social Security"],
+      "priority": "MEDIUM"
+    },
+    {
+      "number": 19,
+      "caption": "Thurman Malik Robinson, Jr. & APPS Holdings WY, Inc. v. Various Debt Collectors",
+      "jurisdiction": "Federal/State",
+      "claims": ["FDCPA", "Damages", "ADA"],
+      "keywords": ["debt", "collector", "FDCPA", "collection"],
+      "priority": "LOW"
+    },
+    {
+      "number": 20,
+      "caption": "Thurman Malik Robinson, Jr. & APPS Holdings WY, Inc. v. Various Entities (Contract Disputes)",
+      "jurisdiction": "Federal/State",
+      "claims": ["Breach of Contract", "Damages", "ADA"],
+      "keywords": ["contract", "breach", "agreement", "business"],
+      "priority": "MEDIUM"
+    },
+    {
+      "number": 21,
+      "caption": "Thurman Malik Robinson, Jr. & APPS Holdings WY, Inc. v. United Airlines",
+      "jurisdiction": "Federal/State",
+      "claims": ["Baggage Claim", "ADA", "Damages"],
+      "keywords": ["United", "airline", "baggage"],
+      "priority": "LOW"
+    },
+    {
+      "number": 22,
+      "caption": "Thurman Malik Robinson, Jr. & APPS Holdings WY, Inc. v. Delta Airlines",
+      "jurisdiction": "Federal/State",
+      "claims": ["Travel Disruption", "ADA", "Damages"],
+      "keywords": ["Delta", "airline", "travel"],
+      "priority": "LOW"
+    },
+    {
+      "number": 23,
+      "caption": "Thurman Malik Robinson, Jr. & APPS Holdings WY, Inc. v. Chase Bank",
+      "jurisdiction": "Federal/State",
+      "claims": ["ADA", "Financial Harm", "Fraud"],
+      "keywords": ["Chase", "JPMorgan", "bank"],
+      "priority": "MEDIUM"
+    },
+    {
+      "number": 24,
+      "caption": "Thurman Malik Robinson, Jr. & APPS Holdings WY, Inc. v. Wells Fargo",
+      "jurisdiction": "Federal/State",
+      "claims": ["ADA", "Financial Harm", "Account Errors"],
+      "keywords": ["Wells Fargo", "bank", "account"],
+      "priority": "MEDIUM"
+    },
+    {
+      "number": 25,
+      "caption": "Thurman Malik Robinson, Jr. & APPS Holdings WY, Inc. v. Citibank",
+      "jurisdiction": "Federal/State",
+      "claims": ["ADA", "Credit Dispute", "Damages"],
+      "keywords": ["Citibank", "Citi", "credit"],
+      "priority": "MEDIUM"
+    },
+    {
+      "number": 26,
+      "caption": "Thurman Malik Robinson, Jr. & APPS Holdings WY, Inc. v. Capital One",
+      "jurisdiction": "Federal/State",
+      "claims": ["ADA", "Credit Errors", "Damages"],
+      "keywords": ["Capital One", "credit", "card"],
+      "priority": "MEDIUM"
+    },
+    {
+      "number": 27,
+      "caption": "Thurman Malik Robinson, Jr. & APPS Holdings WY, Inc. v. AT&T",
+      "jurisdiction": "Federal/State",
+      "claims": ["Service Disruption", "ADA", "Billing Errors"],
+      "keywords": ["AT&T", "phone", "service", "billing"],
+      "priority": "LOW"
+    },
+    {
+      "number": 28,
+      "caption": "Thurman Malik Robinson, Jr. & APPS Holdings WY, Inc. v. Verizon",
+      "jurisdiction": "Federal/State",
+      "claims": ["Service Quality", "ADA", "Contract Breach"],
+      "keywords": ["Verizon", "wireless", "service"],
+      "priority": "LOW"
+    },
+    {
+      "number": 29,
+      "caption": "Thurman Malik Robinson, Jr. & APPS Holdings WY, Inc. v. Comcast/Xfinity",
+      "jurisdiction": "Federal/State",
+      "claims": ["Service Disruption", "ADA", "Billing"],
+      "keywords": ["Comcast", "Xfinity", "internet", "cable"],
+      "priority": "LOW"
+    },
+    {
+      "number": 30,
+      "caption": "Thurman Malik Robinson, Jr. & APPS Holdings WY, Inc. v. Spectrum",
+      "jurisdiction": "Federal/State",
+      "claims": ["Service Issues", "ADA", "Contract"],
+      "keywords": ["Spectrum", "internet", "cable"],
+      "priority": "LOW"
+    },
+    {
+      "number": 31,
+      "caption": "Thurman Malik Robinson, Jr. & APPS Holdings WY, Inc. v. Amazon",
+      "jurisdiction": "Federal/State",
+      "claims": ["ADA", "E-commerce Access", "Damages"],
+      "keywords": ["Amazon", "online", "accessibility"],
+      "priority": "MEDIUM"
+    },
+    {
+      "number": 32,
+      "caption": "Thurman Malik Robinson, Jr. & APPS Holdings WY, Inc. v. Target",
+      "jurisdiction": "Federal/State",
+      "claims": ["ADA", "Physical Access", "Damages"],
+      "keywords": ["Target", "retail", "accessibility"],
+      "priority": "LOW"
+    },
+    {
+      "number": 33,
+      "caption": "Thurman Malik Robinson, Jr. & APPS Holdings WY, Inc. v. Walmart",
+      "jurisdiction": "Federal/State",
+      "claims": ["ADA", "Employment", "Damages"],
+      "keywords": ["Walmart", "retail", "employment"],
+      "priority": "LOW"
+    },
+    {
+      "number": 34,
+      "caption": "Thurman Malik Robinson, Jr. & APPS Holdings WY, Inc. v. CVS Pharmacy",
+      "jurisdiction": "Federal/State",
+      "claims": ["ADA", "Prescription Access", "Damages"],
+      "keywords": ["CVS", "pharmacy", "prescription"],
+      "priority": "LOW"
+    },
+    {
+      "number": 35,
+      "caption": "Thurman Malik Robinson, Jr. & APPS Holdings WY, Inc. v. Walgreens",
+      "jurisdiction": "Federal/State",
+      "claims": ["ADA", "Service Access", "Damages"],
+      "keywords": ["Walgreens", "pharmacy"],
+      "priority": "LOW"
+    },
+    {
+      "number": 36,
+      "caption": "Thurman Malik Robinson, Jr. & APPS Holdings WY, Inc. v. UPS",
+      "jurisdiction": "Federal/State",
+      "claims": ["Lost Package", "ADA", "Damages"],
+      "keywords": ["UPS", "shipping", "package"],
+      "priority": "LOW"
+    },
+    {
+      "number": 37,
+      "caption": "Thurman Malik Robinson, Jr. & APPS Holdings WY, Inc. v. FedEx",
+      "jurisdiction": "Federal/State",
+      "claims": ["Shipping Issues", "ADA", "Damages"],
+      "keywords": ["FedEx", "shipping", "delivery"],
+      "priority": "LOW"
+    },
+    {
+      "number": 38,
+      "caption": "Thurman Malik Robinson, Jr. & APPS Holdings WY, Inc. v. USPS",
+      "jurisdiction": "Federal",
+      "claims": ["Mail Issues", "ADA", "Government Tort"],
+      "keywords": ["USPS", "postal", "mail"],
+      "priority": "LOW"
+    },
+    {
+      "number": 39,
+      "caption": "Thurman Malik Robinson, Jr. & APPS Holdings WY, Inc. v. IRS",
+      "jurisdiction": "Federal",
+      "claims": ["Tax Dispute", "ADA", "Administrative"],
+      "keywords": ["IRS", "tax", "refund"],
+      "priority": "MEDIUM"
+    },
+    {
+      "number": 40,
+      "caption": "Thurman Malik Robinson, Jr. & APPS Holdings WY, Inc. v. Social Security Administration",
+      "jurisdiction": "Federal",
+      "claims": ["Benefits Denial", "ADA", "Administrative Appeal"],
+      "keywords": ["Social Security", "SSA", "disability", "benefits"],
+      "priority": "MEDIUM"
+    }
+  ],
+  "metadata": {
+    "total_cases": 40,
+    "generated_date": "2025-12-05",
+    "plaintiff_entity": "Thurman Malik Robinson, Jr. & APPS Holdings WY, Inc.",
+    "primary_counsel": "Thurman Malik Robinson, Jr. (Pro Se + Corporate Representative)",
+    "high_priority_cases": [1, 2],
+    "medium_priority_cases": [3, 4, 6, 7, 8, 9, 10, 12, 15, 18, 20, 23, 24, 25, 26, 31, 39, 40],
+    "low_priority_cases": [5, 11, 13, 14, 16, 17, 19, 21, 22, 27, 28, 29, 30, 32, 33, 34, 35, 36, 37, 38]
+  }
+}
