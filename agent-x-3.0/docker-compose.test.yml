@@ -1,0 +1,297 @@
+version: '3.8'
+
+# AGENT X 3.0 - TEST ENVIRONMENT
+# Complete testing stack with all services
+
+services:
+  # Core Trading Bot Service
+  trading-bot-test:
+    build:
+      context: ./trading-bot
+      dockerfile: Dockerfile
+    container_name: agentx-trading-test
+    restart: unless-stopped
+    environment:
+      - ENVIRONMENT=test
+      - DATABASE_URL=postgresql://agentx_user:agentx_test_pass@postgres-test:5432/agentx_test
+      - REDIS_URL=redis://redis-test:6379/0
+      - MT5_SERVER=demo.broker.com
+      - MT5_LOGIN=12345678
+      - MT5_PASSWORD=${MT5_TEST_PASSWORD}
+      - LOG_LEVEL=DEBUG
+      - KRAKEN_API_KEY=${KRAKEN_TEST_KEY}
+      - KRAKEN_API_SECRET=${KRAKEN_TEST_SECRET}
+    depends_on:
+      postgres-test:
+        condition: service_healthy
+      redis-test:
+        condition: service_healthy
+    ports:
+      - "8001:8000"
+    volumes:
+      - ./trading-bot:/app
+      - trading-logs-test:/var/log/agentx
+    networks:
+      - agentx-test-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Legal Automation Service
+  legal-automation-test:
+    build:
+      context: ./legal-service
+      dockerfile: Dockerfile
+    container_name: agentx-legal-test
+    restart: unless-stopped
+    environment:
+      - ENVIRONMENT=test
+      - DATABASE_URL=postgresql://agentx_user:agentx_test_pass@postgres-test:5432/agentx_legal_test
+      - REDIS_URL=redis://redis-test:6379/1
+      - OPENAI_API_KEY=${OPENAI_TEST_KEY}
+      - ANTHROPIC_API_KEY=${ANTHROPIC_TEST_KEY}
+    depends_on:
+      postgres-test:
+        condition: service_healthy
+    ports:
+      - "8002:8000"
+    volumes:
+      - ./legal-service:/app
+      - legal-docs-test:/var/legal/documents
+    networks:
+      - agentx-test-network
+
+  # Tax Compliance Service
+  tax-service-test:
+    build:
+      context: ./tax-service
+      dockerfile: Dockerfile
+    container_name: agentx-tax-test
+    restart: unless-stopped
+    environment:
+      - ENVIRONMENT=test
+      - DATABASE_URL=postgresql://agentx_user:agentx_test_pass@postgres-test:5432/agentx_tax_test
+      - REDIS_URL=redis://redis-test:6379/2
+      - IRS_API_KEY=${IRS_TEST_KEY}
+      - FINCEN_API_KEY=${FINCEN_TEST_KEY}
+    depends_on:
+      postgres-test:
+        condition: service_healthy
+    ports:
+      - "8003:8000"
+    volumes:
+      - ./tax-service:/app
+      - tax-records-test:/var/tax/records
+    networks:
+      - agentx-test-network
+
+  # Microsoft 365 Integration Service
+  ms365-service-test:
+    build:
+      context: ./ms365-service
+      dockerfile: Dockerfile
+    container_name: agentx-ms365-test
+    restart: unless-stopped
+    environment:
+      - ENVIRONMENT=test
+      - AZURE_TENANT_ID=${AZURE_TEST_TENANT}
+      - AZURE_CLIENT_ID=${AZURE_TEST_CLIENT}
+      - AZURE_CLIENT_SECRET=${AZURE_TEST_SECRET}
+      - DATABASE_URL=postgresql://agentx_user:agentx_test_pass@postgres-test:5432/agentx_ms365_test
+    ports:
+      - "8004:8000"
+    volumes:
+      - ./ms365-service:/app
+    networks:
+      - agentx-test-network
+
+  # HubSpot CRM Integration
+  hubspot-service-test:
+    build:
+      context: ./hubspot-service
+      dockerfile: Dockerfile
+    container_name: agentx-hubspot-test
+    restart: unless-stopped
+    environment:
+      - ENVIRONMENT=test
+      - HUBSPOT_API_KEY=${HUBSPOT_TEST_KEY}
+      - DATABASE_URL=postgresql://agentx_user:agentx_test_pass@postgres-test:5432/agentx_hubspot_test
+    ports:
+      - "8005:8000"
+    networks:
+      - agentx-test-network
+
+  # PostgreSQL Database (Test)
+  postgres-test:
+    image: postgres:15-alpine
+    container_name: agentx-postgres-test
+    restart: unless-stopped
+    environment:
+      - POSTGRES_USER=agentx_user
+      - POSTGRES_PASSWORD=agentx_test_pass
+      - POSTGRES_DB=agentx_test
+      - POSTGRES_MULTIPLE_DATABASES=agentx_legal_test,agentx_tax_test,agentx_ms365_test,agentx_hubspot_test
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres-data-test:/var/lib/postgresql/data
+      - ./scripts/init-databases.sh:/docker-entrypoint-initdb.d/init-databases.sh
+    networks:
+      - agentx-test-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U agentx_user -d agentx_test"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Redis Cache (Test)
+  redis-test:
+    image: redis:7.2-alpine
+    container_name: agentx-redis-test
+    restart: unless-stopped
+    command: >
+      redis-server
+      --appendonly yes
+      --maxmemory 512mb
+      --maxmemory-policy allkeys-lru
+      --requirepass agentx_redis_test_pass
+    ports:
+      - "6380:6379"
+    volumes:
+      - redis-data-test:/data
+    networks:
+      - agentx-test-network
+    healthcheck:
+      test: ["CMD", "redis-cli", "--raw", "incr", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
+  # Webhook Receiver (Flask)
+  webhook-receiver-test:
+    build:
+      context: ./webhook-service
+      dockerfile: Dockerfile
+    container_name: agentx-webhook-test
+    restart: unless-stopped
+    environment:
+      - ENVIRONMENT=test
+      - REDIS_URL=redis://redis-test:6379/3
+      - WEBHOOK_SECRET=${WEBHOOK_TEST_SECRET}
+    ports:
+      - "5001:5000"
+    volumes:
+      - ./webhook-service:/app
+    networks:
+      - agentx-test-network
+
+  # Nginx Reverse Proxy (Test)
+  nginx-test:
+    image: nginx:alpine
+    container_name: agentx-nginx-test
+    restart: unless-stopped
+    ports:
+      - "8080:80"
+    volumes:
+      - ./nginx/test.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx/ssl-test:/etc/nginx/ssl:ro
+    depends_on:
+      - trading-bot-test
+      - legal-automation-test
+      - tax-service-test
+    networks:
+      - agentx-test-network
+
+  # Monitoring - Prometheus (Test)
+  prometheus-test:
+    image: prom/prometheus:latest
+    container_name: agentx-prometheus-test
+    restart: unless-stopped
+    ports:
+      - "9091:9090"
+    volumes:
+      - ./monitoring/prometheus-test.yml:/etc/prometheus/prometheus.yml
+      - prometheus-data-test:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+    networks:
+      - agentx-test-network
+
+  # Monitoring - Grafana (Test)
+  grafana-test:
+    image: grafana/grafana:latest
+    container_name: agentx-grafana-test
+    restart: unless-stopped
+    ports:
+      - "3001:3000"
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=agentx_test_admin
+      - GF_INSTALL_PLUGINS=redis-datasource
+    volumes:
+      - grafana-data-test:/var/lib/grafana
+      - ./monitoring/grafana-dashboards:/etc/grafana/provisioning/dashboards
+    networks:
+      - agentx-test-network
+
+  # ELK Stack - Elasticsearch (Test)
+  elasticsearch-test:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.11.0
+    container_name: agentx-elasticsearch-test
+    restart: unless-stopped
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ports:
+      - "9201:9200"
+    volumes:
+      - elasticsearch-data-test:/usr/share/elasticsearch/data
+    networks:
+      - agentx-test-network
+
+  # ELK Stack - Logstash (Test)
+  logstash-test:
+    image: docker.elastic.co/logstash/logstash:8.11.0
+    container_name: agentx-logstash-test
+    restart: unless-stopped
+    volumes:
+      - ./monitoring/logstash-test.conf:/usr/share/logstash/pipeline/logstash.conf
+    depends_on:
+      - elasticsearch-test
+    networks:
+      - agentx-test-network
+
+  # ELK Stack - Kibana (Test)
+  kibana-test:
+    image: docker.elastic.co/kibana/kibana:8.11.0
+    container_name: agentx-kibana-test
+    restart: unless-stopped
+    ports:
+      - "5602:5601"
+    environment:
+      - ELASTICSEARCH_HOSTS=http://elasticsearch-test:9200
+    depends_on:
+      - elasticsearch-test
+    networks:
+      - agentx-test-network
+
+volumes:
+  postgres-data-test:
+  redis-data-test:
+  trading-logs-test:
+  legal-docs-test:
+  tax-records-test:
+  prometheus-data-test:
+  grafana-data-test:
+  elasticsearch-data-test:
+
+networks:
+  agentx-test-network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16

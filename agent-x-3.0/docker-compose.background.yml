@@ -1,0 +1,247 @@
+version: '3.8'
+
+# AGENT X 3.0 - BACKGROUND ENVIRONMENT
+# Scheduled jobs, cron tasks, and continuous monitoring services
+
+services:
+  # Scheduled Job Runner (Cron Alternative)
+  job-scheduler:
+    build:
+      context: ./scheduler-service
+      dockerfile: Dockerfile
+    container_name: agentx-scheduler
+    restart: always
+    environment:
+      - ENVIRONMENT=background
+      - DATABASE_URL=postgresql://agentx_user:agentx_bg_pass@postgres-bg:5432/agentx_bg
+      - REDIS_URL=redis://redis-bg:6379/0
+      - TIMEZONE=America/Chicago
+    volumes:
+      - ./scheduler-service:/app
+      - /var/run/docker.sock:/var/run/docker.sock
+      - scheduler-logs:/var/log/scheduler
+    networks:
+      - agentx-bg-network
+    command: python scheduler_daemon.py
+
+  # Daily Tax Calculation Job
+  tax-daily-job:
+    build:
+      context: ./tax-service
+      dockerfile: Dockerfile.jobs
+    container_name: agentx-tax-daily
+    restart: unless-stopped
+    environment:
+      - JOB_TYPE=daily_tax_calculation
+      - SCHEDULE=0 2 * * *  # 2 AM daily
+      - DATABASE_URL=postgresql://agentx_user:agentx_bg_pass@postgres-bg:5432/agentx_bg
+    volumes:
+      - tax-job-logs:/var/log/tax-jobs
+    networks:
+      - agentx-bg-network
+
+  # Trading Performance Analysis Job (Weekly)
+  trading-weekly-job:
+    build:
+      context: ./trading-bot
+      dockerfile: Dockerfile.jobs
+    container_name: agentx-trading-weekly
+    restart: unless-stopped
+    environment:
+      - JOB_TYPE=weekly_performance_analysis
+      - SCHEDULE=0 0 * * 0  # Sunday midnight
+      - DATABASE_URL=postgresql://agentx_user:agentx_bg_pass@postgres-bg:5432/agentx_bg
+    volumes:
+      - trading-job-logs:/var/log/trading-jobs
+    networks:
+      - agentx-bg-network
+
+  # CTR/SAR Monitoring Job (Continuous)
+  fincen-monitor:
+    build:
+      context: ./tax-service
+      dockerfile: Dockerfile.monitor
+    container_name: agentx-fincen-monitor
+    restart: always
+    environment:
+      - JOB_TYPE=ctr_sar_monitoring
+      - CHECK_INTERVAL=300  # 5 minutes
+      - DATABASE_URL=postgresql://agentx_user:agentx_bg_pass@postgres-bg:5432/agentx_bg
+      - FINCEN_API_KEY=${FINCEN_API_KEY}
+    networks:
+      - agentx-bg-network
+
+  # Backup Job (Daily at 3 AM)
+  backup-daemon:
+    build:
+      context: ./backup-service
+      dockerfile: Dockerfile
+    container_name: agentx-backup-daemon
+    restart: always
+    environment:
+      - BACKUP_SCHEDULE=0 3 * * *  # 3 AM daily
+      - DATABASE_URL=postgresql://agentx_user:agentx_bg_pass@postgres-bg:5432/agentx_bg
+      - BACKUP_RETENTION_DAYS=30
+      - S3_BUCKET=${BACKUP_S3_BUCKET}
+      - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY}
+      - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_KEY}
+    volumes:
+      - /var/backups:/backups
+      - postgres-data-bg:/pg-data:ro
+    networks:
+      - agentx-bg-network
+
+  # Email Digest Sender (Daily Summary)
+  email-digest:
+    build:
+      context: ./notification-service
+      dockerfile: Dockerfile.digest
+    container_name: agentx-email-digest
+    restart: unless-stopped
+    environment:
+      - SCHEDULE=0 8 * * *  # 8 AM daily
+      - SMTP_HOST=${SMTP_HOST}
+      - SMTP_PORT=${SMTP_PORT}
+      - SMTP_USER=${SMTP_USER}
+      - SMTP_PASSWORD=${SMTP_PASSWORD}
+      - DATABASE_URL=postgresql://agentx_user:agentx_bg_pass@postgres-bg:5432/agentx_bg
+    networks:
+      - agentx-bg-network
+
+  # Health Check Monitor (Continuous)
+  health-monitor:
+    build:
+      context: ./monitoring-service
+      dockerfile: Dockerfile.health
+    container_name: agentx-health-monitor
+    restart: always
+    environment:
+      - CHECK_INTERVAL=60  # 1 minute
+      - ALERT_WEBHOOK=${SLACK_WEBHOOK_URL}
+      - REDIS_URL=redis://redis-bg:6379/1
+    networks:
+      - agentx-bg-network
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+
+  # Log Rotation and Cleanup
+  log-cleanup:
+    build:
+      context: ./utility-service
+      dockerfile: Dockerfile.logrotate
+    container_name: agentx-log-cleanup
+    restart: unless-stopped
+    environment:
+      - SCHEDULE=0 0 * * *  # Midnight daily
+      - LOG_RETENTION_DAYS=90
+    volumes:
+      - trading-logs-test:/logs/trading:rw
+      - legal-docs-test:/logs/legal:rw
+      - tax-records-test:/logs/tax:rw
+
+  # Certificate Renewal (Let's Encrypt)
+  cert-renewal:
+    build:
+      context: ./utility-service
+      dockerfile: Dockerfile.certbot
+    container_name: agentx-cert-renewal
+    restart: unless-stopped
+    environment:
+      - SCHEDULE=0 0 1 * *  # 1st of month
+      - DOMAIN=${PRODUCTION_DOMAIN}
+      - EMAIL=${ADMIN_EMAIL}
+    volumes:
+      - /etc/letsencrypt:/etc/letsencrypt
+      - /var/www/certbot:/var/www/certbot
+
+  # Database Vacuum and Analyze (Weekly)
+  db-maintenance:
+    image: postgres:15-alpine
+    container_name: agentx-db-maintenance
+    restart: unless-stopped
+    environment:
+      - PGHOST=postgres-bg
+      - PGUSER=agentx_user
+      - PGPASSWORD=agentx_bg_pass
+      - PGDATABASE=agentx_bg
+    networks:
+      - agentx-bg-network
+    command: >
+      sh -c "
+      while true; do
+        echo 'Running VACUUM ANALYZE...'
+        psql -c 'VACUUM ANALYZE;'
+        sleep 604800  # 1 week
+      done
+      "
+
+  # Redis Persistence Checker
+  redis-persistence:
+    image: redis:7.2-alpine
+    container_name: agentx-redis-checker
+    restart: unless-stopped
+    environment:
+      - REDIS_HOST=redis-bg
+      - REDIS_PORT=6379
+    networks:
+      - agentx-bg-network
+    command: >
+      sh -c "
+      while true; do
+        redis-cli -h redis-bg BGSAVE
+        sleep 3600  # Hourly
+      done
+      "
+
+  # Background PostgreSQL
+  postgres-bg:
+    image: postgres:15-alpine
+    container_name: agentx-postgres-bg
+    restart: always
+    environment:
+      - POSTGRES_USER=agentx_user
+      - POSTGRES_PASSWORD=agentx_bg_pass
+      - POSTGRES_DB=agentx_bg
+    ports:
+      - "5434:5432"
+    volumes:
+      - postgres-data-bg:/var/lib/postgresql/data
+    networks:
+      - agentx-bg-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U agentx_user"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Background Redis
+  redis-bg:
+    image: redis:7.2-alpine
+    container_name: agentx-redis-bg
+    restart: always
+    command: redis-server --appendonly yes
+    ports:
+      - "6381:6379"
+    volumes:
+      - redis-data-bg:/data
+    networks:
+      - agentx-bg-network
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
+volumes:
+  postgres-data-bg:
+  redis-data-bg:
+  scheduler-logs:
+  tax-job-logs:
+  trading-job-logs:
+  trading-logs-test:
+  legal-docs-test:
+  tax-records-test:
+
+networks:
+  agentx-bg-network:
+    driver: bridge
