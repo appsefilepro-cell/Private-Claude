@@ -9,9 +9,19 @@ import requests
 import logging
 from typing import Dict, Any, List, Optional
 from datetime import datetime
+from pathlib import Path
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger('ZapierMCP')
+
+# Load environment variables from config/.env
+try:
+    from dotenv import load_dotenv
+    config_path = Path(__file__).parent.parent.parent / 'config' / '.env'
+    load_dotenv(config_path)
+    logger.info(f"Loaded environment variables from {config_path}")
+except ImportError:
+    logger.warning("python-dotenv not installed. Install with: pip install python-dotenv")
 
 
 class ZapierMCPConnector:

@@ -7,10 +7,10 @@ import os
 import sys
 from datetime import datetime
 
-# Add parent to path
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+# Add current directory to path
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
-from zapier_integration.zapier_mcp_connector import ZapierMCPConnector
+from zapier_mcp_connector import ZapierMCPConnector
 
 
 def print_banner():
