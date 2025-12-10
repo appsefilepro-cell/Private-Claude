@@ -15,48 +15,6 @@ sys.path.insert(0, current_dir)
 
 from forensic_data_analyzer import ForensicDataAnalyzer
 from data_source_connectors import MultiSourceOrchestrator
-# Add current directory to path for imports
-current_dir = os.path.dirname(os.path.abspath(__file__))
-sys.path.insert(0, current_dir)
-
-from forensic_data_analyzer import ForensicDataAnalyzer
-from data_source_connectors import MultiSourceOrchestrator
-# Add current directory to path for imports
-current_dir = os.path.dirname(os.path.abspath(__file__))
-sys.path.insert(0, current_dir)
-
-from forensic_data_analyzer import ForensicDataAnalyzer
-from data_source_connectors import MultiSourceOrchestrator
-# Add current directory to path for imports
-current_dir = os.path.dirname(os.path.abspath(__file__))
-sys.path.insert(0, current_dir)
-
-from forensic_data_analyzer import ForensicDataAnalyzer
-from data_source_connectors import MultiSourceOrchestrator
-# Add current directory to path for imports
-current_dir = os.path.dirname(os.path.abspath(__file__))
-sys.path.insert(0, current_dir)
-
-from forensic_data_analyzer import ForensicDataAnalyzer
-from data_source_connectors import MultiSourceOrchestrator
-# Add current directory to path for imports
-current_dir = os.path.dirname(os.path.abspath(__file__))
-sys.path.insert(0, current_dir)
-
-from forensic_data_analyzer import ForensicDataAnalyzer
-from data_source_connectors import MultiSourceOrchestrator
-# Add current directory to path for imports
-current_dir = os.path.dirname(os.path.abspath(__file__))
-sys.path.insert(0, current_dir)
-
-from forensic_data_analyzer import ForensicDataAnalyzer
-from data_source_connectors import MultiSourceOrchestrator
-# Add current directory to path for imports
-current_dir = os.path.dirname(os.path.abspath(__file__))
-sys.path.insert(0, current_dir)
-
-from forensic_data_analyzer import ForensicDataAnalyzer
-from data_source_connectors import MultiSourceOrchestrator
 
 logging.basicConfig(
     level=logging.INFO,

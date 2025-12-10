@@ -1,0 +1,77 @@
+{
+  "timestamp": "2025-12-10 11:23:31",
+  "tests": [
+    {
+      "test": "Environment Configuration",
+      "status": "\u2705 PASS",
+      "passed": true,
+      "message": ".env file found"
+    },
+    {
+      "test": "Required Dependencies",
+      "status": "\u274c FAIL",
+      "passed": false,
+      "message": "Missing: python-dotenv"
+    },
+    {
+      "test": "Package Structure",
+      "status": "\u2705 PASS",
+      "passed": true,
+      "message": "All __init__.py files present"
+    },
+    {
+      "test": "Trading Risk Profiles",
+      "status": "\u2705 PASS",
+      "passed": true,
+      "message": "All 3 profiles configured"
+    },
+    {
+      "test": "Backtesting Engine",
+      "status": "\u2705 PASS",
+      "passed": true,
+      "message": "Backtesting Engine initialized"
+    },
+    {
+      "test": "Zapier MCP Connection",
+      "status": "\u274c FAIL",
+      "passed": false,
+      "message": "Import error: No module named 'pillar_a_trading'"
+    },
+    {
+      "test": "Agent 3.0 Orchestrator",
+      "status": "\u2705 PASS",
+      "passed": true,
+      "message": "Agent 3.0 initialized successfully"
+    },
+    {
+      "test": "Candlestick Pattern Analyzer",
+      "status": "\u274c FAIL",
+      "passed": false,
+      "message": "'CandlestickAnalyzer' object has no attribute 'analyze_pattern'"
+    },
+    {
+      "test": "Forensic Data Analyzer",
+      "status": "\u2705 PASS",
+      "passed": true,
+      "message": "Loaded 3 cases"
+    },
+    {
+      "test": "Grant Pipeline Manager",
+      "status": "\u2705 PASS",
+      "passed": true,
+      "message": "Grant Pipeline Manager initialized"
+    },
+    {
+      "test": "Remediation Engine",
+      "status": "\u2705 PASS",
+      "passed": true,
+      "message": "Remediation Engine initialized"
+    }
+  ],
+  "summary": {
+    "total": 11,
+    "passed": 8,
+    "failed": 3,
+    "pass_rate": 72.73
+  }
+}

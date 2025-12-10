@@ -1,0 +1,188 @@
+{
+  "profiles": {
+    "beginner": {
+      "name": "Beginner - Conservative",
+      "description": "Ultra-conservative settings for new traders learning the system",
+      "risk_parameters": {
+        "confidence_threshold": 0.85,
+        "max_position_size": 0.01,
+        "risk_per_trade": 0.005,
+        "max_daily_loss": 0.02,
+        "max_weekly_loss": 0.05,
+        "max_concurrent_trades": 1,
+        "emergency_halt_threshold": 0.03
+      },
+      "trading_pairs": [
+        "BTC/USD"
+      ],
+      "patterns_enabled": [
+        "HAMMER",
+        "BULLISH_ENGULFING",
+        "MORNING_STAR"
+      ],
+      "min_pattern_confirmation": 2,
+      "require_volume_confirmation": true,
+      "stop_loss_percentage": 0.02,
+      "take_profit_percentage": 0.04,
+      "trailing_stop": true,
+      "max_trades_per_day": 3,
+      "trading_hours": {
+        "enabled": true,
+        "start": "09:00",
+        "end": "16:00",
+        "timezone": "America/New_York"
+      },
+      "paper_trading_only": true
+    },
+    "novice": {
+      "name": "Novice - Moderate",
+      "description": "Balanced settings for traders with some experience",
+      "risk_parameters": {
+        "confidence_threshold": 0.80,
+        "max_position_size": 0.02,
+        "risk_per_trade": 0.01,
+        "max_daily_loss": 0.03,
+        "max_weekly_loss": 0.08,
+        "max_concurrent_trades": 2,
+        "emergency_halt_threshold": 0.05
+      },
+      "trading_pairs": [
+        "BTC/USD",
+        "ETH/USD"
+      ],
+      "patterns_enabled": [
+        "HAMMER",
+        "SHOOTING_STAR",
+        "BULLISH_ENGULFING",
+        "BEARISH_ENGULFING",
+        "MORNING_STAR",
+        "EVENING_STAR",
+        "DOJI"
+      ],
+      "min_pattern_confirmation": 2,
+      "require_volume_confirmation": true,
+      "stop_loss_percentage": 0.025,
+      "take_profit_percentage": 0.05,
+      "trailing_stop": true,
+      "max_trades_per_day": 5,
+      "trading_hours": {
+        "enabled": true,
+        "start": "08:00",
+        "end": "18:00",
+        "timezone": "America/New_York"
+      },
+      "paper_trading_only": false,
+      "sandbox_testing_required": true
+    },
+    "advanced": {
+      "name": "Advanced - Aggressive",
+      "description": "Optimized settings for experienced traders",
+      "risk_parameters": {
+        "confidence_threshold": 0.75,
+        "max_position_size": 0.03,
+        "risk_per_trade": 0.015,
+        "max_daily_loss": 0.05,
+        "max_weekly_loss": 0.10,
+        "max_concurrent_trades": 3,
+        "emergency_halt_threshold": 0.08
+      },
+      "trading_pairs": [
+        "BTC/USD",
+        "ETH/USD",
+        "BNB/USD",
+        "SOL/USD"
+      ],
+      "patterns_enabled": [
+        "HAMMER",
+        "SHOOTING_STAR",
+        "BULLISH_ENGULFING",
+        "BEARISH_ENGULFING",
+        "MORNING_STAR",
+        "EVENING_STAR",
+        "DOJI",
+        "DRAGONFLY_DOJI",
+        "GRAVESTONE_DOJI",
+        "PIERCING_PATTERN",
+        "DARK_CLOUD_COVER",
+        "THREE_WHITE_SOLDIERS"
+      ],
+      "min_pattern_confirmation": 1,
+      "require_volume_confirmation": false,
+      "stop_loss_percentage": 0.03,
+      "take_profit_percentage": 0.06,
+      "trailing_stop": true,
+      "max_trades_per_day": 10,
+      "trading_hours": {
+        "enabled": false,
+        "start": "00:00",
+        "end": "23:59",
+        "timezone": "UTC"
+      },
+      "paper_trading_only": false,
+      "sandbox_testing_required": true,
+      "live_trading_enabled": true
+    }
+  },
+  "backtesting_config": {
+    "historical_data_days": 365,
+    "test_periods": {
+      "quick": 1,
+      "standard": 7,
+      "comprehensive": 30,
+      "full": 90
+    },
+    "initial_capital": 10000,
+    "commission_rate": 0.001,
+    "slippage_percentage": 0.0005
+  },
+  "environment_settings": {
+    "paper": {
+      "description": "Simulated trading with fake money",
+      "api_endpoint": "https://api.kraken.com/0/public",
+      "requires_api_keys": false,
+      "zapier_enabled": false
+    },
+    "sandbox": {
+      "description": "Test environment with sandbox API",
+      "api_endpoint": "https://api-sandbox.kraken.com",
+      "requires_api_keys": true,
+      "zapier_enabled": true
+    },
+    "live": {
+      "description": "Real trading with real money",
+      "api_endpoint": "https://api.kraken.com",
+      "requires_api_keys": true,
+      "requires_2fa": true,
+      "zapier_enabled": true,
+      "approval_required": true
+    }
+  },
+  "integration_settings": {
+    "zapier_mcp": {
+      "enabled": true,
+      "send_trade_signals": true,
+      "log_to_sheets": true,
+      "email_alerts": true,
+      "alert_on_loss_threshold": 0.02
+    },
+    "microsoft_365": {
+      "enabled": true,
+      "sharepoint_logging": true,
+      "teams_notifications": false,
+      "outlook_alerts": true
+    },
+    "notifications": {
+      "email": {
+        "enabled": true,
+        "on_trade_execution": true,
+        "on_stop_loss": true,
+        "on_take_profit": true,
+        "on_emergency_halt": true
+      },
+      "webhook": {
+        "enabled": true,
+        "endpoints": []
+      }
+    }
+  }
+}
