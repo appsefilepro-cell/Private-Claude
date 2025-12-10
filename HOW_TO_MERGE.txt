@@ -1,0 +1,82 @@
+╔══════════════════════════════════════════════════════════════╗
+║                                                              ║
+║         HOW TO MERGE YOUR TWO REPOSITORIES                   ║
+║                                                              ║
+╚══════════════════════════════════════════════════════════════╝
+
+SIMPLE 3-STEP PROCESS:
+======================
+
+STEP 1: Pull Latest Private-Claude
+-----------------------------------
+1. Open PowerShell or Command Prompt
+2. Navigate to Private-Claude:
+   cd C:\Users\ladss\OneDrive\Documents\GitHub\Private-Claude
+
+3. Pull latest changes:
+   git pull origin claude/deploy-agent-x2-01826tc4741Zm819Gf6PaXAX
+
+
+STEP 2: Run the Merge Script
+-----------------------------
+In the same PowerShell window:
+
+   powershell -ExecutionPolicy Bypass -File MERGE_REPOSITORIES.ps1
+
+The script will:
+✅ Check both repositories exist
+✅ Add CLAUDE-CODE-AI as remote
+✅ Merge automatically
+✅ Resolve common conflicts (README, requirements.txt, .gitignore)
+✅ Ask you to confirm before pushing
+✅ Archive the old repository
+
+
+STEP 3: Test Everything
+------------------------
+After merge completes:
+
+   bash scripts/complete_agent30_setup.sh
+
+This runs all tests and verifies everything works.
+
+
+THAT'S IT!
+==========
+The script does everything automatically.
+Just run it and answer the prompts.
+
+
+WHAT IF IT FAILS?
+==================
+If merge fails for any reason:
+
+1. Abort the merge:
+   git merge --abort
+
+2. Try manual copy instead (slower but safer):
+   - Copy unique files from CLAUDE-CODE-AI to Private-Claude manually
+   - git add .
+   - git commit -m "Add files from CLAUDE-CODE-AI"
+   - git push
+
+
+SAFETY NOTES:
+=============
+✅ All changes in Private-Claude are already committed and pushed
+✅ Script creates archive of old repo (not deleted)
+✅ Can rollback with: git reset --hard af88db1
+✅ Full backup recommended before merge
+
+
+NEED HELP?
+==========
+If script doesn't work:
+1. Open REPOSITORY_MERGE_GUIDE.md for detailed manual instructions
+2. Or manually copy unique files from one repo to the other
+
+
+STATUS: Ready to merge!
+========================
+All Private-Claude changes are committed and pushed.
+Safe to proceed with merge.
