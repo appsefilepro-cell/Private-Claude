@@ -74,9 +74,25 @@ class BigShortStrategy:
         pb_ratio = data.get('pb_ratio', 3)
         debt_equity = data.get('debt_equity', 1)
 
+        # Handle 'N/A' or string values
+        try:
+            pe_ratio = float(pe_ratio) if pe_ratio not in ['N/A', None] else 999  # Assume very high if N/A
+        except (ValueError, TypeError):
+            pe_ratio = 999
+
+        try:
+            pb_ratio = float(pb_ratio) if pb_ratio not in ['N/A', None] else 0
+        except (ValueError, TypeError):
+            pb_ratio = 0
+
+        try:
+            debt_equity = float(debt_equity) if debt_equity not in ['N/A', None, 'Unknown (fraud)'] else 0
+        except (ValueError, TypeError):
+            debt_equity = 0
+
         if pe_ratio > self.criteria['pe_ratio_max']:
             score += 15
-            signal['reasons'].append(f"Extremely high P/E: {pe_ratio} (overvalued)")
+            signal['reasons'].append(f"Extremely high P/E: {pe_ratio if pe_ratio < 999 else 'N/A (no earnings)'} (overvalued)")
 
         if pb_ratio > self.criteria['pb_ratio_max']:
             score += 10
