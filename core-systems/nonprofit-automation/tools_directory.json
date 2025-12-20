@@ -1,0 +1,134 @@
+{
+  "chatgpt": {
+    "url": "https://chat.openai.com",
+    "purpose": "Content generation, grant writing, social media",
+    "cost": "Free tier available",
+    "integration": "API key required for automation"
+  },
+  "hemingway_editor": {
+    "url": "https://hemingwayapp.com",
+    "purpose": "Simplify writing, improve readability",
+    "cost": "Free web version",
+    "integration": "Manual copy-paste"
+  },
+  "grammarly": {
+    "url": "https://grammarly.com",
+    "purpose": "Grammar checking, tone adjustment",
+    "cost": "Free tier available",
+    "integration": "Browser extension"
+  },
+  "funraise": {
+    "url": "https://funraise.com",
+    "purpose": "AI-powered fundraising platform",
+    "cost": "Check for nonprofit discounts",
+    "integration": "API available"
+  },
+  "donorsearch_ai": {
+    "url": "https://donorsearch.ai",
+    "purpose": "Donor prospecting and research",
+    "cost": "Free tier for small nonprofits",
+    "integration": "Web interface"
+  },
+  "freewill": {
+    "url": "https://freewill.com",
+    "purpose": "Planned giving, grant assistant",
+    "cost": "Free for nonprofits",
+    "integration": "Embed on website"
+  },
+  "momentum": {
+    "url": "https://momentumapp.com",
+    "purpose": "AI donor insights, fundraising optimization",
+    "cost": "Nonprofit pricing available",
+    "integration": "CRM integration"
+  },
+  "clickup": {
+    "url": "https://clickup.com",
+    "purpose": "AI-powered project management",
+    "cost": "Free tier available",
+    "integration": "API, Zapier"
+  },
+  "asana": {
+    "url": "https://asana.com",
+    "purpose": "Task management with AI features",
+    "cost": "Free for nonprofits (up to 15 users)",
+    "integration": "API, Zapier"
+  },
+  "trello": {
+    "url": "https://trello.com",
+    "purpose": "Visual project management",
+    "cost": "Free tier",
+    "integration": "Power-ups, API"
+  },
+  "canva": {
+    "url": "https://canva.com",
+    "purpose": "AI-powered design (Magic Write, Magic Design)",
+    "cost": "Free for nonprofits (Canva for Nonprofits)",
+    "integration": "Web interface, templates"
+  },
+  "remove_bg": {
+    "url": "https://remove.bg",
+    "purpose": "AI background removal",
+    "cost": "Free tier available",
+    "integration": "API available"
+  },
+  "google_analytics": {
+    "url": "https://analytics.google.com",
+    "purpose": "Website analytics with AI insights",
+    "cost": "Free",
+    "integration": "JavaScript tracking code"
+  },
+  "tableau_public": {
+    "url": "https://public.tableau.com",
+    "purpose": "Data visualization",
+    "cost": "Free",
+    "integration": "Desktop app, publish to web"
+  },
+  "mailchimp": {
+    "url": "https://mailchimp.com",
+    "purpose": "Email marketing with AI features",
+    "cost": "Free tier (up to 500 contacts)",
+    "integration": "API, Zapier"
+  },
+  "harvard_ai_tools": {
+    "url": "https://huit.harvard.edu/ai",
+    "purpose": "Harvard AI tools for research",
+    "cost": "Free educational resources",
+    "integration": "Access through Harvard resources"
+  },
+  "mit_ai_resources": {
+    "url": "https://openlearning.mit.edu",
+    "purpose": "MIT OpenCourseWare AI/ML resources",
+    "cost": "Free",
+    "integration": "Educational access"
+  },
+  "uc_berkeley_ai": {
+    "url": "https://data.berkeley.edu",
+    "purpose": "UC Berkeley data science and AI tools",
+    "cost": "Free educational resources",
+    "integration": "Open-source tools"
+  },
+  "gsa_ai_guide": {
+    "url": "https://coe.gsa.gov/ai/",
+    "purpose": "GSA AI Guide for government/nonprofit",
+    "cost": "Free",
+    "integration": "Guidelines and frameworks"
+  },
+  "advocate_feature": {
+    "url": "Custom implementation",
+    "purpose": "AI detection bypass for legal writing",
+    "cost": "Free (custom Python implementation)",
+    "integration": "Built into legal research system"
+  },
+  "notion": {
+    "url": "https://notion.so",
+    "purpose": "AI-powered workspace, documentation",
+    "cost": "Free tier available",
+    "integration": "API, templates"
+  },
+  "zapier": {
+    "url": "https://zapier.com",
+    "purpose": "Workflow automation",
+    "cost": "Free tier (100 tasks/month)",
+    "integration": "1000+ app integrations"
+  }
+}
