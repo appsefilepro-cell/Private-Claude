@@ -1,0 +1,62 @@
+{
+  "Agent_5.0_Deployment": {
+    "TradingBot": [
+      "data",
+      "logs",
+      "config"
+    ],
+    "LegalTools": [
+      "probate",
+      "case_management",
+      "legal_research"
+    ],
+    "WebIntelligence": [
+      "archives",
+      "reports"
+    ],
+    "NonprofitAutomation": [
+      "501c3_applications",
+      "forms",
+      "guides"
+    ]
+  },
+  "Legal_Documents": {
+    "Probate": [
+      "Thurman_Sr",
+      "Rosetta_Burnett",
+      "Grover_Burnett"
+    ],
+    "Case_Management": [
+      "active_cases",
+      "evidence",
+      "timelines"
+    ],
+    "Damages_Claims": [
+      "calculations",
+      "supporting_docs"
+    ],
+    "Settlement_Demands": []
+  },
+  "Trading_Bot_Backups": {
+    "Backtest_Results": [],
+    "Live_Trading_Logs": [],
+    "Configuration": []
+  },
+  "Nonprofit_Applications": {
+    "Form_1023": [],
+    "Articles_of_Incorporation": [],
+    "Bylaws": [],
+    "Supporting_Documents": []
+  },
+  "Case_Management": {
+    "Timelines": [],
+    "Evidence": [],
+    "Causes_of_Action": [],
+    "Damages": []
+  },
+  "Grant_Applications": {
+    "Drafts": [],
+    "Submitted": [],
+    "Awards": []
+  }
+}
