@@ -10,7 +10,7 @@ import os
 from datetime import datetime, timedelta
 from typing import Dict, Any, List, Optional
 
-class CleoGas Manager:
+class CleoGasManager:
     """Core case management engine for legal practice"""
 
     def __init__(self, db_path="pillar-f-cleo/data/cleo.db"):

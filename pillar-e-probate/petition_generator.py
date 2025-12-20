@@ -285,7 +285,7 @@ A PETITION FOR PROBATE has been filed by:
 
 THE PETITION FOR PROBATE requests that **{estate_info['petitioner_name']}** be appointed as personal representative to administer the estate of the decedent.
 
-THE PETITION requests {'the decedent's will and codicils, if any, be admitted to probate.' if estate_info.get('will_exists') else 'that the estate be administered without a will.'}
+THE PETITION requests {"the decedent's will and codicils, if any, be admitted to probate." if estate_info.get('will_exists') else "that the estate be administered without a will."}
 
 THE PETITION requests authority to administer the estate under the Independent Administration of Estates Act. (This authority will allow the personal representative to take many actions without obtaining court approval. Before taking certain very important actions, however, the personal representative will be required to give notice to interested persons unless they have waived notice or consented to the proposed action.) The independent administration authority will be granted unless an interested person files an objection to the petition and shows good cause why the court should not grant the authority.
 
