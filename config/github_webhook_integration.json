@@ -1,0 +1,86 @@
+{
+  "github_integration": {
+    "name": "E2B Code Execution Sync",
+    "description": "Sync E2B sandbox executions with GitHub repository",
+    "repository": "Private-Claude",
+    "branch": "claude/setup-e2b-webhooks-CPFBo"
+  },
+
+  "webhook_events": {
+    "incoming": [
+      "push",
+      "pull_request",
+      "issues",
+      "issue_comment",
+      "workflow_run"
+    ],
+    "outgoing": {
+      "e2b_execution_complete": "create_commit",
+      "e2b_file_upload": "create_artifact",
+      "e2b_sandbox_start": "trigger_workflow"
+    }
+  },
+
+  "automation_workflows": {
+    "on_push": {
+      "trigger": "push to branch",
+      "action": "execute_tests_in_e2b",
+      "settings": {
+        "auto_run": true,
+        "notify_on_failure": true
+      }
+    },
+    "on_pr": {
+      "trigger": "pull_request opened",
+      "action": "run_code_review_in_e2b",
+      "settings": {
+        "post_results_as_comment": true
+      }
+    },
+    "on_execution_complete": {
+      "trigger": "E2B execution finished",
+      "action": "commit_results_to_branch",
+      "settings": {
+        "create_new_branch": false,
+        "update_existing": true
+      }
+    }
+  },
+
+  "api_configuration": {
+    "base_url": "https://api.github.com",
+    "endpoints": {
+      "repos": "/repos/{owner}/{repo}",
+      "commits": "/repos/{owner}/{repo}/commits",
+      "issues": "/repos/{owner}/{repo}/issues",
+      "pulls": "/repos/{owner}/{repo}/pulls",
+      "actions": "/repos/{owner}/{repo}/actions"
+    },
+    "authentication": {
+      "type": "token",
+      "header": "Authorization: Bearer ${GITHUB_TOKEN}"
+    }
+  },
+
+  "data_sync_rules": {
+    "compression": true,
+    "batch_updates": true,
+    "max_commit_size_kb": 50,
+    "exclude_large_files": true,
+    "file_size_limit_mb": 5
+  },
+
+  "copilot_integration": {
+    "enabled": true,
+    "share_execution_context": true,
+    "sync_with_copilot_workspace": true,
+    "use_copilot_for_code_review": true
+  },
+
+  "security": {
+    "require_signature_verification": true,
+    "allowed_events_only": true,
+    "encrypt_sensitive_data": true,
+    "secret_scanning": true
+  }
+}
