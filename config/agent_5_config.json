@@ -1,0 +1,587 @@
+{
+  "system_metadata": {
+    "system_name": "Agent 5.0 - Enterprise Automation Orchestrator",
+    "version": "5.0.0",
+    "deployment_date": "2025-12-21",
+    "owner": "Thurman Malik Robinson",
+    "organization": "APPS Holdings WY Inc.",
+    "status": "production-ready",
+    "description": "Advanced multi-pillar automation system with E2B code execution, trading, legal, federal, and nonprofit integration"
+  },
+
+  "loop_control": {
+    "execution_pattern": "10x",
+    "max_iterations": 10,
+    "iteration_delay_seconds": 2,
+    "checkpoint_interval": 2,
+    "failure_recovery": true,
+    "rollback_on_critical_error": true,
+    "health_check_enabled": true
+  },
+
+  "pillar_a_trading": {
+    "enabled": true,
+    "name": "Automated Trading Automation",
+    "exchanges": {
+      "kraken": {
+        "enabled": true,
+        "api_endpoint": "https://api.kraken.com",
+        "ws_endpoint": "wss://ws.kraken.com",
+        "supported_pairs": ["BTC/USD", "ETH/USD", "SOL/USD", "XRP/USD"],
+        "trading_mode": "sandbox",
+        "max_concurrent_trades": 5,
+        "position_sizing": "dynamic"
+      },
+      "metatrader5": {
+        "enabled": true,
+        "platform": "MT5",
+        "supported_symbols": ["EURUSD", "GBPUSD", "USDJPY", "AUDUSD"],
+        "trading_mode": "sandbox",
+        "max_concurrent_orders": 10,
+        "timeframes": ["M1", "M5", "M15", "H1", "D1"]
+      }
+    },
+    "risk_management": {
+      "confidence_threshold": 0.75,
+      "max_position_size": 0.02,
+      "risk_per_trade": 0.01,
+      "max_daily_loss_percent": 5,
+      "max_weekly_loss_percent": 10,
+      "max_open_positions": 5,
+      "emergency_halt_threshold": 15,
+      "trailing_stop_enabled": true,
+      "trailing_stop_percent": 2.5
+    },
+    "candlestick_patterns": {
+      "bullish": [
+        "HAMMER",
+        "INVERTED_HAMMER",
+        "BULLISH_ENGULFING",
+        "MORNING_STAR",
+        "THREE_WHITE_SOLDIERS",
+        "DRAGONFLY_DOJI",
+        "PIERCING_LINE"
+      ],
+      "bearish": [
+        "SHOOTING_STAR",
+        "HANGING_MAN",
+        "BEARISH_ENGULFING",
+        "EVENING_STAR",
+        "THREE_BLACK_CROWS",
+        "GRAVESTONE_DOJI",
+        "DARK_CLOUD_COVER"
+      ]
+    },
+    "indicators": {
+      "moving_averages": ["SMA_20", "SMA_50", "SMA_200", "EMA_12", "EMA_26"],
+      "oscillators": ["RSI", "MACD", "Stochastic"],
+      "volatility": ["Bollinger_Bands", "ATR"]
+    },
+    "monitoring": {
+      "check_interval_seconds": 60,
+      "health_check_interval": 300,
+      "trade_execution_timeout": 30,
+      "market_data_lag_alert": 5000
+    }
+  },
+
+  "pillar_b_legal": {
+    "enabled": true,
+    "name": "Legal Document Processing & Automation",
+    "document_types": {
+      "contracts": {
+        "enabled": true,
+        "templates_dir": "pillar-b-legal/templates/contracts",
+        "auto_review": true,
+        "risk_assessment": true
+      },
+      "litigation": {
+        "enabled": true,
+        "case_management_dir": "pillar-b-legal/case-management",
+        "evidence_tracking": true,
+        "deposition_analysis": true
+      },
+      "compliance": {
+        "enabled": true,
+        "regulatory_db": "pillar-b-legal/compliance/regulations",
+        "audit_logging": true
+      }
+    },
+    "processing": {
+      "ocr_enabled": true,
+      "entity_extraction": true,
+      "evidence_keywords": ["evidence", "exhibit", "deposition", "affidavit", "document", "attachment"],
+      "redaction_fields": ["ssn", "address", "phone", "email", "account"],
+      "output_format": ["pdf", "docx", "xlsx"],
+      "max_file_size_mb": 100
+    },
+    "forensic_analysis": {
+      "enabled": true,
+      "metadata_extraction": true,
+      "timeline_analysis": true,
+      "relationship_mapping": true,
+      "pattern_detection": true
+    },
+    "templates_location": "pillar-b-legal/templates",
+    "output_location": "pillar-b-legal/automation-flows/output",
+    "log_location": "logs/legal_operations"
+  },
+
+  "pillar_c_federal": {
+    "enabled": true,
+    "name": "Federal Contracting Automation (SAM.gov)",
+    "sam_gov": {
+      "enabled": true,
+      "api_endpoint": "https://api.sam.gov/prod/opportunities/v2/search",
+      "api_version": "v2",
+      "search_interval_hours": 4,
+      "filter_keywords": ["technology", "IT", "automation", "AI", "consulting"]
+    },
+    "opportunity_monitoring": {
+      "enabled": true,
+      "target_naics_codes": ["561110", "541611", "541990", "611210"],
+      "max_contract_value": 10000000,
+      "min_contract_value": 10000,
+      "set_aside_types": ["8(a)", "SDB", "SDVOSB", "HUBZone", "Woman-Owned"],
+      "deadline_buffer_days": 14,
+      "scoring_algorithm": "multi-factor"
+    },
+    "proposal_automation": {
+      "enabled": true,
+      "template_location": "pillar-c-federal/templates",
+      "auto_respond": true,
+      "response_time_hours": 48,
+      "compliance_check": true
+    },
+    "reporting": {
+      "enabled": true,
+      "report_format": "pdf",
+      "report_frequency": "daily",
+      "email_notifications": true
+    },
+    "monitoring_location": "pillar-c-federal/sam-monitoring",
+    "log_location": "logs/federal_operations"
+  },
+
+  "pillar_d_nonprofit": {
+    "enabled": true,
+    "name": "Nonprofit Automation & Form Processing",
+    "form_processing": {
+      "form_1023": {
+        "enabled": true,
+        "fields": {
+          "organization_name": "required",
+          "ein": "required",
+          "mission_statement": "required",
+          "governance_structure": "required",
+          "financial_projections": "required"
+        },
+        "validation": true,
+        "auto_fill_from_templates": true
+      },
+      "form_1023_ez": {
+        "enabled": true,
+        "fields": {
+          "organization_name": "required",
+          "ein": "required",
+          "principal_activity": "required",
+          "gross_receipts": "required"
+        },
+        "validation": true,
+        "eligibility_check": true
+      },
+      "form_990": {
+        "enabled": true,
+        "fields": {
+          "organization_info": "required",
+          "financial_statements": "required",
+          "program_activities": "required",
+          "compensation": "required"
+        }
+      }
+    },
+    "grant_intelligence": {
+      "enabled": true,
+      "sources": [
+        "https://www.grants.gov/",
+        "https://www.sam.gov/",
+        "https://candid.org/",
+        "https://foundationcenter.org/"
+      ],
+      "focus_areas": [
+        "technology",
+        "small business",
+        "minority-owned",
+        "ai_automation",
+        "nonprofit_capacity",
+        "community_development"
+      ],
+      "search_interval_hours": 6,
+      "minimum_award_amount": 10000
+    },
+    "pipeline_management": {
+      "enabled": true,
+      "stages": ["discovery", "application", "submitted", "pending", "awarded", "closed"],
+      "tracking_enabled": true,
+      "deadline_alerts": true,
+      "collaboration_enabled": true
+    },
+    "grant_location": "pillar-d-nonprofit/grant-intelligence",
+    "form_location": "pillar-d-nonprofit/form-automation",
+    "log_location": "logs/nonprofit_operations"
+  },
+
+  "e2b_integration": {
+    "enabled": true,
+    "api_version": "v1",
+    "webhook_id": "YIyOpaJ0UMJ3Pl9Md5kVExEDdkqyDGRp",
+    "code_execution": {
+      "enabled": true,
+      "timeout_seconds": 30,
+      "memory_limit_mb": 512,
+      "cpu_cores": 2,
+      "disk_quota_mb": 1024
+    },
+    "sandbox_management": {
+      "auto_create": true,
+      "auto_cleanup": true,
+      "idle_timeout_minutes": 10,
+      "max_concurrent_sandboxes": 5
+    },
+    "webhook_endpoints": {
+      "e2b_events": "/api/webhooks/e2b",
+      "github_sync": "/api/webhooks/github",
+      "zapier_relay": "/api/webhooks/zapier"
+    },
+    "event_subscriptions": [
+      "sandbox.created",
+      "sandbox.started",
+      "sandbox.stopped",
+      "execution.completed",
+      "execution.failed",
+      "file.uploaded",
+      "file.downloaded"
+    ],
+    "sync_targets": {
+      "github": {
+        "enabled": true,
+        "repository": "appsefilepro-cell/Private-Claude",
+        "branch": "claude/setup-e2b-webhooks-CPFBo",
+        "auto_commit": true,
+        "commit_on_events": ["execution.completed", "file.uploaded"]
+      },
+      "zapier": {
+        "enabled": true,
+        "relay_events": true,
+        "format": "json"
+      },
+      "slack": {
+        "enabled": true,
+        "channel": "#agent-5-execution",
+        "notify_on_completion": true,
+        "notify_on_error": true
+      }
+    },
+    "data_optimization": {
+      "compress_payloads": true,
+      "minimal_mode": true,
+      "exclude_fields": ["metadata.internal", "debug_info"],
+      "max_payload_size_kb": 100
+    },
+    "logging": {
+      "enabled": true,
+      "level": "INFO",
+      "retention_days": 30,
+      "destinations": ["file", "cloud"]
+    }
+  },
+
+  "agent_forge_replit": {
+    "enabled": true,
+    "platform": "Replit",
+    "integration_type": "direct",
+    "replit_url": "https://72f0ad6a-efdf-4560-b50f-596680549d29-00-auxmaxx8t7os.kirk.replit.dev/",
+    "account": {
+      "email": "appsefilepro@gmail.com",
+      "username": "appsefilepro"
+    },
+    "github_integration": {
+      "enabled": true,
+      "repository": "appsefilepro-cell/Private-Claude",
+      "auto_sync": true,
+      "sync_interval_seconds": 300
+    },
+    "deployment": {
+      "auto_deploy": true,
+      "deployment_environment": "production",
+      "health_checks": true,
+      "rollback_on_failure": true
+    },
+    "capabilities": {
+      "code_execution": true,
+      "agent_hosting": true,
+      "webhook_support": true,
+      "database_support": true
+    }
+  },
+
+  "github_integration": {
+    "enabled": true,
+    "repository": "appsefilepro-cell/Private-Claude",
+    "owner": "appsefilepro-cell",
+    "auto_commit": true,
+    "branch": "claude/setup-e2b-webhooks-CPFBo",
+    "webhook_events": [
+      "push",
+      "pull_request",
+      "issues",
+      "issue_comment"
+    ],
+    "copilot_integration": {
+      "enabled": true,
+      "code_review": true,
+      "code_suggestions": true,
+      "documentation_generation": true
+    },
+    "commit_settings": {
+      "auto_message": true,
+      "message_template": "Agent 5.0: {action} - {description}",
+      "sign_commits": false
+    }
+  },
+
+  "zapier_integration": {
+    "enabled": true,
+    "mcp_bearer_token_env": "ZAPIER_MCP_BEARER_TOKEN",
+    "mcp_endpoint_env": "ZAPIER_MCP_ENDPOINT",
+    "actions": {
+      "notification": true,
+      "data_routing": true,
+      "task_creation": true,
+      "spreadsheet_update": true
+    },
+    "zaps": [
+      {
+        "name": "E2B Execution Alert",
+        "trigger": "E2B execution completed",
+        "action": "Send Slack notification"
+      },
+      {
+        "name": "Trading Signal Capture",
+        "trigger": "Trading signal detected",
+        "action": "Create Airtable record"
+      },
+      {
+        "name": "Legal Document Sync",
+        "trigger": "Legal document processed",
+        "action": "Update SharePoint"
+      },
+      {
+        "name": "Grant Opportunity Found",
+        "trigger": "New grant opportunity detected",
+        "action": "Send email notification"
+      }
+    ]
+  },
+
+  "slack_integration": {
+    "enabled": true,
+    "workspace": "apps-holdings",
+    "channels": {
+      "trading_alerts": "#trading-alerts",
+      "legal_operations": "#legal-operations",
+      "federal_contracting": "#federal-contracting",
+      "nonprofit": "#nonprofit-automation",
+      "agent_5_execution": "#agent-5-execution",
+      "errors": "#errors-and-alerts"
+    },
+    "notifications": {
+      "execution_start": true,
+      "execution_complete": true,
+      "execution_error": true,
+      "milestone_reached": true,
+      "critical_events": true
+    }
+  },
+
+  "microsoft_365": {
+    "enabled": true,
+    "tenant": "APPSHOLDINGSWYINC.onmicrosoft.com",
+    "sharepoint_site": "appsholdingswyinc.sharepoint.com",
+    "admin_email": "appsefilepro@gmail.com",
+    "integrations": {
+      "sharepoint": {
+        "enabled": true,
+        "folders": {
+          "trading_data": "Sites/Agent-5.0/Shared Documents/Trading",
+          "legal_documents": "Sites/Agent-5.0/Shared Documents/Legal",
+          "federal_proposals": "Sites/Agent-5.0/Shared Documents/Federal",
+          "grants": "Sites/Agent-5.0/Shared Documents/Grants"
+        }
+      },
+      "teams": {
+        "enabled": true,
+        "team_id": "agent-5-execution"
+      },
+      "outlook": {
+        "enabled": true,
+        "notification_email": "appsefilepro@gmail.com"
+      }
+    }
+  },
+
+  "data_ingestion": {
+    "enabled": true,
+    "sources": {
+      "gmail": {
+        "enabled": true,
+        "keywords": ["1040", "Tax Return", "W-2", "Tax Document", "grant", "contract"],
+        "auto_process": true,
+        "archive_after_processing": true
+      },
+      "sharepoint": {
+        "enabled": true,
+        "monitor_folders": true,
+        "auto_sync": true
+      },
+      "file_upload": {
+        "enabled": true,
+        "supported_types": [".pdf", ".xlsx", ".xls", ".docx", ".csv", ".json"],
+        "max_file_size_mb": 100,
+        "scan_for_malware": true
+      }
+    },
+    "processing": {
+      "deduplication_enabled": true,
+      "pii_detection": true,
+      "format_standardization": true,
+      "validation": true
+    },
+    "ingestion_location": "core-systems/data-ingestion",
+    "log_location": "logs/data_ingestion"
+  },
+
+  "compliance_security": {
+    "audit_logging_enabled": true,
+    "encryption_enabled": true,
+    "data_retention_days": 2555,
+    "pii_handling": "encrypted",
+    "backup_enabled": true,
+    "backup_frequency_hours": 24,
+    "data_classification": {
+      "public": "no_encryption",
+      "internal": "standard_encryption",
+      "confidential": "strong_encryption",
+      "restricted": "maximum_encryption"
+    },
+    "access_control": {
+      "role_based": true,
+      "mfa_required": true,
+      "audit_trail": true
+    },
+    "compliance_standards": [
+      "SOC2",
+      "GDPR",
+      "HIPAA",
+      "PCI-DSS",
+      "FedRAMP"
+    ]
+  },
+
+  "monitoring_and_alerts": {
+    "health_monitoring": {
+      "enabled": true,
+      "check_interval_seconds": 60,
+      "timeout_threshold": 30,
+      "error_threshold_percent": 5
+    },
+    "performance_monitoring": {
+      "enabled": true,
+      "metrics": ["latency", "throughput", "error_rate", "cpu_usage", "memory_usage"],
+      "alert_thresholds": {
+        "latency_ms": 5000,
+        "error_rate_percent": 5,
+        "cpu_usage_percent": 80,
+        "memory_usage_percent": 85
+      }
+    },
+    "notifications": {
+      "email_enabled": true,
+      "email_recipients": ["appsefilepro@gmail.com"],
+      "slack_enabled": true,
+      "teams_enabled": true,
+      "sms_enabled": false
+    },
+    "alert_levels": ["info", "warning", "error", "critical"],
+    "log_location": "logs/monitoring"
+  },
+
+  "error_handling_recovery": {
+    "enabled": true,
+    "retry_strategy": "exponential_backoff",
+    "max_retries": 3,
+    "initial_backoff_seconds": 2,
+    "max_backoff_seconds": 300,
+    "circuit_breaker": {
+      "enabled": true,
+      "failure_threshold": 5,
+      "reset_timeout_seconds": 60
+    },
+    "fallback_actions": {
+      "trading": "pause_and_notify",
+      "legal": "queue_for_manual_review",
+      "federal": "escalate_to_admin",
+      "nonprofit": "retry_with_reduced_data"
+    }
+  },
+
+  "api_endpoints": {
+    "kraken_api": "https://api.kraken.com",
+    "kraken_ws": "wss://ws.kraken.com",
+    "sam_gov_api": "https://api.sam.gov/prod/opportunities/v2/search",
+    "e2b_api": "https://api.e2b.dev/v1",
+    "github_api": "https://api.github.com",
+    "zapier_api": "https://hooks.zapier.com",
+    "sharepoint_api": "https://graph.microsoft.com/v1.0/sites",
+    "slack_api": "https://slack.com/api"
+  },
+
+  "performance_optimization": {
+    "caching_enabled": true,
+    "cache_ttl_seconds": 3600,
+    "batch_processing": true,
+    "batch_size": 100,
+    "parallel_execution": true,
+    "max_concurrent_tasks": 10,
+    "connection_pooling": true,
+    "pool_size": 20,
+    "compression": {
+      "enabled": true,
+      "algorithm": "gzip",
+      "min_size_bytes": 1024
+    }
+  },
+
+  "execution_settings": {
+    "timeout_seconds": 300,
+    "max_retries": 3,
+    "retry_delay_seconds": 5,
+    "log_level": "INFO",
+    "verbose_mode": false,
+    "dry_run_mode": false,
+    "sandbox_mode": true
+  },
+
+  "instructions": [
+    "Agent 5.0 is the next-generation orchestrator combining all pillars",
+    "E2B integration enables dynamic code execution and testing",
+    "10x loop control pattern ensures systematic execution and recovery",
+    "Update API keys and credentials using environment variables in config/.env",
+    "Never commit credentials or sensitive data to version control",
+    "Use .env file for all API keys, tokens, and sensitive configuration",
+    "Refer to docs/AGENT_5_DEPLOYMENT_GUIDE.md for complete setup instructions",
+    "Monitor execution logs in logs/ directory for troubleshooting",
+    "All integrations support async/await patterns for performance",
+    "Critical errors trigger automatic rollback and recovery procedures"
+  ]
+}
