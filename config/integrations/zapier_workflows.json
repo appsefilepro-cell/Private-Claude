@@ -1,0 +1,472 @@
+{
+  "zapier_workflows": {
+    "version": "2.0.0",
+    "environment": "production",
+    "optimization": "minimal_data_tier",
+    "description": "Complete Zapier Zap workflows for E2B, GitHub, trading, and document generation"
+  },
+
+  "workflows": [
+    {
+      "id": "zap_e2b_sheets",
+      "name": "E2B Execution to Google Sheets",
+      "description": "Log E2B code executions and outputs to Google Sheets",
+      "trigger": {
+        "app": "E2B Webhook",
+        "event": "execution.completed",
+        "fields": {
+          "execution_id": "id",
+          "status": "status",
+          "output": "output",
+          "timestamp": "timestamp",
+          "sandbox_id": "sandbox_id"
+        }
+      },
+      "steps": [
+        {
+          "id": 1,
+          "action": "Add row to Google Sheets",
+          "app": "Google Sheets",
+          "config": {
+            "spreadsheet": "E2B Execution Logs",
+            "worksheet": "Executions",
+            "columns": {
+              "A": "Execution ID",
+              "B": "Status",
+              "C": "Output (truncated)",
+              "D": "Timestamp",
+              "E": "Sandbox ID"
+            }
+          },
+          "data_mapping": {
+            "A": "{{trigger.execution_id}}",
+            "B": "{{trigger.status}}",
+            "C": "{{trigger.output | slice: 0, 256}}",
+            "D": "{{trigger.timestamp}}",
+            "E": "{{trigger.sandbox_id}}"
+          }
+        },
+        {
+          "id": 2,
+          "action": "Conditional: Only if failed",
+          "condition": {
+            "field": "{{trigger.status}}",
+            "operator": "equals",
+            "value": "failed"
+          },
+          "enabled": true
+        },
+        {
+          "id": 3,
+          "action": "Send Slack message (on failure)",
+          "app": "Slack",
+          "config": {
+            "channel": "#e2b-alerts",
+            "message": "E2B Execution Failed: {{trigger.execution_id}}"
+          },
+          "data": {
+            "text": "Execution Failed",
+            "blocks": [
+              {
+                "type": "section",
+                "text": {
+                  "type": "mrkdwn",
+                  "text": "*E2B Execution Failed*\n*ID:* {{trigger.execution_id}}\n*Time:* {{trigger.timestamp}}"
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "enabled": true,
+      "performance": {
+        "rate_limit": "10/min",
+        "timeout_seconds": 30,
+        "batch_mode": false
+      }
+    },
+
+    {
+      "id": "zap_github_e2b_test",
+      "name": "GitHub Push to E2B Test Execution",
+      "description": "Trigger E2B test execution on GitHub push to main branches",
+      "trigger": {
+        "app": "GitHub",
+        "event": "new_commit",
+        "config": {
+          "repository": "Private-Claude",
+          "branches": ["main", "develop"],
+          "file_patterns": ["*.py", "tests/**"]
+        },
+        "fields": {
+          "repository": "repository",
+          "commit_sha": "commit_sha",
+          "commit_message": "commit_message",
+          "author": "author"
+        }
+      },
+      "steps": [
+        {
+          "id": 1,
+          "action": "Execute code in E2B",
+          "app": "E2B API",
+          "config": {
+            "code_template": "pytest",
+            "timeout": "60",
+            "language": "python"
+          },
+          "data": {
+            "code": "cd /repo && pytest --tb=short -v",
+            "sandbox_config": {
+              "memory_mb": 1024,
+              "timeout": 60
+            }
+          }
+        },
+        {
+          "id": 2,
+          "action": "Filter: Only if tests fail",
+          "condition": {
+            "field": "{{trigger.exit_code}}",
+            "operator": "not_equals",
+            "value": "0"
+          }
+        },
+        {
+          "id": 3,
+          "action": "Create GitHub issue",
+          "app": "GitHub",
+          "config": {
+            "repository": "{{trigger.repository}}",
+            "title": "Test Failure: {{trigger.commit_sha | slice: 0, 7}}"
+          },
+          "data": {
+            "title": "Tests failed on commit {{trigger.commit_sha | slice: 0, 7}}",
+            "body": "Author: {{trigger.author}}\nMessage: {{trigger.commit_message}}\n\nE2B Test Output:\n```\n{{trigger.test_output | slice: 0, 500}}\n```"
+          }
+        }
+      ],
+      "enabled": true,
+      "performance": {
+        "rate_limit": "20/min",
+        "timeout_seconds": 120,
+        "batch_mode": true,
+        "batch_size": 5
+      }
+    },
+
+    {
+      "id": "zap_trading_slack",
+      "name": "Trading Signals to Slack Notifications",
+      "description": "Send trading signals and alerts to Slack channels for real-time notifications",
+      "trigger": {
+        "app": "Trading API",
+        "event": "signal_generated",
+        "fields": {
+          "signal_type": "type",
+          "asset": "asset",
+          "confidence": "confidence",
+          "entry_price": "entry_price",
+          "stop_loss": "stop_loss",
+          "take_profit": "take_profit"
+        }
+      },
+      "steps": [
+        {
+          "id": 1,
+          "action": "Filter: High confidence only",
+          "condition": {
+            "field": "{{trigger.confidence}}",
+            "operator": "greater_than_or_equal",
+            "value": "75"
+          }
+        },
+        {
+          "id": 2,
+          "action": "Send Slack message",
+          "app": "Slack",
+          "config": {
+            "channel": "#trading-signals",
+            "webhook": "{{env.SLACK_TRADING_WEBHOOK}}"
+          },
+          "data": {
+            "text": "New {{trigger.signal_type}} signal for {{trigger.asset}}",
+            "blocks": [
+              {
+                "type": "section",
+                "text": {
+                  "type": "mrkdwn",
+                  "text": "*{{trigger.signal_type | upcase}}* Signal\n*Asset:* {{trigger.asset}}\n*Confidence:* {{trigger.confidence}}%"
+                }
+              },
+              {
+                "type": "section",
+                "text": {
+                  "type": "mrkdwn",
+                  "text": "*Entry:* {{trigger.entry_price}}\n*Stop Loss:* {{trigger.stop_loss}}\n*Take Profit:* {{trigger.take_profit}}"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "id": 3,
+          "action": "Log to spreadsheet",
+          "app": "Google Sheets",
+          "config": {
+            "spreadsheet": "Trading Signals",
+            "worksheet": "Signals"
+          },
+          "data": {
+            "timestamp": "{{now | date: 'YYYY-MM-DD HH:mm:ss'}}",
+            "signal_type": "{{trigger.signal_type}}",
+            "asset": "{{trigger.asset}}",
+            "confidence": "{{trigger.confidence}}",
+            "entry_price": "{{trigger.entry_price}}"
+          }
+        }
+      ],
+      "enabled": true,
+      "performance": {
+        "rate_limit": "30/min",
+        "timeout_seconds": 15,
+        "batch_mode": true,
+        "batch_size": 10
+      }
+    },
+
+    {
+      "id": "zap_form1023_sharepoint",
+      "name": "Form 1023 Generation to SharePoint Upload",
+      "description": "Generate Form 1023 documents and upload to SharePoint for archival",
+      "trigger": {
+        "app": "Google Forms",
+        "event": "form_submission",
+        "config": {
+          "form_id": "{{env.FORM_1023_ID}}"
+        },
+        "fields": {
+          "timestamp": "timestamp",
+          "organization_name": "organization_name",
+          "ein": "ein",
+          "form_data": "all_responses"
+        }
+      },
+      "steps": [
+        {
+          "id": 1,
+          "action": "Generate document via E2B",
+          "app": "E2B API",
+          "config": {
+            "code_template": "python",
+            "timeout": "120"
+          },
+          "data": {
+            "code": "from reportlab.lib.pagesizes import letter\nfrom reportlab.pdfgen import canvas\n# Generate Form 1023 PDF from form data\ndoc = canvas.Canvas('/tmp/form_1023.pdf', pagesize=letter)",
+            "files_input": {
+              "form_data.json": "{{trigger.form_data | json}}"
+            }
+          }
+        },
+        {
+          "id": 2,
+          "action": "Upload to SharePoint",
+          "app": "Microsoft SharePoint",
+          "config": {
+            "site": "{{env.SHAREPOINT_SITE}}",
+            "library": "Form 1023 Archive",
+            "folder": "{{trigger.timestamp | date: 'YYYY-MM'}}"
+          },
+          "data": {
+            "file_name": "Form_1023_{{trigger.ein}}_{{trigger.timestamp | date: 'YYYYMMDD'}}",
+            "file_path": "/tmp/form_1023.pdf",
+            "metadata": {
+              "organization": "{{trigger.organization_name}}",
+              "ein": "{{trigger.ein}}",
+              "date_submitted": "{{trigger.timestamp}}"
+            }
+          }
+        },
+        {
+          "id": 3,
+          "action": "Send confirmation email",
+          "app": "Gmail",
+          "config": {
+            "to": "{{trigger.submitter_email}}"
+          },
+          "data": {
+            "subject": "Form 1023 Submission Confirmed",
+            "body": "Your Form 1023 for {{trigger.organization_name}} has been processed and archived.\nEIN: {{trigger.ein}}\nDate: {{trigger.timestamp}}"
+          }
+        }
+      ],
+      "enabled": true,
+      "performance": {
+        "rate_limit": "5/min",
+        "timeout_seconds": 180,
+        "batch_mode": false
+      }
+    },
+
+    {
+      "id": "zap_error_alerts",
+      "name": "Error Alerts to Email and Slack",
+      "description": "Route error alerts to appropriate channels (Slack for critical, Email for archives)",
+      "trigger": {
+        "app": "Error Tracking API",
+        "event": "error_threshold_exceeded",
+        "fields": {
+          "error_count": "count",
+          "error_type": "type",
+          "service": "service",
+          "severity": "severity",
+          "stack_trace": "stack_trace"
+        }
+      },
+      "steps": [
+        {
+          "id": 1,
+          "action": "Filter by severity",
+          "condition": {
+            "field": "{{trigger.severity}}",
+            "operator": "in",
+            "value": ["critical", "high"]
+          }
+        },
+        {
+          "id": 2,
+          "action": "Send Slack alert (critical only)",
+          "app": "Slack",
+          "config": {
+            "channel": "#error-alerts",
+            "mention": "@devops"
+          },
+          "condition": "{{trigger.severity == 'critical'}}",
+          "data": {
+            "text": "CRITICAL: {{trigger.error_type}} in {{trigger.service}}",
+            "blocks": [
+              {
+                "type": "section",
+                "text": {
+                  "type": "mrkdwn",
+                  "text": ":rotating_light: *CRITICAL ERROR*\n*Type:* {{trigger.error_type}}\n*Service:* {{trigger.service}}\n*Count:* {{trigger.error_count}}"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "id": 3,
+          "action": "Send email to team",
+          "app": "Gmail",
+          "config": {
+            "to": "{{env.ALERT_EMAIL_LIST}}"
+          },
+          "data": {
+            "subject": "[{{trigger.severity | upcase}}] {{trigger.error_type}} in {{trigger.service}}",
+            "body": "Error Type: {{trigger.error_type}}\nService: {{trigger.service}}\nCount: {{trigger.error_count}}\nSeverity: {{trigger.severity}}\n\nStack Trace:\n{{trigger.stack_trace | slice: 0, 1000}}"
+          }
+        },
+        {
+          "id": 4,
+          "action": "Log to Google Sheets",
+          "app": "Google Sheets",
+          "config": {
+            "spreadsheet": "Error Logs",
+            "worksheet": "{{trigger.severity}}"
+          },
+          "data": {
+            "timestamp": "{{now | date: 'YYYY-MM-DD HH:mm:ss'}}",
+            "error_type": "{{trigger.error_type}}",
+            "service": "{{trigger.service}}",
+            "error_count": "{{trigger.error_count}}",
+            "severity": "{{trigger.severity}}"
+          }
+        }
+      ],
+      "enabled": true,
+      "performance": {
+        "rate_limit": "60/min",
+        "timeout_seconds": 30,
+        "batch_mode": true,
+        "batch_size": 20,
+        "deduplication": {
+          "enabled": true,
+          "window_minutes": 15,
+          "key": "{{trigger.error_type}}_{{trigger.service}}"
+        }
+      }
+    }
+  ],
+
+  "webhook_configuration": {
+    "base_url": "{{env.ZAPIER_WEBHOOK_BASE}}",
+    "headers": {
+      "Content-Type": "application/json",
+      "X-Webhook-Source": "Private-Claude",
+      "User-Agent": "Private-Claude/2.0"
+    },
+    "timeout_seconds": 30,
+    "retry_policy": {
+      "enabled": true,
+      "max_retries": 3,
+      "backoff_multiplier": 2,
+      "initial_delay_seconds": 1,
+      "max_delay_seconds": 60
+    },
+    "error_handling": {
+      "on_timeout": "log_and_continue",
+      "on_failure": "retry_with_backoff",
+      "on_rate_limit": "queue_and_retry"
+    }
+  },
+
+  "data_optimization": {
+    "compression": {
+      "enabled": true,
+      "algorithm": "gzip",
+      "level": 6
+    },
+    "batching": {
+      "enabled": true,
+      "max_batch_size": 10,
+      "max_wait_seconds": 60
+    },
+    "field_limits": {
+      "text_fields_max_chars": 512,
+      "output_max_chars": 256,
+      "stack_trace_max_chars": 1000
+    },
+    "payload_optimization": {
+      "exclude_null_fields": true,
+      "exclude_empty_arrays": true,
+      "truncate_long_strings": true
+    }
+  },
+
+  "pricing_optimization": {
+    "free_tier_limits": {
+      "zaps_allowed": 5,
+      "tasks_per_month": 100,
+      "team_limit": 1
+    },
+    "cost_reduction": {
+      "batch_operations": true,
+      "filter_unnecessary_tasks": true,
+      "compress_data": true,
+      "schedule_off_peak": false
+    }
+  },
+
+  "monitoring": {
+    "log_all_executions": true,
+    "log_retention_days": 30,
+    "alert_on_failure": true,
+    "track_data_usage": true,
+    "performance_metrics": {
+      "execution_time": true,
+      "success_rate": true,
+      "data_transferred": true
+    }
+  }
+}

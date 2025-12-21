@@ -1,0 +1,479 @@
+{
+  "slack_integration": {
+    "version": "2.0.0",
+    "workspace": "Private-Claude",
+    "bot_name": "Claude Assistant",
+    "environment": "production"
+  },
+
+  "webhooks": {
+    "general": {
+      "name": "General Notifications",
+      "channel": "#general",
+      "url": "${SLACK_WEBHOOK_GENERAL}",
+      "enabled": true,
+      "description": "General project updates and announcements"
+    },
+    "e2b_alerts": {
+      "name": "E2B Alerts",
+      "channel": "#e2b-alerts",
+      "url": "${SLACK_WEBHOOK_E2B}",
+      "enabled": true,
+      "description": "E2B execution status and errors",
+      "priority": "high"
+    },
+    "trading_signals": {
+      "name": "Trading Signals",
+      "channel": "#trading-signals",
+      "url": "${SLACK_WEBHOOK_TRADING}",
+      "enabled": true,
+      "description": "Real-time trading signals and market alerts",
+      "priority": "high",
+      "threading": true
+    },
+    "error_alerts": {
+      "name": "Error Alerts",
+      "channel": "#error-alerts",
+      "url": "${SLACK_WEBHOOK_ERRORS}",
+      "enabled": true,
+      "description": "Critical errors and system warnings",
+      "priority": "critical",
+      "mention_on_severity": {
+        "critical": "@devops",
+        "high": "@team-lead",
+        "medium": null
+      }
+    },
+    "github_events": {
+      "name": "GitHub Events",
+      "channel": "#github-updates",
+      "url": "${SLACK_WEBHOOK_GITHUB}",
+      "enabled": true,
+      "description": "GitHub push, PR, and issue updates"
+    },
+    "zapier_sync": {
+      "name": "Zapier Sync",
+      "channel": "#zapier-logs",
+      "url": "${SLACK_WEBHOOK_ZAPIER}",
+      "enabled": true,
+      "description": "Zapier workflow execution and status",
+      "log_level": "debug"
+    },
+    "system_health": {
+      "name": "System Health",
+      "channel": "#system-health",
+      "url": "${SLACK_WEBHOOK_HEALTH}",
+      "enabled": true,
+      "description": "System uptime, performance metrics"
+    }
+  },
+
+  "notification_templates": {
+    "e2b_execution_success": {
+      "channel": "e2b_alerts",
+      "template": "e2b_success",
+      "content": {
+        "icon_emoji": ":white_check_mark:",
+        "title": "E2B Execution Completed",
+        "fields": [
+          {
+            "title": "Status",
+            "value": "{{status}}",
+            "short": true
+          },
+          {
+            "title": "Execution ID",
+            "value": "{{execution_id}}",
+            "short": true
+          },
+          {
+            "title": "Duration",
+            "value": "{{duration}}s",
+            "short": true
+          },
+          {
+            "title": "Output",
+            "value": "```{{output | truncate: 200}}```",
+            "short": false
+          }
+        ],
+        "color": "#36a64f"
+      }
+    },
+
+    "e2b_execution_failed": {
+      "channel": "e2b_alerts",
+      "template": "e2b_failure",
+      "content": {
+        "icon_emoji": ":x:",
+        "title": "E2B Execution Failed",
+        "fields": [
+          {
+            "title": "Status",
+            "value": "Failed",
+            "short": true
+          },
+          {
+            "title": "Execution ID",
+            "value": "{{execution_id}}",
+            "short": true
+          },
+          {
+            "title": "Error",
+            "value": "```{{error_message | truncate: 200}}```",
+            "short": false
+          }
+        ],
+        "color": "#ff0000"
+      }
+    },
+
+    "trading_signal_buy": {
+      "channel": "trading_signals",
+      "template": "trading_buy",
+      "content": {
+        "icon_emoji": ":arrow_upper_right:",
+        "title": "BUY Signal Generated",
+        "fields": [
+          {
+            "title": "Asset",
+            "value": "{{asset}}",
+            "short": true
+          },
+          {
+            "title": "Confidence",
+            "value": "{{confidence}}%",
+            "short": true
+          },
+          {
+            "title": "Entry Price",
+            "value": "${{entry_price}}",
+            "short": true
+          },
+          {
+            "title": "Stop Loss",
+            "value": "${{stop_loss}}",
+            "short": true
+          },
+          {
+            "title": "Take Profit",
+            "value": "${{take_profit}}",
+            "short": true
+          },
+          {
+            "title": "Signal Strength",
+            "value": "{{signal_strength}}/10",
+            "short": true
+          }
+        ],
+        "color": "#2ecc71"
+      }
+    },
+
+    "trading_signal_sell": {
+      "channel": "trading_signals",
+      "template": "trading_sell",
+      "content": {
+        "icon_emoji": ":arrow_lower_left:",
+        "title": "SELL Signal Generated",
+        "fields": [
+          {
+            "title": "Asset",
+            "value": "{{asset}}",
+            "short": true
+          },
+          {
+            "title": "Confidence",
+            "value": "{{confidence}}%",
+            "short": true
+          },
+          {
+            "title": "Exit Price",
+            "value": "${{exit_price}}",
+            "short": true
+          },
+          {
+            "title": "Profit/Loss",
+            "value": "{{pnl}}%",
+            "short": true
+          }
+        ],
+        "color": "#e74c3c"
+      }
+    },
+
+    "error_critical": {
+      "channel": "error_alerts",
+      "template": "error_critical",
+      "content": {
+        "icon_emoji": ":rotating_light:",
+        "title": "CRITICAL ERROR",
+        "fields": [
+          {
+            "title": "Error Type",
+            "value": "{{error_type}}",
+            "short": true
+          },
+          {
+            "title": "Service",
+            "value": "{{service}}",
+            "short": true
+          },
+          {
+            "title": "Timestamp",
+            "value": "{{timestamp}}",
+            "short": true
+          },
+          {
+            "title": "Error Count",
+            "value": "{{error_count}}",
+            "short": true
+          },
+          {
+            "title": "Stack Trace",
+            "value": "```{{stack_trace | truncate: 300}}```",
+            "short": false
+          }
+        ],
+        "color": "#ff0000",
+        "urgency": "immediate"
+      }
+    },
+
+    "github_push": {
+      "channel": "github_events",
+      "template": "github_push",
+      "content": {
+        "icon_emoji": ":github:",
+        "title": "Repository Push",
+        "fields": [
+          {
+            "title": "Repository",
+            "value": "{{repository}}",
+            "short": true
+          },
+          {
+            "title": "Branch",
+            "value": "{{branch}}",
+            "short": true
+          },
+          {
+            "title": "Author",
+            "value": "{{author}}",
+            "short": true
+          },
+          {
+            "title": "Commits",
+            "value": "{{commit_count}}",
+            "short": true
+          },
+          {
+            "title": "Message",
+            "value": "{{commit_message | truncate: 150}}",
+            "short": false
+          }
+        ],
+        "color": "#171515"
+      }
+    },
+
+    "system_health_ok": {
+      "channel": "system_health",
+      "template": "system_ok",
+      "content": {
+        "icon_emoji": ":heartbeat:",
+        "title": "System Health Status",
+        "fields": [
+          {
+            "title": "Uptime",
+            "value": "{{uptime_percent}}%",
+            "short": true
+          },
+          {
+            "title": "Response Time",
+            "value": "{{response_time}}ms",
+            "short": true
+          },
+          {
+            "title": "CPU Usage",
+            "value": "{{cpu_usage}}%",
+            "short": true
+          },
+          {
+            "title": "Memory Usage",
+            "value": "{{memory_usage}}%",
+            "short": true
+          }
+        ],
+        "color": "#27ae60"
+      }
+    },
+
+    "system_health_degraded": {
+      "channel": "system_health",
+      "template": "system_warning",
+      "content": {
+        "icon_emoji": ":warning:",
+        "title": "System Health Degraded",
+        "fields": [
+          {
+            "title": "Status",
+            "value": "{{status}}",
+            "short": true
+          },
+          {
+            "title": "Issue",
+            "value": "{{issue_description}}",
+            "short": false
+          }
+        ],
+        "color": "#f39c12"
+      }
+    }
+  },
+
+  "alert_routing": {
+    "rules": [
+      {
+        "id": "route_e2b_errors",
+        "name": "Route E2B Errors",
+        "condition": {
+          "source": "e2b",
+          "type": "error"
+        },
+        "target": "e2b_alerts",
+        "priority": "high",
+        "enabled": true
+      },
+      {
+        "id": "route_critical_errors",
+        "name": "Route Critical Errors",
+        "condition": {
+          "source": "*",
+          "severity": "critical"
+        },
+        "target": "error_alerts",
+        "priority": "critical",
+        "enabled": true,
+        "mention": "@devops"
+      },
+      {
+        "id": "route_trading_signals",
+        "name": "Route Trading Signals",
+        "condition": {
+          "source": "trading",
+          "type": ["buy", "sell"]
+        },
+        "target": "trading_signals",
+        "priority": "high",
+        "enabled": true,
+        "threading": true
+      },
+      {
+        "id": "route_github_updates",
+        "name": "Route GitHub Updates",
+        "condition": {
+          "source": "github",
+          "event": ["push", "pull_request", "issue"]
+        },
+        "target": "github_events",
+        "priority": "medium",
+        "enabled": true
+      },
+      {
+        "id": "route_zapier_status",
+        "name": "Route Zapier Status",
+        "condition": {
+          "source": "zapier"
+        },
+        "target": "zapier_sync",
+        "priority": "low",
+        "enabled": false,
+        "log_only": true
+      },
+      {
+        "id": "route_system_health",
+        "name": "Route System Health",
+        "condition": {
+          "source": "system",
+          "type": "health"
+        },
+        "target": "system_health",
+        "priority": "medium",
+        "enabled": true
+      }
+    ],
+    "default_target": "general",
+    "fallback_behavior": "log_to_default"
+  },
+
+  "message_formatting": {
+    "timestamp_format": "YYYY-MM-DD HH:mm:ss UTC",
+    "timezone": "UTC",
+    "markdown_enabled": true,
+    "thread_replies": {
+      "enabled": true,
+      "broadcast": false,
+      "reply_count_limit": 50
+    },
+    "attachments": {
+      "enabled": true,
+      "max_size_mb": 20,
+      "supported_types": ["json", "csv", "pdf", "png", "jpg"]
+    }
+  },
+
+  "user_mentions": {
+    "devops_team": ["@devops", "@devops-lead"],
+    "team_lead": ["@team-lead"],
+    "full_team": ["@team", "@here"]
+  },
+
+  "rate_limiting": {
+    "enabled": true,
+    "messages_per_minute": 60,
+    "messages_per_hour": 1000,
+    "burst_limit": 10,
+    "handling": "queue_and_throttle"
+  },
+
+  "retry_policy": {
+    "enabled": true,
+    "max_retries": 3,
+    "backoff_multiplier": 2,
+    "initial_delay_seconds": 1,
+    "max_delay_seconds": 30,
+    "timeout_seconds": 10
+  },
+
+  "data_optimization": {
+    "compression": {
+      "enabled": true,
+      "algorithm": "gzip"
+    },
+    "field_truncation": {
+      "enabled": true,
+      "limits": {
+        "title": 150,
+        "value": 1000,
+        "text": 2000
+      }
+    },
+    "batch_messages": {
+      "enabled": false,
+      "max_batch_size": 5
+    }
+  },
+
+  "monitoring": {
+    "track_delivery": true,
+    "log_failures": true,
+    "log_retention_days": 30,
+    "metrics": {
+      "messages_sent": true,
+      "delivery_rate": true,
+      "response_time": true,
+      "error_rate": true
+    }
+  }
+}

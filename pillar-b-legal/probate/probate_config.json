@@ -1,0 +1,391 @@
+{
+  "general_settings": {
+    "hearing_days": 30,
+    "creditor_claim_deadline_days": 120,
+    "final_account_filing_days": 180,
+    "minimum_publication_days": 14
+  },
+  "state_rules": {
+    "default": {
+      "state_name": "Default",
+      "small_estate_threshold": 20000,
+      "requires_bond": true,
+      "inventory_due_days": 90,
+      "creditor_claim_period_days": 120,
+      "notice_required": true,
+      "appraisal_required": true,
+      "hearing_required": true,
+      "publication_required": true
+    },
+    "california": {
+      "state_name": "California",
+      "small_estate_threshold": 166250,
+      "requires_bond": false,
+      "inventory_due_days": 60,
+      "creditor_claim_period_days": 120,
+      "notice_required": true,
+      "appraisal_required": false,
+      "hearing_required": true,
+      "publication_required": true,
+      "special_rules": {
+        "succession_without_administration": true,
+        "succession_threshold": 50000
+      }
+    },
+    "florida": {
+      "state_name": "Florida",
+      "small_estate_threshold": 75000,
+      "requires_bond": false,
+      "inventory_due_days": 90,
+      "creditor_claim_period_days": 90,
+      "notice_required": true,
+      "appraisal_required": false,
+      "hearing_required": true,
+      "publication_required": true,
+      "special_rules": {
+        "disposition_without_administration": true,
+        "disposition_threshold": 35000
+      }
+    },
+    "texas": {
+      "state_name": "Texas",
+      "small_estate_threshold": 75000,
+      "requires_bond": false,
+      "inventory_due_days": 90,
+      "creditor_claim_period_days": 120,
+      "notice_required": true,
+      "appraisal_required": false,
+      "hearing_required": true,
+      "publication_required": true,
+      "special_rules": {
+        "independent_administration": true
+      }
+    },
+    "new_york": {
+      "state_name": "New York",
+      "small_estate_threshold": 30000,
+      "requires_bond": false,
+      "inventory_due_days": 90,
+      "creditor_claim_period_days": 120,
+      "notice_required": true,
+      "appraisal_required": true,
+      "hearing_required": true,
+      "publication_required": true,
+      "special_rules": {
+        "small_estate_affidavit": true
+      }
+    }
+  },
+  "timeline_tracking": {
+    "milestones": [
+      {
+        "name": "Estate Initiated",
+        "status": "initiated",
+        "days_after_death": 0,
+        "description": "Estate administration begins"
+      },
+      {
+        "name": "Petition Filed",
+        "status": "petition_filed",
+        "days_after_death": 14,
+        "description": "Petition for probate filed with court"
+      },
+      {
+        "name": "Hearing Scheduled",
+        "status": "hearing_scheduled",
+        "days_after_death": 44,
+        "description": "Probate hearing scheduled"
+      },
+      {
+        "name": "Probate Granted",
+        "status": "probate_granted",
+        "days_after_death": 50,
+        "description": "Court grants probate, PR receives letters"
+      },
+      {
+        "name": "Inventory Filed",
+        "status": "inventory_filed",
+        "days_after_death": 140,
+        "description": "Inventory and appraisal filed"
+      },
+      {
+        "name": "Creditor Period Open",
+        "status": "creditor_period_open",
+        "days_after_death": 50,
+        "description": "Notice to creditors published"
+      },
+      {
+        "name": "Final Accounts Filed",
+        "status": "accounts_filed",
+        "days_after_death": 230,
+        "description": "Final account and report filed"
+      },
+      {
+        "name": "Assets Distributed",
+        "status": "assets_distributed",
+        "days_after_death": 240,
+        "description": "Final distributions made to beneficiaries"
+      },
+      {
+        "name": "Estate Closed",
+        "status": "closed",
+        "days_after_death": 250,
+        "description": "Estate administration complete"
+      }
+    ]
+  },
+  "document_checklist": {
+    "pre_filing": [
+      {
+        "document": "Death Certificate",
+        "required": true,
+        "copies_needed": 10,
+        "description": "Certified copy of decedent's death certificate"
+      },
+      {
+        "document": "Original Will",
+        "required": true,
+        "copies_needed": 5,
+        "description": "Original will and any codicils"
+      },
+      {
+        "document": "Birth Certificate",
+        "required": false,
+        "copies_needed": 2,
+        "description": "Decedent's birth certificate"
+      },
+      {
+        "document": "Marriage Certificate",
+        "required": false,
+        "copies_needed": 2,
+        "description": "Marriage certificate if applicable"
+      },
+      {
+        "document": "Tax Returns",
+        "required": true,
+        "copies_needed": 2,
+        "description": "Last 3 years of income tax returns"
+      },
+      {
+        "document": "Financial Statements",
+        "required": true,
+        "copies_needed": 1,
+        "description": "Bank statements, investment accounts, mortgages"
+      }
+    ],
+    "filing_documents": [
+      {
+        "document": "Petition for Probate",
+        "required": true,
+        "court_copies": 2,
+        "description": "Formal petition filed with probate court"
+      },
+      {
+        "document": "Oath of Personal Representative",
+        "required": true,
+        "court_copies": 2,
+        "description": "PR takes oath before court/notary"
+      },
+      {
+        "document": "Affidavit of Domicile",
+        "required": true,
+        "court_copies": 2,
+        "description": "Establishes decedent's state of domicile"
+      },
+      {
+        "document": "Notice of Petition",
+        "required": true,
+        "court_copies": 2,
+        "description": "Published notice of probate hearing"
+      },
+      {
+        "document": "Proof of Publication",
+        "required": true,
+        "court_copies": 2,
+        "description": "Proof that notice was published"
+      }
+    ],
+    "administration_documents": [
+      {
+        "document": "Inventory and Appraisal",
+        "required": true,
+        "court_copies": 2,
+        "due_days": 90,
+        "description": "List of all estate assets with values"
+      },
+      {
+        "document": "Notice to Creditors",
+        "required": true,
+        "court_copies": 2,
+        "due_days": 50,
+        "description": "Published notice requesting creditor claims"
+      },
+      {
+        "document": "Account Books",
+        "required": true,
+        "court_copies": 1,
+        "description": "Detailed accounting of all estate transactions"
+      },
+      {
+        "document": "Receipts and Invoices",
+        "required": true,
+        "court_copies": 0,
+        "description": "Supporting documentation for all expenses"
+      }
+    ],
+    "closing_documents": [
+      {
+        "document": "Final Account and Report",
+        "required": true,
+        "court_copies": 2,
+        "due_days": 180,
+        "description": "Final accounting of estate administration"
+      },
+      {
+        "document": "Petition for Distribution",
+        "required": true,
+        "court_copies": 2,
+        "description": "Request for court approval of distributions"
+      },
+      {
+        "document": "Affidavit of Distribution",
+        "required": true,
+        "court_copies": 1,
+        "description": "Certification that distributions were made"
+      },
+      {
+        "document": "Order for Final Distribution",
+        "required": true,
+        "court_copies": 2,
+        "description": "Court order approving final distributions"
+      }
+    ]
+  },
+  "court_filing_requirements": {
+    "filing_fees": {
+      "petition_filing": 300,
+      "hearing_fee": 0,
+      "inventory_filing": 0,
+      "final_accounting_filing": 150,
+      "certified_copy_per_page": 1.50
+    },
+    "publication_requirements": {
+      "newspaper_notice_days": 14,
+      "number_of_publications": 2,
+      "average_cost_per_publication": 200
+    },
+    "required_documents_for_filing": [
+      "Petition for Probate",
+      "Certified Death Certificate",
+      "Original Will",
+      "Oath of Personal Representative",
+      "Affidavit of Domicile",
+      "Notice of Petition to Probate Will"
+    ],
+    "filing_deadlines": {
+      "will_must_be_filed_days": 30,
+      "inventory_due_days": 90,
+      "first_account_due_days": 180,
+      "final_account_due_days": 365,
+      "estate_closure_timeline_days": 400
+    }
+  },
+  "asset_categories": {
+    "real_property": {
+      "description": "Real estate, land, buildings",
+      "appraisal_required": true,
+      "transfer_complexity": "high",
+      "transfer_timeline_days": 30
+    },
+    "personal_property": {
+      "description": "Tangible items, household goods, jewelry",
+      "appraisal_required": false,
+      "transfer_complexity": "low",
+      "transfer_timeline_days": 5
+    },
+    "bank_account": {
+      "description": "Checking, savings, money market accounts",
+      "appraisal_required": false,
+      "transfer_complexity": "low",
+      "transfer_timeline_days": 10
+    },
+    "investment": {
+      "description": "Stocks, bonds, mutual funds",
+      "appraisal_required": false,
+      "transfer_complexity": "medium",
+      "transfer_timeline_days": 15
+    },
+    "vehicle": {
+      "description": "Cars, trucks, motorcycles, boats",
+      "appraisal_required": true,
+      "transfer_complexity": "medium",
+      "transfer_timeline_days": 20
+    },
+    "business_interest": {
+      "description": "Ownership stakes, partnerships, LLC interests",
+      "appraisal_required": true,
+      "transfer_complexity": "high",
+      "transfer_timeline_days": 45
+    },
+    "life_insurance": {
+      "description": "Life insurance policies with estate as beneficiary",
+      "appraisal_required": false,
+      "transfer_complexity": "medium",
+      "transfer_timeline_days": 14
+    },
+    "retirement_account": {
+      "description": "IRAs, 401ks, pension accounts",
+      "appraisal_required": false,
+      "transfer_complexity": "medium",
+      "transfer_timeline_days": 30
+    }
+  },
+  "creditor_priority_rules": {
+    "priority_order": [
+      {
+        "level": 1,
+        "name": "Administrative Expenses",
+        "description": "Court costs, attorney fees, appraiser fees"
+      },
+      {
+        "level": 2,
+        "name": "Funeral Expenses",
+        "description": "Reasonable funeral and burial costs"
+      },
+      {
+        "level": 3,
+        "name": "Secured Claims",
+        "description": "Mortgages, liens on specific property"
+      },
+      {
+        "level": 4,
+        "name": "Wage Claims",
+        "description": "Employee wages owed to decedent's employees"
+      },
+      {
+        "level": 5,
+        "name": "Tax Claims",
+        "description": "Federal, state, and local taxes"
+      },
+      {
+        "level": 6,
+        "name": "Unsecured Claims",
+        "description": "Credit cards, personal loans, medical bills"
+      }
+    ]
+  },
+  "distribution_rules": {
+    "intestate_distribution": {
+      "spouse_and_children": "Spouse gets 1/3, children split 2/3",
+      "spouse_only": "Spouse gets entire estate",
+      "children_only": "Children split equally",
+      "parents_only": "Parents split equally",
+      "siblings_only": "Siblings split equally"
+    },
+    "escrow_requirements": {
+      "percentage_held": 10,
+      "hold_duration_days": 30,
+      "reason": "Potential creditor claims or tax adjustments"
+    }
+  }
+}

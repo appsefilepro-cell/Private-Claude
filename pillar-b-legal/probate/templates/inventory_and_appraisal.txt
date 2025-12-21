@@ -1,0 +1,264 @@
+INVENTORY AND APPRAISAL
+OF PROPERTY OF THE ESTATE OF
+
+[DECEDENT NAME], DECEASED
+
+[STATE] SUPERIOR COURT
+[COUNTY] COUNTY PROBATE DEPARTMENT
+CASE NO.: [CASE NUMBER]
+
+INVENTORY AND APPRAISAL
+
+This inventory and appraisal is made by [PERSONAL REPRESENTATIVE NAME],
+personal representative of the estate of [DECEDENT NAME], deceased, and
+[APPRAISER NAME], court-appointed appraiser.
+
+The following is a true and correct statement of all property, real and personal,
+of the estate of the above-named deceased, with the fair market value at the date
+of death, which is [DATE OF DEATH]:
+
+================================================================================
+REAL PROPERTY
+================================================================================
+
+Description and Location                          Fair Market Value
+__________________________________________________________________
+
+[ADDRESS 1]
+[PROPERTY DESCRIPTION]
+Size/Square Footage: [SIZE]
+Outstanding Encumbrances: $[AMOUNT]
+Net Value: $[AMOUNT]                             $[VALUE]
+
+[ADDRESS 2]
+[PROPERTY DESCRIPTION]
+Size/Square Footage: [SIZE]
+Outstanding Encumbrances: $[AMOUNT]
+Net Value: $[AMOUNT]                             $[VALUE]
+
+                                    SUBTOTAL REAL PROPERTY: $[SUBTOTAL]
+
+================================================================================
+PERSONAL PROPERTY
+================================================================================
+
+HOUSEHOLD FURNISHINGS AND EFFECTS
+[Description]                                    Fair Market Value
+__________________________________________________________________
+Furniture, fixtures, and household items              $[VALUE]
+Jewelry, watches, and precious items                 $[VALUE]
+Art, antiques, and collectibles                      $[VALUE]
+Other personal property                              $[VALUE]
+
+SUBTOTAL PERSONAL PROPERTY: $[SUBTOTAL]
+
+================================================================================
+BANK ACCOUNTS AND CASH
+================================================================================
+
+Institution                    Account Type          Balance
+__________________________________________________________________
+[BANK NAME]                    [ACCOUNT TYPE]        $[BALANCE]
+[BANK NAME]                    [ACCOUNT TYPE]        $[BALANCE]
+[BANK NAME]                    [ACCOUNT TYPE]        $[BALANCE]
+
+Cash on Hand (at date of death)                      $[AMOUNT]
+
+SUBTOTAL BANK ACCOUNTS: $[SUBTOTAL]
+
+================================================================================
+INVESTMENTS
+================================================================================
+
+Security Description                  Quantity    Price per Share    Value
+__________________________________________________________________
+
+Stocks:
+[COMPANY NAME]                         [QTY]       $[PRICE]          $[VALUE]
+[COMPANY NAME]                         [QTY]       $[PRICE]          $[VALUE]
+
+Bonds:
+[BOND DESCRIPTION]                     [QTY]       $[PRICE]          $[VALUE]
+[BOND DESCRIPTION]                     [QTY]       $[PRICE]          $[VALUE]
+
+Mutual Funds:
+[FUND NAME]                            [QTY]       $[PRICE]          $[VALUE]
+
+Other Investments:
+[DESCRIPTION]                                                         $[VALUE]
+
+SUBTOTAL INVESTMENTS: $[SUBTOTAL]
+
+================================================================================
+VEHICLES
+================================================================================
+
+Vehicle Description              Year    Make    Model    Value
+__________________________________________________________________
+
+[DESCRIPTION]                   [YEAR]  [MAKE]  [MODEL]  $[VALUE]
+[DESCRIPTION]                   [YEAR]  [MAKE]  [MODEL]  $[VALUE]
+
+Encumbrances (liens):          $[AMOUNT]
+Net Vehicle Value:             $[VALUE]
+
+SUBTOTAL VEHICLES: $[SUBTOTAL]
+
+================================================================================
+BUSINESS INTERESTS
+================================================================================
+
+[Business Name]
+Type of Interest: [TYPE]
+Ownership Percentage: [PERCENTAGE]%
+Date of Valuation: [DATE]
+Basis of Valuation: [METHOD]
+Fair Market Value:                                    $[VALUE]
+
+[Business Name]
+Type of Interest: [TYPE]
+Ownership Percentage: [PERCENTAGE]%
+Date of Valuation: [DATE]
+Basis of Valuation: [METHOD]
+Fair Market Value:                                    $[VALUE]
+
+SUBTOTAL BUSINESS INTERESTS: $[SUBTOTAL]
+
+================================================================================
+LIFE INSURANCE
+================================================================================
+
+Insurance Company              Policy Number      Face Amount    Cash Value
+__________________________________________________________________
+[COMPANY NAME]                 [NUMBER]           $[AMOUNT]      $[VALUE]
+[COMPANY NAME]                 [NUMBER]           $[AMOUNT]      $[VALUE]
+
+Payable to Estate:                                $[TOTAL]
+
+SUBTOTAL LIFE INSURANCE: $[SUBTOTAL]
+
+================================================================================
+RETIREMENT ACCOUNTS
+================================================================================
+
+Institution                Account Type           Beneficiary    Value
+__________________________________________________________________
+[INSTITUTION]             [TYPE]                 [BENEFICIARY]  $[VALUE]
+[INSTITUTION]             [TYPE]                 [BENEFICIARY]  $[VALUE]
+
+SUBTOTAL RETIREMENT ACCOUNTS: $[SUBTOTAL]
+
+================================================================================
+OTHER ASSETS
+================================================================================
+
+Description                                          Fair Market Value
+__________________________________________________________________
+[DESCRIPTION]                                        $[VALUE]
+[DESCRIPTION]                                        $[VALUE]
+
+SUBTOTAL OTHER ASSETS: $[SUBTOTAL]
+
+================================================================================
+SUMMARY OF ESTATE PROPERTY
+================================================================================
+
+Real Property                                         $[AMOUNT]
+Personal Property (Household Items, etc.)            $[AMOUNT]
+Bank Accounts and Cash                               $[AMOUNT]
+Investments                                          $[AMOUNT]
+Vehicles                                             $[AMOUNT]
+Business Interests                                   $[AMOUNT]
+Life Insurance                                       $[AMOUNT]
+Retirement Accounts                                  $[AMOUNT]
+Other Assets                                         $[AMOUNT]
+                                    ___________________________
+TOTAL GROSS ESTATE VALUE:                            $[TOTAL]
+                                    ===========================
+
+OUTSTANDING ENCUMBRANCES AND LIABILITIES:
+Mortgages and Deeds of Trust                         $[AMOUNT]
+Vehicle Loans                                        $[AMOUNT]
+Other Liens and Encumbrances                         $[AMOUNT]
+                                    ___________________________
+TOTAL ENCUMBRANCES:                                  $[TOTAL]
+                                    ===========================
+
+NET ESTATE VALUE (After Encumbrances):               $[NET VALUE]
+
+================================================================================
+APPRAISER STATEMENT
+================================================================================
+
+I, [APPRAISER NAME], a court-appointed appraiser, do hereby state that I have
+personally examined and appraised all the property listed in this inventory and
+appraisal, and that in my professional opinion, the fair market values set forth
+herein are true and correct.
+
+The fair market value has been determined as of [DATE OF DEATH].
+
+My qualifications:
+[APPRAISER CREDENTIALS]
+
+My License Number: [LICENSE NUMBER]
+My Bond Number: [BOND NUMBER]
+
+I declare under penalty of perjury that the foregoing is true and correct.
+
+Dated: [DATE]
+
+                                    ________________________________
+                                    [APPRAISER NAME]
+                                    Court-Appointed Appraiser
+
+================================================================================
+PERSONAL REPRESENTATIVE CERTIFICATION
+================================================================================
+
+I, [PERSONAL REPRESENTATIVE NAME], personal representative of the estate of
+[DECEDENT NAME], deceased, do hereby state:
+
+1. I have made diligent inquiry and investigation for the purpose of ascertaining
+   all the property belonging to the decedent.
+
+2. I have listed all property of which I have knowledge or could reasonably be
+   expected to have knowledge.
+
+3. The appraisal values listed herein are, to the best of my knowledge and belief,
+   a true and correct valuation of the estate property at fair market value as of
+   the date of death.
+
+I declare under penalty of perjury that the foregoing is true and correct.
+
+Dated: [DATE]
+
+                                    ________________________________
+                                    [PERSONAL REPRESENTATIVE NAME]
+                                    Personal Representative
+
+================================================================================
+ATTORNEY CERTIFICATION (if applicable)
+================================================================================
+
+I, [ATTORNEY NAME], attorney for the personal representative, declare:
+
+I have examined this inventory and appraisal and certify that it is complete and
+accurate to the best of my knowledge based on the information provided to me by
+the personal representative.
+
+I declare under penalty of perjury that the foregoing is true and correct.
+
+Dated: [DATE]
+
+                                    ________________________________
+                                    [ATTORNEY NAME]
+                                    State Bar Number: [NUMBER]
+
+NOTES:
+- Fair market value means the price at which the property would change hands
+  between a willing buyer and seller, neither being under any compulsion to buy
+  or sell and both having reasonable knowledge of relevant facts.
+- All values should be supported by appropriate documentation (appraisals,
+  bank statements, investment account statements, etc.).
+- This inventory must be filed with the court within [DEADLINE] days of the
+  issuance of letters testamentary or letters of administration.

@@ -1,0 +1,323 @@
+FINAL ACCOUNT AND REPORT OF PERSONAL REPRESENTATIVE
+OF THE ESTATE OF [DECEDENT NAME], DECEASED
+
+[STATE] SUPERIOR COURT
+[COUNTY] COUNTY PROBATE DEPARTMENT
+CASE NO.: [CASE NUMBER]
+
+FINAL ACCOUNT AND REPORT
+
+To the Honorable Court:
+
+The undersigned, [PERSONAL REPRESENTATIVE NAME], as personal representative of
+the estate of [DECEDENT NAME], deceased, makes this Final Account and Report.
+
+================================================================================
+PART I: PROPERTY RECEIVED
+================================================================================
+
+PROPERTY IN INVENTORY
+As shown in the inventory and appraisal filed
+[DATE], which was approved by the Court              $[AMOUNT]
+
+PROPERTY NOT IN INVENTORY
+
+Life Insurance Proceeds (Estate Beneficiary):        $[AMOUNT]
+Retirement Account Distributions:                   $[AMOUNT]
+Transfer on Death Accounts:                         $[AMOUNT]
+Community Property Transfers:                       $[AMOUNT]
+Other Property Received:                            $[AMOUNT]
+
+TOTAL PROPERTY NOT IN INVENTORY:                     $[AMOUNT]
+
+INCREASES TO ESTATE
+
+Net Rents and Income from Real Property:             $[AMOUNT]
+Dividends and Interest:                             $[AMOUNT]
+Sale Proceeds from Asset Sales:                     $[AMOUNT]
+Other Income:                                       $[AMOUNT]
+
+TOTAL INCREASES:                                    $[AMOUNT]
+
+TOTAL PROPERTY RECEIVED:                            $[TOTAL]
+
+================================================================================
+PART II: PROPERTY EXPENDED AND LIABILITIES PAID
+================================================================================
+
+DEBTS AND LIABILITIES PAID
+
+Mortgages and Deeds of Trust:                       $[AMOUNT]
+Vehicle Loans:                                      $[AMOUNT]
+Credit Card Debts:                                  $[AMOUNT]
+Medical Bills:                                      $[AMOUNT]
+Other Unsecured Debts:                              $[AMOUNT]
+
+TOTAL DEBTS PAID:                                   $[AMOUNT]
+
+FUNERAL AND ADMINISTRATION EXPENSES
+
+Funeral Expenses:                                   $[AMOUNT]
+Probate Court Fees and Costs:                       $[AMOUNT]
+Publication and Legal Notices:                      $[AMOUNT]
+Appraiser Fees:                                     $[AMOUNT]
+Accounting Fees:                                    $[AMOUNT]
+Professional Services Fees:                        $[AMOUNT]
+Insurance (Estate Bond, etc.):                      $[AMOUNT]
+Real Estate Holding Costs (taxes, utilities):       $[AMOUNT]
+Other Administration Expenses:                      $[AMOUNT]
+
+TOTAL ADMINISTRATION EXPENSES:                      $[AMOUNT]
+
+FEDERAL ESTATE TAXES PAID:                          $[AMOUNT]
+
+STATE INHERITANCE/ESTATE TAXES PAID:                $[AMOUNT]
+
+INCOME TAXES PAID (Fiduciary Income Tax):           $[AMOUNT]
+
+PROPERTY TRANSFERRED AND DELIVERED
+
+During administration, property has been transferred and delivered as follows:
+
+Real Property Transferred to Beneficiaries:         $[AMOUNT]
+Personal Property Distributed:                     $[AMOUNT]
+Cash Distributions to Beneficiaries:                $[AMOUNT]
+
+TOTAL DISTRIBUTIONS MADE:                           $[AMOUNT]
+
+TOTAL PROPERTY EXPENDED:                            $[TOTAL]
+
+================================================================================
+PART III: ACCOUNTING
+================================================================================
+
+Total Property Received:                            $[AMOUNT]
+Less: Total Property Expended:                      ($[AMOUNT])
+                                    ___________________________
+Balance Remaining in Estate:                        $[BALANCE]
+
+The balance consists of:
+- Cash on Hand:                                     $[AMOUNT]
+- Pending Estate Matters:                           $[AMOUNT]
+- Reserved for Claims/Contingencies:                $[AMOUNT]
+
+================================================================================
+PART IV: CREDITOR CLAIMS
+================================================================================
+
+Claims have been received as follows:
+
+Creditor Claims Summary:
+Total Claims Received:                              $[NUMBER] claims
+Total Amount Claimed:                               $[AMOUNT]
+
+Allowed Claims:
+- Administrative Expenses (Priority 1):             $[AMOUNT]
+- Funeral Expenses (Priority 2):                    $[AMOUNT]
+- Secured Claims (Priority 3):                      $[AMOUNT]
+- Tax Claims (Priority 4):                          $[AMOUNT]
+- Unsecured Claims (Priority 5):                    $[AMOUNT]
+
+Total Allowed Claims:                               $[AMOUNT]
+
+Disputed/Rejected Claims:
+- Reason for Rejection: [DESCRIPTION]
+- Amount:                                           $[AMOUNT]
+
+================================================================================
+PART V: DETAILED DISTRIBUTIONS TO BENEFICIARIES
+================================================================================
+
+Distribution has been made or will be made as follows:
+
+Beneficiary Name                    Relationship    Share %    Distribution Amount
+________________________________________________________________________________
+
+[BENEFICIARY NAME]                  [RELATIONSHIP]  [%]        $[AMOUNT]
+[BENEFICIARY NAME]                  [RELATIONSHIP]  [%]        $[AMOUNT]
+[BENEFICIARY NAME]                  [RELATIONSHIP]  [%]        $[AMOUNT]
+
+TOTAL DISTRIBUTIONS:                                           $[TOTAL]
+
+DISTRIBUTION METHOD:
+
+[Select appropriate statement(s)]:
+[ ] Cash distributions paid to beneficiaries
+[ ] Real property distributed in kind to beneficiaries
+[ ] Personal property distributed in kind to beneficiaries
+[ ] Distributions held in continuing trust
+[ ] Partial distributions made; estate remains open
+[ ] Final distributions approved by Court order dated [DATE]
+
+================================================================================
+PART VI: FINAL ACCOUNTING SUMMARY
+================================================================================
+
+RECEIPTS AND SOURCES OF FUNDS
+
+Opening Estate Value (from Inventory):              $[AMOUNT]
+Income Received:                                    $[AMOUNT]
+Sale Proceeds:                                      $[AMOUNT]
+Insurance Proceeds:                                 $[AMOUNT]
+Retirement Account Distributions:                  $[AMOUNT]
+Other Receipts:                                     $[AMOUNT]
+
+TOTAL RECEIPTS:                                     $[AMOUNT]
+
+DISBURSEMENTS AND USES OF FUNDS
+
+Debts and Liabilities Paid:                         $[AMOUNT]
+Administration Expenses:                            $[AMOUNT]
+Taxes Paid:                                         $[AMOUNT]
+Distributions to Beneficiaries:                    $[AMOUNT]
+
+TOTAL DISBURSEMENTS:                                $[AMOUNT]
+
+NET CHANGE IN ESTATE VALUE:                         $[AMOUNT]
+FINAL ESTATE VALUE REMAINING:                       $[AMOUNT]
+
+================================================================================
+PART VII: PERSONAL REPRESENTATIVE'S STATEMENT
+================================================================================
+
+I, [PERSONAL REPRESENTATIVE NAME], personal representative of the estate of
+[DECEDENT NAME], deceased, make the following statements:
+
+1. I have faithfully executed all duties as personal representative.
+
+2. I have made diligent inquiry to ascertain all property of the decedent.
+
+3. I have paid all just debts, charges, and expenses of administration that I
+   have been able to ascertain.
+
+4. I have received and considered all creditor claims presented within the
+   prescribed period.
+
+5. I have made distributions to beneficiaries in accordance with the Will
+   [and the laws of intestate succession / as modified by Court order].
+
+6. The following documents are attached to this Final Account:
+   [ ] Inventory and Appraisal (if not previously filed)
+   [ ] Receipts and invoices for all expenses
+   [ ] Bank statements and account records
+   [ ] Creditor claim determinations
+   [ ] Distribution receipts from beneficiaries
+   [ ] Real property sale documents
+   [ ] Tax return copies (if applicable)
+
+7. [Select as appropriate]:
+   [ ] This estate is ready for final distribution and closure.
+   [ ] This estate has pending matters and will remain open for [REASON].
+   [ ] All distributions have been completed.
+
+I declare under penalty of perjury that the foregoing is true and correct.
+
+Executed on [DATE] at [CITY], [STATE].
+
+                                    ________________________________
+                                    [PERSONAL REPRESENTATIVE NAME]
+                                    Personal Representative
+
+================================================================================
+PART VIII: ATTORNEY'S CERTIFICATION (if applicable)
+================================================================================
+
+I, [ATTORNEY NAME], attorney for the personal representative, certify:
+
+1. I have reviewed this Final Account and Report and the supporting documents.
+
+2. The accounting is complete, accurate, and properly reflects all transactions
+   of the personal representative.
+
+3. The distributions shown have been made in accordance with the Will and
+   applicable law.
+
+4. All creditor claims have been properly evaluated and processed.
+
+I declare under penalty of perjury that the foregoing is true and correct.
+
+Executed on [DATE] at [CITY], [STATE].
+
+                                    ________________________________
+                                    [ATTORNEY NAME]
+                                    State Bar Number: [NUMBER]
+                                    Attorney for Personal Representative
+
+================================================================================
+PART IX: REQUEST FOR APPROVAL AND DISCHARGE
+================================================================================
+
+The personal representative respectfully requests:
+
+1. Approval of this Final Account and Report
+
+2. Approval of the distributions made to the beneficiaries
+
+3. Determination that the personal representative has properly administered
+   the estate
+
+4. An Order discharging the personal representative from further liability,
+   and settling and allowing the Final Account and Report
+
+5. [If applicable] An Order closing the estate
+
+6. Such other and further relief as the Court deems proper
+
+================================================================================
+SUPPORTING DOCUMENTATION CHECKLIST
+================================================================================
+
+The following documents are attached:
+
+[ ] Original inventory and appraisal (or certification if previously filed)
+[ ] Certified copies of creditor claims determinations
+[ ] Receipts for all administration expenses
+[ ] Funeral expense statements and receipts
+[ ] Real property sale documents and HUD-1 statements
+[ ] Bank statements showing all transactions
+[ ] Investment account statements and brokerage confirmations
+[ ] Federal estate tax return (Form 706) if filed
+[ ] State estate/inheritance tax returns
+[ ] Fiduciary income tax returns (Form 1041)
+[ ] Personal income tax returns of personal representative (if required)
+[ ] Distribution letters signed by beneficiaries
+[ ] Notice of the hearing on final account
+[ ] Proof of publication of notice
+[ ] Insurance policies and appraisals
+[ ] Deed transfers for real property
+[ ] Title transfer documents for vehicles
+[ ] Beneficiary receipts and acknowledgments
+
+================================================================================
+NOTES AND EXPLANATIONS
+================================================================================
+
+[PERSONAL REPRESENTATIVE/ATTORNEY USE ONLY]
+
+Additional information regarding specific transactions or unusual items:
+
+[NARRATIVE EXPLANATION OF ESTATE ADMINISTRATION]
+
+================================================================================
+SIGNATURE AND OATH
+================================================================================
+
+I declare under penalty of perjury under the laws of the State of [STATE] that
+I have read the foregoing Final Account and Report, know the contents thereof,
+and believe the statements therein are true and correct. I am authorized to make
+this account on behalf of [ESTATE ENTITY NAME].
+
+                                    ________________________________
+                                    [PERSONAL REPRESENTATIVE NAME]
+                                    Personal Representative
+
+                                    ________________________________
+                                    Date
+
+[NOTARY SEAL - if required]
+
+SWORN TO AND SUBSCRIBED before me on [DATE]
+
+                                    ________________________________
+                                    Notary Public
+                                    [State] of [State]

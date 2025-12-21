@@ -1,0 +1,132 @@
+graph LR
+    subgraph "Authentication Layer"
+        AUTH["🔐 Auth Services"]
+        API_KEYS["API Keys Management<br/>Environment Variables"]
+        JWT["JWT Tokens"]
+        HMAC["HMAC-SHA256<br/>Signatures"]
+        AUTH --> API_KEYS
+        AUTH --> JWT
+        AUTH --> HMAC
+    end
+
+    subgraph "E2B Integration"
+        E2B_API["E2B API<br/>Base: api.e2b.dev"]
+        E2B_AUTH["Auth: Bearer Token<br/>e2b_fcc08e8c..."]
+        E2B_WH["Webhook Handler<br/>POST /api/webhooks/e2b"]
+        E2B_SANDBOX["Sandbox Endpoints<br/>exec, logs, files"]
+        E2B_API --> E2B_AUTH
+        E2B_API --> E2B_SANDBOX
+        E2B_API --> E2B_WH
+    end
+
+    subgraph "GitHub Integration"
+        GH_API["GitHub API<br/>api.github.com"]
+        GH_AUTH["Auth: Personal Access Token"]
+        GH_WEBHOOK["GitHub Webhook<br/>POST /api/webhooks/github"]
+        GH_ACTIONS["GitHub Actions<br/>CI/CD Pipelines"]
+        GH_COPILOT["Copilot Integration<br/>Code Review Context"]
+        GH_API --> GH_AUTH
+        GH_API --> GH_WEBHOOK
+        GH_API --> GH_ACTIONS
+        GH_API --> GH_COPILOT
+    end
+
+    subgraph "Zapier Integration"
+        ZAPIER_WH["Zapier Webhook<br/>hooks.zapier.com"]
+        ZAPIER_AUTH["Auth: Webhook Token<br/>Bearer Token"]
+        ZAPIER_TRIGGER["Trigger Workflows<br/>on E2B Events"]
+        ZAPIER_ACTIONS["Actions:<br/>Google Sheets, Slack"]
+        ZAPIER_WH --> ZAPIER_AUTH
+        ZAPIER_WH --> ZAPIER_TRIGGER
+        ZAPIER_WH --> ZAPIER_ACTIONS
+    end
+
+    subgraph "Slack Integration"
+        SLACK_API["Slack API<br/>Webhooks"]
+        SLACK_AUTH["Auth: Bot Token"]
+        SLACK_MESSAGES["Message Posting"]
+        SLACK_NOTIFICATIONS["Event Notifications"]
+        SLACK_API --> SLACK_AUTH
+        SLACK_API --> SLACK_MESSAGES
+        SLACK_API --> SLACK_NOTIFICATIONS
+    end
+
+    subgraph "Google Services"
+        GEMINI["Google Gemini AI<br/>generativelanguage.googleapis.com"]
+        GEMINI_AUTH["Auth: API Key<br/>AIzaSyBqAbz..."]
+        GOOGLE_SHEETS["Google Sheets API"]
+        SHEETS_AUTH["Auth: OAuth 2.0"]
+        GEMINI --> GEMINI_AUTH
+        GOOGLE_SHEETS --> SHEETS_AUTH
+    end
+
+    subgraph "Data Synchronization"
+        SYNC_ENGINE["🔄 Sync Engine<br/>Event Processor"]
+        PAYLOAD_COMPRESS["Payload Compression<br/>60-80% reduction"]
+        RATE_LIMIT["Rate Limiting<br/>60 req/min"]
+        RETRY_LOGIC["Retry Logic<br/>Exponential Backoff"]
+        SYNC_ENGINE --> PAYLOAD_COMPRESS
+        SYNC_ENGINE --> RATE_LIMIT
+        SYNC_ENGINE --> RETRY_LOGIC
+    end
+
+    subgraph "Security Layer"
+        SEC["🛡️ Security Controls"]
+        ENCRYPT["AES-256-GCM<br/>Encryption"]
+        VERIFY["Signature<br/>Verification"]
+        IP_WHITE["IP Whitelisting<br/>Optional"]
+        SEC --> ENCRYPT
+        SEC --> VERIFY
+        SEC --> IP_WHITE
+    end
+
+    subgraph "Monitoring & Logging"
+        LOGS["📝 Logging System"]
+        MONITORING["📊 Monitoring"]
+        HEALTH["🏥 Health Checks"]
+        ALERTS["🚨 Alerts"]
+        LOGS --> MONITORING
+        LOGS --> HEALTH
+        MONITORING --> ALERTS
+    end
+
+    %% Connection flows
+    AUTH --> E2B_API
+    AUTH --> GH_API
+    AUTH --> ZAPIER_WH
+    AUTH --> SLACK_API
+    AUTH --> GEMINI
+
+    E2B_API --> SYNC_ENGINE
+    GH_API --> SYNC_ENGINE
+    ZAPIER_WH --> SYNC_ENGINE
+    SLACK_API --> SYNC_ENGINE
+    GEMINI --> SYNC_ENGINE
+    GOOGLE_SHEETS --> SYNC_ENGINE
+
+    SYNC_ENGINE --> SEC
+    SEC --> LOGS
+    LOGS --> HEALTH
+
+    %% Webhook flows
+    E2B_WH --> ZAPIER_ACTIONS
+    GH_WEBHOOK --> ZAPIER_TRIGGER
+    ZAPIER_TRIGGER --> SLACK_MESSAGES
+    GEMINI --> GH_COPILOT
+
+    %% Monitoring connections
+    HEALTH -.->|Health Status| E2B_API
+    HEALTH -.->|Health Status| GH_API
+    HEALTH -.->|Health Status| ZAPIER_WH
+    HEALTH -.->|Health Status| SLACK_API
+
+    style AUTH fill:#FF1744
+    style E2B_API fill:#00BCD4
+    style GH_API fill:#333333
+    style ZAPIER_WH fill:#FF6D00
+    style SLACK_API fill:#36C5F0
+    style GEMINI fill:#4285F4
+    style GOOGLE_SHEETS fill:#0F9D58
+    style SYNC_ENGINE fill:#7B1FA2
+    style SEC fill:#C62828
+    style LOGS fill:#455A64

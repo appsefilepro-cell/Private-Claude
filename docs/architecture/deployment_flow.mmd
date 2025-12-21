@@ -1,0 +1,143 @@
+graph TD
+    subgraph "Developer Workflow"
+        DEV["👨‍💻 Developer<br/>Commits Code"]
+        BRANCH["🌿 Create Feature Branch"]
+        COMMIT["📝 Commit Changes"]
+        DEV --> BRANCH
+        BRANCH --> COMMIT
+    end
+
+    subgraph "GitHub Integration"
+        PUSH["📤 Push to GitHub"]
+        WEBHOOK["🔗 GitHub Webhook<br/>Triggered"]
+        PR["📋 Create Pull Request"]
+        COMMIT --> PUSH
+        PUSH --> WEBHOOK
+        PUSH --> PR
+    end
+
+    subgraph "GitHub Actions CI/CD"
+        GHA["⚙️ GitHub Actions<br/>Workflow Engine"]
+        LINT["🔍 Code Linting<br/>eslint, pylint"]
+        FORMAT["✨ Format Check<br/>black, prettier"]
+        UNIT["🧪 Unit Tests<br/>pytest, jest"]
+        BUILD["🏗️ Build Project<br/>npm/pip"]
+
+        WEBHOOK --> GHA
+        GHA --> LINT
+        LINT --> FORMAT
+        FORMAT --> UNIT
+        UNIT --> BUILD
+    end
+
+    subgraph "E2B Sandbox Testing"
+        E2B_TEST["📦 E2B Sandbox Tests<br/>Isolated Environment"]
+        E2B_CODE["🔧 Execute Test Code<br/>in Sandbox"]
+        E2B_INTEGRATION["🔗 Integration Tests<br/>Multi-service"]
+        E2B_CLEANUP["🧹 Cleanup Sandbox<br/>Resources"]
+
+        BUILD --> E2B_TEST
+        E2B_TEST --> E2B_CODE
+        E2B_CODE --> E2B_INTEGRATION
+        E2B_INTEGRATION --> E2B_CLEANUP
+    end
+
+    subgraph "Postman API Testing"
+        POSTMAN["📮 Postman Collections"]
+        POSTMAN_AUTH["🔐 Test Authentication<br/>All API Keys"]
+        POSTMAN_ENDPOINTS["🔌 Test All Endpoints<br/>E2B, GitHub, Zapier, Slack"]
+        POSTMAN_DATA["📊 Data Validation<br/>Schema & Responses"]
+        POSTMAN_PERF["⚡ Performance Tests<br/>Load & Latency"]
+
+        E2B_CLEANUP --> POSTMAN
+        POSTMAN --> POSTMAN_AUTH
+        POSTMAN_AUTH --> POSTMAN_ENDPOINTS
+        POSTMAN_ENDPOINTS --> POSTMAN_DATA
+        POSTMAN_DATA --> POSTMAN_PERF
+    end
+
+    subgraph "Security & Compliance Checks"
+        SEC_SCAN["🔐 Security Scanning"]
+        DEPS_CHECK["📦 Dependency Check<br/>Vulnerabilities"]
+        CODE_REVIEW["👁️ Code Review<br/>Copilot AI Review"]
+        COMPLIANCE["📋 Compliance Check<br/>Logging & Audit"]
+
+        POSTMAN_PERF --> SEC_SCAN
+        SEC_SCAN --> DEPS_CHECK
+        DEPS_CHECK --> CODE_REVIEW
+        CODE_REVIEW --> COMPLIANCE
+    end
+
+    subgraph "Test Results & Reporting"
+        REPORT["📊 Generate Report"]
+        COVERAGE["📈 Code Coverage<br/>Target: >80%"]
+        RESULTS["✅ Test Results<br/>Pass/Fail"]
+        COMMENT["💬 Post to PR<br/>Comment with Results"]
+
+        COMPLIANCE --> REPORT
+        REPORT --> COVERAGE
+        COVERAGE --> RESULTS
+        RESULTS --> COMMENT
+    end
+
+    subgraph "Approval & Merge"
+        APPROVE["✅ Approval Required<br/>Human Review"]
+        DECISION{"Manual<br/>Decision"}
+        MERGE["🔀 Merge to Main"]
+        REJECT["❌ Request Changes"]
+
+        COMMENT --> APPROVE
+        APPROVE --> DECISION
+        DECISION -->|Approved| MERGE
+        DECISION -->|Rejected| REJECT
+        REJECT -.->|Fix Issues| COMMIT
+    end
+
+    subgraph "Staging Deployment"
+        STAGING["🚀 Deploy to Staging<br/>Test Environment"]
+        SMOKE_TEST["🔥 Smoke Tests<br/>Basic Functionality"]
+        E2B_STAGE["📦 E2B Integration<br/>in Staging"]
+        ZAPIER_STAGE["⚙️ Zapier Sync<br/>in Staging"]
+
+        MERGE --> STAGING
+        STAGING --> SMOKE_TEST
+        SMOKE_TEST --> E2B_STAGE
+        E2B_STAGE --> ZAPIER_STAGE
+    end
+
+    subgraph "Production Deployment"
+        PROD["🌍 Production Release<br/>Live Environment"]
+        NOTIFY["🔔 Notifications<br/>Slack, Email"]
+        MONITOR["📡 Real-time Monitoring<br/>Health Checks"]
+        LOG["📝 Audit Logging<br/>Change Tracking"]
+
+        ZAPIER_STAGE --> PROD
+        PROD --> NOTIFY
+        PROD --> MONITOR
+        PROD --> LOG
+    end
+
+    subgraph "Post-Deployment"
+        VERIFY["✔️ Verify Deployment<br/>E2B, APIs Online"]
+        ROLLBACK{"Any<br/>Issues?"}
+        ROLLBACK_ACTION["⬅️ Rollback to<br/>Previous Version"]
+        SUCCESS["🎉 Deployment Complete"]
+
+        MONITOR --> VERIFY
+        LOG --> VERIFY
+        VERIFY --> ROLLBACK
+        ROLLBACK -->|Yes| ROLLBACK_ACTION
+        ROLLBACK -->|No| SUCCESS
+        ROLLBACK_ACTION -.->|Incident| NOTIFY
+    end
+
+    style DEV fill:#FF6B6B
+    style GHA fill:#4ECDC4
+    style E2B_TEST fill:#95E1D3
+    style POSTMAN fill:#FFE66D
+    style SEC_SCAN fill:#FF8C69
+    style REPORT fill:#6C5B7B
+    style APPROVE fill:#8B7D6B
+    style STAGING fill:#355C7D
+    style PROD fill:#2E86AB
+    style SUCCESS fill:#00C853

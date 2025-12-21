@@ -1,0 +1,169 @@
+graph TB
+    subgraph "Agent 5.0 Orchestration Layer"
+        A0["🤖 Agent 5.0<br/>Central Orchestrator"]
+        A0_1["Loop Control<br/>10x Execution"]
+        A0 --> A0_1
+    end
+
+    subgraph "Input Services"
+        GH["🐙 GitHub<br/>Repository"]
+        Slack["💬 Slack<br/>Messages"]
+        Replit["⚡ Replit<br/>IDE"]
+    end
+
+    subgraph "Core Execution Layer"
+        E2B["📦 E2B Sandbox<br/>Code Execution"]
+        E2B_1["Sandbox 1"]
+        E2B_2["Sandbox 2"]
+        E2B_3["Sandbox N..."]
+        E2B --> E2B_1
+        E2B --> E2B_2
+        E2B --> E2B_3
+    end
+
+    subgraph "Integration Hub - Zapier"
+        Zapier["⚙️ Zapier<br/>Workflow Engine"]
+        Zap1["Zap 1:<br/>Data Transform"]
+        Zap2["Zap 2:<br/>Event Relay"]
+        Zap3["Zap 3:<br/>Multi-App Sync"]
+        Zapier --> Zap1
+        Zapier --> Zap2
+        Zapier --> Zap3
+    end
+
+    subgraph "Business Logic Pillars"
+        subgraph "Pillar A: Trading"
+            PA["📈 Trading Bot Network"]
+            PA1["Pattern Recognition"]
+            PA2["Trade Execution"]
+            PA3["Compliance Logger"]
+            PA --> PA1
+            PA --> PA2
+            PA --> PA3
+        end
+
+        subgraph "Pillar B: Legal"
+            PB["⚖️ Legal Automation"]
+            PB1["Doc Generator"]
+            PB2["Case Management"]
+            PB3["Template Library"]
+            PB --> PB1
+            PB --> PB2
+            PB --> PB3
+        end
+
+        subgraph "Pillar C: Federal"
+            PC["🏛️ Federal Contracting"]
+            PC1["SAM.gov Monitor"]
+            PC2["8(a) Applications"]
+            PC3["CDFI Outreach"]
+            PC --> PC1
+            PC --> PC2
+            PC --> PC3
+        end
+
+        subgraph "Pillar D: Nonprofit"
+            PD["💰 Grant Intelligence"]
+            PD1["Grant Pipeline"]
+            PD2["Research Engine"]
+            PD3["Digest Generator"]
+            PD --> PD1
+            PD --> PD2
+            PD --> PD3
+        end
+    end
+
+    subgraph "Core Systems"
+        DI["📊 Data Ingestion"]
+        RM["🔧 Remediation Engine"]
+        CM["📝 Compliance Logger"]
+
+        DI1["Gmail Inbox"]
+        DI2["OneDrive"]
+        DI3["SharePoint"]
+        DI4["Dropbox"]
+        DI --> DI1
+        DI --> DI2
+        DI --> DI3
+        DI --> DI4
+    end
+
+    subgraph "Output Services"
+        Copilot["🔮 GitHub Copilot<br/>AI Assistant"]
+        Output["📤 Output Channels<br/>Reports & Results"]
+        Sheets["📊 Google Sheets<br/>Data Storage"]
+    end
+
+    subgraph "Data Flow & Webhook Chain"
+        WH["🔗 Webhook Handler<br/>Event Router"]
+        Webhook1["Webhook: E2B Events"]
+        Webhook2["Webhook: GitHub Events"]
+        Webhook3["Webhook: Zapier Events"]
+    end
+
+    %% Input connections
+    GH --> A0
+    Slack --> A0
+    Replit --> A0
+    A0 --> E2B
+    A0_1 --> E2B
+
+    %% E2B to Zapier
+    E2B_1 --> Zapier
+    E2B_2 --> Zapier
+    E2B_3 --> Zapier
+    E2B --> WH
+
+    %% Zapier to Pillars
+    Zapier --> PA
+    Zapier --> PB
+    Zapier --> PC
+    Zapier --> PD
+
+    %% Data Ingestion to Pillars
+    DI --> PA
+    DI --> PB
+    DI --> PC
+    DI --> PD
+
+    %% Core Systems Flow
+    PA --> RM
+    PB --> RM
+    PC --> RM
+    PD --> RM
+    RM --> CM
+
+    %% Output Flows
+    E2B --> Copilot
+    Zapier --> Output
+    CM --> Sheets
+    PA --> Sheets
+    PB --> Sheets
+    PC --> Sheets
+    PD --> Sheets
+
+    %% Webhook Integration
+    WH --> Webhook1
+    WH --> Webhook2
+    WH --> Webhook3
+    Webhook1 -.->|Feedback Loop| A0
+    Webhook2 -.->|Feedback Loop| A0
+    Webhook3 -.->|Feedback Loop| A0
+
+    %% Copilot Integration
+    Copilot -.->|Code Review| GH
+    Copilot -.->|Suggestions| A0
+
+    style A0 fill:#FF6B6B
+    style A0_1 fill:#FF8C42
+    style E2B fill:#4ECDC4
+    style Zapier fill:#95E1D3
+    style PA fill:#FFE66D
+    style PB fill:#95E1D3
+    style PC fill:#FF8C69
+    style PD fill:#C44569
+    style DI fill:#6C5B7B
+    style RM fill:#8B7D6B
+    style CM fill:#355C7D
+    style Copilot fill:#2E86AB
+    style WH fill:#A23B72

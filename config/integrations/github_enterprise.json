@@ -1,0 +1,387 @@
+{
+  "github_enterprise": {
+    "version": "2.0.0",
+    "tier": "enterprise_30day_trial",
+    "environment": "production",
+    "trial_duration_days": 30,
+    "trial_status": "active"
+  },
+
+  "enterprise_settings": {
+    "organization": "Private-Claude-Enterprise",
+    "billing_email": "${GH_ENTERPRISE_BILLING_EMAIL}",
+    "trial_start_date": "2025-01-01T00:00:00Z",
+    "trial_end_date": "2025-01-31T23:59:59Z",
+    "auto_downgrade_on_expiry": true,
+    "downgrade_to": "pro",
+    "admin_users": ["${GH_ADMIN_USER}"]
+  },
+
+  "repositories": {
+    "Private-Claude": {
+      "visibility": "private",
+      "description": "AI-powered automation and integration platform",
+      "has_wiki": true,
+      "has_projects": true,
+      "has_discussions": true,
+      "vulnerability_alerts": true,
+      "dependabot_alerts": true,
+      "dependabot_updates": true
+    }
+  },
+
+  "advanced_security_features": {
+    "secret_scanning": {
+      "enabled": true,
+      "custom_patterns_enabled": true,
+      "push_protection": true,
+      "validity_checks": true,
+      "patterns": [
+        {
+          "name": "API Keys",
+          "pattern": "(?i)(api[_-]?key|apikey)\\s*[=:]\\s*['\"]?[a-z0-9]{32,}['\"]?",
+          "enabled": true
+        },
+        {
+          "name": "AWS Credentials",
+          "pattern": "(?i)(aws_access_key_id|aws_secret_access_key)\\s*[=:]",
+          "enabled": true
+        },
+        {
+          "name": "Private Keys",
+          "pattern": "-----BEGIN (RSA|DSA|EC|PGP|OPENSSH) PRIVATE KEY",
+          "enabled": true
+        },
+        {
+          "name": "Database Credentials",
+          "pattern": "(?i)(database_url|db_password|mysql_password)\\s*[=:]",
+          "enabled": true
+        },
+        {
+          "name": "E2B API Keys",
+          "pattern": "(?i)(e2b_api_key|e2b_key)\\s*[=:]\\s*[a-z0-9]{20,}",
+          "enabled": true
+        }
+      ]
+    },
+
+    "code_scanning": {
+      "enabled": true,
+      "tools": [
+        {
+          "name": "CodeQL",
+          "enabled": true,
+          "language": "python",
+          "query_suite": "security-and-quality"
+        }
+      ],
+      "severity_levels": ["critical", "high", "medium"],
+      "auto_fix_enabled": true,
+      "dismiss_old_alerts": false
+    },
+
+    "dependency_management": {
+      "dependabot_alerts": {
+        "enabled": true,
+        "severity_level": "high"
+      },
+      "dependabot_auto_updates": {
+        "enabled": true,
+        "update_frequency": "weekly",
+        "day_of_week": "monday",
+        "time": "02:00"
+      },
+      "vulnerable_package_restrictions": {
+        "enabled": true,
+        "allow_security_updates_only": false
+      }
+    },
+
+    "branch_protection": {
+      "main": {
+        "enforce_admins": true,
+        "require_code_review": {
+          "enabled": true,
+          "required_reviews": 1,
+          "dismiss_stale_reviews": true,
+          "require_review_from_code_owners": true
+        },
+        "require_status_checks": {
+          "enabled": true,
+          "strict": true,
+          "required_checks": [
+            "build",
+            "test",
+            "security-scan"
+          ]
+        },
+        "require_branches_up_to_date": true,
+        "require_conversation_resolution": true,
+        "allow_force_pushes": false,
+        "allow_deletions": false,
+        "dismiss_old_reviews_on_push": true,
+        "restrict_who_can_push_to_matching_branch": {
+          "enabled": true,
+          "allowed_users": ["${GH_ADMIN_USER}"],
+          "allowed_teams": ["maintainers"]
+        }
+      },
+      "develop": {
+        "enforce_admins": true,
+        "require_code_review": {
+          "enabled": true,
+          "required_reviews": 1,
+          "dismiss_stale_reviews": true
+        },
+        "require_status_checks": {
+          "enabled": true,
+          "strict": false,
+          "required_checks": ["test"]
+        }
+      }
+    },
+
+    "audit_logging": {
+      "enabled": true,
+      "retention_days": 90,
+      "log_types": [
+        "authentication",
+        "authorization",
+        "repository_access",
+        "git_operations",
+        "org_changes"
+      ]
+    },
+
+    "saml_sso": {
+      "enabled": true,
+      "idp_url": "${SAML_IDP_URL}",
+      "issuer_url": "https://github.com/orgs/Private-Claude-Enterprise/saml",
+      "sign_request": true,
+      "encrypt_assertions": true
+    }
+  },
+
+  "copilot_business": {
+    "enabled": true,
+    "organization_access": true,
+    "seat_licenses": {
+      "total_seats": 5,
+      "assigned_seats": 1,
+      "available_seats": 4,
+      "monthly_cost_per_seat": 39
+    },
+    "settings": {
+      "code_completion": {
+        "enabled": true,
+        "inline_suggestions": true,
+        "context_aware": true
+      },
+      "chat_features": {
+        "enabled": true,
+        "github_copilot_chat": true,
+        "copilot_enterprise_features": true
+      },
+      "code_review": {
+        "copilot_review_enabled": true,
+        "suggest_improvements": true
+      },
+      "documentation_generation": {
+        "enabled": true,
+        "auto_generate_docstrings": false,
+        "suggest_documentation": true
+      },
+      "content_exclusions": {
+        "exclude_github_copilot_from_training": true,
+        "exclude_private_repos": true
+      }
+    },
+    "policy_settings": {
+      "allowed_domains": ["${GITHUB_DOMAIN}"],
+      "blocked_content_types": ["malware", "sensitive_data"],
+      "suggestion_filtering": {
+        "enabled": true,
+        "filter_secrets": true,
+        "filter_vulnerable_patterns": true
+      }
+    },
+    "usage_tracking": {
+      "enabled": true,
+      "track_completions": true,
+      "track_suggestions": true,
+      "monthly_reporting": true
+    }
+  },
+
+  "actions_minutes": {
+    "plan": "enterprise_30day_trial",
+    "included_minutes_per_month": 3000,
+    "current_month_used": 150,
+    "cost_per_extra_minute": 0.008,
+    "auto_purchase_enabled": false,
+
+    "optimization": {
+      "cache_dependencies": {
+        "enabled": true,
+        "cache_size_mb": 10000,
+        "retention_days": 7
+      },
+      "parallel_jobs": {
+        "max_concurrent": 20,
+        "default_concurrent": 5
+      },
+      "workflow_timeouts": {
+        "default_timeout_minutes": 360,
+        "max_timeout_minutes": 1440
+      },
+      "matrix_strategy": {
+        "enabled": true,
+        "max_matrix_dimensions": 256
+      }
+    },
+
+    "usage_policies": {
+      "weekly_limit_minutes": 500,
+      "daily_limit_minutes": 100,
+      "per_workflow_timeout": 360,
+      "auto_cancel_old_runs": true
+    },
+
+    "cost_optimization": {
+      "scheduled_maintenance_window": {
+        "enabled": true,
+        "day": "sunday",
+        "time": "02:00 UTC"
+      },
+      "use_github_hosted_when_available": true,
+      "disable_unnecessary_jobs": true,
+      "skip_workflows_for_drafts": true
+    }
+  },
+
+  "github_apps": {
+    "installed_apps": [
+      {
+        "name": "Dependabot",
+        "enabled": true,
+        "permissions": {
+          "contents": "write",
+          "pull-requests": "write",
+          "workflows": "write"
+        }
+      },
+      {
+        "name": "GitHub Advanced Security",
+        "enabled": true,
+        "permissions": {
+          "security_events": "read"
+        }
+      }
+    ]
+  },
+
+  "webhooks": {
+    "github_webhook": {
+      "url": "${GITHUB_WEBHOOK_URL}",
+      "content_type": "json",
+      "ssl_verify": true,
+      "active": true,
+      "events": [
+        "push",
+        "pull_request",
+        "pull_request_review",
+        "issues",
+        "issue_comment",
+        "repository"
+      ]
+    }
+  },
+
+  "integrations": {
+    "e2b_integration": {
+      "enabled": true,
+      "sync_code_to_e2b": true,
+      "run_tests_on_e2b": true,
+      "webhook": "${E2B_WEBHOOK_URL}"
+    },
+    "zapier_integration": {
+      "enabled": true,
+      "sync_events": ["push", "pull_request"],
+      "webhook": "${ZAPIER_WEBHOOK_URL}"
+    },
+    "slack_integration": {
+      "enabled": true,
+      "notifications_channel": "#github-updates",
+      "webhook": "${SLACK_WEBHOOK_GITHUB}"
+    }
+  },
+
+  "enterprise_features": {
+    "staff_support": {
+      "enabled": true,
+      "support_tier": "priority"
+    },
+    "sla": {
+      "enabled": true,
+      "response_time_hours": 4,
+      "resolution_time_hours": 24
+    },
+    "training": {
+      "enabled": true,
+      "sessions_included": 5
+    }
+  },
+
+  "organization_policies": {
+    "two_factor_authentication": {
+      "required": true,
+      "grace_period_days": 3
+    },
+    "member_privileges": {
+      "base_permissions": "read",
+      "can_create_internal_repos": true,
+      "can_create_private_repos": true,
+      "can_fork_repos": true
+    },
+    "repository_creation": {
+      "restricted_to": "admins",
+      "auto_add_to_teams": ["developers"]
+    },
+    "personal_access_tokens": {
+      "expiration_required": true,
+      "max_expiration_days": 365
+    }
+  },
+
+  "compliance": {
+    "soc_2_compliance": true,
+    "gdpr_compliance": true,
+    "data_residency": "us-east-1",
+    "encryption_at_rest": true,
+    "encryption_in_transit": true,
+    "audit_trail": {
+      "enabled": true,
+      "retention_days": 90
+    }
+  },
+
+  "cost_tracking": {
+    "monthly_budget": 500,
+    "budget_alerts": {
+      "enabled": true,
+      "alert_at_percent": [50, 75, 90]
+    },
+    "cost_breakdown": {
+      "copilot_business_seats": 39,
+      "actions_minutes_overage": 0,
+      "other_services": 0
+    }
+  },
+
+  "migration_path": {
+    "trial_expiry_action": "downgrade_to_pro",
+    "auto_cancel_paid_features": true,
+    "notification_days_before_expiry": [14, 7, 1],
+    "fallback_plan": "pro"
+  }
+}
