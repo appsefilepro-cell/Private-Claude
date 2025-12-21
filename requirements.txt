@@ -1,68 +1,23 @@
-# Agent X2.0 - Python Dependencies
+# Agent 5.0 + Trading Bot - MINIMAL REQUIREMENTS (LOW DATA USAGE)
 # Install with: pip install -r requirements.txt
+# Total download size: ~60MB
 
-# Core Dependencies
-python-dotenv>=1.0.0
+# Core Dependencies (ESSENTIAL)
 requests>=2.31.0
-asyncio>=3.4.3
 
-# PDF Processing
-PyMuPDF>=1.23.0  # fitz for PDF parsing
+# Trading Bot (ESSENTIAL)
+MetaTrader5>=5.0.45
 
-# Excel Processing
-openpyxl>=3.1.2
-
-# Microsoft Graph API
-msal>=1.24.0
-msgraph-core>=0.2.2
-
-# Google APIs (Gmail)
-google-auth>=2.23.0
-google-auth-oauthlib>=1.1.0
-google-auth-httplib2>=0.1.1
-google-api-python-client>=2.100.0
-
-# Web Scraping (if needed)
-beautifulsoup4>=4.12.0
-lxml>=4.9.3
-
-# Data Processing
+# Data Processing (ESSENTIAL for trading patterns)
 pandas>=2.1.0
 numpy>=1.25.0
 
-# Date/Time
-python-dateutil>=2.8.2
+# Async Support (built-in, no install)
+# asyncio - included in Python 3.7+
+# json - included
+# datetime - included
 
-# Logging & Monitoring
-colorlog>=6.7.0
-
-# Testing
-pytest>=7.4.0
-pytest-asyncio>=0.21.0
-pytest-cov>=4.1.0
-
-# Security
-cryptography>=41.0.0
-
-# API Rate Limiting
-ratelimit>=2.2.1
-
-# Database (if using)
-# psycopg2-binary>=2.9.7  # PostgreSQL
-# pymongo>=4.5.0  # MongoDB
-
-# Optional: Trading Libraries
-# ccxt>=4.0.0  # Unified crypto exchange API
-
-# Optional: Document Generation
-# python-docx>=1.0.0  # Create .docx files
-# reportlab>=4.0.0  # PDF generation
-
-# Optional: Email
-# sendgrid>=6.10.0  # Email via SendGrid
-# python-ses>=1.0.0  # Amazon SES
-
-# Development Tools
-black>=23.7.0  # Code formatter
-flake8>=6.1.0  # Linter
-mypy>=1.5.0  # Type checker
+# Optional: Uncomment if needed
+# python-dotenv>=1.0.0  # Environment variables
+# beautifulsoup4>=4.12.0  # Web scraping
+# cryptography>=41.0.0  # Security
