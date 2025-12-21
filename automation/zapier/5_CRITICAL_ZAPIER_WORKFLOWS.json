@@ -1,0 +1,289 @@
+{
+  "zapier_workflows": {
+    "workflow_1_email_to_case_automation": {
+      "name": "Email → Case Management Automation",
+      "description": "Automatically create cases from incoming emails",
+      "trigger": {
+        "app": "Gmail",
+        "event": "New Email Matching Search",
+        "search_query": "from:court OR from:legal OR subject:lawsuit OR subject:case"
+      },
+      "actions": [
+        {
+          "step": 1,
+          "app": "OpenAI (ChatGPT)",
+          "action": "Conversation",
+          "prompt": "Extract the following from this email:\n1. Case name\n2. Case number (if any)\n3. Defendant name\n4. Court name\n5. Deadline dates\n6. Next actions required\n\nEmail: {{trigger.body_plain}}"
+        },
+        {
+          "step": 2,
+          "app": "Google Drive",
+          "action": "Create Folder",
+          "folder_name": "{{1.case_name}} - {{trigger.date}}"
+        },
+        {
+          "step": 3,
+          "app": "Google Drive",
+          "action": "Upload File",
+          "file": "{{trigger.attachments}}",
+          "folder": "{{2.folder_id}}"
+        },
+        {
+          "step": 4,
+          "app": "Google Sheets",
+          "action": "Create Spreadsheet Row",
+          "spreadsheet": "Agent 5.0 - Case Tracker",
+          "worksheet": "Active Cases",
+          "data": {
+            "Case Name": "{{1.case_name}}",
+            "Case Number": "{{1.case_number}}",
+            "Defendant": "{{1.defendant_name}}",
+            "Court": "{{1.court_name}}",
+            "Deadline": "{{1.deadline_dates}}",
+            "Next Action": "{{1.next_actions}}",
+            "Email Received": "{{trigger.date}}",
+            "Folder Link": "{{2.folder_url}}"
+          }
+        },
+        {
+          "step": 5,
+          "app": "Gmail",
+          "action": "Send Email",
+          "to": "terobinsony@gmail.com",
+          "subject": "New Case Added: {{1.case_name}}",
+          "body": "Agent 5.0 has automatically created a new case:\n\nCase: {{1.case_name}}\nDefendant: {{1.defendant_name}}\nDeadline: {{1.deadline_dates}}\n\nFolder: {{2.folder_url}}\nCase Tracker: [Google Sheets Link]"
+        }
+      ],
+      "zap_link": "https://zapier.com/app/editor/",
+      "cost": "FREE (under 100 tasks/month)"
+    },
+
+    "workflow_2_credit_bureau_response_tracker": {
+      "name": "Credit Bureau Response Tracker",
+      "description": "Track 30-day response deadlines for credit disputes",
+      "trigger": {
+        "app": "Gmail",
+        "event": "New Email Matching Search",
+        "search_query": "from:equifax.com OR from:experian.com OR from:transunion.com"
+      },
+      "actions": [
+        {
+          "step": 1,
+          "app": "OpenAI (ChatGPT)",
+          "action": "Conversation",
+          "prompt": "Analyze this credit bureau response:\n1. Bureau name\n2. Dispute result (deleted, updated, verified)\n3. Account names\n4. Response date\n\nEmail: {{trigger.body_plain}}"
+        },
+        {
+          "step": 2,
+          "app": "Google Sheets",
+          "action": "Create Spreadsheet Row",
+          "spreadsheet": "Agent 5.0 - Credit Repair Tracker",
+          "worksheet": "Bureau Responses",
+          "data": {
+            "Bureau": "{{1.bureau_name}}",
+            "Response Date": "{{trigger.date}}",
+            "Result": "{{1.dispute_result}}",
+            "Accounts": "{{1.account_names}}",
+            "Email Subject": "{{trigger.subject}}"
+          }
+        },
+        {
+          "step": 3,
+          "app": "Formatter by Zapier",
+          "action": "Date/Time",
+          "transform": "Add 30 days to {{trigger.date}}"
+        },
+        {
+          "step": 4,
+          "app": "Google Calendar",
+          "action": "Create Detailed Event",
+          "calendar": "Agent 5.0 - Legal Deadlines",
+          "event_name": "Credit Bureau Escalation - {{1.bureau_name}}",
+          "start_date": "{{3.result}}",
+          "description": "30 days have passed since {{1.bureau_name}} response. Escalate to CFPB if unresolved."
+        }
+      ],
+      "zap_link": "https://zapier.com/app/editor/",
+      "cost": "FREE"
+    },
+
+    "workflow_3_court_deadline_reminder": {
+      "name": "Court Deadline Reminder System",
+      "description": "Automatic reminders for court filings (7 days, 3 days, 1 day before)",
+      "trigger": {
+        "app": "Google Sheets",
+        "event": "New or Updated Spreadsheet Row",
+        "spreadsheet": "Agent 5.0 - Case Tracker",
+        "worksheet": "Active Cases",
+        "trigger_column": "Deadline"
+      },
+      "actions": [
+        {
+          "step": 1,
+          "app": "Formatter by Zapier",
+          "action": "Date/Time",
+          "transform": "Subtract 7 days from {{trigger.Deadline}}"
+        },
+        {
+          "step": 2,
+          "app": "Delay by Zapier",
+          "action": "Delay Until",
+          "delay_until": "{{1.result}} 09:00:00"
+        },
+        {
+          "step": 3,
+          "app": "Email by Zapier",
+          "action": "Send Outbound Email",
+          "to": "terobinsony@gmail.com",
+          "subject": "⚠️ COURT DEADLINE in 7 Days: {{trigger.Case_Name}}",
+          "body": "DEADLINE ALERT:\n\nCase: {{trigger.Case_Name}}\nDeadline: {{trigger.Deadline}}\nNext Action: {{trigger.Next_Action}}\n\nYou have 7 DAYS to complete this filing.\n\n- Agent 5.0 Deadline System"
+        },
+        {
+          "step": 4,
+          "app": "SMS by Zapier",
+          "action": "Send SMS",
+          "to": "{{user_phone}}",
+          "message": "⚠️ COURT DEADLINE in 7 days: {{trigger.Case_Name}}"
+        }
+      ],
+      "notes": "Create 3 separate Zaps for 7-day, 3-day, and 1-day reminders",
+      "zap_link": "https://zapier.com/app/editor/",
+      "cost": "FREE (use Delay by Zapier)"
+    },
+
+    "workflow_4_automatic_document_backup": {
+      "name": "Automatic Document Backup to Google Drive",
+      "description": "Auto-save all generated documents to Google Drive with organization",
+      "trigger": {
+        "app": "Webhooks by Zapier",
+        "event": "Catch Hook",
+        "webhook_url": "https://hooks.zapier.com/hooks/catch/[YOUR_WEBHOOK_ID]/"
+      },
+      "actions": [
+        {
+          "step": 1,
+          "app": "Code by Zapier",
+          "action": "Run Python",
+          "code": "# Parse incoming document data\nimport json\nfrom datetime import datetime\n\ninput_data = input.get('document_data')\ndoc = json.loads(input_data)\n\n# Generate folder structure\nfolder_path = f\"Agent_5.0/{doc['category']}/{doc['case_name']}\"\nfilename = f\"{doc['document_type']}_{datetime.now().strftime('%Y%m%d')}.pdf\"\n\nreturn {'folder_path': folder_path, 'filename': filename}"
+        },
+        {
+          "step": 2,
+          "app": "Google Drive",
+          "action": "Create Folder",
+          "folder_name": "{{1.folder_path}}",
+          "parent_folder": "Agent 5.0 Deployment"
+        },
+        {
+          "step": 3,
+          "app": "Google Drive",
+          "action": "Upload File",
+          "file": "{{trigger.document_content}}",
+          "filename": "{{1.filename}}",
+          "folder": "{{2.folder_id}}",
+          "convert_to_google_doc": false
+        },
+        {
+          "step": 4,
+          "app": "Google Sheets",
+          "action": "Create Spreadsheet Row",
+          "spreadsheet": "Agent 5.0 - Document Log",
+          "worksheet": "All Documents",
+          "data": {
+            "Document Name": "{{1.filename}}",
+            "Category": "{{trigger.category}}",
+            "Case": "{{trigger.case_name}}",
+            "Date Created": "{{trigger.timestamp}}",
+            "Google Drive Link": "{{3.file_url}}"
+          }
+        }
+      ],
+      "how_to_trigger": "Send POST request to webhook with JSON:\n{\n  \"document_data\": {\n    \"category\": \"Probate\",\n    \"case_name\": \"Thurman Sr Estate\",\n    \"document_type\": \"Petition\"\n  },\n  \"document_content\": \"[base64_encoded_PDF]\"\n}",
+      "zap_link": "https://zapier.com/app/editor/",
+      "cost": "FREE"
+    },
+
+    "workflow_5_bank_transaction_monitor": {
+      "name": "Bank Transaction Fraud Monitor",
+      "description": "Monitor bank emails for unauthorized transactions and auto-dispute",
+      "trigger": {
+        "app": "Gmail",
+        "event": "New Email Matching Search",
+        "search_query": "from:bankofamerica.com OR from:bmo.com subject:transaction"
+      },
+      "actions": [
+        {
+          "step": 1,
+          "app": "Email Parser by Zapier",
+          "action": "Parse Email",
+          "parse_rules": {
+            "transaction_amount": "regex: \\$([0-9,]+\\.[0-9]{2})",
+            "transaction_date": "regex: ([0-9]{2}/[0-9]{2}/[0-9]{4})",
+            "merchant_name": "regex: at (.+) on"
+          }
+        },
+        {
+          "step": 2,
+          "app": "Filter by Zapier",
+          "action": "Only Continue If",
+          "condition": "transaction_amount > 100.00"
+        },
+        {
+          "step": 3,
+          "app": "Google Sheets",
+          "action": "Lookup Spreadsheet Row",
+          "spreadsheet": "Agent 5.0 - Authorized Merchants",
+          "worksheet": "Whitelist",
+          "lookup_column": "Merchant Name",
+          "lookup_value": "{{1.merchant_name}}"
+        },
+        {
+          "step": 4,
+          "app": "Filter by Zapier",
+          "action": "Only Continue If",
+          "condition": "{{3.result}} is empty (not whitelisted)"
+        },
+        {
+          "step": 5,
+          "app": "Gmail",
+          "action": "Send Email",
+          "to": "terobinsony@gmail.com",
+          "subject": "🚨 POTENTIAL FRAUD: ${{1.transaction_amount}} at {{1.merchant_name}}",
+          "body": "FRAUD ALERT:\n\nTransaction: ${{1.transaction_amount}}\nMerchant: {{1.merchant_name}}\nDate: {{1.transaction_date}}\n\nThis merchant is NOT on your whitelist.\n\nREPLY with:\n- FRAUD - to auto-generate dispute letter\n- AUTHORIZE - to add merchant to whitelist"
+        },
+        {
+          "step": 6,
+          "app": "SMS by Zapier",
+          "action": "Send SMS",
+          "to": "{{user_phone}}",
+          "message": "🚨 FRAUD ALERT: ${{1.transaction_amount}} at {{1.merchant_name}}. Check email."
+        }
+      ],
+      "zap_link": "https://zapier.com/app/editor/",
+      "cost": "FREE"
+    }
+  },
+
+  "setup_instructions": {
+    "step_1": "Go to https://zapier.com/app/editor/",
+    "step_2": "Create new Zap for each workflow above",
+    "step_3": "Connect apps: Gmail (terobinsony@gmail.com), Google Drive, Google Sheets",
+    "step_4": "Set up triggers exactly as specified",
+    "step_5": "Configure actions with provided parameters",
+    "step_6": "Test each Zap",
+    "step_7": "Turn ON all Zaps",
+    "step_8": "Monitor Zap activity at https://zapier.com/app/history"
+  },
+
+  "free_tier_limits": {
+    "tasks_per_month": 100,
+    "zaps": 5,
+    "update_time": "15 minutes",
+    "tip": "Combine workflows where possible to stay under 100 tasks/month"
+  },
+
+  "cost_breakdown": {
+    "zapier_free_plan": "$0/month (100 tasks)",
+    "zapier_starter_plan": "$19.99/month (750 tasks)",
+    "total_monthly_cost": "$0 (using free plan)"
+  }
+}
