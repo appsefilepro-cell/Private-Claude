@@ -1,0 +1,61 @@
+{
+  "mcpServers": {
+    "zapier": {
+      "provider": "zapier",
+      "apiKey": "${ZAPIER_MCP_BEARER_TOKEN}",
+      "endpoint": "https://mcp.zapier.com/api/mcp/mcp",
+      "enabled": true,
+      "description": "Zapier MCP server for workflow automation"
+    },
+    "e2b-webhooks": {
+      "provider": "custom",
+      "type": "webhook-relay",
+      "endpoint": "http://localhost:5000/api/mcp",
+      "enabled": true,
+      "description": "Custom MCP server for E2B webhook relay",
+      "capabilities": [
+        "execute_code",
+        "manage_sandboxes",
+        "sync_to_github",
+        "trigger_zapier"
+      ]
+    },
+    "github": {
+      "provider": "github",
+      "token": "${GITHUB_TOKEN}",
+      "repository": "appsefilepro-cell/Private-Claude",
+      "branch": "claude/setup-e2b-webhooks-CPFBo",
+      "enabled": true,
+      "description": "GitHub MCP integration for code sync"
+    }
+  },
+  "routes": {
+    "/mcp/execute": {
+      "handler": "e2b-webhooks",
+      "method": "POST",
+      "description": "Execute code in E2B sandbox"
+    },
+    "/mcp/sync": {
+      "handler": "zapier",
+      "method": "POST",
+      "description": "Sync data to Zapier workflows"
+    },
+    "/mcp/github/commit": {
+      "handler": "github",
+      "method": "POST",
+      "description": "Commit results to GitHub"
+    }
+  },
+  "middleware": [
+    "auth",
+    "rateLimit",
+    "compression"
+  ],
+  "settings": {
+    "port": 5000,
+    "host": "0.0.0.0",
+    "logLevel": "INFO",
+    "enableCors": true,
+    "maxPayloadSize": "100kb"
+  }
+}

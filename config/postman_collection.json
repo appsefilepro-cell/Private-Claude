@@ -1,0 +1,226 @@
+{
+  "info": {
+    "name": "Private-Claude E2B & API Collection",
+    "description": "Complete API testing collection for E2B webhooks, Zapier, GitHub, and Gemini integrations",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_postman_id": "private-claude-e2b-apis"
+  },
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{API_TOKEN}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:5000",
+      "type": "string"
+    },
+    {
+      "key": "e2b_api_key",
+      "value": "e2b_fcc08e8c733b3eab00bdb3ad5857f5966afc2773",
+      "type": "string"
+    },
+    {
+      "key": "gemini_api_key",
+      "value": "AIzaSyBqAbzJdyg7sP5tIhCddWk4Q1EEmSZSCT4",
+      "type": "string"
+    },
+    {
+      "key": "webhook_id",
+      "value": "YIyOpaJ0UMJ3Pl9Md5kVExEDdkqyDGRp",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "E2B Webhooks",
+      "item": [
+        {
+          "name": "Webhook - Execution Completed",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "X-Webhook-ID",
+                "value": "{{webhook_id}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"event\": \"execution.completed\",\n  \"execution_id\": \"exec_123\",\n  \"sandbox_id\": \"sandbox_456\",\n  \"status\": \"success\",\n  \"output\": \"Hello from E2B!\",\n  \"timestamp\": \"2025-12-21T00:00:00Z\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/webhooks/e2b",
+              "host": ["{{base_url}}"],
+              "path": ["api", "webhooks", "e2b"]
+            }
+          }
+        },
+        {
+          "name": "Webhook - File Uploaded",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"event\": \"file.uploaded\",\n  \"file_name\": \"output.txt\",\n  \"file_url\": \"https://e2b.dev/files/abc123\",\n  \"file_size\": 1024,\n  \"mime_type\": \"text/plain\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/webhooks/e2b",
+              "host": ["{{base_url}}"],
+              "path": ["api", "webhooks", "e2b"]
+            }
+          }
+        },
+        {
+          "name": "Create E2B Sandbox",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{e2b_api_key}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"template\": \"python3\",\n  \"timeout\": 300\n}"
+            },
+            "url": {
+              "raw": "https://api.e2b.dev/sandboxes",
+              "protocol": "https",
+              "host": ["api", "e2b", "dev"],
+              "path": ["sandboxes"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Zapier Integration",
+      "item": [
+        {
+          "name": "Send to Zapier Webhook",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"event\": \"execution.completed\",\n  \"id\": \"exec_123\",\n  \"status\": \"success\",\n  \"timestamp\": \"2025-12-21T00:00:00Z\"\n}"
+            },
+            "url": {
+              "raw": "https://hooks.zapier.com/hooks/catch/YOUR_WEBHOOK_ID/",
+              "protocol": "https",
+              "host": ["hooks", "zapier", "com"],
+              "path": ["hooks", "catch", "YOUR_WEBHOOK_ID", ""]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "GitHub API",
+      "item": [
+        {
+          "name": "Create Issue Comment",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{GITHUB_TOKEN}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"body\": \"E2B Execution completed successfully\\n\\nExecution ID: exec_123\\nStatus: success\"\n}"
+            },
+            "url": {
+              "raw": "https://api.github.com/repos/appsefilepro-cell/Private-Claude/issues/1/comments",
+              "protocol": "https",
+              "host": ["api", "github", "com"],
+              "path": ["repos", "appsefilepro-cell", "Private-Claude", "issues", "1", "comments"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Google Gemini API",
+      "item": [
+        {
+          "name": "Generate Content",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"contents\": [{\n    \"parts\": [{\n      \"text\": \"Explain how E2B webhooks work\"\n    }]\n  }]\n}"
+            },
+            "url": {
+              "raw": "https://generativelanguage.googleapis.com/v1/models/gemini-pro:generateContent?key={{gemini_api_key}}",
+              "protocol": "https",
+              "host": ["generativelanguage", "googleapis", "com"],
+              "path": ["v1", "models", "gemini-pro:generateContent"],
+              "query": [
+                {
+                  "key": "key",
+                  "value": "{{gemini_api_key}}"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Health Checks",
+      "item": [
+        {
+          "name": "Webhook Handler Health",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/health",
+              "host": ["{{base_url}}"],
+              "path": ["health"]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
