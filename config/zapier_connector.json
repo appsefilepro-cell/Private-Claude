@@ -1,0 +1,88 @@
+{
+  "zapier_integration": {
+    "name": "Private-Claude E2B Sync",
+    "version": "1.0.0",
+    "description": "Sync E2B code executions and outputs to Zapier for automation workflows"
+  },
+
+  "triggers": {
+    "new_execution": {
+      "event": "execution.completed",
+      "description": "Triggers when E2B completes a code execution",
+      "output_fields": [
+        {"key": "execution_id", "label": "Execution ID"},
+        {"key": "status", "label": "Status"},
+        {"key": "output", "label": "Output"},
+        {"key": "timestamp", "label": "Timestamp"},
+        {"key": "sandbox_id", "label": "Sandbox ID"}
+      ]
+    },
+    "file_created": {
+      "event": "file.uploaded",
+      "description": "Triggers when a file is uploaded to E2B",
+      "output_fields": [
+        {"key": "file_name", "label": "File Name"},
+        {"key": "file_url", "label": "File URL"},
+        {"key": "file_size", "label": "File Size"},
+        {"key": "mime_type", "label": "MIME Type"}
+      ]
+    }
+  },
+
+  "actions": {
+    "execute_code": {
+      "description": "Execute code in E2B sandbox",
+      "input_fields": [
+        {"key": "code", "label": "Code to Execute", "required": true},
+        {"key": "language", "label": "Language", "default": "python"},
+        {"key": "timeout", "label": "Timeout (seconds)", "default": 30}
+      ]
+    },
+    "upload_file": {
+      "description": "Upload file to E2B sandbox",
+      "input_fields": [
+        {"key": "file_url", "label": "File URL", "required": true},
+        {"key": "destination_path", "label": "Destination Path"}
+      ]
+    }
+  },
+
+  "webhook_config": {
+    "method": "POST",
+    "headers": {
+      "Content-Type": "application/json",
+      "X-Webhook-Source": "E2B-Private-Claude"
+    },
+    "retry_on_fail": true,
+    "max_retries": 3
+  },
+
+  "common_zap_workflows": [
+    {
+      "name": "E2B to Google Sheets",
+      "trigger": "new_execution",
+      "action": "Add row to Google Sheets"
+    },
+    {
+      "name": "E2B to Slack",
+      "trigger": "execution.completed",
+      "action": "Send Slack notification"
+    },
+    {
+      "name": "E2B to Notion",
+      "trigger": "file_created",
+      "action": "Create Notion database item"
+    },
+    {
+      "name": "GitHub to E2B",
+      "trigger": "GitHub push",
+      "action": "Execute code in E2B"
+    }
+  ],
+
+  "api_keys_storage": {
+    "e2b_api_key": "${E2B_API_KEY}",
+    "gemini_api_key": "${GEMINI_API_KEY}",
+    "github_token": "${GITHUB_TOKEN}"
+  }
+}

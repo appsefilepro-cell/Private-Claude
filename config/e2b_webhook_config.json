@@ -1,0 +1,95 @@
+{
+  "e2b_configuration": {
+    "api_version": "v1",
+    "webhook_id": "YIyOpaJ0UMJ3Pl9Md5kVExEDdkqyDGRp",
+    "enabled": true,
+    "description": "E2B Code Interpreter webhook configuration for GitHub and Zapier integration"
+  },
+
+  "webhook_endpoints": {
+    "e2b_events": "/api/webhooks/e2b",
+    "github_sync": "/api/webhooks/github",
+    "zapier_relay": "/api/webhooks/zapier"
+  },
+
+  "event_subscriptions": [
+    "sandbox.created",
+    "sandbox.started",
+    "sandbox.stopped",
+    "execution.completed",
+    "execution.failed",
+    "file.uploaded",
+    "file.downloaded"
+  ],
+
+  "sync_targets": {
+    "zapier": {
+      "enabled": true,
+      "endpoint": "${ZAPIER_WEBHOOK_URL}",
+      "events": ["execution.completed", "file.uploaded"],
+      "format": "json",
+      "retry_policy": {
+        "max_retries": 3,
+        "backoff": "exponential"
+      }
+    },
+    "github": {
+      "enabled": true,
+      "repository": "Private-Claude",
+      "branch": "claude/setup-e2b-webhooks-CPFBo",
+      "actions": {
+        "on_execution_complete": "create_issue_comment",
+        "on_file_upload": "commit_to_branch"
+      }
+    },
+    "google_cloud": {
+      "enabled": true,
+      "project_id": "${GEMINI_PROJECT_NUMBER}",
+      "storage_bucket": "e2b-outputs",
+      "pubsub_topic": "e2b-events"
+    }
+  },
+
+  "security": {
+    "verify_signature": true,
+    "allowed_ips": ["*"],
+    "rate_limit": {
+      "requests_per_minute": 60,
+      "burst": 100
+    },
+    "encryption": {
+      "enabled": true,
+      "algorithm": "AES-256-GCM"
+    }
+  },
+
+  "data_optimization": {
+    "compress_payloads": true,
+    "minimal_mode": true,
+    "exclude_fields": ["metadata.internal", "debug_info"],
+    "max_payload_size_kb": 100
+  },
+
+  "logging": {
+    "enabled": true,
+    "level": "INFO",
+    "retention_days": 30,
+    "destinations": ["file", "cloud"]
+  },
+
+  "integrations": {
+    "copilot": {
+      "enabled": true,
+      "sync_code_executions": true,
+      "share_context": true
+    },
+    "make": {
+      "enabled": false,
+      "webhook_url": ""
+    },
+    "n8n": {
+      "enabled": false,
+      "webhook_url": ""
+    }
+  }
+}
