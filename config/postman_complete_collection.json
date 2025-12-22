@@ -1,0 +1,1383 @@
+{
+  "info": {
+    "name": "Private-Claude Complete API Collection",
+    "description": "Complete API testing collection with all integrations: E2B, GitHub, GitLab, Zapier, Slack, Gemini, Google Workspace, Microsoft 365, Dropbox, and Email",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_postman_id": "private-claude-complete-api-collection",
+    "version": "2.0.0"
+  },
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{API_TOKEN}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:5000",
+      "type": "string",
+      "description": "Local API server base URL"
+    },
+    {
+      "key": "e2b_api_key",
+      "value": "{{E2B_API_KEY}}",
+      "type": "string",
+      "description": "E2B API key"
+    },
+    {
+      "key": "e2b_base_url",
+      "value": "https://api.e2b.dev",
+      "type": "string",
+      "description": "E2B API base URL"
+    },
+    {
+      "key": "github_token",
+      "value": "{{GITHUB_TOKEN}}",
+      "type": "string",
+      "description": "GitHub personal access token"
+    },
+    {
+      "key": "github_base_url",
+      "value": "https://api.github.com",
+      "type": "string",
+      "description": "GitHub API base URL"
+    },
+    {
+      "key": "gitlab_token",
+      "value": "{{GITLAB_TOKEN}}",
+      "type": "string",
+      "description": "GitLab personal access token"
+    },
+    {
+      "key": "gitlab_base_url",
+      "value": "https://gitlab.com/api/v4",
+      "type": "string",
+      "description": "GitLab API base URL"
+    },
+    {
+      "key": "slack_bot_token",
+      "value": "{{SLACK_BOT_TOKEN}}",
+      "type": "string",
+      "description": "Slack bot token"
+    },
+    {
+      "key": "slack_webhook_url",
+      "value": "{{SLACK_WEBHOOK_URL}}",
+      "type": "string",
+      "description": "Slack webhook URL"
+    },
+    {
+      "key": "gemini_api_key",
+      "value": "{{GEMINI_API_KEY}}",
+      "type": "string",
+      "description": "Google Gemini API key"
+    },
+    {
+      "key": "zapier_webhook_url",
+      "value": "{{ZAPIER_WEBHOOK_URL}}",
+      "type": "string",
+      "description": "Zapier webhook URL"
+    },
+    {
+      "key": "dropbox_access_token",
+      "value": "{{DROPBOX_ACCESS_TOKEN}}",
+      "type": "string",
+      "description": "Dropbox access token"
+    },
+    {
+      "key": "google_sheets_api_key",
+      "value": "{{GOOGLE_SHEETS_API_KEY}}",
+      "type": "string",
+      "description": "Google Sheets API key"
+    },
+    {
+      "key": "microsoft_graph_token",
+      "value": "{{MICROSOFT_GRAPH_TOKEN}}",
+      "type": "string",
+      "description": "Microsoft Graph access token"
+    },
+    {
+      "key": "sendgrid_api_key",
+      "value": "{{SENDGRID_API_KEY}}",
+      "type": "string",
+      "description": "SendGrid API key"
+    },
+    {
+      "key": "webhook_id",
+      "value": "{{WEBHOOK_ID}}",
+      "type": "string",
+      "description": "Internal webhook ID"
+    },
+    {
+      "key": "timestamp",
+      "value": "",
+      "type": "string",
+      "description": "Current timestamp (set by pre-request script)"
+    },
+    {
+      "key": "random_id",
+      "value": "",
+      "type": "string",
+      "description": "Random ID (set by pre-request script)"
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          "// Set timestamp for all requests",
+          "pm.variables.set('timestamp', new Date().toISOString());",
+          "",
+          "// Generate random ID",
+          "pm.variables.set('random_id', 'id_' + Math.random().toString(36).substr(2, 9));",
+          "",
+          "// Log request details",
+          "console.log('Request:', pm.request.method, pm.request.url);"
+        ]
+      }
+    }
+  ],
+  "item": [
+    {
+      "name": "E2B Sandbox API",
+      "item": [
+        {
+          "name": "Create Sandbox",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{e2b_api_key}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"template\": \"python3\",\n  \"timeout\": 300,\n  \"buildImageUri\": \"docker.io/library/python:3.11\"\n}"
+            },
+            "url": {
+              "raw": "{{e2b_base_url}}/sandboxes",
+              "host": ["{{e2b_base_url}}"],
+              "path": ["sandboxes"]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "// Test script for Create Sandbox",
+                  "pm.test('Status code is 201', function() {",
+                  "    pm.response.to.have.status(201);",
+                  "});",
+                  "",
+                  "pm.test('Response has sandbox ID', function() {",
+                  "    pm.expect(pm.response.json()).to.have.property('sandboxId');",
+                  "});",
+                  "",
+                  "var jsonData = pm.response.json();",
+                  "pm.globals.set('sandbox_id', jsonData.sandboxId);"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Execute Code in Sandbox",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{e2b_api_key}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"code\": \"print('Hello from E2B')\",\n  \"language\": \"python3\",\n  \"timeout\": 30\n}"
+            },
+            "url": {
+              "raw": "{{e2b_base_url}}/sandboxes/{{sandbox_id}}/code_executions",
+              "host": ["{{e2b_base_url}}"],
+              "path": ["sandboxes", "{{sandbox_id}}", "code_executions"]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status code is 200', function() {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "pm.test('Execution completed successfully', function() {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData.status).to.equal('success');",
+                  "});",
+                  "",
+                  "pm.test('Output contains expected text', function() {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData.stdout).to.include('Hello from E2B');",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Webhook - Execution Completed",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "X-Webhook-ID",
+                "value": "{{webhook_id}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"event\": \"execution.completed\",\n  \"execution_id\": \"{{random_id}}\",\n  \"sandbox_id\": \"sandbox_123\",\n  \"status\": \"success\",\n  \"output\": \"Code executed successfully\",\n  \"timestamp\": \"{{timestamp}}\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/webhooks/e2b",
+              "host": ["{{base_url}}"],
+              "path": ["api", "webhooks", "e2b"]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Webhook received successfully', function() {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "pm.test('Response contains success status', function() {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData.status).to.equal('received');",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Webhook - File Uploaded",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"event\": \"file.uploaded\",\n  \"file_name\": \"output.txt\",\n  \"file_url\": \"https://e2b.dev/files/{{random_id}}\",\n  \"file_size\": 1024,\n  \"mime_type\": \"text/plain\",\n  \"timestamp\": \"{{timestamp}}\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/webhooks/e2b",
+              "host": ["{{base_url}}"],
+              "path": ["api", "webhooks", "e2b"]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('File webhook processed', function() {",
+                  "    pm.response.to.have.status(200);",
+                  "});"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "GitHub API",
+      "item": [
+        {
+          "name": "Get Repository",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{github_token}}",
+                "type": "text"
+              },
+              {
+                "key": "Accept",
+                "value": "application/vnd.github.v3+json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{github_base_url}}/repos/appsefilepro-cell/Private-Claude",
+              "host": ["{{github_base_url}}"],
+              "path": ["repos", "appsefilepro-cell", "Private-Claude"]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status code is 200', function() {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "pm.test('Repository exists', function() {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData).to.have.property('id');",
+                  "    pm.expect(jsonData.name).to.equal('Private-Claude');",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Create Issue",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{github_token}}",
+                "type": "text"
+              },
+              {
+                "key": "Accept",
+                "value": "application/vnd.github.v3+json",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"API Integration Test - {{timestamp}}\",\n  \"body\": \"Automated test issue created by Postman\",\n  \"labels\": [\"automated-test\", \"api-testing\"]\n}"
+            },
+            "url": {
+              "raw": "{{github_base_url}}/repos/appsefilepro-cell/Private-Claude/issues",
+              "host": ["{{github_base_url}}"],
+              "path": ["repos", "appsefilepro-cell", "Private-Claude", "issues"]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Issue created successfully', function() {",
+                  "    pm.response.to.have.status(201);",
+                  "});",
+                  "",
+                  "pm.test('Issue has required fields', function() {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData).to.have.property('number');",
+                  "    pm.expect(jsonData).to.have.property('title');",
+                  "});",
+                  "",
+                  "var jsonData = pm.response.json();",
+                  "pm.globals.set('issue_number', jsonData.number);"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Create Issue Comment",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{github_token}}",
+                "type": "text"
+              },
+              {
+                "key": "Accept",
+                "value": "application/vnd.github.v3+json",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"body\": \"API Test Comment from Postman - {{timestamp}}\"\n}"
+            },
+            "url": {
+              "raw": "{{github_base_url}}/repos/appsefilepro-cell/Private-Claude/issues/{{issue_number}}/comments",
+              "host": ["{{github_base_url}}"],
+              "path": ["repos", "appsefilepro-cell", "Private-Claude", "issues", "{{issue_number}}", "comments"]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Comment created successfully', function() {",
+                  "    pm.response.to.have.status(201);",
+                  "});",
+                  "",
+                  "pm.test('Comment has body', function() {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData).to.have.property('body');",
+                  "    pm.expect(jsonData.body).to.include('API Test Comment');",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "List Pull Requests",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{github_token}}",
+                "type": "text"
+              },
+              {
+                "key": "Accept",
+                "value": "application/vnd.github.v3+json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{github_base_url}}/repos/appsefilepro-cell/Private-Claude/pulls?state=all&per_page=10",
+              "host": ["{{github_base_url}}"],
+              "path": ["repos", "appsefilepro-cell", "Private-Claude", "pulls"],
+              "query": [
+                {
+                  "key": "state",
+                  "value": "all"
+                },
+                {
+                  "key": "per_page",
+                  "value": "10"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status code is 200', function() {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "pm.test('Response is an array', function() {",
+                  "    pm.expect(pm.response.json()).to.be.an('array');",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Webhook - Push Event",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "X-GitHub-Event",
+                "value": "push",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"ref\": \"refs/heads/main\",\n  \"before\": \"abc123\",\n  \"after\": \"def456\",\n  \"repository\": {\n    \"name\": \"Private-Claude\",\n    \"full_name\": \"appsefilepro-cell/Private-Claude\"\n  },\n  \"pusher\": {\n    \"name\": \"test-user\",\n    \"email\": \"test@example.com\"\n  },\n  \"commits\": [\n    {\n      \"id\": \"def456\",\n      \"message\": \"Test commit from Postman\",\n      \"timestamp\": \"{{timestamp}}\"\n    }\n  ]\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/webhooks/github",
+              "host": ["{{base_url}}"],
+              "path": ["api", "webhooks", "github"]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Webhook received', function() {",
+                  "    pm.response.to.have.status(200);",
+                  "});"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "GitLab API",
+      "item": [
+        {
+          "name": "Get Project",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "PRIVATE-TOKEN",
+                "value": "{{gitlab_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{gitlab_base_url}}/projects?search=test",
+              "host": ["{{gitlab_base_url}}"],
+              "path": ["projects"],
+              "query": [
+                {
+                  "key": "search",
+                  "value": "test"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status code is 200', function() {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "pm.test('Response is an array', function() {",
+                  "    pm.expect(pm.response.json()).to.be.an('array');",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Create Issue",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "PRIVATE-TOKEN",
+                "value": "{{gitlab_token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Test Issue - {{timestamp}}\",\n  \"description\": \"Created via Postman API\",\n  \"labels\": \"api-testing\"\n}"
+            },
+            "url": {
+              "raw": "{{gitlab_base_url}}/projects/1/issues",
+              "host": ["{{gitlab_base_url}}"],
+              "path": ["projects", "1", "issues"]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Issue created', function() {",
+                  "    pm.response.to.have.status(201);",
+                  "});"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Slack API",
+      "item": [
+        {
+          "name": "Send Message",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{slack_bot_token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"channel\": \"#general\",\n  \"text\": \"API Test Message - {{timestamp}}\",\n  \"blocks\": [\n    {\n      \"type\": \"section\",\n      \"text\": {\n        \"type\": \"mrkdwn\",\n        \"text\": \"*E2B API Status*\\nIntegration test completed successfully\"\n      }\n    }\n  ]\n}"
+            },
+            "url": {
+              "raw": "https://slack.com/api/chat.postMessage",
+              "protocol": "https",
+              "host": ["slack", "com"],
+              "path": ["api", "chat", "postMessage"]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Message sent successfully', function() {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData.ok).to.be.true;",
+                  "});",
+                  "",
+                  "pm.test('Response has message timestamp', function() {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData).to.have.property('ts');",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Get Channel Info",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{slack_bot_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "https://slack.com/api/conversations.list?limit=10",
+              "protocol": "https",
+              "host": ["slack", "com"],
+              "path": ["api", "conversations", "list"],
+              "query": [
+                {
+                  "key": "limit",
+                  "value": "10"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Channels retrieved', function() {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData.ok).to.be.true;",
+                  "    pm.expect(jsonData).to.have.property('channels');",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Webhook - Incoming Webhook",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"text\": \"API Test Alert\",\n  \"attachments\": [\n    {\n      \"fallback\": \"Required plain-text summary\",\n      \"color\": \"#36a64f\",\n      \"title\": \"E2B Integration Status\",\n      \"text\": \"All systems operational\",\n      \"ts\": \"{{timestamp}}\"\n    }\n  ]\n}"
+            },
+            "url": {
+              "raw": "{{slack_webhook_url}}",
+              "host": ["{{slack_webhook_url}}"],
+              "path": []
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Webhook message sent', function() {",
+                  "    pm.response.to.have.status(200);",
+                  "});"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Google Gemini API",
+      "item": [
+        {
+          "name": "Generate Content",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"contents\": [\n    {\n      \"parts\": [\n        {\n          \"text\": \"Explain the benefits of API integration testing in 50 words\"\n        }\n      ]\n    }\n  ]\n}"
+            },
+            "url": {
+              "raw": "https://generativelanguage.googleapis.com/v1/models/gemini-pro:generateContent?key={{gemini_api_key}}",
+              "protocol": "https",
+              "host": ["generativelanguage", "googleapis", "com"],
+              "path": ["v1", "models", "gemini-pro:generateContent"],
+              "query": [
+                {
+                  "key": "key",
+                  "value": "{{gemini_api_key}}"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status code is 200', function() {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "pm.test('Response contains generated text', function() {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData).to.have.property('candidates');",
+                  "    pm.expect(jsonData.candidates.length).to.be.greaterThan(0);",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Count Tokens",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"contents\": [\n    {\n      \"parts\": [\n        {\n          \"text\": \"Count the tokens in this text\"\n        }\n      ]\n    }\n  ]\n}"
+            },
+            "url": {
+              "raw": "https://generativelanguage.googleapis.com/v1/models/gemini-pro:countTokens?key={{gemini_api_key}}",
+              "protocol": "https",
+              "host": ["generativelanguage", "googleapis", "com"],
+              "path": ["v1", "models", "gemini-pro:countTokens"],
+              "query": [
+                {
+                  "key": "key",
+                  "value": "{{gemini_api_key}}"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status code is 200', function() {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "pm.test('Response contains token count', function() {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData).to.have.property('totalTokens');",
+                  "});"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Zapier Webhooks",
+      "item": [
+        {
+          "name": "Send Execution Event",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"event\": \"execution.completed\",\n  \"id\": \"{{random_id}}\",\n  \"status\": \"success\",\n  \"output\": \"Code executed successfully\",\n  \"timestamp\": \"{{timestamp}}\",\n  \"sandbox_id\": \"sandbox_123\"\n}"
+            },
+            "url": {
+              "raw": "{{zapier_webhook_url}}",
+              "host": ["{{zapier_webhook_url}}"],
+              "path": []
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Webhook received', function() {",
+                  "    pm.response.to.have.status(200);",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Send File Event",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"event\": \"file.uploaded\",\n  \"file_name\": \"output.txt\",\n  \"file_url\": \"https://e2b.dev/files/{{random_id}}\",\n  \"file_size\": 2048,\n  \"mime_type\": \"text/plain\",\n  \"timestamp\": \"{{timestamp}}\"\n}"
+            },
+            "url": {
+              "raw": "{{zapier_webhook_url}}",
+              "host": ["{{zapier_webhook_url}}"],
+              "path": []
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('File event delivered', function() {",
+                  "    pm.response.to.have.status(200);",
+                  "});"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Google Sheets API",
+      "item": [
+        {
+          "name": "Get Spreadsheet",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{google_sheets_api_key}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "https://sheets.googleapis.com/v4/spreadsheets/{{spreadsheet_id}}",
+              "protocol": "https",
+              "host": ["sheets", "googleapis", "com"],
+              "path": ["v4", "spreadsheets", "{{spreadsheet_id}}"]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status code is 200', function() {",
+                  "    pm.response.to.have.status(200);",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Append Values",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{google_sheets_api_key}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"values\": [\n    [\"{{timestamp}}\", \"API Test\", \"Success\"]\n  ]\n}"
+            },
+            "url": {
+              "raw": "https://sheets.googleapis.com/v4/spreadsheets/{{spreadsheet_id}}/values/Sheet1!A:C:append?valueInputOption=USER_ENTERED",
+              "protocol": "https",
+              "host": ["sheets", "googleapis", "com"],
+              "path": ["v4", "spreadsheets", "{{spreadsheet_id}}", "values", "Sheet1!A:C:append"],
+              "query": [
+                {
+                  "key": "valueInputOption",
+                  "value": "USER_ENTERED"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Values appended', function() {",
+                  "    pm.response.to.have.status(200);",
+                  "});"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Microsoft Graph API",
+      "item": [
+        {
+          "name": "Get My Profile",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{microsoft_graph_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "https://graph.microsoft.com/v1.0/me",
+              "protocol": "https",
+              "host": ["graph", "microsoft", "com"],
+              "path": ["v1", "0", "me"]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status code is 200', function() {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "pm.test('Response has user email', function() {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData).to.have.property('mail');",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Send Email",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{microsoft_graph_token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"message\": {\n    \"subject\": \"API Test Email\",\n    \"body\": {\n      \"contentType\": \"HTML\",\n      \"content\": \"This is an API test email sent from Postman\"\n    },\n    \"toRecipients\": [\n      {\n        \"emailAddress\": {\n          \"address\": \"test@example.com\"\n        }\n      }\n    ]\n  },\n  \"saveToSentItems\": true\n}"
+            },
+            "url": {
+              "raw": "https://graph.microsoft.com/v1.0/me/sendMail",
+              "protocol": "https",
+              "host": ["graph", "microsoft", "com"],
+              "path": ["v1", "0", "me", "sendMail"]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Email sent', function() {",
+                  "    pm.response.to.have.status(202);",
+                  "});"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Dropbox API",
+      "item": [
+        {
+          "name": "List Folder",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{dropbox_access_token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"path\": \"/\",\n  \"recursive\": false,\n  \"include_media_info\": true,\n  \"include_deleted\": false,\n  \"include_has_explicit_shared_members\": false,\n  \"include_mounted_folders\": true,\n  \"include_non_downloadable_files\": true\n}"
+            },
+            "url": {
+              "raw": "https://api.dropboxapi.com/2/files/list_folder",
+              "protocol": "https",
+              "host": ["api", "dropboxapi", "com"],
+              "path": ["2", "files", "list_folder"]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status code is 200', function() {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "pm.test('Response has entries', function() {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData).to.have.property('entries');",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Upload File",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{dropbox_access_token}}",
+                "type": "text"
+              },
+              {
+                "key": "Dropbox-API-Arg",
+                "value": "{\"path\": \"/test_{{timestamp}}.txt\", \"mode\": \"add\", \"autorename\": true}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/octet-stream",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "Test file content from Postman API test"
+            },
+            "url": {
+              "raw": "https://content.dropboxapi.com/2/files/upload",
+              "protocol": "https",
+              "host": ["content", "dropboxapi", "com"],
+              "path": ["2", "files", "upload"]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('File uploaded', function() {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "pm.test('Response has file metadata', function() {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData).to.have.property('id');",
+                  "    pm.expect(jsonData).to.have.property('name');",
+                  "});"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "SendGrid Email API",
+      "item": [
+        {
+          "name": "Send Email",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{sendgrid_api_key}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"personalizations\": [\n    {\n      \"to\": [\n        {\n          \"email\": \"test@example.com\",\n          \"name\": \"Test Recipient\"\n        }\n      ],\n      \"subject\": \"API Test Email - {{timestamp}}\"\n    }\n  ],\n  \"from\": {\n    \"email\": \"noreply@private-claude.com\",\n    \"name\": \"Private Claude API\"\n  },\n  \"content\": [\n    {\n      \"type\": \"text/html\",\n      \"value\": \"<h1>API Test</h1><p>This email was sent via Postman API testing.</p>\"\n    }\n  ]\n}"
+            },
+            "url": {
+              "raw": "https://api.sendgrid.com/v3/mail/send",
+              "protocol": "https",
+              "host": ["api", "sendgrid", "com"],
+              "path": ["v3", "mail", "send"]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Email queued for delivery', function() {",
+                  "    pm.response.to.have.status(202);",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Get Mail Send Stats",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{sendgrid_api_key}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "https://api.sendgrid.com/v3/stats?aggregated_by=day&limit=30",
+              "protocol": "https",
+              "host": ["api", "sendgrid", "com"],
+              "path": ["v3", "stats"],
+              "query": [
+                {
+                  "key": "aggregated_by",
+                  "value": "day"
+                },
+                {
+                  "key": "limit",
+                  "value": "30"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Stats retrieved', function() {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "pm.test('Response is an array', function() {",
+                  "    pm.expect(pm.response.json()).to.be.an('array');",
+                  "});"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Health & Status Checks",
+      "item": [
+        {
+          "name": "API Server Health",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/health",
+              "host": ["{{base_url}}"],
+              "path": ["health"]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('API server is healthy', function() {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "pm.test('Health check includes status', function() {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData).to.have.property('status');",
+                  "    pm.expect(jsonData.status).to.equal('ok');",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Webhook Handler Status",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/api/status",
+              "host": ["{{base_url}}"],
+              "path": ["api", "status"]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Webhook handler is running', function() {",
+                  "    pm.response.to.have.status(200);",
+                  "});"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

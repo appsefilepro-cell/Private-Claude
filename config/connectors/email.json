@@ -1,0 +1,339 @@
+{
+  "connector": {
+    "name": "Email Integration",
+    "type": "communication",
+    "version": "1.0.0",
+    "status": "configured"
+  },
+
+  "providers": [
+    {
+      "name": "SendGrid",
+      "type": "transactional_email",
+      "enabled": true,
+      "priority": 1,
+      "authentication": {
+        "api_key": "${SENDGRID_API_KEY}",
+        "base_url": "https://api.sendgrid.com"
+      },
+      "configuration": {
+        "from_email": "noreply@private-claude.com",
+        "from_name": "Private Claude",
+        "reply_to": "support@private-claude.com",
+        "category": "private-claude"
+      },
+      "features": {
+        "send_email": true,
+        "track_opens": true,
+        "track_clicks": true,
+        "send_at": true,
+        "dynamic_templates": true,
+        "batch_sending": true
+      },
+      "rate_limiting": {
+        "requests_per_second": 100,
+        "max_batch_size": 1000
+      }
+    },
+    {
+      "name": "Gmail",
+      "type": "email_account",
+      "enabled": true,
+      "priority": 2,
+      "authentication": {
+        "oauth2_token": "${GOOGLE_ACCESS_TOKEN}",
+        "user_email": "terobinsonwy@gmail.com"
+      },
+      "features": {
+        "send_email": true,
+        "read_email": true,
+        "draft_email": true,
+        "manage_labels": true
+      }
+    },
+    {
+      "name": "Microsoft Exchange",
+      "type": "email_account",
+      "enabled": true,
+      "priority": 3,
+      "authentication": {
+        "graph_token": "${MICROSOFT_GRAPH_TOKEN}",
+        "user_email": "${MICROSOFT_EMAIL}"
+      },
+      "features": {
+        "send_email": true,
+        "read_email": true,
+        "draft_email": true,
+        "manage_categories": true
+      }
+    }
+  ],
+
+  "sendgrid_configuration": {
+    "api_version": "v3",
+    "base_url": "https://api.sendgrid.com/v3",
+    "endpoints": {
+      "send": "/mail/send",
+      "stats": "/stats",
+      "contacts": "/marketing/contacts",
+      "templates": "/templates",
+      "suppressions": "/suppression"
+    },
+    "sender_identities": [
+      {
+        "email": "noreply@private-claude.com",
+        "name": "Private Claude Notifications",
+        "verified": true,
+        "default": true
+      },
+      {
+        "email": "alerts@private-claude.com",
+        "name": "Private Claude Alerts",
+        "verified": true,
+        "default": false
+      }
+    ],
+    "email_templates": {
+      "api_notification": {
+        "id": "${SENDGRID_TEMPLATE_NOTIFICATION}",
+        "name": "API Notification",
+        "version": 1,
+        "status": "active"
+      },
+      "error_alert": {
+        "id": "${SENDGRID_TEMPLATE_ERROR}",
+        "name": "Error Alert",
+        "version": 1,
+        "status": "active"
+      },
+      "success_confirmation": {
+        "id": "${SENDGRID_TEMPLATE_SUCCESS}",
+        "name": "Success Confirmation",
+        "version": 1,
+        "status": "active"
+      }
+    }
+  },
+
+  "email_rules": [
+    {
+      "id": "rule_001",
+      "name": "API Notifications",
+      "enabled": true,
+      "trigger": {
+        "event": "api_execution",
+        "status": ["success", "error"]
+      },
+      "action": {
+        "provider": "sendgrid",
+        "template": "api_notification",
+        "recipients": ["terobinsonwy@gmail.com"]
+      }
+    },
+    {
+      "id": "rule_002",
+      "name": "Critical Errors",
+      "enabled": true,
+      "trigger": {
+        "event": "system_error",
+        "severity": "critical"
+      },
+      "action": {
+        "provider": "sendgrid",
+        "template": "error_alert",
+        "recipients": ["terobinsonwy@gmail.com"],
+        "cc": ["alerts@private-claude.com"],
+        "priority": "high"
+      }
+    },
+    {
+      "id": "rule_003",
+      "name": "Integration Success",
+      "enabled": true,
+      "trigger": {
+        "event": "integration_complete",
+        "status": "success"
+      },
+      "action": {
+        "provider": "sendgrid",
+        "template": "success_confirmation",
+        "recipients": ["terobinsonwy@gmail.com"]
+      }
+    },
+    {
+      "id": "rule_004",
+      "name": "Daily Summary",
+      "enabled": true,
+      "trigger": {
+        "event": "scheduled",
+        "schedule": "0 8 * * *"
+      },
+      "action": {
+        "provider": "sendgrid",
+        "template": "daily_summary",
+        "recipients": ["terobinsonwy@gmail.com"]
+      }
+    }
+  ],
+
+  "recipient_management": {
+    "contacts": [
+      {
+        "email": "terobinsonwy@gmail.com",
+        "name": "Tero Robinson",
+        "list_ids": ["primary"],
+        "custom_fields": {
+          "notification_preference": "all"
+        }
+      }
+    ],
+    "suppression_lists": {
+      "bounces": {
+        "enabled": true,
+        "auto_cleanup": true
+      },
+      "complaints": {
+        "enabled": true,
+        "auto_cleanup": true
+      },
+      "unsubscribes": {
+        "enabled": true,
+        "auto_cleanup": true
+      }
+    }
+  },
+
+  "deliverability": {
+    "domain_authentication": {
+      "domain": "private-claude.com",
+      "dkim": {
+        "enabled": true,
+        "verified": true
+      },
+      "spf": {
+        "enabled": true,
+        "verified": true
+      }
+    },
+    "ip_pooling": {
+      "enabled": false
+    },
+    "dedicated_ip": {
+      "enabled": false
+    }
+  },
+
+  "monitoring": {
+    "enabled": true,
+    "metrics": [
+      "emails_sent",
+      "bounce_rate",
+      "open_rate",
+      "click_rate",
+      "unsubscribe_rate"
+    ],
+    "alerts": {
+      "high_bounce_rate": {
+        "enabled": true,
+        "threshold": 0.05,
+        "notify": ["#error-alerts"]
+      },
+      "delivery_failure": {
+        "enabled": true,
+        "threshold": 5,
+        "notify": ["#error-alerts"]
+      }
+    },
+    "logging": {
+      "level": "INFO",
+      "retention_days": 90,
+      "log_file": "/home/user/Private-Claude/logs/email.log"
+    }
+  },
+
+  "rate_limiting": {
+    "enabled": true,
+    "sendgrid_limits": {
+      "requests_per_second": 100,
+      "burst_size": 10
+    },
+    "gmail_limits": {
+      "requests_per_second": 1,
+      "daily_limit": 1000
+    },
+    "exchange_limits": {
+      "requests_per_second": 2000,
+      "burst_size": 20
+    },
+    "retry_strategy": "exponential_backoff",
+    "max_retries": 5,
+    "initial_backoff_seconds": 1,
+    "max_backoff_seconds": 32
+  },
+
+  "error_handling": {
+    "strategies": {
+      "invalid_recipient": "log_and_skip",
+      "rate_limited": "queue_request",
+      "authentication_failed": "alert_and_fallback",
+      "network_error": "retry_with_backoff"
+    },
+    "fallback_provider": "gmail"
+  },
+
+  "health_check": {
+    "enabled": true,
+    "interval_seconds": 300,
+    "checks": [
+      {
+        "name": "sendgrid_api",
+        "method": "GET",
+        "endpoint": "https://api.sendgrid.com/v3/stats",
+        "expected_status": 200
+      },
+      {
+        "name": "gmail_access",
+        "method": "GET",
+        "endpoint": "https://gmail.googleapis.com/gmail/v1/users/me/profile",
+        "expected_status": 200
+      },
+      {
+        "name": "exchange_access",
+        "method": "GET",
+        "endpoint": "https://graph.microsoft.com/v1.0/me/mailFolders",
+        "expected_status": 200
+      }
+    ]
+  },
+
+  "compliance": {
+    "gdpr": {
+      "enabled": true,
+      "consent_required": true,
+      "data_retention_days": 90,
+      "right_to_be_forgotten": true
+    },
+    "can_spam": {
+      "enabled": true,
+      "unsubscribe_link": true,
+      "contact_information": true,
+      "honor_opt_out": true
+    },
+    "archive": {
+      "enabled": true,
+      "retention_days": 365
+    }
+  },
+
+  "backup_and_recovery": {
+    "enabled": true,
+    "backup_interval": 86400,
+    "backup_retention_days": 30,
+    "include_items": [
+      "sent_emails",
+      "templates",
+      "contacts",
+      "rules"
+    ]
+  }
+}

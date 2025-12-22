@@ -1,0 +1,208 @@
+{
+  "connector": {
+    "name": "Dropbox",
+    "type": "file_storage",
+    "version": "2.1.0",
+    "status": "configured"
+  },
+
+  "authentication": {
+    "type": "oauth2",
+    "oauth2": {
+      "authorization_url": "https://www.dropbox.com/oauth2/authorize",
+      "token_url": "https://api.dropboxapi.com/oauth2/token",
+      "client_id": "${DROPBOX_CLIENT_ID}",
+      "client_secret": "${DROPBOX_CLIENT_SECRET}",
+      "redirect_uri": "http://localhost:5000/auth/dropbox/callback",
+      "scope": [
+        "files.content.read",
+        "files.content.write",
+        "account_info.read"
+      ],
+      "token_expiry": 14400,
+      "refresh_token_expiry": null
+    },
+    "current_token": "${DROPBOX_ACCESS_TOKEN}",
+    "token_refresh_strategy": "automatic",
+    "token_refresh_interval": 3600
+  },
+
+  "endpoints": {
+    "api_base": "https://api.dropboxapi.com",
+    "content_base": "https://content.dropboxapi.com",
+    "www_base": "https://www.dropbox.com",
+    "endpoints": {
+      "list_folder": "/2/files/list_folder",
+      "list_folder_continue": "/2/files/list_folder/continue",
+      "upload": "/2/files/upload",
+      "download": "/2/files/download",
+      "delete": "/2/files/delete",
+      "create_folder": "/2/files/create_folder_v2",
+      "move": "/2/files/move_v2",
+      "copy": "/2/files/copy_v2",
+      "get_metadata": "/2/files/get_metadata",
+      "get_account": "/2/users/get_account"
+    }
+  },
+
+  "file_operations": {
+    "upload": {
+      "method": "POST",
+      "endpoint": "${content_base}${endpoints.upload}",
+      "headers": {
+        "Authorization": "Bearer ${current_token}",
+        "Dropbox-API-Arg": "{\"path\": \"{{path}}\", \"mode\": \"{{mode}}\"}",
+        "Content-Type": "application/octet-stream"
+      },
+      "max_file_size": 157286400,
+      "chunk_size": 8388608,
+      "timeout": 300000,
+      "retry_count": 3
+    },
+    "download": {
+      "method": "POST",
+      "endpoint": "${content_base}${endpoints.download}",
+      "headers": {
+        "Authorization": "Bearer ${current_token}",
+        "Dropbox-API-Arg": "{\"path\": \"{{path}}\"}"
+      },
+      "timeout": 300000,
+      "retry_count": 3
+    },
+    "list_folder": {
+      "method": "POST",
+      "endpoint": "${api_base}${endpoints.list_folder}",
+      "headers": {
+        "Authorization": "Bearer ${current_token}",
+        "Content-Type": "application/json"
+      },
+      "body": {
+        "path": "{{path}}",
+        "recursive": false,
+        "include_media_info": true,
+        "include_deleted": false,
+        "include_has_explicit_shared_members": false,
+        "limit": 100
+      }
+    }
+  },
+
+  "folder_structure": {
+    "root": "/Private-Claude",
+    "folders": {
+      "uploads": "/Private-Claude/uploads",
+      "downloads": "/Private-Claude/downloads",
+      "documents": "/Private-Claude/documents",
+      "data": "/Private-Claude/data",
+      "backups": "/Private-Claude/backups",
+      "archived": "/Private-Claude/archived",
+      "temp": "/Private-Claude/temp"
+    }
+  },
+
+  "sync_settings": {
+    "enabled": true,
+    "bidirectional": true,
+    "sync_interval": 3600,
+    "conflict_resolution": "local_wins",
+    "auto_cleanup_interval": 86400,
+    "cleanup_threshold_days": 30,
+    "max_sync_errors_before_alert": 5
+  },
+
+  "sharing": {
+    "enabled": true,
+    "default_link_type": "shared_link",
+    "password_protected": false,
+    "expiry_days": null,
+    "allow_comments": true,
+    "notification_on_change": true
+  },
+
+  "monitoring": {
+    "enabled": true,
+    "metrics": [
+      "upload_count",
+      "download_count",
+      "sync_errors",
+      "quota_usage"
+    ],
+    "alerts": {
+      "sync_failure": {
+        "enabled": true,
+        "threshold": 3,
+        "notify": ["#error-alerts"]
+      },
+      "quota_warning": {
+        "enabled": true,
+        "threshold_percent": 80,
+        "notify": ["#alerts"]
+      },
+      "unusual_activity": {
+        "enabled": true,
+        "threshold": 100,
+        "notify": ["#security"]
+      }
+    },
+    "logging": {
+      "level": "INFO",
+      "retention_days": 90,
+      "log_file": "/home/user/Private-Claude/logs/dropbox.log"
+    }
+  },
+
+  "rate_limiting": {
+    "enabled": true,
+    "requests_per_second": 100,
+    "burst_size": 10,
+    "retry_strategy": "exponential_backoff",
+    "max_retries": 5,
+    "initial_backoff_seconds": 1,
+    "max_backoff_seconds": 32
+  },
+
+  "error_handling": {
+    "strategies": {
+      "invalid_token": "refresh_token",
+      "insufficient_space": "alert_and_stop",
+      "network_error": "retry_with_backoff",
+      "file_not_found": "log_and_continue",
+      "permission_denied": "alert_and_skip"
+    }
+  },
+
+  "health_check": {
+    "enabled": true,
+    "interval_seconds": 300,
+    "checks": [
+      {
+        "name": "token_validity",
+        "method": "GET",
+        "endpoint": "/2/users/get_account",
+        "expected_status": 200
+      },
+      {
+        "name": "quota_check",
+        "method": "POST",
+        "endpoint": "/2/users/get_space_usage",
+        "expected_status": 200
+      },
+      {
+        "name": "folder_access",
+        "method": "POST",
+        "endpoint": "/2/files/get_metadata",
+        "expected_status": 200
+      }
+    ]
+  },
+
+  "backup_settings": {
+    "enabled": true,
+    "schedule": "daily",
+    "time": "02:00",
+    "retention_days": 30,
+    "backup_path": "/Private-Claude/backups",
+    "include_patterns": ["*.json", "*.csv", "*.txt", "*.pdf"],
+    "exclude_patterns": ["*.tmp", "*.log", "*.cache"]
+  }
+}

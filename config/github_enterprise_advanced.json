@@ -1,0 +1,765 @@
+{
+  "metadata": {
+    "version": "3.0.0",
+    "name": "GitHub Enterprise Advanced Configuration",
+    "description": "Advanced security, compliance, and Copilot features for Private-Claude",
+    "last_updated": "2025-12-21T00:00:00Z",
+    "environment": "production",
+    "managed_by": "Agent 5.0"
+  },
+
+  "github_enterprise": {
+    "version": "3.11.0",
+    "tier": "enterprise_cloud_with_copilot",
+    "deployment_type": "cloud",
+    "trial_status": "active",
+    "trial_duration_days": 30,
+    "auto_downgrade_enabled": true
+  },
+
+  "organization_settings": {
+    "name": "Private-Claude-Enterprise",
+    "billing_email": "${GH_ENTERPRISE_BILLING_EMAIL}",
+    "company": "Private-Claude AI Systems",
+    "location": "United States",
+    "description": "AI-powered automation and integration platform with advanced GitHub Enterprise features",
+    "website": "${ORGANIZATION_WEBSITE}",
+    "email": "${ORGANIZATION_EMAIL}",
+
+    "visibility": {
+      "profile_public": false,
+      "members_can_change_visibility": false,
+      "default_repository_visibility": "private"
+    },
+
+    "security_policies": {
+      "enforce_2fa": true,
+      "2fa_grace_period_days": 3,
+      "require_ssh_key_fingerprints": true,
+      "require_commit_signing": true,
+      "allowed_ip_ranges": [
+        "${ALLOWED_IP_RANGE_1}",
+        "${ALLOWED_IP_RANGE_2}"
+      ]
+    }
+  },
+
+  "advanced_security_features": {
+    "secret_scanning": {
+      "enabled": true,
+      "push_protection": true,
+      "validity_checks": true,
+      "alert_recipients": ["${SECURITY_EMAIL}"],
+
+      "custom_patterns": [
+        {
+          "name": "E2B API Keys",
+          "pattern": "e2b_[a-zA-Z0-9]{32,}",
+          "enabled": true,
+          "severity": "critical"
+        },
+        {
+          "name": "Anthropic API Keys",
+          "pattern": "sk-ant-[a-zA-Z0-9\\-]{95,}",
+          "enabled": true,
+          "severity": "critical"
+        },
+        {
+          "name": "OpenAI API Keys",
+          "pattern": "sk-[a-zA-Z0-9]{48}",
+          "enabled": true,
+          "severity": "critical"
+        },
+        {
+          "name": "Zapier Webhooks",
+          "pattern": "hooks\\.zapier\\.com/hooks/catch/[0-9]+/[a-zA-Z0-9]+",
+          "enabled": true,
+          "severity": "high"
+        },
+        {
+          "name": "GitHub Personal Access Tokens",
+          "pattern": "ghp_[a-zA-Z0-9]{36}",
+          "enabled": true,
+          "severity": "critical"
+        },
+        {
+          "name": "Slack Webhooks",
+          "pattern": "hooks\\.slack\\.com/services/[A-Z0-9]+/[A-Z0-9]+/[a-zA-Z0-9]+",
+          "enabled": true,
+          "severity": "high"
+        },
+        {
+          "name": "AWS Access Keys",
+          "pattern": "(A3T[A-Z0-9]|AKIA|AGPA|AIDA|AROA|AIPA|ANPA|ANVA|ASIA)[A-Z0-9]{16}",
+          "enabled": true,
+          "severity": "critical"
+        },
+        {
+          "name": "Database Connection Strings",
+          "pattern": "(mongodb|postgresql|mysql)://[^\\s]+",
+          "enabled": true,
+          "severity": "high"
+        },
+        {
+          "name": "JWT Tokens",
+          "pattern": "eyJ[a-zA-Z0-9\\-_]+\\.[a-zA-Z0-9\\-_]+\\.[a-zA-Z0-9\\-_]+",
+          "enabled": true,
+          "severity": "medium"
+        },
+        {
+          "name": "Private SSH Keys",
+          "pattern": "-----BEGIN (RSA|DSA|EC|OPENSSH|PGP) PRIVATE KEY-----",
+          "enabled": true,
+          "severity": "critical"
+        }
+      ],
+
+      "excluded_paths": [
+        "**/.env.example",
+        "**/.env.template",
+        "**/config/API_KEYS_REFERENCE.md",
+        "**/docs/**/*.md",
+        "**/test/**/*_mock.py"
+      ],
+
+      "automated_remediation": {
+        "enabled": true,
+        "revoke_on_detection": false,
+        "notify_security_team": true,
+        "create_incident": true
+      }
+    },
+
+    "code_scanning": {
+      "enabled": true,
+      "default_setup": true,
+
+      "codeql": {
+        "enabled": true,
+        "languages": ["python", "javascript", "typescript"],
+        "query_suite": "security-extended",
+        "build_mode": "autobuild",
+
+        "queries": {
+          "security": true,
+          "quality": true,
+          "maintainability": true
+        },
+
+        "severity_threshold": "low",
+        "fail_on": ["critical", "high"],
+
+        "schedule": {
+          "cron": "0 2 * * 1",
+          "branches": ["main", "develop"]
+        }
+      },
+
+      "third_party_scanners": [
+        {
+          "name": "Snyk",
+          "enabled": true,
+          "scan_dependencies": true,
+          "scan_code": true,
+          "scan_containers": false
+        },
+        {
+          "name": "SonarCloud",
+          "enabled": true,
+          "quality_gate_check": true
+        }
+      ],
+
+      "alerts": {
+        "auto_dismiss_stale": false,
+        "auto_dismiss_after_days": null,
+        "notify_on_new": true,
+        "notification_channels": ["email", "slack"]
+      }
+    },
+
+    "dependency_review": {
+      "enabled": true,
+      "block_pr_on_vulnerabilities": true,
+      "severity_threshold": "moderate",
+
+      "allowed_licenses": [
+        "MIT",
+        "Apache-2.0",
+        "BSD-3-Clause",
+        "BSD-2-Clause",
+        "ISC",
+        "Python-2.0"
+      ],
+
+      "blocked_licenses": [
+        "GPL-3.0",
+        "AGPL-3.0",
+        "Commercial"
+      ],
+
+      "vulnerability_alerts": {
+        "enabled": true,
+        "email_notifications": true,
+        "slack_notifications": true,
+        "create_issues": true
+      },
+
+      "dependabot": {
+        "enabled": true,
+        "auto_merge": false,
+        "auto_merge_security_only": true,
+
+        "update_schedule": {
+          "interval": "weekly",
+          "day": "monday",
+          "time": "02:00",
+          "timezone": "America/New_York"
+        },
+
+        "package_ecosystems": [
+          {
+            "ecosystem": "pip",
+            "directory": "/",
+            "schedule": "weekly",
+            "open_pull_requests_limit": 5,
+            "reviewers": ["${GH_ADMIN_USER}"],
+            "assignees": ["${GH_ADMIN_USER}"]
+          },
+          {
+            "ecosystem": "npm",
+            "directory": "/",
+            "schedule": "weekly",
+            "open_pull_requests_limit": 5,
+            "versioning_strategy": "increase"
+          },
+          {
+            "ecosystem": "github-actions",
+            "directory": "/",
+            "schedule": "monthly"
+          }
+        ],
+
+        "ignore_conditions": [
+          {
+            "dependency_name": "pytest",
+            "update_types": ["version-update:semver-patch"]
+          }
+        ]
+      }
+    },
+
+    "branch_protection_advanced": {
+      "main": {
+        "enforce_admins": true,
+        "allow_force_pushes": false,
+        "allow_deletions": false,
+        "required_linear_history": true,
+        "allow_fork_syncing": false,
+
+        "required_pull_request_reviews": {
+          "required_approving_review_count": 2,
+          "dismiss_stale_reviews": true,
+          "require_code_owner_reviews": true,
+          "require_last_push_approval": true,
+          "bypass_pull_request_allowances": {
+            "users": [],
+            "teams": []
+          }
+        },
+
+        "required_status_checks": {
+          "strict": true,
+          "contexts": [
+            "Copilot Code Review",
+            "Code Quality & Improvements",
+            "Documentation Generation",
+            "Test Coverage Analysis",
+            "Security Scan",
+            "CodeQL Analysis",
+            "Dependency Review"
+          ]
+        },
+
+        "required_signatures": true,
+        "required_conversation_resolution": true,
+
+        "restrictions": {
+          "users": ["${GH_ADMIN_USER}"],
+          "teams": ["maintainers", "security-team"],
+          "apps": []
+        },
+
+        "lock_branch": false,
+        "allow_auto_merge": false
+      },
+
+      "develop": {
+        "enforce_admins": false,
+        "required_pull_request_reviews": {
+          "required_approving_review_count": 1,
+          "dismiss_stale_reviews": true
+        },
+        "required_status_checks": {
+          "strict": false,
+          "contexts": [
+            "Copilot Code Review",
+            "Test Coverage Analysis"
+          ]
+        }
+      },
+
+      "feature/*": {
+        "enforce_admins": false,
+        "required_pull_request_reviews": {
+          "required_approving_review_count": 1
+        }
+      }
+    },
+
+    "audit_logging_advanced": {
+      "enabled": true,
+      "retention_days": 180,
+      "export_enabled": true,
+      "export_format": "json",
+      "export_frequency": "daily",
+      "export_destination": "${AUDIT_LOG_S3_BUCKET}",
+
+      "log_categories": [
+        "authentication",
+        "authorization",
+        "repository_access",
+        "git_operations",
+        "organization_changes",
+        "team_changes",
+        "integration_activity",
+        "webhook_events",
+        "secret_scanning_alerts",
+        "code_scanning_alerts",
+        "copilot_usage",
+        "api_requests"
+      ],
+
+      "real_time_alerts": {
+        "enabled": true,
+        "alert_on": [
+          "failed_authentication_attempts",
+          "privilege_escalation",
+          "secret_detected",
+          "critical_vulnerability_detected",
+          "branch_protection_override",
+          "force_push_to_main"
+        ]
+      },
+
+      "siem_integration": {
+        "enabled": true,
+        "provider": "splunk",
+        "endpoint": "${SIEM_ENDPOINT}",
+        "api_key": "${SIEM_API_KEY}"
+      }
+    },
+
+    "saml_sso_advanced": {
+      "enabled": true,
+      "enforcement": "required",
+      "idp_provider": "okta",
+      "idp_url": "${SAML_IDP_URL}",
+      "idp_certificate": "${SAML_IDP_CERT}",
+      "issuer_url": "https://github.com/orgs/Private-Claude-Enterprise/saml",
+
+      "settings": {
+        "sign_request": true,
+        "encrypt_assertions": true,
+        "signature_method": "RSA-SHA256",
+        "digest_method": "SHA256"
+      },
+
+      "attribute_mapping": {
+        "username": "username",
+        "email": "email",
+        "first_name": "firstName",
+        "last_name": "lastName"
+      },
+
+      "scim_provisioning": {
+        "enabled": true,
+        "auto_provision": true,
+        "auto_deprovision": true,
+        "sync_teams": true
+      }
+    }
+  },
+
+  "github_copilot_enterprise": {
+    "enabled": true,
+    "tier": "copilot_enterprise",
+
+    "licensing": {
+      "total_seats": 10,
+      "assigned_seats": 2,
+      "available_seats": 8,
+      "cost_per_seat_monthly": 39,
+      "billing_cycle": "monthly",
+      "auto_assign": false
+    },
+
+    "copilot_chat_enterprise": {
+      "enabled": true,
+      "context_repositories": [
+        "Private-Claude",
+        "Private-Claude-Docs"
+      ],
+      "knowledge_base_sync": true,
+      "organization_knowledge": true
+    },
+
+    "copilot_pull_requests": {
+      "enabled": true,
+      "auto_review": true,
+      "generate_descriptions": true,
+      "suggest_reviewers": true
+    },
+
+    "copilot_docs": {
+      "enabled": true,
+      "auto_generate": false,
+      "sync_with_wiki": true
+    },
+
+    "copilot_cli": {
+      "enabled": true,
+      "allowed_users": ["${GH_ADMIN_USER}"]
+    },
+
+    "content_policies": {
+      "public_code_suggestions": "block",
+      "exclude_repositories": [],
+      "exclude_files": [
+        "**/.env",
+        "**/secrets/**",
+        "**/credentials/**"
+      ],
+      "data_retention": "minimal",
+      "telemetry": "essential_only"
+    },
+
+    "code_referencing": {
+      "enabled": true,
+      "show_code_references": true,
+      "filter_by_license": true
+    },
+
+    "usage_analytics": {
+      "enabled": true,
+      "track_acceptance_rate": true,
+      "track_lines_suggested": true,
+      "track_lines_accepted": true,
+      "monthly_reports": true,
+      "cost_tracking": true
+    }
+  },
+
+  "github_actions_advanced": {
+    "enabled": true,
+
+    "permissions": {
+      "default_workflow_permissions": "read",
+      "can_approve_pull_requests": false,
+      "allowed_actions": "selected",
+
+      "allowed_actions_config": {
+        "github_owned_allowed": true,
+        "verified_allowed": true,
+        "patterns_allowed": [
+          "actions/*",
+          "github/*",
+          "docker/*"
+        ]
+      }
+    },
+
+    "runners": {
+      "github_hosted": {
+        "enabled": true,
+        "allowed_runner_groups": ["default"]
+      },
+
+      "self_hosted": {
+        "enabled": false,
+        "runner_groups": []
+      }
+    },
+
+    "workflow_policies": {
+      "require_approval_for_fork_prs": true,
+      "require_approval_for_first_time_contributors": true,
+      "timeout_minutes": 360,
+      "max_concurrent_workflows": 20
+    },
+
+    "artifacts": {
+      "retention_days": 90,
+      "max_size_gb": 10,
+      "encryption_enabled": true
+    },
+
+    "caching": {
+      "enabled": true,
+      "max_cache_size_gb": 10,
+      "retention_days": 7
+    },
+
+    "environments": {
+      "production": {
+        "protection_rules": {
+          "required_reviewers": 2,
+          "wait_timer_minutes": 10,
+          "prevent_self_review": true
+        },
+        "deployment_branch_policy": {
+          "protected_branches": true,
+          "custom_branches": ["main"]
+        }
+      },
+      "staging": {
+        "protection_rules": {
+          "required_reviewers": 1
+        }
+      }
+    },
+
+    "cost_optimization": {
+      "auto_cancel_redundant_builds": true,
+      "cache_dependencies": true,
+      "use_concurrency_groups": true,
+      "skip_ci_on_draft_prs": true,
+
+      "budget": {
+        "monthly_limit_usd": 100,
+        "alert_thresholds": [50, 75, 90],
+        "hard_limit_enabled": true
+      }
+    }
+  },
+
+  "github_packages": {
+    "enabled": true,
+    "registry_types": ["npm", "docker", "maven", "nuget", "rubygems"],
+
+    "retention_policy": {
+      "keep_n_most_recent": 10,
+      "keep_days": 90,
+      "delete_untagged": true
+    },
+
+    "access_control": {
+      "public_packages": false,
+      "internal_packages": true,
+      "private_packages": true
+    }
+  },
+
+  "webhooks_advanced": {
+    "organization_webhooks": [
+      {
+        "name": "E2B Integration",
+        "url": "${E2B_WEBHOOK_URL}",
+        "content_type": "json",
+        "secret": "${E2B_WEBHOOK_SECRET}",
+        "ssl_verify": true,
+        "active": true,
+        "events": [
+          "push",
+          "pull_request",
+          "deployment",
+          "deployment_status",
+          "workflow_run"
+        ]
+      },
+      {
+        "name": "Zapier Automation",
+        "url": "${ZAPIER_WEBHOOK_URL}",
+        "content_type": "json",
+        "secret": "${ZAPIER_WEBHOOK_SECRET}",
+        "ssl_verify": true,
+        "active": true,
+        "events": [
+          "issues",
+          "issue_comment",
+          "pull_request",
+          "pull_request_review"
+        ]
+      },
+      {
+        "name": "Slack Notifications",
+        "url": "${SLACK_WEBHOOK_GITHUB}",
+        "content_type": "json",
+        "ssl_verify": true,
+        "active": true,
+        "events": [
+          "push",
+          "pull_request",
+          "release",
+          "deployment"
+        ]
+      }
+    ],
+
+    "webhook_insights": {
+      "enabled": true,
+      "log_deliveries": true,
+      "retry_failed": true,
+      "max_retries": 3
+    }
+  },
+
+  "integrations_advanced": {
+    "github_apps": [
+      {
+        "name": "Dependabot",
+        "enabled": true,
+        "auto_install_on_new_repos": true
+      },
+      {
+        "name": "GitHub Advanced Security",
+        "enabled": true,
+        "auto_install_on_new_repos": true
+      },
+      {
+        "name": "Copilot",
+        "enabled": true,
+        "auto_install_on_new_repos": true
+      }
+    ],
+
+    "oauth_apps": {
+      "allowed": true,
+      "require_approval": true,
+      "allowed_apps": []
+    }
+  },
+
+  "compliance_and_governance": {
+    "compliance_frameworks": {
+      "soc2": {
+        "enabled": true,
+        "audit_frequency": "annual"
+      },
+      "iso27001": {
+        "enabled": true,
+        "audit_frequency": "annual"
+      },
+      "gdpr": {
+        "enabled": true,
+        "data_residency": "us-east-1",
+        "right_to_erasure": true
+      },
+      "hipaa": {
+        "enabled": false
+      }
+    },
+
+    "data_protection": {
+      "encryption_at_rest": true,
+      "encryption_in_transit": true,
+      "encryption_algorithm": "AES-256",
+      "key_management": "github_managed"
+    },
+
+    "retention_policies": {
+      "code_retention": "indefinite",
+      "audit_logs_retention_days": 180,
+      "workflow_logs_retention_days": 90,
+      "artifact_retention_days": 90
+    },
+
+    "geographic_restrictions": {
+      "enabled": false,
+      "allowed_countries": [],
+      "blocked_countries": []
+    }
+  },
+
+  "disaster_recovery": {
+    "backup_strategy": {
+      "enabled": true,
+      "frequency": "daily",
+      "retention_days": 30,
+      "backup_repositories": true,
+      "backup_wikis": true,
+      "backup_issues": true,
+      "backup_discussions": true
+    },
+
+    "business_continuity": {
+      "rpo_hours": 24,
+      "rto_hours": 4,
+      "failover_enabled": false
+    }
+  },
+
+  "cost_management": {
+    "monthly_budget_usd": 500,
+    "cost_allocation": {
+      "copilot_seats": 390,
+      "actions_minutes": 50,
+      "packages_storage": 10,
+      "lfs_storage": 10,
+      "other": 40
+    },
+
+    "budget_alerts": {
+      "enabled": true,
+      "alert_emails": ["${BILLING_EMAIL}"],
+      "thresholds": [50, 75, 90, 100]
+    },
+
+    "optimization_recommendations": {
+      "enabled": true,
+      "auto_apply": false
+    }
+  },
+
+  "migration_and_transition": {
+    "trial_end_date": "2025-01-31T23:59:59Z",
+    "post_trial_plan": "github_team",
+
+    "transition_plan": {
+      "downgrade_features": [
+        "copilot_enterprise",
+        "advanced_security"
+      ],
+      "retain_features": [
+        "basic_security",
+        "github_actions",
+        "github_packages"
+      ],
+      "notification_schedule": [14, 7, 3, 1],
+      "auto_transition": true
+    }
+  },
+
+  "monitoring_and_observability": {
+    "enabled": true,
+
+    "metrics": {
+      "repository_metrics": true,
+      "action_metrics": true,
+      "copilot_metrics": true,
+      "security_metrics": true
+    },
+
+    "dashboards": {
+      "security_dashboard": true,
+      "insights_dashboard": true,
+      "copilot_dashboard": true
+    },
+
+    "notifications": {
+      "email": ["${ADMIN_EMAIL}"],
+      "slack_channel": "#github-admin",
+      "webhook": "${MONITORING_WEBHOOK_URL}"
+    }
+  }
+}

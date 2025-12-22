@@ -1,0 +1,360 @@
+{
+  "zapier_activation": {
+    "account_email": "terobinsonwy@gmail.com",
+    "description": "Complete Zapier workflow activation and automation system",
+    "active_workflows": []
+  },
+
+  "email_extraction_zaps": [
+    {
+      "name": "Gmail to Task Extraction",
+      "id": "zap_001",
+      "status": "active",
+      "trigger": {
+        "app": "Gmail",
+        "event": "New Email Matching Search",
+        "search": "is:unread category:primary",
+        "account": "terobinsonwy@gmail.com"
+      },
+      "actions": [
+        {
+          "step": 1,
+          "app": "Formatter by Zapier",
+          "action": "Extract Email Data",
+          "fields": ["subject", "body", "sender", "date", "attachments"]
+        },
+        {
+          "step": 2,
+          "app": "AI by Zapier",
+          "action": "Extract Action Items",
+          "prompt": "Extract to-do items, reminders, and deadlines from this email. Return as JSON with: {tasks: [], reminders: [], deadlines: [], documents_needed: []}"
+        },
+        {
+          "step": 3,
+          "app": "Google Tasks",
+          "action": "Create Task",
+          "task_list": "Agent 5.0 Tasks"
+        },
+        {
+          "step": 4,
+          "app": "Google Calendar",
+          "action": "Create Reminder",
+          "calendar": "Reminders"
+        },
+        {
+          "step": 5,
+          "app": "Webhooks by Zapier",
+          "action": "POST",
+          "url": "${AGENT_5_WEBHOOK_URL}",
+          "payload": {
+            "event": "email_processed",
+            "tasks": "{{step2.tasks}}",
+            "reminders": "{{step2.reminders}}",
+            "documents": "{{step2.documents_needed}}"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Email to Document Generator",
+      "id": "zap_002",
+      "status": "active",
+      "trigger": {
+        "app": "Gmail",
+        "event": "New Email with Attachment",
+        "label": "Documents/Forms",
+        "account": "terobinsonwy@gmail.com"
+      },
+      "actions": [
+        {
+          "step": 1,
+          "app": "Gmail",
+          "action": "Download Attachment"
+        },
+        {
+          "step": 2,
+          "app": "Google Drive",
+          "action": "Upload File",
+          "folder": "Agent 5.0/Incoming Documents"
+        },
+        {
+          "step": 3,
+          "app": "Webhooks by Zapier",
+          "action": "POST to E2B",
+          "url": "${E2B_WEBHOOK_URL}",
+          "trigger_processing": true
+        },
+        {
+          "step": 4,
+          "app": "Slack",
+          "action": "Send Message",
+          "channel": "#document-processing",
+          "message": "New document received: {{email.subject}}"
+        }
+      ]
+    },
+    {
+      "name": "Form 1023 Auto-Generator",
+      "id": "zap_003",
+      "status": "active",
+      "trigger": {
+        "app": "Google Sheets",
+        "event": "New Row",
+        "spreadsheet": "Nonprofit Applications",
+        "worksheet": "Form 1023 Queue"
+      },
+      "actions": [
+        {
+          "step": 1,
+          "app": "Webhooks by Zapier",
+          "action": "POST",
+          "url": "${AGENT_5_WEBHOOK_URL}/generate-form-1023",
+          "data": "{{new_row}}"
+        },
+        {
+          "step": 2,
+          "app": "Delay by Zapier",
+          "delay": "5 minutes"
+        },
+        {
+          "step": 3,
+          "app": "Google Drive",
+          "action": "Find File",
+          "search_term": "Form_1023_{{row.organization_name}}.pdf"
+        },
+        {
+          "step": 4,
+          "app": "Gmail",
+          "action": "Send Email",
+          "to": "{{row.contact_email}}",
+          "subject": "Your Form 1023 is Ready",
+          "attachment": "{{step3.file}}"
+        },
+        {
+          "step": 5,
+          "app": "Google Sheets",
+          "action": "Update Row",
+          "status": "Completed"
+        }
+      ]
+    },
+    {
+      "name": "Legal Document Automation",
+      "id": "zap_004",
+      "status": "active",
+      "trigger": {
+        "app": "Webhooks by Zapier",
+        "event": "Catch Hook",
+        "webhook_url": "https://hooks.zapier.com/hooks/catch/legal-docs/"
+      },
+      "actions": [
+        {
+          "step": 1,
+          "app": "E2B Code Interpreter",
+          "action": "Execute Python Script",
+          "script": "pillar-b-legal/probate/probate_automation.py",
+          "params": "{{webhook.data}}"
+        },
+        {
+          "step": 2,
+          "app": "SharePoint",
+          "action": "Upload File",
+          "site": "APPSHOLDINGSWYINC593",
+          "library": "Legal Documents"
+        },
+        {
+          "step": 3,
+          "app": "Slack",
+          "action": "Send Message",
+          "channel": "#legal-operations",
+          "message": "Document generated: {{webhook.document_type}}"
+        }
+      ]
+    },
+    {
+      "name": "Trading Alert to Action",
+      "id": "zap_005",
+      "status": "active",
+      "trigger": {
+        "app": "Webhooks by Zapier",
+        "event": "Catch Hook - Trading Signal"
+      },
+      "actions": [
+        {
+          "step": 1,
+          "app": "Filter by Zapier",
+          "condition": "signal_strength > 0.75"
+        },
+        {
+          "step": 2,
+          "app": "Slack",
+          "action": "Send Message",
+          "channel": "#trading-signals",
+          "message": "🚨 Trading Signal: {{signal.pair}} - {{signal.action}} - Confidence: {{signal.confidence}}"
+        },
+        {
+          "step": 3,
+          "app": "Google Sheets",
+          "action": "Add Row",
+          "spreadsheet": "Trading Log",
+          "data": "{{signal}}"
+        },
+        {
+          "step": 4,
+          "app": "Webhooks by Zapier",
+          "action": "POST to Trading Bot",
+          "url": "${TRADING_BOT_API}/execute",
+          "mode": "paper"
+        }
+      ]
+    },
+    {
+      "name": "Task Reminder System",
+      "id": "zap_006",
+      "status": "active",
+      "trigger": {
+        "app": "Schedule by Zapier",
+        "frequency": "Every hour"
+      },
+      "actions": [
+        {
+          "step": 1,
+          "app": "Google Tasks",
+          "action": "Find Tasks Due Soon"
+        },
+        {
+          "step": 2,
+          "app": "Filter by Zapier",
+          "condition": "has_tasks == true"
+        },
+        {
+          "step": 3,
+          "app": "Gmail",
+          "action": "Send Email",
+          "to": "terobinsonwy@gmail.com",
+          "subject": "Upcoming Tasks Reminder",
+          "body": "{{tasks_list}}"
+        },
+        {
+          "step": 4,
+          "app": "Slack",
+          "action": "Send DM",
+          "message": "📋 Tasks due: {{tasks_summary}}"
+        }
+      ]
+    },
+    {
+      "name": "E2B Execution to Postman Test",
+      "id": "zap_007",
+      "status": "active",
+      "trigger": {
+        "app": "Webhooks by Zapier",
+        "event": "E2B Execution Complete"
+      },
+      "actions": [
+        {
+          "step": 1,
+          "app": "Postman API",
+          "action": "Run Collection",
+          "collection_id": "{{execution.collection_id}}",
+          "environment": "production"
+        },
+        {
+          "step": 2,
+          "app": "Google Sheets",
+          "action": "Log Test Results",
+          "spreadsheet": "API Test Results"
+        },
+        {
+          "step": 3,
+          "app": "Slack",
+          "action": "Send Message",
+          "channel": "#test-results",
+          "message": "✅ Tests passed: {{test.passed}} ❌ Failed: {{test.failed}}"
+        }
+      ]
+    },
+    {
+      "name": "GitHub to Live Deployment",
+      "id": "zap_008",
+      "status": "active",
+      "trigger": {
+        "app": "GitHub",
+        "event": "Push to Branch",
+        "repository": "appsefilepro-cell/Private-Claude",
+        "branch": "claude/setup-e2b-webhooks-CPFBo"
+      },
+      "actions": [
+        {
+          "step": 1,
+          "app": "Webhooks by Zapier",
+          "action": "Trigger E2B Tests",
+          "url": "${E2B_WEBHOOK_URL}/test"
+        },
+        {
+          "step": 2,
+          "app": "Delay by Zapier",
+          "delay": "2 minutes"
+        },
+        {
+          "step": 3,
+          "app": "GitHub Actions",
+          "action": "Trigger Workflow",
+          "workflow": "deploy.yml"
+        },
+        {
+          "step": 4,
+          "app": "Slack",
+          "action": "Send Message",
+          "channel": "#deployments",
+          "message": "🚀 Deployment triggered for commit {{commit.sha}}"
+        }
+      ]
+    }
+  ],
+
+  "workflow_completion_tasks": [
+    {
+      "workflow": "Email Processing Pipeline",
+      "steps_remaining": [
+        "Configure Gmail OAuth for terobinsonwy@gmail.com",
+        "Set up Google Tasks API connection",
+        "Configure Google Calendar API",
+        "Test email extraction with sample emails"
+      ]
+    },
+    {
+      "workflow": "Document Generation",
+      "steps_remaining": [
+        "Connect E2B webhook to Zapier",
+        "Configure SharePoint upload permissions",
+        "Test Form 1023 generation pipeline",
+        "Set up email templates"
+      ]
+    },
+    {
+      "workflow": "Trading Automation",
+      "steps_remaining": [
+        "Configure trading bot webhook endpoint",
+        "Set up Slack trading channel",
+        "Test signal processing",
+        "Enable paper trading mode"
+      ]
+    }
+  ],
+
+  "zapier_settings": {
+    "plan": "Free (100 tasks/month)",
+    "optimization": {
+      "use_filters": true,
+      "batch_processing": true,
+      "delay_non_urgent": true,
+      "deduplicate": true
+    },
+    "monitoring": {
+      "track_task_usage": true,
+      "alert_at_80_percent": true,
+      "weekly_summary": true
+    }
+  }
+}

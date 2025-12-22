@@ -1,0 +1,295 @@
+{
+  "connector": {
+    "name": "Google Workspace",
+    "type": "productivity_suite",
+    "version": "1.0.0",
+    "status": "configured",
+    "workspace_email": "terobinsonwy@gmail.com"
+  },
+
+  "authentication": {
+    "type": "oauth2_service_account",
+    "oauth2": {
+      "authorization_url": "https://accounts.google.com/o/oauth2/auth",
+      "token_url": "https://oauth2.googleapis.com/token",
+      "client_id": "${GOOGLE_CLIENT_ID}",
+      "client_secret": "${GOOGLE_CLIENT_SECRET}",
+      "redirect_uri": "http://localhost:5000/auth/google/callback",
+      "scopes": [
+        "https://www.googleapis.com/auth/drive",
+        "https://www.googleapis.com/auth/spreadsheets",
+        "https://www.googleapis.com/auth/documents",
+        "https://www.googleapis.com/auth/calendar",
+        "https://www.googleapis.com/auth/gmail.modify",
+        "https://www.googleapis.com/auth/contacts"
+      ],
+      "token_expiry": 3600,
+      "refresh_token_expiry": null
+    },
+    "service_account": {
+      "type": "${GOOGLE_SA_TYPE}",
+      "project_id": "${GOOGLE_SA_PROJECT_ID}",
+      "private_key_id": "${GOOGLE_SA_KEY_ID}",
+      "private_key": "${GOOGLE_SA_PRIVATE_KEY}",
+      "client_email": "${GOOGLE_SA_EMAIL}",
+      "client_id": "${GOOGLE_SA_CLIENT_ID}",
+      "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+      "token_uri": "https://oauth2.googleapis.com/token"
+    },
+    "current_token": "${GOOGLE_ACCESS_TOKEN}",
+    "token_refresh_strategy": "automatic",
+    "token_refresh_interval": 3000
+  },
+
+  "services": {
+    "gmail": {
+      "enabled": true,
+      "api_version": "v1",
+      "base_url": "https://gmail.googleapis.com",
+      "features": [
+        "send_email",
+        "read_emails",
+        "create_draft",
+        "manage_labels",
+        "manage_attachments",
+        "thread_management"
+      ],
+      "default_label": "Private-Claude",
+      "auto_archive": true,
+      "spam_filter": true
+    },
+    "drive": {
+      "enabled": true,
+      "api_version": "v3",
+      "base_url": "https://www.googleapis.com/drive",
+      "features": [
+        "create_files",
+        "upload_files",
+        "manage_folders",
+        "share_files",
+        "sync_files",
+        "version_control"
+      ],
+      "root_folder": "${GOOGLE_DRIVE_ROOT_ID}",
+      "shared_drive_id": "${GOOGLE_SHARED_DRIVE_ID}",
+      "quota_check_interval": 86400
+    },
+    "sheets": {
+      "enabled": true,
+      "api_version": "v4",
+      "base_url": "https://sheets.googleapis.com",
+      "features": [
+        "read_sheets",
+        "write_sheets",
+        "create_sheets",
+        "batch_operations",
+        "formatting"
+      ],
+      "primary_spreadsheet_id": "${GOOGLE_SHEETS_ID}",
+      "default_worksheet": "Sheet1"
+    },
+    "docs": {
+      "enabled": true,
+      "api_version": "v1",
+      "base_url": "https://docs.googleapis.com",
+      "features": [
+        "create_documents",
+        "edit_documents",
+        "manage_comments",
+        "revision_history"
+      ]
+    },
+    "calendar": {
+      "enabled": true,
+      "api_version": "v3",
+      "base_url": "https://www.googleapis.com/calendar",
+      "features": [
+        "create_events",
+        "update_events",
+        "list_events",
+        "manage_attendees",
+        "set_reminders"
+      ],
+      "primary_calendar": "terobinsonwy@gmail.com",
+      "timezone": "America/Denver"
+    },
+    "contacts": {
+      "enabled": true,
+      "api_version": "v1",
+      "base_url": "https://people.googleapis.com",
+      "features": [
+        "list_contacts",
+        "create_contacts",
+        "update_contacts",
+        "manage_groups"
+      ]
+    }
+  },
+
+  "email_settings": {
+    "primary_email": "terobinsonwy@gmail.com",
+    "send_as": [
+      {
+        "email": "terobinsonwy@gmail.com",
+        "display_name": "Tero Robinson",
+        "reply_to": "terobinsonwy@gmail.com",
+        "default": true
+      }
+    ],
+    "signature": "Private Claude Integration\nAutomated System Messages",
+    "forwarding": {
+      "enabled": false,
+      "forward_to": []
+    },
+    "auto_reply": {
+      "enabled": false,
+      "message": ""
+    },
+    "labels": {
+      "create_auto": true,
+      "label_structure": {
+        "api_responses": "API/Responses",
+        "integration_logs": "API/Logs",
+        "error_alerts": "Alerts/Errors",
+        "success_notifications": "Alerts/Success"
+      }
+    }
+  },
+
+  "drive_structure": {
+    "root_folder": "Private-Claude",
+    "folders": {
+      "documents": "Documents",
+      "spreadsheets": "Spreadsheets",
+      "api_logs": "API Logs",
+      "backups": "Backups",
+      "shared": "Shared",
+      "archived": "Archived",
+      "temp": "Temp"
+    }
+  },
+
+  "sharing_settings": {
+    "default_permissions": "viewer",
+    "allow_comments": true,
+    "allow_suggestions": true,
+    "shared_with": [
+      {
+        "email": "terobinsonwy@gmail.com",
+        "role": "owner"
+      }
+    ]
+  },
+
+  "sync_settings": {
+    "enabled": true,
+    "bidirectional": true,
+    "sync_interval": 3600,
+    "conflict_resolution": "cloud_wins",
+    "auto_cleanup_interval": 86400,
+    "cleanup_threshold_days": 90,
+    "max_sync_errors_before_alert": 5
+  },
+
+  "monitoring": {
+    "enabled": true,
+    "metrics": [
+      "quota_usage",
+      "sync_status",
+      "api_calls",
+      "error_rate"
+    ],
+    "alerts": {
+      "quota_warning": {
+        "enabled": true,
+        "threshold_percent": 85,
+        "notify": ["#alerts"]
+      },
+      "sync_failure": {
+        "enabled": true,
+        "threshold": 3,
+        "notify": ["#error-alerts"]
+      },
+      "api_quota_limit": {
+        "enabled": true,
+        "notify": ["#alerts"]
+      }
+    },
+    "logging": {
+      "level": "INFO",
+      "retention_days": 90,
+      "log_file": "/home/user/Private-Claude/logs/google_workspace.log"
+    }
+  },
+
+  "rate_limiting": {
+    "enabled": true,
+    "requests_per_second": 1000,
+    "burst_size": 10,
+    "user_rate_limit": 500,
+    "retry_strategy": "exponential_backoff",
+    "max_retries": 5,
+    "initial_backoff_seconds": 1,
+    "max_backoff_seconds": 32
+  },
+
+  "error_handling": {
+    "strategies": {
+      "invalid_token": "refresh_token",
+      "quota_exceeded": "queue_request",
+      "network_error": "retry_with_backoff",
+      "permission_denied": "alert_and_skip",
+      "not_found": "log_and_continue"
+    }
+  },
+
+  "health_check": {
+    "enabled": true,
+    "interval_seconds": 300,
+    "checks": [
+      {
+        "name": "gmail_access",
+        "method": "GET",
+        "endpoint": "/gmail/v1/users/me/profile",
+        "expected_status": 200
+      },
+      {
+        "name": "drive_quota",
+        "method": "GET",
+        "endpoint": "/drive/v3/about",
+        "expected_status": 200
+      },
+      {
+        "name": "sheets_access",
+        "method": "GET",
+        "endpoint": "/sheets/v4/spreadsheets/${GOOGLE_SHEETS_ID}",
+        "expected_status": 200
+      },
+      {
+        "name": "calendar_access",
+        "method": "GET",
+        "endpoint": "/calendar/v3/users/me/calendarList",
+        "expected_status": 200
+      }
+    ]
+  },
+
+  "backup_settings": {
+    "enabled": true,
+    "schedule": "daily",
+    "time": "02:30",
+    "retention_days": 30,
+    "backup_path": "/Private-Claude/Backups",
+    "include_file_types": [".docx", ".xlsx", ".pptx"],
+    "exclude_folders": ["Trash", "Spam"]
+  },
+
+  "migration_settings": {
+    "enabled": false,
+    "source_email": "",
+    "target_email": "terobinsonwy@gmail.com",
+    "migrate_contacts": false,
+    "migrate_calendar": false,
+    "migrate_drive_files": false
+  }
+}

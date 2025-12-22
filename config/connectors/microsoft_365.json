@@ -1,0 +1,288 @@
+{
+  "connector": {
+    "name": "Microsoft 365 / SharePoint",
+    "type": "productivity_suite",
+    "version": "1.0.0",
+    "status": "configured"
+  },
+
+  "authentication": {
+    "type": "oauth2",
+    "oauth2": {
+      "authorization_url": "https://login.microsoftonline.com/common/oauth2/v2.0/authorize",
+      "token_url": "https://login.microsoftonline.com/common/oauth2/v2.0/token",
+      "client_id": "${MICROSOFT_CLIENT_ID}",
+      "client_secret": "${MICROSOFT_CLIENT_SECRET}",
+      "tenant_id": "${MICROSOFT_TENANT_ID}",
+      "redirect_uri": "http://localhost:5000/auth/microsoft/callback",
+      "scopes": [
+        "Calendars.ReadWrite",
+        "Mail.ReadWrite",
+        "Mail.Send",
+        "offline_access",
+        "Sites.ReadWrite.All",
+        "Files.ReadWrite.All",
+        "User.Read"
+      ],
+      "token_expiry": 3600,
+      "refresh_token_expiry": 1209600
+    },
+    "current_token": "${MICROSOFT_GRAPH_TOKEN}",
+    "token_refresh_strategy": "automatic",
+    "token_refresh_interval": 3000
+  },
+
+  "services": {
+    "graph_api": {
+      "enabled": true,
+      "api_version": "v1.0",
+      "base_url": "https://graph.microsoft.com",
+      "version_beta": "https://graph.microsoft.com/beta"
+    },
+    "exchange": {
+      "enabled": true,
+      "features": [
+        "send_email",
+        "read_emails",
+        "create_draft",
+        "manage_calendar",
+        "manage_contacts",
+        "set_out_of_office"
+      ]
+    },
+    "sharepoint": {
+      "enabled": true,
+      "site_url": "${SHAREPOINT_SITE_URL}",
+      "features": [
+        "list_files",
+        "upload_files",
+        "create_folders",
+        "manage_permissions",
+        "sync_files"
+      ]
+    },
+    "onedrive": {
+      "enabled": true,
+      "features": [
+        "upload_files",
+        "download_files",
+        "create_folders",
+        "share_files",
+        "sync_files"
+      ],
+      "root_folder": "/drive/root"
+    },
+    "teams": {
+      "enabled": true,
+      "features": [
+        "send_messages",
+        "manage_channels",
+        "create_teams",
+        "manage_meetings"
+      ]
+    }
+  },
+
+  "email_settings": {
+    "mailbox": "${MICROSOFT_EMAIL}",
+    "send_as": [
+      {
+        "email": "${MICROSOFT_EMAIL}",
+        "display_name": "Private Claude",
+        "reply_to": "${MICROSOFT_EMAIL}",
+        "default": true
+      }
+    ],
+    "signature": "Private Claude Integration\nAutomated System Messages",
+    "forwarding": {
+      "enabled": false,
+      "forward_to": []
+    },
+    "focused_inbox": {
+      "enabled": true
+    },
+    "categories": {
+      "create_auto": true,
+      "categories": {
+        "api_responses": "API Responses",
+        "integration_logs": "Integration Logs",
+        "error_alerts": "Error Alerts",
+        "success_notifications": "Success Notifications"
+      }
+    }
+  },
+
+  "sharepoint_settings": {
+    "site_name": "Private-Claude",
+    "site_url": "${SHAREPOINT_SITE_URL}",
+    "lists": {
+      "documents": "Documents",
+      "logs": "Integration Logs",
+      "configurations": "Configurations",
+      "audit": "Audit Trail"
+    },
+    "libraries": {
+      "documents": "Documents",
+      "archives": "Archives",
+      "templates": "Templates",
+      "backups": "Backups"
+    }
+  },
+
+  "calendar_settings": {
+    "primary_calendar": "${MICROSOFT_EMAIL}",
+    "timezone": "Mountain Standard Time",
+    "working_hours": {
+      "start": "09:00",
+      "end": "17:00",
+      "timezone": "Mountain Standard Time"
+    },
+    "auto_response": {
+      "enabled": false,
+      "start_date": "",
+      "end_date": "",
+      "message": ""
+    }
+  },
+
+  "sync_settings": {
+    "enabled": true,
+    "bidirectional": true,
+    "sync_interval": 3600,
+    "conflict_resolution": "cloud_wins",
+    "auto_cleanup_interval": 86400,
+    "cleanup_threshold_days": 90
+  },
+
+  "file_handling": {
+    "supported_formats": [
+      ".docx", ".xlsx", ".pptx", ".pdf",
+      ".txt", ".csv", ".json", ".xml"
+    ],
+    "max_file_size": 4294967296,
+    "upload_timeout": 300000,
+    "download_timeout": 300000,
+    "chunk_size": 5242880,
+    "enable_version_control": true,
+    "retention_days": 90
+  },
+
+  "sharing_settings": {
+    "default_permissions": "read",
+    "allow_external_sharing": false,
+    "require_password": false,
+    "expiry_days": null,
+    "allow_comments": true,
+    "allow_editing": false
+  },
+
+  "monitoring": {
+    "enabled": true,
+    "metrics": [
+      "mailbox_size",
+      "storage_quota",
+      "sync_status",
+      "api_calls",
+      "error_rate"
+    ],
+    "alerts": {
+      "storage_warning": {
+        "enabled": true,
+        "threshold_percent": 85,
+        "notify": ["#alerts"]
+      },
+      "sync_failure": {
+        "enabled": true,
+        "threshold": 3,
+        "notify": ["#error-alerts"]
+      },
+      "api_throttling": {
+        "enabled": true,
+        "notify": ["#alerts"]
+      }
+    },
+    "logging": {
+      "level": "INFO",
+      "retention_days": 90,
+      "log_file": "/home/user/Private-Claude/logs/microsoft_365.log"
+    }
+  },
+
+  "rate_limiting": {
+    "enabled": true,
+    "requests_per_second": 2000,
+    "burst_size": 20,
+    "retry_strategy": "exponential_backoff",
+    "max_retries": 5,
+    "initial_backoff_seconds": 1,
+    "max_backoff_seconds": 32
+  },
+
+  "error_handling": {
+    "strategies": {
+      "invalid_token": "refresh_token",
+      "throttled": "queue_request",
+      "not_found": "log_and_continue",
+      "permission_denied": "alert_and_skip",
+      "network_error": "retry_with_backoff"
+    }
+  },
+
+  "health_check": {
+    "enabled": true,
+    "interval_seconds": 300,
+    "checks": [
+      {
+        "name": "mailbox_access",
+        "method": "GET",
+        "endpoint": "/v1.0/me/mailFolders",
+        "expected_status": 200
+      },
+      {
+        "name": "storage_quota",
+        "method": "GET",
+        "endpoint": "/v1.0/me",
+        "expected_status": 200
+      },
+      {
+        "name": "sharepoint_access",
+        "method": "GET",
+        "endpoint": "/v1.0/me/drive",
+        "expected_status": 200
+      },
+      {
+        "name": "calendar_access",
+        "method": "GET",
+        "endpoint": "/v1.0/me/calendars",
+        "expected_status": 200
+      }
+    ]
+  },
+
+  "backup_settings": {
+    "enabled": true,
+    "schedule": "daily",
+    "time": "03:00",
+    "retention_days": 30,
+    "backup_location": "OneDrive",
+    "backup_folder": "/Backups",
+    "include_types": ["mail", "calendar", "files"],
+    "compression": true
+  },
+
+  "compliance": {
+    "eDiscovery": {
+      "enabled": false,
+      "retention_policy": "default"
+    },
+    "data_loss_prevention": {
+      "enabled": false,
+      "rules": []
+    },
+    "audit_logging": {
+      "enabled": true,
+      "log_location": "sharepoint",
+      "retention_days": 365
+    }
+  }
+}

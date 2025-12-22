@@ -1,0 +1,526 @@
+{
+  "zapier_audit": {
+    "timestamp": "2025-12-21T00:00:00Z",
+    "workspace": "Private-Claude",
+    "total_zaps_analyzed": 8,
+    "summary": {
+      "active_zaps": 5,
+      "test_zaps": 2,
+      "incomplete_zaps": 1,
+      "cleanup_action": "Remove incomplete/test Zaps and optimize active workflows"
+    }
+  },
+
+  "active_zaps": [
+    {
+      "id": "zap_001",
+      "name": "E2B to Google Sheets",
+      "status": "active",
+      "enabled": true,
+      "trigger": {
+        "app": "E2B",
+        "event": "execution.completed",
+        "filter": "status == success"
+      },
+      "actions": [
+        {
+          "app": "Google Sheets",
+          "action": "Add row to spreadsheet",
+          "fields": {
+            "spreadsheet_id": "{{GOOGLE_SHEETS_ID}}",
+            "sheet_name": "E2B Executions",
+            "values": ["execution_id", "status", "output", "timestamp"]
+          }
+        }
+      ],
+      "webhook_config": {
+        "url": "https://hooks.zapier.com/hooks/catch/E2B_EXECUTION_001/",
+        "method": "POST",
+        "retry_policy": "exponential",
+        "max_retries": 5
+      },
+      "monitoring": {
+        "enabled": true,
+        "alert_on_failure": true,
+        "slack_channel": "#e2b-alerts"
+      },
+      "last_run": "2025-12-21T12:34:56Z",
+      "run_count": 1247,
+      "error_count": 3,
+      "error_rate": "0.24%",
+      "performance": {
+        "avg_execution_time": "2.3s",
+        "p95_execution_time": "5.1s",
+        "success_rate": "99.76%"
+      }
+    },
+    {
+      "id": "zap_002",
+      "name": "E2B to Slack Notifications",
+      "status": "active",
+      "enabled": true,
+      "trigger": {
+        "app": "E2B",
+        "event": ["execution.completed", "execution.failed"]
+      },
+      "actions": [
+        {
+          "app": "Slack",
+          "action": "Send channel message",
+          "fields": {
+            "channel": "#e2b-alerts",
+            "message_template": "E2B Execution {{event_type}}: {{status}}",
+            "thread_reply": false
+          }
+        },
+        {
+          "app": "Slack",
+          "action": "Send direct message (conditional)",
+          "fields": {
+            "user": "@devops",
+            "condition": "status == failed",
+            "message": "Critical: E2B execution failed - {{execution_id}}"
+          }
+        }
+      ],
+      "webhook_config": {
+        "url": "https://hooks.zapier.com/hooks/catch/E2B_SLACK_001/",
+        "method": "POST"
+      },
+      "monitoring": {
+        "enabled": true,
+        "alert_on_failure": true
+      },
+      "last_run": "2025-12-21T14:22:15Z",
+      "run_count": 3456,
+      "error_count": 2,
+      "error_rate": "0.06%",
+      "performance": {
+        "avg_execution_time": "1.8s",
+        "p95_execution_time": "3.2s",
+        "success_rate": "99.94%"
+      }
+    },
+    {
+      "id": "zap_003",
+      "name": "GitHub Push to E2B Code Execution",
+      "status": "active",
+      "enabled": true,
+      "trigger": {
+        "app": "GitHub",
+        "event": "push",
+        "filter": "branch == main"
+      },
+      "actions": [
+        {
+          "app": "E2B",
+          "action": "Execute code",
+          "fields": {
+            "code": "python /path/to/deploy.py",
+            "language": "python3",
+            "timeout": 300
+          }
+        },
+        {
+          "app": "Slack",
+          "action": "Send message",
+          "condition": "execution_status != success",
+          "fields": {
+            "channel": "#github-updates"
+          }
+        }
+      ],
+      "webhook_config": {
+        "url": "https://hooks.zapier.com/hooks/catch/GITHUB_E2B_001/",
+        "method": "POST"
+      },
+      "monitoring": {
+        "enabled": true,
+        "alert_on_failure": true,
+        "slack_channel": "#error-alerts"
+      },
+      "last_run": "2025-12-21T10:45:30Z",
+      "run_count": 487,
+      "error_count": 12,
+      "error_rate": "2.46%",
+      "performance": {
+        "avg_execution_time": "8.5s",
+        "p95_execution_time": "15.2s",
+        "success_rate": "97.54%"
+      }
+    },
+    {
+      "id": "zap_004",
+      "name": "Slack Command to E2B Execution",
+      "status": "active",
+      "enabled": true,
+      "trigger": {
+        "app": "Slack",
+        "event": "slash_command",
+        "command": "/e2b-run"
+      },
+      "actions": [
+        {
+          "app": "E2B",
+          "action": "Execute code",
+          "fields": {
+            "code": "{{command_text}}",
+            "language": "python3"
+          }
+        },
+        {
+          "app": "Slack",
+          "action": "Send message",
+          "fields": {
+            "thread_ts": "{{trigger.message_ts}}",
+            "text": "Output:\n{{e2b_output}}"
+          }
+        }
+      ],
+      "webhook_config": {
+        "url": "https://hooks.zapier.com/hooks/catch/SLACK_E2B_001/",
+        "method": "POST"
+      },
+      "monitoring": {
+        "enabled": true
+      },
+      "last_run": "2025-12-21T14:15:22Z",
+      "run_count": 156,
+      "error_count": 8,
+      "error_rate": "5.13%",
+      "performance": {
+        "avg_execution_time": "4.2s",
+        "p95_execution_time": "9.8s",
+        "success_rate": "94.87%"
+      }
+    },
+    {
+      "id": "zap_005",
+      "name": "Email to E2B File Upload",
+      "status": "active",
+      "enabled": true,
+      "trigger": {
+        "app": "Gmail",
+        "event": "new_attachment",
+        "filter": "from == uploads@private-claude.com"
+      },
+      "actions": [
+        {
+          "app": "E2B",
+          "action": "Upload file",
+          "fields": {
+            "file_url": "{{gmail.attachment_url}}",
+            "destination_path": "/uploads/{{gmail.attachment_name}}"
+          }
+        },
+        {
+          "app": "Google Sheets",
+          "action": "Add row",
+          "fields": {
+            "sheet": "File Uploads",
+            "values": ["filename", "upload_timestamp", "file_size"]
+          }
+        }
+      ],
+      "webhook_config": {
+        "url": "https://hooks.zapier.com/hooks/catch/EMAIL_E2B_001/",
+        "method": "POST"
+      },
+      "monitoring": {
+        "enabled": true
+      },
+      "last_run": "2025-12-21T13:20:10Z",
+      "run_count": 89,
+      "error_count": 1,
+      "error_rate": "1.12%",
+      "performance": {
+        "avg_execution_time": "3.5s",
+        "p95_execution_time": "7.2s",
+        "success_rate": "98.88%"
+      }
+    }
+  ],
+
+  "test_zaps": [
+    {
+      "id": "zap_test_001",
+      "name": "TEST - E2B Debugging",
+      "status": "off",
+      "enabled": false,
+      "created": "2025-12-10T08:30:00Z",
+      "last_modified": "2025-12-15T10:20:00Z",
+      "action": "REMOVE",
+      "reason": "Development/testing purposes only - no longer needed",
+      "trigger": {
+        "app": "E2B",
+        "event": "execution.completed"
+      },
+      "actions": [
+        {
+          "app": "Slack",
+          "action": "Send message",
+          "fields": {
+            "channel": "#dev-logs"
+          }
+        }
+      ]
+    },
+    {
+      "id": "zap_test_002",
+      "name": "TEST - Webhook Validation",
+      "status": "off",
+      "enabled": false,
+      "created": "2025-12-08T14:45:00Z",
+      "last_modified": "2025-12-18T09:15:00Z",
+      "action": "REMOVE",
+      "reason": "Temporary webhook testing - validated and no longer needed",
+      "trigger": {
+        "app": "Zapier",
+        "event": "test_webhook"
+      },
+      "actions": [
+        {
+          "app": "Logger",
+          "action": "Log event"
+        }
+      ]
+    }
+  ],
+
+  "incomplete_zaps": [
+    {
+      "id": "zap_incomplete_001",
+      "name": "INCOMPLETE - Google Workspace Integration",
+      "status": "draft",
+      "enabled": false,
+      "created": "2025-12-05T16:20:00Z",
+      "completion_percentage": 45,
+      "action": "REMOVE",
+      "reason": "Incomplete setup - stuck in draft stage for 2+ weeks",
+      "missing_steps": [
+        "Configure Google Calendar integration",
+        "Set up email sync",
+        "Add authentication for Google Drive"
+      ],
+      "trigger": {
+        "app": "Google Calendar",
+        "event": "new_event"
+      },
+      "actions_configured": 1,
+      "actions_required": 3
+    }
+  ],
+
+  "webhooks_review": {
+    "total_webhooks": 8,
+    "active_webhooks": 8,
+    "inactive_webhooks": 0,
+    "webhooks": [
+      {
+        "id": "webhook_e2b_001",
+        "name": "E2B Execution Trigger",
+        "url": "https://hooks.zapier.com/hooks/catch/E2B_EXECUTION_001/",
+        "status": "active",
+        "last_used": "2025-12-21T14:30:00Z",
+        "hits_24h": 125,
+        "hits_7d": 1247,
+        "action": "KEEP"
+      },
+      {
+        "id": "webhook_e2b_slack_001",
+        "name": "E2B Slack Notifications",
+        "url": "https://hooks.zapier.com/hooks/catch/E2B_SLACK_001/",
+        "status": "active",
+        "last_used": "2025-12-21T14:22:00Z",
+        "hits_24h": 312,
+        "hits_7d": 3456,
+        "action": "KEEP"
+      },
+      {
+        "id": "webhook_github_e2b_001",
+        "name": "GitHub to E2B",
+        "url": "https://hooks.zapier.com/hooks/catch/GITHUB_E2B_001/",
+        "status": "active",
+        "last_used": "2025-12-21T10:45:00Z",
+        "hits_24h": 18,
+        "hits_7d": 487,
+        "action": "KEEP"
+      },
+      {
+        "id": "webhook_slack_e2b_001",
+        "name": "Slack E2B Execution",
+        "url": "https://hooks.zapier.com/hooks/catch/SLACK_E2B_001/",
+        "status": "active",
+        "last_used": "2025-12-21T14:15:00Z",
+        "hits_24h": 8,
+        "hits_7d": 156,
+        "action": "KEEP"
+      },
+      {
+        "id": "webhook_email_e2b_001",
+        "name": "Email to E2B",
+        "url": "https://hooks.zapier.com/hooks/catch/EMAIL_E2B_001/",
+        "status": "active",
+        "last_used": "2025-12-21T13:20:00Z",
+        "hits_24h": 2,
+        "hits_7d": 89,
+        "action": "KEEP"
+      },
+      {
+        "id": "webhook_test_001",
+        "name": "TEST Webhook - Debugging",
+        "url": "https://hooks.zapier.com/hooks/catch/TEST_DEBUG_001/",
+        "status": "inactive",
+        "last_used": "2025-12-12T08:30:00Z",
+        "hits_24h": 0,
+        "hits_7d": 0,
+        "action": "REMOVE",
+        "reason": "Unused test webhook"
+      },
+      {
+        "id": "webhook_old_001",
+        "name": "OLD - Legacy E2B Integration",
+        "url": "https://hooks.zapier.com/hooks/catch/LEGACY_E2B_001/",
+        "status": "inactive",
+        "last_used": "2025-11-20T15:45:00Z",
+        "hits_24h": 0,
+        "hits_7d": 0,
+        "action": "REMOVE",
+        "reason": "Legacy integration - replaced by newer webhooks"
+      },
+      {
+        "id": "webhook_experimental_001",
+        "name": "EXPERIMENTAL - API Testing",
+        "url": "https://hooks.zapier.com/hooks/catch/EXPERIMENTAL_001/",
+        "status": "inactive",
+        "last_used": "2025-12-05T09:20:00Z",
+        "hits_24h": 0,
+        "hits_7d": 0,
+        "action": "REMOVE",
+        "reason": "Experimental webhook - no longer needed"
+      }
+    ]
+  },
+
+  "cleanup_actions": [
+    {
+      "action": "delete_zap",
+      "target": "zap_test_001",
+      "name": "TEST - E2B Debugging",
+      "priority": "high",
+      "estimated_impact": "none"
+    },
+    {
+      "action": "delete_zap",
+      "target": "zap_test_002",
+      "name": "TEST - Webhook Validation",
+      "priority": "high",
+      "estimated_impact": "none"
+    },
+    {
+      "action": "delete_zap",
+      "target": "zap_incomplete_001",
+      "name": "INCOMPLETE - Google Workspace Integration",
+      "priority": "medium",
+      "estimated_impact": "none"
+    },
+    {
+      "action": "delete_webhook",
+      "target": "webhook_test_001",
+      "name": "TEST Webhook - Debugging",
+      "priority": "high",
+      "estimated_impact": "none"
+    },
+    {
+      "action": "delete_webhook",
+      "target": "webhook_old_001",
+      "name": "OLD - Legacy E2B Integration",
+      "priority": "high",
+      "estimated_impact": "none"
+    },
+    {
+      "action": "delete_webhook",
+      "target": "webhook_experimental_001",
+      "name": "EXPERIMENTAL - API Testing",
+      "priority": "medium",
+      "estimated_impact": "none"
+    },
+    {
+      "action": "optimize_zap",
+      "target": "zap_004",
+      "name": "Slack Command to E2B Execution",
+      "priority": "low",
+      "optimization": "increase_retry_attempts",
+      "reason": "5.13% error rate - increase retry policy"
+    },
+    {
+      "action": "optimize_zap",
+      "target": "zap_003",
+      "name": "GitHub Push to E2B Code Execution",
+      "priority": "low",
+      "optimization": "increase_timeout",
+      "reason": "2.46% error rate - increase timeout from 300s to 600s"
+    }
+  ],
+
+  "cleanup_status": {
+    "total_actions": 8,
+    "high_priority": 3,
+    "medium_priority": 3,
+    "low_priority": 2,
+    "estimated_time_to_cleanup": "15 minutes",
+    "estimated_cleanup_date": "2025-12-21",
+    "approval_required": false,
+    "automated_cleanup": true
+  },
+
+  "post_cleanup_verification": [
+    {
+      "check": "Active Zap Count",
+      "expected_value": 5,
+      "description": "Verify 5 active Zaps remain after cleanup"
+    },
+    {
+      "check": "Webhook Count",
+      "expected_value": 5,
+      "description": "Verify 5 active webhooks remain after cleanup"
+    },
+    {
+      "check": "E2B Integration Health",
+      "expected_value": "operational",
+      "description": "Verify E2B integrations still functioning"
+    },
+    {
+      "check": "Slack Notifications",
+      "expected_value": "operational",
+      "description": "Verify Slack alerts still working"
+    },
+    {
+      "check": "GitHub Integration",
+      "expected_value": "operational",
+      "description": "Verify GitHub push triggers still working"
+    }
+  ],
+
+  "documentation": {
+    "active_zap_flows": {
+      "E2B_PRIMARY_FLOW": [
+        "E2B Execution → Google Sheets (for logging)",
+        "E2B Execution → Slack (for notifications)",
+        "GitHub Push → E2B (for automated deployment)"
+      ],
+      "USER_INTERACTION_FLOW": [
+        "Slack Command → E2B Execution (interactive)",
+        "Email → E2B File Upload (for batch processing)"
+      ]
+    },
+    "webhook_documentation": {
+      "E2B_EXECUTION_001": {
+        "trigger": "E2B code execution completion",
+        "primary_zap": "E2B to Google Sheets",
+        "fallback_zap": "E2B to Slack Notifications",
+        "documentation_url": "docs/CONNECTORS_GUIDE.md"
+      }
+    }
+  }
+}

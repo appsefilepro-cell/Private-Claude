@@ -1,0 +1,340 @@
+{
+  "connector": {
+    "name": "Slack",
+    "type": "communication",
+    "version": "2.0.0",
+    "status": "configured",
+    "workspace": "Private-Claude"
+  },
+
+  "authentication": {
+    "type": "oauth2",
+    "oauth2": {
+      "client_id": "${SLACK_CLIENT_ID}",
+      "client_secret": "${SLACK_CLIENT_SECRET}",
+      "scopes": [
+        "app_mentions:read",
+        "channels:history",
+        "channels:manage",
+        "channels:read",
+        "chat:write",
+        "chat:write.customize",
+        "commands",
+        "files:read",
+        "files:write",
+        "groups:history",
+        "groups:read",
+        "im:history",
+        "im:read",
+        "reactions:read",
+        "team:read",
+        "users:read",
+        "users:read.email"
+      ],
+      "redirect_uri": "http://localhost:5000/auth/slack/callback",
+      "token_expiry": null
+    },
+    "current_token": "${SLACK_BOT_TOKEN}",
+    "refresh_token": "${SLACK_REFRESH_TOKEN}",
+    "token_refresh_strategy": "manual",
+    "signing_secret": "${SLACK_SIGNING_SECRET}"
+  },
+
+  "workspace_config": {
+    "workspace_id": "${SLACK_WORKSPACE_ID}",
+    "workspace_name": "Private-Claude",
+    "team_id": "${SLACK_TEAM_ID}",
+    "app_id": "${SLACK_APP_ID}",
+    "bot_user_id": "${SLACK_BOT_USER_ID}",
+    "bot_display_name": "Claude Assistant"
+  },
+
+  "channels": {
+    "general": {
+      "id": "${SLACK_CHANNEL_GENERAL_ID}",
+      "name": "general",
+      "description": "General announcements and updates",
+      "enabled": true,
+      "notifications": ["announcements"]
+    },
+    "e2b_alerts": {
+      "id": "${SLACK_CHANNEL_E2B_ID}",
+      "name": "e2b-alerts",
+      "description": "E2B execution status and errors",
+      "enabled": true,
+      "notifications": ["execution_events"],
+      "priority": "high"
+    },
+    "error_alerts": {
+      "id": "${SLACK_CHANNEL_ERRORS_ID}",
+      "name": "error-alerts",
+      "description": "Critical errors and system warnings",
+      "enabled": true,
+      "notifications": ["errors", "critical"],
+      "priority": "critical",
+      "mentions": ["@devops"]
+    },
+    "github_updates": {
+      "id": "${SLACK_CHANNEL_GITHUB_ID}",
+      "name": "github-updates",
+      "description": "GitHub events and pull requests",
+      "enabled": true,
+      "notifications": ["push", "pr", "issues"]
+    },
+    "api_logs": {
+      "id": "${SLACK_CHANNEL_LOGS_ID}",
+      "name": "api-logs",
+      "description": "API integration logs",
+      "enabled": true,
+      "notifications": ["api_calls"],
+      "log_level": "INFO"
+    },
+    "trading_signals": {
+      "id": "${SLACK_CHANNEL_TRADING_ID}",
+      "name": "trading-signals",
+      "description": "Real-time trading signals and market alerts",
+      "enabled": true,
+      "notifications": ["trading_events"],
+      "priority": "high"
+    }
+  },
+
+  "webhooks": {
+    "incoming": [
+      {
+        "id": "webhook_general",
+        "url": "${SLACK_WEBHOOK_GENERAL}",
+        "channel": "#general",
+        "enabled": true,
+        "description": "General notifications"
+      },
+      {
+        "id": "webhook_e2b",
+        "url": "${SLACK_WEBHOOK_E2B}",
+        "channel": "#e2b-alerts",
+        "enabled": true,
+        "description": "E2B execution webhooks"
+      },
+      {
+        "id": "webhook_errors",
+        "url": "${SLACK_WEBHOOK_ERRORS}",
+        "channel": "#error-alerts",
+        "enabled": true,
+        "description": "Error and alert webhooks"
+      }
+    ],
+    "outgoing": [
+      {
+        "id": "outgoing_github",
+        "callback_url": "http://localhost:5000/api/webhooks/slack/github",
+        "enabled": true,
+        "trigger_words": ["/github"]
+      },
+      {
+        "id": "outgoing_e2b",
+        "callback_url": "http://localhost:5000/api/webhooks/slack/e2b",
+        "enabled": true,
+        "trigger_words": ["/e2b-run"]
+      }
+    ]
+  },
+
+  "message_formatting": {
+    "default_format": "mrkdwn",
+    "emoji_support": true,
+    "thread_support": true,
+    "blocks_enabled": true,
+    "message_templates": {
+      "success": {
+        "color": "#36a64f",
+        "icon": ":white_check_mark:",
+        "template": "*Success* - {{message}}"
+      },
+      "error": {
+        "color": "#ff0000",
+        "icon": ":x:",
+        "template": "*Error* - {{message}}"
+      },
+      "warning": {
+        "color": "#ffa500",
+        "icon": ":warning:",
+        "template": "*Warning* - {{message}}"
+      },
+      "info": {
+        "color": "#0099ff",
+        "icon": ":information_source:",
+        "template": "*Info* - {{message}}"
+      }
+    }
+  },
+
+  "api_calls": {
+    "chat_postMessage": {
+      "enabled": true,
+      "rate_limit": "60/minute"
+    },
+    "chat_postEphemeral": {
+      "enabled": true,
+      "rate_limit": "60/minute"
+    },
+    "chat_update": {
+      "enabled": true,
+      "rate_limit": "30/minute"
+    },
+    "files_upload": {
+      "enabled": true,
+      "max_file_size": 20971520,
+      "rate_limit": "20/minute"
+    },
+    "conversations_list": {
+      "enabled": true,
+      "rate_limit": "60/minute"
+    },
+    "users_list": {
+      "enabled": true,
+      "rate_limit": "60/minute"
+    }
+  },
+
+  "slash_commands": [
+    {
+      "command": "/e2b-run",
+      "description": "Execute code in E2B sandbox",
+      "request_url": "http://localhost:5000/api/slack/commands/e2b-run",
+      "enabled": true,
+      "parameters": [
+        {
+          "name": "code",
+          "description": "Python code to execute",
+          "required": true
+        },
+        {
+          "name": "language",
+          "description": "Programming language",
+          "default": "python3"
+        }
+      ]
+    },
+    {
+      "command": "/api-status",
+      "description": "Check API integration status",
+      "request_url": "http://localhost:5000/api/slack/commands/api-status",
+      "enabled": true
+    },
+    {
+      "command": "/github-search",
+      "description": "Search GitHub repositories and issues",
+      "request_url": "http://localhost:5000/api/slack/commands/github-search",
+      "enabled": true,
+      "parameters": [
+        {
+          "name": "query",
+          "description": "Search query",
+          "required": true
+        }
+      ]
+    }
+  ],
+
+  "event_subscriptions": {
+    "enabled": true,
+    "request_url": "http://localhost:5000/api/slack/events",
+    "events": [
+      "app_mention",
+      "message.channels",
+      "message.groups",
+      "message.im",
+      "reaction_added",
+      "reaction_removed",
+      "file_shared"
+    ]
+  },
+
+  "monitoring": {
+    "enabled": true,
+    "metrics": [
+      "messages_sent",
+      "commands_executed",
+      "events_processed",
+      "errors"
+    ],
+    "alerts": {
+      "high_error_rate": {
+        "enabled": true,
+        "threshold": 10,
+        "notify": ["#error-alerts"]
+      },
+      "webhook_failure": {
+        "enabled": true,
+        "threshold": 3,
+        "notify": ["#error-alerts"]
+      }
+    },
+    "logging": {
+      "level": "INFO",
+      "retention_days": 90,
+      "log_file": "/home/user/Private-Claude/logs/slack.log"
+    }
+  },
+
+  "rate_limiting": {
+    "enabled": true,
+    "default_burst": 1,
+    "retry_strategy": "exponential_backoff",
+    "max_retries": 3,
+    "initial_backoff_seconds": 1,
+    "max_backoff_seconds": 10
+  },
+
+  "error_handling": {
+    "strategies": {
+      "rate_limited": "queue_request",
+      "network_error": "retry_with_backoff",
+      "invalid_token": "alert_and_skip",
+      "channel_not_found": "log_and_continue"
+    }
+  },
+
+  "health_check": {
+    "enabled": true,
+    "interval_seconds": 300,
+    "checks": [
+      {
+        "name": "bot_token_validity",
+        "method": "POST",
+        "endpoint": "/api/auth.test",
+        "expected_status": 200
+      },
+      {
+        "name": "workspace_access",
+        "method": "GET",
+        "endpoint": "/api/team.info",
+        "expected_status": 200
+      },
+      {
+        "name": "channel_access",
+        "method": "GET",
+        "endpoint": "/api/conversations.list",
+        "expected_status": 200
+      }
+    ]
+  },
+
+  "user_management": {
+    "enable_bot_profile": true,
+    "bot_display_name": "Claude Assistant",
+    "bot_emoji": ":robot_face:",
+    "bot_status": "API Integration Active"
+  },
+
+  "compliance": {
+    "message_retention": {
+      "enabled": true,
+      "retention_days": 90
+    },
+    "audit_logging": {
+      "enabled": true,
+      "log_actions": ["message_sent", "command_executed", "error_occurred"]
+    }
+  }
+}
