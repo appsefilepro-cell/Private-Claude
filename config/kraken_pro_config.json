@@ -1,0 +1,248 @@
+{
+  "kraken_configuration": {
+    "api_version": "v1",
+    "base_url": "https://api.kraken.com",
+    "websocket_url": "wss://ws.kraken.com",
+    "description": "Kraken and Kraken Pro API configuration for live trading"
+  },
+
+  "api_credentials": {
+    "api_key": "${KRAKEN_API_KEY}",
+    "api_secret": "${KRAKEN_API_SECRET}",
+    "otp": "${KRAKEN_OTP}",
+    "note": "Store in .env file, never commit to git"
+  },
+
+  "kraken_pro": {
+    "enabled": true,
+    "advanced_orders": true,
+    "margin_trading": false,
+    "futures": false,
+    "staking": false
+  },
+
+  "trading_pairs": {
+    "active_pairs": [
+      "XXBTZUSD",
+      "XETHZUSD",
+      "SOLUSD",
+      "XRPUSD",
+      "ADAUSD",
+      "DOTUSD",
+      "MATICUSD",
+      "LINKUSD",
+      "AVAXUSD",
+      "ATOMUSD"
+    ],
+    "pair_configs": {
+      "XXBTZUSD": {
+        "display_name": "BTC/USD",
+        "min_order_size": 0.0001,
+        "price_decimals": 1,
+        "volume_decimals": 8,
+        "position_size": 0.02,
+        "stop_loss_pct": 2.0,
+        "take_profit_pct": 4.0
+      },
+      "XETHZUSD": {
+        "display_name": "ETH/USD",
+        "min_order_size": 0.001,
+        "price_decimals": 2,
+        "volume_decimals": 8,
+        "position_size": 0.02,
+        "stop_loss_pct": 2.5,
+        "take_profit_pct": 5.0
+      },
+      "SOLUSD": {
+        "display_name": "SOL/USD",
+        "min_order_size": 0.1,
+        "price_decimals": 2,
+        "volume_decimals": 8,
+        "position_size": 0.02,
+        "stop_loss_pct": 3.0,
+        "take_profit_pct": 6.0
+      },
+      "XRPUSD": {
+        "display_name": "XRP/USD",
+        "min_order_size": 1,
+        "price_decimals": 4,
+        "volume_decimals": 8,
+        "position_size": 0.02,
+        "stop_loss_pct": 2.0,
+        "take_profit_pct": 4.0
+      }
+    }
+  },
+
+  "candlestick_patterns": {
+    "bullish": [
+      "HAMMER",
+      "INVERTED_HAMMER",
+      "BULLISH_ENGULFING",
+      "MORNING_STAR",
+      "THREE_WHITE_SOLDIERS",
+      "DRAGONFLY_DOJI",
+      "PIERCING_PATTERN",
+      "BULLISH_HARAMI",
+      "RISING_THREE_METHODS",
+      "THREE_INSIDE_UP",
+      "BULLISH_MARUBOZU",
+      "BULLISH_SPINNING_TOP"
+    ],
+    "bearish": [
+      "SHOOTING_STAR",
+      "HANGING_MAN",
+      "BEARISH_ENGULFING",
+      "EVENING_STAR",
+      "THREE_BLACK_CROWS",
+      "GRAVESTONE_DOJI",
+      "DARK_CLOUD_COVER",
+      "BEARISH_HARAMI",
+      "FALLING_THREE_METHODS",
+      "THREE_INSIDE_DOWN",
+      "BEARISH_MARUBOZU",
+      "BEARISH_SPINNING_TOP"
+    ],
+    "neutral": [
+      "DOJI",
+      "SPINNING_TOP",
+      "HIGH_WAVE",
+      "LONG_LEGGED_DOJI"
+    ]
+  },
+
+  "technical_indicators": {
+    "enabled": [
+      "RSI",
+      "MACD",
+      "BOLLINGER_BANDS",
+      "STOCHASTIC",
+      "ATR",
+      "ADX",
+      "EMA_9",
+      "EMA_21",
+      "SMA_50",
+      "SMA_200",
+      "VWAP",
+      "OBV"
+    ],
+    "timeframes": ["1m", "5m", "15m", "1h", "4h", "1d"],
+    "signal_strength_weights": {
+      "RSI": 0.15,
+      "MACD": 0.20,
+      "BOLLINGER_BANDS": 0.15,
+      "CANDLESTICK_PATTERN": 0.25,
+      "VOLUME": 0.10,
+      "TREND": 0.15
+    }
+  },
+
+  "risk_management": {
+    "max_position_size": 0.02,
+    "max_open_positions": 5,
+    "max_daily_loss": 0.05,
+    "max_weekly_loss": 0.10,
+    "risk_per_trade": 0.01,
+    "position_sizing_method": "fixed_percentage",
+    "emergency_halt_threshold": 0.15,
+    "max_consecutive_losses": 3
+  },
+
+  "trading_modes": {
+    "available_modes": ["paper", "demo", "live"],
+    "default_mode": "paper",
+    "mode_configs": {
+      "paper": {
+        "initial_capital": 10000,
+        "use_real_market_data": true,
+        "simulate_fees": true,
+        "simulate_slippage": true
+      },
+      "demo": {
+        "initial_capital": 10000,
+        "use_kraken_demo_api": true,
+        "real_order_book": true
+      },
+      "live": {
+        "requires_2fa": true,
+        "withdrawal_approval": true,
+        "max_daily_volume": 50000
+      }
+    }
+  },
+
+  "testing_configuration": {
+    "continuous_testing": true,
+    "test_all_pairs": true,
+    "test_all_patterns": true,
+    "pattern_rotation_interval": "15m",
+    "pair_rotation_interval": "1h",
+    "performance_tracking_intervals": ["15m", "1h", "4h", "24h"],
+    "backtesting_periods": ["7d", "30d", "90d"]
+  },
+
+  "api_endpoints": {
+    "public": {
+      "server_time": "/0/public/Time",
+      "system_status": "/0/public/SystemStatus",
+      "asset_info": "/0/public/Assets",
+      "asset_pairs": "/0/public/AssetPairs",
+      "ticker": "/0/public/Ticker",
+      "ohlc": "/0/public/OHLC",
+      "order_book": "/0/public/Depth",
+      "trades": "/0/public/Trades"
+    },
+    "private": {
+      "account_balance": "/0/private/Balance",
+      "open_orders": "/0/private/OpenOrders",
+      "closed_orders": "/0/private/ClosedOrders",
+      "query_orders": "/0/private/QueryOrders",
+      "add_order": "/0/private/AddOrder",
+      "cancel_order": "/0/private/CancelOrder",
+      "cancel_all": "/0/private/CancelAll"
+    }
+  },
+
+  "order_types": {
+    "supported": ["market", "limit", "stop-loss", "take-profit", "stop-loss-limit", "take-profit-limit"],
+    "default": "limit",
+    "advanced": {
+      "trailing_stop": true,
+      "iceberg": false,
+      "post_only": true,
+      "reduce_only": false
+    }
+  },
+
+  "monitoring": {
+    "health_checks": {
+      "api_connection": "1m",
+      "websocket_connection": "30s",
+      "account_balance": "5m",
+      "open_positions": "1m"
+    },
+    "alerts": {
+      "slack_channel": "#trading-alerts",
+      "email": "terobinsonwy@gmail.com",
+      "zapier_webhook": "${ZAPIER_TRADING_WEBHOOK}"
+    }
+  },
+
+  "performance_reporting": {
+    "intervals": ["15min", "1hour", "4hour", "daily", "weekly", "monthly"],
+    "metrics_tracked": [
+      "total_trades",
+      "win_rate",
+      "profit_loss",
+      "roi",
+      "sharpe_ratio",
+      "max_drawdown",
+      "avg_trade_duration",
+      "best_performing_pair",
+      "best_performing_pattern"
+    ],
+    "export_formats": ["json", "csv", "txt"],
+    "auto_export": true,
+    "export_destination": "logs/trading_bot/performance/"
+  }
+}
