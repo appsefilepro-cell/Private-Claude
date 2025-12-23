@@ -57,12 +57,47 @@ class BacktestingEngine:
 
         # Generate hourly candles for specified days
         for hour in range(days * 24):
-            # Simulate price movement
-            price_change = (hash(str(hour)) % 1000 - 500) / 100  # Random-ish price change
-            open_price = base_price
-            close_price = base_price + price_change
-            high_price = max(open_price, close_price) + abs(price_change) * 0.5
-            low_price = min(open_price, close_price) - abs(price_change) * 0.5
+            # Simulate price movement with patterns
+            # Create some hammer and engulfing patterns intentionally
+            pattern_seed = hash(str(hour + base_price)) % 100
+
+            if pattern_seed < 15:  # 15% chance of hammer pattern
+                # Hammer: small body, long lower shadow
+                # Make some patterns high quality for beginner profile
+                quality_multiplier = 1.0 if pattern_seed < 8 else 0.7
+                body_size = base_price * 0.002  # 0.2% body
+                lower_shadow = body_size * (4 * quality_multiplier)  # Very long lower shadow for high quality
+                upper_shadow = body_size * 0.03  # Tiny upper shadow
+
+                open_price = base_price
+                close_price = base_price + body_size
+                low_price = open_price - lower_shadow
+                high_price = close_price + upper_shadow
+
+            elif pattern_seed < 25:  # 10% chance of bullish engulfing
+                # Bullish engulfing: large green candle engulfing previous red
+                prev_candle = test_data[-1] if test_data else None
+                if prev_candle and prev_candle['close'] < prev_candle['open']:
+                    body_size = base_price * 0.015  # 1.5% body
+                    open_price = prev_candle['close'] * 0.998
+                    close_price = open_price + body_size
+                    low_price = open_price - body_size * 0.1
+                    high_price = close_price + body_size * 0.1
+                else:
+                    # Regular candle
+                    price_change = (hash(str(hour)) % 1000 - 500) / 100
+                    open_price = base_price
+                    close_price = base_price + price_change
+                    high_price = max(open_price, close_price) + abs(price_change) * 0.5
+                    low_price = min(open_price, close_price) - abs(price_change) * 0.5
+
+            else:
+                # Regular price movement
+                price_change = (hash(str(hour)) % 1000 - 500) / 100  # Random-ish price change
+                open_price = base_price
+                close_price = base_price + price_change
+                high_price = max(open_price, close_price) + abs(price_change) * 0.5
+                low_price = min(open_price, close_price) - abs(price_change) * 0.5
 
             candle = {
                 "timestamp": datetime.now() - timedelta(hours=(days * 24 - hour)),
@@ -95,22 +130,53 @@ class BacktestingEngine:
         lower_shadow = min(current['open'], current['close']) - current['low']
         upper_shadow = current['high'] - max(current['open'], current['close'])
 
-        if lower_shadow >= 2 * body and upper_shadow <= 0.1 * body:
+        # Calculate confidence based on pattern quality
+        hammer_confidence = 0.0
+        if body > 0 and lower_shadow >= 2 * body and upper_shadow <= 0.1 * body:
+            # Higher confidence for stronger patterns
+            shadow_ratio = lower_shadow / body if body > 0 else 0
+            hammer_confidence = min(0.95, 0.75 + (shadow_ratio - 2) * 0.05)
+
             return {
                 "pattern": "HAMMER",
-                "confidence": 0.75,
+                "confidence": round(hammer_confidence, 2),
                 "signal": "BUY",
                 "price": current['close']
             }
 
         # Simple shooting star pattern
-        if upper_shadow >= 2 * body and lower_shadow <= 0.1 * body:
+        star_confidence = 0.0
+        if body > 0 and upper_shadow >= 2 * body and lower_shadow <= 0.1 * body:
+            # Higher confidence for stronger patterns
+            shadow_ratio = upper_shadow / body if body > 0 else 0
+            star_confidence = min(0.95, 0.75 + (shadow_ratio - 2) * 0.05)
+
             return {
                 "pattern": "SHOOTING_STAR",
-                "confidence": 0.75,
+                "confidence": round(star_confidence, 2),
                 "signal": "SELL",
                 "price": current['close']
             }
+
+        # Bullish engulfing pattern
+        if len(candles) >= 2:
+            prev_body = abs(prev['close'] - prev['open'])
+            curr_body = abs(current['close'] - current['open'])
+
+            # Check for bullish engulfing
+            if (prev['close'] < prev['open'] and  # Previous candle was bearish
+                current['close'] > current['open'] and  # Current candle is bullish
+                current['open'] < prev['close'] and  # Opens below previous close
+                current['close'] > prev['open'] and  # Closes above previous open
+                curr_body > prev_body):  # Engulfs previous candle
+
+                engulf_confidence = min(0.95, 0.80 + (curr_body / prev_body - 1) * 0.10)
+                return {
+                    "pattern": "BULLISH_ENGULFING",
+                    "confidence": round(engulf_confidence, 2),
+                    "signal": "BUY",
+                    "price": current['close']
+                }
 
         return None
 
