@@ -1,0 +1,265 @@
+{
+  "report_timestamp": "2025-12-23T05:31:30.001951",
+  "report_type": "MASTER_TRADING_BOT_PERFORMANCE_REPORT",
+  "executive_summary": {
+    "total_systems_deployed": 5,
+    "total_tests_executed": 918,
+    "total_patterns_tested": 24,
+    "total_pairs_tested": 10,
+    "total_signals_generated": 488,
+    "total_trades_executed": 2,
+    "total_capital_tested": 20000.0,
+    "net_profit_all_systems": 19.78,
+    "systems": [
+      {
+        "name": "Kraken Pro Continuous Testing",
+        "status": "Active",
+        "tests": 918,
+        "signals": 488
+      },
+      {
+        "name": "Paper Trading Bot",
+        "status": "Active",
+        "capital": 10020.0,
+        "roi": "0.2%",
+        "win_rate": "100.0%"
+      },
+      {
+        "name": "Backtest - Beginner Profile",
+        "status": "Completed",
+        "trades": 0,
+        "roi": "0%",
+        "win_rate": "0%"
+      },
+      {
+        "name": "Backtest - Novice Profile",
+        "status": "Completed",
+        "trades": 0,
+        "roi": "0%",
+        "win_rate": "0%"
+      },
+      {
+        "name": "Backtest - Advanced Profile",
+        "status": "Completed",
+        "trades": 1,
+        "roi": "-0.0%",
+        "win_rate": "0.0%"
+      }
+    ]
+  },
+  "data_sources": {
+    "consolidated_historical": {
+      "file": "summary_20251223_052144.json",
+      "summary": {
+        "total_performance_files": 2,
+        "total_backtest_files": 24,
+        "total_test_result_files": 2,
+        "total_trades_across_all_tests": 2,
+        "total_profit_loss": 40,
+        "profiles_tested": [
+          "advanced",
+          "beginner",
+          "novice"
+        ],
+        "trading_pairs_tested": [
+          "BTC/USD",
+          "ETH/USD",
+          "SOL/USD"
+        ]
+      }
+    }
+  },
+  "kraken_continuous_testing": {
+    "file": "performance_report_20251223_052939.json",
+    "metadata": {
+      "start_time": "2025-12-23T05:23:47.425227",
+      "current_time": "2025-12-23T05:29:39.976000",
+      "mode": "paper"
+    },
+    "statistics": {
+      "total_tests": 918,
+      "patterns_tested": 24,
+      "pairs_tested": 10,
+      "signals_generated": 488
+    },
+    "pattern_distribution": {
+      "HAMMER": 27,
+      "INVERTED_HAMMER": 27,
+      "BULLISH_ENGULFING": 27,
+      "MORNING_STAR": 27,
+      "THREE_WHITE_SOLDIERS": 27,
+      "DRAGONFLY_DOJI": 27,
+      "PIERCING_PATTERN": 27,
+      "BULLISH_HARAMI": 27,
+      "RISING_THREE_METHODS": 27,
+      "THREE_INSIDE_UP": 27,
+      "BULLISH_MARUBOZU": 27,
+      "BULLISH_SPINNING_TOP": 27,
+      "SHOOTING_STAR": 27,
+      "HANGING_MAN": 27,
+      "BEARISH_ENGULFING": 27,
+      "EVENING_STAR": 27,
+      "THREE_BLACK_CROWS": 27,
+      "GRAVESTONE_DOJI": 27,
+      "DARK_CLOUD_COVER": 27,
+      "BEARISH_HARAMI": 27,
+      "FALLING_THREE_METHODS": 27,
+      "THREE_INSIDE_DOWN": 27,
+      "BEARISH_MARUBOZU": 27,
+      "BEARISH_SPINNING_TOP": 27
+    },
+    "pair_distribution": {
+      "XXBTZUSD": 27,
+      "XETHZUSD": 27,
+      "SOLUSD": 27,
+      "XRPUSD": 27,
+      "ADAUSD": 27,
+      "DOTUSD": 27,
+      "MATICUSD": 27,
+      "LINKUSD": 27,
+      "AVAXUSD": 27,
+      "ATOMUSD": 27
+    }
+  },
+  "historical_backtests": {
+    "beginner": {
+      "total_trades": 0,
+      "message": "No trades executed"
+    },
+    "novice": {
+      "total_trades": 0,
+      "message": "No trades executed"
+    },
+    "advanced": {
+      "profile": "advanced",
+      "total_trades": 1,
+      "winning_trades": 0,
+      "losing_trades": 1,
+      "win_rate": 0.0,
+      "total_profit": 0,
+      "total_loss": 0.22,
+      "net_profit": -0.22,
+      "roi_percentage": -0.0,
+      "initial_capital": 10000,
+      "final_capital": 9999.78,
+      "avg_win": 0,
+      "avg_loss": 0.22,
+      "profit_factor": 0.0,
+      "largest_win": 0,
+      "largest_loss": -0.22362438303788834
+    }
+  },
+  "paper_trading_performance": {
+    "file": "performance_paper_beginner_20251222_204449.json",
+    "metrics": {
+      "timestamp": "2025-12-22T20:44:49.604712",
+      "mode": "paper",
+      "profile": "beginner",
+      "session_start": "2025-12-22T20:44:49.604333",
+      "total_trades": 1,
+      "open_trades": 0,
+      "closed_trades": 1,
+      "winning_trades": 1,
+      "losing_trades": 0,
+      "win_rate": 100.0,
+      "loss_rate": 0.0,
+      "win_loss_ratio": "\u221e",
+      "initial_capital": 10000.0,
+      "current_capital": 10020.0,
+      "net_profit": 20,
+      "roi_percentage": 0.2,
+      "daily_roi": 0.2,
+      "monthly_roi": 6.0,
+      "yearly_roi": 73.0,
+      "days_running": 1,
+      "total_profit": 20,
+      "total_loss": 0,
+      "avg_win": 20.0,
+      "avg_loss": 0,
+      "largest_win": 20,
+      "largest_loss": 0,
+      "profit_factor": "\u221e",
+      "avg_profit_per_trade": 20.0,
+      "peak_capital": 10020.0,
+      "max_drawdown": 0.0,
+      "max_drawdown_pct": 0.0,
+      "current_drawdown": 0.0,
+      "current_drawdown_pct": 0.0,
+      "sharpe_ratio": 0.0,
+      "avg_trade_duration": "0h 0m",
+      "shortest_trade": "0h 0m",
+      "longest_trade": "0h 0m"
+    },
+    "trades": [
+      {
+        "id": 1,
+        "pair": "BTC/USD",
+        "type": "BUY",
+        "entry_price": 50000,
+        "quantity": 0.02,
+        "position_value": 1000,
+        "entry_time": "2025-12-22 20:44:49.604673",
+        "status": "CLOSED",
+        "exit_price": 51000,
+        "exit_time": "2025-12-22 20:44:49.604674",
+        "profit_loss": 20,
+        "profit_loss_pct": 2.0,
+        "close_reason": "TAKE_PROFIT"
+      }
+    ]
+  },
+  "consolidated_metrics": {
+    "pattern_rotation_system": {
+      "total_patterns": 24,
+      "patterns_tested": 24,
+      "patterns": [
+        "HAMMER",
+        "INVERTED_HAMMER",
+        "BULLISH_ENGULFING",
+        "MORNING_STAR",
+        "THREE_WHITE_SOLDIERS",
+        "DRAGONFLY_DOJI",
+        "PIERCING_PATTERN",
+        "BULLISH_HARAMI",
+        "RISING_THREE_METHODS",
+        "THREE_INSIDE_UP",
+        "BULLISH_MARUBOZU",
+        "BULLISH_SPINNING_TOP",
+        "SHOOTING_STAR",
+        "HANGING_MAN",
+        "BEARISH_ENGULFING",
+        "EVENING_STAR",
+        "THREE_BLACK_CROWS",
+        "GRAVESTONE_DOJI",
+        "DARK_CLOUD_COVER",
+        "BEARISH_HARAMI",
+        "FALLING_THREE_METHODS",
+        "THREE_INSIDE_DOWN",
+        "BEARISH_MARUBOZU",
+        "BEARISH_SPINNING_TOP"
+      ]
+    },
+    "pair_rotation_system": {
+      "total_pairs": 10,
+      "pairs_tested": 10,
+      "pairs": [
+        "XXBTZUSD (Bitcoin)",
+        "XETHZUSD (Ethereum)",
+        "SOLUSD (Solana)",
+        "XRPUSD (Ripple)",
+        "ADAUSD (Cardano)",
+        "DOTUSD (Polkadot)",
+        "MATICUSD (Polygon)",
+        "LINKUSD (Chainlink)",
+        "AVAXUSD (Avalanche)",
+        "ATOMUSD (Cosmos)"
+      ]
+    },
+    "trading_modes": {
+      "paper": "Active - $10,000 initial capital",
+      "demo": "Configured - Ready to activate",
+      "live": "Configured - Requires Kraken API keys",
+      "simulation": "Active - Continuous testing"
+    }
+  }
+}

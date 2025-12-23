@@ -1,0 +1,252 @@
+{
+  "test_type": "pattern_rotation",
+  "timestamp": "2025-12-23T05:24:56.975862",
+  "mode": "paper",
+  "results": [
+    {
+      "pattern": "HAMMER",
+      "pair": "XXBTZUSD",
+      "timestamp": "2025-12-23T05:24:54.559726",
+      "detected": false,
+      "confidence": 0.73,
+      "action": "BUY",
+      "status": "simulated",
+      "signal_strength": 0.22
+    },
+    {
+      "pattern": "INVERTED_HAMMER",
+      "pair": "XXBTZUSD",
+      "timestamp": "2025-12-23T05:24:54.660226",
+      "detected": true,
+      "confidence": 0.74,
+      "action": "BUY",
+      "status": "simulated",
+      "signal_strength": 0.74
+    },
+    {
+      "pattern": "BULLISH_ENGULFING",
+      "pair": "XXBTZUSD",
+      "timestamp": "2025-12-23T05:24:54.760785",
+      "detected": false,
+      "confidence": 0.73,
+      "action": "BUY",
+      "status": "simulated",
+      "signal_strength": 0.22
+    },
+    {
+      "pattern": "MORNING_STAR",
+      "pair": "XXBTZUSD",
+      "timestamp": "2025-12-23T05:24:54.861148",
+      "detected": true,
+      "confidence": 0.68,
+      "action": "BUY",
+      "status": "simulated",
+      "signal_strength": 0.68
+    },
+    {
+      "pattern": "THREE_WHITE_SOLDIERS",
+      "pair": "XXBTZUSD",
+      "timestamp": "2025-12-23T05:24:54.961811",
+      "detected": false,
+      "confidence": 0.85,
+      "action": "BUY",
+      "status": "simulated",
+      "signal_strength": 0.26
+    },
+    {
+      "pattern": "DRAGONFLY_DOJI",
+      "pair": "XXBTZUSD",
+      "timestamp": "2025-12-23T05:24:55.062340",
+      "detected": true,
+      "confidence": 0.73,
+      "action": "BUY",
+      "status": "simulated",
+      "signal_strength": 0.73
+    },
+    {
+      "pattern": "PIERCING_PATTERN",
+      "pair": "XXBTZUSD",
+      "timestamp": "2025-12-23T05:24:55.162931",
+      "detected": true,
+      "confidence": 0.71,
+      "action": "BUY",
+      "status": "simulated",
+      "signal_strength": 0.71
+    },
+    {
+      "pattern": "BULLISH_HARAMI",
+      "pair": "XXBTZUSD",
+      "timestamp": "2025-12-23T05:24:55.263568",
+      "detected": false,
+      "confidence": 0.74,
+      "action": "BUY",
+      "status": "simulated",
+      "signal_strength": 0.22
+    },
+    {
+      "pattern": "RISING_THREE_METHODS",
+      "pair": "XXBTZUSD",
+      "timestamp": "2025-12-23T05:24:55.364270",
+      "detected": false,
+      "confidence": 0.9,
+      "action": "BUY",
+      "status": "simulated",
+      "signal_strength": 0.27
+    },
+    {
+      "pattern": "THREE_INSIDE_UP",
+      "pair": "XXBTZUSD",
+      "timestamp": "2025-12-23T05:24:55.464882",
+      "detected": true,
+      "confidence": 0.83,
+      "action": "BUY",
+      "status": "simulated",
+      "signal_strength": 0.83
+    },
+    {
+      "pattern": "BULLISH_MARUBOZU",
+      "pair": "XXBTZUSD",
+      "timestamp": "2025-12-23T05:24:55.565412",
+      "detected": true,
+      "confidence": 0.66,
+      "action": "BUY",
+      "status": "simulated",
+      "signal_strength": 0.66
+    },
+    {
+      "pattern": "BULLISH_SPINNING_TOP",
+      "pair": "XXBTZUSD",
+      "timestamp": "2025-12-23T05:24:55.666081",
+      "detected": true,
+      "confidence": 0.74,
+      "action": "BUY",
+      "status": "simulated",
+      "signal_strength": 0.74
+    },
+    {
+      "pattern": "SHOOTING_STAR",
+      "pair": "XXBTZUSD",
+      "timestamp": "2025-12-23T05:24:55.766430",
+      "detected": false,
+      "confidence": 0.85,
+      "action": "SELL",
+      "status": "simulated",
+      "signal_strength": 0.26
+    },
+    {
+      "pattern": "HANGING_MAN",
+      "pair": "XXBTZUSD",
+      "timestamp": "2025-12-23T05:24:55.867472",
+      "detected": true,
+      "confidence": 0.69,
+      "action": "SELL",
+      "status": "simulated",
+      "signal_strength": 0.69
+    },
+    {
+      "pattern": "BEARISH_ENGULFING",
+      "pair": "XXBTZUSD",
+      "timestamp": "2025-12-23T05:24:55.968137",
+      "detected": true,
+      "confidence": 0.68,
+      "action": "SELL",
+      "status": "simulated",
+      "signal_strength": 0.68
+    },
+    {
+      "pattern": "EVENING_STAR",
+      "pair": "XXBTZUSD",
+      "timestamp": "2025-12-23T05:24:56.068712",
+      "detected": true,
+      "confidence": 0.76,
+      "action": "SELL",
+      "status": "simulated",
+      "signal_strength": 0.76
+    },
+    {
+      "pattern": "THREE_BLACK_CROWS",
+      "pair": "XXBTZUSD",
+      "timestamp": "2025-12-23T05:24:56.169500",
+      "detected": true,
+      "confidence": 0.71,
+      "action": "SELL",
+      "status": "simulated",
+      "signal_strength": 0.71
+    },
+    {
+      "pattern": "GRAVESTONE_DOJI",
+      "pair": "XXBTZUSD",
+      "timestamp": "2025-12-23T05:24:56.270001",
+      "detected": false,
+      "confidence": 0.84,
+      "action": "SELL",
+      "status": "simulated",
+      "signal_strength": 0.25
+    },
+    {
+      "pattern": "DARK_CLOUD_COVER",
+      "pair": "XXBTZUSD",
+      "timestamp": "2025-12-23T05:24:56.370765",
+      "detected": true,
+      "confidence": 0.78,
+      "action": "SELL",
+      "status": "simulated",
+      "signal_strength": 0.78
+    },
+    {
+      "pattern": "BEARISH_HARAMI",
+      "pair": "XXBTZUSD",
+      "timestamp": "2025-12-23T05:24:56.471516",
+      "detected": true,
+      "confidence": 0.81,
+      "action": "SELL",
+      "status": "simulated",
+      "signal_strength": 0.81
+    },
+    {
+      "pattern": "FALLING_THREE_METHODS",
+      "pair": "XXBTZUSD",
+      "timestamp": "2025-12-23T05:24:56.572099",
+      "detected": true,
+      "confidence": 0.74,
+      "action": "SELL",
+      "status": "simulated",
+      "signal_strength": 0.74
+    },
+    {
+      "pattern": "THREE_INSIDE_DOWN",
+      "pair": "XXBTZUSD",
+      "timestamp": "2025-12-23T05:24:56.672815",
+      "detected": true,
+      "confidence": 0.85,
+      "action": "SELL",
+      "status": "simulated",
+      "signal_strength": 0.85
+    },
+    {
+      "pattern": "BEARISH_MARUBOZU",
+      "pair": "XXBTZUSD",
+      "timestamp": "2025-12-23T05:24:56.773164",
+      "detected": true,
+      "confidence": 0.69,
+      "action": "SELL",
+      "status": "simulated",
+      "signal_strength": 0.69
+    },
+    {
+      "pattern": "BEARISH_SPINNING_TOP",
+      "pair": "XXBTZUSD",
+      "timestamp": "2025-12-23T05:24:56.874353",
+      "detected": true,
+      "confidence": 0.68,
+      "action": "SELL",
+      "status": "simulated",
+      "signal_strength": 0.68
+    }
+  ],
+  "summary": {
+    "total_tests": 24,
+    "successful": 24,
+    "errors": 0
+  }
+}

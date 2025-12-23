@@ -1,0 +1,675 @@
+{
+  "timestamp": "2025-12-23T05:21:44.890502",
+  "latest_performance": {
+    "metadata": {
+      "mode": "paper",
+      "profile": "beginner",
+      "session_start": "2025-12-22T20:44:49.604333",
+      "export_time": "2025-12-22T20:44:49.604710"
+    },
+    "metrics": {
+      "timestamp": "2025-12-22T20:44:49.604712",
+      "mode": "paper",
+      "profile": "beginner",
+      "session_start": "2025-12-22T20:44:49.604333",
+      "total_trades": 1,
+      "open_trades": 0,
+      "closed_trades": 1,
+      "winning_trades": 1,
+      "losing_trades": 0,
+      "win_rate": 100.0,
+      "loss_rate": 0.0,
+      "win_loss_ratio": "\u221e",
+      "initial_capital": 10000.0,
+      "current_capital": 10020.0,
+      "net_profit": 20,
+      "roi_percentage": 0.2,
+      "daily_roi": 0.2,
+      "monthly_roi": 6.0,
+      "yearly_roi": 73.0,
+      "days_running": 1,
+      "total_profit": 20,
+      "total_loss": 0,
+      "avg_win": 20.0,
+      "avg_loss": 0,
+      "largest_win": 20,
+      "largest_loss": 0,
+      "profit_factor": "\u221e",
+      "avg_profit_per_trade": 20.0,
+      "peak_capital": 10020.0,
+      "max_drawdown": 0.0,
+      "max_drawdown_pct": 0.0,
+      "current_drawdown": 0.0,
+      "current_drawdown_pct": 0.0,
+      "sharpe_ratio": 0.0,
+      "avg_trade_duration": "0h 0m",
+      "shortest_trade": "0h 0m",
+      "longest_trade": "0h 0m"
+    },
+    "trades": [
+      {
+        "id": 1,
+        "pair": "BTC/USD",
+        "type": "BUY",
+        "entry_price": 50000,
+        "quantity": 0.02,
+        "position_value": 1000,
+        "entry_time": "2025-12-22 20:44:49.604673",
+        "status": "CLOSED",
+        "exit_price": 51000,
+        "exit_time": "2025-12-22 20:44:49.604674",
+        "profit_loss": 20,
+        "profit_loss_pct": 2.0,
+        "close_reason": "TAKE_PROFIT"
+      }
+    ]
+  },
+  "latest_test_results": {
+    "total_tests": 15,
+    "passed": 12,
+    "failed": 3,
+    "skipped": 0,
+    "duration": 0.027904,
+    "timestamp": "2025-12-22T20:44:49.614139",
+    "test_results": [
+      {
+        "name": "1-Day Backtest - Beginner",
+        "status": "FAILED",
+        "duration": 0.002275,
+        "error": "Should calculate ROI",
+        "traceback": "Traceback (most recent call last):\n  File \"/home/user/Private-Claude/pillar-a-trading/test_suite_runner.py\", line 72, in run_test\n    result = test_func(*args, **kwargs)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/user/Private-Claude/pillar-a-trading/test_suite_runner.py\", line 112, in test_1_day_backtest_beginner\n    assert 'roi_percentage' in results, \"Should calculate ROI\"\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: Should calculate ROI\n",
+        "timestamp": "2025-12-22T20:44:49.591270"
+      },
+      {
+        "name": "1-Day Backtest - Novice",
+        "status": "FAILED",
+        "duration": 0.001938,
+        "error": "Should calculate win rate",
+        "traceback": "Traceback (most recent call last):\n  File \"/home/user/Private-Claude/pillar-a-trading/test_suite_runner.py\", line 72, in run_test\n    result = test_func(*args, **kwargs)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/user/Private-Claude/pillar-a-trading/test_suite_runner.py\", line 123, in test_1_day_backtest_novice\n    assert 'win_rate' in results, \"Should calculate win rate\"\n           ^^^^^^^^^^^^^^^^^^^^^\nAssertionError: Should calculate win rate\n",
+        "timestamp": "2025-12-22T20:44:49.593703"
+      },
+      {
+        "name": "1-Day Backtest - Advanced",
+        "status": "FAILED",
+        "duration": 0.001917,
+        "error": "Should calculate profit factor",
+        "traceback": "Traceback (most recent call last):\n  File \"/home/user/Private-Claude/pillar-a-trading/test_suite_runner.py\", line 72, in run_test\n    result = test_func(*args, **kwargs)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/user/Private-Claude/pillar-a-trading/test_suite_runner.py\", line 134, in test_1_day_backtest_advanced\n    assert 'profit_factor' in results, \"Should calculate profit factor\"\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: Should calculate profit factor\n",
+        "timestamp": "2025-12-22T20:44:49.596041"
+      },
+      {
+        "name": "7-Day Backtest - All Profiles",
+        "status": "PASSED",
+        "duration": 0.00673,
+        "result": {
+          "beginner": {
+            "total_trades": 0,
+            "message": "No trades executed"
+          },
+          "novice": {
+            "total_trades": 0,
+            "message": "No trades executed"
+          },
+          "advanced": {
+            "profile": "advanced",
+            "total_trades": 1,
+            "winning_trades": 0,
+            "losing_trades": 1,
+            "win_rate": 0.0,
+            "total_profit": 0,
+            "total_loss": 0.22,
+            "net_profit": -0.22,
+            "roi_percentage": -0.0,
+            "initial_capital": 10000,
+            "final_capital": 9999.78,
+            "avg_win": 0,
+            "avg_loss": 0.22,
+            "profit_factor": 0.0,
+            "largest_win": 0,
+            "largest_loss": -0.22362438303788834
+          }
+        },
+        "timestamp": "2025-12-22T20:44:49.602893"
+      },
+      {
+        "name": "Performance Tracker - Basic",
+        "status": "PASSED",
+        "duration": 0.000435,
+        "result": {
+          "timestamp": "2025-12-22T20:44:49.603334",
+          "mode": "paper",
+          "profile": "beginner",
+          "session_start": "2025-12-22T20:44:49.602983",
+          "total_trades": 1,
+          "open_trades": 0,
+          "closed_trades": 1,
+          "winning_trades": 1,
+          "losing_trades": 0,
+          "win_rate": 100.0,
+          "loss_rate": 0.0,
+          "win_loss_ratio": "\u221e",
+          "initial_capital": 10000.0,
+          "current_capital": 10020.0,
+          "net_profit": 20,
+          "roi_percentage": 0.2,
+          "daily_roi": 0.2,
+          "monthly_roi": 6.0,
+          "yearly_roi": 73.0,
+          "days_running": 1,
+          "total_profit": 20,
+          "total_loss": 0,
+          "avg_win": 20.0,
+          "avg_loss": 0,
+          "largest_win": 20,
+          "largest_loss": 0,
+          "profit_factor": "\u221e",
+          "avg_profit_per_trade": 20.0,
+          "peak_capital": 10020.0,
+          "max_drawdown": 0.0,
+          "max_drawdown_pct": 0.0,
+          "current_drawdown": 0.0,
+          "current_drawdown_pct": 0.0,
+          "sharpe_ratio": 0.0,
+          "avg_trade_duration": "0h 0m",
+          "shortest_trade": "0h 0m",
+          "longest_trade": "0h 0m"
+        },
+        "timestamp": "2025-12-22T20:44:49.603414"
+      },
+      {
+        "name": "Performance Tracker - Metrics",
+        "status": "PASSED",
+        "duration": 0.000539,
+        "result": {
+          "timestamp": "2025-12-22T20:44:49.603870",
+          "mode": "paper",
+          "profile": "beginner",
+          "session_start": "2025-12-22T20:44:49.603529",
+          "total_trades": 3,
+          "open_trades": 0,
+          "closed_trades": 3,
+          "winning_trades": 2,
+          "losing_trades": 1,
+          "win_rate": 66.67,
+          "loss_rate": 33.33,
+          "win_loss_ratio": 2.0,
+          "initial_capital": 10000.0,
+          "current_capital": 10023.5,
+          "net_profit": 23.5,
+          "roi_percentage": 0.24,
+          "daily_roi": 0.24,
+          "monthly_roi": 7.05,
+          "yearly_roi": 85.78,
+          "days_running": 1,
+          "total_profit": 40,
+          "total_loss": 16.5,
+          "avg_win": 20.0,
+          "avg_loss": 16.5,
+          "largest_win": 20,
+          "largest_loss": -16.5,
+          "profit_factor": 2.42,
+          "avg_profit_per_trade": 7.83,
+          "peak_capital": 10023.5,
+          "max_drawdown": 0.0,
+          "max_drawdown_pct": 0.0,
+          "current_drawdown": 0.0,
+          "current_drawdown_pct": 0.0,
+          "sharpe_ratio": 0.3658,
+          "avg_trade_duration": "1h 0m",
+          "shortest_trade": "1h 0m",
+          "longest_trade": "1h 0m"
+        },
+        "timestamp": "2025-12-22T20:44:49.604065"
+      },
+      {
+        "name": "Performance Tracker - JSON Export",
+        "status": "PASSED",
+        "duration": 0.001363,
+        "result": "/home/user/Private-Claude/logs/trading_bot/performance/performance_paper_beginner_20251222_204449.json",
+        "timestamp": "2025-12-22T20:44:49.605694"
+      },
+      {
+        "name": "Performance Tracker - CSV Export",
+        "status": "PASSED",
+        "duration": 0.000971,
+        "result": "/home/user/Private-Claude/logs/trading_bot/performance/trades_paper_beginner_20251222_204449.csv",
+        "timestamp": "2025-12-22T20:44:49.606779"
+      },
+      {
+        "name": "Performance Tracker - Report",
+        "status": "PASSED",
+        "duration": 0.001393,
+        "result": "/home/user/Private-Claude/logs/trading_bot/performance/report_paper_beginner_20251222_204449.txt",
+        "timestamp": "2025-12-22T20:44:49.608271"
+      },
+      {
+        "name": "Risk Profile Loading",
+        "status": "PASSED",
+        "duration": 0.000433,
+        "result": {
+          "profiles": {
+            "beginner": {
+              "name": "Beginner - Conservative",
+              "description": "Ultra-conservative settings for new traders learning the system",
+              "risk_parameters": {
+                "confidence_threshold": 0.85,
+                "max_position_size": 0.01,
+                "risk_per_trade": 0.005,
+                "max_daily_loss": 0.02,
+                "max_weekly_loss": 0.05,
+                "max_concurrent_trades": 1,
+                "emergency_halt_threshold": 0.03
+              },
+              "trading_pairs": [
+                "BTC/USD"
+              ],
+              "patterns_enabled": [
+                "HAMMER",
+                "BULLISH_ENGULFING",
+                "MORNING_STAR"
+              ],
+              "min_pattern_confirmation": 2,
+              "require_volume_confirmation": true,
+              "stop_loss_percentage": 0.02,
+              "take_profit_percentage": 0.04,
+              "trailing_stop": true,
+              "max_trades_per_day": 3,
+              "trading_hours": {
+                "enabled": true,
+                "start": "09:00",
+                "end": "16:00",
+                "timezone": "America/New_York"
+              },
+              "paper_trading_only": true
+            },
+            "novice": {
+              "name": "Novice - Moderate",
+              "description": "Balanced settings for traders with some experience",
+              "risk_parameters": {
+                "confidence_threshold": 0.8,
+                "max_position_size": 0.02,
+                "risk_per_trade": 0.01,
+                "max_daily_loss": 0.03,
+                "max_weekly_loss": 0.08,
+                "max_concurrent_trades": 2,
+                "emergency_halt_threshold": 0.05
+              },
+              "trading_pairs": [
+                "BTC/USD",
+                "ETH/USD"
+              ],
+              "patterns_enabled": [
+                "HAMMER",
+                "SHOOTING_STAR",
+                "BULLISH_ENGULFING",
+                "BEARISH_ENGULFING",
+                "MORNING_STAR",
+                "EVENING_STAR",
+                "DOJI"
+              ],
+              "min_pattern_confirmation": 2,
+              "require_volume_confirmation": true,
+              "stop_loss_percentage": 0.025,
+              "take_profit_percentage": 0.05,
+              "trailing_stop": true,
+              "max_trades_per_day": 5,
+              "trading_hours": {
+                "enabled": true,
+                "start": "08:00",
+                "end": "18:00",
+                "timezone": "America/New_York"
+              },
+              "paper_trading_only": false,
+              "sandbox_testing_required": true
+            },
+            "advanced": {
+              "name": "Advanced - Aggressive",
+              "description": "Optimized settings for experienced traders",
+              "risk_parameters": {
+                "confidence_threshold": 0.75,
+                "max_position_size": 0.03,
+                "risk_per_trade": 0.015,
+                "max_daily_loss": 0.05,
+                "max_weekly_loss": 0.1,
+                "max_concurrent_trades": 3,
+                "emergency_halt_threshold": 0.08
+              },
+              "trading_pairs": [
+                "BTC/USD",
+                "ETH/USD",
+                "BNB/USD",
+                "SOL/USD"
+              ],
+              "patterns_enabled": [
+                "HAMMER",
+                "SHOOTING_STAR",
+                "BULLISH_ENGULFING",
+                "BEARISH_ENGULFING",
+                "MORNING_STAR",
+                "EVENING_STAR",
+                "DOJI",
+                "DRAGONFLY_DOJI",
+                "GRAVESTONE_DOJI",
+                "PIERCING_PATTERN",
+                "DARK_CLOUD_COVER",
+                "THREE_WHITE_SOLDIERS"
+              ],
+              "min_pattern_confirmation": 1,
+              "require_volume_confirmation": false,
+              "stop_loss_percentage": 0.03,
+              "take_profit_percentage": 0.06,
+              "trailing_stop": true,
+              "max_trades_per_day": 10,
+              "trading_hours": {
+                "enabled": false,
+                "start": "00:00",
+                "end": "23:59",
+                "timezone": "UTC"
+              },
+              "paper_trading_only": false,
+              "sandbox_testing_required": true,
+              "live_trading_enabled": true
+            }
+          },
+          "backtesting_config": {
+            "historical_data_days": 365,
+            "test_periods": {
+              "quick": 1,
+              "standard": 7,
+              "comprehensive": 30,
+              "full": 90
+            },
+            "initial_capital": 10000,
+            "commission_rate": 0.001,
+            "slippage_percentage": 0.0005
+          },
+          "environment_settings": {
+            "paper": {
+              "description": "Simulated trading with fake money",
+              "api_endpoint": "https://api.kraken.com/0/public",
+              "requires_api_keys": false,
+              "zapier_enabled": false
+            },
+            "sandbox": {
+              "description": "Test environment with sandbox API",
+              "api_endpoint": "https://api-sandbox.kraken.com",
+              "requires_api_keys": true,
+              "zapier_enabled": true
+            },
+            "live": {
+              "description": "Real trading with real money",
+              "api_endpoint": "https://api.kraken.com",
+              "requires_api_keys": true,
+              "requires_2fa": true,
+              "zapier_enabled": true,
+              "approval_required": true
+            }
+          },
+          "integration_settings": {
+            "zapier_mcp": {
+              "enabled": true,
+              "send_trade_signals": true,
+              "log_to_sheets": true,
+              "email_alerts": true,
+              "alert_on_loss_threshold": 0.02
+            },
+            "microsoft_365": {
+              "enabled": true,
+              "sharepoint_logging": true,
+              "teams_notifications": false,
+              "outlook_alerts": true
+            },
+            "notifications": {
+              "email": {
+                "enabled": true,
+                "on_trade_execution": true,
+                "on_stop_loss": true,
+                "on_take_profit": true,
+                "on_emergency_halt": true
+              },
+              "webhook": {
+                "enabled": true,
+                "endpoints": []
+              }
+            }
+          }
+        },
+        "timestamp": "2025-12-22T20:44:49.608824"
+      },
+      {
+        "name": "Config Validation",
+        "status": "PASSED",
+        "duration": 0.000363,
+        "result": {
+          "bot_name": "24/7 Trading Bot",
+          "version": "1.0.0",
+          "description": "Autonomous 24/7 trading bot with paper, demo, and live trading capabilities",
+          "trading_pairs": [
+            "BTC/USD",
+            "ETH/USD",
+            "SOL/USD",
+            "XRP/USD"
+          ],
+          "check_interval_seconds": 60,
+          "performance_check_intervals": {
+            "15_minutes": 900,
+            "1_hour": 3600,
+            "4_hours": 14400,
+            "daily": 86400
+          },
+          "paper_mode": {
+            "initial_capital": 10000,
+            "simulate_slippage": true,
+            "slippage_percentage": 0.0005,
+            "simulate_commission": true,
+            "commission_rate": 0.001,
+            "use_real_market_data": false,
+            "market_data_source": "simulated"
+          },
+          "demo_mode": {
+            "initial_capital": 10000,
+            "api_endpoint": "https://api-sandbox.kraken.com",
+            "requires_api_keys": true,
+            "use_real_market_data": true,
+            "enable_webhooks": true,
+            "enable_zapier_logging": true
+          },
+          "live_mode": {
+            "requires_confirmation": true,
+            "requires_2fa": true,
+            "api_endpoint": "https://api.kraken.com",
+            "max_daily_trades": 50,
+            "emergency_halt_enabled": true,
+            "enable_all_integrations": true
+          },
+          "market_analysis": {
+            "use_pattern_recognition": true,
+            "use_technical_indicators": true,
+            "use_volume_analysis": true,
+            "use_sentiment_analysis": false,
+            "min_confidence_score": 0.75
+          },
+          "execution": {
+            "auto_execute_signals": true,
+            "require_manual_approval": false,
+            "max_position_per_trade_pct": 2.0,
+            "max_total_exposure_pct": 10.0,
+            "enable_stop_loss": true,
+            "enable_take_profit": true,
+            "enable_trailing_stop": true
+          },
+          "monitoring": {
+            "enable_performance_tracking": true,
+            "enable_real_time_dashboard": true,
+            "enable_alerts": true,
+            "enable_logging": true,
+            "log_level": "INFO",
+            "log_rotation": "daily",
+            "keep_logs_days": 30
+          },
+          "alerts": {
+            "email": {
+              "enabled": false,
+              "on_trade_execution": true,
+              "on_stop_loss": true,
+              "on_take_profit": true,
+              "on_error": true
+            },
+            "slack": {
+              "enabled": true,
+              "channel": "#trading-signals",
+              "webhook_url": "",
+              "on_trade_execution": true,
+              "on_stop_loss": true,
+              "on_take_profit": true,
+              "on_performance_milestone": true
+            },
+            "webhook": {
+              "enabled": true,
+              "endpoints": [],
+              "on_trade_execution": true,
+              "on_signal_generated": true
+            }
+          },
+          "integrations": {
+            "zapier": {
+              "enabled": true,
+              "log_trades_to_sheets": true,
+              "send_email_alerts": true,
+              "update_dashboards": true
+            },
+            "google_sheets": {
+              "enabled": true,
+              "spreadsheet_id": "",
+              "sheet_name": "Trading Bot Logs"
+            },
+            "agent_5_0": {
+              "enabled": true,
+              "status_updates": true,
+              "error_reporting": true,
+              "performance_sync": true
+            }
+          },
+          "safety": {
+            "enable_emergency_halt": true,
+            "max_loss_threshold_pct": 5.0,
+            "max_drawdown_threshold_pct": 10.0,
+            "auto_restart_on_error": true,
+            "max_restart_attempts": 10,
+            "restart_delay_seconds": 30
+          },
+          "reporting": {
+            "generate_daily_reports": true,
+            "generate_weekly_reports": true,
+            "generate_monthly_reports": true,
+            "export_format": [
+              "json",
+              "csv",
+              "txt"
+            ],
+            "auto_save_reports": true,
+            "report_directory": "logs/trading_bot/reports"
+          },
+          "backtesting": {
+            "enabled": true,
+            "run_on_startup": false,
+            "test_days": 7,
+            "validate_strategies": true
+          }
+        },
+        "timestamp": "2025-12-22T20:44:49.609306"
+      },
+      {
+        "name": "Strategy Validation - Beginner",
+        "status": "PASSED",
+        "duration": 0.001003,
+        "result": {
+          "profile": "beginner",
+          "results": {
+            "total_trades": 0,
+            "message": "No trades executed"
+          },
+          "validation": "PASSED"
+        },
+        "timestamp": "2025-12-22T20:44:49.610419"
+      },
+      {
+        "name": "Strategy Validation - Advanced",
+        "status": "PASSED",
+        "duration": 0.000814,
+        "result": {
+          "profile": "advanced",
+          "results": {
+            "total_trades": 0,
+            "message": "No trades executed"
+          },
+          "validation": "PASSED"
+        },
+        "timestamp": "2025-12-22T20:44:49.611299"
+      },
+      {
+        "name": "Paper Trading Verification",
+        "status": "PASSED",
+        "duration": 0.00034,
+        "result": {
+          "mode": "paper",
+          "verification": "PASSED"
+        },
+        "timestamp": "2025-12-22T20:44:49.611718"
+      },
+      {
+        "name": "Performance Benchmarks",
+        "status": "PASSED",
+        "duration": 0.002272,
+        "result": {
+          "beginner": {
+            "total_trades": 0,
+            "win_rate": 0,
+            "roi": 0,
+            "profit_factor": 0
+          },
+          "novice": {
+            "total_trades": 0,
+            "win_rate": 0,
+            "roi": 0,
+            "profit_factor": 0
+          },
+          "advanced": {
+            "total_trades": 0,
+            "win_rate": 0,
+            "roi": 0,
+            "profit_factor": 0
+          }
+        },
+        "timestamp": "2025-12-22T20:44:49.614097"
+      }
+    ]
+  },
+  "latest_backtest_metrics": {
+    "beginner": {
+      "total_trades": 0,
+      "message": "No trades executed"
+    },
+    "novice": {
+      "total_trades": 0,
+      "message": "No trades executed"
+    },
+    "advanced": {
+      "profile": "advanced",
+      "total_trades": 1,
+      "winning_trades": 0,
+      "losing_trades": 1,
+      "win_rate": 0.0,
+      "total_profit": 0,
+      "total_loss": 0.22,
+      "net_profit": -0.22,
+      "roi_percentage": -0.0,
+      "initial_capital": 10000,
+      "final_capital": 9999.78,
+      "avg_win": 0,
+      "avg_loss": 0.22,
+      "profit_factor": 0.0,
+      "largest_win": 0,
+      "largest_loss": -0.22362438303788834
+    }
+  }
+}

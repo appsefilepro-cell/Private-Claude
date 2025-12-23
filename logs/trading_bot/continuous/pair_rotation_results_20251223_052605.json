@@ -1,0 +1,112 @@
+{
+  "test_type": "pair_rotation",
+  "timestamp": "2025-12-23T05:26:05.124331",
+  "mode": "paper",
+  "results": [
+    {
+      "pair": "XXBTZUSD",
+      "timestamp": "2025-12-23T05:26:04.116343",
+      "simulated_price": 2843.5,
+      "volume_24h": 1289989.92,
+      "spread_pct": 0.0275,
+      "order_book_depth": 156,
+      "status": "simulated",
+      "liquidity_score": 0.87
+    },
+    {
+      "pair": "XETHZUSD",
+      "timestamp": "2025-12-23T05:26:04.216646",
+      "simulated_price": 2884.77,
+      "volume_24h": 2225241.54,
+      "spread_pct": 0.0194,
+      "order_book_depth": 123,
+      "status": "simulated",
+      "liquidity_score": 0.89
+    },
+    {
+      "pair": "SOLUSD",
+      "timestamp": "2025-12-23T05:26:04.317441",
+      "simulated_price": 2276.97,
+      "volume_24h": 4818199.48,
+      "spread_pct": 0.0115,
+      "order_book_depth": 137,
+      "status": "simulated",
+      "liquidity_score": 0.73
+    },
+    {
+      "pair": "XRPUSD",
+      "timestamp": "2025-12-23T05:26:04.418638",
+      "simulated_price": 2413.28,
+      "volume_24h": 2995811.5,
+      "spread_pct": 0.0172,
+      "order_book_depth": 88,
+      "status": "simulated",
+      "liquidity_score": 0.7
+    },
+    {
+      "pair": "ADAUSD",
+      "timestamp": "2025-12-23T05:26:04.519751",
+      "simulated_price": 2172.81,
+      "volume_24h": 1397104.6,
+      "spread_pct": 0.0358,
+      "order_book_depth": 187,
+      "status": "simulated",
+      "liquidity_score": 0.78
+    },
+    {
+      "pair": "DOTUSD",
+      "timestamp": "2025-12-23T05:26:04.619996",
+      "simulated_price": 2955.22,
+      "volume_24h": 4142703.58,
+      "spread_pct": 0.0243,
+      "order_book_depth": 183,
+      "status": "simulated",
+      "liquidity_score": 0.85
+    },
+    {
+      "pair": "MATICUSD",
+      "timestamp": "2025-12-23T05:26:04.720917",
+      "simulated_price": 2098.66,
+      "volume_24h": 4937429.54,
+      "spread_pct": 0.0389,
+      "order_book_depth": 138,
+      "status": "simulated",
+      "liquidity_score": 0.88
+    },
+    {
+      "pair": "LINKUSD",
+      "timestamp": "2025-12-23T05:26:04.821929",
+      "simulated_price": 2916.86,
+      "volume_24h": 4163377.07,
+      "spread_pct": 0.0401,
+      "order_book_depth": 137,
+      "status": "simulated",
+      "liquidity_score": 0.84
+    },
+    {
+      "pair": "AVAXUSD",
+      "timestamp": "2025-12-23T05:26:04.922115",
+      "simulated_price": 2911.14,
+      "volume_24h": 1480257.09,
+      "spread_pct": 0.0443,
+      "order_book_depth": 136,
+      "status": "simulated",
+      "liquidity_score": 0.77
+    },
+    {
+      "pair": "ATOMUSD",
+      "timestamp": "2025-12-23T05:26:05.023077",
+      "simulated_price": 2588.45,
+      "volume_24h": 3733830.6,
+      "spread_pct": 0.0165,
+      "order_book_depth": 136,
+      "status": "simulated",
+      "liquidity_score": 0.84
+    }
+  ],
+  "summary": {
+    "total_tests": 10,
+    "successful": 10,
+    "errors": 0
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "timestamp": "2025-12-23T05:21:44.880326",
+  "summary": {
+    "total_performance_files": 2,
+    "total_backtest_files": 24,
+    "total_test_result_files": 2,
+    "total_trades_across_all_tests": 2,
+    "total_profit_loss": 40,
+    "profiles_tested": [
+      "advanced",
+      "beginner",
+      "novice"
+    ],
+    "trading_pairs_tested": [
+      "BTC/USD",
+      "ETH/USD",
+      "SOL/USD"
+    ]
+  }
+}

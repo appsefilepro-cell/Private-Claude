@@ -1,0 +1,51 @@
+{
+  "metadata": {
+    "start_time": "2025-12-23T05:23:47.425227",
+    "current_time": "2025-12-23T05:26:05.124643",
+    "mode": "paper"
+  },
+  "statistics": {
+    "total_tests": 374,
+    "patterns_tested": 24,
+    "pairs_tested": 10,
+    "signals_generated": 197
+  },
+  "pattern_distribution": {
+    "HAMMER": 11,
+    "INVERTED_HAMMER": 11,
+    "BULLISH_ENGULFING": 11,
+    "MORNING_STAR": 11,
+    "THREE_WHITE_SOLDIERS": 11,
+    "DRAGONFLY_DOJI": 11,
+    "PIERCING_PATTERN": 11,
+    "BULLISH_HARAMI": 11,
+    "RISING_THREE_METHODS": 11,
+    "THREE_INSIDE_UP": 11,
+    "BULLISH_MARUBOZU": 11,
+    "BULLISH_SPINNING_TOP": 11,
+    "SHOOTING_STAR": 11,
+    "HANGING_MAN": 11,
+    "BEARISH_ENGULFING": 11,
+    "EVENING_STAR": 11,
+    "THREE_BLACK_CROWS": 11,
+    "GRAVESTONE_DOJI": 11,
+    "DARK_CLOUD_COVER": 11,
+    "BEARISH_HARAMI": 11,
+    "FALLING_THREE_METHODS": 11,
+    "THREE_INSIDE_DOWN": 11,
+    "BEARISH_MARUBOZU": 11,
+    "BEARISH_SPINNING_TOP": 11
+  },
+  "pair_distribution": {
+    "XXBTZUSD": 11,
+    "XETHZUSD": 11,
+    "SOLUSD": 11,
+    "XRPUSD": 11,
+    "ADAUSD": 11,
+    "DOTUSD": 11,
+    "MATICUSD": 11,
+    "LINKUSD": 11,
+    "AVAXUSD": 11,
+    "ATOMUSD": 11
+  }
+}
