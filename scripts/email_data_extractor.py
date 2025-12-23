@@ -13,6 +13,12 @@ from typing import Dict, List, Any, Optional
 import imaplib
 import email
 from email.header import decode_header
+from pathlib import Path
+from dotenv import load_dotenv
+
+# Load environment variables from config/.env
+env_path = Path(__file__).parent.parent / 'config' / '.env'
+load_dotenv(dotenv_path=env_path)
 
 class EmailDataExtractor:
     """Extract actionable data from emails"""
@@ -207,17 +213,22 @@ class TaskAutomation:
 
     def save_task_locally(self, task: Dict[str, Any]):
         """Save task to local JSON file"""
-        filename = f"{self.output_dir}/tasks_{datetime.now().strftime('%Y%m%d')}.json"
+        tasks_dir = f"{self.output_dir}/tasks"
+        os.makedirs(tasks_dir, exist_ok=True)
+        filename = f"{tasks_dir}/tasks_{datetime.now().strftime('%Y%m%d')}.json"
 
         tasks = []
         if os.path.exists(filename):
             with open(filename, 'r') as f:
                 tasks = json.load(f)
 
+        task['saved_at'] = datetime.utcnow().isoformat()
         tasks.append(task)
 
         with open(filename, 'w') as f:
             json.dump(tasks, f, indent=2)
+
+        print(f"   ✅ Task saved: {task.get('title', 'Untitled')[:50]}...")
 
     def create_reminder(self, reminder: Dict[str, Any]) -> bool:
         """Create reminder in Google Calendar"""
@@ -236,17 +247,22 @@ class TaskAutomation:
 
     def save_reminder_locally(self, reminder: Dict[str, Any]):
         """Save reminder to local JSON file"""
-        filename = f"{self.output_dir}/reminders_{datetime.now().strftime('%Y%m%d')}.json"
+        reminders_dir = f"{self.output_dir}/reminders"
+        os.makedirs(reminders_dir, exist_ok=True)
+        filename = f"{reminders_dir}/reminders_{datetime.now().strftime('%Y%m%d')}.json"
 
         reminders = []
         if os.path.exists(filename):
             with open(filename, 'r') as f:
                 reminders = json.load(f)
 
+        reminder['saved_at'] = datetime.utcnow().isoformat()
         reminders.append(reminder)
 
         with open(filename, 'w') as f:
             json.dump(reminders, f, indent=2)
+
+        print(f"   ⏰ Reminder saved: {reminder.get('reminder', 'Untitled')[:50]}...")
 
     def generate_document_request(self, documents: List[str]) -> Dict[str, Any]:
         """Generate document generation request"""
@@ -256,6 +272,46 @@ class TaskAutomation:
             'requested_at': datetime.utcnow().isoformat(),
             'status': 'pending'
         }
+
+    def save_document_request(self, documents: List[str], email_subject: str):
+        """Save document request to local file"""
+        docs_dir = f"{self.output_dir}/documents"
+        os.makedirs(docs_dir, exist_ok=True)
+        filename = f"{docs_dir}/document_requests_{datetime.now().strftime('%Y%m%d')}.json"
+
+        requests = []
+        if os.path.exists(filename):
+            with open(filename, 'r') as f:
+                requests = json.load(f)
+
+        doc_request = {
+            'email_subject': email_subject,
+            'documents': documents,
+            'requested_at': datetime.utcnow().isoformat(),
+            'status': 'pending'
+        }
+        requests.append(doc_request)
+
+        with open(filename, 'w') as f:
+            json.dump(requests, f, indent=2)
+
+        print(f"   📄 Document request saved: {len(documents)} documents")
+
+    def save_processed_email(self, email_data: Dict[str, Any]):
+        """Save processed email metadata"""
+        processed_dir = f"{self.output_dir}/processed_emails"
+        os.makedirs(processed_dir, exist_ok=True)
+        filename = f"{processed_dir}/processed_{datetime.now().strftime('%Y%m%d')}.json"
+
+        emails = []
+        if os.path.exists(filename):
+            with open(filename, 'r') as f:
+                emails = json.load(f)
+
+        emails.append(email_data)
+
+        with open(filename, 'w') as f:
+            json.dump(emails, f, indent=2)
 
 
 def main():
@@ -294,8 +350,10 @@ def main():
         # Track documents needed
         if email_data['documents_needed']:
             total_docs += len(email_data['documents_needed'])
-            doc_request = automation.generate_document_request(email_data['documents_needed'])
-            print(f"   📄 Documents needed: {', '.join(email_data['documents_needed'])}")
+            automation.save_document_request(email_data['documents_needed'], email_data['subject'])
+
+        # Save processed email metadata
+        automation.save_processed_email(email_data)
 
     # Summary
     print("\n" + "="*60)

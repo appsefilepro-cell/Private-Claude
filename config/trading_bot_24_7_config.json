@@ -1,0 +1,147 @@
+{
+  "bot_name": "24/7 Trading Bot",
+  "version": "1.0.0",
+  "description": "Autonomous 24/7 trading bot with paper, demo, and live trading capabilities",
+
+  "trading_pairs": [
+    "BTC/USD",
+    "ETH/USD",
+    "SOL/USD",
+    "XRP/USD"
+  ],
+
+  "check_interval_seconds": 60,
+
+  "performance_check_intervals": {
+    "15_minutes": 900,
+    "1_hour": 3600,
+    "4_hours": 14400,
+    "daily": 86400
+  },
+
+  "paper_mode": {
+    "initial_capital": 10000,
+    "simulate_slippage": true,
+    "slippage_percentage": 0.0005,
+    "simulate_commission": true,
+    "commission_rate": 0.001,
+    "use_real_market_data": false,
+    "market_data_source": "simulated"
+  },
+
+  "demo_mode": {
+    "initial_capital": 10000,
+    "api_endpoint": "https://api-sandbox.kraken.com",
+    "requires_api_keys": true,
+    "use_real_market_data": true,
+    "enable_webhooks": true,
+    "enable_zapier_logging": true
+  },
+
+  "live_mode": {
+    "requires_confirmation": true,
+    "requires_2fa": true,
+    "api_endpoint": "https://api.kraken.com",
+    "max_daily_trades": 50,
+    "emergency_halt_enabled": true,
+    "enable_all_integrations": true
+  },
+
+  "market_analysis": {
+    "use_pattern_recognition": true,
+    "use_technical_indicators": true,
+    "use_volume_analysis": true,
+    "use_sentiment_analysis": false,
+    "min_confidence_score": 0.75
+  },
+
+  "execution": {
+    "auto_execute_signals": true,
+    "require_manual_approval": false,
+    "max_position_per_trade_pct": 2.0,
+    "max_total_exposure_pct": 10.0,
+    "enable_stop_loss": true,
+    "enable_take_profit": true,
+    "enable_trailing_stop": true
+  },
+
+  "monitoring": {
+    "enable_performance_tracking": true,
+    "enable_real_time_dashboard": true,
+    "enable_alerts": true,
+    "enable_logging": true,
+    "log_level": "INFO",
+    "log_rotation": "daily",
+    "keep_logs_days": 30
+  },
+
+  "alerts": {
+    "email": {
+      "enabled": false,
+      "on_trade_execution": true,
+      "on_stop_loss": true,
+      "on_take_profit": true,
+      "on_error": true
+    },
+    "slack": {
+      "enabled": true,
+      "channel": "#trading-signals",
+      "webhook_url": "",
+      "on_trade_execution": true,
+      "on_stop_loss": true,
+      "on_take_profit": true,
+      "on_performance_milestone": true
+    },
+    "webhook": {
+      "enabled": true,
+      "endpoints": [],
+      "on_trade_execution": true,
+      "on_signal_generated": true
+    }
+  },
+
+  "integrations": {
+    "zapier": {
+      "enabled": true,
+      "log_trades_to_sheets": true,
+      "send_email_alerts": true,
+      "update_dashboards": true
+    },
+    "google_sheets": {
+      "enabled": true,
+      "spreadsheet_id": "",
+      "sheet_name": "Trading Bot Logs"
+    },
+    "agent_5_0": {
+      "enabled": true,
+      "status_updates": true,
+      "error_reporting": true,
+      "performance_sync": true
+    }
+  },
+
+  "safety": {
+    "enable_emergency_halt": true,
+    "max_loss_threshold_pct": 5.0,
+    "max_drawdown_threshold_pct": 10.0,
+    "auto_restart_on_error": true,
+    "max_restart_attempts": 10,
+    "restart_delay_seconds": 30
+  },
+
+  "reporting": {
+    "generate_daily_reports": true,
+    "generate_weekly_reports": true,
+    "generate_monthly_reports": true,
+    "export_format": ["json", "csv", "txt"],
+    "auto_save_reports": true,
+    "report_directory": "logs/trading_bot/reports"
+  },
+
+  "backtesting": {
+    "enabled": true,
+    "run_on_startup": false,
+    "test_days": 7,
+    "validate_strategies": true
+  }
+}

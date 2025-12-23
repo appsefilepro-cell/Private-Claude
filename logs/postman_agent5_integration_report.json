@@ -1,0 +1,24 @@
+{
+  "timestamp": "2025-12-22T20:46:55.229496",
+  "agent_5_version": "5.0.0",
+  "postman_integration": {
+    "enabled": true,
+    "last_test_run": null,
+    "last_test_success": null,
+    "automated_testing_enabled": true,
+    "scheduled_tests": "Hourly",
+    "scheduled_sync": "Daily at 02:00"
+  },
+  "integrations": {
+    "e2b": true,
+    "github": true,
+    "zapier": true,
+    "slack": true
+  },
+  "test_configuration": {
+    "collection_path": "/home/user/Private-Claude/config/postman_complete_collection.json",
+    "environment_path": "/home/user/Private-Claude/config/postman_environment.json",
+    "test_results_dir": "/home/user/Private-Claude/test-results",
+    "log_file": "/home/user/Private-Claude/logs/postman_agent5.log"
+  }
+}

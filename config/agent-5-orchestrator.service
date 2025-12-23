@@ -1,0 +1,44 @@
+[Unit]
+Description=Agent 5.0 Enterprise Automation Orchestrator
+Documentation=https://github.com/appsefilepro-cell/Private-Claude
+After=network.target
+
+[Service]
+Type=simple
+User=ubuntu
+Group=ubuntu
+WorkingDirectory=/home/user/Private-Claude
+Environment="PATH=/usr/bin:/usr/local/bin"
+Environment="PYTHONPATH=/home/user/Private-Claude"
+
+# Main execution command
+ExecStart=/usr/bin/python3 /home/user/Private-Claude/scripts/agent_5_orchestrator.py
+
+# Restart configuration
+Restart=always
+RestartSec=10
+StartLimitBurst=5
+StartLimitInterval=300
+
+# Resource limits
+MemoryLimit=2G
+CPUQuota=100%
+
+# Logging
+StandardOutput=append:/home/user/Private-Claude/logs/agent_5_orchestrator.log
+StandardError=append:/home/user/Private-Claude/logs/agent_5_orchestrator_error.log
+SyslogIdentifier=agent-5-orchestrator
+
+# Security hardening
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=read-only
+ReadWritePaths=/home/user/Private-Claude/logs
+ReadWritePaths=/home/user/Private-Claude/pillar-a-trading
+ReadWritePaths=/home/user/Private-Claude/pillar-b-legal
+ReadWritePaths=/home/user/Private-Claude/pillar-c-federal
+ReadWritePaths=/home/user/Private-Claude/pillar-d-nonprofit
+
+[Install]
+WantedBy=multi-user.target

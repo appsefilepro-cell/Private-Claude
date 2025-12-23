@@ -1,0 +1,123 @@
+{
+  "timestamp": "2025-12-22T20:44:15.160208",
+  "tests_run": 5,
+  "tests_passed": 5,
+  "tests_failed": 0,
+  "workflow_tests": [
+    {
+      "workflow_id": "zap_001",
+      "workflow_name": "Gmail to Task Extraction",
+      "status": "configured",
+      "webhook_url": "https://hooks.zapier.com/hooks/catch/zap_001/gmail-to-task-extraction/",
+      "test_data": {
+        "from": "test@example.com",
+        "to": "terobinsonwy@gmail.com",
+        "subject": "Test Email - Action Items for Agent 5.0",
+        "body": "\n            Hi,\n\n            Here are the tasks for today:\n            - Review the Form 1023 application for ABC Nonprofit\n            - Schedule meeting with legal team for 2pm\n            - Prepare probate documents for Case #12345\n            - Follow up on trading bot performance report\n\n            Documents needed:\n            - Financial statements Q4 2024\n            - Board meeting minutes\n            - Tax exemption forms\n\n            Deadline: December 25, 2025\n\n            Thanks!\n            ",
+        "date": "2025-12-22T20:44:15.160779",
+        "has_attachment": false,
+        "is_unread": true,
+        "category": "primary"
+      },
+      "expected_tasks": [
+        "Review the Form 1023 application for ABC Nonprofit",
+        "Schedule meeting with legal team for 2pm",
+        "Prepare probate documents for Case #12345",
+        "Follow up on trading bot performance report"
+      ],
+      "expected_documents": [
+        "Financial statements Q4 2024",
+        "Board meeting minutes",
+        "Tax exemption forms"
+      ],
+      "deadline": "December 25, 2025",
+      "tested_at": "2025-12-22T20:44:15.161056"
+    },
+    {
+      "workflow_id": "zap_002",
+      "workflow_name": "Email to Document Generator",
+      "status": "configured",
+      "webhook_url": "https://hooks.zapier.com/hooks/catch/zap_002/email-to-document-generator/",
+      "test_data": {
+        "from": "client@example.com",
+        "to": "terobinsonwy@gmail.com",
+        "subject": "Form 1023 Application Documents",
+        "body": "Please find attached the required documents for processing.",
+        "date": "2025-12-22T20:44:15.161230",
+        "has_attachment": true,
+        "attachments": [
+          {
+            "filename": "financial_statements.pdf",
+            "size": 524288,
+            "mime_type": "application/pdf"
+          },
+          {
+            "filename": "board_minutes.docx",
+            "size": 102400,
+            "mime_type": "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+          }
+        ]
+      },
+      "tested_at": "2025-12-22T20:44:15.161411"
+    },
+    {
+      "workflow_id": "zap_003",
+      "workflow_name": "Form 1023 Auto-Generator",
+      "status": "configured",
+      "webhook_url": "https://hooks.zapier.com/hooks/catch/zap_003/form-1023-auto-generator/",
+      "test_data": {
+        "organization_name": "Test Nonprofit Organization",
+        "ein": "12-3456789",
+        "address": "123 Main St, Anytown, USA",
+        "contact_email": "contact@testnonprofit.org",
+        "contact_phone": "555-123-4567",
+        "purpose": "Educational and charitable activities",
+        "activities": "Community outreach and education programs",
+        "annual_revenue": 50000,
+        "form_type": "Form 1023-EZ",
+        "timestamp": "2025-12-22T20:44:15.161510"
+      },
+      "tested_at": "2025-12-22T20:44:15.161850"
+    },
+    {
+      "workflow_id": "zap_004",
+      "workflow_name": "Legal Document Automation",
+      "status": "configured",
+      "webhook_url": "https://hooks.zapier.com/hooks/catch/zap_004/legal-document-automation/",
+      "test_data": {
+        "document_type": "probate_petition",
+        "case_number": 12345,
+        "case_caption": "Estate of John Doe",
+        "decedent_name": "John Doe",
+        "date_of_death": "2024-06-15",
+        "petitioner_name": "Jane Doe",
+        "estimated_value": 250000,
+        "jurisdiction": "Wyoming",
+        "filing_date": "2025-12-22T20:44:15.162003"
+      },
+      "tested_at": "2025-12-22T20:44:15.162314"
+    },
+    {
+      "workflow_id": "zap_005",
+      "workflow_name": "Trading Alert to Action",
+      "status": "configured",
+      "webhook_url": "https://hooks.zapier.com/hooks/catch/zap_005/trading-alert-to-action/",
+      "test_data": {
+        "signal_type": "BUY",
+        "pair": "BTC/USD",
+        "signal_strength": 0.85,
+        "price": 95000,
+        "pattern": "HAMMER",
+        "confidence": 0.85,
+        "indicators": {
+          "rsi": 35,
+          "macd": "bullish",
+          "volume": "high"
+        },
+        "timestamp": "2025-12-22T20:44:15.162401"
+      },
+      "filter_passed": true,
+      "tested_at": "2025-12-22T20:44:15.162621"
+    }
+  ]
+}

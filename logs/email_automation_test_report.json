@@ -1,0 +1,482 @@
+{
+  "test_type": "simulated_email_processing",
+  "timestamp": "2025-12-22T20:46:03.753262",
+  "email_account": "terobinsonwy@gmail.com",
+  "status": "success",
+  "summary": {
+    "emails_processed": 5,
+    "tasks_extracted": 44,
+    "reminders_extracted": 7,
+    "documents_identified": 8,
+    "deadlines_found": 4
+  },
+  "emails": [
+    {
+      "subject": "Q4 Financial Review - Action Items",
+      "from": "cfo@company.com",
+      "date": "Mon, 18 Dec 2024 09:30:00 -0700",
+      "tasks": [
+        {
+          "title": "Review and approve the Q4 budget report by December 28",
+          "description": "Review and approve the Q4 budget report by December 28",
+          "source": "email",
+          "created_at": "2025-12-22T20:46:03.696518",
+          "saved_at": "2025-12-22T20:46:03.698218"
+        },
+        {
+          "title": "Update the financial forecast spreadsheet with revised projections",
+          "description": "Update the financial forecast spreadsheet with revised projections",
+          "source": "email",
+          "created_at": "2025-12-22T20:46:03.696529",
+          "saved_at": "2025-12-22T20:46:03.699201"
+        },
+        {
+          "title": "send me the following documents:",
+          "description": "send me the following documents:",
+          "source": "email",
+          "created_at": "2025-12-22T20:46:03.696654",
+          "saved_at": "2025-12-22T20:46:03.700059"
+        },
+        {
+          "title": "be completed by December 31, 2024",
+          "description": "be completed by December 31, 2024",
+          "source": "email",
+          "created_at": "2025-12-22T20:46:03.696662",
+          "saved_at": "2025-12-22T20:46:03.700836"
+        },
+        {
+          "title": "Prepare presentation slides for the board meeting",
+          "description": "Prepare presentation slides for the board meeting",
+          "source": "email",
+          "created_at": "2025-12-22T20:46:03.696741",
+          "saved_at": "2025-12-22T20:46:03.701619"
+        },
+        {
+          "title": "Schedule follow-up meeting with department heads",
+          "description": "Schedule follow-up meeting with department heads",
+          "source": "email",
+          "created_at": "2025-12-22T20:46:03.696746",
+          "saved_at": "2025-12-22T20:46:03.702421"
+        },
+        {
+          "title": "Form 1023 for tax-exempt status application",
+          "description": "Form 1023 for tax-exempt status application",
+          "source": "email",
+          "created_at": "2025-12-22T20:46:03.696749",
+          "saved_at": "2025-12-22T20:46:03.703219"
+        },
+        {
+          "title": "Updated W-2 forms for all employees",
+          "description": "Updated W-2 forms for all employees",
+          "source": "email",
+          "created_at": "2025-12-22T20:46:03.696751",
+          "saved_at": "2025-12-22T20:46:03.704040"
+        },
+        {
+          "title": "Final audit report from external auditors",
+          "description": "Final audit report from external auditors",
+          "source": "email",
+          "created_at": "2025-12-22T20:46:03.696753",
+          "saved_at": "2025-12-22T20:46:03.704896"
+        },
+        {
+          "title": "2024.\n\nRemind me to follow up with the auditing team next Friday.",
+          "description": "2024.\n\nRemind me to follow up with the auditing team next Friday.",
+          "source": "email",
+          "created_at": "2025-12-22T20:46:03.696841",
+          "saved_at": "2025-12-22T20:46:03.705726"
+        }
+      ],
+      "deadlines": [
+        {
+          "date": "December 31, 2024",
+          "context": "l auditors\n\nDeadline: All items must be completed by December 31, 2024.\n\nRemind me to follow up with the auditing team n",
+          "extracted_at": "2025-12-22T20:46:03.696996"
+        }
+      ],
+      "documents_needed": [
+        "send me the following document",
+        "Form 1023",
+        "1023",
+        "W-2"
+      ],
+      "reminders": [
+        {
+          "reminder": "follow up with the auditing team next Friday",
+          "created_at": "2025-12-22T20:46:03.697581",
+          "saved_at": "2025-12-22T20:46:03.706452"
+        },
+        {
+          "reminder": "with the auditing team next Friday",
+          "created_at": "2025-12-22T20:46:03.697684",
+          "saved_at": "2025-12-22T20:46:03.707254"
+        }
+      ],
+      "processed_at": "2025-12-22T20:46:03.697687"
+    },
+    {
+      "subject": "Client Project - Deliverables and Timeline",
+      "from": "project.manager@client.com",
+      "date": "Tue, 19 Dec 2024 14:15:00 -0700",
+      "tasks": [
+        {
+          "title": "address these items:",
+          "description": "address these items:",
+          "source": "email",
+          "created_at": "2025-12-22T20:46:03.709150",
+          "saved_at": "2025-12-22T20:46:03.710596"
+        },
+        {
+          "title": "receive the technical documentation by December 26, 2024",
+          "description": "receive the technical documentation by December 26, 2024",
+          "source": "email",
+          "created_at": "2025-12-22T20:46:03.709161",
+          "saved_at": "2025-12-22T20:46:03.711525"
+        },
+        {
+          "title": "submit the following:",
+          "description": "submit the following:",
+          "source": "email",
+          "created_at": "2025-12-22T20:46:03.709163",
+          "saved_at": "2025-12-22T20:46:03.712369"
+        },
+        {
+          "title": "Project proposal document",
+          "description": "Project proposal document",
+          "source": "email",
+          "created_at": "2025-12-22T20:46:03.709174",
+          "saved_at": "2025-12-22T20:46:03.713194"
+        },
+        {
+          "title": "Technical specification PDF",
+          "description": "Technical specification PDF",
+          "source": "email",
+          "created_at": "2025-12-22T20:46:03.709176",
+          "saved_at": "2025-12-22T20:46:03.714036"
+        },
+        {
+          "title": "Risk assessment report",
+          "description": "Risk assessment report",
+          "source": "email",
+          "created_at": "2025-12-22T20:46:03.709177",
+          "saved_at": "2025-12-22T20:46:03.714970"
+        },
+        {
+          "title": "1. Complete the initial design mockups",
+          "description": "1. Complete the initial design mockups",
+          "source": "email",
+          "created_at": "2025-12-22T20:46:03.709184",
+          "saved_at": "2025-12-22T20:46:03.715912"
+        },
+        {
+          "title": "2. Review API integration requirements",
+          "description": "2. Review API integration requirements",
+          "source": "email",
+          "created_at": "2025-12-22T20:46:03.709186",
+          "saved_at": "2025-12-22T20:46:03.716816"
+        },
+        {
+          "title": "3. Set up staging environment for testing",
+          "description": "3. Set up staging environment for testing",
+          "source": "email",
+          "created_at": "2025-12-22T20:46:03.709188",
+          "saved_at": "2025-12-22T20:46:03.717643"
+        },
+        {
+          "title": "2024.\n\nPlease submit the following:",
+          "description": "2024.\n\nPlease submit the following:",
+          "source": "email",
+          "created_at": "2025-12-22T20:46:03.709191",
+          "saved_at": "2025-12-22T20:46:03.718461"
+        }
+      ],
+      "deadlines": [
+        {
+          "date": "December 26, 2024",
+          "context": "ting\n\nNeed to receive the technical documentation by December 26, 2024.\n\nPlease submit the following:\n- Project proposal",
+          "extracted_at": "2025-12-22T20:46:03.709215"
+        }
+      ],
+      "documents_needed": [
+        "Need to receive the technical document"
+      ],
+      "reminders": [
+        {
+          "reminder": "schedule the kickoff meeting for early January",
+          "created_at": "2025-12-22T20:46:03.709301",
+          "saved_at": "2025-12-22T20:46:03.719365"
+        }
+      ],
+      "processed_at": "2025-12-22T20:46:03.709314"
+    },
+    {
+      "subject": "Legal Documents Required - Urgent",
+      "from": "legal@lawfirm.com",
+      "date": "Wed, 20 Dec 2024 11:00:00 -0700",
+      "tasks": [
+        {
+          "title": "Sign and return the engagement agreement",
+          "description": "Sign and return the engagement agreement",
+          "source": "email",
+          "created_at": "2025-12-22T20:46:03.721413",
+          "saved_at": "2025-12-22T20:46:03.722190"
+        },
+        {
+          "title": "Provide copies of all relevant contracts",
+          "description": "Provide copies of all relevant contracts",
+          "source": "email",
+          "created_at": "2025-12-22T20:46:03.721417",
+          "saved_at": "2025-12-22T20:46:03.723139"
+        },
+        {
+          "title": "be received by December 27, 2024 to meet the filing deadline",
+          "description": "be received by December 27, 2024 to meet the filing deadline",
+          "source": "email",
+          "created_at": "2025-12-22T20:46:03.721437",
+          "saved_at": "2025-12-22T20:46:03.724042"
+        },
+        {
+          "title": "Corporate bylaws and articles of incorporation",
+          "description": "Corporate bylaws and articles of incorporation",
+          "source": "email",
+          "created_at": "2025-12-22T20:46:03.721445",
+          "saved_at": "2025-12-22T20:46:03.724971"
+        },
+        {
+          "title": "Form 990 for the past 3 years",
+          "description": "Form 990 for the past 3 years",
+          "source": "email",
+          "created_at": "2025-12-22T20:46:03.721446",
+          "saved_at": "2025-12-22T20:46:03.725902"
+        },
+        {
+          "title": "Employment contracts for key personnel",
+          "description": "Employment contracts for key personnel",
+          "source": "email",
+          "created_at": "2025-12-22T20:46:03.721448",
+          "saved_at": "2025-12-22T20:46:03.726789"
+        },
+        {
+          "title": "Partnership agreement (if applicable)",
+          "description": "Partnership agreement (if applicable)",
+          "source": "email",
+          "created_at": "2025-12-22T20:46:03.721450",
+          "saved_at": "2025-12-22T20:46:03.727749"
+        }
+      ],
+      "deadlines": [
+        {
+          "date": "December 27, 2024",
+          "context": "agreement (if applicable)\n\nThese must be received by December 27, 2024 to meet the filing deadline.\n\nRemind me to follow",
+          "extracted_at": "2025-12-22T20:46:03.721480"
+        }
+      ],
+      "documents_needed": [
+        "require the following document",
+        "Form 990",
+        "990"
+      ],
+      "reminders": [
+        {
+          "reminder": "follow up if we haven't received everything by Monday",
+          "created_at": "2025-12-22T20:46:03.721579",
+          "saved_at": "2025-12-22T20:46:03.728640"
+        },
+        {
+          "reminder": "if we haven't received everything by Monday",
+          "created_at": "2025-12-22T20:46:03.721593",
+          "saved_at": "2025-12-22T20:46:03.729424"
+        }
+      ],
+      "processed_at": "2025-12-22T20:46:03.721594"
+    },
+    {
+      "subject": "Conference Preparation Checklist",
+      "from": "events@conference.org",
+      "date": "Thu, 21 Dec 2024 16:45:00 -0700",
+      "tasks": [
+        {
+          "title": "complete these tasks:",
+          "description": "complete these tasks:",
+          "source": "email",
+          "created_at": "2025-12-22T20:46:03.731786",
+          "saved_at": "2025-12-22T20:46:03.732525"
+        },
+        {
+          "title": "submit your materials by January 5, 2025",
+          "description": "submit your materials by January 5, 2025",
+          "source": "email",
+          "created_at": "2025-12-22T20:46:03.731796",
+          "saved_at": "2025-12-22T20:46:03.733475"
+        },
+        {
+          "title": "Book travel arrangements (flights and hotel)",
+          "description": "Book travel arrangements (flights and hotel)",
+          "source": "email",
+          "created_at": "2025-12-22T20:46:03.731804",
+          "saved_at": "2025-12-22T20:46:03.734385"
+        },
+        {
+          "title": "Prepare your presentation slides (30-minute slot)",
+          "description": "Prepare your presentation slides (30-minute slot)",
+          "source": "email",
+          "created_at": "2025-12-22T20:46:03.731808",
+          "saved_at": "2025-12-22T20:46:03.735294"
+        },
+        {
+          "title": "Submit your bio and headshot for the program",
+          "description": "Submit your bio and headshot for the program",
+          "source": "email",
+          "created_at": "2025-12-22T20:46:03.731811",
+          "saved_at": "2025-12-22T20:46:03.736191"
+        },
+        {
+          "title": "Review and approve the conference agenda",
+          "description": "Review and approve the conference agenda",
+          "source": "email",
+          "created_at": "2025-12-22T20:46:03.731813",
+          "saved_at": "2025-12-22T20:46:03.737110"
+        },
+        {
+          "title": "2025.\n\nFollow up with the venue coordinator regarding A/V requirements.",
+          "description": "2025.\n\nFollow up with the venue coordinator regarding A/V requirements.",
+          "source": "email",
+          "created_at": "2025-12-22T20:46:03.731823",
+          "saved_at": "2025-12-22T20:46:03.738038"
+        }
+      ],
+      "deadlines": [
+        {
+          "date": "January 5, 2025",
+          "context": " conference agenda\n\nNeed to submit your materials by January 5, 2025.\n\nFollow up with the venue coordinator regarding ",
+          "extracted_at": "2025-12-22T20:46:03.731840"
+        }
+      ],
+      "documents_needed": [],
+      "reminders": [
+        {
+          "reminder": "with the venue coordinator regarding A/V requirements",
+          "created_at": "2025-12-22T20:46:03.731924",
+          "saved_at": "2025-12-22T20:46:03.739111"
+        }
+      ],
+      "processed_at": "2025-12-22T20:46:03.731926"
+    },
+    {
+      "subject": "Monthly Team Sync - Discussion Topics",
+      "from": "team.lead@company.com",
+      "date": "Fri, 22 Dec 2024 10:30:00 -0700",
+      "tasks": [
+        {
+          "title": "Prepare Q1 2025 goals and objectives",
+          "description": "Prepare Q1 2025 goals and objectives",
+          "source": "email",
+          "created_at": "2025-12-22T20:46:03.740693",
+          "saved_at": "2025-12-22T20:46:03.741471"
+        },
+        {
+          "title": "Review team performance metrics from December",
+          "description": "Review team performance metrics from December",
+          "source": "email",
+          "created_at": "2025-12-22T20:46:03.740698",
+          "saved_at": "2025-12-22T20:46:03.742487"
+        },
+        {
+          "title": "review these topics:",
+          "description": "review these topics:",
+          "source": "email",
+          "created_at": "2025-12-22T20:46:03.740709",
+          "saved_at": "2025-12-22T20:46:03.743524"
+        },
+        {
+          "title": "send the following before the meeting:",
+          "description": "send the following before the meeting:",
+          "source": "email",
+          "created_at": "2025-12-22T20:46:03.740718",
+          "saved_at": "2025-12-22T20:46:03.744478"
+        },
+        {
+          "title": "Budget allocation for new tools and software",
+          "description": "Budget allocation for new tools and software",
+          "source": "email",
+          "created_at": "2025-12-22T20:46:03.740727",
+          "saved_at": "2025-12-22T20:46:03.745424"
+        },
+        {
+          "title": "Hiring plans for the first quarter",
+          "description": "Hiring plans for the first quarter",
+          "source": "email",
+          "created_at": "2025-12-22T20:46:03.740729",
+          "saved_at": "2025-12-22T20:46:03.746443"
+        },
+        {
+          "title": "Process improvements and efficiency gains",
+          "description": "Process improvements and efficiency gains",
+          "source": "email",
+          "created_at": "2025-12-22T20:46:03.740731",
+          "saved_at": "2025-12-22T20:46:03.747462"
+        },
+        {
+          "title": "Individual performance reports",
+          "description": "Individual performance reports",
+          "source": "email",
+          "created_at": "2025-12-22T20:46:03.740733",
+          "saved_at": "2025-12-22T20:46:03.748478"
+        },
+        {
+          "title": "Department budget requests",
+          "description": "Department budget requests",
+          "source": "email",
+          "created_at": "2025-12-22T20:46:03.740735",
+          "saved_at": "2025-12-22T20:46:03.749507"
+        },
+        {
+          "title": "Training and development proposals",
+          "description": "Training and development proposals",
+          "source": "email",
+          "created_at": "2025-12-22T20:46:03.740737",
+          "saved_at": "2025-12-22T20:46:03.750566"
+        }
+      ],
+      "deadlines": [],
+      "documents_needed": [],
+      "reminders": [
+        {
+          "reminder": "send out the meeting agenda by end of day",
+          "created_at": "2025-12-22T20:46:03.740850",
+          "saved_at": "2025-12-22T20:46:03.751521"
+        }
+      ],
+      "processed_at": "2025-12-22T20:46:03.740864"
+    }
+  ],
+  "extraction_patterns": {
+    "tasks": [
+      "TODO/To do patterns",
+      "Action verbs (please, need to, must)",
+      "Bullet points (-/*)",
+      "Numbered lists (1.2.3.)"
+    ],
+    "reminders": [
+      "Remind me/reminder",
+      "Don't forget",
+      "Follow up/check in"
+    ],
+    "deadlines": [
+      "Due/deadline/by/before + date",
+      "Date formats: MM/DD/YYYY, YYYY-MM-DD",
+      "Written dates"
+    ],
+    "documents": [
+      "Form + number",
+      "Tax forms (W-2, 1099, 990, 1023)",
+      "Document keywords + types"
+    ]
+  },
+  "next_steps": [
+    "Configure Gmail app password in .env",
+    "Set up Zapier webhooks for task/reminder creation",
+    "Test with actual Gmail inbox",
+    "Enable continuous automation mode"
+  ]
+}

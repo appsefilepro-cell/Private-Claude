@@ -4,7 +4,8 @@
     "description": "Complete API testing collection with all integrations: E2B, GitHub, GitLab, Zapier, Slack, Gemini, Google Workspace, Microsoft 365, Dropbox, and Email",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
     "_postman_id": "private-claude-complete-api-collection",
-    "version": "2.0.0"
+    "version": "2.0.0",
+    "_updated_at": "2025-12-22T20:43:06.489676"
   },
   "auth": {
     "type": "bearer",
@@ -170,8 +171,12 @@
             },
             "url": {
               "raw": "{{e2b_base_url}}/sandboxes",
-              "host": ["{{e2b_base_url}}"],
-              "path": ["sandboxes"]
+              "host": [
+                "{{e2b_base_url}}"
+              ],
+              "path": [
+                "sandboxes"
+              ]
             }
           },
           "event": [
@@ -218,8 +223,14 @@
             },
             "url": {
               "raw": "{{e2b_base_url}}/sandboxes/{{sandbox_id}}/code_executions",
-              "host": ["{{e2b_base_url}}"],
-              "path": ["sandboxes", "{{sandbox_id}}", "code_executions"]
+              "host": [
+                "{{e2b_base_url}}"
+              ],
+              "path": [
+                "sandboxes",
+                "{{sandbox_id}}",
+                "code_executions"
+              ]
             }
           },
           "event": [
@@ -268,8 +279,14 @@
             },
             "url": {
               "raw": "{{base_url}}/api/webhooks/e2b",
-              "host": ["{{base_url}}"],
-              "path": ["api", "webhooks", "e2b"]
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "webhooks",
+                "e2b"
+              ]
             }
           },
           "event": [
@@ -308,8 +325,14 @@
             },
             "url": {
               "raw": "{{base_url}}/api/webhooks/e2b",
-              "host": ["{{base_url}}"],
-              "path": ["api", "webhooks", "e2b"]
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "webhooks",
+                "e2b"
+              ]
             }
           },
           "event": [
@@ -349,8 +372,14 @@
             ],
             "url": {
               "raw": "{{github_base_url}}/repos/appsefilepro-cell/Private-Claude",
-              "host": ["{{github_base_url}}"],
-              "path": ["repos", "appsefilepro-cell", "Private-Claude"]
+              "host": [
+                "{{github_base_url}}"
+              ],
+              "path": [
+                "repos",
+                "appsefilepro-cell",
+                "Private-Claude"
+              ]
             }
           },
           "event": [
@@ -400,8 +429,15 @@
             },
             "url": {
               "raw": "{{github_base_url}}/repos/appsefilepro-cell/Private-Claude/issues",
-              "host": ["{{github_base_url}}"],
-              "path": ["repos", "appsefilepro-cell", "Private-Claude", "issues"]
+              "host": [
+                "{{github_base_url}}"
+              ],
+              "path": [
+                "repos",
+                "appsefilepro-cell",
+                "Private-Claude",
+                "issues"
+              ]
             }
           },
           "event": [
@@ -454,8 +490,17 @@
             },
             "url": {
               "raw": "{{github_base_url}}/repos/appsefilepro-cell/Private-Claude/issues/{{issue_number}}/comments",
-              "host": ["{{github_base_url}}"],
-              "path": ["repos", "appsefilepro-cell", "Private-Claude", "issues", "{{issue_number}}", "comments"]
+              "host": [
+                "{{github_base_url}}"
+              ],
+              "path": [
+                "repos",
+                "appsefilepro-cell",
+                "Private-Claude",
+                "issues",
+                "{{issue_number}}",
+                "comments"
+              ]
             }
           },
           "event": [
@@ -496,8 +541,15 @@
             ],
             "url": {
               "raw": "{{github_base_url}}/repos/appsefilepro-cell/Private-Claude/pulls?state=all&per_page=10",
-              "host": ["{{github_base_url}}"],
-              "path": ["repos", "appsefilepro-cell", "Private-Claude", "pulls"],
+              "host": [
+                "{{github_base_url}}"
+              ],
+              "path": [
+                "repos",
+                "appsefilepro-cell",
+                "Private-Claude",
+                "pulls"
+              ],
               "query": [
                 {
                   "key": "state",
@@ -550,8 +602,14 @@
             },
             "url": {
               "raw": "{{base_url}}/api/webhooks/github",
-              "host": ["{{base_url}}"],
-              "path": ["api", "webhooks", "github"]
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "webhooks",
+                "github"
+              ]
             }
           },
           "event": [
@@ -586,8 +644,12 @@
             ],
             "url": {
               "raw": "{{gitlab_base_url}}/projects?search=test",
-              "host": ["{{gitlab_base_url}}"],
-              "path": ["projects"],
+              "host": [
+                "{{gitlab_base_url}}"
+              ],
+              "path": [
+                "projects"
+              ],
               "query": [
                 {
                   "key": "search",
@@ -636,8 +698,14 @@
             },
             "url": {
               "raw": "{{gitlab_base_url}}/projects/1/issues",
-              "host": ["{{gitlab_base_url}}"],
-              "path": ["projects", "1", "issues"]
+              "host": [
+                "{{gitlab_base_url}}"
+              ],
+              "path": [
+                "projects",
+                "1",
+                "issues"
+              ]
             }
           },
           "event": [
@@ -682,8 +750,15 @@
             "url": {
               "raw": "https://slack.com/api/chat.postMessage",
               "protocol": "https",
-              "host": ["slack", "com"],
-              "path": ["api", "chat", "postMessage"]
+              "host": [
+                "slack",
+                "com"
+              ],
+              "path": [
+                "api",
+                "chat",
+                "postMessage"
+              ]
             }
           },
           "event": [
@@ -720,8 +795,15 @@
             "url": {
               "raw": "https://slack.com/api/conversations.list?limit=10",
               "protocol": "https",
-              "host": ["slack", "com"],
-              "path": ["api", "conversations", "list"],
+              "host": [
+                "slack",
+                "com"
+              ],
+              "path": [
+                "api",
+                "conversations",
+                "list"
+              ],
               "query": [
                 {
                   "key": "limit",
@@ -763,7 +845,9 @@
             },
             "url": {
               "raw": "{{slack_webhook_url}}",
-              "host": ["{{slack_webhook_url}}"],
+              "host": [
+                "{{slack_webhook_url}}"
+              ],
               "path": []
             }
           },
@@ -804,8 +888,16 @@
             "url": {
               "raw": "https://generativelanguage.googleapis.com/v1/models/gemini-pro:generateContent?key={{gemini_api_key}}",
               "protocol": "https",
-              "host": ["generativelanguage", "googleapis", "com"],
-              "path": ["v1", "models", "gemini-pro:generateContent"],
+              "host": [
+                "generativelanguage",
+                "googleapis",
+                "com"
+              ],
+              "path": [
+                "v1",
+                "models",
+                "gemini-pro:generateContent"
+              ],
               "query": [
                 {
                   "key": "key",
@@ -852,8 +944,16 @@
             "url": {
               "raw": "https://generativelanguage.googleapis.com/v1/models/gemini-pro:countTokens?key={{gemini_api_key}}",
               "protocol": "https",
-              "host": ["generativelanguage", "googleapis", "com"],
-              "path": ["v1", "models", "gemini-pro:countTokens"],
+              "host": [
+                "generativelanguage",
+                "googleapis",
+                "com"
+              ],
+              "path": [
+                "v1",
+                "models",
+                "gemini-pro:countTokens"
+              ],
               "query": [
                 {
                   "key": "key",
@@ -903,7 +1003,9 @@
             },
             "url": {
               "raw": "{{zapier_webhook_url}}",
-              "host": ["{{zapier_webhook_url}}"],
+              "host": [
+                "{{zapier_webhook_url}}"
+              ],
               "path": []
             }
           },
@@ -938,7 +1040,9 @@
             },
             "url": {
               "raw": "{{zapier_webhook_url}}",
-              "host": ["{{zapier_webhook_url}}"],
+              "host": [
+                "{{zapier_webhook_url}}"
+              ],
               "path": []
             }
           },
@@ -975,8 +1079,16 @@
             "url": {
               "raw": "https://sheets.googleapis.com/v4/spreadsheets/{{spreadsheet_id}}",
               "protocol": "https",
-              "host": ["sheets", "googleapis", "com"],
-              "path": ["v4", "spreadsheets", "{{spreadsheet_id}}"]
+              "host": [
+                "sheets",
+                "googleapis",
+                "com"
+              ],
+              "path": [
+                "v4",
+                "spreadsheets",
+                "{{spreadsheet_id}}"
+              ]
             }
           },
           "event": [
@@ -1016,8 +1128,18 @@
             "url": {
               "raw": "https://sheets.googleapis.com/v4/spreadsheets/{{spreadsheet_id}}/values/Sheet1!A:C:append?valueInputOption=USER_ENTERED",
               "protocol": "https",
-              "host": ["sheets", "googleapis", "com"],
-              "path": ["v4", "spreadsheets", "{{spreadsheet_id}}", "values", "Sheet1!A:C:append"],
+              "host": [
+                "sheets",
+                "googleapis",
+                "com"
+              ],
+              "path": [
+                "v4",
+                "spreadsheets",
+                "{{spreadsheet_id}}",
+                "values",
+                "Sheet1!A:C:append"
+              ],
               "query": [
                 {
                   "key": "valueInputOption",
@@ -1059,8 +1181,16 @@
             "url": {
               "raw": "https://graph.microsoft.com/v1.0/me",
               "protocol": "https",
-              "host": ["graph", "microsoft", "com"],
-              "path": ["v1", "0", "me"]
+              "host": [
+                "graph",
+                "microsoft",
+                "com"
+              ],
+              "path": [
+                "v1",
+                "0",
+                "me"
+              ]
             }
           },
           "event": [
@@ -1105,8 +1235,17 @@
             "url": {
               "raw": "https://graph.microsoft.com/v1.0/me/sendMail",
               "protocol": "https",
-              "host": ["graph", "microsoft", "com"],
-              "path": ["v1", "0", "me", "sendMail"]
+              "host": [
+                "graph",
+                "microsoft",
+                "com"
+              ],
+              "path": [
+                "v1",
+                "0",
+                "me",
+                "sendMail"
+              ]
             }
           },
           "event": [
@@ -1151,8 +1290,16 @@
             "url": {
               "raw": "https://api.dropboxapi.com/2/files/list_folder",
               "protocol": "https",
-              "host": ["api", "dropboxapi", "com"],
-              "path": ["2", "files", "list_folder"]
+              "host": [
+                "api",
+                "dropboxapi",
+                "com"
+              ],
+              "path": [
+                "2",
+                "files",
+                "list_folder"
+              ]
             }
           },
           "event": [
@@ -1202,8 +1349,16 @@
             "url": {
               "raw": "https://content.dropboxapi.com/2/files/upload",
               "protocol": "https",
-              "host": ["content", "dropboxapi", "com"],
-              "path": ["2", "files", "upload"]
+              "host": [
+                "content",
+                "dropboxapi",
+                "com"
+              ],
+              "path": [
+                "2",
+                "files",
+                "upload"
+              ]
             }
           },
           "event": [
@@ -1254,8 +1409,16 @@
             "url": {
               "raw": "https://api.sendgrid.com/v3/mail/send",
               "protocol": "https",
-              "host": ["api", "sendgrid", "com"],
-              "path": ["v3", "mail", "send"]
+              "host": [
+                "api",
+                "sendgrid",
+                "com"
+              ],
+              "path": [
+                "v3",
+                "mail",
+                "send"
+              ]
             }
           },
           "event": [
@@ -1286,8 +1449,15 @@
             "url": {
               "raw": "https://api.sendgrid.com/v3/stats?aggregated_by=day&limit=30",
               "protocol": "https",
-              "host": ["api", "sendgrid", "com"],
-              "path": ["v3", "stats"],
+              "host": [
+                "api",
+                "sendgrid",
+                "com"
+              ],
+              "path": [
+                "v3",
+                "stats"
+              ],
               "query": [
                 {
                   "key": "aggregated_by",
@@ -1329,8 +1499,12 @@
             "method": "GET",
             "url": {
               "raw": "{{base_url}}/health",
-              "host": ["{{base_url}}"],
-              "path": ["health"]
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "health"
+              ]
             }
           },
           "event": [
@@ -1359,8 +1533,13 @@
             "method": "GET",
             "url": {
               "raw": "{{base_url}}/api/status",
-              "host": ["{{base_url}}"],
-              "path": ["api", "status"]
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "status"
+              ]
             }
           },
           "event": [
@@ -1374,6 +1553,1175 @@
                   "});"
                 ]
               }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Auto-Discovered APIs",
+      "description": "Automatically discovered on 2025-12-22T20:43:06.489655",
+      "item": [
+        {
+          "name": "Agent_5_Config API (Auto-discovered)",
+          "item": [
+            {
+              "name": "pillar_a_trading.exchanges.kraken",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "https://api.kraken.com",
+                  "protocol": "https",
+                  "host": [
+                    "api",
+                    "kraken",
+                    "com"
+                  ],
+                  "path": []
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "// Auto-generated test script",
+                      "pm.test('Status code is successful', function() {",
+                      "    pm.response.to.be.success;",
+                      "});",
+                      "",
+                      "pm.test('Response time is acceptable', function() {",
+                      "    pm.expect(pm.response.responseTime).to.be.below(5000);",
+                      "});",
+                      "",
+                      "pm.test('Response has data', function() {",
+                      "    var jsonData = pm.response.json();",
+                      "    pm.expect(jsonData).to.be.an('object').or.to.be.an('array');",
+                      "});"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "pillar_c_federal.sam_gov",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "https://api.sam.gov/prod/opportunities/v2/search",
+                  "protocol": "https",
+                  "host": [
+                    "api",
+                    "sam",
+                    "gov"
+                  ],
+                  "path": [
+                    "prod",
+                    "opportunities",
+                    "v2",
+                    "search"
+                  ]
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "// Auto-generated test script",
+                      "pm.test('Status code is successful', function() {",
+                      "    pm.response.to.be.success;",
+                      "});",
+                      "",
+                      "pm.test('Response time is acceptable', function() {",
+                      "    pm.expect(pm.response.responseTime).to.be.below(5000);",
+                      "});",
+                      "",
+                      "pm.test('Response has data', function() {",
+                      "    var jsonData = pm.response.json();",
+                      "    pm.expect(jsonData).to.be.an('object').or.to.be.an('array');",
+                      "});"
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Dropbox API (Auto-discovered)",
+          "item": [
+            {
+              "name": "file_operations.upload",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{dropbox_access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "${content_base}${endpoints.upload}",
+                  "protocol": "https",
+                  "host": [
+                    "${content_base}${endpoints",
+                    "upload}"
+                  ],
+                  "path": []
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "// Auto-generated test script",
+                      "pm.test('Status code is successful', function() {",
+                      "    pm.response.to.be.success;",
+                      "});",
+                      "",
+                      "pm.test('Response time is acceptable', function() {",
+                      "    pm.expect(pm.response.responseTime).to.be.below(5000);",
+                      "});",
+                      "",
+                      "pm.test('Resource created/updated successfully', function() {",
+                      "    pm.expect([200, 201, 204]).to.include(pm.response.code);",
+                      "});"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "file_operations.download",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{dropbox_access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "${content_base}${endpoints.download}",
+                  "protocol": "https",
+                  "host": [
+                    "${content_base}${endpoints",
+                    "download}"
+                  ],
+                  "path": []
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "// Auto-generated test script",
+                      "pm.test('Status code is successful', function() {",
+                      "    pm.response.to.be.success;",
+                      "});",
+                      "",
+                      "pm.test('Response time is acceptable', function() {",
+                      "    pm.expect(pm.response.responseTime).to.be.below(5000);",
+                      "});",
+                      "",
+                      "pm.test('Resource created/updated successfully', function() {",
+                      "    pm.expect([200, 201, 204]).to.include(pm.response.code);",
+                      "});"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "file_operations.list_folder",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{dropbox_access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "${api_base}${endpoints.list_folder}",
+                  "protocol": "https",
+                  "host": [
+                    "${api_base}${endpoints",
+                    "list_folder}"
+                  ],
+                  "path": []
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "// Auto-generated test script",
+                      "pm.test('Status code is successful', function() {",
+                      "    pm.response.to.be.success;",
+                      "});",
+                      "",
+                      "pm.test('Response time is acceptable', function() {",
+                      "    pm.expect(pm.response.responseTime).to.be.below(5000);",
+                      "});",
+                      "",
+                      "pm.test('Resource created/updated successfully', function() {",
+                      "    pm.expect([200, 201, 204]).to.include(pm.response.code);",
+                      "});"
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "E2B_Webhook_Config API (Auto-discovered)",
+          "item": [
+            {
+              "name": "sync_targets.zapier",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "${ZAPIER_WEBHOOK_URL}",
+                  "protocol": "https",
+                  "host": [
+                    "${ZAPIER_WEBHOOK_URL}"
+                  ],
+                  "path": []
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "// Auto-generated test script",
+                      "pm.test('Status code is successful', function() {",
+                      "    pm.response.to.be.success;",
+                      "});",
+                      "",
+                      "pm.test('Response time is acceptable', function() {",
+                      "    pm.expect(pm.response.responseTime).to.be.below(5000);",
+                      "});",
+                      "",
+                      "pm.test('Response has data', function() {",
+                      "    var jsonData = pm.response.json();",
+                      "    pm.expect(jsonData).to.be.an('object').or.to.be.an('array');",
+                      "});"
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Github_Enterprise API (Auto-discovered)",
+          "item": [
+            {
+              "name": "webhooks.github_webhook",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "${GITHUB_WEBHOOK_URL}",
+                  "protocol": "https",
+                  "host": [
+                    "${GITHUB_WEBHOOK_URL}"
+                  ],
+                  "path": []
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "// Auto-generated test script",
+                      "pm.test('Status code is successful', function() {",
+                      "    pm.response.to.be.success;",
+                      "});",
+                      "",
+                      "pm.test('Response time is acceptable', function() {",
+                      "    pm.expect(pm.response.responseTime).to.be.below(5000);",
+                      "});",
+                      "",
+                      "pm.test('Response has data', function() {",
+                      "    var jsonData = pm.response.json();",
+                      "    pm.expect(jsonData).to.be.an('object').or.to.be.an('array');",
+                      "});"
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Github_Enterprise_Advanced API (Auto-discovered)",
+          "item": [
+            {
+              "name": "advanced_security_features.audit_logging_advanced.siem_integration",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "${SIEM_ENDPOINT}",
+                  "protocol": "https",
+                  "host": [
+                    "${SIEM_ENDPOINT}"
+                  ],
+                  "path": []
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "// Auto-generated test script",
+                      "pm.test('Status code is successful', function() {",
+                      "    pm.response.to.be.success;",
+                      "});",
+                      "",
+                      "pm.test('Response time is acceptable', function() {",
+                      "    pm.expect(pm.response.responseTime).to.be.below(5000);",
+                      "});",
+                      "",
+                      "pm.test('Response has data', function() {",
+                      "    var jsonData = pm.response.json();",
+                      "    pm.expect(jsonData).to.be.an('object').or.to.be.an('array');",
+                      "});"
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Mcp_Server_Config API (Auto-discovered)",
+          "item": [
+            {
+              "name": "Zapier MCP server for workflow automation",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "https://mcp.zapier.com/api/mcp/mcp",
+                  "protocol": "https",
+                  "host": [
+                    "mcp",
+                    "zapier",
+                    "com"
+                  ],
+                  "path": [
+                    "api",
+                    "mcp",
+                    "mcp"
+                  ]
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "// Auto-generated test script",
+                      "pm.test('Status code is successful', function() {",
+                      "    pm.response.to.be.success;",
+                      "});",
+                      "",
+                      "pm.test('Response time is acceptable', function() {",
+                      "    pm.expect(pm.response.responseTime).to.be.below(5000);",
+                      "});",
+                      "",
+                      "pm.test('Response has data', function() {",
+                      "    var jsonData = pm.response.json();",
+                      "    pm.expect(jsonData).to.be.an('object').or.to.be.an('array');",
+                      "});"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "Custom MCP server for E2B webhook relay",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:5000/api/mcp",
+                  "protocol": "https",
+                  "host": [
+                    "localhost:5000"
+                  ],
+                  "path": [
+                    "api",
+                    "mcp"
+                  ]
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "// Auto-generated test script",
+                      "pm.test('Status code is successful', function() {",
+                      "    pm.response.to.be.success;",
+                      "});",
+                      "",
+                      "pm.test('Response time is acceptable', function() {",
+                      "    pm.expect(pm.response.responseTime).to.be.below(5000);",
+                      "});",
+                      "",
+                      "pm.test('Response has data', function() {",
+                      "    var jsonData = pm.response.json();",
+                      "    pm.expect(jsonData).to.be.an('object').or.to.be.an('array');",
+                      "});"
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Slack_Config API (Auto-discovered)",
+          "item": [
+            {
+              "name": "General project updates and announcements",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "${SLACK_WEBHOOK_GENERAL}",
+                  "protocol": "https",
+                  "host": [
+                    "${SLACK_WEBHOOK_GENERAL}"
+                  ],
+                  "path": []
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "// Auto-generated test script",
+                      "pm.test('Status code is successful', function() {",
+                      "    pm.response.to.be.success;",
+                      "});",
+                      "",
+                      "pm.test('Response time is acceptable', function() {",
+                      "    pm.expect(pm.response.responseTime).to.be.below(5000);",
+                      "});",
+                      "",
+                      "pm.test('Response has data', function() {",
+                      "    var jsonData = pm.response.json();",
+                      "    pm.expect(jsonData).to.be.an('object').or.to.be.an('array');",
+                      "});"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "E2B execution status and errors",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "${SLACK_WEBHOOK_E2B}",
+                  "protocol": "https",
+                  "host": [
+                    "${SLACK_WEBHOOK_E2B}"
+                  ],
+                  "path": []
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "// Auto-generated test script",
+                      "pm.test('Status code is successful', function() {",
+                      "    pm.response.to.be.success;",
+                      "});",
+                      "",
+                      "pm.test('Response time is acceptable', function() {",
+                      "    pm.expect(pm.response.responseTime).to.be.below(5000);",
+                      "});",
+                      "",
+                      "pm.test('Response has data', function() {",
+                      "    var jsonData = pm.response.json();",
+                      "    pm.expect(jsonData).to.be.an('object').or.to.be.an('array');",
+                      "});"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "Real-time trading signals and market alerts",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "${SLACK_WEBHOOK_TRADING}",
+                  "protocol": "https",
+                  "host": [
+                    "${SLACK_WEBHOOK_TRADING}"
+                  ],
+                  "path": []
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "// Auto-generated test script",
+                      "pm.test('Status code is successful', function() {",
+                      "    pm.response.to.be.success;",
+                      "});",
+                      "",
+                      "pm.test('Response time is acceptable', function() {",
+                      "    pm.expect(pm.response.responseTime).to.be.below(5000);",
+                      "});",
+                      "",
+                      "pm.test('Response has data', function() {",
+                      "    var jsonData = pm.response.json();",
+                      "    pm.expect(jsonData).to.be.an('object').or.to.be.an('array');",
+                      "});"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "Critical errors and system warnings",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "${SLACK_WEBHOOK_ERRORS}",
+                  "protocol": "https",
+                  "host": [
+                    "${SLACK_WEBHOOK_ERRORS}"
+                  ],
+                  "path": []
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "// Auto-generated test script",
+                      "pm.test('Status code is successful', function() {",
+                      "    pm.response.to.be.success;",
+                      "});",
+                      "",
+                      "pm.test('Response time is acceptable', function() {",
+                      "    pm.expect(pm.response.responseTime).to.be.below(5000);",
+                      "});",
+                      "",
+                      "pm.test('Response has data', function() {",
+                      "    var jsonData = pm.response.json();",
+                      "    pm.expect(jsonData).to.be.an('object').or.to.be.an('array');",
+                      "});"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "GitHub push, PR, and issue updates",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "${SLACK_WEBHOOK_GITHUB}",
+                  "protocol": "https",
+                  "host": [
+                    "${SLACK_WEBHOOK_GITHUB}"
+                  ],
+                  "path": []
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "// Auto-generated test script",
+                      "pm.test('Status code is successful', function() {",
+                      "    pm.response.to.be.success;",
+                      "});",
+                      "",
+                      "pm.test('Response time is acceptable', function() {",
+                      "    pm.expect(pm.response.responseTime).to.be.below(5000);",
+                      "});",
+                      "",
+                      "pm.test('Response has data', function() {",
+                      "    var jsonData = pm.response.json();",
+                      "    pm.expect(jsonData).to.be.an('object').or.to.be.an('array');",
+                      "});"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "Zapier workflow execution and status",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "${SLACK_WEBHOOK_ZAPIER}",
+                  "protocol": "https",
+                  "host": [
+                    "${SLACK_WEBHOOK_ZAPIER}"
+                  ],
+                  "path": []
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "// Auto-generated test script",
+                      "pm.test('Status code is successful', function() {",
+                      "    pm.response.to.be.success;",
+                      "});",
+                      "",
+                      "pm.test('Response time is acceptable', function() {",
+                      "    pm.expect(pm.response.responseTime).to.be.below(5000);",
+                      "});",
+                      "",
+                      "pm.test('Response has data', function() {",
+                      "    var jsonData = pm.response.json();",
+                      "    pm.expect(jsonData).to.be.an('object').or.to.be.an('array');",
+                      "});"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "System uptime, performance metrics",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "${SLACK_WEBHOOK_HEALTH}",
+                  "protocol": "https",
+                  "host": [
+                    "${SLACK_WEBHOOK_HEALTH}"
+                  ],
+                  "path": []
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "// Auto-generated test script",
+                      "pm.test('Status code is successful', function() {",
+                      "    pm.response.to.be.success;",
+                      "});",
+                      "",
+                      "pm.test('Response time is acceptable', function() {",
+                      "    pm.expect(pm.response.responseTime).to.be.below(5000);",
+                      "});",
+                      "",
+                      "pm.test('Response has data', function() {",
+                      "    var jsonData = pm.response.json();",
+                      "    pm.expect(jsonData).to.be.an('object').or.to.be.an('array');",
+                      "});"
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Trading_Bot_24_7_Config API (Auto-discovered)",
+          "item": [
+            {
+              "name": "demo_mode",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "https://api-sandbox.kraken.com",
+                  "protocol": "https",
+                  "host": [
+                    "api-sandbox",
+                    "kraken",
+                    "com"
+                  ],
+                  "path": []
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "// Auto-generated test script",
+                      "pm.test('Status code is successful', function() {",
+                      "    pm.response.to.be.success;",
+                      "});",
+                      "",
+                      "pm.test('Response time is acceptable', function() {",
+                      "    pm.expect(pm.response.responseTime).to.be.below(5000);",
+                      "});",
+                      "",
+                      "pm.test('Response has data', function() {",
+                      "    var jsonData = pm.response.json();",
+                      "    pm.expect(jsonData).to.be.an('object').or.to.be.an('array');",
+                      "});"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "live_mode",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "https://api.kraken.com",
+                  "protocol": "https",
+                  "host": [
+                    "api",
+                    "kraken",
+                    "com"
+                  ],
+                  "path": []
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "// Auto-generated test script",
+                      "pm.test('Status code is successful', function() {",
+                      "    pm.response.to.be.success;",
+                      "});",
+                      "",
+                      "pm.test('Response time is acceptable', function() {",
+                      "    pm.expect(pm.response.responseTime).to.be.below(5000);",
+                      "});",
+                      "",
+                      "pm.test('Response has data', function() {",
+                      "    var jsonData = pm.response.json();",
+                      "    pm.expect(jsonData).to.be.an('object').or.to.be.an('array');",
+                      "});"
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Zapier_Cleanup API (Auto-discovered)",
+          "item": [
+            {
+              "name": "active_zaps.webhook_config",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "https://hooks.zapier.com/hooks/catch/E2B_EXECUTION_001/",
+                  "protocol": "https",
+                  "host": [
+                    "hooks",
+                    "zapier",
+                    "com"
+                  ],
+                  "path": [
+                    "hooks",
+                    "catch",
+                    "E2B_EXECUTION_001"
+                  ]
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "// Auto-generated test script",
+                      "pm.test('Status code is successful', function() {",
+                      "    pm.response.to.be.success;",
+                      "});",
+                      "",
+                      "pm.test('Response time is acceptable', function() {",
+                      "    pm.expect(pm.response.responseTime).to.be.below(5000);",
+                      "});",
+                      "",
+                      "pm.test('Resource created/updated successfully', function() {",
+                      "    pm.expect([200, 201, 204]).to.include(pm.response.code);",
+                      "});"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "active_zaps.webhook_config",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "https://hooks.zapier.com/hooks/catch/E2B_SLACK_001/",
+                  "protocol": "https",
+                  "host": [
+                    "hooks",
+                    "zapier",
+                    "com"
+                  ],
+                  "path": [
+                    "hooks",
+                    "catch",
+                    "E2B_SLACK_001"
+                  ]
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "// Auto-generated test script",
+                      "pm.test('Status code is successful', function() {",
+                      "    pm.response.to.be.success;",
+                      "});",
+                      "",
+                      "pm.test('Response time is acceptable', function() {",
+                      "    pm.expect(pm.response.responseTime).to.be.below(5000);",
+                      "});",
+                      "",
+                      "pm.test('Resource created/updated successfully', function() {",
+                      "    pm.expect([200, 201, 204]).to.include(pm.response.code);",
+                      "});"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "active_zaps.webhook_config",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "https://hooks.zapier.com/hooks/catch/GITHUB_E2B_001/",
+                  "protocol": "https",
+                  "host": [
+                    "hooks",
+                    "zapier",
+                    "com"
+                  ],
+                  "path": [
+                    "hooks",
+                    "catch",
+                    "GITHUB_E2B_001"
+                  ]
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "// Auto-generated test script",
+                      "pm.test('Status code is successful', function() {",
+                      "    pm.response.to.be.success;",
+                      "});",
+                      "",
+                      "pm.test('Response time is acceptable', function() {",
+                      "    pm.expect(pm.response.responseTime).to.be.below(5000);",
+                      "});",
+                      "",
+                      "pm.test('Resource created/updated successfully', function() {",
+                      "    pm.expect([200, 201, 204]).to.include(pm.response.code);",
+                      "});"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "active_zaps.webhook_config",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "https://hooks.zapier.com/hooks/catch/SLACK_E2B_001/",
+                  "protocol": "https",
+                  "host": [
+                    "hooks",
+                    "zapier",
+                    "com"
+                  ],
+                  "path": [
+                    "hooks",
+                    "catch",
+                    "SLACK_E2B_001"
+                  ]
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "// Auto-generated test script",
+                      "pm.test('Status code is successful', function() {",
+                      "    pm.response.to.be.success;",
+                      "});",
+                      "",
+                      "pm.test('Response time is acceptable', function() {",
+                      "    pm.expect(pm.response.responseTime).to.be.below(5000);",
+                      "});",
+                      "",
+                      "pm.test('Resource created/updated successfully', function() {",
+                      "    pm.expect([200, 201, 204]).to.include(pm.response.code);",
+                      "});"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "active_zaps.webhook_config",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "https://hooks.zapier.com/hooks/catch/EMAIL_E2B_001/",
+                  "protocol": "https",
+                  "host": [
+                    "hooks",
+                    "zapier",
+                    "com"
+                  ],
+                  "path": [
+                    "hooks",
+                    "catch",
+                    "EMAIL_E2B_001"
+                  ]
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "// Auto-generated test script",
+                      "pm.test('Status code is successful', function() {",
+                      "    pm.response.to.be.success;",
+                      "});",
+                      "",
+                      "pm.test('Response time is acceptable', function() {",
+                      "    pm.expect(pm.response.responseTime).to.be.below(5000);",
+                      "});",
+                      "",
+                      "pm.test('Resource created/updated successfully', function() {",
+                      "    pm.expect([200, 201, 204]).to.include(pm.response.code);",
+                      "});"
+                    ]
+                  }
+                }
+              ]
             }
           ]
         }

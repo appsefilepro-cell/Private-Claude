@@ -330,6 +330,31 @@ class PostmanSyncManager:
         logger.info("Collection validation passed")
         return True, []
 
+    def run_api_scanner(self) -> bool:
+        """Run the API scanner to discover new endpoints"""
+        try:
+            logger.info("Running API scanner to discover endpoints")
+            scanner_path = self.scripts_dir / 'postman_api_scanner.py'
+
+            result = subprocess.run(
+                ['python3', str(scanner_path), 'scan'],
+                capture_output=True,
+                text=True,
+                cwd=str(self.scripts_dir.parent)
+            )
+
+            if result.returncode == 0:
+                logger.info("API scanner completed successfully")
+                logger.info(result.stdout)
+                return True
+            else:
+                logger.error(f"API scanner failed: {result.stderr}")
+                return False
+
+        except Exception as e:
+            logger.error(f"Error running API scanner: {str(e)}")
+            return False
+
     def sync_all_apis(self):
         """Sync all API configurations"""
         logger.info("Starting complete API synchronization")
@@ -338,17 +363,38 @@ class PostmanSyncManager:
         environment_path = str(self.config_dir / 'postman_environment.json')
 
         try:
+            # Run API scanner first to discover new endpoints
+            logger.info("Step 1: Running API scanner to discover endpoints")
+            self.run_api_scanner()
+
             # Load collection
+            logger.info("Step 2: Loading Postman collection")
             collection = self.load_collection(collection_path)
 
             # Validate collection
+            logger.info("Step 3: Validating collection structure")
             is_valid, errors = self.validate_collection(collection)
             if not is_valid:
                 logger.error(f"Collection validation failed: {errors}")
                 return False
 
             # Update environment variables from OS environment
-            env_vars = {
+            logger.info("Step 4: Updating environment variables")
+
+            # Load from .env file
+            env_file = self.config_dir / '.env'
+            env_vars = {}
+
+            if env_file.exists():
+                with open(env_file, 'r') as f:
+                    for line in f:
+                        line = line.strip()
+                        if line and not line.startswith('#') and '=' in line:
+                            key, value = line.split('=', 1)
+                            env_vars[key.strip()] = value.strip()
+
+            # Add common variables
+            common_vars = {
                 'E2B_API_KEY': os.getenv('E2B_API_KEY', ''),
                 'GITHUB_TOKEN': os.getenv('GITHUB_TOKEN', ''),
                 'GITLAB_TOKEN': os.getenv('GITLAB_TOKEN', ''),
@@ -359,27 +405,53 @@ class PostmanSyncManager:
                 'GOOGLE_SHEETS_API_KEY': os.getenv('GOOGLE_SHEETS_API_KEY', ''),
                 'MICROSOFT_GRAPH_TOKEN': os.getenv('MICROSOFT_GRAPH_TOKEN', ''),
                 'SENDGRID_API_KEY': os.getenv('SENDGRID_API_KEY', ''),
+                'POSTMAN_API_KEY': os.getenv('POSTMAN_API_KEY', ''),
+                'POSTMAN_WORKSPACE_ID': os.getenv('POSTMAN_WORKSPACE_ID', ''),
             }
 
+            env_vars.update(common_vars)
+
             # Save environment
+            logger.info("Step 5: Saving environment file")
             self.update_environment_variables(environment_path, env_vars)
 
             # Sync to Postman
+            logger.info("Step 6: Syncing to Postman Cloud")
             success, message = self.sync_to_postman(collection)
             logger.info(f"Postman sync: {message}")
 
             # Run tests
-            logger.info("Running Newman tests")
+            logger.info("Step 7: Running Newman tests")
             test_success, test_results = self.run_newman_tests(
                 collection_path,
                 environment_path,
-                reporters=['cli', 'json']
+                reporters=['cli', 'json', 'html']
             )
 
             if test_success:
                 logger.info("All tests passed successfully")
             else:
                 logger.warning(f"Some tests failed: {test_results}")
+
+            # Generate final report
+            logger.info("Step 8: Generating synchronization report")
+            report = {
+                'timestamp': datetime.now().isoformat(),
+                'collection_path': collection_path,
+                'environment_path': environment_path,
+                'validation_passed': is_valid,
+                'postman_sync_success': success,
+                'postman_sync_message': message,
+                'test_success': test_success,
+                'test_results': test_results,
+                'environment_vars_count': len(env_vars)
+            }
+
+            report_path = self.logs_dir / f'postman_sync_{datetime.now().strftime("%Y%m%d_%H%M%S")}.json'
+            with open(report_path, 'w') as f:
+                json.dump(report, f, indent=2)
+
+            logger.info(f"Sync report saved to {report_path}")
 
             return success and test_success
 

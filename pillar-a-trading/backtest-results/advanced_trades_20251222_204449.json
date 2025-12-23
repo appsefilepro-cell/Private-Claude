@@ -1,0 +1,19 @@
+[
+  {
+    "id": 1,
+    "date": "2025-12-19 22:44:49.601111",
+    "pair": "BTC/USD",
+    "pattern": "HAMMER",
+    "signal": "BUY",
+    "entry_price": 49999.02,
+    "quantity": 0.0060001176023050055,
+    "position_value": 300.0,
+    "stop_loss": 48499.049399999996,
+    "take_profit": 52998.9612,
+    "status": "CLOSED",
+    "exit_price": 49961.75,
+    "profit_loss": -0.22362438303788834,
+    "profit_loss_pct": -0.07454146101262944,
+    "close_reason": "BACKTEST_END"
+  }
+]

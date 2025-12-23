@@ -1,0 +1,18 @@
+{
+  "profile": "advanced",
+  "total_trades": 1,
+  "winning_trades": 0,
+  "losing_trades": 1,
+  "win_rate": 0.0,
+  "total_profit": 0,
+  "total_loss": 0.22,
+  "net_profit": -0.22,
+  "roi_percentage": -0.0,
+  "initial_capital": 10000,
+  "final_capital": 9999.78,
+  "avg_win": 0,
+  "avg_loss": 0.22,
+  "profit_factor": 0.0,
+  "largest_win": 0,
+  "largest_loss": -0.22362438303788834
+}

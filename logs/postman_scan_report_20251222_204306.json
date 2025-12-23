@@ -1,0 +1,171 @@
+{
+  "scan_timestamp": "2025-12-22T20:43:06.494134",
+  "scanner_version": "1.0.0",
+  "statistics": {
+    "total_endpoints": 24,
+    "services_count": 9,
+    "endpoints_by_service": {
+      "agent_5_config": 2,
+      "github_enterprise_advanced": 1,
+      "trading_bot_24_7_config": 2,
+      "mcp_server_config": 2,
+      "zapier_cleanup": 5,
+      "e2b_webhook_config": 1,
+      "github_enterprise": 1,
+      "slack_config": 7,
+      "dropbox": 3
+    },
+    "endpoints_by_method": {
+      "GET": 16,
+      "POST": 8
+    },
+    "api_keys_found": 47,
+    "base_urls_found": 16
+  },
+  "discovered_endpoints": [
+    {
+      "service": "agent_5_config",
+      "method": "GET",
+      "url": "https://api.kraken.com",
+      "description": "pillar_a_trading.exchanges.kraken"
+    },
+    {
+      "service": "agent_5_config",
+      "method": "GET",
+      "url": "https://api.sam.gov/prod/opportunities/v2/search",
+      "description": "pillar_c_federal.sam_gov"
+    },
+    {
+      "service": "github_enterprise_advanced",
+      "method": "GET",
+      "url": "${SIEM_ENDPOINT}",
+      "description": "advanced_security_features.audit_logging_advanced.siem_integration"
+    },
+    {
+      "service": "trading_bot_24_7_config",
+      "method": "GET",
+      "url": "https://api-sandbox.kraken.com",
+      "description": "demo_mode"
+    },
+    {
+      "service": "trading_bot_24_7_config",
+      "method": "GET",
+      "url": "https://api.kraken.com",
+      "description": "live_mode"
+    },
+    {
+      "service": "mcp_server_config",
+      "method": "GET",
+      "url": "https://mcp.zapier.com/api/mcp/mcp",
+      "description": "Zapier MCP server for workflow automation"
+    },
+    {
+      "service": "mcp_server_config",
+      "method": "GET",
+      "url": "http://localhost:5000/api/mcp",
+      "description": "Custom MCP server for E2B webhook relay"
+    },
+    {
+      "service": "zapier_cleanup",
+      "method": "POST",
+      "url": "https://hooks.zapier.com/hooks/catch/E2B_EXECUTION_001/",
+      "description": "active_zaps.webhook_config"
+    },
+    {
+      "service": "zapier_cleanup",
+      "method": "POST",
+      "url": "https://hooks.zapier.com/hooks/catch/E2B_SLACK_001/",
+      "description": "active_zaps.webhook_config"
+    },
+    {
+      "service": "zapier_cleanup",
+      "method": "POST",
+      "url": "https://hooks.zapier.com/hooks/catch/GITHUB_E2B_001/",
+      "description": "active_zaps.webhook_config"
+    },
+    {
+      "service": "zapier_cleanup",
+      "method": "POST",
+      "url": "https://hooks.zapier.com/hooks/catch/SLACK_E2B_001/",
+      "description": "active_zaps.webhook_config"
+    },
+    {
+      "service": "zapier_cleanup",
+      "method": "POST",
+      "url": "https://hooks.zapier.com/hooks/catch/EMAIL_E2B_001/",
+      "description": "active_zaps.webhook_config"
+    },
+    {
+      "service": "e2b_webhook_config",
+      "method": "GET",
+      "url": "${ZAPIER_WEBHOOK_URL}",
+      "description": "sync_targets.zapier"
+    },
+    {
+      "service": "github_enterprise",
+      "method": "GET",
+      "url": "${GITHUB_WEBHOOK_URL}",
+      "description": "webhooks.github_webhook"
+    },
+    {
+      "service": "slack_config",
+      "method": "GET",
+      "url": "${SLACK_WEBHOOK_GENERAL}",
+      "description": "General project updates and announcements"
+    },
+    {
+      "service": "slack_config",
+      "method": "GET",
+      "url": "${SLACK_WEBHOOK_E2B}",
+      "description": "E2B execution status and errors"
+    },
+    {
+      "service": "slack_config",
+      "method": "GET",
+      "url": "${SLACK_WEBHOOK_TRADING}",
+      "description": "Real-time trading signals and market alerts"
+    },
+    {
+      "service": "slack_config",
+      "method": "GET",
+      "url": "${SLACK_WEBHOOK_ERRORS}",
+      "description": "Critical errors and system warnings"
+    },
+    {
+      "service": "slack_config",
+      "method": "GET",
+      "url": "${SLACK_WEBHOOK_GITHUB}",
+      "description": "GitHub push, PR, and issue updates"
+    },
+    {
+      "service": "slack_config",
+      "method": "GET",
+      "url": "${SLACK_WEBHOOK_ZAPIER}",
+      "description": "Zapier workflow execution and status"
+    },
+    {
+      "service": "slack_config",
+      "method": "GET",
+      "url": "${SLACK_WEBHOOK_HEALTH}",
+      "description": "System uptime, performance metrics"
+    },
+    {
+      "service": "dropbox",
+      "method": "POST",
+      "url": "${content_base}${endpoints.upload}",
+      "description": "file_operations.upload"
+    },
+    {
+      "service": "dropbox",
+      "method": "POST",
+      "url": "${content_base}${endpoints.download}",
+      "description": "file_operations.download"
+    },
+    {
+      "service": "dropbox",
+      "method": "POST",
+      "url": "${api_base}${endpoints.list_folder}",
+      "description": "file_operations.list_folder"
+    }
+  ]
+}

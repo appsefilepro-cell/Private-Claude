@@ -1,0 +1,44 @@
+[Unit]
+Description=Committee 100 Multi-Agent Coordination System
+Documentation=https://github.com/appsefilepro-cell/Private-Claude
+After=network.target
+
+[Service]
+Type=simple
+User=ubuntu
+Group=ubuntu
+WorkingDirectory=/home/user/Private-Claude
+Environment="PATH=/usr/bin:/usr/local/bin"
+Environment="PYTHONPATH=/home/user/Private-Claude"
+
+# Main execution command
+ExecStart=/usr/bin/python3 /home/user/Private-Claude/scripts/committee_100_orchestrator.py
+
+# Restart configuration
+Restart=always
+RestartSec=10
+StartLimitBurst=5
+StartLimitInterval=300
+
+# Resource limits
+MemoryLimit=4G
+CPUQuota=200%
+
+# Logging
+StandardOutput=append:/home/user/Private-Claude/logs/committee_100/committee_100_orchestrator.log
+StandardError=append:/home/user/Private-Claude/logs/committee_100/committee_100_error.log
+SyslogIdentifier=committee-100-orchestrator
+
+# Security hardening
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=read-only
+ReadWritePaths=/home/user/Private-Claude/logs
+ReadWritePaths=/home/user/Private-Claude/pillar-a-trading
+ReadWritePaths=/home/user/Private-Claude/pillar-b-legal
+ReadWritePaths=/home/user/Private-Claude/pillar-c-federal
+ReadWritePaths=/home/user/Private-Claude/pillar-d-nonprofit
+
+[Install]
+WantedBy=multi-user.target
