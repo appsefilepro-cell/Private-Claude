@@ -1,0 +1,52 @@
+# Legal Automation System Requirements
+# Install with: pip install -r requirements.txt
+
+# Gmail API
+google-auth==2.25.2
+google-auth-oauthlib==1.2.0
+google-auth-httplib2==0.2.0
+google-api-python-client==2.111.0
+
+# PDF Processing
+PyPDF2==3.0.1
+reportlab==4.0.7
+fillpdf==0.7.1
+pypdf==3.17.4
+PyMuPDF==1.23.8
+
+# Web Scraping
+beautifulsoup4==4.12.2
+requests==2.31.0
+html2text==2020.1.16
+lxml==4.9.3
+
+# Document Processing
+python-docx==1.1.0
+openpyxl==3.1.2
+jinja2==3.1.2
+
+# Data & Utilities
+pandas==2.1.4
+numpy==1.26.2
+python-dateutil==2.8.2
+pytz==2023.3.post1
+
+# CLI & Config
+click==8.1.7
+python-dotenv==1.0.0
+pyyaml==6.0.1
+toml==0.10.2
+
+# AI Integration (optional)
+anthropic==0.7.8
+openai==1.6.1
+
+# Cloud Integration
+google-cloud-storage==2.10.0
+google-cloud-aiplatform==1.38.1
+azure-identity==1.15.0
+azure-storage-blob==12.19.0
+
+# Testing
+pytest==7.4.3
+pytest-cov==4.1.0
