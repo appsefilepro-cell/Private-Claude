@@ -2,11 +2,11 @@
   "agent_id": "agent_legal_12",
   "agent_name": "eDiscovery Specialist",
   "role": "eDiscovery Specialist",
-  "status": "running_loop_3",
-  "tasks_completed": 9,
+  "status": "completed",
+  "tasks_completed": 30,
   "tasks_failed": 0,
-  "loop_count": 3,
-  "start_time": "2025-12-25T19:05:00.373370",
-  "last_update": "2025-12-25T19:05:03.442876",
+  "loop_count": 10,
+  "start_time": "2025-12-25T19:11:39.779253",
+  "last_update": "2025-12-25T19:11:53.326661",
   "details": {}
 }

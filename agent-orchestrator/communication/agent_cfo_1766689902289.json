@@ -1,0 +1,7 @@
+{
+  "from": "agent_fin_1",
+  "to": "agent_cfo",
+  "type": "report",
+  "message": "{\"agent\": \"Accounting Manager\", \"task\": \"accounting_manager_reporting\", \"timestamp\": 1766689902.2896886, \"status\": \"completed\"}",
+  "timestamp": "2025-12-25T19:11:42.289695"
+}}

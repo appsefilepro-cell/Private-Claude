@@ -1,7 +1,0 @@
-{
-  "from": "agent_director_fpa",
-  "to": "agent_cfo",
-  "type": "report",
-  "message": "{\"agent\": \"Director FP&A\", \"task\": \"executive_reports\", \"timestamp\": 1766689503.4681387, \"status\": \"completed\"}",
-  "timestamp": "2025-12-25T19:05:03.468153"
-}

@@ -1,0 +1,257 @@
+{
+  "mt5_accounts": [
+    {
+      "account": 1,
+      "login": "5044023923",
+      "password": "Ut-0YsUm",
+      "investor_password": "L*0bBsQz",
+      "balance": "$3,000",
+      "leverage": "1:100",
+      "status": "\u2705 VERIFIED & READY"
+    },
+    {
+      "account": 2,
+      "login": "100459584",
+      "password": "6aTvYh_n",
+      "investor_password": "TvXpI-Z0",
+      "balance": "$3,000",
+      "leverage": "1:200",
+      "status": "\u2705 VERIFIED & READY"
+    },
+    {
+      "account": 3,
+      "login": "5044025969",
+      "password": "I@SuBd2z",
+      "investor_password": "Lq@0NzPu",
+      "balance": "$3,000",
+      "leverage": "1:10",
+      "status": "\u2705 VERIFIED & READY"
+    }
+  ],
+  "okx_config": {
+    "api_key": "a5b57cd3-b0ee-44f-b8e9-7c5b330a5c28",
+    "secret_key": "E0A25726A822BB669A24ACF6FA4A8E31",
+    "passphrase": "REQUIRED: Set in config",
+    "demo_accounts_needed": [
+      {
+        "name": "Conservative Demo",
+        "balance": "$1,000"
+      },
+      {
+        "name": "Aggressive Demo",
+        "balance": "$10,000"
+      }
+    ],
+    "status": "\u26a0\ufe0f PENDING: Create demos at okx.com/account/demo-trading"
+  },
+  "trading_pairs": {
+    "forex_majors": [
+      "EURUSD",
+      "GBPUSD",
+      "USDJPY",
+      "USDCHF",
+      "AUDUSD",
+      "USDCAD",
+      "NZDUSD"
+    ],
+    "forex_crosses": [
+      "EURJPY",
+      "GBPJPY",
+      "EURGBP",
+      "AUDCAD",
+      "EURAUD",
+      "EURCHF",
+      "GBPCHF"
+    ],
+    "forex_exotics": [
+      "USDMXN",
+      "USDZAR",
+      "USDTRY",
+      "USDSEK",
+      "USDNOK"
+    ],
+    "commodities": [
+      "XAUUSD",
+      "XAGUSD",
+      "USOIL",
+      "UKOIL"
+    ],
+    "indices": [
+      "US30",
+      "US500",
+      "NAS100",
+      "GER40",
+      "UK100"
+    ],
+    "crypto_cfd": [
+      "BTCUSD",
+      "ETHUSD",
+      "LTCUSD",
+      "XRPUSD"
+    ],
+    "btc_futures": [
+      "BTC-USDT-SWAP",
+      "BTC-USD-SWAP",
+      "BTC-USDT-250328"
+    ]
+  },
+  "strategies": {
+    "level_1_scalping": {
+      "timeframe": "1m, 5m",
+      "target_profit": "5-10 pips",
+      "trades_per_day": "50+",
+      "pairs": [
+        "EURUSD",
+        "GBPUSD",
+        "USDJPY",
+        "USDCHF",
+        "AUDUSD",
+        "USDCAD",
+        "NZDUSD"
+      ]
+    },
+    "level_2_day_trading": {
+      "timeframe": "15m, 30m, 1h",
+      "target_profit": "15-30 pips",
+      "trades_per_day": "20+",
+      "pairs": [
+        "EURJPY",
+        "GBPJPY",
+        "EURGBP",
+        "AUDCAD",
+        "EURAUD",
+        "EURCHF",
+        "GBPCHF"
+      ]
+    },
+    "level_3_swing": {
+      "timeframe": "4h, Daily",
+      "target_profit": "50-100 pips",
+      "trades_per_day": "5+",
+      "pairs": [
+        "XAUUSD",
+        "XAGUSD",
+        "USOIL",
+        "UKOIL"
+      ]
+    },
+    "level_4_ml_pattern": {
+      "algorithm": "Machine Learning Pattern Detection",
+      "data_source": "Historical winning trades",
+      "adaptation": "Real-time strategy optimization",
+      "pairs": "ALL"
+    },
+    "level_5_quantum": {
+      "algorithm": "Quantum Physics Multi-Pair Analysis",
+      "execution": "Parallel across all accounts simultaneously",
+      "optimization": "Continuous feedback loop",
+      "pairs": "ALL"
+    }
+  },
+  "position_sizes": [
+    10,
+    50,
+    100,
+    150,
+    200,
+    300,
+    350,
+    400,
+    450,
+    555
+  ],
+  "marathon": {
+    "start": "2025-12-25T19:18:54.258837",
+    "end": "2025-12-26T19:18:54.258842",
+    "target_trades": 350
+  },
+  "divisions": {
+    "MT5_Account_1_Division": {
+      "lead": "MT5 Trading Specialist #1",
+      "account": "5044023923",
+      "strategy": "Scalping + ML Pattern",
+      "pairs": [
+        "EURUSD",
+        "GBPUSD",
+        "USDJPY",
+        "USDCHF",
+        "AUDUSD",
+        "USDCAD",
+        "NZDUSD",
+        "EURJPY",
+        "GBPJPY",
+        "EURGBP",
+        "AUDCAD",
+        "EURAUD",
+        "EURCHF",
+        "GBPCHF"
+      ],
+      "target_trades": 100
+    },
+    "MT5_Account_2_Division": {
+      "lead": "MT5 Trading Specialist #2",
+      "account": "100459584",
+      "strategy": "Day Trading + Quantum",
+      "pairs": [
+        "XAUUSD",
+        "XAGUSD",
+        "USOIL",
+        "UKOIL",
+        "US30",
+        "US500",
+        "NAS100",
+        "GER40",
+        "UK100"
+      ],
+      "target_trades": 100
+    },
+    "MT5_Account_3_Division": {
+      "lead": "MT5 Trading Specialist #3",
+      "account": "5044025969",
+      "strategy": "Swing + Hybrid ML/Quantum",
+      "pairs": [
+        "BTCUSD",
+        "ETHUSD",
+        "LTCUSD",
+        "XRPUSD"
+      ],
+      "target_trades": 100
+    },
+    "OKX_Division": {
+      "lead": "OKX Bitcoin Futures Specialist",
+      "account": "Pending demo creation",
+      "strategy": "Conservative Bitcoin Futures Testing",
+      "pairs": [
+        "BTC-USDT-SWAP",
+        "BTC-USD-SWAP",
+        "BTC-USDT-250328"
+      ],
+      "target_trades": 50
+    }
+  },
+  "mql5_setup": {
+    "platform": "MetaTrader 5",
+    "connection": "MetaQuotes-Demo server",
+    "api": "Python MT5 library",
+    "expert_advisors": [
+      "Scalping EA (1m/5m)",
+      "Day Trading EA (15m/30m/1h)",
+      "Swing Trading EA (4h/Daily)",
+      "ML Pattern Detection EA (Custom)",
+      "Multi-Pair Quantum EA (Custom)"
+    ],
+    "status": "\u26a0\ufe0f Requires MetaTrader 5 installed on Windows/Mac"
+  },
+  "replit_dashboard": {
+    "url": "https://agent-forge.replit.app",
+    "connection": "GitHub Integration",
+    "features": [
+      "Real-time trade monitoring",
+      "Multi-account dashboard",
+      "P&L tracking across all accounts",
+      "Strategy performance analytics",
+      "Risk management alerts"
+    ],
+    "status": "\u2705 Configuration saved - needs app wake-up"
+  }
+}

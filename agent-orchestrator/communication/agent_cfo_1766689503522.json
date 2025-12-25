@@ -1,7 +1,0 @@
-{
-  "from": "agent_legal_19",
-  "to": "agent_cfo",
-  "type": "report",
-  "message": "{\"agent\": \"Client Relations\", \"task\": \"client_relations_reporting\", \"timestamp\": 1766689503.5224798, \"status\": \"completed\"}",
-  "timestamp": "2025-12-25T19:05:03.522500"
-}

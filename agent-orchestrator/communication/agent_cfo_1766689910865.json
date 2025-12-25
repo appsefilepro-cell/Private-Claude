@@ -1,0 +1,8 @@
+{
+  "from": "agent_legal_1",
+  "to": "agent_cfo",
+  "type": "report",
+  "message": "{\"agent\": \"Contract Manager\", \"task\": \"contract_manager_reporting\", \"timestamp\": 1766689910.8652105, \"status\": \"completed\"}",
+  "timestamp": "2025-12-25T19:11:50.865224"
+}.865289"
+}

@@ -1,7 +1,0 @@
-{
-  "from": "agent_trading_6",
-  "to": "agent_cfo",
-  "type": "report",
-  "message": "{\"agent\": \"Spot Trader\", \"task\": \"spot_trader_reporting\", \"timestamp\": 1766689503.5167856, \"status\": \"completed\"}",
-  "timestamp": "2025-12-25T19:05:03.516804"
-}

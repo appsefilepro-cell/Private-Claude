@@ -2,11 +2,11 @@
   "agent_id": "agent_fin_1",
   "agent_name": "Accounting Manager",
   "role": "Accounting Manager",
-  "status": "running_loop_3",
-  "tasks_completed": 9,
+  "status": "completed",
+  "tasks_completed": 30,
   "tasks_failed": 0,
-  "loop_count": 3,
-  "start_time": "2025-12-25T19:04:59.950634",
-  "last_update": "2025-12-25T19:05:02.871382",
+  "loop_count": 10,
+  "start_time": "2025-12-25T19:11:39.371289",
+  "last_update": "2025-12-25T19:11:52.438780",
   "details": {}
 }

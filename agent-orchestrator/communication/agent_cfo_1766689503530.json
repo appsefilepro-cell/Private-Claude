@@ -1,7 +1,0 @@
-{
-  "from": "agent_trading_7",
-  "to": "agent_cfo",
-  "type": "report",
-  "message": "{\"agent\": \"Arbitrage Specialist\", \"task\": \"arbitrage_specialist_reporting\", \"timestamp\": 1766689503.5300405, \"status\": \"completed\"}",
-  "timestamp": "2025-12-25T19:05:03.530056"
-}

@@ -1,0 +1,8 @@
+{
+  "from": "agent_special_10",
+  "to": "agent_cfo",
+  "type": "report",
+  "message": "{\"agent\": \"Postman Testing Manager\", \"task\": \"postman_testing_manager_reporting\", \"timestamp\": 1766689908.7178364, \"status\": \"completed\"}",
+  "timestamp": "2025-12-25T19:11:48.717841"
+}59"
+}

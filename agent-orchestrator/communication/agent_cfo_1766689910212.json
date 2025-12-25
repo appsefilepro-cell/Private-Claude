@@ -1,0 +1,8 @@
+{
+  "from": "agent_risk_mgmt",
+  "to": "agent_cfo",
+  "type": "report",
+  "message": "{\"agent\": \"Risk Management Specialist\", \"task\": \"risk_reporting\", \"timestamp\": 1766689910.212432, \"status\": \"completed\"}",
+  "timestamp": "2025-12-25T19:11:50.212444"
+}
+}

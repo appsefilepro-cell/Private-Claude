@@ -2,17 +2,11 @@
   "agent_id": "agent_intel_3",
   "agent_name": "ML Engineer",
   "role": "ML Engineer",
-  "status": "executing_automation",
-  "tasks_completed": 6,
+  "status": "completed",
+  "tasks_completed": 30,
   "tasks_failed": 0,
-  "loop_count": 3,
-  "start_time": "2025-12-25T19:05:00.856123",
-  "last_update": "2025-12-25T19:05:03.676595",
-  "details": {
-    "agent": "agent_intel_3",
-    "task": "ml_engineer_task_1",
-    "type": "automation",
-    "status": "executing",
-    "timestamp": 1766689503.676591
-  }
+  "loop_count": 10,
+  "start_time": "2025-12-25T19:11:40.248743",
+  "last_update": "2025-12-25T19:11:54.312159",
+  "details": {}
 }

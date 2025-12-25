@@ -1,7 +1,0 @@
-{
-  "from": "agent_trading_20",
-  "to": "agent_cfo",
-  "type": "trading_update",
-  "message": "Trading task executed: trading_operations_task_1",
-  "timestamp": "2025-12-25T19:05:03.376987"
-}
