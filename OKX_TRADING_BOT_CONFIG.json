@@ -1,0 +1,271 @@
+{
+  "okx_api_credentials": {
+    "api_key": "a5b57cd3-b0ee-44f-b8e9-7c5b330a5c28",
+    "secret_key": "E0A25726A822BB669A24ACF6FA4A8E31",
+    "passphrase": "SET_YOUR_PASSPHRASE_HERE",
+    "note": "API permissions: Read, Withdraw, Trade"
+  },
+  "trading_configuration": {
+    "mode": "demo",
+    "note": "Start with demo, then move to paper, then live",
+    "available_modes": ["demo", "paper", "live"],
+    "location": "Houston, TX (OKX only account setup)",
+    "continuous_operation": {
+      "enabled": true,
+      "duration_days": 30,
+      "start_date": "2025-12-25",
+      "end_date": "2026-01-24"
+    }
+  },
+  "trading_amounts_usd": {
+    "test_amounts": [10, 50, 100, 150, 200, 300, 350, 400, 450, 555],
+    "strategy": "Start small, scale up based on performance",
+    "demo_account_balance": 10000,
+    "paper_account_balance": 10000,
+    "live_starting_balance": "TBD - user to decide"
+  },
+  "trading_pairs": {
+    "spot": [
+      "BTC/USDT",
+      "ETH/USDT",
+      "SOL/USDT",
+      "DOGE/USDT",
+      "XRP/USDT",
+      "ADA/USDT",
+      "AVAX/USDT",
+      "DOT/USDT",
+      "MATIC/USDT",
+      "LINK/USDT"
+    ],
+    "futures": [
+      "BTC/USDT:USDT",
+      "ETH/USDT:USDT",
+      "SOL/USDT:USDT",
+      "DOGE/USDT:USDT",
+      "XRP/USDT:USDT"
+    ],
+    "note": "Test all pairs in rotation"
+  },
+  "candlestick_patterns": {
+    "reversal_patterns": [
+      "HAMMER",
+      "INVERTED_HAMMER",
+      "BULLISH_ENGULFING",
+      "BEARISH_ENGULFING",
+      "MORNING_STAR",
+      "EVENING_STAR",
+      "PIERCING_LINE",
+      "DARK_CLOUD_COVER",
+      "THREE_WHITE_SOLDIERS",
+      "THREE_BLACK_CROWS",
+      "BULLISH_HARAMI",
+      "BEARISH_HARAMI"
+    ],
+    "continuation_patterns": [
+      "RISING_THREE_METHODS",
+      "FALLING_THREE_METHODS",
+      "DOJI",
+      "SPINNING_TOP"
+    ],
+    "strength_patterns": [
+      "MARUBOZU",
+      "LONG_LEGGED_DOJI",
+      "DRAGONFLY_DOJI",
+      "GRAVESTONE_DOJI",
+      "SHOOTING_STAR",
+      "HANGING_MAN",
+      "TWEEZER_TOP",
+      "TWEEZER_BOTTOM"
+    ],
+    "total_patterns": 24,
+    "pattern_rotation": "Test each pattern across all pairs"
+  },
+  "trading_strategies": {
+    "beginner": {
+      "confidence_threshold": 0.85,
+      "position_size": 0.01,
+      "stop_loss_percent": 2.0,
+      "take_profit_percent": 3.0,
+      "max_positions": 1
+    },
+    "novice": {
+      "confidence_threshold": 0.80,
+      "position_size": 0.02,
+      "stop_loss_percent": 2.5,
+      "take_profit_percent": 4.0,
+      "max_positions": 2
+    },
+    "advanced": {
+      "confidence_threshold": 0.75,
+      "position_size": 0.03,
+      "stop_loss_percent": 3.0,
+      "take_profit_percent": 5.0,
+      "max_positions": 3
+    }
+  },
+  "risk_management": {
+    "max_daily_loss_percent": 5.0,
+    "max_position_size_percent": 10.0,
+    "max_drawdown_percent": 15.0,
+    "stop_trading_if_daily_loss_exceeded": true,
+    "alerts": {
+      "daily_loss_threshold": "Send Zapier notification",
+      "drawdown_threshold": "Send urgent email",
+      "consecutive_losses": 5
+    }
+  },
+  "testing_schedule": {
+    "24_7_operation": true,
+    "test_types": [
+      {
+        "name": "Pattern Rotation Test",
+        "description": "Test all 24 patterns across all pairs",
+        "duration": "Continuous for 30 days",
+        "frequency": "Test each pattern 10 times per day minimum"
+      },
+      {
+        "name": "Pair Rotation Test",
+        "description": "Test all pairs with each strategy",
+        "duration": "Continuous for 30 days",
+        "frequency": "Cycle through all pairs every hour"
+      },
+      {
+        "name": "Amount Scaling Test",
+        "description": "Test with different position sizes",
+        "amounts": [10, 50, 100, 150, 200, 300, 350, 400, 450, 555],
+        "progression": "Start at $10, increase after 10 successful trades"
+      },
+      {
+        "name": "Backtest Verification",
+        "description": "Run backtests continuously",
+        "pairs": ["BTC/USDT", "ETH/USDT", "SOL/USDT"],
+        "timeframes": ["1h", "4h", "1d"],
+        "duration": "30 days historical data"
+      }
+    ]
+  },
+  "notification_configuration": {
+    "zapier_webhook": "https://hooks.zapier.com/hooks/catch/YOUR_WEBHOOK_ID/okxtrades",
+    "notifications": {
+      "trade_executed": {
+        "slack": true,
+        "email": true,
+        "include_data": ["pair", "side", "amount", "price", "pattern", "pnl"]
+      },
+      "daily_summary": {
+        "time": "8:00 PM CST",
+        "email": true,
+        "include": ["total_trades", "win_rate", "total_pnl", "best_trade", "worst_trade"]
+      },
+      "weekly_report": {
+        "day": "Sunday",
+        "time": "6:00 PM CST",
+        "email": true,
+        "detailed": true
+      },
+      "alerts": {
+        "risk_limit_reached": "immediate_email_and_slack",
+        "consecutive_losses": "slack_notification",
+        "technical_error": "immediate_email"
+      }
+    }
+  },
+  "performance_tracking": {
+    "google_sheets": {
+      "sheet_name": "OKX Trading Log",
+      "update_frequency": "On every trade",
+      "columns": [
+        "Timestamp",
+        "Pair",
+        "Side",
+        "Entry Price",
+        "Exit Price",
+        "Amount",
+        "Pattern",
+        "Strategy",
+        "P&L USD",
+        "P&L %",
+        "Win/Loss",
+        "Cumulative P&L"
+      ]
+    },
+    "airtable": {
+      "base": "Trading",
+      "table": "Trades",
+      "auto_calculate": ["win_rate", "sharpe_ratio", "max_drawdown", "profit_factor"]
+    }
+  },
+  "integration_points": {
+    "zapier": {
+      "trigger_on_trade": true,
+      "log_to_sheets": true,
+      "send_notifications": true,
+      "update_airtable": true
+    },
+    "github": {
+      "repo": "Private-Claude",
+      "branch": "claude/setup-e2b-webhooks-CPFBo",
+      "commit_results": "Daily",
+      "use_copilot_business": true
+    },
+    "e2b_sandbox": {
+      "webhook_id": "YIyOpaJ0UMJ3Pl9Md5kVExEDdkqyDGRp",
+      "execute_backtests": true,
+      "test_strategies": true
+    }
+  },
+  "execution_commands": {
+    "start_demo_trading": "python3 scripts/okx_trading_bot.py --mode demo --amount 10 --continuous --duration 30d",
+    "start_paper_trading": "python3 scripts/okx_trading_bot.py --mode paper --amount 50 --continuous --duration 30d",
+    "run_pattern_tests": "python3 scripts/okx_trading_bot.py --test patterns --all-pairs --duration 30d",
+    "run_pair_rotation": "python3 scripts/okx_trading_bot.py --test pairs --all-patterns --duration 30d",
+    "run_backtests": "python3 pillar-a-trading/backtesting/run_backtests.py --all-profiles --pairs BTC/USDT,ETH/USDT,SOL/USDT",
+    "continuous_testing": "python3 scripts/okx_trading_bot.py --mode demo --continuous --test-all --duration 30d --zapier-webhook https://hooks.zapier.com/hooks/catch/YOUR_ID/okx"
+  },
+  "setup_steps": [
+    "1. Verify OKX API credentials are active",
+    "2. Set API passphrase in configuration",
+    "3. Enable demo/paper trading on OKX account",
+    "4. Create Zapier webhook for trade notifications",
+    "5. Setup Google Sheets for trade logging",
+    "6. Create Airtable base for trading data",
+    "7. Configure Slack channel #trading-alerts",
+    "8. Test API connection with small demo trade",
+    "9. Start 24/7 continuous trading for 30 days",
+    "10. Monitor via Zapier notifications"
+  ],
+  "safety_features": {
+    "emergency_stop": {
+      "enabled": true,
+      "triggers": [
+        "Daily loss exceeds 5%",
+        "Drawdown exceeds 15%",
+        "5 consecutive losses",
+        "API error detected",
+        "Manual stop command"
+      ],
+      "notification": "Immediate email and Slack alert"
+    },
+    "auto_restart": {
+      "enabled": true,
+      "wait_time": "1 hour after stop",
+      "conditions": "Only restart if within risk limits"
+    }
+  },
+  "recommended_amounts_by_balance": {
+    "10000_demo_account": {
+      "conservative": "$10-50 per trade",
+      "moderate": "$50-150 per trade",
+      "aggressive": "$150-555 per trade"
+    },
+    "note": "Test all amounts in demo before moving to live",
+    "progression": "Start at $10, increase after 20 profitable trades"
+  },
+  "questions_for_user": {
+    "q1": "What is your OKX API passphrase? (needed to activate API)",
+    "q2": "How much do you want to allocate for live trading after demo phase?",
+    "q3": "Preferred risk level: conservative, moderate, or aggressive?",
+    "q4": "Should I start trading immediately in demo mode?",
+    "q5": "What is your target ROI for the 30-day period?"
+  }
+}

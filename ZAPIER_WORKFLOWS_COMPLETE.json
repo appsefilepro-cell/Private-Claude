@@ -1,0 +1,651 @@
+{
+  "workflows": [
+    {
+      "name": "GitHub to GitLab Sync",
+      "description": "Automatically sync GitHub commits to GitLab",
+      "trigger": {
+        "app": "GitHub",
+        "event": "New Commit",
+        "account": "appsefilepro",
+        "repository": "Private-Claude"
+      },
+      "actions": [
+        {
+          "app": "GitLab",
+          "action": "Mirror Commit",
+          "project": "appsefilepro-project"
+        },
+        {
+          "app": "Slack",
+          "action": "Send Channel Message",
+          "channel": "#system-status",
+          "message": "✅ GitHub commit synced to GitLab: {{commit_message}}"
+        },
+        {
+          "app": "Email",
+          "action": "Send Email",
+          "to": "terobinsonwy@gmail.com",
+          "subject": "GitHub Sync Complete",
+          "body": "Commit synced: {{commit_message}}"
+        }
+      ]
+    },
+    {
+      "name": "GitLab to GitHub Sync",
+      "description": "Automatically sync GitLab pushes to GitHub",
+      "trigger": {
+        "app": "GitLab",
+        "event": "New Push",
+        "project": "appsefilepro-project"
+      },
+      "actions": [
+        {
+          "app": "GitHub",
+          "action": "Create Commit",
+          "repository": "Private-Claude"
+        },
+        {
+          "app": "Slack",
+          "action": "Send Channel Message",
+          "channel": "#system-status",
+          "message": "✅ GitLab push synced to GitHub"
+        }
+      ]
+    },
+    {
+      "name": "OKX Trade Notifications",
+      "description": "Send email/Slack alerts for every OKX trade",
+      "trigger": {
+        "app": "Webhooks by Zapier",
+        "event": "Catch Hook",
+        "webhook_url": "https://hooks.zapier.com/hooks/catch/YOUR_WEBHOOK_ID/",
+        "note": "Configure OKX bot to send trade data to this webhook"
+      },
+      "actions": [
+        {
+          "app": "Google Sheets",
+          "action": "Create Spreadsheet Row",
+          "spreadsheet": "OKX Trading Log",
+          "worksheet": "Trades",
+          "data": {
+            "Timestamp": "{{timestamp}}",
+            "Pair": "{{pair}}",
+            "Side": "{{side}}",
+            "Amount": "{{amount}}",
+            "Price": "{{price}}",
+            "Pattern": "{{pattern}}",
+            "P&L": "{{pnl}}"
+          }
+        },
+        {
+          "app": "Slack",
+          "action": "Send Channel Message",
+          "channel": "#trading-alerts",
+          "message": "🔔 OKX Trade: {{side}} {{amount}} {{pair}} at {{price}} | Pattern: {{pattern}} | P&L: {{pnl}}"
+        },
+        {
+          "app": "Email",
+          "action": "Send Email",
+          "to": "terobinsonwy@gmail.com",
+          "subject": "OKX Trade Alert: {{pair}}",
+          "body": "Trade executed:\nPair: {{pair}}\nSide: {{side}}\nAmount: {{amount}}\nPrice: {{price}}\nPattern: {{pattern}}\nP&L: {{pnl}}"
+        }
+      ]
+    },
+    {
+      "name": "Daily Trading Report",
+      "description": "Send daily P&L report from OKX trading",
+      "trigger": {
+        "app": "Schedule by Zapier",
+        "event": "Every Day",
+        "time": "8:00 PM CST"
+      },
+      "actions": [
+        {
+          "app": "Google Sheets",
+          "action": "Lookup Spreadsheet Rows",
+          "spreadsheet": "OKX Trading Log",
+          "worksheet": "Trades",
+          "search_column": "Timestamp",
+          "search_value": "{{today}}"
+        },
+        {
+          "app": "Formatter by Zapier",
+          "action": "Spreadsheet-Style Formula",
+          "formula": "=SUM(P&L)",
+          "note": "Calculate total daily P&L"
+        },
+        {
+          "app": "Email",
+          "action": "Send Email",
+          "to": "terobinsonwy@gmail.com",
+          "subject": "Daily OKX Trading Report - {{today}}",
+          "body": "Daily Trading Summary:\n\nTotal Trades: {{count}}\nTotal P&L: {{total_pnl}}\nWin Rate: {{win_rate}}%\nBest Trade: {{best_trade}}\nWorst Trade: {{worst_trade}}\n\nView full log: [Google Sheets Link]"
+        },
+        {
+          "app": "Slack",
+          "action": "Send Channel Message",
+          "channel": "#trading-alerts",
+          "message": "📊 Daily Report: {{count}} trades | P&L: {{total_pnl}} | Win Rate: {{win_rate}}%"
+        }
+      ]
+    },
+    {
+      "name": "Legal Document Generated",
+      "description": "Notify when legal document is generated",
+      "trigger": {
+        "app": "Google Drive",
+        "event": "New File in Folder",
+        "folder": "Legal Automation/Generated Documents"
+      },
+      "actions": [
+        {
+          "app": "PDF.co",
+          "action": "Convert to PDF",
+          "note": "Ensure document is in PDF format"
+        },
+        {
+          "app": "Email",
+          "action": "Send Email",
+          "to": "terobinsonwy@gmail.com",
+          "subject": "Legal Document Ready: {{file_name}}",
+          "body": "Your legal document has been generated and is ready for review.\n\nDocument: {{file_name}}\nGenerated: {{timestamp}}\n\nView document: {{file_link}}",
+          "attachments": "{{pdf_file}}"
+        },
+        {
+          "app": "Slack",
+          "action": "Send Channel Message",
+          "channel": "#legal-updates",
+          "message": "📄 Legal document ready: {{file_name}}\nLink: {{file_link}}"
+        }
+      ]
+    },
+    {
+      "name": "Case 1241511 Dismissal Workflow",
+      "description": "Automate probate case dismissal notice generation and sending",
+      "trigger": {
+        "app": "Webhooks by Zapier",
+        "event": "Catch Hook",
+        "webhook_url": "https://hooks.zapier.com/hooks/catch/YOUR_WEBHOOK_ID/case1241511",
+        "note": "Trigger this manually or via button"
+      },
+      "actions": [
+        {
+          "app": "Google Docs",
+          "action": "Create Document from Template",
+          "template": "Probate Dismissal Notice Template",
+          "replacements": {
+            "{{case_number}}": "1241511",
+            "{{court}}": "Harris County - County Civil Court at Law No. 2",
+            "{{plaintiff}}": "NEW FOREST HOUSTON 2020 LLC",
+            "{{defendant}}": "THURMAN ROBINSON, ET AL.",
+            "{{date}}": "{{today}}"
+          }
+        },
+        {
+          "app": "PDF.co",
+          "action": "Convert Doc to PDF"
+        },
+        {
+          "app": "Email",
+          "action": "Send Email",
+          "to": "terobinsonwy@gmail.com",
+          "subject": "Case 1241511 - Dismissal Notice Generated",
+          "body": "The dismissal notice for Case No. 1241511 has been generated.\n\nPlease review the attached document before filing with the court.",
+          "attachments": "{{pdf_file}}"
+        },
+        {
+          "app": "Airtable",
+          "action": "Create Record",
+          "base": "Legal Cases",
+          "table": "Documents",
+          "fields": {
+            "Case Number": "1241511",
+            "Document Type": "Dismissal Notice",
+            "Generated Date": "{{today}}",
+            "Status": "Ready for Filing",
+            "File Link": "{{file_link}}"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Form 1023-EZ Nonprofit Application",
+      "description": "Automate IRS Form 1023-EZ filling",
+      "trigger": {
+        "app": "Webhooks by Zapier",
+        "event": "Catch Hook",
+        "webhook_url": "https://hooks.zapier.com/hooks/catch/YOUR_WEBHOOK_ID/form1023",
+        "data_source": "Airtable nonprofit data"
+      },
+      "actions": [
+        {
+          "app": "Airtable",
+          "action": "Find Record",
+          "base": "Nonprofit Operations",
+          "table": "Organization Info",
+          "search_field": "Organization Name",
+          "search_value": "{{org_name}}"
+        },
+        {
+          "app": "PDF.co",
+          "action": "Fill PDF Form",
+          "template_url": "https://www.irs.gov/pub/irs-pdf/f1023ez.pdf",
+          "fields": {
+            "OrganizationName": "{{org_name}}",
+            "EIN": "{{ein}}",
+            "Address": "{{address}}",
+            "City": "{{city}}",
+            "State": "{{state}}",
+            "ZIP": "{{zip}}",
+            "FormationDate": "{{formation_date}}",
+            "Purpose": "{{purpose}}"
+          }
+        },
+        {
+          "app": "Google Drive",
+          "action": "Upload File",
+          "folder": "Legal Automation/Nonprofit Forms",
+          "file_name": "Form_1023_EZ_{{org_name}}.pdf"
+        },
+        {
+          "app": "Email",
+          "action": "Send Email",
+          "to": "terobinsonwy@gmail.com",
+          "subject": "Form 1023-EZ Ready: {{org_name}}",
+          "body": "Form 1023-EZ has been completed for {{org_name}}.\n\nNext steps:\n1. Review the form\n2. Pay the filing fee ($275)\n3. Submit to IRS via Pay.gov\n\nView form: {{file_link}}",
+          "attachments": "{{pdf_file}}"
+        }
+      ]
+    },
+    {
+      "name": "Microsoft 365 to Google Drive Migration",
+      "description": "Automate document migration from M365 to Google Drive",
+      "trigger": {
+        "app": "OneDrive",
+        "event": "New File",
+        "folder": "/",
+        "note": "Triggers for each file in OneDrive"
+      },
+      "actions": [
+        {
+          "app": "Google Drive",
+          "action": "Upload File",
+          "folder": "Migrated from Microsoft 365",
+          "file": "{{file}}",
+          "preserve_metadata": true
+        },
+        {
+          "app": "Airtable",
+          "action": "Create Record",
+          "base": "Migration Tracking",
+          "table": "Migrated Files",
+          "fields": {
+            "File Name": "{{file_name}}",
+            "Original Location": "OneDrive",
+            "New Location": "Google Drive",
+            "Migrated Date": "{{today}}",
+            "File Size": "{{file_size}}",
+            "Link": "{{gdrive_link}}"
+          }
+        },
+        {
+          "app": "Formatter by Zapier",
+          "action": "Numbers",
+          "operation": "Perform Math Operation",
+          "note": "Track total migrated size"
+        }
+      ]
+    },
+    {
+      "name": "Slack AI Communication Hub",
+      "description": "Enable AI-to-AI communication via Slack",
+      "trigger": {
+        "app": "Slack",
+        "event": "New Message Posted to Channel",
+        "channel": "#ai-communication"
+      },
+      "actions": [
+        {
+          "app": "Formatter by Zapier",
+          "action": "Text",
+          "operation": "Extract Pattern",
+          "pattern": "@Agent5CFO|@Committee100",
+          "note": "Parse AI mentions"
+        },
+        {
+          "app": "Webhooks by Zapier",
+          "action": "POST",
+          "url": "https://api.anthropic.com/v1/messages",
+          "note": "Send to Claude API for processing"
+        },
+        {
+          "app": "Slack",
+          "action": "Send Channel Message",
+          "channel": "#ai-communication",
+          "message": "{{ai_response}}"
+        }
+      ]
+    },
+    {
+      "name": "System Error Alerts",
+      "description": "Alert on any system errors",
+      "trigger": {
+        "app": "Webhooks by Zapier",
+        "event": "Catch Hook",
+        "webhook_url": "https://hooks.zapier.com/hooks/catch/YOUR_WEBHOOK_ID/errors"
+      },
+      "actions": [
+        {
+          "app": "Airtable",
+          "action": "Create Record",
+          "base": "System Monitoring",
+          "table": "Errors",
+          "fields": {
+            "Timestamp": "{{timestamp}}",
+            "System": "{{system}}",
+            "Error": "{{error_message}}",
+            "Severity": "{{severity}}",
+            "Status": "New"
+          }
+        },
+        {
+          "app": "Slack",
+          "action": "Send Channel Message",
+          "channel": "#system-status",
+          "message": "🚨 ERROR in {{system}}: {{error_message}}",
+          "priority": "urgent"
+        },
+        {
+          "app": "Email",
+          "action": "Send Email",
+          "to": "terobinsonwy@gmail.com",
+          "subject": "URGENT: System Error in {{system}}",
+          "body": "An error has occurred:\n\nSystem: {{system}}\nError: {{error_message}}\nTime: {{timestamp}}\nSeverity: {{severity}}\n\nView in Airtable: {{record_link}}"
+        }
+      ]
+    },
+    {
+      "name": "Test Completion Notifications",
+      "description": "Notify when tests complete",
+      "trigger": {
+        "app": "Webhooks by Zapier",
+        "event": "Catch Hook",
+        "webhook_url": "https://hooks.zapier.com/hooks/catch/YOUR_WEBHOOK_ID/testcomplete"
+      },
+      "actions": [
+        {
+          "app": "Airtable",
+          "action": "Update Record",
+          "base": "Testing",
+          "table": "Test Runs",
+          "record_id": "{{test_id}}",
+          "fields": {
+            "Status": "Complete",
+            "Completed At": "{{timestamp}}",
+            "Results": "{{results}}",
+            "Pass Rate": "{{pass_rate}}"
+          }
+        },
+        {
+          "app": "Slack",
+          "action": "Send Channel Message",
+          "channel": "#test-results",
+          "message": "✅ Test Complete: {{test_name}}\nPass Rate: {{pass_rate}}%\nDetails: {{results}}"
+        },
+        {
+          "app": "Email",
+          "action": "Send Email",
+          "to": "terobinsonwy@gmail.com",
+          "subject": "Test Results: {{test_name}}",
+          "body": "Test: {{test_name}}\nStatus: Complete\nPass Rate: {{pass_rate}}%\nResults: {{results}}\n\nView full report: {{report_link}}"
+        }
+      ]
+    },
+    {
+      "name": "E2B Sandbox Execution",
+      "description": "Trigger code execution in E2B sandbox",
+      "trigger": {
+        "app": "GitHub",
+        "event": "New Push",
+        "repository": "Private-Claude",
+        "branch": "claude/setup-e2b-webhooks-CPFBo"
+      },
+      "actions": [
+        {
+          "app": "Webhooks by Zapier",
+          "action": "POST",
+          "url": "https://api.e2b.dev/webhooks/YIyOpaJ0UMJ3Pl9Md5kVExEDdkqyDGRp",
+          "method": "POST",
+          "data": {
+            "code": "{{commit_diff}}",
+            "environment": "python",
+            "timeout": 300
+          }
+        },
+        {
+          "app": "Slack",
+          "action": "Send Channel Message",
+          "channel": "#system-status",
+          "message": "⚡ E2B executing code from commit: {{commit_message}}"
+        }
+      ]
+    },
+    {
+      "name": "Financial Report Generation",
+      "description": "Generate and send weekly financial reports",
+      "trigger": {
+        "app": "Schedule by Zapier",
+        "event": "Every Week",
+        "day": "Monday",
+        "time": "9:00 AM CST"
+      },
+      "actions": [
+        {
+          "app": "Airtable",
+          "action": "Find Records",
+          "base": "Financial Operations",
+          "table": "Transactions",
+          "filter": "Created Time is within the last 7 days"
+        },
+        {
+          "app": "Formatter by Zapier",
+          "action": "Spreadsheet-Style Formula",
+          "formula": "=SUM(Amount)",
+          "note": "Calculate weekly totals"
+        },
+        {
+          "app": "Google Docs",
+          "action": "Create Document from Template",
+          "template": "Weekly Financial Report",
+          "replacements": {
+            "{{week}}": "{{week_of_year}}",
+            "{{revenue}}": "{{total_revenue}}",
+            "{{expenses}}": "{{total_expenses}}",
+            "{{net}}": "{{net_income}}"
+          }
+        },
+        {
+          "app": "PDF.co",
+          "action": "Convert to PDF"
+        },
+        {
+          "app": "Email",
+          "action": "Send Email",
+          "to": "terobinsonwy@gmail.com",
+          "subject": "Weekly Financial Report - Week {{week}}",
+          "body": "Attached is your weekly financial report.\n\nRevenue: {{total_revenue}}\nExpenses: {{total_expenses}}\nNet Income: {{net_income}}",
+          "attachments": "{{pdf_file}}"
+        }
+      ]
+    },
+    {
+      "name": "Life Coach Session Reminders",
+      "description": "Send reminders for coaching sessions",
+      "trigger": {
+        "app": "Airtable",
+        "event": "New Record",
+        "base": "Life Coach AI",
+        "table": "Sessions",
+        "view": "Upcoming Sessions"
+      },
+      "actions": [
+        {
+          "app": "Delay by Zapier",
+          "action": "Delay Until",
+          "delay_until": "{{session_datetime}} - 1 day"
+        },
+        {
+          "app": "Email",
+          "action": "Send Email",
+          "to": "{{client_email}}",
+          "subject": "Coaching Session Reminder - Tomorrow",
+          "body": "Hi {{client_name}},\n\nThis is a reminder that we have a coaching session scheduled for tomorrow.\n\nDate: {{session_date}}\nTime: {{session_time}}\nTopic: {{session_topic}}\n\nLooking forward to our session!\n\nBest,\nThurman Robinson\nCertified Life Coach"
+        },
+        {
+          "app": "Slack",
+          "action": "Send Direct Message",
+          "user": "Thurman Robinson",
+          "message": "📅 Session reminder: {{client_name}} tomorrow at {{session_time}}"
+        }
+      ]
+    },
+    {
+      "name": "Continuous Test Runner (24/7)",
+      "description": "Run automated tests every hour",
+      "trigger": {
+        "app": "Schedule by Zapier",
+        "event": "Every Hour"
+      },
+      "actions": [
+        {
+          "app": "Webhooks by Zapier",
+          "action": "POST",
+          "url": "https://api.github.com/repos/appsefilepro-cell/Private-Claude/dispatches",
+          "method": "POST",
+          "headers": {
+            "Authorization": "Bearer {{github_token}}",
+            "Accept": "application/vnd.github.v3+json"
+          },
+          "data": {
+            "event_type": "run_tests",
+            "client_payload": {
+              "test_suite": "all",
+              "parallel": true
+            }
+          }
+        },
+        {
+          "app": "Slack",
+          "action": "Send Channel Message",
+          "channel": "#test-results",
+          "message": "🔄 Hourly test run initiated"
+        }
+      ]
+    }
+  ],
+  "setup_instructions": {
+    "step_1": "Create Zapier account (free tier: 100 tasks/month, upgrade to Starter for 750 tasks at $19.99/month if needed)",
+    "step_2": "Import each workflow by copying the JSON and using Zapier's import feature",
+    "step_3": "Connect accounts: GitHub, GitLab, Slack, Google (Sheets, Docs, Drive), Airtable, Email",
+    "step_4": "Replace placeholder webhook URLs with actual Zapier webhook URLs",
+    "step_5": "Test each workflow individually before activating all",
+    "step_6": "Turn on all workflows for continuous 24/7 operation",
+    "step_7": "Monitor Zapier dashboard for task usage and errors"
+  },
+  "zapier_webhook_urls": {
+    "note": "After creating Zapier account, get these webhook URLs from Zapier",
+    "okx_trades": "Get from: https://zapier.com/app/editor → Webhooks by Zapier → Catch Hook",
+    "case_1241511": "Create webhook trigger for Case 1241511 workflow",
+    "form_1023": "Create webhook trigger for Form 1023-EZ workflow",
+    "errors": "Create webhook trigger for error notifications",
+    "test_complete": "Create webhook trigger for test completions"
+  },
+  "airtable_bases_to_create": [
+    {
+      "name": "Legal Cases",
+      "tables": [
+        "Cases",
+        "Documents",
+        "Deadlines",
+        "Contacts"
+      ]
+    },
+    {
+      "name": "Financial Operations",
+      "tables": [
+        "Transactions",
+        "Budgets",
+        "Invoices",
+        "Expenses"
+      ]
+    },
+    {
+      "name": "Trading",
+      "tables": [
+        "Trades",
+        "Strategies",
+        "Performance",
+        "Backtests"
+      ]
+    },
+    {
+      "name": "Testing",
+      "tables": [
+        "Test Runs",
+        "Results",
+        "Issues",
+        "Coverage"
+      ]
+    },
+    {
+      "name": "Migration Tracking",
+      "tables": [
+        "Migrated Files",
+        "File Inventory",
+        "Migration Log"
+      ]
+    },
+    {
+      "name": "System Monitoring",
+      "tables": [
+        "Errors",
+        "Uptime",
+        "Performance",
+        "Logs"
+      ]
+    },
+    {
+      "name": "Life Coach AI",
+      "tables": [
+        "Clients",
+        "Sessions",
+        "Goals",
+        "Progress"
+      ]
+    },
+    {
+      "name": "Nonprofit Operations",
+      "tables": [
+        "Organization Info",
+        "Programs",
+        "Donors",
+        "Grants"
+      ]
+    }
+  ],
+  "google_sheets_to_create": [
+    "OKX Trading Log",
+    "Financial Dashboard",
+    "Test Results",
+    "System Status"
+  ],
+  "slack_channels_to_create": [
+    "#system-status",
+    "#trading-alerts",
+    "#legal-updates",
+    "#financial-reports",
+    "#ai-communication",
+    "#test-results"
+  ]
+}
