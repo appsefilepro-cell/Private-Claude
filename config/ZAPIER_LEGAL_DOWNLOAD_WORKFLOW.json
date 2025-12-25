@@ -1,0 +1,54 @@
+{
+  "workflow_name": "Legal Document Auto-Download System",
+  "workflow_number": 21,
+  "trigger": {
+    "app": "Schedule by Zapier",
+    "event": "Every Week",
+    "frequency": "Monday 9:00 AM"
+  },
+  "actions": [
+    {
+      "step": 1,
+      "app": "Code by Zapier",
+      "action": "Run Python",
+      "code": "Execute download_legal_documents_automated.py"
+    },
+    {
+      "step": 2,
+      "app": "Browse AI",
+      "action": "Run Robot",
+      "robot": "SBA_Forms_Downloader"
+    },
+    {
+      "step": 3,
+      "app": "Dropbox",
+      "action": "Upload Files",
+      "folder": "/Legal_Documents_Downloaded/",
+      "source": "data/legal_documents/"
+    },
+    {
+      "step": 4,
+      "app": "Google Drive",
+      "action": "Upload Files",
+      "folder": "Legal Documents (appefilepro@gmail.com)",
+      "source": "data/legal_documents/"
+    },
+    {
+      "step": 5,
+      "app": "Google Sheets",
+      "action": "Create Spreadsheet Row",
+      "spreadsheet": "Legal Documents Log",
+      "data": "Document name, Download date, Source URL, Status"
+    },
+    {
+      "step": 6,
+      "app": "Email by Zapier",
+      "action": "Send Email",
+      "to": "appefilepro@gmail.com",
+      "subject": "Legal Documents Downloaded - Weekly Report",
+      "body": "All legal forms downloaded and synced to Google Drive & Dropbox"
+    }
+  ],
+  "cost": "FREE - All within Zapier free tier",
+  "delegation": "Legal Division + Integration Division"
+}

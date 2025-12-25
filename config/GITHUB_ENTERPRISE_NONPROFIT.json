@@ -1,0 +1,32 @@
+{
+  "program": "GitHub Enterprise for Nonprofits",
+  "eligibility": {
+    "nonprofit_501c3": "Eligible for FREE or discounted GitHub Enterprise",
+    "8a_program": "SBA 8(a) certified businesses get special pricing",
+    "cdfi": "Community Development Financial Institutions",
+    "sba_loans": "Small Business Administration programs",
+    "grants": "Grant-funded organizations"
+  },
+  "benefits": {
+    "github_copilot_business": "AI-powered code completion",
+    "advanced_security": "CodeQL, Dependabot, Secret scanning",
+    "github_actions_unlimited": "Unlimited CI/CD minutes",
+    "github_codespaces": "Cloud development environments",
+    "github_packages": "Package hosting"
+  },
+  "setup": {
+    "step_1": "Apply at: https://github.com/nonprofit",
+    "step_2": "Provide 501(c)(3) documentation or 8(a) certification",
+    "step_3": "Receive approval (usually 1-2 weeks)",
+    "step_4": "Activate enterprise features",
+    "step_5": "Integrate with Agent 5.0 for full automation"
+  },
+  "agent_5_integration": {
+    "copilot_business": "DevOps Division uses for code generation",
+    "advanced_security": "Cybersecurity team uses for scanning",
+    "actions_unlimited": "All divisions use for automation",
+    "codespaces": "Cloud development for all 219 agents"
+  },
+  "cost": "FREE or $21/user/month (vs $39/user/month standard)",
+  "user_email": "appefilepro@gmail.com"
+}

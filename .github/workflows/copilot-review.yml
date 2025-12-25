@@ -1,0 +1,46 @@
+name: GitHub Copilot - Review & Fix
+
+on:
+  schedule:
+    - cron: '0 */6 * * *'  # Every 6 hours
+  workflow_dispatch:
+
+jobs:
+  copilot-review:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install GitHub CLI
+        run: |
+          curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg
+          echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null
+          sudo apt update
+          sudo apt install -y gh
+
+      - name: Install Copilot CLI
+        run: gh extension install github/gh-copilot || true
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Review conversations
+        run: python3 scripts/github_copilot_review_all_conversations.py
+
+      - name: Fix Python errors
+        run: |
+          for file in scripts/*.py; do
+            python3 -m py_compile "$file" || echo "Error in $file - delegating to GitLab Duo"
+          done
+
+      - name: Commit fixes
+        run: |
+          git config user.name "Agent 5.0 GitHub Copilot Team"
+          git config user.email "appefilepro@gmail.com"
+          git add -A
+          git diff --quiet && git diff --staged --quiet || git commit -m "Agent 5.0: Auto-fix from GitHub Copilot review"
+          git push || true

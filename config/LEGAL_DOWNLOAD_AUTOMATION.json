@@ -1,0 +1,102 @@
+{
+  "timestamp": "2025-12-25T20:22:15.647575",
+  "agent": "Legal Document Download Team",
+  "master_prompt": "\nYou are Agent 5.0 Legal Document Downloader - DON'T CREATE, DOWNLOAD!\n\nYOUR MISSION:\n1. DOWNLOAD all legal forms, templates, documents (NOT generate)\n2. Use Surf CLI to navigate government websites\n3. Use Browse AI to scrape legal databases\n4. Use web crawlers for bulk downloads\n5. Store in Dropbox via Zapier (100% cloud, zero local data)\n6. Connect to user's Google account: appefilepro@gmail.com\n\nWHY DOWNLOAD vs CREATE:\n- Real official forms from government websites\n- Pre-approved templates\n- Legally valid documents\n- No risk of errors in custom generation\n- FREE - no AI generation costs\n\nYOUR TOOLS:\n- Surf CLI: Automated web browsing\n- Browse AI: No-code web scraping\n- Apify: Web automation\n- BeautifulSoup4/Scrapy: Python crawlers\n- Playwright: JavaScript-heavy sites\n- Google Drive: Storage (appefilepro@gmail.com)\n- Dropbox: Backup via Zapier\n\nUSE CASES:\n- IRS Form 1023-EZ \u2192 Download from IRS.gov\n- Probate forms \u2192 Download from county courts\n- Property deeds \u2192 Download from county recorders\n- FTC claim forms \u2192 Download from FTC.gov\n- SBA/CDFI/8(a) forms \u2192 Download from SBA.gov\n- Nonprofit forms \u2192 Download from state websites\n",
+  "email_account": "appefilepro@gmail.com",
+  "download_sources": [
+    {
+      "source": "IRS.gov",
+      "forms": 6,
+      "method": "Surf CLI + curl",
+      "cost": "FREE",
+      "script": "scripts/download_irs_forms.sh"
+    },
+    {
+      "source": "SBA.gov",
+      "forms": 4,
+      "method": "Browse AI + Surf CLI",
+      "cost": "FREE (Browse AI free tier)",
+      "automation": {
+        "robot_name": "SBA_Forms_Downloader",
+        "description": "Download all SBA, CDFI, 8(a) program forms",
+        "url_patterns": [
+          "https://www.sba.gov/document/sba-form-1919-borrower-information-form",
+          "https://www.sba.gov/document/sba-form-413-personal-financial-statement",
+          "https://www.sba.gov/document/sba-form-159-fee-disclosure-form",
+          "https://www.sba.gov/federal-contracting/contracting-assistance-programs/8a-business-development-program"
+        ],
+        "delegation": "Integration Division - Web Automation Team",
+        "zapier_integration": "Workflow #15 - Legal Document Generator"
+      }
+    },
+    {
+      "source": "State Government Websites",
+      "states": 2,
+      "method": "Surf CLI automated browsing",
+      "cost": "FREE",
+      "script": "scripts/download_nonprofit_forms.sh"
+    },
+    {
+      "source": "Probate Court Websites",
+      "courts": 2,
+      "method": "Surf CLI + Playwright (JavaScript sites)",
+      "cost": "FREE"
+    }
+  ],
+  "automations": [
+    {
+      "workflow_name": "Legal Document Auto-Download System",
+      "workflow_number": 21,
+      "trigger": {
+        "app": "Schedule by Zapier",
+        "event": "Every Week",
+        "frequency": "Monday 9:00 AM"
+      },
+      "actions": [
+        {
+          "step": 1,
+          "app": "Code by Zapier",
+          "action": "Run Python",
+          "code": "Execute download_legal_documents_automated.py"
+        },
+        {
+          "step": 2,
+          "app": "Browse AI",
+          "action": "Run Robot",
+          "robot": "SBA_Forms_Downloader"
+        },
+        {
+          "step": 3,
+          "app": "Dropbox",
+          "action": "Upload Files",
+          "folder": "/Legal_Documents_Downloaded/",
+          "source": "data/legal_documents/"
+        },
+        {
+          "step": 4,
+          "app": "Google Drive",
+          "action": "Upload Files",
+          "folder": "Legal Documents (appefilepro@gmail.com)",
+          "source": "data/legal_documents/"
+        },
+        {
+          "step": 5,
+          "app": "Google Sheets",
+          "action": "Create Spreadsheet Row",
+          "spreadsheet": "Legal Documents Log",
+          "data": "Document name, Download date, Source URL, Status"
+        },
+        {
+          "step": 6,
+          "app": "Email by Zapier",
+          "action": "Send Email",
+          "to": "appefilepro@gmail.com",
+          "subject": "Legal Documents Downloaded - Weekly Report",
+          "body": "All legal forms downloaded and synced to Google Drive & Dropbox"
+        }
+      ],
+      "cost": "FREE - All within Zapier free tier",
+      "delegation": "Legal Division + Integration Division"
+    }
+  ]
+}

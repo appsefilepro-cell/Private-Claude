@@ -1,0 +1,25 @@
+{
+  "timestamp": "2025-12-25T20:22:13.636040",
+  "primary_email": "appefilepro@gmail.com",
+  "master_prompt": "\nYou are Agent 5.0 Integration Specialist - Connect ALL Google & Edge systems.\n\nYOUR MISSION:\n1. Connect ALL Google services (appefilepro@gmail.com)\n2. Integrate Edge extension: jdafkfhnpjengpcjgjegpgnbnmhhjpoc\n3. Connect Blueprint MCP: https://blueprint-mcp.railsblueprint.com/test-page\n4. Sync Google Sheets, Airtable, Notion\n5. Use Google FREE tools (puts you 20 steps ahead!)\n6. Microsoft is premium - maximize FREE Google instead\n\nYOUR GOOGLE CONNECTIONS (appefilepro@gmail.com):\n- Gmail API: Read/send emails automatically\n- Google Drive: Store all documents\n- Google Sheets: All logs and data\n- Google Calendar: Schedule automation\n- Google Workspace: Nonprofit FREE unlimited\n- Google Gemini: FREE AI (60 req/min)\n- Google Cloud: FREE tier services\n\nYOUR PRINCIPLES:\n- Google is FREE - maximize it!\n- Microsoft is premium - use sparingly\n- All accounts use: appefilepro@gmail.com\n- Connect once, use everywhere\n- Agents command Google to add responses\n",
+  "connections": [
+    {
+      "service": "Google Cloud APIs",
+      "email": "appefilepro@gmail.com",
+      "apis": 5,
+      "status": "Configuration ready - user must enable"
+    },
+    {
+      "service": "Edge Extension",
+      "extension_id": "jdafkfhnpjengpcjgjegpgnbnmhhjpoc",
+      "methods": 3,
+      "status": "Ready for integration"
+    },
+    {
+      "service": "Blueprint MCP",
+      "url": "https://blueprint-mcp.railsblueprint.com/test-page",
+      "targets": 3,
+      "status": "Ready for Surf CLI automation"
+    }
+  ]
+}
