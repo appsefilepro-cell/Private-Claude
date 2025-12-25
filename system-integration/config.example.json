@@ -1,0 +1,116 @@
+{
+  "microsoft365": {
+    "client_id": "YOUR_AZURE_CLIENT_ID_HERE",
+    "tenant_id": "common",
+    "include_onedrive": true,
+    "include_sharepoint": true,
+    "authority": "https://login.microsoftonline.com/common",
+    "scopes": [
+      "Files.Read.All",
+      "Sites.Read.All",
+      "User.Read"
+    ]
+  },
+  "migration_targets": {
+    "local": {
+      "enabled": true,
+      "output_dir": "/home/user/migrated-docs",
+      "preserve_structure": true,
+      "create_metadata": true
+    },
+    "google_drive": {
+      "enabled": false,
+      "credentials_file": "google_credentials.json",
+      "folder_name": "Microsoft 365 Migration",
+      "preserve_structure": true,
+      "convert_office_docs": false
+    },
+    "sharepoint_target": {
+      "enabled": false,
+      "site_url": "https://yourtenant.sharepoint.com/sites/archive",
+      "client_id": "",
+      "client_secret": "",
+      "library_name": "Documents",
+      "preserve_structure": true
+    }
+  },
+  "batch_processing": {
+    "enabled": true,
+    "batch_size": 50,
+    "concurrent_downloads": 5,
+    "retry_failed": true,
+    "max_retries": 3,
+    "retry_delay_seconds": 5,
+    "exponential_backoff": true
+  },
+  "filters": {
+    "file_types": [],
+    "exclude_patterns": [
+      "*.tmp",
+      "~*",
+      "desktop.ini",
+      "thumbs.db",
+      ".DS_Store"
+    ],
+    "include_patterns": [],
+    "min_size_bytes": 0,
+    "max_size_bytes": 5368709120,
+    "modified_after": null,
+    "modified_before": null
+  },
+  "download_settings": {
+    "chunk_size_bytes": 8192,
+    "request_timeout_seconds": 300,
+    "rate_limit_delay_seconds": 0.1,
+    "resumable_downloads": true,
+    "verify_checksums": true
+  },
+  "scheduling": {
+    "enabled": false,
+    "schedule_type": "daily",
+    "schedule_time": "02:00",
+    "days_of_week": [1, 2, 3, 4, 5],
+    "timezone": "UTC",
+    "incremental_backup": true
+  },
+  "notifications": {
+    "enabled": false,
+    "email": {
+      "enabled": false,
+      "recipient": "your-email@example.com",
+      "smtp_server": "smtp.gmail.com",
+      "smtp_port": 587,
+      "smtp_user": "",
+      "smtp_password": "",
+      "use_tls": true
+    },
+    "webhook": {
+      "enabled": false,
+      "url": "",
+      "method": "POST",
+      "headers": {}
+    }
+  },
+  "logging": {
+    "level": "INFO",
+    "log_dir": "/home/user/Private-Claude/logs/system-integration",
+    "max_log_size_mb": 10,
+    "backup_count": 5,
+    "console_output": true
+  },
+  "security": {
+    "encrypt_output": false,
+    "encryption_password": "",
+    "clear_cache_on_exit": true,
+    "secure_delete": false
+  },
+  "advanced": {
+    "skip_existing_files": true,
+    "compare_file_size": true,
+    "compare_modified_date": true,
+    "save_migration_state": true,
+    "state_file": "migration_state.json",
+    "create_reports": true,
+    "report_formats": ["json", "csv", "html"]
+  }
+}

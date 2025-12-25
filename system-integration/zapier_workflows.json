@@ -1,0 +1,230 @@
+{
+  "zapier_workflows": [
+    {
+      "name": "Email Notification on Git Push",
+      "description": "Sends email when code is pushed to GitHub or GitLab",
+      "trigger": {
+        "type": "webhook",
+        "url": "{{ZAPIER_GIT_WEBHOOK}}",
+        "filter": "event_type contains 'push'"
+      },
+      "actions": [
+        {
+          "type": "email",
+          "to": "{{email_address}}",
+          "subject": "New code pushed to {{data.repository}}",
+          "body": "Branch: {{data.branch}}\nAuthor: {{data.author}}\nMessage: {{data.message}}\n\nCommits: {{data.commits_count}}"
+        }
+      ],
+      "setup_instructions": [
+        "1. Create a new Zap in Zapier",
+        "2. Choose 'Webhooks by Zapier' as trigger",
+        "3. Select 'Catch Hook'",
+        "4. Copy the webhook URL and add to .env as ZAPIER_GIT_WEBHOOK",
+        "5. Add 'Email by Zapier' as action",
+        "6. Configure email template using webhook data",
+        "7. Test and enable the Zap"
+      ]
+    },
+    {
+      "name": "Email Notification on Test Failure",
+      "description": "Sends urgent email when Postman tests fail",
+      "trigger": {
+        "type": "webhook",
+        "url": "{{ZAPIER_TEST_WEBHOOK}}",
+        "filter": "event_type contains 'test.failure'"
+      },
+      "actions": [
+        {
+          "type": "email",
+          "to": "{{email_address}}",
+          "subject": "[URGENT] Tests Failed: {{data.test_name}}",
+          "body": "Test Name: {{data.test_name}}\nFailed: {{data.failed_tests}}/{{data.total_tests}}\nDuration: {{data.duration}}s\n\nFailures:\n{{data.failures}}",
+          "priority": "high"
+        },
+        {
+          "type": "sms",
+          "to": "{{phone_number}}",
+          "message": "Tests failed: {{data.test_name}} - {{data.failed_tests}} failures"
+        }
+      ],
+      "setup_instructions": [
+        "1. Create a new Zap in Zapier",
+        "2. Choose 'Webhooks by Zapier' as trigger",
+        "3. Copy webhook URL to .env as ZAPIER_TEST_WEBHOOK",
+        "4. Add 'Email by Zapier' action with urgent template",
+        "5. Optional: Add SMS action for critical failures",
+        "6. Add filter to only trigger on failures",
+        "7. Test and enable"
+      ]
+    },
+    {
+      "name": "Email Notification on App Error",
+      "description": "Sends critical alert when apps encounter errors",
+      "trigger": {
+        "type": "webhook",
+        "url": "{{ZAPIER_ERROR_WEBHOOK}}",
+        "filter": "priority >= HIGH OR event_type contains 'error'"
+      },
+      "actions": [
+        {
+          "type": "email",
+          "to": "{{email_address}}",
+          "subject": "[ERROR] {{source}}: {{data.details}}",
+          "body": "Source: {{source}}\nTimestamp: {{timestamp}}\nPriority: {{priority}}\n\nDetails: {{data.details}}\n\nEvent ID: {{event_id}}"
+        },
+        {
+          "type": "slack",
+          "channel": "#alerts",
+          "message": ":rotating_light: App Error: {{source}} - {{data.details}}"
+        }
+      ],
+      "setup_instructions": [
+        "1. Create a new Zap",
+        "2. Webhook trigger with ZAPIER_ERROR_WEBHOOK",
+        "3. Add email action with error template",
+        "4. Optional: Add Slack notification",
+        "5. Set filter for HIGH/CRITICAL priority",
+        "6. Enable"
+      ]
+    },
+    {
+      "name": "Email Notification on Pull Request",
+      "description": "Notifies when new PR/MR is created",
+      "trigger": {
+        "type": "webhook",
+        "url": "{{ZAPIER_GIT_WEBHOOK}}",
+        "filter": "event_type contains 'pull_request' OR event_type contains 'merge_request'"
+      },
+      "actions": [
+        {
+          "type": "email",
+          "to": "{{email_address}}",
+          "subject": "New PR: {{data.title}}",
+          "body": "Repository: {{data.repository}}\nTitle: {{data.title}}\nAuthor: {{data.author}}\nBranch: {{data.branch}} → {{data.target_branch}}\n\nURL: {{data.url}}"
+        }
+      ],
+      "setup_instructions": [
+        "1. Create Zap with webhook trigger",
+        "2. Use same ZAPIER_GIT_WEBHOOK",
+        "3. Add filter for PR events",
+        "4. Configure email with PR details",
+        "5. Enable"
+      ]
+    },
+    {
+      "name": "Daily Summary Email",
+      "description": "Sends daily summary of all system events",
+      "trigger": {
+        "type": "webhook",
+        "url": "{{ZAPIER_GENERAL_WEBHOOK}}",
+        "schedule": "daily at 6:00 PM"
+      },
+      "actions": [
+        {
+          "type": "digest",
+          "frequency": "daily",
+          "time": "6:00 PM"
+        },
+        {
+          "type": "email",
+          "to": "{{email_address}}",
+          "subject": "Daily System Summary - {{current_date}}",
+          "body": "System Activity Summary:\n\nTotal Events: {{event_count}}\nGit Events: {{git_events}}\nTest Runs: {{test_runs}}\nErrors: {{error_count}}\n\nRecent Activity:\n{{recent_events}}"
+        }
+      ],
+      "setup_instructions": [
+        "1. Create Zap with Schedule trigger",
+        "2. Set to run daily at 6 PM",
+        "3. Add Digest action to collect webhook data",
+        "4. Add email with summary template",
+        "5. Enable"
+      ]
+    },
+    {
+      "name": "Workflow Completion Callback",
+      "description": "Example workflow that sends callback when complete",
+      "trigger": {
+        "type": "webhook",
+        "url": "{{ZAPIER_GENERAL_WEBHOOK}}"
+      },
+      "actions": [
+        {
+          "type": "email",
+          "to": "{{email_address}}",
+          "subject": "Notification from {{source}}",
+          "body": "{{event_type}}\n\n{{data}}"
+        },
+        {
+          "type": "webhook",
+          "url": "{{callback_url}}/api/zapier/callback",
+          "method": "POST",
+          "body": {
+            "workflow_name": "Generic Email Notification",
+            "status": "completed",
+            "email_sent": true,
+            "original_event_id": "{{event_id}}"
+          }
+        }
+      ],
+      "setup_instructions": [
+        "1. Create Zap with webhook trigger",
+        "2. Add email action",
+        "3. Add webhook action to send callback",
+        "4. Set callback URL to your server",
+        "5. This allows tracking of email delivery"
+      ]
+    }
+  ],
+  "webhook_test_data": {
+    "git_push_example": {
+      "event_type": "github.push",
+      "source": "github",
+      "timestamp": "2025-12-24T12:00:00Z",
+      "priority": "MEDIUM",
+      "data": {
+        "repository": "private-claude",
+        "branch": "main",
+        "author": "developer@example.com",
+        "message": "3 commit(s) pushed",
+        "commits_count": 3
+      },
+      "email_address": "your-email@example.com",
+      "should_send_email": true
+    },
+    "test_failure_example": {
+      "event_type": "postman.test.failure",
+      "source": "postman",
+      "timestamp": "2025-12-24T12:00:00Z",
+      "priority": "HIGH",
+      "data": {
+        "test_name": "API Integration Tests",
+        "passed": false,
+        "total_tests": 25,
+        "failed_tests": 3,
+        "duration": 15.7,
+        "failures": [
+          {
+            "name": "test_authentication",
+            "error": "Token expired"
+          }
+        ]
+      },
+      "email_address": "your-email@example.com",
+      "should_send_email": true
+    },
+    "app_error_example": {
+      "event_type": "app.error",
+      "source": "trading-bot",
+      "timestamp": "2025-12-24T12:00:00Z",
+      "priority": "CRITICAL",
+      "data": {
+        "status": "error",
+        "details": "Database connection lost",
+        "success": false
+      },
+      "email_address": "your-email@example.com",
+      "should_send_email": true
+    }
+  }
+}

@@ -1,0 +1,266 @@
+{
+  "info": {
+    "name": "System Integration API Tests",
+    "description": "Example Postman collection for testing system integrations",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Event Bus Tests",
+      "item": [
+        {
+          "name": "Health Check",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "pm.test(\"Response is OK\", function () {",
+                  "    pm.expect(pm.response.text()).to.equal(\"OK\");",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/health",
+              "host": ["{{base_url}}"],
+              "path": ["health"]
+            }
+          }
+        },
+        {
+          "name": "Get Event Stats",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "pm.test(\"Response has stats\", function () {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData).to.have.property('total_events');",
+                  "    pm.expect(jsonData).to.have.property('events_by_type');",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/stats",
+              "host": ["{{base_url}}"],
+              "path": ["api", "stats"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "GitHub Webhook Tests",
+      "item": [
+        {
+          "name": "GitHub Push Event",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "pm.test(\"Webhook accepted\", function () {",
+                  "    pm.expect(pm.response.text()).to.equal(\"OK\");",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "X-GitHub-Event",
+                "value": "push"
+              },
+              {
+                "key": "X-Hub-Signature-256",
+                "value": "sha256={{github_signature}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"ref\": \"refs/heads/main\",\n  \"repository\": {\n    \"name\": \"test-repo\",\n    \"full_name\": \"user/test-repo\"\n  },\n  \"pusher\": {\n    \"name\": \"test-user\"\n  },\n  \"commits\": [\n    {\n      \"id\": \"abc123\",\n      \"message\": \"Test commit\",\n      \"author\": {\n        \"name\": \"Test User\",\n        \"email\": \"test@example.com\"\n      }\n    }\n  ]\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/webhooks/github",
+              "host": ["{{base_url}}"],
+              "path": ["webhooks", "github"]
+            }
+          }
+        },
+        {
+          "name": "GitHub Pull Request Event",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "X-GitHub-Event",
+                "value": "pull_request"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"action\": \"opened\",\n  \"pull_request\": {\n    \"title\": \"Test PR\",\n    \"user\": {\n      \"login\": \"test-user\"\n    },\n    \"head\": {\n      \"ref\": \"feature-branch\"\n    },\n    \"base\": {\n      \"ref\": \"main\"\n    },\n    \"html_url\": \"https://github.com/user/repo/pull/1\"\n  },\n  \"repository\": {\n    \"name\": \"test-repo\"\n  }\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/webhooks/github",
+              "host": ["{{base_url}}"],
+              "path": ["webhooks", "github"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "GitLab Webhook Tests",
+      "item": [
+        {
+          "name": "GitLab Push Event",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "X-Gitlab-Event",
+                "value": "Push Hook"
+              },
+              {
+                "key": "X-Gitlab-Token",
+                "value": "{{gitlab_webhook_secret}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"object_kind\": \"push\",\n  \"ref\": \"refs/heads/main\",\n  \"user_name\": \"Test User\",\n  \"project\": {\n    \"name\": \"test-project\"\n  },\n  \"commits\": [\n    {\n      \"id\": \"xyz789\",\n      \"message\": \"Test commit\"\n    }\n  ]\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/webhooks/gitlab",
+              "host": ["{{base_url}}"],
+              "path": ["webhooks", "gitlab"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Zapier Callback Tests",
+      "item": [
+        {
+          "name": "Zapier Workflow Complete",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"workflow_name\": \"Email Notification\",\n  \"status\": \"completed\",\n  \"email_sent\": true,\n  \"result\": {\n    \"to\": \"user@example.com\",\n    \"subject\": \"Test notification\"\n  }\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/zapier/callback",
+              "host": ["{{base_url}}"],
+              "path": ["api", "zapier", "callback"]
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:8080",
+      "type": "string"
+    },
+    {
+      "key": "github_signature",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "gitlab_webhook_secret",
+      "value": "",
+      "type": "string"
+    }
+  ]
+}

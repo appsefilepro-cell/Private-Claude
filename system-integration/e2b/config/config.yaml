@@ -1,0 +1,134 @@
+# E2B Sandbox Integration Configuration
+
+# E2B API Configuration
+e2b:
+  api_key: "e2b_fcc08e8c733b3eab00bdb3ad5857f5966afc2773"
+  webhook_id: "YIyOpaJ0UMJ3Pl9Md5kVExEDdkqyDGRp"
+  webhook_secret: "${E2B_WEBHOOK_SECRET}"  # Set via environment variable
+  base_url: "https://api.e2b.dev/v1"
+
+# Webhook Server Configuration
+webhook_server:
+  host: "0.0.0.0"
+  port: 5000
+  debug: false
+  enable_signature_verification: true
+
+# Sandbox Configuration
+sandbox:
+  default_template: "base"
+  default_timeout: 300  # seconds
+  default_memory_limit: 512  # MB
+  default_cpu_limit: 1.0  # cores
+  enable_network: true
+  enable_filesystem: true
+
+  # Sandbox pool configuration
+  pool:
+    enabled: true
+    size: 5
+    auto_cleanup: true
+
+# GitHub Integration
+github:
+  token: "${GITHUB_TOKEN}"  # Set via environment variable
+  default_branch: "main"
+  auto_deploy_branches:
+    - "main"
+    - "master"
+    - "develop"
+
+  # Deployment configuration
+  deployment:
+    entry_file: "main.py"
+    default_language: "python"
+    run_tests_before_deploy: true
+    test_command: "pytest"
+
+  # Webhook configuration
+  webhook:
+    events:
+      - "push"
+      - "pull_request"
+      - "deployment"
+
+# Zapier Integration
+zapier:
+  # Webhook URLs for different channels
+  webhooks:
+    email: "${ZAPIER_EMAIL_WEBHOOK}"
+    slack: "${ZAPIER_SLACK_WEBHOOK}"
+    discord: "${ZAPIER_DISCORD_WEBHOOK}"
+    teams: "${ZAPIER_TEAMS_WEBHOOK}"
+
+  # Notification settings
+  notifications:
+    enabled: true
+    default_level: "info"
+    default_channels:
+      - "email"
+      - "slack"
+
+    # Rule-based notifications
+    rules:
+      execution_failure:
+        enabled: true
+        channels: ["email", "slack"]
+        level: "error"
+
+      long_execution:
+        enabled: true
+        threshold_seconds: 60
+        channels: ["slack"]
+        level: "warning"
+
+      execution_timeout:
+        enabled: true
+        channels: ["email", "slack"]
+        level: "critical"
+
+# Logging Configuration
+logging:
+  level: "INFO"  # DEBUG, INFO, WARNING, ERROR, CRITICAL
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  file: "logs/e2b_integration.log"
+  max_file_size_mb: 10
+  backup_count: 5
+  console_output: true
+
+# Security Settings
+security:
+  enable_api_key_rotation: false
+  max_execution_time: 600  # seconds
+  max_sandbox_lifetime: 3600  # seconds
+  allowed_ip_addresses: []  # Empty list = allow all
+  rate_limiting:
+    enabled: true
+    max_requests_per_minute: 60
+    max_requests_per_hour: 1000
+
+# Features
+features:
+  enable_webhook_handling: true
+  enable_github_integration: true
+  enable_zapier_integration: true
+  enable_sandbox_pooling: true
+  enable_auto_deployment: true
+  enable_test_execution: true
+  enable_file_operations: true
+  enable_package_installation: true
+
+# Performance Tuning
+performance:
+  request_timeout: 30  # seconds
+  max_concurrent_executions: 10
+  sandbox_startup_timeout: 60  # seconds
+  cleanup_interval: 300  # seconds
+
+# Monitoring and Metrics
+monitoring:
+  enabled: true
+  metrics_port: 9090
+  health_check_interval: 60  # seconds
+  collect_execution_stats: true
+  collect_performance_metrics: true
