@@ -2,11 +2,17 @@
   "agent_id": "agent_intel_4",
   "agent_name": "AI Researcher",
   "role": "AI Researcher",
-  "status": "completed",
-  "tasks_completed": 30,
+  "status": "executing_automation",
+  "tasks_completed": 6,
   "tasks_failed": 0,
-  "loop_count": 10,
-  "start_time": "2025-12-25T05:49:25.312562",
-  "last_update": "2025-12-25T05:49:39.427856",
-  "details": {}
+  "loop_count": 3,
+  "start_time": "2025-12-25T19:05:00.867664",
+  "last_update": "2025-12-25T19:05:03.687462",
+  "details": {
+    "agent": "agent_intel_4",
+    "task": "ai_researcher_task_1",
+    "type": "automation",
+    "status": "executing",
+    "timestamp": 1766689503.6874566
+  }
 }

@@ -2,11 +2,11 @@
   "agent_id": "agent_legaltech_specialist",
   "agent_name": "LegalTech Specialist",
   "role": "LegalTech Specialist",
-  "status": "completed",
-  "tasks_completed": 50,
+  "status": "running_loop_2",
+  "tasks_completed": 10,
   "tasks_failed": 0,
-  "loop_count": 10,
-  "start_time": "2025-12-25T05:49:24.699570",
-  "last_update": "2025-12-25T05:49:43.323395",
+  "loop_count": 2,
+  "start_time": "2025-12-25T19:05:00.231687",
+  "last_update": "2025-12-25T19:05:02.958286",
   "details": {}
 }

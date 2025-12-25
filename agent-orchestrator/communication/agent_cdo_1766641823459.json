@@ -1,7 +1,0 @@
-{
-  "from": "agent_cfo",
-  "to": "agent_cdo",
-  "type": "coordination",
-  "message": "Pillar intelligence coordination check - continue operations",
-  "timestamp": "2025-12-25T05:50:23.459783"
-}

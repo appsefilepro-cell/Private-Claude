@@ -2,11 +2,17 @@
   "agent_id": "agent_intel_1",
   "agent_name": "Data Engineer",
   "role": "Data Engineer",
-  "status": "completed",
-  "tasks_completed": 30,
+  "status": "executing_automation",
+  "tasks_completed": 6,
   "tasks_failed": 0,
-  "loop_count": 10,
-  "start_time": "2025-12-25T05:49:25.278263",
-  "last_update": "2025-12-25T05:49:39.400939",
-  "details": {}
+  "loop_count": 3,
+  "start_time": "2025-12-25T19:05:00.832901",
+  "last_update": "2025-12-25T19:05:03.651898",
+  "details": {
+    "agent": "agent_intel_1",
+    "task": "data_engineer_task_1",
+    "type": "automation",
+    "status": "executing",
+    "timestamp": 1766689503.6518915
+  }
 }

@@ -2,11 +2,17 @@
   "agent_id": "agent_intel_5",
   "agent_name": "BI Analyst",
   "role": "BI Analyst",
-  "status": "completed",
-  "tasks_completed": 30,
+  "status": "executing_automation",
+  "tasks_completed": 6,
   "tasks_failed": 0,
-  "loop_count": 10,
-  "start_time": "2025-12-25T05:49:25.323655",
-  "last_update": "2025-12-25T05:49:39.427928",
-  "details": {}
+  "loop_count": 3,
+  "start_time": "2025-12-25T19:05:00.878943",
+  "last_update": "2025-12-25T19:05:03.699356",
+  "details": {
+    "agent": "agent_intel_5",
+    "task": "bi_analyst_task_1",
+    "type": "automation",
+    "status": "executing",
+    "timestamp": 1766689503.69935
+  }
 }

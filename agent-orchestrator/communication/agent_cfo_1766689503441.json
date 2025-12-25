@@ -1,0 +1,7 @@
+{
+  "from": "agent_legal_12",
+  "to": "agent_cfo",
+  "type": "report",
+  "message": "{\"agent\": \"eDiscovery Specialist\", \"task\": \"ediscovery_specialist_reporting\", \"timestamp\": 1766689503.4418137, \"status\": \"completed\"}",
+  "timestamp": "2025-12-25T19:05:03.441834"
+}

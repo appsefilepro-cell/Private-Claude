@@ -2,11 +2,11 @@
   "agent_id": "agent_legal_8",
   "agent_name": "Paralegal 1",
   "role": "Paralegal 1",
-  "status": "completed",
-  "tasks_completed": 30,
+  "status": "running_loop_3",
+  "tasks_completed": 9,
   "tasks_failed": 0,
-  "loop_count": 10,
-  "start_time": "2025-12-25T05:49:24.789770",
-  "last_update": "2025-12-25T05:49:38.354174",
+  "loop_count": 3,
+  "start_time": "2025-12-25T19:05:00.325653",
+  "last_update": "2025-12-25T19:05:03.397892",
   "details": {}
 }

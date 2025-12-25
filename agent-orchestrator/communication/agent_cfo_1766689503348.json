@@ -1,0 +1,7 @@
+{
+  "from": "agent_legal_4",
+  "to": "agent_cfo",
+  "type": "report",
+  "message": "{\"agent\": \"IP Specialist\", \"task\": \"ip_specialist_reporting\", \"timestamp\": 1766689503.348342, \"status\": \"completed\"}",
+  "timestamp": "2025-12-25T19:05:03.348356"
+}

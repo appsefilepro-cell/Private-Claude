@@ -2,11 +2,17 @@
   "agent_id": "agent_vp_finance",
   "agent_name": "VP Finance",
   "role": "Financial Operations Lead",
-  "status": "completed",
-  "tasks_completed": 50,
+  "status": "monitoring",
+  "tasks_completed": 13,
   "tasks_failed": 0,
-  "loop_count": 10,
-  "start_time": "2025-12-25T05:49:24.398704",
-  "last_update": "2025-12-25T05:49:40.519916",
-  "details": {}
+  "loop_count": 3,
+  "start_time": "2025-12-25T19:04:59.928019",
+  "last_update": "2025-12-25T19:05:03.665285",
+  "details": {
+    "agent": "agent_vp_finance",
+    "task": "expense_tracking",
+    "type": "monitoring",
+    "status": "monitoring",
+    "timestamp": 1766689503.6652815
+  }
 }

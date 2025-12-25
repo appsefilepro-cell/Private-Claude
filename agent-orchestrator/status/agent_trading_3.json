@@ -2,11 +2,11 @@
   "agent_id": "agent_trading_3",
   "agent_name": "Forex Trader",
   "role": "Forex Trader",
-  "status": "completed",
-  "tasks_completed": 30,
+  "status": "running_loop_3",
+  "tasks_completed": 9,
   "tasks_failed": 0,
-  "loop_count": 10,
-  "start_time": "2025-12-25T05:49:25.017399",
-  "last_update": "2025-12-25T05:49:38.121666",
+  "loop_count": 3,
+  "start_time": "2025-12-25T19:05:00.562167",
+  "last_update": "2025-12-25T19:05:03.489673",
   "details": {}
 }

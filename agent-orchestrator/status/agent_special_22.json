@@ -2,11 +2,11 @@
   "agent_id": "agent_special_22",
   "agent_name": "Sales AI",
   "role": "Sales AI",
-  "status": "completed",
-  "tasks_completed": 30,
+  "status": "running_loop_2",
+  "tasks_completed": 6,
   "tasks_failed": 0,
-  "loop_count": 10,
-  "start_time": "2025-12-25T05:49:25.767934",
-  "last_update": "2025-12-25T05:49:39.014542",
+  "loop_count": 2,
+  "start_time": "2025-12-25T19:05:01.333649",
+  "last_update": "2025-12-25T19:05:02.945581",
   "details": {}
 }

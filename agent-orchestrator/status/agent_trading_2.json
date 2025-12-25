@@ -2,11 +2,11 @@
   "agent_id": "agent_trading_2",
   "agent_name": "Crypto Trader 2",
   "role": "Crypto Trader 2",
-  "status": "completed",
-  "tasks_completed": 30,
+  "status": "running_loop_3",
+  "tasks_completed": 9,
   "tasks_failed": 0,
-  "loop_count": 10,
-  "start_time": "2025-12-25T05:49:25.005912",
-  "last_update": "2025-12-25T05:49:38.099900",
+  "loop_count": 3,
+  "start_time": "2025-12-25T19:05:00.550672",
+  "last_update": "2025-12-25T19:05:03.474178",
   "details": {}
 }

@@ -2,11 +2,17 @@
   "agent_id": "agent_intel_2",
   "agent_name": "Data Scientist",
   "role": "Data Scientist",
-  "status": "completed",
-  "tasks_completed": 30,
+  "status": "executing_automation",
+  "tasks_completed": 6,
   "tasks_failed": 0,
-  "loop_count": 10,
-  "start_time": "2025-12-25T05:49:25.290087",
-  "last_update": "2025-12-25T05:49:39.402244",
-  "details": {}
+  "loop_count": 3,
+  "start_time": "2025-12-25T19:05:00.844630",
+  "last_update": "2025-12-25T19:05:03.665097",
+  "details": {
+    "agent": "agent_intel_2",
+    "task": "data_scientist_task_1",
+    "type": "automation",
+    "status": "executing",
+    "timestamp": 1766689503.665092
+  }
 }
