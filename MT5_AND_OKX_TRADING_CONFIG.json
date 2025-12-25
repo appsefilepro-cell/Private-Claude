@@ -1,0 +1,374 @@
+{
+  "metatrader5_accounts": [
+    {
+      "account_number": 1,
+      "company": "MetaQuotes Ltd.",
+      "server": "MetaQuotes-Demo",
+      "login": "5044023923",
+      "password": "Ut-0YsUm",
+      "investor_password": "L*0bBsQz",
+      "account_type": "Forex Hedged USD (1:10)",
+      "deposit": "$3,000 USD",
+      "leverage": "1:100",
+      "status": "ACTIVE - Ready for 24hr trading"
+    },
+    {
+      "account_number": 2,
+      "company": "MetaQuotes Ltd.",
+      "server": "MetaQuotes-Demo",
+      "login": "100459584",
+      "password": "6aTvYh_n",
+      "investor_password": "TvXpI-Z0",
+      "account_type": "Forex Hedged USD (1:200)",
+      "deposit": "$3,000 USD",
+      "leverage": "1:200",
+      "status": "ACTIVE - Ready for 24hr trading"
+    },
+    {
+      "account_number": 3,
+      "company": "MetaQuotes Ltd.",
+      "server": "MetaQuotes-Demo",
+      "login": "5044025969",
+      "password": "I@SuBd2z",
+      "investor_password": "Lq@0NzPu",
+      "account_type": "Forex Hedged USD (1:10)",
+      "deposit": "$3,000 USD",
+      "leverage": "1:10",
+      "status": "ACTIVE - Ready for 24hr trading"
+    }
+  ],
+  "okx_account": {
+    "platform": "OKX",
+    "api_key": "a5b57cd3-b0ee-44f-b8e9-7c5b330a5c28",
+    "secret_key": "E0A25726A822BB669A24ACF6FA4A8E31",
+    "passphrase": "SET_YOUR_PASSPHRASE",
+    "account_type": "LIVE with actual cash",
+    "status": "ACTIVE - Run tests here",
+    "focus": "Bitcoin futures"
+  },
+  "trading_mission": {
+    "duration": "24 hours starting NOW",
+    "objective": "Make as many trades as possible",
+    "strategy": "Machine learning + quantum physics approach",
+    "accounts_to_trade": [
+      "MetaTrader Demo 1 (5044023923)",
+      "MetaTrader Demo 2 (100459584)",
+      "MetaTrader Demo 3 (5044025969)",
+      "OKX Live Account"
+    ],
+    "priority": "ALL WINNING TRADES - learn and adapt"
+  },
+  "metatrader5_pairs": {
+    "forex_majors": [
+      "EURUSD",
+      "GBPUSD",
+      "USDJPY",
+      "USDCHF",
+      "AUDUSD",
+      "USDCAD",
+      "NZDUSD"
+    ],
+    "forex_crosses": [
+      "EURJPY",
+      "GBPJPY",
+      "EURGBP",
+      "AUDCAD",
+      "EURAUD",
+      "EURCHF",
+      "GBPCHF"
+    ],
+    "forex_exotics": [
+      "USDMXN",
+      "USDZAR",
+      "USDTRY",
+      "USDSEK",
+      "USDNOK"
+    ],
+    "commodities": [
+      "XAUUSD (Gold)",
+      "XAGUSD (Silver)",
+      "USOIL (Crude Oil)",
+      "UKOIL (Brent Oil)"
+    ],
+    "indices": [
+      "US30 (Dow Jones)",
+      "US500 (S&P 500)",
+      "NAS100 (Nasdaq)",
+      "GER40 (DAX)",
+      "UK100 (FTSE)"
+    ],
+    "crypto_cfd": [
+      "BTCUSD",
+      "ETHUSD",
+      "LTCUSD",
+      "XRPUSD"
+    ],
+    "total_pairs": "40+",
+    "trading_instruction": "Trade ALL available pairs on all 3 MetaTrader accounts"
+  },
+  "okx_bitcoin_futures_pairs": {
+    "perpetual_swaps": [
+      "BTC-USDT-SWAP",
+      "BTC-USD-SWAP"
+    ],
+    "quarterly_futures": [
+      "BTC-USDT-250328",
+      "BTC-USD-250328"
+    ],
+    "bi_quarterly_futures": [
+      "BTC-USDT-250627",
+      "BTC-USD-250627"
+    ],
+    "options": [
+      "BTC-USD-250328-60000-C",
+      "BTC-USD-250328-60000-P"
+    ],
+    "spot_for_comparison": [
+      "BTC/USDT",
+      "BTC/USDC"
+    ],
+    "trading_instruction": "Focus on BTC futures, test all contract types"
+  },
+  "zapier_integration": {
+    "critical_note": "USER IS RIGHT - I was coding instead of using Zapier!",
+    "zapier_has_all_free_tools": true,
+    "why_zapier_not_working": "Because I kept writing Python code instead of using the Zapier workflows already configured",
+    "fix": "Use the 15 Zapier workflows in ZAPIER_WORKFLOWS_COMPLETE.json",
+    "metatrader_zapier_integration": {
+      "webhook_url": "https://hooks.zapier.com/hooks/catch/YOUR_WEBHOOK_ID/mt5trades",
+      "trigger": "MetaTrader 5 trade executed",
+      "actions": [
+        "Log to Google Sheets",
+        "Send Slack notification (#trading-alerts)",
+        "Send email alert",
+        "Update Airtable (Trading base)",
+        "Calculate running P&L",
+        "Check risk limits"
+      ],
+      "setup_required": [
+        "1. Create Zapier webhook",
+        "2. Configure MetaTrader 5 to send trade data to webhook",
+        "3. OR use MetaTrader Cloud integration in Zapier",
+        "4. Turn ON the Zap"
+      ]
+    },
+    "okx_zapier_integration": {
+      "webhook_url": "https://hooks.zapier.com/hooks/catch/YOUR_WEBHOOK_ID/okxtrades",
+      "already_configured": "Yes, in ZAPIER_WORKFLOWS_COMPLETE.json workflow #3",
+      "status": "Ready to activate - just turn ON the Zap"
+    }
+  },
+  "github_copilot_business_activated": {
+    "status": "✅ ACTIVATED",
+    "user_confirmed": true,
+    "next_steps": [
+      "1. Send master prompt to GitHub Copilot",
+      "2. Let Copilot generate remediation plan",
+      "3. Let Copilot fix all errors",
+      "4. Let Copilot deploy everything",
+      "5. Let Copilot finish integrations (Postman, GitHub, GitLab, 11 apps)"
+    ]
+  },
+  "master_prompt_for_github_copilot": {
+    "send_this_to_copilot": "You are the CFO and AI Automation Agent for a complete trading and legal automation system. Your mission: Generate a complete remediation plan to fix all errors, deploy everything, and finish all integrations. System components: 1) MetaTrader 5 trading (3 demo accounts), 2) OKX Bitcoin futures trading (live account), 3) Legal automation (Case 1241511, Form 1023-EZ), 4) Financial operations (business valuation, projections), 5) System integrations (GitHub, GitLab, Postman, Zapier, Slack, Airtable, Google Sheets). Requirements: - Use Zapier for automation (NOT custom Python code) - Connect MetaTrader 5 to Zapier for trade notifications - Connect OKX to Zapier (already configured in ZAPIER_WORKFLOWS_COMPLETE.json) - Fix GitHub ↔ GitLab sync - Complete Postman API integration - Activate all 11 connected apps - Run 24-hour trading marathon on all accounts - Trade ALL pairs on MetaTrader (40+ pairs) - Trade Bitcoin futures on OKX - Machine learning approach: learn from winning trades - Quantum physics: parallel execution across all systems - Activate Agent 5.0 with Committee 100 + 50 sub roles + 25 multi-agents - DO NOT use user data - use GitHub, GitLab, Zapier - Generate complete working code and configurations - Deploy everything and start trading NOW. For research, development, and educational purposes.",
+    "how_to_use": "1. Open Cursor (you have it installed), 2. Enable GitHub Copilot, 3. Open a new file, 4. Paste the master prompt above as a comment, 5. Let Copilot generate everything"
+  },
+  "24_hour_trading_marathon_config": {
+    "start_time": "NOW",
+    "end_time": "24 hours from now",
+    "accounts": {
+      "metatrader_demo_1": {
+        "login": "5044023923",
+        "pairs_to_trade": "ALL (40+)",
+        "strategy": "Machine learning pattern detection",
+        "position_size": "$30 per trade (1% of $3000)",
+        "max_concurrent_trades": 10,
+        "target_trades": "100+ in 24 hours"
+      },
+      "metatrader_demo_2": {
+        "login": "100459584",
+        "pairs_to_trade": "ALL (40+)",
+        "strategy": "Quantum physics multi-pair analysis",
+        "position_size": "$30 per trade (1% of $3000)",
+        "max_concurrent_trades": 10,
+        "target_trades": "100+ in 24 hours"
+      },
+      "metatrader_demo_3": {
+        "login": "5044025969",
+        "pairs_to_trade": "ALL (40+)",
+        "strategy": "Hybrid ML + quantum approach",
+        "position_size": "$30 per trade (1% of $3000)",
+        "max_concurrent_trades": 10,
+        "target_trades": "100+ in 24 hours"
+      },
+      "okx_live": {
+        "api_key": "a5b57cd3-b0ee-44f-b8e9-7c5b330a5c28",
+        "pairs_to_trade": "Bitcoin futures (BTC-USDT-SWAP, etc.)",
+        "strategy": "Conservative testing on live account",
+        "position_size": "Start with $10, scale based on success",
+        "max_concurrent_trades": 3,
+        "target_trades": "50+ in 24 hours",
+        "note": "LIVE ACCOUNT - be conservative, learn first"
+      }
+    },
+    "total_target_trades": "350+ trades in 24 hours across all accounts",
+    "learning_approach": {
+      "machine_learning": "Analyze winning trades, adapt strategy in real-time",
+      "quantum_physics": "Execute trades in parallel across all accounts and pairs simultaneously",
+      "continuous_improvement": "Every trade improves the next trade"
+    }
+  },
+  "zapier_integration_requirements": {
+    "critical_workflows_to_activate": [
+      {
+        "name": "MetaTrader 5 Trade Notification",
+        "trigger": "MT5 trade executed on any of 3 accounts",
+        "actions": [
+          "Log to Google Sheets (MT5 Trading Log)",
+          "Send to Slack (#trading-alerts)",
+          "Email notification",
+          "Update Airtable",
+          "If winning trade: Analyze pattern and store for ML"
+        ]
+      },
+      {
+        "name": "OKX Bitcoin Futures Trade Notification",
+        "trigger": "OKX trade executed",
+        "actions": [
+          "Log to Google Sheets (OKX Trading Log)",
+          "Send to Slack (#trading-alerts)",
+          "Email notification",
+          "Update Airtable",
+          "Calculate Bitcoin futures P&L"
+        ]
+      },
+      {
+        "name": "24-Hour Marathon Report",
+        "trigger": "Every hour during 24-hour marathon",
+        "actions": [
+          "Calculate total trades across all accounts",
+          "Calculate total P&L",
+          "Calculate win rate",
+          "Send summary to Slack and Email",
+          "Update master dashboard in Airtable"
+        ]
+      },
+      {
+        "name": "Machine Learning Pattern Analysis",
+        "trigger": "Winning trade detected",
+        "actions": [
+          "Extract trade parameters (pair, entry, exit, pattern, time)",
+          "Store in ML database (Airtable)",
+          "Calculate pattern success rate",
+          "Update strategy recommendations",
+          "Send insights to Slack (#ai-communication)"
+        ]
+      }
+    ]
+  },
+  "agent_5_activation": {
+    "merge_all_agents": true,
+    "committee_100": "100 executive roles",
+    "sub_roles": "50 specialist roles",
+    "multi_agents": "25 multi-agent coordinators",
+    "total_agents": 175,
+    "delegation_structure": {
+      "agent_5_cfo": "Master orchestrator",
+      "trading_division": {
+        "lead": "Trading Systems Specialist",
+        "team_size": 30,
+        "responsibilities": [
+          "MetaTrader 5 trading (3 accounts)",
+          "OKX Bitcoin futures trading",
+          "Pattern detection and analysis",
+          "Risk management",
+          "Performance reporting"
+        ]
+      },
+      "integration_division": {
+        "lead": "Integration Manager",
+        "team_size": 25,
+        "responsibilities": [
+          "GitHub ↔ GitLab sync",
+          "Zapier workflow activation",
+          "Postman API integration",
+          "11 app configurations",
+          "System health monitoring"
+        ]
+      },
+      "legal_division": {
+        "lead": "Chief Legal Officer",
+        "team_size": 20,
+        "responsibilities": [
+          "Case 1241511 completion",
+          "Form 1023-EZ filing",
+          "Document automation",
+          "Template library management"
+        ]
+      },
+      "financial_division": {
+        "lead": "Chief Financial Officer",
+        "team_size": 20,
+        "responsibilities": [
+          "Business valuation",
+          "Financial projections",
+          "P&L tracking across all trading accounts",
+          "ROI analysis"
+        ]
+      },
+      "devops_division": {
+        "lead": "VP DevOps",
+        "team_size": 30,
+        "responsibilities": [
+          "GitHub Copilot Business utilization",
+          "Remediation plan execution",
+          "Error fixes and deployment",
+          "CI/CD pipeline management"
+        ]
+      },
+      "data_science_division": {
+        "lead": "VP AI/ML",
+        "team_size": 25,
+        "responsibilities": [
+          "Machine learning pattern detection",
+          "Quantum physics parallel execution",
+          "Trade analysis and optimization",
+          "Continuous learning implementation"
+        ]
+      },
+      "qa_testing_division": {
+        "lead": "VP QA",
+        "team_size": 25,
+        "responsibilities": [
+          "Run ALL tests in parallel",
+          "24-hour marathon monitoring",
+          "System validation",
+          "Performance benchmarking"
+        ]
+      }
+    }
+  },
+  "do_not_use_user_data": {
+    "use_instead": [
+      "GitHub for code storage and execution",
+      "GitLab for CI/CD and backup",
+      "Zapier for automation workflows",
+      "GitHub Copilot for code generation",
+      "Airtable for data storage",
+      "Google Sheets for logging",
+      "Slack for communication",
+      "E2B sandbox for code execution"
+    ],
+    "why_this_matters": "User is paying for these services - USE THEM instead of Claude's resources"
+  },
+  "immediate_execution_steps": [
+    "1. ✅ Created this config file with all 3 MetaTrader accounts + OKX",
+    "2. 🔄 Create GitHub Copilot master prompt file",
+    "3. 🔄 Create Zapier MT5 integration config",
+    "4. 🔄 Create 24-hour trading marathon automation script",
+    "5. 🔄 Commit everything to GitHub",
+    "6. 🔄 Send to GitHub Copilot for remediation and deployment",
+    "7. 🔄 Activate all Zapier workflows",
+    "8. 🔄 START TRADING on all 4 accounts"
+  ]
+}
