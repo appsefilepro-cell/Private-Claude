@@ -1,0 +1,30 @@
+{
+  "replit": {
+    "replit_url": "https://agent-forge.replit.app",
+    "agent_type": "trading-bot-dashboard",
+    "integration_mode": "live"
+  },
+  "mt5_accounts": [
+    {
+      "login": 5044023923,
+      "password": "Ut-0YsUm",
+      "server": "MetaQuotes-Demo"
+    },
+    {
+      "login": 100459584,
+      "password": "6aTvYh_n",
+      "server": "MetaQuotes-Demo"
+    },
+    {
+      "login": 5044025969,
+      "password": "I@SuBd2z",
+      "server": "MetaQuotes-Demo"
+    }
+  ],
+  "okx_config": {
+    "api_key": "a5b57cd3-b0ee-44f-b8e9-7c5b330a5c28",
+    "passphrase": "YOUR_PASSPHRASE_HERE"
+  },
+  "integrated_at": "2025-12-25T19:08:13.527476",
+  "status": "configured"
+}
