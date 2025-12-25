@@ -1,0 +1,8 @@
+{
+  "from": "agent_trading_20",
+  "to": "agent_cfo",
+  "type": "report",
+  "message": "{\"agent\": \"Trading Operations\", \"task\": \"trading_operations_reporting\", \"timestamp\": 1766691767.526014, \"status\": \"completed\"}",
+  "timestamp": "2025-12-25T19:42:47.526029"
+}526605"
+}

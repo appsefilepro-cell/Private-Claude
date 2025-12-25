@@ -1,0 +1,9 @@
+{
+  "from": "agent_trading_specialist",
+  "to": "agent_cfo",
+  "type": "trading_update",
+  "message": "Trading task executed: trading_amounts_config",
+  "timestamp": "2025-12-25T19:42:53.979193"
+}asks_completed\": 30, \"tasks_failed\": 0, \"loop_count\": 10, \"uptime\": \"0:00:13.606341\"}",
+  "timestamp": "2025-12-25T19:42:53.979044"
+}

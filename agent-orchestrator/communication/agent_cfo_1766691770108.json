@@ -1,0 +1,9 @@
+{
+  "from": "agent_trading_20",
+  "to": "agent_cfo",
+  "type": "trading_update",
+  "message": "Trading task executed: trading_operations_task_1",
+  "timestamp": "2025-12-25T19:42:50.108752"
+}tus\": \"completed\"}",
+  "timestamp": "2025-12-25T19:42:50.108812"
+}

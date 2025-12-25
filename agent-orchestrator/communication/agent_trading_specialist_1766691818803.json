@@ -1,7 +1,7 @@
 {
   "from": "agent_cfo",
-  "to": "agent_risk_mgmt",
+  "to": "agent_trading_specialist",
   "type": "coordination",
   "message": "Pillar trading coordination check - continue operations",
-  "timestamp": "2025-12-25T19:28:08.640641"
+  "timestamp": "2025-12-25T19:43:38.803950"
 }
