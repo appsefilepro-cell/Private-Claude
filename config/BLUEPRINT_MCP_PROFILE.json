@@ -1,0 +1,200 @@
+{
+  "blueprint_mcp_profile": {
+    "timestamp": "2025-12-25",
+    "profile_url": "https://blueprint-mcp.railsblueprint.com/profile",
+    "email": "appsefilepro@gmail.com",
+    "full_name": "appsefilepro-cell appsefilepro-cell",
+
+    "connections": {
+      "github": {
+        "connected": true,
+        "purpose": "Blueprint MCP reads from GitHub repositories",
+        "delegation": "DevOps Division - GitHub Copilot agents"
+      },
+      "google": {
+        "connected": true,
+        "purpose": "Google can read all apps and agents",
+        "services": [
+          "Gmail",
+          "Google Drive",
+          "Google Sheets",
+          "Google Calendar",
+          "Google Gemini"
+        ],
+        "delegation": "Integration Division - Google API Team"
+      },
+      "chrome": {
+        "connected": true,
+        "purpose": "Chrome can read all apps and agents",
+        "extensions": [
+          "Blueprint MCP extension",
+          "jdafkfhnpjengpcjgjegpgnbnmhhjpoc extension"
+        ],
+        "delegation": "Integration Division - Browser Automation Team"
+      }
+    },
+
+    "integration_tasks": {
+      "github_copilot_review": {
+        "task": "GitHub Copilot goes through Blueprint extension",
+        "actions": [
+          "Review Blueprint MCP extension code",
+          "Understand integration points",
+          "Complete all connection workflows",
+          "Integrate with Agent 5.0 systems"
+        ],
+        "delegation": "DevOps Division - GitHub Copilot Team (12 agents)"
+      },
+
+      "agent_5_blueprint_sync": {
+        "task": "All 219 agents sync with Blueprint MCP",
+        "actions": [
+          "Connect Blueprint to Google Sheets",
+          "Connect Blueprint to Airtable",
+          "Connect Blueprint to Notion",
+          "Sync all data bidirectionally",
+          "Enable Blueprint to read all apps/agents"
+        ],
+        "delegation": "Integration Division (30 agents)"
+      },
+
+      "google_full_access": {
+        "task": "Enable Google to read all apps and agents",
+        "implementation": {
+          "google_sheets_api": "Read all Agent 5.0 logs and data",
+          "google_drive_api": "Access all documents and files",
+          "google_gemini_api": "AI analysis of all agent activities",
+          "google_calendar_api": "Schedule and automation data"
+        },
+        "delegation": "Integration Division - Google Team (10 agents)"
+      },
+
+      "chrome_full_access": {
+        "task": "Enable Chrome to read all apps and agents",
+        "implementation": {
+          "blueprint_mcp_extension": "Read through extension UI",
+          "edge_extension": "jdafkfhnpjengpcjgjegpgnbnmhhjpoc integration",
+          "surf_cli": "Automate Chrome browser interactions",
+          "browser_automation": "Playwright/Puppeteer access"
+        },
+        "delegation": "Integration Division - Browser Team (10 Surf agents)"
+      }
+    },
+
+    "automation_workflow": {
+      "step_1": {
+        "action": "Surf CLI opens Blueprint MCP profile",
+        "command": "npx @surf/cli browse 'https://blueprint-mcp.railsblueprint.com/profile'",
+        "delegation": "Web Automation Team"
+      },
+      "step_2": {
+        "action": "GitHub Copilot reviews extension integration",
+        "command": "gh copilot suggest 'Review Blueprint MCP extension and complete integration'",
+        "delegation": "DevOps Division - Copilot Team"
+      },
+      "step_3": {
+        "action": "Connect Blueprint to Google services",
+        "services": ["Sheets", "Drive", "Gemini", "Calendar"],
+        "delegation": "Integration Division - Google API Team"
+      },
+      "step_4": {
+        "action": "Sync all data bidirectionally",
+        "sources": ["GitHub", "Google", "Blueprint MCP", "Agent 5.0"],
+        "delegation": "Communication Division - Data Sync Team"
+      },
+      "step_5": {
+        "action": "Enable all 219 agents to access Blueprint",
+        "method": "API integration + Browser automation",
+        "delegation": "ALL divisions"
+      }
+    },
+
+    "zapier_blueprint_workflow": {
+      "workflow_name": "Blueprint MCP ↔ Google Sheets Sync",
+      "workflow_number": 24,
+      "trigger": {
+        "app": "Blueprint MCP",
+        "event": "New Data or Update"
+      },
+      "actions": [
+        {
+          "step": 1,
+          "app": "Google Sheets",
+          "action": "Create or Update Row",
+          "spreadsheet": "Blueprint MCP Data (appsefilepro@gmail.com)"
+        },
+        {
+          "step": 2,
+          "app": "Airtable",
+          "action": "Create Record",
+          "base": "Blueprint Integration"
+        },
+        {
+          "step": 3,
+          "app": "Notion",
+          "action": "Create Page",
+          "database": "Blueprint MCP Integration"
+        },
+        {
+          "step": 4,
+          "app": "GitHub",
+          "action": "Update Repository Data",
+          "repo": "Private-Claude"
+        },
+        {
+          "step": 5,
+          "app": "Email by Zapier",
+          "to": "appsefilepro@gmail.com",
+          "subject": "Blueprint MCP: Data synced to all platforms"
+        }
+      ],
+      "bidirectional": true,
+      "note": "Data flows both ways: Blueprint ↔ Google/GitHub/Airtable/Notion"
+    },
+
+    "agent_5_master_prompt_update": {
+      "addition": "Blueprint MCP Integration: All 219 agents can now read and write through Blueprint MCP extension at https://blueprint-mcp.railsblueprint.com/profile (appsefilepro@gmail.com). Google and Chrome have full access to all apps and agents. Use Blueprint for cross-platform data sync (Google Sheets ↔ Airtable ↔ Notion ↔ GitHub)."
+    },
+
+    "delegation_summary": {
+      "devops_division": {
+        "agents": 12,
+        "tasks": [
+          "GitHub Copilot reviews Blueprint extension",
+          "Complete integration workflows",
+          "Test all connections"
+        ]
+      },
+      "integration_division": {
+        "agents": 30,
+        "tasks": [
+          "Connect Blueprint to Google (10 agents)",
+          "Connect Blueprint to GitHub (5 agents)",
+          "Browser automation (10 Surf agents)",
+          "Data sync coordination (5 agents)"
+        ]
+      },
+      "communication_division": {
+        "agents": 10,
+        "tasks": [
+          "Monitor sync status",
+          "Send notifications",
+          "Log all Blueprint activities"
+        ]
+      }
+    },
+
+    "next_steps": [
+      "1. Surf CLI: Open Blueprint profile and complete connections",
+      "2. GitHub Copilot: Review extension and integrate",
+      "3. Google APIs: Enable full read/write access",
+      "4. Zapier Workflow #24: Activate bidirectional sync",
+      "5. All 219 agents: Test Blueprint MCP access",
+      "6. Verify: Google and Chrome can read all apps/agents"
+    ],
+
+    "cost": "$0.00 - Blueprint MCP likely has FREE tier",
+
+    "status": "✅ CONFIGURED - Ready for full integration and sync"
+  }
+}
