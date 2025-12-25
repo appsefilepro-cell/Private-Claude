@@ -1,0 +1,12 @@
+{
+  "agent_id": "agent_special_13",
+  "agent_name": "Project Manager",
+  "role": "Project Manager",
+  "status": "completed",
+  "tasks_completed": 30,
+  "tasks_failed": 0,
+  "loop_count": 10,
+  "start_time": "2025-12-25T05:49:25.663728",
+  "last_update": "2025-12-25T05:49:38.790476",
+  "details": {}
+}

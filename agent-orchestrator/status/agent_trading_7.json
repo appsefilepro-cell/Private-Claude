@@ -1,0 +1,12 @@
+{
+  "agent_id": "agent_trading_7",
+  "agent_name": "Arbitrage Specialist",
+  "role": "Arbitrage Specialist",
+  "status": "completed",
+  "tasks_completed": 30,
+  "tasks_failed": 0,
+  "loop_count": 10,
+  "start_time": "2025-12-25T05:49:25.062730",
+  "last_update": "2025-12-25T05:49:38.146358",
+  "details": {}
+}

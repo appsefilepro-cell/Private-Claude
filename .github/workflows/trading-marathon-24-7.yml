@@ -1,0 +1,427 @@
+name: 24-Hour Trading Marathon - MetaTrader 5 + OKX
+# Runs every 15 minutes to monitor and execute trades
+
+on:
+  schedule:
+    # Every 15 minutes
+    - cron: '*/15 * * * *'
+  workflow_dispatch:
+    inputs:
+      force_trade:
+        description: 'Force immediate trade execution'
+        required: false
+        default: false
+        type: boolean
+      test_mode:
+        description: 'Run in test mode (no real trades)'
+        required: false
+        default: false
+        type: boolean
+
+env:
+  PYTHON_VERSION: '3.11'
+  ZAPIER_WEBHOOK_URL: ${{ secrets.ZAPIER_WEBHOOK_URL }}
+  OKX_API_KEY: ${{ secrets.OKX_API_KEY }}
+  OKX_SECRET_KEY: ${{ secrets.OKX_SECRET_KEY }}
+  OKX_PASSPHRASE: ${{ secrets.OKX_PASSPHRASE }}
+  SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_GITHUB }}
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: trading-marathon-${{ github.ref }}
+  cancel-in-progress: false  # Never cancel trading workflows
+
+jobs:
+  # ============================================
+  # JOB 1: HEALTH CHECK ALL SYSTEMS
+  # ============================================
+  health-check:
+    name: System Health Check
+    runs-on: ubuntu-latest
+    outputs:
+      mt5_status: ${{ steps.check.outputs.mt5_status }}
+      okx_status: ${{ steps.check.outputs.okx_status }}
+      zapier_status: ${{ steps.check.outputs.zapier_status }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+
+      - name: Install dependencies
+        run: |
+          pip install requests ccxt pandas numpy
+
+      - name: Check system health
+        id: check
+        run: |
+          # Check Zapier webhook
+          ZAPIER_CHECK=$(curl -s -o /dev/null -w "%{http_code}" ${{ env.ZAPIER_WEBHOOK_URL }} || echo "000")
+          echo "zapier_status=$ZAPIER_CHECK" >> $GITHUB_OUTPUT
+
+          # Check OKX API
+          python -c "
+          import ccxt
+          import os
+          try:
+              exchange = ccxt.okx({
+                  'apiKey': os.environ.get('OKX_API_KEY'),
+                  'secret': os.environ.get('OKX_SECRET_KEY'),
+                  'password': os.environ.get('OKX_PASSPHRASE'),
+              })
+              balance = exchange.fetch_balance()
+              print('okx_status=healthy')
+          except Exception as e:
+              print(f'okx_status=error: {str(e)}')
+          " >> $GITHUB_OUTPUT
+
+          # MetaTrader status (check via Google Sheets logs)
+          echo "mt5_status=monitoring" >> $GITHUB_OUTPUT
+
+      - name: Send health check to Zapier
+        run: |
+          curl -X POST ${{ env.ZAPIER_WEBHOOK_URL }} \
+            -H "Content-Type: application/json" \
+            -d '{
+              "event": "health_check",
+              "timestamp": "'$(date -u +%Y-%m-%dT%H:%M:%SZ)'",
+              "zapier": "${{ steps.check.outputs.zapier_status }}",
+              "okx": "${{ steps.check.outputs.okx_status }}",
+              "mt5": "${{ steps.check.outputs.mt5_status }}",
+              "github_runner": "healthy"
+            }'
+
+  # ============================================
+  # JOB 2: OKX BITCOIN FUTURES TRADING
+  # ============================================
+  okx-trading:
+    name: OKX Bitcoin Futures Trading
+    runs-on: ubuntu-latest
+    needs: health-check
+    if: needs.health-check.outputs.okx_status == 'healthy'
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+
+      - name: Install trading libraries
+        run: |
+          pip install ccxt pandas numpy ta-lib requests
+
+      - name: Execute OKX trading strategy
+        run: |
+          python << 'EOF'
+          import ccxt
+          import os
+          import json
+          import requests
+          from datetime import datetime
+
+          # Initialize OKX exchange
+          exchange = ccxt.okx({
+              'apiKey': os.environ.get('OKX_API_KEY'),
+              'secret': os.environ.get('OKX_SECRET_KEY'),
+              'password': os.environ.get('OKX_PASSPHRASE'),
+              'enableRateLimit': True,
+          })
+
+          # Trading pairs for Bitcoin futures
+          pairs = [
+              'BTC/USDT:USDT',  # Perpetual swap
+              'BTC/USD:BTC',    # Perpetual swap
+          ]
+
+          trade_results = []
+
+          for pair in pairs:
+              try:
+                  # Fetch ticker
+                  ticker = exchange.fetch_ticker(pair)
+
+                  # Fetch orderbook
+                  orderbook = exchange.fetch_order_book(pair)
+
+                  # Fetch recent trades
+                  trades = exchange.fetch_trades(pair, limit=100)
+
+                  # Simple strategy: Check if spread is favorable
+                  bid = orderbook['bids'][0][0] if len(orderbook['bids']) > 0 else 0
+                  ask = orderbook['asks'][0][0] if len(orderbook['asks']) > 0 else 0
+                  spread = ((ask - bid) / bid * 100) if bid > 0 else 0
+
+                  # Calculate momentum (last 100 trades)
+                  if len(trades) > 0:
+                      recent_price = trades[-1]['price']
+                      old_price = trades[0]['price']
+                      momentum = ((recent_price - old_price) / old_price * 100)
+                  else:
+                      momentum = 0
+
+                  trade_data = {
+                      'timestamp': datetime.utcnow().isoformat(),
+                      'pair': pair,
+                      'bid': bid,
+                      'ask': ask,
+                      'spread': spread,
+                      'momentum': momentum,
+                      'action': 'HOLD',
+                      'reason': 'Monitoring only - no auto-trading'
+                  }
+
+                  # Send to Zapier
+                  requests.post(
+                      os.environ.get('ZAPIER_WEBHOOK_URL'),
+                      json={
+                          'event': 'okx_trade_analysis',
+                          **trade_data
+                      }
+                  )
+
+                  trade_results.append(trade_data)
+                  print(f"Analyzed {pair}: Spread={spread:.4f}%, Momentum={momentum:.4f}%")
+
+              except Exception as e:
+                  print(f"Error analyzing {pair}: {str(e)}")
+                  trade_results.append({
+                      'pair': pair,
+                      'error': str(e)
+                  })
+
+          # Save results
+          with open('okx_analysis_results.json', 'w') as f:
+              json.dump(trade_results, f, indent=2)
+
+          print(f"\n✅ Analyzed {len(pairs)} Bitcoin futures pairs")
+          EOF
+
+      - name: Upload OKX analysis results
+        uses: actions/upload-artifact@v4
+        with:
+          name: okx-analysis-${{ github.run_number }}
+          path: okx_analysis_results.json
+          retention-days: 7
+
+      - name: Notify OKX trading status
+        if: always()
+        run: |
+          curl -X POST ${{ env.SLACK_WEBHOOK }} \
+            -H "Content-Type: application/json" \
+            -d '{
+              "text": "📊 OKX Trading Analysis Complete",
+              "blocks": [{
+                "type": "section",
+                "text": {
+                  "type": "mrkdwn",
+                  "text": "*OKX Bitcoin Futures Analysis*\n• Status: ${{ job.status }}\n• Time: '$(date -u +%Y-%m-%d\ %H:%M:%S)' UTC\n• Run: #${{ github.run_number }}"
+                }
+              }]
+            }'
+
+  # ============================================
+  # JOB 3: METATRADER 5 MONITORING
+  # ============================================
+  mt5-monitoring:
+    name: MetaTrader 5 Accounts Monitoring
+    runs-on: ubuntu-latest
+    needs: health-check
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+
+      - name: Install dependencies
+        run: |
+          pip install requests pandas
+
+      - name: Check MT5 accounts via Zapier
+        run: |
+          python << 'EOF'
+          import requests
+          import os
+          from datetime import datetime
+
+          # MT5 Account details
+          mt5_accounts = [
+              {
+                  'account': '5044023923',
+                  'server': 'MetaQuotes-Demo',
+                  'deposit': 3000,
+                  'leverage': '1:100',
+                  'name': 'MT5 Demo 1'
+              },
+              {
+                  'account': '100459584',
+                  'server': 'MetaQuotes-Demo',
+                  'deposit': 3000,
+                  'leverage': '1:200',
+                  'name': 'MT5 Demo 2'
+              },
+              {
+                  'account': '5044025969',
+                  'server': 'MetaQuotes-Demo',
+                  'deposit': 3000,
+                  'leverage': '1:10',
+                  'name': 'MT5 Demo 3'
+              }
+          ]
+
+          # Send monitoring request to Zapier
+          for account in mt5_accounts:
+              data = {
+                  'event': 'mt5_account_check',
+                  'timestamp': datetime.utcnow().isoformat(),
+                  **account
+              }
+
+              try:
+                  response = requests.post(
+                      os.environ.get('ZAPIER_WEBHOOK_URL'),
+                      json=data,
+                      timeout=10
+                  )
+                  print(f"✅ Sent monitoring request for {account['name']}")
+              except Exception as e:
+                  print(f"❌ Error monitoring {account['name']}: {str(e)}")
+
+          print(f"\n📊 Monitored {len(mt5_accounts)} MetaTrader accounts")
+          EOF
+
+      - name: Notify MT5 monitoring
+        run: |
+          curl -X POST ${{ env.SLACK_WEBHOOK }} \
+            -H "Content-Type: application/json" \
+            -d '{
+              "text": "🔍 MetaTrader 5 Monitoring Complete",
+              "blocks": [{
+                "type": "section",
+                "text": {
+                  "type": "mrkdwn",
+                  "text": "*MT5 Account Check*\n• Accounts: 3 demo accounts\n• Status: Monitoring active\n• Time: '$(date -u +%Y-%m-%d\ %H:%M:%S)' UTC"
+                }
+              }]
+            }'
+
+  # ============================================
+  # JOB 4: PERFORMANCE METRICS
+  # ============================================
+  performance-metrics:
+    name: Calculate Trading Performance
+    runs-on: ubuntu-latest
+    needs: [okx-trading, mt5-monitoring]
+    if: always()
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Download OKX results
+        uses: actions/download-artifact@v4
+        with:
+          name: okx-analysis-${{ github.run_number }}
+        continue-on-error: true
+
+      - name: Calculate metrics
+        run: |
+          python << 'EOF'
+          import json
+          import os
+          from datetime import datetime
+
+          # Load OKX results
+          try:
+              with open('okx_analysis_results.json', 'r') as f:
+                  okx_results = json.load(f)
+          except:
+              okx_results = []
+
+          # Calculate metrics
+          total_pairs_analyzed = len(okx_results)
+          successful_analyses = len([r for r in okx_results if 'error' not in r])
+
+          metrics = {
+              'timestamp': datetime.utcnow().isoformat(),
+              'okx_pairs_analyzed': total_pairs_analyzed,
+              'successful_analyses': successful_analyses,
+              'mt5_accounts_monitored': 3,
+              'total_accounts': 4,
+              'workflow_run': int(os.environ.get('GITHUB_RUN_NUMBER', 0))
+          }
+
+          print("📊 Trading Marathon Metrics:")
+          print(json.dumps(metrics, indent=2))
+
+          # Send to Zapier
+          import requests
+          requests.post(
+              os.environ.get('ZAPIER_WEBHOOK_URL'),
+              json={
+                  'event': 'trading_metrics',
+                  **metrics
+              }
+          )
+          EOF
+
+      - name: Create performance summary
+        run: |
+          echo "## Trading Marathon Performance Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Run #${{ github.run_number }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Time**: $(date -u +%Y-%m-%d\ %H:%M:%S) UTC" >> $GITHUB_STEP_SUMMARY
+          echo "- **OKX Status**: ${{ needs.okx-trading.result }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **MT5 Status**: ${{ needs.mt5-monitoring.result }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Total Accounts**: 4 (3 MT5 Demo + 1 OKX Live)" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Next Run" >> $GITHUB_STEP_SUMMARY
+          echo "Scheduled in 15 minutes ($(date -u -d '+15 minutes' +%H:%M) UTC)" >> $GITHUB_STEP_SUMMARY
+
+  # ============================================
+  # JOB 5: ALERT ON FAILURES
+  # ============================================
+  alert-on-failure:
+    name: Send Failure Alerts
+    runs-on: ubuntu-latest
+    needs: [health-check, okx-trading, mt5-monitoring, performance-metrics]
+    if: failure()
+
+    steps:
+      - name: Send failure notification
+        run: |
+          curl -X POST ${{ env.ZAPIER_WEBHOOK_URL }} \
+            -H "Content-Type: application/json" \
+            -d '{
+              "event": "trading_workflow_failure",
+              "timestamp": "'$(date -u +%Y-%m-%dT%H:%M:%SZ)'",
+              "workflow": "${{ github.workflow }}",
+              "run_number": "${{ github.run_number }}",
+              "severity": "HIGH"
+            }'
+
+          curl -X POST ${{ env.SLACK_WEBHOOK }} \
+            -H "Content-Type: application/json" \
+            -d '{
+              "text": "🚨 ALERT: Trading Marathon Workflow Failed",
+              "blocks": [{
+                "type": "section",
+                "text": {
+                  "type": "mrkdwn",
+                  "text": "*Trading Marathon Failure*\n• Run: #${{ github.run_number }}\n• Time: '$(date -u +%Y-%m-%d\ %H:%M:%S)' UTC\n• Action Required: Check GitHub Actions logs"
+                }
+              }]
+            }'

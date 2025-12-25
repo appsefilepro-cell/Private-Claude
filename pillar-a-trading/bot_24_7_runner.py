@@ -104,8 +104,63 @@ class TradingBot24x7:
         signal.signal(signal.SIGINT, self.signal_handler)
         signal.signal(signal.SIGTERM, self.signal_handler)
 
+        # Initialize live trading connector if in live mode
+        self.live_exchange = None
+        if self.mode == TradingMode.LIVE:
+            self.live_exchange = self._initialize_live_exchange()
+
         logger.info(f"Trading Bot initialized - Mode: {mode.value.upper()}, Profile: {profile}")
         logger.info(f"Initial capital: ${self.current_capital:,.2f}")
+
+    def _initialize_live_exchange(self):
+        """
+        Initialize live trading exchange connection using CCXT
+        Supports Kraken, Binance, Coinbase, and other exchanges
+        """
+        try:
+            import ccxt
+
+            # Get exchange configuration from config
+            exchange_config = self.config.get('live_trading', {})
+            exchange_name = exchange_config.get('exchange', 'kraken').lower()
+
+            # API credentials from environment or config
+            api_key = os.getenv(f'{exchange_name.upper()}_API_KEY') or exchange_config.get('api_key')
+            api_secret = os.getenv(f'{exchange_name.upper()}_API_SECRET') or exchange_config.get('api_secret')
+
+            if not api_key or not api_secret:
+                logger.error(f"Live trading credentials not found for {exchange_name}")
+                logger.error(f"Set {exchange_name.upper()}_API_KEY and {exchange_name.upper()}_API_SECRET")
+                return None
+
+            # Initialize exchange
+            exchange_class = getattr(ccxt, exchange_name)
+            exchange = exchange_class({
+                'apiKey': api_key,
+                'secret': api_secret,
+                'enableRateLimit': True,
+                'options': {
+                    'defaultType': exchange_config.get('market_type', 'spot'),  # spot, margin, future
+                }
+            })
+
+            # Test connection
+            try:
+                balance = exchange.fetch_balance()
+                logger.info(f"✅ Live exchange connected: {exchange_name}")
+                logger.info(f"Account balance available")
+                return exchange
+            except Exception as e:
+                logger.error(f"Failed to connect to {exchange_name}: {e}")
+                return None
+
+        except ImportError:
+            logger.error("CCXT library not installed. Install with: pip install ccxt")
+            logger.error("Live trading requires CCXT for exchange connectivity")
+            return None
+        except Exception as e:
+            logger.error(f"Error initializing live exchange: {e}")
+            return None
 
     def load_config(self, config_path: Path) -> Dict[str, Any]:
         """Load bot configuration"""
@@ -188,7 +243,7 @@ class TradingBot24x7:
     def fetch_market_data(self, pair: str) -> Optional[Dict[str, Any]]:
         """
         Fetch current market data for trading pair
-        In production, this would connect to Kraken/MT5 API
+        Supports both simulated (paper/demo) and live trading
         """
         try:
             # Simulated market data for paper/demo modes
@@ -213,9 +268,24 @@ class TradingBot24x7:
                     "ask": base_price + price_variation + 0.5
                 }
             else:
-                # For live mode, would use real API
-                logger.warning("Live mode API not implemented yet")
-                return None
+                # Live mode - fetch real market data
+                if not self.live_exchange:
+                    logger.error("Live exchange not initialized")
+                    return None
+
+                # Fetch ticker data from exchange
+                ticker = self.live_exchange.fetch_ticker(pair)
+
+                return {
+                    "pair": pair,
+                    "timestamp": datetime.now(),
+                    "price": ticker['last'],
+                    "volume": ticker['baseVolume'],
+                    "bid": ticker['bid'],
+                    "ask": ticker['ask'],
+                    "high": ticker['high'],
+                    "low": ticker['low']
+                }
 
         except Exception as e:
             logger.error(f"Error fetching market data for {pair}: {e}")
@@ -280,9 +350,46 @@ class TradingBot24x7:
 
             # Execute trade
             if self.mode == TradingMode.LIVE:
-                # Would execute real trade via API
-                logger.warning("Live trading not implemented yet")
-                return None
+                # Execute real trade via exchange API
+                if not self.live_exchange:
+                    logger.error("Live exchange not initialized - cannot execute trade")
+                    return None
+
+                try:
+                    # Execute market order
+                    order_type = 'market'  # Can be 'limit' for limit orders
+                    side = 'buy' if trade['type'] == 'BUY' else 'sell'
+
+                    # Create order on exchange
+                    order = self.live_exchange.create_order(
+                        symbol=trade['pair'],
+                        type=order_type,
+                        side=side,
+                        amount=trade['quantity']
+                    )
+
+                    # Update trade with order info
+                    trade['order_id'] = order['id']
+                    trade['actual_price'] = order.get('price', trade['entry_price'])
+                    trade['exchange_status'] = order['status']
+
+                    # Add to positions
+                    self.open_positions.append(trade)
+                    self.daily_trade_count += 1
+
+                    # Track trade
+                    self.performance_tracker.record_trade(trade)
+
+                    logger.info(f"✅ LIVE Trade executed: {trade['type']} {trade['pair']} @ ${trade['entry_price']:.2f}")
+                    logger.info(f"Order ID: {order['id']}, Status: {order['status']}")
+                    logger.info(f"Position size: ${trade['position_value']:.2f}, Quantity: {trade['quantity']:.6f}")
+
+                    return trade
+
+                except Exception as e:
+                    logger.error(f"Failed to execute live trade: {e}")
+                    logger.error(traceback.format_exc())
+                    return None
             else:
                 # Paper/Demo trading - just record it
                 self.open_positions.append(trade)

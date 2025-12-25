@@ -23,7 +23,7 @@ class Microsoft365Migrator:
         self,
         client_id: str = None,
         tenant_id: str = "common",
-        output_dir: str = "../migrated-docs"
+        output_dir: str = "/home/user/Private-Claude/migrated-docs"
     ):
         """
         Initialize Microsoft 365 migrator
@@ -70,7 +70,7 @@ class Microsoft365Migrator:
 
     def _setup_logging(self) -> logging.Logger:
         """Setup logging configuration"""
-        log_dir = Path("../logs/system-integration")
+        log_dir = Path("/home/user/Private-Claude/logs/system-integration")
         log_dir.mkdir(parents=True, exist_ok=True)
 
         logger = logging.getLogger('Microsoft365Migrator')

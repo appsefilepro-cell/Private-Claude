@@ -51,12 +51,15 @@ ratelimit>=2.2.1
 # psycopg2-binary>=2.9.7  # PostgreSQL
 # pymongo>=4.5.0  # MongoDB
 
-# Optional: Trading Libraries
-# ccxt>=4.0.0  # Unified crypto exchange API
+# Trading Libraries
+ccxt>=4.0.0  # Unified crypto exchange API (REQUIRED for live trading)
 
-# Optional: Document Generation
-# python-docx>=1.0.0  # Create .docx files
-# reportlab>=4.0.0  # PDF generation
+# Document Generation
+python-docx>=1.0.0  # Create .docx files
+reportlab>=4.0.0  # PDF generation
+
+# Progress bars
+tqdm>=4.66.0  # Progress bars for long operations
 
 # Optional: Email
 # sendgrid>=6.10.0  # Email via SendGrid

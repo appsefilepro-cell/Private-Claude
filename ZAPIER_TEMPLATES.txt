@@ -1,0 +1,512 @@
+ZAPIER COPY-PASTE TEMPLATES
+===========================
+
+Use these templates when creating your Zaps. Just copy and paste!
+
+---
+
+1. OKX TRADING EMAIL TEMPLATE
+------------------------------
+
+Subject:
+OKX Trade Alert - {{pair}}
+
+Body:
+New trade executed!
+
+Pair: {{pair}}
+Side: {{side}}
+Amount: {{amount}}
+Price: {{price}}
+Pattern: {{pattern}}
+P&L: {{pnl}}
+Time: {{timestamp}}
+
+View full trading log:
+[PASTE YOUR GOOGLE SHEETS LINK HERE]
+
+---
+
+2. OKX TRADING SLACK TEMPLATE
+------------------------------
+
+🔔 OKX Trade Alert
+
+{{side}} {{amount}} {{pair}} at {{price}}
+Pattern: {{pattern}}
+P&L: {{pnl}}
+
+---
+
+3. DAILY TRADING REPORT EMAIL TEMPLATE
+---------------------------------------
+
+Subject:
+Daily Trading Report - {{today}}
+
+Body:
+Daily Trading Summary for {{today}}
+
+📊 Your Trading Activity
+
+Today's Performance:
+• Total Trades: [Check your Google Sheet]
+• Net P&L: [Check your Google Sheet]
+• Win Rate: [Check your Google Sheet]
+
+View detailed log:
+[PASTE YOUR GOOGLE SHEETS LINK HERE]
+
+Keep up the great work!
+
+Your Automated Trading System
+
+---
+
+4. ERROR ALERT EMAIL TEMPLATE
+------------------------------
+
+Subject:
+🚨 URGENT: System Error in {{system}}
+
+Body:
+URGENT SYSTEM ERROR DETECTED
+
+System: {{system}}
+Error Message: {{error_message}}
+Severity: {{severity}}
+Timestamp: {{timestamp}}
+
+Please investigate this issue immediately.
+
+View error details:
+[Link to your tracking system]
+
+---
+
+5. ERROR ALERT SMS TEMPLATE
+----------------------------
+
+🚨 System error in {{system}}: {{error_message}}. Check email for details.
+
+---
+
+6. LEGAL DOCUMENT EMAIL TEMPLATE
+---------------------------------
+
+Subject:
+Legal Document Ready: {{case_number}}
+
+Body:
+Your legal document has been generated and is ready for review.
+
+Case Number: {{case_number}}
+Court: {{court}}
+Document Type: {{document_type}}
+Generated: {{date}}
+
+View document:
+{{document_link}}
+
+Please review the document before filing with the court.
+
+Best regards,
+Legal Automation System
+
+---
+
+7. GOOGLE DRIVE FILE ALERT EMAIL TEMPLATE
+------------------------------------------
+
+Subject:
+New File Ready: {{Name}}
+
+Body:
+A new file has been added to your Legal Automation folder.
+
+File Details:
+• Name: {{Name}}
+• Created: {{Created Time}}
+• Size: {{Size}}
+• Type: {{Mime Type}}
+
+View file:
+{{Web View Link}}
+
+Download:
+{{Download Link}}
+
+---
+
+8. TEST COMPLETION EMAIL TEMPLATE
+----------------------------------
+
+Subject:
+Test Results: {{test_name}}
+
+Body:
+Test Suite Completed: {{test_name}}
+
+Results Summary:
+• Status: {{status}}
+• Pass Rate: {{pass_rate}}%
+• Total Tests: {{total_tests}}
+• Passed: {{passed_tests}}
+• Failed: {{failed_tests}}
+
+Details:
+{{results}}
+
+Completed at: {{timestamp}}
+
+View full report:
+[Link to detailed test report]
+
+---
+
+9. TEST COMPLETION SLACK TEMPLATE
+----------------------------------
+
+✅ Test Complete: {{test_name}}
+
+Pass Rate: {{pass_rate}}%
+Results: {{results}}
+Time: {{timestamp}}
+
+---
+
+10. WEEKLY FINANCIAL REPORT EMAIL TEMPLATE
+-------------------------------------------
+
+Subject:
+Weekly Financial Report - Week of {{date}}
+
+Body:
+Weekly Financial Summary
+Week of {{date}}
+
+📊 This Week's Overview
+
+Key Metrics:
+• Total Revenue: [Update manually or link to sheet]
+• Total Expenses: [Update manually or link to sheet]
+• Net Income: [Update manually or link to sheet]
+
+Action Items:
+□ Review expense categories
+□ Update budget allocations
+□ Check account balances
+□ Plan for next week
+
+View detailed financial data:
+[PASTE YOUR GOOGLE SHEETS LINK HERE]
+
+Have a productive week!
+
+Your Financial Tracking System
+
+---
+
+11. SESSION REMINDER EMAIL TEMPLATE
+------------------------------------
+
+Subject:
+Coaching Session Reminder - Tomorrow
+
+Body:
+Hi {{Client Name}},
+
+This is a friendly reminder that we have a coaching session scheduled for tomorrow.
+
+Session Details:
+• Date: {{Session Date}}
+• Time: {{Session Time}}
+• Topic: {{Session Topic}}
+
+Please come prepared to discuss your goals and progress since our last session.
+
+If you need to reschedule, please let me know as soon as possible.
+
+Looking forward to our session!
+
+Best regards,
+Thurman Robinson
+Certified Life Coach
+
+---
+
+12. CASE 1241511 DISMISSAL EMAIL TEMPLATE
+------------------------------------------
+
+Subject:
+Case 1241511 - Dismissal Notice Generated
+
+Body:
+The dismissal notice for Case No. 1241511 has been generated and is ready for your review.
+
+Case Information:
+• Case Number: 1241511
+• Court: Harris County - County Civil Court at Law No. 2
+• Plaintiff: NEW FOREST HOUSTON 2020 LLC
+• Defendant: THURMAN ROBINSON, ET AL.
+• Document: Notice of Dismissal
+• Generated: {{date}}
+
+Next Steps:
+1. Review the attached dismissal notice
+2. Make any necessary edits
+3. File with the court
+4. Serve all parties
+
+View document:
+{{document_link}}
+
+Please review carefully before filing.
+
+---
+
+13. FORM 1023-EZ COMPLETION EMAIL TEMPLATE
+-------------------------------------------
+
+Subject:
+Form 1023-EZ Ready: {{org_name}}
+
+Body:
+Form 1023-EZ Application for Tax-Exempt Status
+
+Organization: {{org_name}}
+EIN: {{ein}}
+Prepared: {{date}}
+
+The form has been completed with your organization's information and is ready for submission to the IRS.
+
+Next Steps:
+1. Review the completed form (attached)
+2. Prepare filing fee ($275)
+3. Submit application via Pay.gov
+4. Await IRS determination (typically 2-4 weeks)
+
+Organization Details:
+• Name: {{org_name}}
+• Address: {{address}}, {{city}}, {{state}} {{zip}}
+• Formation Date: {{formation_date}}
+• Purpose: {{purpose}}
+
+View form:
+{{form_link}}
+
+IRS Submission Portal:
+https://pay.gov (Search for Form 1023-EZ)
+
+Questions? Contact the IRS at 1-877-829-5500.
+
+Good luck with your application!
+
+---
+
+14. MICROSOFT 365 MIGRATION EMAIL TEMPLATE
+-------------------------------------------
+
+Subject:
+File Migrated: {{file_name}}
+
+Body:
+A file has been successfully migrated from Microsoft 365 to Google Drive.
+
+File: {{file_name}}
+Original Location: OneDrive
+New Location: Google Drive
+Migrated: {{date}}
+Size: {{file_size}}
+
+View file in Google Drive:
+{{gdrive_link}}
+
+Migration is progressing automatically. You will be notified as more files are migrated.
+
+---
+
+15. GITHUB SYNC EMAIL TEMPLATE
+-------------------------------
+
+Subject:
+GitHub Sync Complete
+
+Body:
+Your GitHub commit has been successfully synced to GitLab.
+
+Commit Details:
+• Message: {{commit_message}}
+• Author: {{commit_author}}
+• Repository: Private-Claude
+• Synced: {{timestamp}}
+
+Both repositories are now in sync.
+
+View on GitLab:
+[Your GitLab project link]
+
+---
+
+WEBHOOK TEST DATA TEMPLATES
+============================
+
+Use these JSON templates to test your webhooks.
+
+1. OKX Trading Test:
+{
+  "timestamp": "2025-12-25T10:30:00Z",
+  "pair": "BTC/USDT",
+  "side": "BUY",
+  "amount": "0.05",
+  "price": "45000.00",
+  "pattern": "Golden Cross",
+  "pnl": "+$250.00"
+}
+
+2. Error Alert Test:
+{
+  "timestamp": "2025-12-25T10:35:00Z",
+  "system": "Trading Bot",
+  "error_message": "TEST ERROR - Everything is working!",
+  "severity": "LOW"
+}
+
+3. Legal Document Test:
+{
+  "case_number": "TEST-123",
+  "court": "Test Court",
+  "plaintiff": "Test Plaintiff",
+  "defendant": "Test Defendant",
+  "document_type": "Test Notice",
+  "date": "2025-12-25"
+}
+
+4. Test Completion Test:
+{
+  "test_id": "TEST-001",
+  "test_name": "Integration Test",
+  "status": "PASSED",
+  "pass_rate": "100",
+  "total_tests": "10",
+  "passed_tests": "10",
+  "failed_tests": "0",
+  "results": "All tests passed successfully!",
+  "timestamp": "2025-12-25T10:40:00Z"
+}
+
+---
+
+GOOGLE SHEETS FORMULAS
+=======================
+
+Use these formulas in your Google Sheets for automatic calculations.
+
+1. Total P&L:
+=SUM(G2:G)
+
+2. Win Rate:
+=COUNTIF(G2:G,">0")/COUNTA(G2:G)*100
+
+3. Average Trade Size:
+=AVERAGE(D2:D)
+
+4. Total Trades Today:
+=COUNTIF(A2:A,TODAY())
+
+5. Best Trade:
+=MAX(G2:G)
+
+6. Worst Trade:
+=MIN(G2:G)
+
+7. Total Volume:
+=SUMPRODUCT(D2:D,E2:E)
+
+---
+
+AIRTABLE VIEWS
+==============
+
+Set up these views in Airtable for better organization.
+
+1. Legal Cases - Active Cases:
+Filter: Status = "Active"
+Sort: Deadline (ascending)
+
+2. Legal Cases - Upcoming Deadlines:
+Filter: Deadline is within the next 7 days
+Sort: Deadline (ascending)
+
+3. Financial Operations - This Month:
+Filter: Date is within this month
+Group by: Category
+
+4. Trading - Winning Trades:
+Filter: P&L > 0
+Sort: P&L (descending)
+
+5. System Monitoring - Active Errors:
+Filter: Status = "New" OR Status = "In Progress"
+Sort: Severity (HIGH first)
+
+---
+
+SLACK CHANNEL DESCRIPTIONS
+===========================
+
+Use these descriptions when creating Slack channels.
+
+#system-status
+All system notifications, errors, and status updates. Monitored 24/7.
+
+#trading-alerts
+OKX trading notifications and daily reports. Real-time trade alerts.
+
+#legal-updates
+Legal document notifications and case updates. Attorney communications.
+
+#test-results
+Automated test results and system health checks. Development team.
+
+#ai-communication
+AI agent coordination and cross-system messaging. Agent interactions.
+
+#financial-reports
+Weekly/monthly financial summaries and budget alerts. Financial tracking.
+
+---
+
+ZAPIER FILTER CONDITIONS
+=========================
+
+Use these filter conditions in your Zaps (Zapier Paths).
+
+1. Only High Severity Errors:
+Field: Severity
+Condition: Exactly matches
+Value: HIGH
+
+2. Only Profitable Trades:
+Field: P&L
+Condition: Greater than
+Value: 0
+
+3. Only Work Hours:
+Field: Timestamp
+Condition: Time of day is between
+Value: 9:00 AM and 5:00 PM
+
+4. Only Weekdays:
+Field: Timestamp
+Condition: Day of week
+Value: Monday through Friday
+
+---
+
+END OF TEMPLATES
+
+Copy and paste these templates directly into your Zaps.
+Customize as needed for your specific use case.
+
+Questions? Check ZAPIER_QUICK_START.md for detailed instructions.

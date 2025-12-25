@@ -603,7 +603,66 @@ def main():
     # Run migration
     if args.dry_run:
         print("\n🔍 DRY RUN MODE - No files will be downloaded")
-        # TODO: Implement dry run
+        print("="*70)
+
+        # Authenticate
+        if not migrator.authenticate():
+            print("❌ Authentication failed")
+            return
+
+        all_files = []
+
+        # Get OneDrive files
+        if include_onedrive:
+            print("\n📂 Scanning OneDrive...")
+            onedrive_files = migrator.get_onedrive_files()
+            all_files.extend(onedrive_files)
+            print(f"Found {len(onedrive_files)} files in OneDrive")
+
+        # Get SharePoint files
+        if include_sharepoint:
+            print("\n📂 Scanning SharePoint...")
+            sharepoint_files = migrator.get_sharepoint_files()
+            all_files.extend(sharepoint_files)
+            print(f"Found {len(sharepoint_files)} files in SharePoint")
+
+        # Apply filters
+        all_files = migrator._apply_filters(all_files)
+
+        # Apply limit if specified
+        if args.limit:
+            all_files = all_files[:args.limit]
+
+        # Display summary
+        print("\n" + "="*70)
+        print("DRY RUN SUMMARY")
+        print("="*70)
+        print(f"Total files that would be migrated: {len(all_files)}")
+
+        total_size = sum(f.get('size', 0) for f in all_files)
+        print(f"Total size: {total_size / (1024*1024):.2f} MB")
+
+        # Group by file type
+        from collections import Counter
+        file_types = Counter(f.get('name', '').split('.')[-1].lower() for f in all_files if '.' in f.get('name', ''))
+
+        print("\nFile types breakdown:")
+        for ext, count in file_types.most_common(10):
+            print(f"  .{ext}: {count} files")
+
+        # Show first 20 files
+        print("\nFirst 20 files that would be migrated:")
+        for i, file in enumerate(all_files[:20], 1):
+            size_mb = file.get('size', 0) / (1024*1024)
+            print(f"  {i}. {file.get('name', 'Unknown')} ({size_mb:.2f} MB)")
+
+        if len(all_files) > 20:
+            print(f"  ... and {len(all_files) - 20} more files")
+
+        print("\n" + "="*70)
+        print("To perform actual migration, run without --dry-run flag")
+        print("="*70)
+        return
     elif args.test:
         print("\n🧪 TEST MODE - Migrating first 5 files only")
         migrator.batch_size = 5

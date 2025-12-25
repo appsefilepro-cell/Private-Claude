@@ -1,0 +1,8 @@
+{
+  "from": "agent_vp_finance",
+  "to": "agent_cfo",
+  "type": "report",
+  "message": "{\"agent\": \"VP Finance\", \"task\": \"monthly_statements\", \"timestamp\": 1766641774.6856806, \"status\": \"completed\"}",
+  "timestamp": "2025-12-25T05:49:34.685712"
+}"
+}

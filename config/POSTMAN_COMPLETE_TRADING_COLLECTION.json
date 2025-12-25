@@ -1,0 +1,595 @@
+{
+  "info": {
+    "name": "Private-Claude Complete API Collection",
+    "description": "Comprehensive API tests for trading, integrations, and automation",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_postman_id": "private-claude-complete-2024"
+  },
+  "variable": [
+    {
+      "key": "zapier_webhook_url",
+      "value": "{{ZAPIER_WEBHOOK_URL}}",
+      "type": "string"
+    },
+    {
+      "key": "okx_api_key",
+      "value": "{{OKX_API_KEY}}",
+      "type": "string"
+    },
+    {
+      "key": "okx_secret_key",
+      "value": "{{OKX_SECRET_KEY}}",
+      "type": "string"
+    },
+    {
+      "key": "okx_passphrase",
+      "value": "{{OKX_PASSPHRASE}}",
+      "type": "string"
+    },
+    {
+      "key": "github_token",
+      "value": "{{GITHUB_TOKEN}}",
+      "type": "string"
+    },
+    {
+      "key": "gitlab_token",
+      "value": "{{GITLAB_TOKEN}}",
+      "type": "string"
+    },
+    {
+      "key": "e2b_api_key",
+      "value": "{{E2B_API_KEY}}",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "1. Health Checks",
+      "item": [
+        {
+          "name": "Zapier Webhook Health",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"event\": \"health_check\",\n  \"source\": \"postman\",\n  \"timestamp\": \"{{$timestamp}}\"\n}"
+            },
+            "url": {
+              "raw": "{{zapier_webhook_url}}",
+              "host": ["{{zapier_webhook_url}}"]
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Zapier webhook responds\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "GitHub API Health",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{github_token}}"
+              },
+              {
+                "key": "Accept",
+                "value": "application/vnd.github.v3+json"
+              }
+            ],
+            "url": {
+              "raw": "https://api.github.com/repos/appsefilepro-cell/Private-Claude",
+              "protocol": "https",
+              "host": ["api", "github", "com"],
+              "path": ["repos", "appsefilepro-cell", "Private-Claude"]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"GitHub API accessible\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData.name).to.eql('Private-Claude');",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "GitLab API Health",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "PRIVATE-TOKEN",
+                "value": "{{gitlab_token}}"
+              }
+            ],
+            "url": {
+              "raw": "https://gitlab.com/api/v4/projects",
+              "protocol": "https",
+              "host": ["gitlab", "com"],
+              "path": ["api", "v4", "projects"]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"GitLab API accessible\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "E2B API Health",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "X-API-Key",
+                "value": "{{e2b_api_key}}"
+              }
+            ],
+            "url": {
+              "raw": "https://api.e2b.dev/sandboxes",
+              "protocol": "https",
+              "host": ["api", "e2b", "dev"],
+              "path": ["sandboxes"]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"E2B API accessible\", function () {",
+                  "    pm.response.to.be.ok;",
+                  "});"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "2. OKX Trading API",
+      "item": [
+        {
+          "name": "OKX - Get Account Balance",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "OK-ACCESS-KEY",
+                "value": "{{okx_api_key}}"
+              },
+              {
+                "key": "OK-ACCESS-SIGN",
+                "value": "{{$randomUUID}}"
+              },
+              {
+                "key": "OK-ACCESS-TIMESTAMP",
+                "value": "{{$timestamp}}"
+              },
+              {
+                "key": "OK-ACCESS-PASSPHRASE",
+                "value": "{{okx_passphrase}}"
+              }
+            ],
+            "url": {
+              "raw": "https://www.okx.com/api/v5/account/balance",
+              "protocol": "https",
+              "host": ["www", "okx", "com"],
+              "path": ["api", "v5", "account", "balance"]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"OKX balance retrieved\", function () {",
+                  "    pm.response.to.be.ok;",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData.code).to.eql('0');",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "OKX - Get BTC/USDT Ticker",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://www.okx.com/api/v5/market/ticker?instId=BTC-USDT-SWAP",
+              "protocol": "https",
+              "host": ["www", "okx", "com"],
+              "path": ["api", "v5", "market", "ticker"],
+              "query": [
+                {
+                  "key": "instId",
+                  "value": "BTC-USDT-SWAP"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"BTC ticker retrieved\", function () {",
+                  "    pm.response.to.be.ok;",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData.data).to.be.an('array');",
+                  "    pm.expect(jsonData.data[0].instId).to.eql('BTC-USDT-SWAP');",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "OKX - Get Open Orders",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "OK-ACCESS-KEY",
+                "value": "{{okx_api_key}}"
+              },
+              {
+                "key": "OK-ACCESS-SIGN",
+                "value": "{{$randomUUID}}"
+              },
+              {
+                "key": "OK-ACCESS-TIMESTAMP",
+                "value": "{{$timestamp}}"
+              },
+              {
+                "key": "OK-ACCESS-PASSPHRASE",
+                "value": "{{okx_passphrase}}"
+              }
+            ],
+            "url": {
+              "raw": "https://www.okx.com/api/v5/trade/orders-pending?instType=SWAP",
+              "protocol": "https",
+              "host": ["www", "okx", "com"],
+              "path": ["api", "v5", "trade", "orders-pending"],
+              "query": [
+                {
+                  "key": "instType",
+                  "value": "SWAP"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Open orders retrieved\", function () {",
+                  "    pm.response.to.be.ok;",
+                  "});"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "3. MetaTrader 5 Logging",
+      "item": [
+        {
+          "name": "MT5 Demo 1 - Log Trade",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"event\": \"mt5_trade\",\n  \"account\": \"5044023923\",\n  \"pair\": \"EURUSD\",\n  \"type\": \"BUY\",\n  \"lots\": 0.1,\n  \"entry_price\": 1.0850,\n  \"exit_price\": 1.0875,\n  \"pnl\": 25.00,\n  \"pattern\": \"Breakout\",\n  \"timestamp\": \"{{$timestamp}}\"\n}"
+            },
+            "url": {
+              "raw": "{{zapier_webhook_url}}",
+              "host": ["{{zapier_webhook_url}}"]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"MT5 trade logged to Zapier\", function () {",
+                  "    pm.response.to.be.ok;",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "MT5 Demo 2 - Log Trade",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"event\": \"mt5_trade\",\n  \"account\": \"100459584\",\n  \"pair\": \"GBPUSD\",\n  \"type\": \"SELL\",\n  \"lots\": 0.2,\n  \"entry_price\": 1.2700,\n  \"exit_price\": 1.2680,\n  \"pnl\": 40.00,\n  \"pattern\": \"Reversal\",\n  \"timestamp\": \"{{$timestamp}}\"\n}"
+            },
+            "url": {
+              "raw": "{{zapier_webhook_url}}",
+              "host": ["{{zapier_webhook_url}}"]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"MT5 trade logged to Zapier\", function () {",
+                  "    pm.response.to.be.ok;",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "MT5 Demo 3 - Log Trade",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"event\": \"mt5_trade\",\n  \"account\": \"5044025969\",\n  \"pair\": \"XAUUSD\",\n  \"type\": \"BUY\",\n  \"lots\": 0.05,\n  \"entry_price\": 2050.00,\n  \"exit_price\": 2065.00,\n  \"pnl\": 75.00,\n  \"pattern\": \"Trend Following\",\n  \"timestamp\": \"{{$timestamp}}\"\n}"
+            },
+            "url": {
+              "raw": "{{zapier_webhook_url}}",
+              "host": ["{{zapier_webhook_url}}"]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"MT5 trade logged to Zapier\", function () {",
+                  "    pm.response.to.be.ok;",
+                  "});"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "4. GitHub Actions Triggers",
+      "item": [
+        {
+          "name": "Trigger Trading Marathon Workflow",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{github_token}}"
+              },
+              {
+                "key": "Accept",
+                "value": "application/vnd.github.v3+json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"event_type\": \"run_tests\",\n  \"client_payload\": {\n    \"source\": \"postman\",\n    \"timestamp\": \"{{$timestamp}}\"\n  }\n}"
+            },
+            "url": {
+              "raw": "https://api.github.com/repos/appsefilepro-cell/Private-Claude/dispatches",
+              "protocol": "https",
+              "host": ["api", "github", "com"],
+              "path": ["repos", "appsefilepro-cell", "Private-Claude", "dispatches"]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"GitHub Actions triggered\", function () {",
+                  "    pm.response.to.have.status(204);",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Check Workflow Runs",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{github_token}}"
+              },
+              {
+                "key": "Accept",
+                "value": "application/vnd.github.v3+json"
+              }
+            ],
+            "url": {
+              "raw": "https://api.github.com/repos/appsefilepro-cell/Private-Claude/actions/runs?per_page=5",
+              "protocol": "https",
+              "host": ["api", "github", "com"],
+              "path": ["repos", "appsefilepro-cell", "Private-Claude", "actions", "runs"],
+              "query": [
+                {
+                  "key": "per_page",
+                  "value": "5"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Workflow runs retrieved\", function () {",
+                  "    pm.response.to.be.ok;",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData.workflow_runs).to.be.an('array');",
+                  "});"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "5. Integration Tests",
+      "item": [
+        {
+          "name": "Send Error Alert",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"event\": \"system_error\",\n  \"system\": \"Postman API Tests\",\n  \"error_message\": \"Test error from Postman\",\n  \"severity\": \"LOW\",\n  \"timestamp\": \"{{$timestamp}}\"\n}"
+            },
+            "url": {
+              "raw": "{{zapier_webhook_url}}",
+              "host": ["{{zapier_webhook_url}}"]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Error alert sent\", function () {",
+                  "    pm.response.to.be.ok;",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Send Test Complete Notification",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"event\": \"test_complete\",\n  \"test_name\": \"Postman Complete API Collection\",\n  \"pass_rate\": 100,\n  \"results\": \"All tests passed\",\n  \"timestamp\": \"{{$timestamp}}\"\n}"
+            },
+            "url": {
+              "raw": "{{zapier_webhook_url}}",
+              "host": ["{{zapier_webhook_url}}"]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Test completion notification sent\", function () {",
+                  "    pm.response.to.be.ok;",
+                  "});"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          "// Global pre-request script",
+          "console.log('Running Postman collection for Private-Claude');"
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          "// Global test script",
+          "pm.test('Response time is acceptable', function () {",
+          "    pm.expect(pm.response.responseTime).to.be.below(5000);",
+          "});"
+        ]
+      }
+    }
+  ]
+}

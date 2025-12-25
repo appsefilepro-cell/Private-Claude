@@ -1,0 +1,610 @@
+{
+  "airtable_workspace": "Private-Claude Complete System",
+  "description": "Complete Airtable base schemas with formulas for trading, legal, financial, and system operations",
+  "bases": [
+    {
+      "base_name": "Trading Machine Learning",
+      "description": "ML-powered trading analytics and pattern detection",
+      "tables": [
+        {
+          "table_name": "Trades",
+          "fields": [
+            {
+              "name": "Trade ID",
+              "type": "Auto Number",
+              "description": "Unique trade identifier"
+            },
+            {
+              "name": "Timestamp",
+              "type": "Date",
+              "format": "ISO 8601"
+            },
+            {
+              "name": "Account",
+              "type": "Single Select",
+              "options": ["MT5-Demo-1", "MT5-Demo-2", "MT5-Demo-3", "OKX-Live"]
+            },
+            {
+              "name": "Pair",
+              "type": "Single Line Text"
+            },
+            {
+              "name": "Type",
+              "type": "Single Select",
+              "options": ["BUY", "SELL", "LONG", "SHORT"]
+            },
+            {
+              "name": "Entry",
+              "type": "Number",
+              "format": "Decimal (0.00000)"
+            },
+            {
+              "name": "Exit",
+              "type": "Number",
+              "format": "Decimal (0.00000)"
+            },
+            {
+              "name": "P&L",
+              "type": "Number",
+              "format": "Currency ($0.00)"
+            },
+            {
+              "name": "Pattern",
+              "type": "Single Select",
+              "options": ["Breakout", "Reversal", "Trend Following", "Range Bound", "Momentum", "Mean Reversion"]
+            },
+            {
+              "name": "Duration",
+              "type": "Duration",
+              "format": "h:mm"
+            },
+            {
+              "name": "Win",
+              "type": "Checkbox",
+              "formula": "IF({P&L} > 0, TRUE(), FALSE())"
+            },
+            {
+              "name": "Win Rate Category",
+              "type": "Formula",
+              "formula": "IF({P&L} > 100, '🚀 Big Win', IF({P&L} > 0, '✅ Win', IF({P&L} > -50, '⚠️ Small Loss', '❌ Big Loss')))"
+            }
+          ],
+          "views": [
+            {
+              "name": "All Trades",
+              "type": "Grid"
+            },
+            {
+              "name": "Winning Trades Only",
+              "type": "Grid",
+              "filter": "{Win} = TRUE()"
+            },
+            {
+              "name": "Big Wins",
+              "type": "Grid",
+              "filter": "{P&L} > 100"
+            },
+            {
+              "name": "By Pattern",
+              "type": "Grouped by Pattern"
+            },
+            {
+              "name": "Today's Trades",
+              "type": "Grid",
+              "filter": "IS_SAME({Timestamp}, TODAY(), 'day')"
+            }
+          ]
+        },
+        {
+          "table_name": "Strategy Insights",
+          "fields": [
+            {
+              "name": "Pattern",
+              "type": "Single Line Text",
+              "primary": true
+            },
+            {
+              "name": "Total Trades",
+              "type": "Rollup",
+              "rollup_table": "Trades",
+              "rollup_field": "Trade ID",
+              "rollup_function": "COUNT"
+            },
+            {
+              "name": "Winning Trades",
+              "type": "Rollup",
+              "rollup_table": "Trades",
+              "rollup_field": "Win",
+              "rollup_function": "COUNT(values=TRUE)"
+            },
+            {
+              "name": "Win Rate",
+              "type": "Formula",
+              "formula": "IF({Total Trades} > 0, ({Winning Trades} / {Total Trades}) * 100, 0)",
+              "format": "Percent"
+            },
+            {
+              "name": "Total P&L",
+              "type": "Rollup",
+              "rollup_table": "Trades",
+              "rollup_field": "P&L",
+              "rollup_function": "SUM"
+            },
+            {
+              "name": "Avg Profit",
+              "type": "Rollup",
+              "rollup_table": "Trades",
+              "rollup_field": "P&L",
+              "rollup_function": "AVERAGE(values)"
+            },
+            {
+              "name": "Recommendation",
+              "type": "Formula",
+              "formula": "IF(AND({Win Rate} > 70, {Total Trades} > 10), '🎯 HIGH PRIORITY', IF({Win Rate} > 60, '✅ GOOD', IF({Win Rate} > 50, '⚠️ MODERATE', '❌ AVOID')))"
+            },
+            {
+              "name": "Last Updated",
+              "type": "Last Modified Time"
+            }
+          ]
+        },
+        {
+          "table_name": "Performance Metrics",
+          "fields": [
+            {
+              "name": "Date/Hour",
+              "type": "Date",
+              "primary": true
+            },
+            {
+              "name": "Total Trades",
+              "type": "Number"
+            },
+            {
+              "name": "Total P&L",
+              "type": "Currency"
+            },
+            {
+              "name": "Win Rate",
+              "type": "Percent"
+            },
+            {
+              "name": "Best Account",
+              "type": "Single Line Text"
+            },
+            {
+              "name": "Best Pattern",
+              "type": "Single Line Text"
+            },
+            {
+              "name": "Performance Score",
+              "type": "Formula",
+              "formula": "({Win Rate} * 0.6) + (MIN({Total P&L} / 100, 40))",
+              "description": "Weighted score: 60% win rate + 40% profit (capped)"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "base_name": "Legal Cases",
+      "description": "Case management, document tracking, and deadline monitoring",
+      "tables": [
+        {
+          "table_name": "Cases",
+          "fields": [
+            {
+              "name": "Case Number",
+              "type": "Single Line Text",
+              "primary": true
+            },
+            {
+              "name": "Case Name",
+              "type": "Single Line Text"
+            },
+            {
+              "name": "Court",
+              "type": "Single Line Text"
+            },
+            {
+              "name": "Status",
+              "type": "Single Select",
+              "options": ["Active", "Pending", "Dismissed", "Closed", "On Hold"]
+            },
+            {
+              "name": "Filed Date",
+              "type": "Date"
+            },
+            {
+              "name": "Plaintiff",
+              "type": "Single Line Text"
+            },
+            {
+              "name": "Defendant",
+              "type": "Single Line Text"
+            },
+            {
+              "name": "Next Deadline",
+              "type": "Lookup",
+              "lookup_table": "Deadlines",
+              "lookup_field": "Due Date"
+            },
+            {
+              "name": "Days Until Deadline",
+              "type": "Formula",
+              "formula": "DATETIME_DIFF({Next Deadline}, TODAY(), 'days')"
+            },
+            {
+              "name": "Urgency",
+              "type": "Formula",
+              "formula": "IF({Days Until Deadline} < 7, '🔴 URGENT', IF({Days Until Deadline} < 14, '🟡 SOON', '🟢 OK'))"
+            }
+          ]
+        },
+        {
+          "table_name": "Documents",
+          "fields": [
+            {
+              "name": "Document Name",
+              "type": "Single Line Text",
+              "primary": true
+            },
+            {
+              "name": "Case",
+              "type": "Linked Record",
+              "linked_table": "Cases"
+            },
+            {
+              "name": "Document Type",
+              "type": "Single Select",
+              "options": ["Motion", "Brief", "Notice", "Order", "Filing", "Correspondence"]
+            },
+            {
+              "name": "Generated Date",
+              "type": "Date"
+            },
+            {
+              "name": "Status",
+              "type": "Single Select",
+              "options": ["Draft", "Ready for Filing", "Filed", "Served"]
+            },
+            {
+              "name": "File Link",
+              "type": "URL"
+            }
+          ]
+        },
+        {
+          "table_name": "Deadlines",
+          "fields": [
+            {
+              "name": "Deadline Name",
+              "type": "Single Line Text",
+              "primary": true
+            },
+            {
+              "name": "Case",
+              "type": "Linked Record",
+              "linked_table": "Cases"
+            },
+            {
+              "name": "Due Date",
+              "type": "Date"
+            },
+            {
+              "name": "Days Remaining",
+              "type": "Formula",
+              "formula": "DATETIME_DIFF({Due Date}, TODAY(), 'days')"
+            },
+            {
+              "name": "Status",
+              "type": "Single Select",
+              "options": ["Upcoming", "Completed", "Overdue"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "base_name": "Financial Operations",
+      "description": "Financial tracking, budgeting, and reporting",
+      "tables": [
+        {
+          "table_name": "Transactions",
+          "fields": [
+            {
+              "name": "Transaction ID",
+              "type": "Auto Number"
+            },
+            {
+              "name": "Date",
+              "type": "Date"
+            },
+            {
+              "name": "Description",
+              "type": "Long Text"
+            },
+            {
+              "name": "Amount",
+              "type": "Currency"
+            },
+            {
+              "name": "Type",
+              "type": "Single Select",
+              "options": ["Revenue", "Expense", "Investment", "Transfer"]
+            },
+            {
+              "name": "Category",
+              "type": "Single Select",
+              "options": ["Trading", "Legal Services", "Coaching", "Software", "Marketing", "Operations"]
+            },
+            {
+              "name": "Account",
+              "type": "Single Select",
+              "options": ["Business Checking", "Trading Account", "Savings", "OKX", "MT5"]
+            }
+          ]
+        },
+        {
+          "table_name": "Budget Summary",
+          "fields": [
+            {
+              "name": "Month",
+              "type": "Single Line Text",
+              "primary": true
+            },
+            {
+              "name": "Total Revenue",
+              "type": "Rollup",
+              "rollup_table": "Transactions",
+              "rollup_field": "Amount",
+              "rollup_function": "SUM(values WHERE Type='Revenue')"
+            },
+            {
+              "name": "Total Expenses",
+              "type": "Rollup",
+              "rollup_table": "Transactions",
+              "rollup_field": "Amount",
+              "rollup_function": "SUM(values WHERE Type='Expense')"
+            },
+            {
+              "name": "Net Income",
+              "type": "Formula",
+              "formula": "{Total Revenue} - {Total Expenses}"
+            },
+            {
+              "name": "Profit Margin",
+              "type": "Formula",
+              "formula": "IF({Total Revenue} > 0, ({Net Income} / {Total Revenue}) * 100, 0)",
+              "format": "Percent"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "base_name": "System Monitoring",
+      "description": "System health, errors, and performance tracking",
+      "tables": [
+        {
+          "table_name": "Errors",
+          "fields": [
+            {
+              "name": "Error ID",
+              "type": "Auto Number"
+            },
+            {
+              "name": "Timestamp",
+              "type": "Date"
+            },
+            {
+              "name": "System",
+              "type": "Single Select",
+              "options": ["GitHub Actions", "Zapier", "MT5", "OKX", "E2B", "Postman", "Other"]
+            },
+            {
+              "name": "Error Message",
+              "type": "Long Text"
+            },
+            {
+              "name": "Severity",
+              "type": "Single Select",
+              "options": ["LOW", "MEDIUM", "HIGH", "CRITICAL"]
+            },
+            {
+              "name": "Status",
+              "type": "Single Select",
+              "options": ["New", "Investigating", "Resolved", "Ignored"]
+            },
+            {
+              "name": "Age (hours)",
+              "type": "Formula",
+              "formula": "DATETIME_DIFF(NOW(), {Timestamp}, 'hours')"
+            }
+          ]
+        },
+        {
+          "table_name": "Uptime",
+          "fields": [
+            {
+              "name": "Check Time",
+              "type": "Date",
+              "primary": true
+            },
+            {
+              "name": "GitHub Actions",
+              "type": "Single Select",
+              "options": ["UP", "DOWN", "DEGRADED"]
+            },
+            {
+              "name": "Zapier",
+              "type": "Single Select",
+              "options": ["UP", "DOWN", "DEGRADED"]
+            },
+            {
+              "name": "OKX API",
+              "type": "Single Select",
+              "options": ["UP", "DOWN", "DEGRADED"]
+            },
+            {
+              "name": "E2B",
+              "type": "Single Select",
+              "options": ["UP", "DOWN", "DEGRADED"]
+            },
+            {
+              "name": "Overall Status",
+              "type": "Formula",
+              "formula": "IF(AND({GitHub Actions}='UP', {Zapier}='UP', {OKX API}='UP'), '✅ ALL SYSTEMS GO', '⚠️ ISSUES DETECTED')"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "base_name": "Agent 5.0 Operations",
+      "description": "Agent task delegation and monitoring",
+      "tables": [
+        {
+          "table_name": "Tasks",
+          "fields": [
+            {
+              "name": "Task ID",
+              "type": "Auto Number"
+            },
+            {
+              "name": "Task Name",
+              "type": "Single Line Text"
+            },
+            {
+              "name": "Division",
+              "type": "Single Select",
+              "options": ["Trading", "Legal", "Financial", "DevOps", "Data Science", "QA Testing"]
+            },
+            {
+              "name": "Assigned Agent",
+              "type": "Single Line Text"
+            },
+            {
+              "name": "Status",
+              "type": "Single Select",
+              "options": ["Pending", "In Progress", "Completed", "Blocked"]
+            },
+            {
+              "name": "Priority",
+              "type": "Single Select",
+              "options": ["LOW", "MEDIUM", "HIGH", "URGENT"]
+            },
+            {
+              "name": "Created",
+              "type": "Created Time"
+            },
+            {
+              "name": "Due Date",
+              "type": "Date"
+            },
+            {
+              "name": "Completed",
+              "type": "Date"
+            },
+            {
+              "name": "Duration",
+              "type": "Formula",
+              "formula": "IF({Completed}, DATETIME_DIFF({Completed}, {Created}, 'hours'), DATETIME_DIFF(NOW(), {Created}, 'hours'))"
+            }
+          ]
+        },
+        {
+          "table_name": "Agent Performance",
+          "fields": [
+            {
+              "name": "Agent Name",
+              "type": "Single Line Text",
+              "primary": true
+            },
+            {
+              "name": "Division",
+              "type": "Single Line Text"
+            },
+            {
+              "name": "Tasks Completed",
+              "type": "Rollup",
+              "rollup_table": "Tasks",
+              "rollup_field": "Task ID",
+              "rollup_function": "COUNT(values WHERE Status='Completed')"
+            },
+            {
+              "name": "Avg Completion Time",
+              "type": "Rollup",
+              "rollup_table": "Tasks",
+              "rollup_field": "Duration",
+              "rollup_function": "AVERAGE"
+            },
+            {
+              "name": "Performance Rating",
+              "type": "Formula",
+              "formula": "IF({Tasks Completed} > 50, '⭐⭐⭐⭐⭐', IF({Tasks Completed} > 30, '⭐⭐⭐⭐', IF({Tasks Completed} > 10, '⭐⭐⭐', '⭐⭐')))"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "base_name": "Testing",
+      "description": "API testing, integration testing, and QA tracking",
+      "tables": [
+        {
+          "table_name": "Test Runs",
+          "fields": [
+            {
+              "name": "Run ID",
+              "type": "Auto Number"
+            },
+            {
+              "name": "Test Name",
+              "type": "Single Line Text"
+            },
+            {
+              "name": "Started At",
+              "type": "Date"
+            },
+            {
+              "name": "Completed At",
+              "type": "Date"
+            },
+            {
+              "name": "Status",
+              "type": "Single Select",
+              "options": ["Running", "Passed", "Failed", "Skipped"]
+            },
+            {
+              "name": "Pass Rate",
+              "type": "Percent"
+            },
+            {
+              "name": "Total Tests",
+              "type": "Number"
+            },
+            {
+              "name": "Passed",
+              "type": "Number"
+            },
+            {
+              "name": "Failed",
+              "type": "Number"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "setup_instructions": {
+    "step_1": "Create Airtable account at https://airtable.com",
+    "step_2": "Create a new Workspace called 'Private-Claude Complete System'",
+    "step_3": "For each base in the schema, create a new base",
+    "step_4": "For each table, create the fields exactly as specified",
+    "step_5": "Set up formulas, rollups, and lookups as defined",
+    "step_6": "Create views for easy data filtering",
+    "step_7": "Get Airtable API key from https://airtable.com/account",
+    "step_8": "Update Zapier workflows with Airtable base IDs"
+  }
+}

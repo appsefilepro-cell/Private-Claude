@@ -1,0 +1,12 @@
+{
+  "agent_id": "agent_risk_mgmt",
+  "agent_name": "Risk Management Specialist",
+  "role": "Risk Management Specialist",
+  "status": "completed",
+  "tasks_completed": 50,
+  "tasks_failed": 0,
+  "loop_count": 10,
+  "start_time": "2025-12-25T05:49:24.983177",
+  "last_update": "2025-12-25T05:49:41.227747",
+  "details": {}
+}

@@ -1,0 +1,54 @@
+═══════════════════════════════════════════════════════════════
+                    START HERE - SIMPLE STEPS
+═══════════════════════════════════════════════════════════════
+
+YOU DON'T NEED TO KNOW CODING! Just follow these 3 steps:
+
+STEP 1: Set your OKX passphrase
+────────────────────────────────
+1. Open file: OKX_TRADING_BOT_CONFIG.json
+2. Find line 6: "passphrase": "SET_YOUR_PASSPHRASE_HERE"
+3. Replace with your actual OKX API passphrase
+4. Save the file
+
+STEP 2: Run the activation script
+──────────────────────────────────
+Open Terminal and type:
+
+   cd Private-Claude
+   ./RUN_THIS_NOW.sh
+
+That's it! Everything starts automatically.
+
+STEP 3: Watch it work
+─────────────────────
+The script will show you what's happening.
+
+To see live trading:
+   tail -f logs/trading/mt5_account1.log
+
+To see Agent 5.0:
+   tail -f logs/agents/agent_5x.log
+
+To stop everything:
+   pkill -f python3
+
+═══════════════════════════════════════════════════════════════
+
+WHAT'S RUNNING:
+✅ MetaTrader 5 - 3 accounts trading 40+ pairs each
+✅ OKX - Bitcoin futures trading
+✅ Agent 5.0 - 176 AI agents working
+✅ GitHub Actions - Running every 15 minutes
+
+NOTIFICATIONS:
+Everything logs to files in logs/ folder.
+Check logs/system/monitor.log for hourly updates.
+
+═══════════════════════════════════════════════════════════════
+
+That's it! No coding needed.
+
+Everything is automated and running 24/7.
+
+═══════════════════════════════════════════════════════════════

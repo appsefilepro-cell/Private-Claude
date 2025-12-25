@@ -1,0 +1,265 @@
+{
+  "test_scenarios": {
+    "okx_trade_test": {
+      "description": "Sample OKX trade data for testing",
+      "data": {
+        "timestamp": "2025-12-25T10:30:00Z",
+        "pair": "BTC/USDT",
+        "side": "BUY",
+        "amount": "0.05",
+        "price": "45000.00",
+        "pattern": "Golden Cross Detected",
+        "pnl": "+$250.00",
+        "test_mode": true
+      },
+      "expected_outputs": {
+        "email": "Should receive email at terobinsonwy@gmail.com with trade details",
+        "google_sheets": "New row added to 'OKX Trading Log' sheet",
+        "slack": "Message posted to #trading-alerts channel"
+      }
+    },
+    "error_alert_test": {
+      "description": "Sample system error for testing",
+      "data": {
+        "timestamp": "2025-12-25T10:35:00Z",
+        "system": "Trading Bot",
+        "error_message": "TEST ERROR - API connection timeout (this is just a test)",
+        "severity": "MEDIUM",
+        "test_mode": true
+      },
+      "expected_outputs": {
+        "email": "Urgent email notification received",
+        "slack": "Alert posted to #system-status",
+        "airtable": "New error record created in System Monitoring base"
+      }
+    },
+    "legal_document_test": {
+      "description": "Sample legal document generation request",
+      "data": {
+        "case_number": "TEST-1241511",
+        "court": "Test County - Test Court",
+        "plaintiff": "TEST PLAINTIFF LLC",
+        "defendant": "TEST DEFENDANT",
+        "document_type": "Test Notice of Dismissal",
+        "date": "2025-12-25",
+        "test_mode": true
+      },
+      "expected_outputs": {
+        "google_docs": "Document created from template",
+        "email": "Email with PDF attachment sent",
+        "google_drive": "File saved to Legal Automation folder"
+      }
+    },
+    "test_completion_test": {
+      "description": "Sample test completion notification",
+      "data": {
+        "test_id": "TEST-001",
+        "test_name": "Zapier Integration Test Suite",
+        "timestamp": "2025-12-25T10:40:00Z",
+        "results": "All 10 tests passed successfully",
+        "pass_rate": "100",
+        "failed_tests": "0",
+        "total_tests": "10",
+        "test_mode": true
+      },
+      "expected_outputs": {
+        "email": "Test results email sent",
+        "slack": "Results posted to #test-results",
+        "airtable": "Test run record updated"
+      }
+    },
+    "daily_report_test": {
+      "description": "Sample daily trading report data",
+      "data": {
+        "date": "2025-12-25",
+        "total_trades": "15",
+        "total_pnl": "+$1,250.00",
+        "win_rate": "73.3",
+        "best_trade": "+$450.00 (ETH/USDT)",
+        "worst_trade": "-$125.00 (BTC/USDT)",
+        "total_volume": "$67,500.00",
+        "test_mode": true
+      },
+      "expected_outputs": {
+        "email": "Daily report email with summary",
+        "slack": "Report posted to #trading-alerts"
+      }
+    }
+  },
+  "webhook_curl_commands": {
+    "okx_trade": "curl -X POST \"YOUR_WEBHOOK_URL\" -H \"Content-Type: application/json\" -d '{\"timestamp\":\"2025-12-25T10:30:00Z\",\"pair\":\"BTC/USDT\",\"side\":\"BUY\",\"amount\":\"0.05\",\"price\":\"45000.00\",\"pattern\":\"Golden Cross\",\"pnl\":\"+$250.00\"}'",
+    "error_alert": "curl -X POST \"YOUR_WEBHOOK_URL\" -H \"Content-Type: application/json\" -d '{\"timestamp\":\"2025-12-25T10:35:00Z\",\"system\":\"Trading Bot\",\"error_message\":\"Test Error\",\"severity\":\"MEDIUM\"}'",
+    "legal_doc": "curl -X POST \"YOUR_WEBHOOK_URL\" -H \"Content-Type: application/json\" -d '{\"case_number\":\"TEST-123\",\"court\":\"Test Court\",\"plaintiff\":\"Test Plaintiff\",\"defendant\":\"Test Defendant\",\"date\":\"2025-12-25\"}'",
+    "test_complete": "curl -X POST \"YOUR_WEBHOOK_URL\" -H \"Content-Type: application/json\" -d '{\"test_id\":\"TEST-001\",\"test_name\":\"Integration Test\",\"timestamp\":\"2025-12-25T10:40:00Z\",\"results\":\"All tests passed\",\"pass_rate\":\"100\"}'"
+  },
+  "sample_google_sheets_data": {
+    "okx_trading_log": {
+      "headers": ["Timestamp", "Pair", "Side", "Amount", "Price", "Pattern", "P&L"],
+      "sample_rows": [
+        ["2025-12-25 10:30:00", "BTC/USDT", "BUY", "0.05", "$45,000.00", "Golden Cross", "+$250.00"],
+        ["2025-12-25 11:15:00", "ETH/USDT", "SELL", "1.5", "$3,200.00", "RSI Overbought", "+$450.00"],
+        ["2025-12-25 14:20:00", "BTC/USDT", "BUY", "0.03", "$45,500.00", "Moving Average Cross", "+$175.00"],
+        ["2025-12-25 16:45:00", "SOL/USDT", "SELL", "10", "$105.00", "Breakout Pattern", "+$320.00"],
+        ["2025-12-25 18:30:00", "BTC/USDT", "SELL", "0.04", "$45,200.00", "Take Profit", "-$125.00"]
+      ]
+    }
+  },
+  "verification_checklist": [
+    {
+      "step": 1,
+      "action": "Send test webhook",
+      "verification": "Check Zapier History for green checkmark",
+      "url": "https://zapier.com/app/history"
+    },
+    {
+      "step": 2,
+      "action": "Verify email received",
+      "verification": "Check inbox at terobinsonwy@gmail.com",
+      "expected": "Email with test data within 1-2 minutes"
+    },
+    {
+      "step": 3,
+      "action": "Check Google Sheets",
+      "verification": "Open 'OKX Trading Log' sheet",
+      "expected": "New row with test trade data"
+    },
+    {
+      "step": 4,
+      "action": "Check Slack",
+      "verification": "Look in #trading-alerts channel",
+      "expected": "Message with trade details"
+    },
+    {
+      "step": 5,
+      "action": "Monitor Zap status",
+      "verification": "All Zaps show green 'ON' status",
+      "url": "https://zapier.com/app/zaps"
+    }
+  ],
+  "troubleshooting_tests": {
+    "webhook_not_working": {
+      "test": "Send simple ping",
+      "curl": "curl -X POST \"YOUR_WEBHOOK_URL\" -d '{\"ping\":\"test\"}'",
+      "expected": "200 OK response",
+      "fix_if_fails": "1. Check webhook URL is correct\n2. Verify Zap is ON\n3. Recreate webhook trigger"
+    },
+    "email_not_received": {
+      "test": "Check email manually in Zap",
+      "steps": [
+        "Go to Zapier Zap editor",
+        "Click 'Test' on Gmail action",
+        "Check spam folder"
+      ],
+      "fix_if_fails": "1. Reconnect Gmail account\n2. Check email address is correct\n3. Verify Gmail account has permissions"
+    },
+    "google_sheets_not_updating": {
+      "test": "Manual Google Sheets test",
+      "steps": [
+        "Open Zap editor",
+        "Test Google Sheets action",
+        "Check if sheet exists and is accessible"
+      ],
+      "fix_if_fails": "1. Reconnect Google Sheets\n2. Verify sheet name matches exactly\n3. Check column headers match"
+    }
+  },
+  "performance_benchmarks": {
+    "webhook_response_time": "< 2 seconds",
+    "email_delivery": "1-3 minutes",
+    "google_sheets_update": "< 1 minute",
+    "slack_notification": "< 30 seconds",
+    "daily_task_limit_free": 100,
+    "daily_task_limit_starter": 750
+  },
+  "realistic_trading_data": [
+    {
+      "timestamp": "2025-12-25 09:15:00",
+      "pair": "BTC/USDT",
+      "side": "BUY",
+      "amount": "0.025",
+      "price": "44,850.00",
+      "pattern": "Support Bounce",
+      "pnl": "+$187.50"
+    },
+    {
+      "timestamp": "2025-12-25 09:45:00",
+      "pair": "ETH/USDT",
+      "side": "BUY",
+      "amount": "0.8",
+      "price": "3,185.00",
+      "pattern": "MACD Cross",
+      "pnl": "+$96.00"
+    },
+    {
+      "timestamp": "2025-12-25 10:30:00",
+      "pair": "BTC/USDT",
+      "side": "SELL",
+      "amount": "0.025",
+      "price": "45,350.00",
+      "pattern": "Take Profit",
+      "pnl": "+$12.50"
+    },
+    {
+      "timestamp": "2025-12-25 11:20:00",
+      "pair": "SOL/USDT",
+      "side": "BUY",
+      "amount": "5.0",
+      "price": "104.20",
+      "pattern": "Breakout",
+      "pnl": "+$26.00"
+    },
+    {
+      "timestamp": "2025-12-25 12:15:00",
+      "pair": "ETH/USDT",
+      "side": "SELL",
+      "amount": "0.8",
+      "price": "3,305.00",
+      "pattern": "Resistance",
+      "pnl": "+$96.00"
+    },
+    {
+      "timestamp": "2025-12-25 13:45:00",
+      "pair": "BTC/USDT",
+      "side": "BUY",
+      "amount": "0.03",
+      "price": "45,120.00",
+      "pattern": "Dip Buy",
+      "pnl": "-$45.00"
+    },
+    {
+      "timestamp": "2025-12-25 14:30:00",
+      "pair": "SOL/USDT",
+      "side": "SELL",
+      "amount": "5.0",
+      "price": "106.40",
+      "pattern": "Profit Target",
+      "pnl": "+$11.00"
+    },
+    {
+      "timestamp": "2025-12-25 15:20:00",
+      "pair": "BTC/USDT",
+      "side": "SELL",
+      "amount": "0.03",
+      "price": "45,450.00",
+      "pattern": "Swing High",
+      "pnl": "+$9.90"
+    },
+    {
+      "timestamp": "2025-12-25 16:10:00",
+      "pair": "ETH/USDT",
+      "side": "BUY",
+      "amount": "1.2",
+      "price": "3,280.00",
+      "pattern": "Pullback",
+      "pnl": "+$147.60"
+    },
+    {
+      "timestamp": "2025-12-25 17:00:00",
+      "pair": "ETH/USDT",
+      "side": "SELL",
+      "amount": "1.2",
+      "price": "3,403.00",
+      "pattern": "Day High",
+      "pnl": "+$147.60"
+    }
+  ]
+}

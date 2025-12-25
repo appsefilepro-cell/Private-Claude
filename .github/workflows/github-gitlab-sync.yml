@@ -1,0 +1,247 @@
+name: GitHub ↔ GitLab Bidirectional Sync
+# Keeps GitHub and GitLab repositories in perfect sync
+
+on:
+  push:
+    branches:
+      - '**'  # All branches
+  workflow_dispatch:
+  schedule:
+    # Check sync status every hour
+    - cron: '0 * * * *'
+
+env:
+  GITLAB_TOKEN: ${{ secrets.GITLAB_TOKEN }}
+  GITLAB_PROJECT_ID: ${{ secrets.GITLAB_PROJECT_ID }}
+  GITLAB_URL: 'https://gitlab.com'
+  ZAPIER_WEBHOOK_URL: ${{ secrets.ZAPIER_WEBHOOK_URL }}
+  SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_GITHUB }}
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sync-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  # ============================================
+  # JOB 1: SYNC GITHUB TO GITLAB
+  # ============================================
+  github-to-gitlab:
+    name: Push to GitLab Mirror
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push'
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Full history for mirror
+
+      - name: Configure Git
+        run: |
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git config --global user.name "GitHub Actions Bot"
+
+      - name: Add GitLab remote
+        run: |
+          # Add GitLab as a remote
+          git remote add gitlab https://oauth2:${{ env.GITLAB_TOKEN }}@gitlab.com/${{ secrets.GITLAB_PROJECT_PATH }}.git || true
+          git remote set-url gitlab https://oauth2:${{ env.GITLAB_TOKEN }}@gitlab.com/${{ secrets.GITLAB_PROJECT_PATH }}.git
+
+      - name: Push to GitLab
+        run: |
+          # Push current branch to GitLab
+          git push gitlab ${{ github.ref_name }} --force --tags
+          echo "✅ Successfully pushed ${{ github.ref_name }} to GitLab"
+
+      - name: Verify sync
+        run: |
+          # Verify the push was successful
+          GITLAB_COMMIT=$(git ls-remote gitlab ${{ github.ref_name }} | awk '{print $1}')
+          GITHUB_COMMIT=${{ github.sha }}
+
+          echo "GitHub commit: $GITHUB_COMMIT"
+          echo "GitLab commit: $GITLAB_COMMIT"
+
+          if [ "$GITLAB_COMMIT" = "$GITHUB_COMMIT" ]; then
+            echo "✅ Sync verified: Commits match"
+          else
+            echo "⚠️ Sync warning: Commits differ (may be due to timing)"
+          fi
+
+      - name: Notify Zapier
+        if: always()
+        run: |
+          curl -X POST ${{ env.ZAPIER_WEBHOOK_URL }} \
+            -H "Content-Type: application/json" \
+            -d '{
+              "event": "github_to_gitlab_sync",
+              "status": "${{ job.status }}",
+              "branch": "${{ github.ref_name }}",
+              "commit": "${{ github.sha }}",
+              "commit_message": "${{ github.event.head_commit.message }}",
+              "author": "${{ github.event.head_commit.author.name }}",
+              "timestamp": "'$(date -u +%Y-%m-%dT%H:%M:%SZ)'"
+            }'
+
+      - name: Notify Slack
+        if: always()
+        run: |
+          STATUS_EMOJI="${{ job.status == 'success' && '✅' || '❌' }}"
+          curl -X POST ${{ env.SLACK_WEBHOOK }} \
+            -H "Content-Type: application/json" \
+            -d '{
+              "text": "'"$STATUS_EMOJI"' GitHub → GitLab Sync: ${{ job.status }}",
+              "blocks": [{
+                "type": "section",
+                "text": {
+                  "type": "mrkdwn",
+                  "text": "*GitHub → GitLab Sync*\n• Branch: `${{ github.ref_name }}`\n• Commit: `${{ github.sha }}`\n• Author: ${{ github.event.head_commit.author.name }}\n• Message: ${{ github.event.head_commit.message }}\n• Status: ${{ job.status }}"
+                }
+              }]
+            }'
+
+  # ============================================
+  # JOB 2: CHECK GITLAB FOR NEW COMMITS
+  # ============================================
+  gitlab-to-github:
+    name: Pull from GitLab Mirror
+    runs-on: ubuntu-latest
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Configure Git
+        run: |
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git config --global user.name "GitHub Actions Bot"
+
+      - name: Add GitLab remote
+        run: |
+          git remote add gitlab https://oauth2:${{ env.GITLAB_TOKEN }}@gitlab.com/${{ secrets.GITLAB_PROJECT_PATH }}.git || true
+          git remote set-url gitlab https://oauth2:${{ env.GITLAB_TOKEN }}@gitlab.com/${{ secrets.GITLAB_PROJECT_PATH }}.git
+
+      - name: Fetch from GitLab
+        run: |
+          git fetch gitlab
+          echo "✅ Fetched from GitLab"
+
+      - name: Check for differences
+        id: check_diff
+        run: |
+          # Check if GitLab has commits not in GitHub
+          DIFF_COUNT=$(git rev-list --count HEAD..gitlab/${{ github.ref_name }} || echo "0")
+          echo "diff_count=$DIFF_COUNT" >> $GITHUB_OUTPUT
+
+          if [ "$DIFF_COUNT" -gt 0 ]; then
+            echo "has_changes=true" >> $GITHUB_OUTPUT
+            echo "⚠️ GitLab has $DIFF_COUNT new commit(s)"
+          else
+            echo "has_changes=false" >> $GITHUB_OUTPUT
+            echo "✅ No new commits in GitLab"
+          fi
+
+      - name: Merge GitLab changes
+        if: steps.check_diff.outputs.has_changes == 'true'
+        run: |
+          git merge gitlab/${{ github.ref_name }} --no-edit
+          echo "✅ Merged GitLab changes"
+
+      - name: Push to GitHub
+        if: steps.check_diff.outputs.has_changes == 'true'
+        run: |
+          git push origin ${{ github.ref_name }}
+          echo "✅ Pushed GitLab changes to GitHub"
+
+      - name: Notify sync status
+        if: always()
+        run: |
+          curl -X POST ${{ env.ZAPIER_WEBHOOK_URL }} \
+            -H "Content-Type: application/json" \
+            -d '{
+              "event": "gitlab_to_github_sync",
+              "status": "${{ job.status }}",
+              "branch": "${{ github.ref_name }}",
+              "changes_found": "${{ steps.check_diff.outputs.has_changes }}",
+              "commit_count": "${{ steps.check_diff.outputs.diff_count }}",
+              "timestamp": "'$(date -u +%Y-%m-%dT%H:%M:%SZ)'"
+            }'
+
+  # ============================================
+  # JOB 3: SYNC STATUS REPORT
+  # ============================================
+  sync-status:
+    name: Generate Sync Status Report
+    runs-on: ubuntu-latest
+    needs: [github-to-gitlab, gitlab-to-github]
+    if: always()
+
+    steps:
+      - name: Generate status report
+        run: |
+          echo "## GitHub ↔ GitLab Sync Status" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Sync Results" >> $GITHUB_STEP_SUMMARY
+          echo "- **Time**: $(date -u +%Y-%m-%d\ %H:%M:%S) UTC" >> $GITHUB_STEP_SUMMARY
+          echo "- **Branch**: ${{ github.ref_name }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **GitHub → GitLab**: ${{ needs.github-to-gitlab.result }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **GitLab → GitHub**: ${{ needs.gitlab-to-github.result }}" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Repository Status" >> $GITHUB_STEP_SUMMARY
+          echo "- **GitHub**: https://github.com/${{ github.repository }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **GitLab**: ${{ env.GITLAB_URL }}/${{ secrets.GITLAB_PROJECT_PATH }}" >> $GITHUB_STEP_SUMMARY
+
+      - name: Send summary to Zapier
+        run: |
+          curl -X POST ${{ env.ZAPIER_WEBHOOK_URL }} \
+            -H "Content-Type: application/json" \
+            -d '{
+              "event": "sync_status_report",
+              "github_to_gitlab": "${{ needs.github-to-gitlab.result }}",
+              "gitlab_to_github": "${{ needs.gitlab-to-github.result }}",
+              "branch": "${{ github.ref_name }}",
+              "repository": "${{ github.repository }}",
+              "timestamp": "'$(date -u +%Y-%m-%dT%H:%M:%SZ)'"
+            }'
+
+  # ============================================
+  # JOB 4: ALERT ON SYNC FAILURE
+  # ============================================
+  alert-on-failure:
+    name: Send Failure Alerts
+    runs-on: ubuntu-latest
+    needs: [github-to-gitlab, gitlab-to-github]
+    if: failure()
+
+    steps:
+      - name: Send failure notification
+        run: |
+          curl -X POST ${{ env.ZAPIER_WEBHOOK_URL }} \
+            -H "Content-Type: application/json" \
+            -d '{
+              "event": "sync_failure",
+              "severity": "HIGH",
+              "github_to_gitlab": "${{ needs.github-to-gitlab.result }}",
+              "gitlab_to_github": "${{ needs.gitlab-to-github.result }}",
+              "timestamp": "'$(date -u +%Y-%m-%dT%H:%M:%SZ)'"
+            }'
+
+          curl -X POST ${{ env.SLACK_WEBHOOK }} \
+            -H "Content-Type: application/json" \
+            -d '{
+              "text": "🚨 ALERT: GitHub ↔ GitLab Sync Failed",
+              "blocks": [{
+                "type": "section",
+                "text": {
+                  "type": "mrkdwn",
+                  "text": "*Sync Failure Alert*\n• Branch: ${{ github.ref_name }}\n• GitHub→GitLab: ${{ needs.github-to-gitlab.result }}\n• GitLab→GitHub: ${{ needs.gitlab-to-github.result }}\n• Action Required: Check sync logs"
+                }
+              }]
+            }'

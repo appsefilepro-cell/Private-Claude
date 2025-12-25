@@ -1,0 +1,12 @@
+{
+  "agent_id": "agent_trading_specialist",
+  "agent_name": "Trading Systems Specialist",
+  "role": "Trading Systems Specialist",
+  "status": "completed",
+  "tasks_completed": 50,
+  "tasks_failed": 0,
+  "loop_count": 10,
+  "start_time": "2025-12-25T05:49:24.960250",
+  "last_update": "2025-12-25T05:49:44.127773",
+  "details": {}
+}

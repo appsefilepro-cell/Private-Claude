@@ -1,0 +1,787 @@
+{
+  "version": "2.0",
+  "description": "Complete 24-Hour Trading Marathon + Agent 5.0 Automation",
+  "total_workflows": 18,
+  "workflows": [
+    {
+      "id": 1,
+      "name": "MetaTrader 5 Demo 1 - Trade Logger",
+      "description": "Log every trade from MT5 Account 5044023923",
+      "trigger": {
+        "app": "Webhooks by Zapier",
+        "event": "Catch Hook",
+        "webhook_url": "CREATE_IN_ZAPIER",
+        "webhook_name": "mt5_demo_1_trades"
+      },
+      "actions": [
+        {
+          "step": 1,
+          "app": "Google Sheets",
+          "action": "Create Spreadsheet Row",
+          "spreadsheet": "MT5 Trading Log - Demo 1",
+          "worksheet": "Trades",
+          "data": {
+            "Timestamp": "{{timestamp}}",
+            "Account": "5044023923",
+            "Pair": "{{pair}}",
+            "Type": "{{type}}",
+            "Lots": "{{lots}}",
+            "Entry Price": "{{entry_price}}",
+            "Exit Price": "{{exit_price}}",
+            "Stop Loss": "{{stop_loss}}",
+            "Take Profit": "{{take_profit}}",
+            "Profit/Loss": "{{pnl}}",
+            "Pattern": "{{pattern}}",
+            "Duration": "{{duration}}"
+          }
+        },
+        {
+          "step": 2,
+          "app": "Airtable",
+          "action": "Create Record",
+          "base": "Trading Machine Learning",
+          "table": "Trades",
+          "fields": {
+            "Account": "MT5-Demo-1",
+            "Pair": "{{pair}}",
+            "Entry": "{{entry_price}}",
+            "Exit": "{{exit_price}}",
+            "P&L": "{{pnl}}",
+            "Pattern": "{{pattern}}",
+            "Timestamp": "{{timestamp}}",
+            "Win": "={{pnl}} > 0"
+          }
+        },
+        {
+          "step": 3,
+          "app": "Filter by Zapier",
+          "action": "Only continue if...",
+          "condition": "P&L > 0",
+          "note": "Only notify on winning trades"
+        },
+        {
+          "step": 4,
+          "app": "Slack",
+          "action": "Send Channel Message",
+          "channel": "#trading-alerts",
+          "message": "🎯 MT5 Demo 1 WIN: {{pair}} | {{type}} | P&L: ${{pnl}} | Pattern: {{pattern}}"
+        },
+        {
+          "step": 5,
+          "app": "Paths by Zapier",
+          "paths": [
+            {
+              "path": "A",
+              "condition": "{{pnl}} > 100",
+              "action": {
+                "app": "Email",
+                "action": "Send Email",
+                "to": "terobinsonwy@gmail.com",
+                "subject": "🚀 BIG WIN on MT5 Demo 1: ${{pnl}}",
+                "body": "Excellent trade on {{pair}}!\n\nProfit: ${{pnl}}\nPattern: {{pattern}}\nEntry: {{entry_price}}\nExit: {{exit_price}}"
+              }
+            },
+            {
+              "path": "B",
+              "condition": "{{pnl}} <= 100",
+              "action": {
+                "app": "Delay by Zapier",
+                "delay": "1 minute",
+                "note": "Rate limit notifications"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "MetaTrader 5 Demo 2 - Trade Logger",
+      "description": "Log every trade from MT5 Account 100459584",
+      "trigger": {
+        "app": "Webhooks by Zapier",
+        "event": "Catch Hook",
+        "webhook_url": "CREATE_IN_ZAPIER",
+        "webhook_name": "mt5_demo_2_trades"
+      },
+      "actions": [
+        {
+          "app": "Google Sheets",
+          "action": "Create Spreadsheet Row",
+          "spreadsheet": "MT5 Trading Log - Demo 2",
+          "worksheet": "Trades"
+        },
+        {
+          "app": "Airtable",
+          "action": "Create Record",
+          "base": "Trading Machine Learning",
+          "table": "Trades"
+        },
+        {
+          "app": "Slack",
+          "action": "Send Channel Message",
+          "channel": "#trading-alerts"
+        }
+      ],
+      "note": "Same structure as Demo 1, different account"
+    },
+    {
+      "id": 3,
+      "name": "MetaTrader 5 Demo 3 - Trade Logger",
+      "description": "Log every trade from MT5 Account 5044025969",
+      "trigger": {
+        "app": "Webhooks by Zapier",
+        "event": "Catch Hook",
+        "webhook_url": "CREATE_IN_ZAPIER",
+        "webhook_name": "mt5_demo_3_trades"
+      },
+      "actions": [
+        {
+          "app": "Google Sheets",
+          "action": "Create Spreadsheet Row",
+          "spreadsheet": "MT5 Trading Log - Demo 3",
+          "worksheet": "Trades"
+        },
+        {
+          "app": "Airtable",
+          "action": "Create Record",
+          "base": "Trading Machine Learning",
+          "table": "Trades"
+        },
+        {
+          "app": "Slack",
+          "action": "Send Channel Message",
+          "channel": "#trading-alerts"
+        }
+      ],
+      "note": "Same structure as Demo 1, different account"
+    },
+    {
+      "id": 4,
+      "name": "OKX Live - Bitcoin Futures Logger",
+      "description": "Log every OKX Bitcoin futures trade",
+      "trigger": {
+        "app": "Webhooks by Zapier",
+        "event": "Catch Hook",
+        "webhook_url": "CREATE_IN_ZAPIER",
+        "webhook_name": "okx_btc_trades"
+      },
+      "actions": [
+        {
+          "app": "Google Sheets",
+          "action": "Create Spreadsheet Row",
+          "spreadsheet": "OKX Trading Log - LIVE",
+          "worksheet": "Bitcoin Futures"
+        },
+        {
+          "app": "Airtable",
+          "action": "Create Record",
+          "base": "Trading Machine Learning",
+          "table": "Trades"
+        },
+        {
+          "app": "Slack",
+          "action": "Send Channel Message",
+          "channel": "#trading-alerts",
+          "message": "💰 OKX LIVE: {{pair}} | {{side}} | {{amount}} BTC @ ${{price}} | P&L: ${{pnl}}"
+        },
+        {
+          "app": "Email",
+          "action": "Send Email",
+          "to": "terobinsonwy@gmail.com",
+          "subject": "OKX LIVE Trade: {{pair}}",
+          "body": "Live trade executed on OKX\n\nPair: {{pair}}\nSide: {{side}}\nAmount: {{amount}} BTC\nPrice: ${{price}}\nP&L: ${{pnl}}\nTime: {{timestamp}}"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "name": "Machine Learning - Pattern Detection",
+      "description": "Analyze winning trades and detect patterns",
+      "trigger": {
+        "app": "Airtable",
+        "event": "New Record",
+        "base": "Trading Machine Learning",
+        "table": "Trades",
+        "view": "Winning Trades Only"
+      },
+      "actions": [
+        {
+          "step": 1,
+          "app": "Airtable",
+          "action": "Find Records",
+          "base": "Trading Machine Learning",
+          "table": "Trades",
+          "filter": "AND(Pattern = '{{pattern}}', Win = TRUE())",
+          "note": "Find all wins with same pattern"
+        },
+        {
+          "step": 2,
+          "app": "Formatter by Zapier",
+          "action": "Numbers",
+          "operation": "Spreadsheet-Style Formula",
+          "formula": "=AVERAGE(P&L)",
+          "note": "Calculate average profit for pattern"
+        },
+        {
+          "step": 3,
+          "app": "Formatter by Zapier",
+          "action": "Numbers",
+          "operation": "Perform Math Operation",
+          "expression": "({{winning_trades}} / {{total_trades}}) * 100",
+          "note": "Calculate win rate for pattern"
+        },
+        {
+          "step": 4,
+          "app": "Airtable",
+          "action": "Update Record",
+          "base": "Trading Machine Learning",
+          "table": "Strategy Insights",
+          "fields": {
+            "Pattern": "{{pattern}}",
+            "Win Rate": "{{win_rate}}",
+            "Avg Profit": "{{avg_profit}}",
+            "Total Trades": "{{total_trades}}",
+            "Last Updated": "{{timestamp}}"
+          }
+        },
+        {
+          "step": 5,
+          "app": "Filter by Zapier",
+          "condition": "Win Rate > 70",
+          "note": "Only alert on high-probability patterns"
+        },
+        {
+          "step": 6,
+          "app": "Slack",
+          "action": "Send Channel Message",
+          "channel": "#ai-communication",
+          "message": "🤖 HIGH-PROBABILITY PATTERN DETECTED!\n\nPattern: {{pattern}}\nWin Rate: {{win_rate}}%\nAvg Profit: ${{avg_profit}}\nTotal Trades: {{total_trades}}\n\n✅ Recommend prioritizing this pattern!"
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "name": "Quantum Trading - Parallel Execution Every 15 Minutes",
+      "description": "Execute trades in parallel across all accounts",
+      "trigger": {
+        "app": "Schedule by Zapier",
+        "event": "Every 15 Minutes"
+      },
+      "actions": [
+        {
+          "step": 1,
+          "app": "Paths by Zapier",
+          "note": "Split into parallel execution paths",
+          "paths": [
+            {
+              "path": "A - MT5 Demo 1",
+              "action": {
+                "app": "Webhooks by Zapier",
+                "method": "POST",
+                "url": "https://api.github.com/repos/appsefilepro-cell/Private-Claude/dispatches",
+                "headers": {
+                  "Authorization": "Bearer {{github_token}}",
+                  "Accept": "application/vnd.github.v3+json"
+                },
+                "data": {
+                  "event_type": "trigger_mt5_demo_1",
+                  "client_payload": {
+                    "account": "5044023923",
+                    "action": "analyze_and_trade"
+                  }
+                }
+              }
+            },
+            {
+              "path": "B - MT5 Demo 2",
+              "action": {
+                "app": "Webhooks by Zapier",
+                "method": "POST",
+                "url": "https://api.github.com/repos/appsefilepro-cell/Private-Claude/dispatches",
+                "data": {
+                  "event_type": "trigger_mt5_demo_2",
+                  "client_payload": {
+                    "account": "100459584",
+                    "action": "analyze_and_trade"
+                  }
+                }
+              }
+            },
+            {
+              "path": "C - MT5 Demo 3",
+              "action": {
+                "app": "Webhooks by Zapier",
+                "method": "POST",
+                "url": "https://api.github.com/repos/appsefilepro-cell/Private-Claude/dispatches",
+                "data": {
+                  "event_type": "trigger_mt5_demo_3",
+                  "client_payload": {
+                    "account": "5044025969",
+                    "action": "analyze_and_trade"
+                  }
+                }
+              }
+            },
+            {
+              "path": "D - OKX Live",
+              "action": {
+                "app": "Webhooks by Zapier",
+                "method": "POST",
+                "url": "https://api.github.com/repos/appsefilepro-cell/Private-Claude/dispatches",
+                "data": {
+                  "event_type": "trigger_okx_live",
+                  "client_payload": {
+                    "exchange": "okx",
+                    "action": "analyze_btc_futures"
+                  }
+                }
+              }
+            }
+          ]
+        },
+        {
+          "step": 2,
+          "app": "Slack",
+          "action": "Send Channel Message",
+          "channel": "#trading-alerts",
+          "message": "⚡ QUANTUM EXECUTION: All 4 accounts analyzing markets in parallel..."
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "name": "Hourly Trading Report",
+      "description": "Generate hourly performance across all accounts",
+      "trigger": {
+        "app": "Schedule by Zapier",
+        "event": "Every Hour"
+      },
+      "actions": [
+        {
+          "step": 1,
+          "app": "Google Sheets",
+          "action": "Lookup Spreadsheet Rows",
+          "spreadsheet": "MT5 Trading Log - Demo 1",
+          "search_column": "Timestamp",
+          "search_value": "Last 1 hour"
+        },
+        {
+          "step": 2,
+          "app": "Formatter by Zapier",
+          "action": "Spreadsheet-Style Formula",
+          "formula": "=SUM(Profit/Loss)"
+        },
+        {
+          "step": 3,
+          "app": "Formatter by Zapier",
+          "action": "Spreadsheet-Style Formula",
+          "formula": "=COUNTIF(Profit/Loss, >0) / COUNT(Profit/Loss) * 100"
+        },
+        {
+          "step": 4,
+          "app": "Slack",
+          "action": "Send Channel Message",
+          "channel": "#trading-alerts",
+          "message": "📊 HOURLY REPORT\n\nMT5 Demo 1:\n• Trades: {{trade_count}}\n• P&L: ${{total_pnl}}\n• Win Rate: {{win_rate}}%\n\nMT5 Demo 2: [Similar stats]\nMT5 Demo 3: [Similar stats]\nOKX Live: [Similar stats]\n\n📈 Total: {{total_trades}} trades | ${{combined_pnl}}"
+        },
+        {
+          "step": 5,
+          "app": "Airtable",
+          "action": "Create Record",
+          "base": "Trading Machine Learning",
+          "table": "Performance",
+          "fields": {
+            "Hour": "{{hour}}",
+            "Total Trades": "{{total_trades}}",
+            "Total P&L": "{{combined_pnl}}",
+            "Win Rate": "{{overall_win_rate}}",
+            "Best Account": "{{best_account}}",
+            "Best Pattern": "{{best_pattern}}"
+          }
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "name": "24-Hour Marathon Summary",
+      "description": "Daily comprehensive trading report",
+      "trigger": {
+        "app": "Schedule by Zapier",
+        "event": "Every Day",
+        "time": "11:59 PM CST"
+      },
+      "actions": [
+        {
+          "step": 1,
+          "app": "Airtable",
+          "action": "Find Records",
+          "base": "Trading Machine Learning",
+          "table": "Trades",
+          "filter": "IS_SAME(Timestamp, TODAY(), 'day')"
+        },
+        {
+          "step": 2,
+          "app": "Formatter by Zapier",
+          "action": "Numbers",
+          "operations": [
+            "Total trades",
+            "Total P&L",
+            "Win rate",
+            "Best trade",
+            "Worst trade",
+            "Most profitable pattern",
+            "Most profitable pair",
+            "Most profitable account"
+          ]
+        },
+        {
+          "step": 3,
+          "app": "Google Docs",
+          "action": "Create Document from Template",
+          "template": "24-Hour Marathon Report Template",
+          "replacements": {
+            "{{date}}": "{{today}}",
+            "{{total_trades}}": "{{total_trades}}",
+            "{{mt5_demo_1_trades}}": "{{mt5_1_count}}",
+            "{{mt5_demo_2_trades}}": "{{mt5_2_count}}",
+            "{{mt5_demo_3_trades}}": "{{mt5_3_count}}",
+            "{{okx_trades}}": "{{okx_count}}",
+            "{{total_pnl}}": "{{total_pnl}}",
+            "{{win_rate}}": "{{win_rate}}",
+            "{{best_pattern}}": "{{best_pattern}}",
+            "{{ml_insights}}": "{{ml_insights}}"
+          }
+        },
+        {
+          "step": 4,
+          "app": "PDF.co",
+          "action": "Convert to PDF"
+        },
+        {
+          "step": 5,
+          "app": "Email",
+          "action": "Send Email",
+          "to": "terobinsonwy@gmail.com",
+          "subject": "24-Hour Trading Marathon Report - {{today}}",
+          "body": "Attached is your comprehensive trading report for {{today}}.\n\n🎯 HIGHLIGHTS:\n• Total Trades: {{total_trades}}\n• Total P&L: ${{total_pnl}}\n• Win Rate: {{win_rate}}%\n• Best Pattern: {{best_pattern}}\n• Best Account: {{best_account}}\n\n🤖 Machine Learning detected {{pattern_count}} high-probability patterns.\n\nFull report attached.",
+          "attachments": "{{pdf_file}}"
+        },
+        {
+          "step": 6,
+          "app": "Slack",
+          "action": "Send Channel Message",
+          "channel": "#trading-alerts",
+          "message": "🎉 24-HOUR MARATHON COMPLETE!\n\n📊 RESULTS:\n• Trades: {{total_trades}} (Target: 350+)\n• P&L: ${{total_pnl}}\n• Win Rate: {{win_rate}}%\n\n🏆 WINNERS:\n• MT5 Demo 1: {{mt5_1_count}} trades\n• MT5 Demo 2: {{mt5_2_count}} trades\n• MT5 Demo 3: {{mt5_3_count}} trades\n• OKX Live: {{okx_count}} trades\n\nFull report sent to email!"
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "name": "GitHub to GitLab Sync",
+      "description": "Mirror GitHub commits to GitLab",
+      "trigger": {
+        "app": "GitHub",
+        "event": "New Commit",
+        "repository": "Private-Claude"
+      },
+      "actions": [
+        {
+          "app": "GitLab",
+          "action": "Mirror Commit"
+        },
+        {
+          "app": "Slack",
+          "action": "Send Channel Message",
+          "channel": "#system-status"
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "name": "GitLab to GitHub Sync",
+      "description": "Mirror GitLab pushes to GitHub",
+      "trigger": {
+        "app": "GitLab",
+        "event": "New Push"
+      },
+      "actions": [
+        {
+          "app": "GitHub",
+          "action": "Create Commit"
+        },
+        {
+          "app": "Slack",
+          "action": "Send Channel Message",
+          "channel": "#system-status"
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "name": "Agent 5.0 Task Delegation",
+      "description": "Route tasks to appropriate agent divisions",
+      "trigger": {
+        "app": "Slack",
+        "event": "New Message Posted to Channel",
+        "channel": "#agent-5-cfo"
+      },
+      "actions": [
+        {
+          "app": "Formatter by Zapier",
+          "action": "Text",
+          "operation": "Extract Pattern",
+          "pattern": "@trading|@legal|@financial|@devops"
+        },
+        {
+          "app": "Paths by Zapier",
+          "paths": [
+            {
+              "condition": "Contains '@trading'",
+              "action": {
+                "app": "Slack",
+                "action": "Send Channel Message",
+                "channel": "#trading-division"
+              }
+            },
+            {
+              "condition": "Contains '@legal'",
+              "action": {
+                "app": "Slack",
+                "action": "Send Channel Message",
+                "channel": "#legal-division"
+              }
+            },
+            {
+              "condition": "Contains '@financial'",
+              "action": {
+                "app": "Slack",
+                "action": "Send Channel Message",
+                "channel": "#financial-division"
+              }
+            },
+            {
+              "condition": "Contains '@devops'",
+              "action": {
+                "app": "Slack",
+                "action": "Send Channel Message",
+                "channel": "#devops-division"
+              }
+            }
+          ]
+        },
+        {
+          "app": "Airtable",
+          "action": "Create Record",
+          "base": "Agent 5.0 Operations",
+          "table": "Tasks"
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "name": "System Error Alerts",
+      "description": "Immediate notification of any errors",
+      "trigger": {
+        "app": "Webhooks by Zapier",
+        "event": "Catch Hook",
+        "webhook_url": "CREATE_IN_ZAPIER",
+        "webhook_name": "system_errors"
+      },
+      "actions": [
+        {
+          "app": "Airtable",
+          "action": "Create Record",
+          "base": "System Monitoring",
+          "table": "Errors"
+        },
+        {
+          "app": "Slack",
+          "action": "Send Channel Message",
+          "channel": "#system-status",
+          "priority": "urgent"
+        },
+        {
+          "app": "Email",
+          "action": "Send Email",
+          "to": "terobinsonwy@gmail.com",
+          "subject": "🚨 URGENT: System Error"
+        }
+      ]
+    },
+    {
+      "id": 13,
+      "name": "Postman Test Results",
+      "description": "Log API test results from Postman monitors",
+      "trigger": {
+        "app": "Webhooks by Zapier",
+        "event": "Catch Hook",
+        "webhook_url": "CREATE_IN_ZAPIER",
+        "webhook_name": "postman_results"
+      },
+      "actions": [
+        {
+          "app": "Airtable",
+          "action": "Create Record",
+          "base": "Testing",
+          "table": "API Test Results"
+        },
+        {
+          "app": "Slack",
+          "action": "Send Channel Message",
+          "channel": "#test-results"
+        }
+      ]
+    },
+    {
+      "id": 14,
+      "name": "E2B Sandbox Execution Logs",
+      "description": "Log E2B sandbox executions",
+      "trigger": {
+        "app": "GitHub",
+        "event": "New Push",
+        "repository": "Private-Claude"
+      },
+      "actions": [
+        {
+          "app": "Webhooks by Zapier",
+          "action": "POST",
+          "url": "https://api.e2b.dev/webhooks/YIyOpaJ0UMJ3Pl9Md5kVExEDdkqyDGRp"
+        },
+        {
+          "app": "Slack",
+          "action": "Send Channel Message",
+          "channel": "#system-status"
+        }
+      ]
+    },
+    {
+      "id": 15,
+      "name": "Legal Document Automation",
+      "description": "Generate legal documents",
+      "trigger": {
+        "app": "Webhooks by Zapier",
+        "event": "Catch Hook",
+        "webhook_url": "CREATE_IN_ZAPIER",
+        "webhook_name": "generate_legal_doc"
+      },
+      "actions": [
+        {
+          "app": "Google Docs",
+          "action": "Create Document from Template"
+        },
+        {
+          "app": "PDF.co",
+          "action": "Convert to PDF"
+        },
+        {
+          "app": "Email",
+          "action": "Send Email",
+          "attachments": "{{pdf}}"
+        }
+      ]
+    },
+    {
+      "id": 16,
+      "name": "Financial Reports Weekly",
+      "description": "Weekly financial summary",
+      "trigger": {
+        "app": "Schedule by Zapier",
+        "event": "Every Week",
+        "day": "Monday",
+        "time": "9:00 AM CST"
+      },
+      "actions": [
+        {
+          "app": "Airtable",
+          "action": "Find Records",
+          "base": "Financial Operations"
+        },
+        {
+          "app": "Google Docs",
+          "action": "Create Document from Template"
+        },
+        {
+          "app": "Email",
+          "action": "Send Email"
+        }
+      ]
+    },
+    {
+      "id": 17,
+      "name": "Life Coach Session Reminders",
+      "description": "Send coaching session reminders",
+      "trigger": {
+        "app": "Airtable",
+        "event": "New Record",
+        "base": "Life Coach AI",
+        "table": "Sessions"
+      },
+      "actions": [
+        {
+          "app": "Delay by Zapier",
+          "delay_until": "{{session_datetime}} - 1 day"
+        },
+        {
+          "app": "Email",
+          "action": "Send Email"
+        },
+        {
+          "app": "Slack",
+          "action": "Send Direct Message"
+        }
+      ]
+    },
+    {
+      "id": 18,
+      "name": "GitHub Actions Workflow Triggers",
+      "description": "Trigger GitHub Actions from Zapier",
+      "trigger": {
+        "app": "Schedule by Zapier",
+        "event": "Every 15 Minutes"
+      },
+      "actions": [
+        {
+          "app": "Webhooks by Zapier",
+          "action": "POST",
+          "url": "https://api.github.com/repos/appsefilepro-cell/Private-Claude/dispatches",
+          "headers": {
+            "Authorization": "Bearer {{github_token}}",
+            "Accept": "application/vnd.github.v3+json"
+          },
+          "data": {
+            "event_type": "zapier_trigger",
+            "client_payload": {
+              "source": "zapier_scheduler"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "setup_instructions": {
+    "step_1": "Create Zapier account at https://zapier.com",
+    "step_2": "For each workflow, create a new Zap",
+    "step_3": "Configure trigger based on workflow definition",
+    "step_4": "Add actions in the specified order",
+    "step_5": "Replace {{variables}} with dynamic data from trigger/previous steps",
+    "step_6": "Test each workflow before turning ON",
+    "step_7": "Monitor Zapier dashboard for task usage",
+    "step_8": "Get webhook URLs from Zapier and update RUN_EVERYTHING.sh"
+  },
+  "webhook_urls_needed": {
+    "mt5_demo_1_trades": "For MetaTrader 5 Account 5044023923",
+    "mt5_demo_2_trades": "For MetaTrader 5 Account 100459584",
+    "mt5_demo_3_trades": "For MetaTrader 5 Account 5044025969",
+    "okx_btc_trades": "For OKX Bitcoin futures trades",
+    "system_errors": "For error notifications",
+    "postman_results": "For Postman test results",
+    "generate_legal_doc": "For legal document generation"
+  },
+  "integration_notes": {
+    "metatrader_5": "Use MetaTrader Webhook Expert Advisor (EA) to send trade data to Zapier webhooks",
+    "okx": "Use GitHub Actions workflow to monitor OKX and send data to Zapier",
+    "machine_learning": "Airtable formulas calculate pattern success rates automatically",
+    "quantum_parallel": "Paths feature in Zapier enables simultaneous execution across all accounts"
+  }
+}

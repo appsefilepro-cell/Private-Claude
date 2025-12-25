@@ -1,0 +1,135 @@
+╔══════════════════════════════════════════════════════════════════════════╗
+║                                                                          ║
+║           🚨 EXTRACT YOUR MICROSOFT 365 DOCUMENTS NOW 🚨                ║
+║                                                                          ║
+║                    Your subscription is ending!                          ║
+║                                                                          ║
+╚══════════════════════════════════════════════════════════════════════════╝
+
+
+═══════════════════════════════════════════════════════════════════════════
+ OPTION 1: INTERACTIVE (RECOMMENDED) - Guides you through setup
+═══════════════════════════════════════════════════════════════════════════
+
+   Run this ONE command:
+
+      cd /home/user/Private-Claude && ./EXTRACT_SIMPLE.sh
+
+   ✅ Walks you through Azure AD app creation
+   ✅ Interactive prompts - just follow along
+   ✅ Automatically opens browser and guides each step
+
+
+═══════════════════════════════════════════════════════════════════════════
+ OPTION 2: Manual Setup (if you already have Client ID)
+═══════════════════════════════════════════════════════════════════════════
+
+   Step 1: Create Azure AD app (2 minutes - see URGENT_READ_ME_FIRST.md)
+
+   Step 2: Set your client ID:
+      export MICROSOFT365_CLIENT_ID='your-client-id-here'
+
+   Step 3: Run:
+      cd /home/user/Private-Claude && ./EXTRACT_DOCUMENTS_NOW.sh
+
+
+═══════════════════════════════════════════════════════════════════════════
+ TEST YOUR SETUP FIRST (Optional)
+═══════════════════════════════════════════════════════════════════════════
+
+   Run this to verify everything is ready:
+
+      cd /home/user/Private-Claude && ./TEST_SETUP.sh
+
+
+═══════════════════════════════════════════════════════════════════════════
+ WHAT HAPPENS DURING EXTRACTION
+═══════════════════════════════════════════════════════════════════════════
+
+   1. You'll see a code like: ABC123DE
+   2. Open: https://microsoft.com/devicelogin
+   3. Enter the code
+   4. Sign in with your Microsoft 365 account
+   5. Click "Accept"
+   6. Return to terminal - download starts!
+
+
+═══════════════════════════════════════════════════════════════════════════
+ WHERE ARE MY DOCUMENTS?
+═══════════════════════════════════════════════════════════════════════════
+
+   Location: /home/user/Private-Claude/migrated-docs/
+
+   Structure:
+      migrated-docs/
+      ├── onedrive/              ← Your OneDrive files
+      ├── sharepoint/            ← Your SharePoint files
+      ├── migration_report.json  ← Detailed report
+      └── migration_report.csv   ← Spreadsheet report
+
+
+═══════════════════════════════════════════════════════════════════════════
+ FILES CREATED FOR YOU
+═══════════════════════════════════════════════════════════════════════════
+
+   📄 QUICK_START.txt              ← This file
+   📄 URGENT_READ_ME_FIRST.md      ← Detailed instructions
+
+   🚀 EXTRACT_SIMPLE.sh            ← Fastest method (use this!)
+   🚀 EXTRACT_DOCUMENTS_NOW.sh     ← Custom app method
+   🔍 TEST_SETUP.sh                ← Test your setup
+
+
+═══════════════════════════════════════════════════════════════════════════
+ START NOW - RECOMMENDED COMMAND
+═══════════════════════════════════════════════════════════════════════════
+
+   cd /home/user/Private-Claude && ./EXTRACT_SIMPLE.sh
+
+
+═══════════════════════════════════════════════════════════════════════════
+ TROUBLESHOOTING
+═══════════════════════════════════════════════════════════════════════════
+
+   Problem: "Permission denied"
+   Fix:     chmod +x *.sh
+
+   Problem: "Module not found"
+   Fix:     pip3 install msal requests
+
+   Problem: "Authentication failed"
+   Fix:     Make sure you signed in with the correct Microsoft account
+
+   Problem: Script fails
+   Fix:     Check logs at /home/user/Private-Claude/logs/system-integration/
+
+
+═══════════════════════════════════════════════════════════════════════════
+ AFTER EXTRACTION
+═══════════════════════════════════════════════════════════════════════════
+
+   ✅ Verify files are in: /home/user/Private-Claude/migrated-docs/
+   ✅ Check the CSV report to confirm all files downloaded
+   ✅ Backup migrated-docs folder to external storage
+   ✅ Cancel your Microsoft 365 subscription (documents are safe!)
+
+
+═══════════════════════════════════════════════════════════════════════════
+ NEED HELP?
+═══════════════════════════════════════════════════════════════════════════
+
+   📖 Read: /home/user/Private-Claude/URGENT_READ_ME_FIRST.md
+   📖 Read: /home/user/Private-Claude/system-integration/MIGRATION_SETUP_GUIDE.md
+   📋 Logs: /home/user/Private-Claude/logs/system-integration/
+
+
+╔══════════════════════════════════════════════════════════════════════════╗
+║                                                                          ║
+║                        🚀 START RIGHT NOW! 🚀                           ║
+║                                                                          ║
+║            cd /home/user/Private-Claude                                 ║
+║            ./EXTRACT_SIMPLE.sh                                           ║
+║                                                                          ║
+║        (It will walk you through everything step by step)               ║
+║                                                                          ║
+╚══════════════════════════════════════════════════════════════════════════╝
