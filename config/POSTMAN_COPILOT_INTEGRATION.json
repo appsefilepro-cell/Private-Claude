@@ -1,0 +1,194 @@
+{
+  "postman_copilot_integration": {
+    "description": "Use Postman AI/Copilot to auto-complete API collections and sync across all platforms",
+    "postman_ai_features": {
+      "api_test_generation": "Auto-generate tests using Postman Copilot",
+      "documentation_generation": "Auto-document APIs",
+      "collection_enhancement": "Copilot suggests improvements",
+      "environment_sync": "Sync variables across all collections"
+    },
+    "collections": [
+      {
+        "name": "MetaTrader 5 Trading API",
+        "description": "Complete MT5 API for 3 demo accounts",
+        "endpoints": [
+          {
+            "name": "Login to Account",
+            "method": "POST",
+            "url": "{{MT5_SERVER}}/login",
+            "body": {
+              "login": "{{MT5_ACCOUNT_1_LOGIN}}",
+              "password": "{{MT5_ACCOUNT_1_PASSWORD}}",
+              "server": "MetaQuotes-Demo"
+            }
+          },
+          {
+            "name": "Get Account Info",
+            "method": "GET",
+            "url": "{{MT5_SERVER}}/account/info"
+          },
+          {
+            "name": "Place Market Order",
+            "method": "POST",
+            "url": "{{MT5_SERVER}}/order/place",
+            "body": {
+              "symbol": "EURUSD",
+              "volume": 0.1,
+              "type": "BUY",
+              "price": null,
+              "sl": 0,
+              "tp": 0
+            }
+          },
+          {
+            "name": "Get Positions",
+            "method": "GET",
+            "url": "{{MT5_SERVER}}/positions"
+          },
+          {
+            "name": "Close Position",
+            "method": "POST",
+            "url": "{{MT5_SERVER}}/position/close"
+          }
+        ]
+      },
+      {
+        "name": "OKX Bitcoin Futures API",
+        "description": "Complete OKX API for Bitcoin futures trading",
+        "endpoints": [
+          {
+            "name": "Get Account Balance",
+            "method": "GET",
+            "url": "https://www.okx.com/api/v5/account/balance",
+            "headers": {
+              "OK-ACCESS-KEY": "{{OKX_API_KEY}}",
+              "OK-ACCESS-SIGN": "{{OKX_SIGNATURE}}",
+              "OK-ACCESS-TIMESTAMP": "{{$timestamp}}",
+              "OK-ACCESS-PASSPHRASE": "{{OKX_PASSPHRASE}}"
+            }
+          },
+          {
+            "name": "Place Bitcoin Futures Order",
+            "method": "POST",
+            "url": "https://www.okx.com/api/v5/trade/order",
+            "body": {
+              "instId": "BTC-USDT-SWAP",
+              "tdMode": "isolated",
+              "side": "buy",
+              "ordType": "market",
+              "sz": "1"
+            }
+          },
+          {
+            "name": "Get Open Orders",
+            "method": "GET",
+            "url": "https://www.okx.com/api/v5/trade/orders-pending"
+          }
+        ]
+      },
+      {
+        "name": "Zapier Webhook API",
+        "description": "Complete Zapier integration for notifications and automation",
+        "endpoints": [
+          {
+            "name": "Send Trade Notification",
+            "method": "POST",
+            "url": "https://hooks.zapier.com/hooks/catch/{{ZAPIER_WEBHOOK_ID}}/mt5trades",
+            "body": {
+              "account": "5044023923",
+              "symbol": "EURUSD",
+              "action": "BUY",
+              "volume": 0.1,
+              "price": 1.0850,
+              "timestamp": "{{$timestamp}}"
+            }
+          },
+          {
+            "name": "Send Migration Notification",
+            "method": "POST",
+            "url": "https://hooks.zapier.com/hooks/catch/{{ZAPIER_WEBHOOK_ID}}/migration",
+            "body": {
+              "file_name": "document.docx",
+              "source": "OneDrive",
+              "destination": "Dropbox",
+              "status": "completed",
+              "timestamp": "{{$timestamp}}"
+            }
+          }
+        ]
+      },
+      {
+        "name": "E2B Sandbox API",
+        "description": "E2B code execution and deployment",
+        "endpoints": [
+          {
+            "name": "Execute Code",
+            "method": "POST",
+            "url": "https://api.e2b.dev/execute",
+            "headers": {
+              "Authorization": "Bearer {{E2B_API_KEY}}"
+            },
+            "body": {
+              "code": "print('Hello from E2B')",
+              "language": "python"
+            }
+          },
+          {
+            "name": "Send Webhook",
+            "method": "POST",
+            "url": "https://api.e2b.dev/webhooks/{{E2B_WEBHOOK_ID}}",
+            "body": {
+              "event": "deployment",
+              "status": "success"
+            }
+          }
+        ]
+      }
+    ],
+    "environments": {
+      "production": {
+        "MT5_SERVER": "https://mt5.api.com",
+        "MT5_ACCOUNT_1_LOGIN": "5044023923",
+        "MT5_ACCOUNT_1_PASSWORD": "Ut-0YsUm",
+        "MT5_ACCOUNT_2_LOGIN": "100459584",
+        "MT5_ACCOUNT_2_PASSWORD": "6aTvYh_n",
+        "MT5_ACCOUNT_3_LOGIN": "5044025969",
+        "MT5_ACCOUNT_3_PASSWORD": "I@SuBd2z",
+        "OKX_API_KEY": "a5b57cd3-b0ee-44f-b8e9-7c5b330a5c28",
+        "OKX_SECRET_KEY": "E0A25726A822BB669A24ACF6FA4A8E31",
+        "OKX_PASSPHRASE": "SET_YOUR_PASSPHRASE",
+        "ZAPIER_WEBHOOK_ID": "YOUR_WEBHOOK_ID",
+        "E2B_API_KEY": "e2b_fcc08e8c733b3eab00bdb3ad5857f5966afc2773",
+        "E2B_WEBHOOK_ID": "YIyOpaJ0UMJ3Pl9Md5kVExEDdkqyDGRp"
+      }
+    },
+    "postman_copilot_usage": {
+      "step_1": "Import collection to Postman",
+      "step_2": "Enable Postman AI/Copilot in settings",
+      "step_3": "Let Copilot auto-generate tests for each endpoint",
+      "step_4": "Let Copilot suggest improvements and validations",
+      "step_5": "Let Copilot auto-document all APIs",
+      "step_6": "Sync environments across all systems"
+    },
+    "agent_integration": {
+      "integration_agent": "Integration Division - Postman Team",
+      "responsible": "VP System Integration",
+      "agents_assigned": 5,
+      "tasks": [
+        "Import collection to Postman",
+        "Enable Postman Copilot",
+        "Auto-generate tests",
+        "Sync with GitHub, GitLab, Zapier",
+        "Share API data across all platforms"
+      ]
+    },
+    "sync_with_platforms": {
+      "github": "Export collection to GitHub repository",
+      "gitlab": "Mirror collection via GitLab CI",
+      "zapier": "Trigger Zaps when API calls succeed",
+      "claude": "Share API responses for agent learning",
+      "vscode": "Use Postman extension for direct testing"
+    },
+    "status": "✅ CONFIGURED - Ready for Postman Copilot import and enhancement"
+  }
+}

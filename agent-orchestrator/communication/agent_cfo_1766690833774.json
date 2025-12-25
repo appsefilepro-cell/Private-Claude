@@ -1,0 +1,8 @@
+{
+  "from": "agent_fin_5",
+  "to": "agent_cfo",
+  "type": "report",
+  "message": "{\"agent\": \"AP Specialist\", \"task\": \"ap_specialist_reporting\", \"timestamp\": 1766690833.7744331, \"status\": \"completed\"}",
+  "timestamp": "2025-12-25T19:27:13.774443"
+}27:13.774197"
+}

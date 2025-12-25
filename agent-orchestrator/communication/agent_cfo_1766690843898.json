@@ -1,0 +1,8 @@
+{
+  "from": "agent_special_13",
+  "to": "agent_cfo",
+  "type": "status_report",
+  "message": "{\"agent\": \"Project Manager\", \"role\": \"Project Manager\", \"status\": \"completed\", \"tasks_completed\": 30, \"tasks_failed\": 0, \"loop_count\": 10, \"uptime\": \"0:00:13.138993\"}",
+  "timestamp": "2025-12-25T19:27:23.898466"
+}7:23.898254"
+}

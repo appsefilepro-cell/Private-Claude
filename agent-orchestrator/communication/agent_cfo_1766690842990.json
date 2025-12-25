@@ -1,0 +1,8 @@
+{
+  "from": "agent_special_24",
+  "to": "agent_cfo",
+  "type": "report",
+  "message": "{\"agent\": \"Content AI\", \"task\": \"content_ai_reporting\", \"timestamp\": 1766690842.990119, \"status\": \"completed\"}",
+  "timestamp": "2025-12-25T19:27:22.990134"
+}207"
+}

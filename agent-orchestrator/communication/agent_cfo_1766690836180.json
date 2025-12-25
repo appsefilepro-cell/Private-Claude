@@ -1,0 +1,8 @@
+{
+  "from": "agent_special_3",
+  "to": "agent_cfo",
+  "type": "report",
+  "message": "{\"agent\": \"SMS Coordinator\", \"task\": \"sms_coordinator_reporting\", \"timestamp\": 1766690836.1807444, \"status\": \"completed\"}",
+  "timestamp": "2025-12-25T19:27:16.180761"
+}:27:16.180526"
+}

@@ -1,0 +1,95 @@
+version: '3.8'
+
+services:
+  # Agent 5.0 Master Orchestrator
+  agent-orchestrator:
+    build: .
+    container_name: agent-5-orchestrator
+    restart: unless-stopped
+    environment:
+      - E2B_API_KEY=e2b_fcc08e8c733b3eab00bdb3ad5857f5966afc2773
+      - E2B_WEBHOOK_ID=YIyOpaJ0UMJ3Pl9Md5kVExEDdkqyDGRp
+      - AGENT_MODE=orchestrator
+      - TOTAL_AGENTS=176
+    volumes:
+      - ./logs:/app/logs
+      - ./data:/app/data
+      - ./agent-orchestrator/communication:/app/agent-orchestrator/communication
+    networks:
+      - agent-network
+    command: python3 agent-orchestrator/master_orchestrator.py
+
+  # Trading Division
+  trading-agents:
+    build: .
+    container_name: trading-agents
+    restart: unless-stopped
+    environment:
+      - AGENT_MODE=trading
+      - MT5_ACCOUNTS=3
+      - OKX_ENABLED=true
+    volumes:
+      - ./logs/trading:/app/logs/trading
+      - ./data/trades:/app/data/trades
+    networks:
+      - agent-network
+    depends_on:
+      - agent-orchestrator
+    command: python3 scripts/activate_24_7_trading_marathon.py
+
+  # Legal Automation Division
+  legal-agents:
+    build: .
+    container_name: legal-agents
+    restart: unless-stopped
+    environment:
+      - AGENT_MODE=legal
+    volumes:
+      - ./legal-automation:/app/legal-automation
+      - ./logs:/app/logs
+    networks:
+      - agent-network
+    depends_on:
+      - agent-orchestrator
+    command: python3 legal-automation/draft_final_case_1241511.py
+
+  # Continuous Testing
+  testing-agents:
+    build: .
+    container_name: testing-agents
+    restart: unless-stopped
+    environment:
+      - AGENT_MODE=testing
+      - TEST_DURATION=72
+    volumes:
+      - ./logs/agents:/app/logs/agents
+    networks:
+      - agent-network
+    depends_on:
+      - agent-orchestrator
+    command: python3 scripts/continuous_testing_24_7.py
+
+  # Remediation & Audit
+  remediation-agents:
+    build: .
+    container_name: remediation-agents
+    restart: unless-stopped
+    environment:
+      - AGENT_MODE=remediation
+    volumes:
+      - ./logs/errors:/app/logs/errors
+      - ./logs/audit:/app/logs/audit
+    networks:
+      - agent-network
+    depends_on:
+      - agent-orchestrator
+    command: python3 scripts/remediation_plan_complete.py
+
+networks:
+  agent-network:
+    driver: bridge
+
+volumes:
+  logs:
+  data:
+  communication:

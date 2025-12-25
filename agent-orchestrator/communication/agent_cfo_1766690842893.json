@@ -1,0 +1,8 @@
+{
+  "from": "agent_special_13",
+  "to": "agent_cfo",
+  "type": "report",
+  "message": "{\"agent\": \"Project Manager\", \"task\": \"project_manager_reporting\", \"timestamp\": 1766690842.8933947, \"status\": \"completed\"}",
+  "timestamp": "2025-12-25T19:27:22.893402"
+}7:22.893136"
+}

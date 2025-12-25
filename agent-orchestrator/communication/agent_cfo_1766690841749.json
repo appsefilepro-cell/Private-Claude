@@ -1,0 +1,8 @@
+{
+  "from": "agent_fin_15",
+  "to": "agent_cfo",
+  "type": "report",
+  "message": "{\"agent\": \"Credit Manager\", \"task\": \"credit_manager_reporting\", \"timestamp\": 1766690841.749918, \"status\": \"completed\"}",
+  "timestamp": "2025-12-25T19:27:21.749931"
+}749654"
+}
