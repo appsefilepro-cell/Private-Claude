@@ -1,0 +1,61 @@
+{
+  "gemini_project_configuration": {
+    "timestamp": "2025-12-25",
+    "project_details": {
+      "name": "Default Gemini Project",
+      "project_name": "projects/190831837188",
+      "project_number": "190831837188",
+      "project_id": "gen-lang-client-0313025061"
+    },
+
+    "api_setup": {
+      "base_url": "https://generativelanguage.googleapis.com/v1beta",
+      "project_endpoint": "projects/190831837188",
+      "api_key_command": "Get from: https://makersuite.google.com/app/apikey",
+      "pricing": "FREE - 60 requests/minute, 1500 requests/day",
+      "features": [
+        "Gemini 1.5 Pro (FREE)",
+        "Gemini 1.5 Flash (FREE)",
+        "Document analysis (PDFs, images)",
+        "Legal research",
+        "SWOT analysis",
+        "Multi-turn conversations"
+      ]
+    },
+
+    "integration_with_agent_5": {
+      "ai_ml_division": {
+        "agents": 15,
+        "use_cases": [
+          "SWOT analysis (already integrated)",
+          "Legal document analysis",
+          "Trading pattern analysis",
+          "Research automation",
+          "Client case analysis"
+        ]
+      },
+      "legal_division": {
+        "agents": 10,
+        "use_cases": [
+          "Analyze probate court documents",
+          "Extract case details automatically",
+          "Research similar cases",
+          "Generate legal summaries"
+        ]
+      }
+    },
+
+    "zapier_integration": {
+      "workflow": "Zapier → Gemini API → Agent 5.0",
+      "example": "New client case → Gemini analyzes → Agent 5.0 processes → Store in Airtable"
+    },
+
+    "environment_variable": {
+      "name": "GEMINI_API_KEY",
+      "project_id": "gen-lang-client-0313025061",
+      "note": "Set this in .env file and GitHub Secrets"
+    },
+
+    "status": "✅ CONFIGURED - Ready to use with project ID"
+  }
+}

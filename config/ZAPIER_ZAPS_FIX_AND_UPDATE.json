@@ -1,0 +1,228 @@
+{
+  "zapier_zaps_fix_and_update": {
+    "timestamp": "2025-12-25",
+    "zapier_account": "terobinsonwy@gmail.com",
+    "context_id": "25466836",
+
+    "current_zaps_status": {
+      "recently_updated_zaps": [
+        {
+          "name": "Untitled Zap",
+          "apps": ["Schedule by Zapier", "Google Calendar", "Gmail"],
+          "status": "OFF",
+          "last_run": "10 days ago",
+          "issue": "Zap is turned off, needs activation and proper naming",
+          "priority": "HIGH"
+        },
+        {
+          "name": "LIVE PRODUCTION SYSTEMS",
+          "status": "Unknown (appears twice in list)",
+          "updated": "13 days ago",
+          "issue": "Duplicate entry or two separate zaps with same name",
+          "priority": "HIGH"
+        },
+        {
+          "name": "AI Agent 3.0 Quantum Systems",
+          "updated": "13 days ago",
+          "issue": "Needs review and update",
+          "priority": "MEDIUM"
+        },
+        {
+          "name": "Free Government & Nonprofit AI Resources",
+          "updated": "13 days ago",
+          "issue": "Needs review and update",
+          "priority": "MEDIUM"
+        }
+      ],
+      "total_issues": 5
+    },
+
+    "fixes_and_updates": {
+      "fix_1_untitled_zap": {
+        "current_name": "Untitled Zap",
+        "new_name": "Daily Schedule → Calendar → Email Reminder",
+        "apps": ["Schedule by Zapier", "Google Calendar", "Gmail"],
+        "actions": [
+          "1. Turn ON the zap (currently OFF)",
+          "2. Rename to descriptive name",
+          "3. Review trigger: Schedule by Zapier (daily? weekly?)",
+          "4. Review action 1: Add to Google Calendar",
+          "5. Review action 2: Send Gmail notification",
+          "6. Test the zap",
+          "7. Verify it runs successfully"
+        ],
+        "delegation": "Communication Division - Zapier Team"
+      },
+
+      "fix_2_live_production_systems": {
+        "current_name": "LIVE PRODUCTION SYSTEMS (appears twice)",
+        "issue": "Duplicate or two separate zaps",
+        "actions": [
+          "1. Check if truly duplicate → Delete one",
+          "2. If two separate zaps → Rename to differentiate",
+          "3. Suggested names:",
+          "   - LIVE PRODUCTION SYSTEMS - Trading",
+          "   - LIVE PRODUCTION SYSTEMS - Legal",
+          "4. Review both zaps for functionality",
+          "5. Consolidate if possible to reduce task count",
+          "6. Document what each does"
+        ],
+        "delegation": "DevOps Division - System Monitoring"
+      },
+
+      "fix_3_ai_agent_quantum": {
+        "current_name": "AI Agent 3.0 Quantum Systems",
+        "updated": "13 days ago",
+        "actions": [
+          "1. Review zap configuration",
+          "2. Update to Agent 5.0 (from 3.0)",
+          "3. Integrate with new quantum analysis features",
+          "4. Connect to updated AI/ML Division agents",
+          "5. Test with parallel execution mode",
+          "6. Verify FREE tier compliance"
+        ],
+        "delegation": "AI/ML Division - Quantum Team"
+      },
+
+      "fix_4_government_nonprofit": {
+        "current_name": "Free Government & Nonprofit AI Resources",
+        "updated": "13 days ago",
+        "actions": [
+          "1. Review and expand FREE resource list",
+          "2. Add GitHub Enterprise for Nonprofits",
+          "3. Add SBA 8(a) program resources",
+          "4. Add CDFI loan resources",
+          "5. Add new Google Gemini FREE tier",
+          "6. Update with all 35+ FREE AI tools from our config",
+          "7. Test automation workflow"
+        ],
+        "delegation": "Legal Division - Nonprofit Team"
+      }
+    },
+
+    "zapier_copilot_automation": {
+      "description": "Use Zapier Copilot to automatically fix and update these zaps",
+      "prompts_for_zapier_copilot": [
+        {
+          "prompt": "Review my 'Untitled Zap' and suggest a better name and optimization",
+          "expected_result": "Zapier Copilot renames and optimizes the zap"
+        },
+        {
+          "prompt": "I have two zaps called 'LIVE PRODUCTION SYSTEMS' - help me differentiate or consolidate them",
+          "expected_result": "Zapier Copilot analyzes and suggests merge or rename"
+        },
+        {
+          "prompt": "Update my 'AI Agent 3.0 Quantum Systems' zap to work with Agent 5.0",
+          "expected_result": "Zapier Copilot suggests workflow updates"
+        },
+        {
+          "prompt": "Expand my 'Free Government & Nonprofit AI Resources' zap with all new FREE tools",
+          "expected_result": "Zapier Copilot adds new app connections"
+        },
+        {
+          "prompt": "Analyze all my zaps and show which ones can be simplified or combined to reduce task count",
+          "expected_result": "Zapier Copilot identifies optimization opportunities"
+        }
+      ]
+    },
+
+    "gitlab_advanced_cleanup": {
+      "description": "Use GitLab Duo on advanced mode to clean up code and pipelines",
+      "cleanup_tasks": [
+        {
+          "task": "Remove unused code and scripts",
+          "method": "GitLab Duo code analysis → Identify dead code → Delete"
+        },
+        {
+          "task": "Optimize .gitlab-ci.yml pipeline",
+          "method": "GitLab Duo suggests faster pipeline configuration"
+        },
+        {
+          "task": "Fix all syntax errors and warnings",
+          "method": "GitLab Duo vulnerability scanner + code review"
+        },
+        {
+          "task": "Consolidate duplicate files",
+          "method": "GitLab Duo identifies similar files → Merge or delete"
+        },
+        {
+          "task": "Update dependencies to latest FREE versions",
+          "method": "GitLab Duo dependency scanning → Upgrade suggestions"
+        }
+      ]
+    },
+
+    "simplify_for_free": {
+      "description": "Publish, test, fix errors, and simplify so everything runs FREE",
+      "optimization_strategy": {
+        "zapier_optimization": [
+          "Combine similar zaps to reduce task count (stay under 100/month FREE limit)",
+          "Use Storage by Zapier instead of premium databases",
+          "Use Code by Zapier (Python/JS) instead of premium apps",
+          "Use Webhooks instead of direct integrations where possible",
+          "Schedule zaps during low-traffic times to spread task usage"
+        ],
+        "code_optimization": [
+          "Remove premium dependencies (use FREE alternatives)",
+          "Optimize scripts to reduce execution time",
+          "Cache results to avoid redundant API calls",
+          "Use batch processing instead of real-time (fewer tasks)",
+          "Consolidate multiple API calls into single requests"
+        ],
+        "github_gitlab_optimization": [
+          "Use GitHub Actions FREE tier (2000 min/month)",
+          "Use GitLab CI FREE tier (400 min/month)",
+          "Optimize pipeline to run only when needed",
+          "Cache dependencies to speed up builds",
+          "Run parallel jobs to reduce total time"
+        ]
+      }
+    },
+
+    "testing_and_fixing": {
+      "test_plan": {
+        "step_1": "Activate all OFF zaps one by one",
+        "step_2": "Monitor first run for errors",
+        "step_3": "Fix errors using Zapier Copilot + Claude Code",
+        "step_4": "Run test again",
+        "step_5": "Verify FREE tier compliance",
+        "step_6": "Document final working configuration"
+      },
+      "error_fixing_delegation": {
+        "zapier_errors": "Zapier Copilot (co-primary agent)",
+        "code_errors": "Claude Code (co-primary agent)",
+        "integration_errors": "Agent 5.0 Integration Division",
+        "workflow_errors": "Agent 5.0 Communication Division"
+      }
+    },
+
+    "recommended_zap_consolidation": {
+      "description": "Reduce number of zaps to stay under FREE tier limit",
+      "current_count": "24+ configured zaps",
+      "free_tier_limit": "100 tasks/month",
+      "strategy": [
+        "Combine Untitled Zap with similar scheduling zaps",
+        "Merge two LIVE PRODUCTION SYSTEMS zaps if duplicates",
+        "Use Sub-Zap to create reusable components",
+        "Use Paths to handle multiple scenarios in one zap",
+        "Use Looping to process batches instead of individual items"
+      ],
+      "target": "15-20 essential zaps (leaves room for task count)"
+    },
+
+    "next_steps": [
+      "1. Open Zapier Copilot: https://agents.zapier.com/bots",
+      "2. Ask Zapier Copilot to review and fix all 4 problematic zaps",
+      "3. Turn ON the 'Untitled Zap' and rename it",
+      "4. Differentiate or consolidate 'LIVE PRODUCTION SYSTEMS' duplicates",
+      "5. Update 'AI Agent 3.0' to 'Agent 5.0'",
+      "6. Expand 'Free Government & Nonprofit AI Resources'",
+      "7. Test all zaps and verify FREE tier compliance",
+      "8. Use GitLab Duo to clean up code on advanced mode",
+      "9. Publish, test, fix, and simplify",
+      "10. Monitor task count to stay under 100/month FREE limit"
+    ],
+
+    "status": "✅ FIX PLAN READY - All zaps identified and solutions provided"
+  }
+}

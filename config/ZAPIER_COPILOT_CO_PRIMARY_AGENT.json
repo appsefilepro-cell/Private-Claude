@@ -1,0 +1,190 @@
+{
+  "zapier_copilot_co_primary_agent": {
+    "timestamp": "2025-12-25",
+    "zapier_account": {
+      "url": "https://zapier.com/app/home?context=25466836&conversationId=29b727ab-5285-44d3-a1f3-10c2240b2b19",
+      "context_id": "25466836",
+      "conversation_id": "29b727ab-5285-44d3-a1f3-10c2240b2b19",
+      "email": "terobinsonwy@gmail.com"
+    },
+
+    "zapier_copilot_features": {
+      "description": "Zapier's AI assistant for automation - FREE",
+      "capabilities": [
+        "Extract all FREE setups and tools automatically",
+        "Recommend best automation workflows",
+        "Connect 7000+ apps with natural language",
+        "Update and optimize existing zaps",
+        "Generate automation templates",
+        "Fix broken zaps automatically"
+      ],
+      "pricing": "FREE with Zapier account",
+      "url": "https://agents.zapier.com/bots"
+    },
+
+    "co_primary_agent_architecture": {
+      "description": "Zapier Copilot works alongside Claude AI and Claude Code as co-primary multi-agent orchestrator",
+
+      "tier_1_orchestrators": {
+        "agent_5_master_cfo": {
+          "role": "Primary orchestrator for all 219 agents",
+          "responsibilities": "Delegate tasks, coordinate divisions, manage Agent 5.0"
+        },
+        "zapier_copilot": {
+          "role": "Co-primary automation orchestrator",
+          "responsibilities": "Process workflows, connect apps, extract FREE tools, update zaps"
+        },
+        "claude_code": {
+          "role": "Co-primary code orchestrator",
+          "responsibilities": "Write code, fix errors, generate scripts, integrate systems"
+        }
+      },
+
+      "workflow": {
+        "step_1": "User makes request",
+        "step_2": "Agent 5.0 Master CFO analyzes and delegates",
+        "step_3_parallel": {
+          "a": "Zapier Copilot: Handles all automation, app connections, FREE tool extraction",
+          "b": "Claude Code: Handles all coding, GitLab, GitHub, technical integration",
+          "c": "Gemini AI: Handles all analysis, research, SWOT, legal docs"
+        },
+        "step_4": "All three co-primaries report back to Master CFO",
+        "step_5": "Master CFO synthesizes results and delivers to user"
+      }
+    },
+
+    "zapier_agents": {
+      "url": "https://agents.zapier.com/bots",
+      "description": "Zapier AI agents for specific tasks",
+      "use_cases": [
+        "Create custom AI chatbots",
+        "Build automation workflows with AI",
+        "Extract data from conversations",
+        "Connect to Zapier workflows automatically"
+      ],
+      "integration_with_agent_5": "Zapier Agents can trigger Agent 5.0 workflows via webhooks"
+    },
+
+    "free_automation_extraction": {
+      "description": "Use Zapier Copilot to extract all FREE setups and tools",
+      "zapier_copilot_prompts": [
+        {
+          "prompt": "Show me all FREE Zapier apps and integrations",
+          "output": "List of 7000+ apps with FREE tiers"
+        },
+        {
+          "prompt": "Find all FREE AI tools available on Zapier",
+          "output": "OpenAI, Anthropic, Google Gemini, etc. (all FREE tiers)"
+        },
+        {
+          "prompt": "Extract all recommended FREE templates for nonprofits",
+          "output": "Template library for 501(c)(3) organizations"
+        },
+        {
+          "prompt": "Update all my broken zaps and make them FREE",
+          "output": "Auto-fix and optimize for FREE tier usage"
+        }
+      ]
+    },
+
+    "integration_with_claude_code": {
+      "description": "Zapier Copilot processes everything for FREE, Claude Code handles technical implementation",
+      "division_of_labor": {
+        "zapier_copilot": [
+          "Identify FREE automation opportunities",
+          "Recommend workflow optimizations",
+          "Connect apps without coding",
+          "Extract best practices from templates",
+          "Update and fix existing zaps"
+        ],
+        "claude_code": [
+          "Write custom Python/JavaScript code",
+          "Integrate with GitLab/GitHub APIs",
+          "Create advanced automation scripts",
+          "Fix technical errors in code",
+          "Deploy to E2B/Docker/GitLab CI"
+        ]
+      },
+      "collaboration": "Zapier Copilot finds the automation, Claude Code implements the technical details"
+    },
+
+    "agent_5_delegation": {
+      "communication_division": {
+        "agents": 10,
+        "task": "Monitor Zapier Copilot recommendations and implement via Zapier workflows"
+      },
+      "integration_division": {
+        "agents": 10,
+        "task": "Use Zapier Copilot to find new FREE app integrations"
+      },
+      "automation_division": {
+        "agents": 15,
+        "task": "Implement Zapier Copilot recommendations in production"
+      }
+    },
+
+    "zapier_copilot_automation_workflow": {
+      "workflow_name": "Zapier Copilot → Agent 5.0 Integration",
+      "workflow_number": 25,
+      "trigger": {
+        "app": "Zapier Copilot",
+        "event": "New recommendation or automation suggestion"
+      },
+      "actions": [
+        {
+          "step": 1,
+          "app": "Webhooks by Zapier",
+          "action": "Send to Agent 5.0 Master CFO"
+        },
+        {
+          "step": 2,
+          "app": "Filter by Zapier",
+          "condition": "Only FREE recommendations"
+        },
+        {
+          "step": 3,
+          "app": "Code by Zapier",
+          "action": "Claude Code evaluates technical feasibility"
+        },
+        {
+          "step": 4,
+          "app": "Paths by Zapier",
+          "paths": [
+            {
+              "name": "No Code Needed",
+              "action": "Zapier Copilot implements directly"
+            },
+            {
+              "name": "Code Required",
+              "action": "Claude Code writes implementation"
+            }
+          ]
+        },
+        {
+          "step": 5,
+          "app": "Google Sheets",
+          "action": "Log automation implemented"
+        },
+        {
+          "step": 6,
+          "app": "Email by Zapier",
+          "to": "terobinsonwy@gmail.com",
+          "subject": "New FREE automation activated"
+        }
+      ]
+    },
+
+    "next_steps": [
+      "1. Open Zapier Copilot at: https://agents.zapier.com/bots",
+      "2. Ask Zapier Copilot: 'Show me all FREE automation templates'",
+      "3. Ask: 'Extract all FREE AI tools available on Zapier'",
+      "4. Ask: 'Fix my broken zaps and optimize for FREE tier'",
+      "5. Ask: 'Create automation for nonprofit client case management'",
+      "6. Implement Zapier Copilot recommendations via Agent 5.0"
+    ],
+
+    "cost": "$0.00 - Zapier Copilot is FREE with Zapier account",
+
+    "status": "✅ CONFIGURED - Zapier Copilot ready as co-primary agent"
+  }
+}
