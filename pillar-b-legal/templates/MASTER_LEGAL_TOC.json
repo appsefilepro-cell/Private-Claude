@@ -1,0 +1,200 @@
+{
+  "master_toc": {
+    "document_title": "Comprehensive Legal Motion Package",
+    "subtitle": "Complete Court-Ready Filing with Evidence and Legal Research",
+    "sections": [
+      {
+        "section": "I. COVER PAGE & FILING INFORMATION",
+        "pages": "1-2",
+        "subsections": [
+          "A. Caption (Case Name, Number, Court)",
+          "B. Attorney Information",
+          "C. Party Information",
+          "D. Filing Date and Deadline"
+        ]
+      },
+      {
+        "section": "II. TABLE OF CONTENTS",
+        "pages": "3-5",
+        "subsections": [
+          "A. Master Table of Contents",
+          "B. Table of Authorities (Cases)",
+          "C. Table of Authorities (Statutes)",
+          "D. Table of Exhibits"
+        ]
+      },
+      {
+        "section": "III. NOTICE OF MOTION",
+        "pages": "6-8",
+        "subsections": [
+          "A. Notice to Opposing Party",
+          "B. Motion Type and Relief Sought",
+          "C. Hearing Date, Time, and Location",
+          "D. Service Information"
+        ]
+      },
+      {
+        "section": "IV. MEMORANDUM OF POINTS AND AUTHORITIES",
+        "pages": "9-35",
+        "subsections": [
+          "A. Introduction and Summary",
+          "B. Statement of Facts",
+          "C. Legal Standard",
+          "D. Argument",
+          "E. Legal Research and Case Law",
+          "F. Conclusion"
+        ]
+      },
+      {
+        "section": "V. DECLARATION OF PLAINTIFF/PETITIONER",
+        "pages": "36-50",
+        "subsections": [
+          "A. Personal Background",
+          "B. Statement of Facts Under Penalty of Perjury",
+          "C. Timeline of Events",
+          "D. Description of Damages",
+          "E. Exhibits Referenced",
+          "F. Signature and Verification"
+        ]
+      },
+      {
+        "section": "VI. DECLARATION OF COUNSEL",
+        "pages": "51-55",
+        "subsections": [
+          "A. Attorney Background and Qualifications",
+          "B. Investigation Conducted",
+          "C. Legal Research Performed",
+          "D. Authentication of Documents",
+          "E. Service and Filing Certifications"
+        ]
+      },
+      {
+        "section": "VII. SUPPORTING EVIDENCE",
+        "pages": "56-100",
+        "subsections": [
+          "A. Documentary Evidence",
+          "   1. Contracts and Agreements",
+          "   2. Correspondence (Emails, Letters)",
+          "   3. Financial Records",
+          "   4. Medical Records (if applicable)",
+          "   5. Police Reports",
+          "   6. Photographs and Visual Evidence",
+          "B. Expert Declarations",
+          "   1. Medical Experts",
+          "   2. Financial Experts",
+          "   3. Technical Experts",
+          "C. Witness Declarations",
+          "D. Business Records",
+          "E. Public Records"
+        ]
+      },
+      {
+        "section": "VIII. DAMAGES CALCULATION",
+        "pages": "101-115",
+        "subsections": [
+          "A. Economic Damages",
+          "   1. Past Medical Expenses",
+          "   2. Future Medical Expenses",
+          "   3. Lost Wages",
+          "   4. Loss of Earning Capacity",
+          "   5. Property Damage",
+          "B. Non-Economic Damages",
+          "   1. Pain and Suffering",
+          "   2. Emotional Distress",
+          "   3. Loss of Consortium",
+          "   4. Loss of Enjoyment of Life",
+          "C. Punitive Damages (if applicable)",
+          "D. Total Damages Summary"
+        ]
+      },
+      {
+        "section": "IX. PROPOSED ORDER",
+        "pages": "116-118",
+        "subsections": [
+          "A. Findings of Fact",
+          "B. Conclusions of Law",
+          "C. Order Granting Relief",
+          "D. Signature Block for Judge"
+        ]
+      },
+      {
+        "section": "X. PROOF OF SERVICE",
+        "pages": "119-120",
+        "subsections": [
+          "A. Declaration of Service",
+          "B. Date, Time, and Method of Service",
+          "C. Parties Served",
+          "D. Server's Signature and Information"
+        ]
+      },
+      {
+        "section": "XI. EXHIBITS INDEX",
+        "pages": "121-125",
+        "subsections": [
+          "A. Complete List of All Exhibits",
+          "B. Brief Description of Each Exhibit",
+          "C. Page References"
+        ]
+      },
+      {
+        "section": "XII. CERTIFICATE OF COMPLIANCE",
+        "pages": "126-127",
+        "subsections": [
+          "A. Word Count Certification",
+          "B. Font and Formatting Compliance",
+          "C. Filing Requirements Met"
+        ]
+      }
+    ],
+    "document_types": {
+      "pre_trial": [
+        "Motion to Compel Discovery",
+        "Motion for Summary Judgment",
+        "Motion in Limine",
+        "Motion to Dismiss",
+        "Motion for Preliminary Injunction",
+        "Demurrer",
+        "Answer to Complaint",
+        "Complaint for Damages"
+      ],
+      "trial": [
+        "Opening Statement Outline",
+        "Direct Examination Questions",
+        "Cross-Examination Questions",
+        "Closing Argument Outline",
+        "Jury Instructions",
+        "Trial Brief",
+        "Motions for Directed Verdict",
+        "Proposed Findings of Fact"
+      ],
+      "post_trial": [
+        "Motion for New Trial",
+        "Motion for JNOV",
+        "Notice of Appeal",
+        "Motion to Tax Costs",
+        "Memorandum of Costs",
+        "Motion to Enforce Judgment",
+        "Request for Statement of Decision"
+      ],
+      "collections": [
+        "Writ of Execution",
+        "Abstract of Judgment",
+        "Lien Documentation",
+        "Garnishment Orders",
+        "Debtor's Examination Notice",
+        "Turnover Order",
+        "Bank Levy",
+        "Wage Garnishment"
+      ]
+    },
+    "formatting_requirements": {
+      "font": "Times New Roman 12pt or Arial 11pt",
+      "margins": "1 inch all sides",
+      "line_spacing": "Double-spaced",
+      "page_numbers": "Bottom center",
+      "headings": "Bold, numbered",
+      "citations": "Bluebook format",
+      "exhibits": "Tabbed and numbered"
+    }
+  }
+}

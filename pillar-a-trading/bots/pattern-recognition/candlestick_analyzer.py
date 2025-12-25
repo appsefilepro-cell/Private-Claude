@@ -261,6 +261,18 @@ class CandlestickAnalyzer:
 
         return self._no_signal("No patterns detected")
 
+    def analyze_pattern(self, candles: List[Dict]) -> Dict[str, Any]:
+        """
+        Alias for analyze() method - analyzes candles for patterns
+
+        Args:
+            candles: List of candle dictionaries with OHLCV data
+
+        Returns:
+            Signal dictionary
+        """
+        return self.analyze(candles)
+
     def _create_signal(self, pattern: str, signal_type: str, confidence: float, last_candle: Dict) -> Dict[str, Any]:
         """Create a trading signal"""
         signal = {

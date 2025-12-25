@@ -1,0 +1,28 @@
+{
+  "sharepoint": {
+    "site_url": "https://appswy.sharepoint.com/sites/LitigationVault",
+    "library_name": "Documents",
+    "drive_id": "Documents",
+    "enabled": true
+  },
+  "power_bi": {
+    "group_id": "c96c4ac3-c695-4afd-b90d-423b3ece0b8d",
+    "dashboard_id": "fa50985d-6616-4ead-859a-8e4c08dabb88",
+    "home_url": "https://app.powerbi.com/home?experience=power-bi",
+    "enabled": true
+  },
+  "power_automate": {
+    "environment_id": "Default-fe3b018d-58d1-4513-8d70-2dc06273a649",
+    "enabled": true
+  },
+  "azure_ad": {
+    "tenant_id": "fe3b018d-58d1-4513-8d70-2dc06273a649",
+    "tenant_domain": "appswy.onmicrosoft.com",
+    "enabled": true
+  },
+  "integration_status": {
+    "last_updated": "2025-12-14T05:15:00Z",
+    "configured_by": "Agent X2.0",
+    "all_services_configured": true
+  }
+}

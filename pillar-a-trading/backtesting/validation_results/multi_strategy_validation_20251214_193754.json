@@ -1,0 +1,287 @@
+{
+  "results": {
+    "big_short": {
+      "strategy": "big_short",
+      "total_signals": 10,
+      "successful_trades": 10,
+      "failed_trades": 0,
+      "win_rate": 100.0,
+      "trades": [
+        {
+          "symbol": "PETS_COM",
+          "name": "Pets.com",
+          "period": "Dot-com 2000",
+          "signal_confidence": 0.6,
+          "entry_price": 14.0,
+          "exit_price": 0.22,
+          "profit_pct": 98.42857142857142,
+          "success": true
+        },
+        {
+          "symbol": "WBVN",
+          "name": "Webvan",
+          "period": "Dot-com 2000",
+          "signal_confidence": 0.6,
+          "entry_price": 34.0,
+          "exit_price": 0.06,
+          "profit_pct": 99.8235294117647,
+          "success": true
+        },
+        {
+          "symbol": "ETYS",
+          "name": "eToys",
+          "period": "Dot-com 2000",
+          "signal_confidence": 0.6,
+          "entry_price": 86.0,
+          "exit_price": 0.09,
+          "profit_pct": 99.8953488372093,
+          "success": true
+        },
+        {
+          "symbol": "CMGI",
+          "name": "CMGI",
+          "period": "Dot-com 2000",
+          "signal_confidence": 0.6,
+          "entry_price": 163.22,
+          "exit_price": 0.84,
+          "profit_pct": 99.48535718661928,
+          "success": true
+        },
+        {
+          "symbol": "TGLO",
+          "name": "Theglobe.com",
+          "period": "Dot-com 2000",
+          "signal_confidence": 0.6,
+          "entry_price": 97.0,
+          "exit_price": 0.15,
+          "profit_pct": 99.84536082474226,
+          "success": true
+        },
+        {
+          "symbol": "LEH",
+          "name": "Lehman Brothers",
+          "period": "Housing 2008",
+          "signal_confidence": 0.6,
+          "entry_price": 85.8,
+          "exit_price": 0.21,
+          "profit_pct": 99.75524475524476,
+          "success": true
+        },
+        {
+          "symbol": "AMC",
+          "name": "AMC Entertainment",
+          "period": "Meme 2021",
+          "signal_confidence": 0.6,
+          "entry_price": 72.62,
+          "exit_price": 29.08,
+          "profit_pct": 59.9559350041311,
+          "success": true
+        },
+        {
+          "symbol": "CLOV",
+          "name": "Clover Health",
+          "period": "Meme 2021",
+          "signal_confidence": 0.6,
+          "entry_price": 28.85,
+          "exit_price": 2.15,
+          "profit_pct": 92.54766031195841,
+          "success": true
+        },
+        {
+          "symbol": "WISH",
+          "name": "ContextLogic",
+          "period": "Meme 2021",
+          "signal_confidence": 0.6,
+          "entry_price": 32.85,
+          "exit_price": 0.42,
+          "profit_pct": 98.72146118721462,
+          "success": true
+        },
+        {
+          "symbol": "MSTR",
+          "name": "MicroStrategy",
+          "period": "Crypto 2022",
+          "signal_confidence": 0.65,
+          "entry_price": 891.0,
+          "exit_price": 145.0,
+          "profit_pct": 83.72615039281706,
+          "success": true
+        }
+      ],
+      "target_met": false
+    },
+    "momentum_short": {
+      "strategy": "momentum_short",
+      "total_signals": 11,
+      "successful_trades": 11,
+      "failed_trades": 0,
+      "win_rate": 100.0,
+      "trades": [
+        {
+          "symbol": "PETS_COM",
+          "name": "Pets.com",
+          "period": "Dot-com 2000",
+          "signal_confidence": 0.65,
+          "entry_price": 14.0,
+          "exit_price": 0.22,
+          "profit_pct": 98.42857142857142,
+          "success": true
+        },
+        {
+          "symbol": "WBVN",
+          "name": "Webvan",
+          "period": "Dot-com 2000",
+          "signal_confidence": 0.65,
+          "entry_price": 34.0,
+          "exit_price": 0.06,
+          "profit_pct": 99.8235294117647,
+          "success": true
+        },
+        {
+          "symbol": "ETYS",
+          "name": "eToys",
+          "period": "Dot-com 2000",
+          "signal_confidence": 0.75,
+          "entry_price": 86.0,
+          "exit_price": 0.09,
+          "profit_pct": 99.8953488372093,
+          "success": true
+        },
+        {
+          "symbol": "CMGI",
+          "name": "CMGI",
+          "period": "Dot-com 2000",
+          "signal_confidence": 0.65,
+          "entry_price": 163.22,
+          "exit_price": 0.84,
+          "profit_pct": 99.48535718661928,
+          "success": true
+        },
+        {
+          "symbol": "TGLO",
+          "name": "Theglobe.com",
+          "period": "Dot-com 2000",
+          "signal_confidence": 0.65,
+          "entry_price": 97.0,
+          "exit_price": 0.15,
+          "profit_pct": 99.84536082474226,
+          "success": true
+        },
+        {
+          "symbol": "GME",
+          "name": "GameStop",
+          "period": "Meme 2021",
+          "signal_confidence": 0.75,
+          "entry_price": 483.0,
+          "exit_price": 40.59,
+          "profit_pct": 91.59627329192546,
+          "success": true
+        },
+        {
+          "symbol": "AMC",
+          "name": "AMC Entertainment",
+          "period": "Meme 2021",
+          "signal_confidence": 0.8,
+          "entry_price": 72.62,
+          "exit_price": 29.08,
+          "profit_pct": 59.9559350041311,
+          "success": true
+        },
+        {
+          "symbol": "BB",
+          "name": "BlackBerry",
+          "period": "Meme 2021",
+          "signal_confidence": 0.75,
+          "entry_price": 28.0,
+          "exit_price": 8.5,
+          "profit_pct": 69.64285714285714,
+          "success": true
+        },
+        {
+          "symbol": "CLOV",
+          "name": "Clover Health",
+          "period": "Meme 2021",
+          "signal_confidence": 0.65,
+          "entry_price": 28.85,
+          "exit_price": 2.15,
+          "profit_pct": 92.54766031195841,
+          "success": true
+        },
+        {
+          "symbol": "COIN",
+          "name": "Coinbase",
+          "period": "Crypto 2022",
+          "signal_confidence": 0.65,
+          "entry_price": 429.54,
+          "exit_price": 40.83,
+          "profit_pct": 90.49448246961866,
+          "success": true
+        },
+        {
+          "symbol": "RIOT",
+          "name": "Riot Blockchain",
+          "period": "Crypto 2022",
+          "signal_confidence": 0.65,
+          "entry_price": 79.5,
+          "exit_price": 3.5,
+          "profit_pct": 95.59748427672956,
+          "success": true
+        }
+      ],
+      "target_met": false
+    },
+    "technical_breakdown": {
+      "strategy": "technical_breakdown",
+      "total_signals": 1,
+      "successful_trades": 1,
+      "failed_trades": 0,
+      "win_rate": 100.0,
+      "trades": [
+        {
+          "symbol": "WM",
+          "name": "Washington Mutual",
+          "period": "Housing 2008",
+          "signal_confidence": 0.6,
+          "entry_price": 45.0,
+          "exit_price": 0.45,
+          "profit_pct": 99.0,
+          "success": true
+        }
+      ],
+      "target_met": false
+    }
+  },
+  "verification": {
+    "big_short": {
+      "verified": true,
+      "original_win_rate": 100.0,
+      "method1_win_rate": 100.0,
+      "method2_win_rate": 100.0,
+      "method3_win_rate": 100.0,
+      "total_trades": 10,
+      "successful_trades_original": 10,
+      "successful_trades_verified": 10
+    },
+    "momentum_short": {
+      "verified": true,
+      "original_win_rate": 100.0,
+      "method1_win_rate": 100.0,
+      "method2_win_rate": 100.0,
+      "method3_win_rate": 100.0,
+      "total_trades": 11,
+      "successful_trades_original": 11,
+      "successful_trades_verified": 11
+    },
+    "technical_breakdown": {
+      "verified": true,
+      "original_win_rate": 100.0,
+      "method1_win_rate": 100.0,
+      "method2_win_rate": 100.0,
+      "method3_win_rate": 100.0,
+      "total_trades": 1,
+      "successful_trades_original": 1,
+      "successful_trades_verified": 1
+    }
+  },
+  "timestamp": "2025-12-14T19:37:54.863746"
+}

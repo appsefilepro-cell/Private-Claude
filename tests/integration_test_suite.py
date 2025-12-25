@@ -62,7 +62,8 @@ class IntegrationTestSuite:
         """Test Zapier MCP integration"""
         test_name = "Zapier MCP Connection"
         try:
-            from pillar_a_trading.zapier_integration.zapier_mcp_connector import ZapierMCPConnector
+            sys.path.insert(0, str(Path(__file__).parent.parent / 'pillar-a-trading' / 'zapier-integration'))
+            from zapier_mcp_connector import ZapierMCPConnector
 
             connector = ZapierMCPConnector()
 
@@ -222,19 +223,20 @@ class IntegrationTestSuite:
         """Test required Python dependencies"""
         test_name = "Required Dependencies"
         try:
-            required = [
-                'requests',
-                'python-dotenv',
-                'fitz',  # PyMuPDF
-                'openpyxl'
-            ]
+            # Map package names to their import names
+            required = {
+                'requests': 'requests',
+                'python-dotenv': 'dotenv',
+                'PyMuPDF': 'fitz',
+                'openpyxl': 'openpyxl'
+            }
 
             missing = []
-            for module in required:
+            for package_name, import_name in required.items():
                 try:
-                    __import__(module if module != 'fitz' else 'fitz')
+                    __import__(import_name)
                 except ImportError:
-                    missing.append(module)
+                    missing.append(package_name)
 
             if not missing:
                 self.test_result(test_name, True, "All dependencies installed")
