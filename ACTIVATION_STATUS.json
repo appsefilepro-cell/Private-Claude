@@ -7,7 +7,7 @@
   "systems": {
     "trading_24_7": "ACTIVE",
     "bonds_trading": "ACTIVE",
-    "remediation": "ACTIVE",
+    "remediation": "IN_PROGRESS",
     "zapier": "READY",
     "github_workflows": "CONFIGURED",
     "trading_knowledge": "COMPLETE"
@@ -27,7 +27,11 @@
       "test_suite": "tests/complete_system_test.py"
     },
     "trading_strategy": {
-      "pairs": ["BTC/USDT-PERP", "ETH/USDT-PERP", "XRP/USDT-PERP"],
+      "pairs": [
+        "BTC/USDT-PERP",
+        "ETH/USDT-PERP",
+        "XRP/USDT-PERP"
+      ],
       "position_size": "0.5% ($1.25)",
       "max_loss_per_trade": "$0.0065",
       "leverage": "3x-5x",
@@ -36,5 +40,13 @@
     "deal_ai_apps": 13,
     "implementation_phases": 4,
     "zapier_active_learning": "ACTIVE"
+  },
+  "remediation_results": {
+    "timestamp": "2025-12-26T17:13:43.861427+00:00",
+    "overall_score": 74.76190476190476,
+    "target_score": 97.0,
+    "passing_criteria": 9,
+    "failing_criteria": 12,
+    "total_criteria": 21
   }
 }
