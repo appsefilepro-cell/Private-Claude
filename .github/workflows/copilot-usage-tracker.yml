@@ -1,0 +1,138 @@
+name: GitHub Copilot Usage Tracker
+
+on:
+  schedule:
+    # Run every Monday at 9 AM UTC
+    - cron: '0 9 * * 1'
+  workflow_dispatch: # Allow manual trigger
+
+jobs:
+  track-copilot-usage:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Check Copilot Usage
+        run: |
+          echo "📊 GitHub Copilot Usage Tracker - Week $(date +%U)"
+          echo "================================================"
+          echo ""
+          echo "Current Target: 95% usage"
+          echo "Investment: \$39/month GitHub Copilot Business"
+          echo ""
+          echo "📈 Weekly Goals:"
+          WEEK_NUM=$(($(date +%U) - 51))  # Adjust based on start week
+
+          case $WEEK_NUM in
+            1)
+              echo "Week 1 Target: 20% - Trading System Completion"
+              echo "Tasks: Chart.js, MT5 Live, Binance API, Unit Tests"
+              ;;
+            2)
+              echo "Week 2 Target: 35% - Legal Automation + Tests"
+              echo "Tasks: Credit Repair, Tax Filing, Form Generators"
+              ;;
+            3)
+              echo "Week 3 Target: 50% - API Expansion + Frontend"
+              echo "Tasks: 50+ API Endpoints, React Components, GraphQL"
+              ;;
+            4)
+              echo "Week 4 Target: 65% - Credit + Tax Systems"
+              echo "Tasks: CFPB Automation, IRS Forms, QuickBooks Integration"
+              ;;
+            5)
+              echo "Week 5 Target: 75% - Mobile App Development"
+              echo "Tasks: React Native Screens, Navigation, Push Notifications"
+              ;;
+            6)
+              echo "Week 6 Target: 85% - AI + ML Models"
+              echo "Tasks: LSTM, Document Classification, NER, Multi-model Bridge"
+              ;;
+            7)
+              echo "Week 7 Target: 92% - Integration Testing"
+              echo "Tasks: E2E Tests, Load Tests, Security Tests"
+              ;;
+            8)
+              echo "Week 8 Target: 95%+ - Performance Optimization"
+              echo "Tasks: Caching, Query Optimization, Monitoring"
+              ;;
+            *)
+              echo "Maintenance Mode: Maintain 95%+ usage"
+              ;;
+          esac
+
+          echo ""
+          echo "📋 Action Items:"
+          echo "1. Open VS Code with Copilot enabled"
+          echo "2. Review tasks in .github/copilot-tasks.md"
+          echo "3. Accept 50+ Copilot suggestions today"
+          echo "4. Commit code to GitHub"
+          echo ""
+          echo "✅ Check your usage: https://github.com/settings/copilot"
+
+      - name: Create Weekly Report Issue
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const week = new Date().toISOString().split('T')[0];
+            const weekNum = Math.floor((new Date() - new Date(new Date().getFullYear(), 0, 1)) / 604800000);
+
+            const targets = {
+              1: { target: '20%', focus: 'Trading System Completion' },
+              2: { target: '35%', focus: 'Legal Automation + Tests' },
+              3: { target: '50%', focus: 'API Expansion + Frontend' },
+              4: { target: '65%', focus: 'Credit + Tax Systems' },
+              5: { target: '75%', focus: 'Mobile App Development' },
+              6: { target: '85%', focus: 'AI + ML Models' },
+              7: { target: '92%', focus: 'Integration Testing' },
+              8: { target: '95%+', focus: 'Performance Optimization' }
+            };
+
+            const currentWeek = targets[weekNum] || { target: '95%+', focus: 'Maintenance' };
+
+            const body = `## 📊 GitHub Copilot Weekly Usage Report
+
+            **Week:** ${weekNum}
+            **Date:** ${week}
+            **Target:** ${currentWeek.target}
+            **Focus:** ${currentWeek.focus}
+
+            ---
+
+            ### ✅ Checklist
+
+            - [ ] Opened VS Code with Copilot enabled
+            - [ ] Reviewed tasks in \`.github/copilot-tasks.md\`
+            - [ ] Accepted 50+ Copilot suggestions
+            - [ ] Committed code to GitHub
+            - [ ] Checked usage stats: [GitHub Copilot Settings](https://github.com/settings/copilot)
+
+            ### 📈 Progress Tracking
+
+            **Current Usage:** __%__ (Update this)
+            **Lines of Code Generated:** ___
+            **Suggestions Accepted:** ___
+            **Files Created:** ___
+
+            ### 🎯 This Week's Tasks
+
+            See detailed task list: \`.github/copilot-tasks.md\`
+
+            ### 📝 Notes
+
+            (Add your notes here about what you completed this week)
+
+            ---
+
+            **Next Week Target:** ${targets[weekNum + 1]?.target || '95%+'}
+            **Next Week Focus:** ${targets[weekNum + 1]?.focus || 'Maintenance'}
+            `;
+
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: `📊 Copilot Usage Report - Week ${weekNum} (${week})`,
+              body: body,
+              labels: ['copilot', 'weekly-report', 'automation']
+            });

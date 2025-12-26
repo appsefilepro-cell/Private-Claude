@@ -1,0 +1,156 @@
+name: Create GitHub Tasks from 2-Month Plan
+
+on:
+  workflow_dispatch:
+    inputs:
+      weeks:
+        description: 'Number of weeks to create tasks for (1-8)'
+        required: true
+        default: '8'
+
+jobs:
+  create-tasks:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Create GitHub Issues for All Tasks
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const weeks = parseInt('${{ github.event.inputs.weeks }}');
+
+            const tasksData = {
+              week1: {
+                title: 'Week 1: Trading System Completion (Target: 20%)',
+                tasks: [
+                  { title: 'Chart.js Integration (PerformanceChart.tsx)', estimate: '250 lines', priority: 'high', labels: ['week-1', 'frontend', 'trading'] },
+                  { title: 'MT5 Live Account Integration', estimate: '400 lines', priority: 'critical', labels: ['week-1', 'trading', 'backend'] },
+                  { title: 'Binance Live API Integration', estimate: '500 lines', priority: 'high', labels: ['week-1', 'crypto', 'trading'] },
+                  { title: 'KinnoBot AI Pattern Recognition ML Model', estimate: '600 lines', priority: 'high', labels: ['week-1', 'ai', 'ml'] },
+                  { title: 'Trade Copier (Copygram Clone)', estimate: '300 lines', priority: 'medium', labels: ['week-1', 'trading'] },
+                  { title: 'Unit Tests for Trading System', estimate: '800 lines', priority: 'high', labels: ['week-1', 'testing'] }
+                ]
+              },
+              week2: {
+                title: 'Week 2: Legal Automation + Tests (Target: 35%)',
+                tasks: [
+                  { title: 'Credit Repair Automation System', estimate: '700 lines', priority: 'critical', labels: ['week-2', 'legal', 'credit-repair'] },
+                  { title: 'Tradeline Management System', estimate: '450 lines', priority: 'high', labels: ['week-2', 'credit-repair'] },
+                  { title: 'Tax Filing System - Individual 1040', estimate: '800 lines', priority: 'critical', labels: ['week-2', 'tax', 'financial'] },
+                  { title: 'Tax Filing System - Business Returns (1065, 1120-S)', estimate: '900 lines', priority: 'high', labels: ['week-2', 'tax'] },
+                  { title: 'Nonprofit Form 990 Generator', estimate: '650 lines', priority: 'high', labels: ['week-2', 'nonprofit'] },
+                  { title: 'Unit Tests for Legal/Financial Systems', estimate: '700 lines', priority: 'high', labels: ['week-2', 'testing'] }
+                ]
+              },
+              week3: {
+                title: 'Week 3: API Expansion + Frontend (Target: 50%)',
+                tasks: [
+                  { title: 'Expand REST API to 100+ Endpoints', estimate: '1200 lines', priority: 'critical', labels: ['week-3', 'api', 'backend'] },
+                  { title: 'GraphQL API Layer', estimate: '500 lines', priority: 'medium', labels: ['week-3', 'graphql'] },
+                  { title: 'React Dashboard - Trading Components', estimate: '1500 lines', priority: 'high', labels: ['week-3', 'frontend', 'react'] },
+                  { title: 'React Dashboard - Legal Components', estimate: '1200 lines', priority: 'high', labels: ['week-3', 'frontend'] },
+                  { title: 'React Dashboard - Financial Components', estimate: '1000 lines', priority: 'medium', labels: ['week-3', 'frontend'] },
+                  { title: 'WebSocket Real-Time Updates', estimate: '350 lines', priority: 'high', labels: ['week-3', 'websocket'] }
+                ]
+              },
+              week4: {
+                title: 'Week 4: Credit Repair + Tax Filing (Target: 65%)',
+                tasks: [
+                  { title: 'CFPB Complaint Automation', estimate: '400 lines', priority: 'high', labels: ['week-4', 'legal', 'cfpb'] },
+                  { title: 'Goodwill Letter Generator', estimate: '300 lines', priority: 'medium', labels: ['week-4', 'credit-repair'] },
+                  { title: 'FTC Identity Theft Report Generator', estimate: '350 lines', priority: 'medium', labels: ['week-4', 'legal'] },
+                  { title: 'Tax Return E-Filing Integration (IRS MeF)', estimate: '600 lines', priority: 'critical', labels: ['week-4', 'tax'] },
+                  { title: 'QuickBooks Integration', estimate: '500 lines', priority: 'high', labels: ['week-4', 'financial', 'integration'] },
+                  { title: 'Stripe Billing Integration', estimate: '450 lines', priority: 'high', labels: ['week-4', 'billing'] }
+                ]
+              },
+              week5: {
+                title: 'Week 5: Mobile App Development (Target: 75%)',
+                tasks: [
+                  { title: 'React Native Mobile App - Core & Navigation', estimate: '800 lines', priority: 'high', labels: ['week-5', 'mobile', 'react-native'] },
+                  { title: 'Mobile App - Trading Screens', estimate: '1200 lines', priority: 'high', labels: ['week-5', 'mobile', 'trading'] },
+                  { title: 'Mobile App - Legal Screens', estimate: '900 lines', priority: 'medium', labels: ['week-5', 'mobile', 'legal'] },
+                  { title: 'Mobile App - Financial Screens', estimate: '800 lines', priority: 'medium', labels: ['week-5', 'mobile', 'financial'] }
+                ]
+              },
+              week6: {
+                title: 'Week 6: AI Orchestration + ML Models (Target: 85%)',
+                tasks: [
+                  { title: 'Multi-Model Orchestration Enhancement', estimate: '400 lines', priority: 'high', labels: ['week-6', 'ai', 'orchestration'] },
+                  { title: 'Legal Document Classification ML Model', estimate: '700 lines', priority: 'medium', labels: ['week-6', 'ml', 'legal'] },
+                  { title: 'Named Entity Recognition for Legal Docs', estimate: '600 lines', priority: 'medium', labels: ['week-6', 'ml', 'ner'] },
+                  { title: 'Predictive Analytics for Case Outcomes', estimate: '800 lines', priority: 'medium', labels: ['week-6', 'ml', 'analytics'] }
+                ]
+              },
+              week7: {
+                title: 'Week 7: Integration Testing (Target: 92%)',
+                tasks: [
+                  { title: 'End-to-End Testing with Playwright', estimate: '600 lines', priority: 'high', labels: ['week-7', 'testing', 'e2e'] },
+                  { title: 'Integration Tests - Trading + Notifications', estimate: '500 lines', priority: 'high', labels: ['week-7', 'testing', 'integration'] },
+                  { title: 'Integration Tests - Legal + Document Generation', estimate: '450 lines', priority: 'high', labels: ['week-7', 'testing'] },
+                  { title: 'Load Testing with Locust', estimate: '400 lines', priority: 'medium', labels: ['week-7', 'testing', 'load'] },
+                  { title: 'Security Testing (OWASP Top 10)', estimate: '700 lines', priority: 'critical', labels: ['week-7', 'security', 'testing'] }
+                ]
+              },
+              week8: {
+                title: 'Week 8: Performance Optimization (Target: 95%+)',
+                tasks: [
+                  { title: 'Database Query Optimization', estimate: '350 lines', priority: 'high', labels: ['week-8', 'performance', 'database'] },
+                  { title: 'API Response Caching (Redis)', estimate: '300 lines', priority: 'high', labels: ['week-8', 'caching'] },
+                  { title: 'Frontend Performance Optimization', estimate: '400 lines', priority: 'medium', labels: ['week-8', 'frontend', 'performance'] },
+                  { title: 'Monitoring and Observability (Prometheus)', estimate: '350 lines', priority: 'high', labels: ['week-8', 'monitoring'] },
+                  { title: 'Documentation Generation', estimate: '2000 lines', priority: 'medium', labels: ['week-8', 'documentation'] }
+                ]
+              }
+            };
+
+            let issuesCreated = 0;
+
+            for (let i = 1; i <= weeks; i++) {
+              const weekKey = `week${i}`;
+              const weekData = tasksData[weekKey];
+
+              if (!weekData) continue;
+
+              // Create parent issue for the week
+              const parentIssue = await github.rest.issues.create({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                title: `🎯 ${weekData.title}`,
+                body: `## Overview\n\nThis is the tracking issue for Week ${i} tasks.\n\n### Tasks:\n${weekData.tasks.map((t, idx) => `${idx + 1}. ${t.title} (${t.estimate})`).join('\n')}\n\n### Progress\n\n- [ ] All tasks assigned\n- [ ] All tasks in progress\n- [ ] All tasks completed\n- [ ] Week ${i} target usage achieved\n\n---\n\n**See detailed task plan:** \`.github/copilot-tasks.md\``,
+                labels: [`week-${i}`, 'epic', 'copilot-plan']
+              });
+
+              console.log(`Created parent issue for Week ${i}: #${parentIssue.data.number}`);
+
+              // Create individual task issues
+              for (const task of weekData.tasks) {
+                const taskIssue = await github.rest.issues.create({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  title: task.title,
+                  body: `## Task Details\n\n**Estimated Lines:** ${task.estimate}\n**Priority:** ${task.priority}\n**Week:** ${i}\n\n### Implementation Guide\n\nSee detailed instructions in \`.github/copilot-tasks.md\`\n\n### Acceptance Criteria\n\n- [ ] Code implemented using GitHub Copilot\n- [ ] Unit tests written\n- [ ] Code reviewed\n- [ ] Merged to main branch\n\n### Parent Issue\n\nPart of #${parentIssue.data.number}`,
+                  labels: task.labels,
+                  assignees: []
+                });
+
+                issuesCreated++;
+                console.log(`Created task issue: #${taskIssue.data.number} - ${task.title}`);
+
+                // Add small delay to avoid rate limiting
+                await new Promise(resolve => setTimeout(resolve, 100));
+              }
+            }
+
+            // Create summary comment
+            const summary = `## ✅ Task Creation Complete\n\n**Total Issues Created:** ${issuesCreated}\n**Weeks Covered:** ${weeks}\n\n### Next Steps:\n\n1. Review all issues in the [Issues tab](https://github.com/${context.repo.owner}/${context.repo.repo}/issues)\n2. Assign issues to yourself or team members\n3. Start with Week 1 tasks\n4. Use GitHub Copilot to maximize code generation\n5. Track progress weekly\n\n**Target:** Increase Copilot usage from 2.3% → 95% in 8 weeks`;
+
+            console.log(summary);
+
+            // Post summary as a comment on the workflow run
+            core.summary
+              .addHeading('GitHub Tasks Created Successfully')
+              .addRaw(summary)
+              .write();
