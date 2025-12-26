@@ -1,0 +1,805 @@
+{
+  "test_date": "2025-12-21T01:24:08.951806",
+  "capital_levels": [
+    {
+      "capital": 10,
+      "total_trades": 10,
+      "wins": 10,
+      "losses": 0,
+      "win_rate": "100.0%",
+      "total_profit": 5.0,
+      "roi": "50.0%",
+      "final_balance": 15.0,
+      "trades": [
+        {
+          "trade_num": 1,
+          "pair": "GBPJPY",
+          "pattern": "Inverse H&S",
+          "accuracy": 94,
+          "capital": 10,
+          "risk": 0.2,
+          "profit": 0.5,
+          "outcome": "WIN",
+          "timestamp": "2025-12-21T01:24:08.953362"
+        },
+        {
+          "trade_num": 2,
+          "pair": "MATICUSD",
+          "pattern": "Inverse H&S",
+          "accuracy": 94,
+          "capital": 10,
+          "risk": 0.2,
+          "profit": 0.5,
+          "outcome": "WIN",
+          "timestamp": "2025-12-21T01:24:08.953421"
+        },
+        {
+          "trade_num": 3,
+          "pair": "WHEAT",
+          "pattern": "Inverse H&S",
+          "accuracy": 94,
+          "capital": 10,
+          "risk": 0.2,
+          "profit": 0.5,
+          "outcome": "WIN",
+          "timestamp": "2025-12-21T01:24:08.953445"
+        },
+        {
+          "trade_num": 4,
+          "pair": "META",
+          "pattern": "Inverse H&S",
+          "accuracy": 94,
+          "capital": 10,
+          "risk": 0.2,
+          "profit": 0.5,
+          "outcome": "WIN",
+          "timestamp": "2025-12-21T01:24:08.953487"
+        },
+        {
+          "trade_num": 5,
+          "pair": "XAUUSD",
+          "pattern": "Inverse H&S",
+          "accuracy": 93,
+          "capital": 10,
+          "risk": 0.2,
+          "profit": 0.5,
+          "outcome": "WIN",
+          "timestamp": "2025-12-21T01:24:08.953543"
+        },
+        {
+          "trade_num": 6,
+          "pair": "GOOGL",
+          "pattern": "H&S",
+          "accuracy": 93,
+          "capital": 10,
+          "risk": 0.2,
+          "profit": 0.5,
+          "outcome": "WIN",
+          "timestamp": "2025-12-21T01:24:08.953561"
+        },
+        {
+          "trade_num": 7,
+          "pair": "BTCUSD",
+          "pattern": "Morning Star",
+          "accuracy": 92,
+          "capital": 10,
+          "risk": 0.2,
+          "profit": 0.5,
+          "outcome": "WIN",
+          "timestamp": "2025-12-21T01:24:08.953577"
+        },
+        {
+          "trade_num": 8,
+          "pair": "EURUSD",
+          "pattern": "Morning Star",
+          "accuracy": 91,
+          "capital": 10,
+          "risk": 0.2,
+          "profit": 0.5,
+          "outcome": "WIN",
+          "timestamp": "2025-12-21T01:24:08.953598"
+        },
+        {
+          "trade_num": 9,
+          "pair": "ETHUSD",
+          "pattern": "H&S",
+          "accuracy": 91,
+          "capital": 10,
+          "risk": 0.2,
+          "profit": 0.5,
+          "outcome": "WIN",
+          "timestamp": "2025-12-21T01:24:08.953616"
+        },
+        {
+          "trade_num": 10,
+          "pair": "SPX500",
+          "pattern": "Morning Star",
+          "accuracy": 92,
+          "capital": 10,
+          "risk": 0.2,
+          "profit": 0.5,
+          "outcome": "WIN",
+          "timestamp": "2025-12-21T01:24:08.953632"
+        }
+      ]
+    },
+    {
+      "capital": 50,
+      "total_trades": 10,
+      "wins": 7,
+      "losses": 3,
+      "win_rate": "70.0%",
+      "total_profit": 14.5,
+      "roi": "29.0%",
+      "final_balance": 64.5,
+      "trades": [
+        {
+          "trade_num": 1,
+          "pair": "GBPJPY",
+          "pattern": "Inverse H&S",
+          "accuracy": 94,
+          "capital": 50,
+          "risk": 1.0,
+          "profit": 2.5,
+          "outcome": "WIN",
+          "timestamp": "2025-12-21T01:24:09.455120"
+        },
+        {
+          "trade_num": 2,
+          "pair": "MATICUSD",
+          "pattern": "Inverse H&S",
+          "accuracy": 94,
+          "capital": 50,
+          "risk": 1.0,
+          "profit": 2.5,
+          "outcome": "WIN",
+          "timestamp": "2025-12-21T01:24:09.455183"
+        },
+        {
+          "trade_num": 3,
+          "pair": "WHEAT",
+          "pattern": "Inverse H&S",
+          "accuracy": 94,
+          "capital": 50,
+          "risk": 1.0,
+          "profit": -1.0,
+          "outcome": "LOSS",
+          "timestamp": "2025-12-21T01:24:09.455211"
+        },
+        {
+          "trade_num": 4,
+          "pair": "META",
+          "pattern": "Inverse H&S",
+          "accuracy": 94,
+          "capital": 50,
+          "risk": 1.0,
+          "profit": -1.0,
+          "outcome": "LOSS",
+          "timestamp": "2025-12-21T01:24:09.455236"
+        },
+        {
+          "trade_num": 5,
+          "pair": "XAUUSD",
+          "pattern": "Inverse H&S",
+          "accuracy": 93,
+          "capital": 50,
+          "risk": 1.0,
+          "profit": 2.5,
+          "outcome": "WIN",
+          "timestamp": "2025-12-21T01:24:09.455260"
+        },
+        {
+          "trade_num": 6,
+          "pair": "GOOGL",
+          "pattern": "H&S",
+          "accuracy": 93,
+          "capital": 50,
+          "risk": 1.0,
+          "profit": 2.5,
+          "outcome": "WIN",
+          "timestamp": "2025-12-21T01:24:09.455284"
+        },
+        {
+          "trade_num": 7,
+          "pair": "BTCUSD",
+          "pattern": "Morning Star",
+          "accuracy": 92,
+          "capital": 50,
+          "risk": 1.0,
+          "profit": 2.5,
+          "outcome": "WIN",
+          "timestamp": "2025-12-21T01:24:09.455332"
+        },
+        {
+          "trade_num": 8,
+          "pair": "EURUSD",
+          "pattern": "Morning Star",
+          "accuracy": 91,
+          "capital": 50,
+          "risk": 1.0,
+          "profit": 2.5,
+          "outcome": "WIN",
+          "timestamp": "2025-12-21T01:24:09.455356"
+        },
+        {
+          "trade_num": 9,
+          "pair": "ETHUSD",
+          "pattern": "H&S",
+          "accuracy": 91,
+          "capital": 50,
+          "risk": 1.0,
+          "profit": -1.0,
+          "outcome": "LOSS",
+          "timestamp": "2025-12-21T01:24:09.455379"
+        },
+        {
+          "trade_num": 10,
+          "pair": "SPX500",
+          "pattern": "Morning Star",
+          "accuracy": 92,
+          "capital": 50,
+          "risk": 1.0,
+          "profit": 2.5,
+          "outcome": "WIN",
+          "timestamp": "2025-12-21T01:24:09.455404"
+        }
+      ]
+    },
+    {
+      "capital": 100,
+      "total_trades": 10,
+      "wins": 7,
+      "losses": 3,
+      "win_rate": "70.0%",
+      "total_profit": 29.0,
+      "roi": "29.0%",
+      "final_balance": 129.0,
+      "trades": [
+        {
+          "trade_num": 1,
+          "pair": "GBPJPY",
+          "pattern": "Inverse H&S",
+          "accuracy": 94,
+          "capital": 100,
+          "risk": 2.0,
+          "profit": 5.0,
+          "outcome": "WIN",
+          "timestamp": "2025-12-21T01:24:09.956063"
+        },
+        {
+          "trade_num": 2,
+          "pair": "MATICUSD",
+          "pattern": "Inverse H&S",
+          "accuracy": 94,
+          "capital": 100,
+          "risk": 2.0,
+          "profit": 5.0,
+          "outcome": "WIN",
+          "timestamp": "2025-12-21T01:24:09.956108"
+        },
+        {
+          "trade_num": 3,
+          "pair": "WHEAT",
+          "pattern": "Inverse H&S",
+          "accuracy": 94,
+          "capital": 100,
+          "risk": 2.0,
+          "profit": 5.0,
+          "outcome": "WIN",
+          "timestamp": "2025-12-21T01:24:09.956125"
+        },
+        {
+          "trade_num": 4,
+          "pair": "META",
+          "pattern": "Inverse H&S",
+          "accuracy": 94,
+          "capital": 100,
+          "risk": 2.0,
+          "profit": -2.0,
+          "outcome": "LOSS",
+          "timestamp": "2025-12-21T01:24:09.956142"
+        },
+        {
+          "trade_num": 5,
+          "pair": "XAUUSD",
+          "pattern": "Inverse H&S",
+          "accuracy": 93,
+          "capital": 100,
+          "risk": 2.0,
+          "profit": -2.0,
+          "outcome": "LOSS",
+          "timestamp": "2025-12-21T01:24:09.956158"
+        },
+        {
+          "trade_num": 6,
+          "pair": "GOOGL",
+          "pattern": "H&S",
+          "accuracy": 93,
+          "capital": 100,
+          "risk": 2.0,
+          "profit": 5.0,
+          "outcome": "WIN",
+          "timestamp": "2025-12-21T01:24:09.956174"
+        },
+        {
+          "trade_num": 7,
+          "pair": "BTCUSD",
+          "pattern": "Morning Star",
+          "accuracy": 92,
+          "capital": 100,
+          "risk": 2.0,
+          "profit": -2.0,
+          "outcome": "LOSS",
+          "timestamp": "2025-12-21T01:24:09.956191"
+        },
+        {
+          "trade_num": 8,
+          "pair": "EURUSD",
+          "pattern": "Morning Star",
+          "accuracy": 91,
+          "capital": 100,
+          "risk": 2.0,
+          "profit": 5.0,
+          "outcome": "WIN",
+          "timestamp": "2025-12-21T01:24:09.956206"
+        },
+        {
+          "trade_num": 9,
+          "pair": "ETHUSD",
+          "pattern": "H&S",
+          "accuracy": 91,
+          "capital": 100,
+          "risk": 2.0,
+          "profit": 5.0,
+          "outcome": "WIN",
+          "timestamp": "2025-12-21T01:24:09.956222"
+        },
+        {
+          "trade_num": 10,
+          "pair": "SPX500",
+          "pattern": "Morning Star",
+          "accuracy": 92,
+          "capital": 100,
+          "risk": 2.0,
+          "profit": 5.0,
+          "outcome": "WIN",
+          "timestamp": "2025-12-21T01:24:09.956238"
+        }
+      ]
+    },
+    {
+      "capital": 200,
+      "total_trades": 10,
+      "wins": 7,
+      "losses": 3,
+      "win_rate": "70.0%",
+      "total_profit": 58.0,
+      "roi": "29.0%",
+      "final_balance": 258.0,
+      "trades": [
+        {
+          "trade_num": 1,
+          "pair": "GBPJPY",
+          "pattern": "Inverse H&S",
+          "accuracy": 94,
+          "capital": 200,
+          "risk": 4.0,
+          "profit": 10.0,
+          "outcome": "WIN",
+          "timestamp": "2025-12-21T01:24:10.457372"
+        },
+        {
+          "trade_num": 2,
+          "pair": "MATICUSD",
+          "pattern": "Inverse H&S",
+          "accuracy": 94,
+          "capital": 200,
+          "risk": 4.0,
+          "profit": 10.0,
+          "outcome": "WIN",
+          "timestamp": "2025-12-21T01:24:10.457415"
+        },
+        {
+          "trade_num": 3,
+          "pair": "WHEAT",
+          "pattern": "Inverse H&S",
+          "accuracy": 94,
+          "capital": 200,
+          "risk": 4.0,
+          "profit": -4.0,
+          "outcome": "LOSS",
+          "timestamp": "2025-12-21T01:24:10.457439"
+        },
+        {
+          "trade_num": 4,
+          "pair": "META",
+          "pattern": "Inverse H&S",
+          "accuracy": 94,
+          "capital": 200,
+          "risk": 4.0,
+          "profit": 10.0,
+          "outcome": "WIN",
+          "timestamp": "2025-12-21T01:24:10.457482"
+        },
+        {
+          "trade_num": 5,
+          "pair": "XAUUSD",
+          "pattern": "Inverse H&S",
+          "accuracy": 93,
+          "capital": 200,
+          "risk": 4.0,
+          "profit": 10.0,
+          "outcome": "WIN",
+          "timestamp": "2025-12-21T01:24:10.457527"
+        },
+        {
+          "trade_num": 6,
+          "pair": "GOOGL",
+          "pattern": "H&S",
+          "accuracy": 93,
+          "capital": 200,
+          "risk": 4.0,
+          "profit": 10.0,
+          "outcome": "WIN",
+          "timestamp": "2025-12-21T01:24:10.457548"
+        },
+        {
+          "trade_num": 7,
+          "pair": "BTCUSD",
+          "pattern": "Morning Star",
+          "accuracy": 92,
+          "capital": 200,
+          "risk": 4.0,
+          "profit": -4.0,
+          "outcome": "LOSS",
+          "timestamp": "2025-12-21T01:24:10.457566"
+        },
+        {
+          "trade_num": 8,
+          "pair": "EURUSD",
+          "pattern": "Morning Star",
+          "accuracy": 91,
+          "capital": 200,
+          "risk": 4.0,
+          "profit": -4.0,
+          "outcome": "LOSS",
+          "timestamp": "2025-12-21T01:24:10.457585"
+        },
+        {
+          "trade_num": 9,
+          "pair": "ETHUSD",
+          "pattern": "H&S",
+          "accuracy": 91,
+          "capital": 200,
+          "risk": 4.0,
+          "profit": 10.0,
+          "outcome": "WIN",
+          "timestamp": "2025-12-21T01:24:10.457605"
+        },
+        {
+          "trade_num": 10,
+          "pair": "SPX500",
+          "pattern": "Morning Star",
+          "accuracy": 92,
+          "capital": 200,
+          "risk": 4.0,
+          "profit": 10.0,
+          "outcome": "WIN",
+          "timestamp": "2025-12-21T01:24:10.457624"
+        }
+      ]
+    },
+    {
+      "capital": 500,
+      "total_trades": 10,
+      "wins": 10,
+      "losses": 0,
+      "win_rate": "100.0%",
+      "total_profit": 250.0,
+      "roi": "50.0%",
+      "final_balance": 750.0,
+      "trades": [
+        {
+          "trade_num": 1,
+          "pair": "GBPJPY",
+          "pattern": "Inverse H&S",
+          "accuracy": 94,
+          "capital": 500,
+          "risk": 10.0,
+          "profit": 25.0,
+          "outcome": "WIN",
+          "timestamp": "2025-12-21T01:24:10.958696"
+        },
+        {
+          "trade_num": 2,
+          "pair": "MATICUSD",
+          "pattern": "Inverse H&S",
+          "accuracy": 94,
+          "capital": 500,
+          "risk": 10.0,
+          "profit": 25.0,
+          "outcome": "WIN",
+          "timestamp": "2025-12-21T01:24:10.958737"
+        },
+        {
+          "trade_num": 3,
+          "pair": "WHEAT",
+          "pattern": "Inverse H&S",
+          "accuracy": 94,
+          "capital": 500,
+          "risk": 10.0,
+          "profit": 25.0,
+          "outcome": "WIN",
+          "timestamp": "2025-12-21T01:24:10.958754"
+        },
+        {
+          "trade_num": 4,
+          "pair": "META",
+          "pattern": "Inverse H&S",
+          "accuracy": 94,
+          "capital": 500,
+          "risk": 10.0,
+          "profit": 25.0,
+          "outcome": "WIN",
+          "timestamp": "2025-12-21T01:24:10.958771"
+        },
+        {
+          "trade_num": 5,
+          "pair": "XAUUSD",
+          "pattern": "Inverse H&S",
+          "accuracy": 93,
+          "capital": 500,
+          "risk": 10.0,
+          "profit": 25.0,
+          "outcome": "WIN",
+          "timestamp": "2025-12-21T01:24:10.958787"
+        },
+        {
+          "trade_num": 6,
+          "pair": "GOOGL",
+          "pattern": "H&S",
+          "accuracy": 93,
+          "capital": 500,
+          "risk": 10.0,
+          "profit": 25.0,
+          "outcome": "WIN",
+          "timestamp": "2025-12-21T01:24:10.958809"
+        },
+        {
+          "trade_num": 7,
+          "pair": "BTCUSD",
+          "pattern": "Morning Star",
+          "accuracy": 92,
+          "capital": 500,
+          "risk": 10.0,
+          "profit": 25.0,
+          "outcome": "WIN",
+          "timestamp": "2025-12-21T01:24:10.958825"
+        },
+        {
+          "trade_num": 8,
+          "pair": "EURUSD",
+          "pattern": "Morning Star",
+          "accuracy": 91,
+          "capital": 500,
+          "risk": 10.0,
+          "profit": 25.0,
+          "outcome": "WIN",
+          "timestamp": "2025-12-21T01:24:10.958840"
+        },
+        {
+          "trade_num": 9,
+          "pair": "ETHUSD",
+          "pattern": "H&S",
+          "accuracy": 91,
+          "capital": 500,
+          "risk": 10.0,
+          "profit": 25.0,
+          "outcome": "WIN",
+          "timestamp": "2025-12-21T01:24:10.958856"
+        },
+        {
+          "trade_num": 10,
+          "pair": "SPX500",
+          "pattern": "Morning Star",
+          "accuracy": 92,
+          "capital": 500,
+          "risk": 10.0,
+          "profit": 25.0,
+          "outcome": "WIN",
+          "timestamp": "2025-12-21T01:24:10.958871"
+        }
+      ]
+    },
+    {
+      "capital": 1000,
+      "total_trades": 10,
+      "wins": 10,
+      "losses": 0,
+      "win_rate": "100.0%",
+      "total_profit": 500.0,
+      "roi": "50.0%",
+      "final_balance": 1500.0,
+      "trades": [
+        {
+          "trade_num": 1,
+          "pair": "GBPJPY",
+          "pattern": "Inverse H&S",
+          "accuracy": 94,
+          "capital": 1000,
+          "risk": 20.0,
+          "profit": 50.0,
+          "outcome": "WIN",
+          "timestamp": "2025-12-21T01:24:11.459443"
+        },
+        {
+          "trade_num": 2,
+          "pair": "MATICUSD",
+          "pattern": "Inverse H&S",
+          "accuracy": 94,
+          "capital": 1000,
+          "risk": 20.0,
+          "profit": 50.0,
+          "outcome": "WIN",
+          "timestamp": "2025-12-21T01:24:11.459521"
+        },
+        {
+          "trade_num": 3,
+          "pair": "WHEAT",
+          "pattern": "Inverse H&S",
+          "accuracy": 94,
+          "capital": 1000,
+          "risk": 20.0,
+          "profit": 50.0,
+          "outcome": "WIN",
+          "timestamp": "2025-12-21T01:24:11.459541"
+        },
+        {
+          "trade_num": 4,
+          "pair": "META",
+          "pattern": "Inverse H&S",
+          "accuracy": 94,
+          "capital": 1000,
+          "risk": 20.0,
+          "profit": 50.0,
+          "outcome": "WIN",
+          "timestamp": "2025-12-21T01:24:11.459560"
+        },
+        {
+          "trade_num": 5,
+          "pair": "XAUUSD",
+          "pattern": "Inverse H&S",
+          "accuracy": 93,
+          "capital": 1000,
+          "risk": 20.0,
+          "profit": 50.0,
+          "outcome": "WIN",
+          "timestamp": "2025-12-21T01:24:11.459579"
+        },
+        {
+          "trade_num": 6,
+          "pair": "GOOGL",
+          "pattern": "H&S",
+          "accuracy": 93,
+          "capital": 1000,
+          "risk": 20.0,
+          "profit": 50.0,
+          "outcome": "WIN",
+          "timestamp": "2025-12-21T01:24:11.459601"
+        },
+        {
+          "trade_num": 7,
+          "pair": "BTCUSD",
+          "pattern": "Morning Star",
+          "accuracy": 92,
+          "capital": 1000,
+          "risk": 20.0,
+          "profit": 50.0,
+          "outcome": "WIN",
+          "timestamp": "2025-12-21T01:24:11.459619"
+        },
+        {
+          "trade_num": 8,
+          "pair": "EURUSD",
+          "pattern": "Morning Star",
+          "accuracy": 91,
+          "capital": 1000,
+          "risk": 20.0,
+          "profit": 50.0,
+          "outcome": "WIN",
+          "timestamp": "2025-12-21T01:24:11.459637"
+        },
+        {
+          "trade_num": 9,
+          "pair": "ETHUSD",
+          "pattern": "H&S",
+          "accuracy": 91,
+          "capital": 1000,
+          "risk": 20.0,
+          "profit": 50.0,
+          "outcome": "WIN",
+          "timestamp": "2025-12-21T01:24:11.459655"
+        },
+        {
+          "trade_num": 10,
+          "pair": "SPX500",
+          "pattern": "Morning Star",
+          "accuracy": 92,
+          "capital": 1000,
+          "risk": 20.0,
+          "profit": 50.0,
+          "outcome": "WIN",
+          "timestamp": "2025-12-21T01:24:11.459680"
+        }
+      ]
+    }
+  ],
+  "stacked_tests": [
+    {
+      "capital_per_position": 10,
+      "stack_size": 10,
+      "total_capital_used": 100,
+      "total_trades": 100,
+      "wins": 92,
+      "losses": 8,
+      "win_rate": "92.0%",
+      "total_profit": 44.4,
+      "roi": "44.4%"
+    },
+    {
+      "capital_per_position": 50,
+      "stack_size": 10,
+      "total_capital_used": 500,
+      "total_trades": 100,
+      "wins": 90,
+      "losses": 10,
+      "win_rate": "90.0%",
+      "total_profit": 215.0,
+      "roi": "43.0%"
+    },
+    {
+      "capital_per_position": 100,
+      "stack_size": 10,
+      "total_capital_used": 1000,
+      "total_trades": 100,
+      "wins": 92,
+      "losses": 8,
+      "win_rate": "92.0%",
+      "total_profit": 444.0,
+      "roi": "44.4%"
+    },
+    {
+      "capital_per_position": 200,
+      "stack_size": 10,
+      "total_capital_used": 2000,
+      "total_trades": 100,
+      "wins": 90,
+      "losses": 10,
+      "win_rate": "90.0%",
+      "total_profit": 860.0,
+      "roi": "43.0%"
+    },
+    {
+      "capital_per_position": 500,
+      "stack_size": 10,
+      "total_capital_used": 5000,
+      "total_trades": 100,
+      "wins": 96,
+      "losses": 4,
+      "win_rate": "96.0%",
+      "total_profit": 2360.0,
+      "roi": "47.2%"
+    },
+    {
+      "capital_per_position": 1000,
+      "stack_size": 10,
+      "total_capital_used": 10000,
+      "total_trades": 100,
+      "wins": 96,
+      "losses": 4,
+      "win_rate": "96.0%",
+      "total_profit": 4720.0,
+      "roi": "47.2%"
+    }
+  ]
+}
