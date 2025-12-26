@@ -1,0 +1,151 @@
+{
+  "zapier_chatbot_training_qa": {
+    "version": "1.0.0",
+    "created": "2025-12-25",
+    "purpose": "Training data and sample Q&A for Legal AI Chatbot",
+    "chatbot_url": "https://zapier.com/app/chatbots/cmj36ng540hfn0n8q8xfz8o48",
+
+    "training_scenarios": {
+      "category_1_tax_questions": [
+        {
+          "user_question": "I made $100,000 as a 1099 contractor. Should I form an S corp?",
+          "chatbot_response": "Great question! Based on your $100,000 income as a 1099 contractor, forming an S corporation could save you approximately $7,650 annually in self-employment taxes.\n\n**Current Situation (Sole Proprietor/LLC):**\n- Self-employment tax: $100,000 × 92.35% × 15.3% = $14,130\n\n**With S Corporation:**\n- Reasonable salary (40%): $40,000\n- Distributions (60%): $60,000\n- SE tax on salary only: $40,000 × 92.35% × 15.3% = $5,652\n- **Annual Savings: $8,478**\n\n**Other Considerations:**\n- Additional costs: $800-$2,000/year (payroll, tax prep)\n- Net savings: ~$6,500-$7,650/year\n- You'll need to run payroll for yourself\n- More compliance requirements\n\n**Recommendation:** Yes, an S corp makes sense at your income level!\n\nWould you like me to:\n1. Send you the Tax Planning Questionnaire for detailed analysis?\n2. Calculate exact savings based on your state?\n3. Schedule a consultation with our CPA?",
+          "triggers_workflow": "Tax Question Processing",
+          "sends_form": "Tax Planning Questionnaire"
+        },
+        {
+          "user_question": "What's the difference between Schedule C and Form 1120S?",
+          "chatbot_response": "Excellent question! These are two different tax forms for different business structures:\n\n**Schedule C (Form 1040)**\n- For: Sole proprietors and single-member LLCs\n- Filed with: Your personal tax return (Form 1040)\n- Income: All business profit taxed as ordinary income\n- Self-Employment Tax: Yes - 15.3% on 92.35% of net profit\n- Complexity: Simple\n- Example: Freelancer, consultant\n\n**Form 1120S**\n- For: S Corporations\n- Filed: Separate corporate tax return\n- Income: Split between salary (W2) and distributions\n- Self-Employment Tax: Only on salary portion, not distributions\n- Complexity: More complex - requires payroll, corporate formalities\n- Benefit: Tax savings on distributions\n\n**Quick Comparison:**\nIf you earn $80,000:\n- Schedule C SE tax: ~$11,304\n- 1120S SE tax (40% salary): ~$4,522\n- **Savings: ~$6,782/year**\n\nNeed help deciding which structure is best for you? I can analyze your specific situation!",
+          "knowledge_base_source": "IVY_LEAGUE_LEGAL_TAX_FINANCIAL_SYSTEM.json - tax_planning section"
+        },
+        {
+          "user_question": "Can I deduct my home office?",
+          "chatbot_response": "Yes! If you use part of your home exclusively and regularly for business, you can deduct home office expenses.\n\n**Two Methods:**\n\n**1. Simplified Method (IRS Safe Harbor)**\n- $5 per square foot\n- Maximum 300 sq ft = $1,500 max deduction\n- Easy, no detailed records needed\n\n**2. Regular Method**\n- Deduct actual expenses proportionally:\n  - Mortgage interest/rent\n  - Property taxes\n  - Utilities\n  - Insurance\n  - Repairs and maintenance\n  - Depreciation\n- Formula: (Office sq ft ÷ Total home sq ft) × Total expenses\n- Potentially larger deduction\n- Requires detailed recordkeeping\n\n**Example:**\n- Home: 2,000 sq ft\n- Office: 200 sq ft (10%)\n- Total home expenses: $24,000/year\n- Deduction: $2,400\n\n**Requirements:**\n1. Exclusive use (office only, not dual-purpose)\n2. Regular use (not occasional)\n3. Principal place of business OR where you meet clients\n\n**State Considerations:**\nSome states (like California) have additional rules. What state are you in?",
+          "knowledge_base_source": "IRS Publication 587 - Business Use of Your Home"
+        }
+      ],
+
+      "category_2_legal_questions": [
+        {
+          "user_question": "A debt collector keeps calling me about a debt I don't recognize. What can I do?",
+          "chatbot_response": "This is a common issue, and you have strong legal protections under federal law!\n\n**Your Rights Under the Fair Debt Collection Practices Act (FDCPA):**\n\n**1. Immediate Action - Send a Debt Validation Letter:**\nYou have 30 days from first contact to request validation. The collector must:\n- Prove you owe the debt\n- Provide the original creditor's name\n- Show the debt amount\n- Prove they're licensed to collect in your state\n\n**2. They Must STOP Collection Activities Until They Provide Proof**\n\n**3. FDCPA Violations to Watch For:**\n- Calling before 8am or after 9pm\n- Calling your workplace if you told them not to\n- Harassing or threatening you\n- Calling repeatedly to annoy you\n- Discussing your debt with others\n- Misrepresenting the amount owed\n\n**4. Your Options:**\nA. Send debt validation letter (I can generate one for you)\nB. File complaint with CFPB\nC. Sue for FDCPA violations (up to $1,000 per violation)\n\n**Next Steps:**\n1. Don't pay or admit to owing the debt yet\n2. Document all calls (date, time, what they said)\n3. Send validation letter via certified mail\n4. If they violated FDCPA, you may have a lawsuit\n\nWould you like me to:\n1. Generate a debt validation letter for you?\n2. Send you the Legal Consultation Intake form?\n3. Help you file a CFPB complaint?",
+          "triggers_workflow": "Legal Research Workflow",
+          "knowledge_base_source": "Fair Debt Collection Practices Act (FDCPA)",
+          "sends_form": "Legal Consultation Intake OR CFPB Complaint Intake"
+        },
+        {
+          "user_question": "My employer won't accommodate my disability. Is this legal?",
+          "chatbot_response": "No, this is likely illegal under the Americans with Disabilities Act (ADA)!\n\n**ADA Requirements for Employers:**\n\nEmployers with 15+ employees MUST provide reasonable accommodations for qualified individuals with disabilities, unless it causes \"undue hardship.\"\n\n**What is a Reasonable Accommodation?**\n- Modified work schedule\n- Assistive devices or equipment\n- Modified duties or reassignment\n- Accessible workspace\n- Remote work options\n- Leave of absence for treatment\n\n**The Process:**\n1. You request accommodation (verbal or written)\n2. Employer engages in \"interactive process\" to identify accommodation\n3. Employer provides accommodation OR proves undue hardship\n\n**Your Employer's Denial May Be Illegal If:**\n- They refused to discuss accommodations\n- They didn't explore alternatives\n- They claimed \"undue hardship\" without evidence\n- The accommodation is simple/low-cost\n\n**Your Legal Options:**\n\n**1. EEOC Complaint (Required before lawsuit):**\n- File within 180 days (300 days in some states)\n- EEOC investigates for free\n- Can lead to settlement or lawsuit\n\n**2. Federal Lawsuit:**\n- Must file EEOC complaint first\n- Potential damages: Back pay, compensatory damages, punitive damages, attorney fees\n\n**3. State Agency Complaint:**\n- Many states have additional protections\n\n**Immediate Steps:**\n1. Document everything (emails, meeting notes, dates)\n2. Put accommodation request in writing (if not already)\n3. Save all medical documentation\n4. Don't resign (could waive rights)\n\nThis is time-sensitive! Would you like me to:\n1. Send you the ADA/Disability Consultation Form?\n2. Help you draft a formal accommodation request?\n3. Connect you with an employment discrimination attorney?",
+          "triggers_workflow": "Legal Research Workflow",
+          "knowledge_base_source": "Americans with Disabilities Act (ADA)",
+          "sends_form": "ADA/Disability Consultation Form",
+          "urgency": "High - 180/300 day deadline"
+        },
+        {
+          "user_question": "Can I sue a company for charging me for services I didn't authorize?",
+          "chatbot_response": "Absolutely! Unauthorized charges may violate multiple consumer protection laws.\n\n**Legal Violations:**\n\n**1. Fair Credit Billing Act (FCBA) - Credit Card Charges:**\n- You have 60 days to dispute unauthorized charges\n- Credit card company must investigate\n- You're only liable for $50 maximum\n\n**2. Electronic Fund Transfer Act (EFTA) - Bank Account Charges:**\n- Report within 60 days: Liability limited to $50\n- Report within 2 days: No liability\n- Report after 60 days: Could be liable for all charges\n\n**3. Federal Trade Commission Act - Deceptive Practices:**\n- Unauthorized charges = deceptive practice\n- Can file FTC complaint\n\n**4. State Consumer Protection Laws:**\n- Many states allow private lawsuits\n- Potential for 3x damages (treble damages)\n- Attorney fees often recoverable\n\n**Your Legal Options:**\n\n**A. Dispute with Bank/Credit Card (Start Here):**\n1. Call bank immediately\n2. File written dispute within 60 days\n3. Bank investigates, usually refunds charges\n\n**B. File CFPB Complaint:**\n- CFPB will forward to company\n- Company must respond in 15 days\n- Often leads to refund\n\n**C. Sue in Small Claims Court:**\n- For smaller amounts (<$5,000-$10,000, varies by state)\n- No attorney needed\n- Fast resolution (30-60 days)\n\n**D. Civil Lawsuit:**\n- For larger amounts or pattern of violations\n- Potential damages: Actual damages + attorney fees + statutory damages\n\n**Amount Matters:**\n- Under $500: Dispute with bank, CFPB complaint\n- $500-$5,000: Small claims court\n- Over $5,000: Civil lawsuit\n\n**How much were you charged?** I'll provide specific guidance based on the amount.",
+          "triggers_workflow": "Legal Research Workflow OR CFPB Complaint Filing",
+          "knowledge_base_source": "FCBA, EFTA, FTC Act, State Consumer Protection Laws"
+        }
+      ],
+
+      "category_3_credit_repair": [
+        {
+          "user_question": "How long do late payments stay on my credit report?",
+          "chatbot_response": "Great question! Under the Fair Credit Reporting Act (FCRA), here are the timelines:\n\n**Late Payments: 7 years from the date of first delinquency**\n\n**Important Details:**\n\n**Impact Decreases Over Time:**\n- Recent late payments hurt more\n- Late payments from 2+ years ago have minimal impact\n- After 7 years, automatically removed\n\n**Exception - Disputed Items:**\nIf you successfully dispute the late payment as inaccurate, it can be removed earlier!\n\n**Other Negative Items Timeline:**\n- Collections: 7 years from date of first delinquency\n- Charge-offs: 7 years from date of first delinquency\n- Bankruptcies: 7-10 years (Chapter 7: 10 years, Chapter 13: 7 years)\n- Foreclosures: 7 years\n- Hard inquiries: 2 years\n\n**Strategies to Remove Late Payments Early:**\n\n**1. Dispute if Inaccurate (FCRA Section 611):**\n- Wrong date?\n- Wrong amount?\n- Not your account?\n- Creditor must verify within 30 days or remove it\n\n**2. Goodwill Letter (If You're Current Now):**\n- Write to creditor explaining circumstances\n- Ask for goodwill deletion as a courtesy\n- Works best for one-time late payments\n\n**3. Pay-for-Delete Negotiation:**\n- Negotiate with collection agency\n- Pay debt in exchange for deletion\n- Get agreement in writing BEFORE paying\n\n**4. Wait and Rebuild:**\n- Late payment impact fades after 2 years\n- Build positive credit to offset\n\n**Your Next Steps:**\n1. Get your free credit report (annualcreditreport.com)\n2. Identify all late payments\n3. Determine if any are inaccurate or disputable\n4. I can generate dispute letters for you\n\nWould you like me to:\n1. Analyze your credit report?\n2. Generate dispute letters?\n3. Send Credit Repair Intake form?",
+          "knowledge_base_source": "Fair Credit Reporting Act (FCRA) Section 605",
+          "sends_form": "Credit Repair Intake"
+        },
+        {
+          "user_question": "What's the fastest way to improve my credit score?",
+          "chatbot_response": "Excellent question! Here are the FASTEST strategies to boost your credit score:\n\n**Immediate Actions (0-30 days):**\n\n**1. Pay Down Credit Card Balances (Biggest Impact):**\n- Credit utilization = 30% of your score\n- Goal: Under 30% utilization (under 10% is ideal)\n- Example: $5,000 limit → Keep balance under $1,500 (ideally under $500)\n- **Potential increase: 50-100 points**\n\n**2. Become an Authorized User:**\n- Ask family member with good credit to add you\n- Their positive history appears on your report\n- **Potential increase: 20-50 points**\n\n**3. Dispute Inaccurate Items:**\n- Review credit report for errors\n- Dispute anything inaccurate\n- Bureaus must investigate in 30 days\n- **Potential increase: 30-100+ points per item removed**\n\n**4. Request Credit Limit Increase:**\n- Lowers utilization without paying down debt\n- Call creditors and request increase\n- **Potential increase: 10-30 points**\n\n**Short-Term (30-90 days):**\n\n**5. Pay Off Collections (Carefully):**\n- Newer scoring models (FICO 9, VantageScore 3.0) ignore paid collections\n- Negotiate pay-for-delete if possible\n- **Potential increase: 20-50 points**\n\n**6. Dispute Late Payments:**\n- Challenge any late payments as inaccurate\n- Send goodwill letters\n- **Potential increase: 30-60 points**\n\n**7. Open a Secured Credit Card:**\n- Builds positive payment history\n- Reports to all 3 bureaus\n- **Potential increase: 20-40 points over 3-6 months**\n\n**Credit Score Factors (Priority Order):**\n1. Payment history (35%) → Pay on time, always\n2. Credit utilization (30%) → Keep under 30%\n3. Credit age (15%) → Keep old accounts open\n4. Credit mix (10%) → Have variety of credit types\n5. New credit (10%) → Limit hard inquiries\n\n**Realistic Timeline:**\n- 30 days: 20-100 point increase (pay down cards, dispute errors)\n- 90 days: 50-150 point increase (consistent payments + disputes)\n- 6-12 months: 100-200 point increase (all strategies combined)\n\n**Your Situation:**\nWhat's your current credit score? I can create a personalized plan!\n\nWould you like me to:\n1. Analyze your credit report and identify quick wins?\n2. Generate dispute letters for inaccurate items?\n3. Send Credit Repair Intake form for comprehensive service?",
+          "knowledge_base_source": "FICO scoring model, VantageScore, Credit repair strategies",
+          "sends_form": "Credit Repair Intake"
+        }
+      ],
+
+      "category_4_business_formation": [
+        {
+          "user_question": "LLC vs S corp - which is better for my business?",
+          "chatbot_response": "Great question! The answer depends on your income, but here's the breakdown:\n\n**LLC (Limited Liability Company):**\n\n**Pros:**\n- Simple to set up and maintain\n- Flexible taxation (can elect S corp treatment)\n- Less paperwork and formalities\n- Liability protection for owners\n- Can have unlimited members\n\n**Cons:**\n- All profit subject to self-employment tax (15.3%)\n- No tax savings on distributions\n\n**Best for:**\n- Income under $60,000/year\n- Want simplicity\n- Real estate holdings\n- Partnership/multi-member business\n\n**S Corporation:**\n\n**Pros:**\n- **BIG TAX SAVINGS** on distributions\n- Only salary (not distributions) subject to SE tax\n- Professional appearance\n- Can issue stock to attract investors\n\n**Cons:**\n- More paperwork (payroll, corporate minutes, etc.)\n- Must pay \"reasonable salary\"\n- Limited to 100 shareholders\n- Only one class of stock\n- Higher accounting costs ($1,500-$3,000/year)\n\n**Best for:**\n- Income over $60,000/year\n- Want tax savings\n- Plan to raise investment\n- Can handle more compliance\n\n**TAX SAVINGS EXAMPLE:**\n\n**Income: $100,000/year**\n\n**LLC (no S corp election):**\n- SE tax: $100,000 × 92.35% × 15.3% = $14,130\n- Federal income tax: ~$18,000\n- **Total tax: ~$32,130**\n\n**S Corporation:**\n- Reasonable salary (40%): $40,000\n- Distributions (60%): $60,000\n- SE tax on salary only: $40,000 × 92.35% × 15.3% = $5,652\n- Federal income tax: ~$18,000\n- **Total tax: ~$23,652**\n- **SAVINGS: $8,478/year**\n\n**My Recommendation Formula:**\n- Income < $40,000 → LLC (simple)\n- Income $40,000-$60,000 → LLC (savings don't justify costs)\n- Income > $60,000 → S Corp (tax savings worth the complexity)\n- Income > $150,000 → S Corp (major tax savings!)\n\n**Important:** You can form an LLC and elect S corp tax treatment (best of both worlds!)\n\n**What's your projected annual income?** I'll calculate exact savings for your situation!\n\nWould you like me to:\n1. Calculate your specific tax savings?\n2. Send Business Formation Questionnaire?\n3. Help you file LLC or S corp paperwork?",
+          "knowledge_base_source": "IVY_LEAGUE_LEGAL_TAX_FINANCIAL_SYSTEM.json - business_structures",
+          "triggers_workflow": "Tax Question Processing",
+          "sends_form": "Business Formation Questionnaire"
+        }
+      ],
+
+      "category_5_investment_crypto": [
+        {
+          "user_question": "Do I have to pay taxes on crypto if I didn't cash out to dollars?",
+          "chatbot_response": "Yes! This is a common misconception. The IRS treats cryptocurrency as property, so MANY crypto transactions are taxable events.\n\n**TAXABLE Crypto Events (Even Without Cashing Out):**\n\n**1. Trading Crypto for Crypto:**\n- Example: Sell Bitcoin → Buy Ethereum\n- This is a taxable event!\n- You owe taxes on the gain from selling Bitcoin\n\n**2. Using Crypto to Buy Goods/Services:**\n- Example: Buy a car with Bitcoin\n- Taxable! You \"sold\" Bitcoin for fair market value\n\n**3. Receiving Crypto as Payment:**\n- Taxable as ordinary income at fair market value when received\n\n**4. Staking/Mining Rewards:**\n- Taxable as ordinary income when received\n\n**5. Airdrops/Hard Forks:**\n- Taxable as ordinary income at fair market value\n\n**6. Selling Crypto for USD:**\n- Obviously taxable (this is what most people think of)\n\n**NOT Taxable:**\n- Buying crypto with USD (no tax yet)\n- Holding crypto (no tax until you sell/trade)\n- Transferring crypto between your own wallets\n- Gifting crypto under $18,000/year\n\n**Tax Rates:**\n\n**Short-term (held < 1 year):**\n- Taxed as ordinary income\n- Rates: 10%-37% (federal)\n- Plus state taxes\n\n**Long-term (held > 1 year):**\n- Preferential capital gains rates\n- Rates: 0%, 15%, or 20% (federal)\n- Much better!\n\n**Example:**\n\n**Transaction 1:**\n- Buy 1 BTC for $30,000 (January 2024)\n\n**Transaction 2:**\n- Trade 1 BTC for 15 ETH when BTC = $50,000 (June 2024)\n- **TAXABLE GAIN: $20,000**\n- Tax owed (24% bracket): $4,800\n- This is true even though you never cashed out to dollars!\n\n**Your Obligations:**\n1. Report ALL crypto transactions on Form 8949\n2. Calculate gain/loss for each transaction\n3. Report on Schedule D of Form 1040\n4. IRS asks \"Did you receive, sell, exchange crypto?\" on Form 1040\n   - You MUST answer truthfully (it's under penalty of perjury)\n\n**Common Mistakes:**\n- Not reporting crypto-to-crypto trades (IRS is auditing this!)\n- Not tracking cost basis\n- Thinking \"I didn't cash out\" = no tax\n- Not reporting staking/mining income\n\n**Good News:**\n- Crypto LOSSES can offset gains\n- Losses can offset $3,000 of ordinary income per year\n- Remaining losses carry forward indefinitely\n\n**How many crypto transactions did you have this year?**\n\nI can help you:\n1. Calculate your exact crypto tax liability\n2. Generate Form 8949 and Schedule D\n3. Identify tax-loss harvesting opportunities\n\nWould you like me to send you the Crypto & Investment Tax Intake form?",
+          "knowledge_base_source": "IRS Notice 2014-21, Revenue Ruling 2019-24, Form 8949 instructions",
+          "triggers_workflow": "Tax Question Processing OR Investment Damage Assessment",
+          "sends_form": "Crypto & Investment Tax Intake"
+        }
+      ],
+
+      "category_6_general_consultation": [
+        {
+          "user_question": "What services do you offer?",
+          "chatbot_response": "Welcome to Legal AI Professional Services! We provide Harvard/Yale/MIT level expertise in 10 specialized areas:\n\n**1. 📋 Tax Planning & Consulting**\n- Federal and state tax planning (all 50 states)\n- Business structure optimization (LLC, S corp, C corp)\n- Tax forms: 1040, 1120S, 1120, 1065, W2, 1099\n- Maximize deductions and credits\n- Multi-state tax compliance\n\n**2. ⚖️ Legal Research & Consumer Rights**\n- Harvard/Yale level legal research\n- Consumer protection law (CFPB, FTC)\n- Civil rights and discrimination cases\n- Lawsuit strategy and settlements\n- Legal brief generation\n\n**3. 💳 Credit Repair & Credit Building**\n- Credit report disputes (FCRA)\n- Remove negative items\n- Credit score optimization\n- Debt validation (FDCPA)\n- Credit building strategies\n\n**4. 🏠 Real Estate Funding & Creative Financing**\n- Mortgages and HELOC\n- Fix & flip funding\n- Corporation funding\n- Lines of credit (personal and business)\n- Creative financing options\n\n**5. 💰 Investment Analysis & Damage Assessment**\n- CFO suite for trade analysis\n- Investment loss assessment\n- Fraud detection and recovery\n- Tax implications of investments\n- Injury lawyer referral for damages\n\n**6. 📢 CFPB/FTC Complaints & Lawsuits**\n- File complaints with CFPB/FTC\n- BBB complaint assistance\n- Settlement negotiations\n- Lawsuit preparation\n\n**7. ♿ ADA/Disability Federal Government Specialist**\n- ADA compliance\n- Disability discrimination\n- Federal government programs\n- Accommodation requests\n- EEOC complaints\n\n**8. 🏢 Business Entity Formation & Tax Elections**\n- LLC, S corp, C corp formation\n- Tax election optimization\n- Tax savings calculator\n- Operating agreements\n- State filing\n\n**9. 🪙 Crypto & Investment Tax Planning**\n- Crypto tax calculations\n- Form 8949 and Schedule D generation\n- Capital gains optimization\n- Tax-loss harvesting\n- Investment tax strategies\n\n**10. 🤝 Partnership & Passive Income Structuring**\n- Partnership formation (1065)\n- K-1 analysis\n- Passive vs active income optimization\n- Multi-member LLC structuring\n\n**How We Help:**\n1. Free AI-powered consultation\n2. Harvard/Yale/MIT level analysis\n3. Automated form generation\n4. Expert human review\n5. End-to-end service\n\n**Which service interests you?** I can provide detailed information or get started right away!",
+          "sends_form": "Based on client selection"
+        },
+        {
+          "user_question": "How much do your services cost?",
+          "chatbot_response": "Great question! We offer transparent, value-based pricing:\n\n**Free Services:**\n- ✅ Initial AI consultation (this chat!)\n- ✅ Preliminary analysis and research\n- ✅ Form generation (intake forms, questionnaires)\n- ✅ Basic legal/tax information\n- ✅ Strategy recommendations\n\n**Paid Services (Fiverr Gigs):**\n\nWe offer services through Fiverr with three tiers:\n\n**Basic Tier ($100-$300):**\n- Tax calculation and basic planning\n- Legal research summary\n- Credit report analysis\n- Business formation guidance\n- Document drafts\n\n**Standard Tier ($300-$800):**\n- Comprehensive tax planning with forms\n- Full legal brief with citations\n- Credit repair with dispute letters\n- Business formation with filing\n- CFPB complaint filing\n\n**Premium Tier ($800-$2,000+):**\n- Multi-year tax strategy with CPA review\n- Full legal representation prep\n- Comprehensive credit repair program\n- Complete business setup with tax optimization\n- Litigation support\n\n**Consultation Packages:**\n- 30-minute consultation: $150\n- 60-minute deep dive: $300\n- Ongoing monthly retainer: $500-$2,000/month\n\n**What You Get:**\n- Harvard/Yale/MIT level expertise\n- AI-powered analysis (Gemini AI)\n- Human expert review and approval\n- Complete documentation\n- Ongoing support\n\n**Value Comparison:**\n\nTraditional services:\n- Tax CPA: $300-$500/hour\n- Attorney: $300-$800/hour\n- Credit repair: $100-$150/month\n\nOur AI-assisted service:\n- Same quality\n- 50-70% lower cost\n- Faster turnaround\n- More comprehensive\n\n**Payment Methods:**\n- Fiverr (credit card, PayPal)\n- Direct payment (Venmo, Zelle for consultations)\n- Payment plans available for larger services\n\n**Money-Back Guarantee:**\n- If you're not satisfied, we'll revise for free\n- Or issue full refund within 7 days\n\n**Which service are you interested in?** I'll provide exact pricing and can get you started!",
+          "knowledge_base_source": "Fiverr gigs pricing structure"
+        }
+      ]
+    },
+
+    "escalation_scenarios": {
+      "scenario_1_cannot_answer": {
+        "user_question": "Can I sue my employer under Section 1983 for violating my constitutional rights?",
+        "chatbot_response": "This is an excellent and complex question that involves federal civil rights law. Section 1983 allows lawsuits against government actors who violate constitutional rights - but the analysis is very nuanced.\n\nKey considerations:\n- Is your employer a government entity (state, local, federal)?\n- What constitutional right was allegedly violated?\n- Was the violation by an individual or a policy?\n- Qualified immunity may apply\n\nThis requires detailed legal analysis from our senior attorneys who specialize in civil rights litigation.\n\n**I recommend:**\n1. Completing our Legal Consultation Intake form with full details\n2. Scheduling a consultation with our civil rights attorney\n3. We'll provide a comprehensive analysis within 24-48 hours\n\nMay I have your contact information to escalate this to our legal team?",
+        "action": "Escalate to human expert",
+        "reason": "Complex constitutional law question requiring attorney analysis"
+      },
+      "scenario_2_urgent_matter": {
+        "user_question": "I was just served with a lawsuit. The deadline to respond is in 20 days!",
+        "chatbot_response": "⚠️ **URGENT: TIME-SENSITIVE LEGAL MATTER**\n\nThis is extremely urgent! Failing to respond to a lawsuit within the deadline can result in a default judgment against you.\n\n**IMMEDIATE ACTIONS:**\n\n1. **DO NOT IGNORE THIS**\n   - Default judgment = You automatically lose\n   - Can't undo after deadline passes\n\n2. **READ THE SUMMONS CAREFULLY**\n   - When is response due?\n   - What court is it filed in?\n   - What are you being sued for?\n\n3. **GATHER ALL DOCUMENTS**\n   - Summons and complaint\n   - Any contracts or agreements\n   - All communication with plaintiff\n\n**I'M ESCALATING YOUR CASE TO OUR EMERGENCY LEGAL TEAM**\n\nThey will contact you within 2 hours to:\n- Review the lawsuit\n- Determine response strategy\n- File response before deadline\n- Represent you or connect you with litigation attorney\n\n**Please provide:**\n- Your name:\n- Phone number:\n- Email:\n- Best time to call:\n- Case number (from summons):\n\n**IMPORTANT:** Our team is standing by. We WILL respond before your deadline.\n\nIn the meantime, take photos of all lawsuit documents and email them to urgent@legalai.com",
+        "action": "Immediate escalation to on-call attorney",
+        "priority": "URGENT",
+        "response_time": "Within 2 hours"
+      },
+      "scenario_3_outside_expertise": {
+        "user_question": "I need help with a trademark application for my business.",
+        "chatbot_response": "Thank you for your question! Trademark law is a specialized area of intellectual property law.\n\nWhile we don't currently offer trademark services in-house, I can help you in two ways:\n\n**1. Referral to Trademark Attorney**\nWe partner with IP attorneys who specialize in:\n- Trademark searches and clearance\n- USPTO applications (Federal trademarks)\n- State trademark registrations\n- Trademark enforcement and litigation\n- International trademark protection\n\nWould you like a referral?\n\n**2. Business Formation Support**\nWhile filing your trademark, we CAN help you:\n- Form your business entity (LLC, corporation)\n- Optimize tax structure\n- Register business name with state\n- Set up legal foundation\n\n**Trademark Basics (For Your Reference):**\n- Federal trademark (USPTO): $250-$350 filing fee + attorney fees ($500-$2,000)\n- State trademark: $50-$200 (varies by state)\n- Processing time: 8-12 months\n- Protection: Protects brand name, logo, slogan\n\nWould you like:\n1. Referral to trademark attorney?\n2. Help with business formation while you file trademark?\n3. Both?",
+        "action": "Offer referral OR alternative service",
+        "reason": "Outside current service scope"
+      }
+    },
+
+    "knowledge_base_training_tips": {
+      "tip_1": "Upload all regulatory content in text format for best AI parsing",
+      "tip_2": "Organize knowledge by categories (Legal, Tax, Credit, etc.) with clear tags",
+      "tip_3": "Include citation format: [Source: FCRA Section 605(a)] so chatbot can cite sources",
+      "tip_4": "Keep content current - update quarterly with new laws/regulations",
+      "tip_5": "Use real examples in knowledge base to help chatbot provide concrete answers",
+      "tip_6": "Include Q&A format in knowledge base - chatbot learns from example responses",
+      "tip_7": "Tag content with keywords chatbot should recognize (e.g., '1099', 'S corp', 'FDCPA')",
+      "tip_8": "Include calculation formulas so chatbot can provide accurate tax/financial math"
+    },
+
+    "continuous_improvement": {
+      "track_these_metrics": [
+        "Questions chatbot couldn't answer (add to knowledge base)",
+        "Frequently asked questions (create canned responses)",
+        "High satisfaction responses (use as training examples)",
+        "Escalation patterns (identify knowledge gaps)",
+        "Conversion rate by question type (optimize for conversions)"
+      ],
+      "monthly_updates": [
+        "Review unanswered questions log",
+        "Add new legal/tax updates to knowledge base",
+        "Refine chatbot responses based on feedback",
+        "Update forms based on client feedback",
+        "Optimize workflows based on conversion data"
+      ]
+    }
+  }
+}

@@ -1,0 +1,26 @@
+[
+  {
+    "workflow_number": 25,
+    "name": "New Client \u2192 Airtable Record",
+    "trigger": "Gmail (new email with subject: New Client)",
+    "action": "Airtable (create record in Clients table)"
+  },
+  {
+    "workflow_number": 26,
+    "name": "Task Completion \u2192 Update Airtable",
+    "trigger": "Python script (webhook)",
+    "action": "Airtable (update record status to Completed)"
+  },
+  {
+    "workflow_number": 27,
+    "name": "Document Download \u2192 Log in Airtable",
+    "trigger": "GitHub Actions (workflow completion)",
+    "action": "Airtable (create record in Legal Documents table)"
+  },
+  {
+    "workflow_number": 28,
+    "name": "Weekly Report \u2192 Airtable Summary",
+    "trigger": "Schedule (every Monday)",
+    "action": "Airtable (generate summary view) + Email report"
+  }
+]

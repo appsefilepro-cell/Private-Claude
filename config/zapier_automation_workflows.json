@@ -1,0 +1,916 @@
+{
+  "zapier_automation_workflows_for_legal_ai_chatbot": {
+    "version": "1.0.0",
+    "created": "2025-12-25",
+    "description": "Complete Zapier workflow configurations for Legal AI Chatbot automation",
+    "chatbot_url": "https://zapier.com/app/chatbots/cmj36ng540hfn0n8q8xfz8o48",
+
+    "workflows": [
+      {
+        "workflow_id": "workflow_1",
+        "name": "New Client Onboarding",
+        "description": "Automated client intake and routing to appropriate service",
+        "trigger": {
+          "app": "Zapier Chatbot",
+          "event": "New conversation",
+          "filters": {
+            "message_contains": ["help", "services", "consultation", "need", "question"]
+          }
+        },
+        "steps": [
+          {
+            "step_number": 1,
+            "app": "Zapier Chatbot",
+            "action": "Send message",
+            "configuration": {
+              "message": "Welcome! I'm your Legal AI Assistant. To best assist you, which service are you interested in?\n\n1️⃣ Legal Consultation\n2️⃣ Tax Planning\n3️⃣ Credit Repair\n4️⃣ Real Estate Funding\n5️⃣ Business Formation\n6️⃣ Investment Analysis\n7️⃣ CFPB Complaint\n8️⃣ ADA/Disability Law\n9️⃣ Crypto/Investment Taxes\n🔟 Partnership Planning\n\nPlease respond with a number or describe your needs."
+            }
+          },
+          {
+            "step_number": 2,
+            "app": "Filter by Zapier",
+            "action": "Only continue if...",
+            "configuration": {
+              "condition": "User responds with service selection",
+              "field": "{{chatbot.user_message}}",
+              "operator": "contains",
+              "values": ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "tax", "legal", "credit", "funding", "business", "investment", "cfpb", "ada", "crypto", "partnership"]
+            }
+          },
+          {
+            "step_number": 3,
+            "app": "Airtable",
+            "action": "Create record",
+            "configuration": {
+              "base": "Legal AI Clients",
+              "table": "New Leads",
+              "fields": {
+                "Name": "{{chatbot.user_name}}",
+                "Email": "{{chatbot.user_email}}",
+                "Phone": "{{chatbot.user_phone}}",
+                "Service Interest": "{{chatbot.service_selection}}",
+                "Inquiry Date": "{{current_timestamp}}",
+                "Status": "New",
+                "Source": "Chatbot",
+                "Initial Message": "{{chatbot.user_message}}"
+              }
+            }
+          },
+          {
+            "step_number": 4,
+            "app": "Formatter by Zapier",
+            "action": "Text - Lookup Table",
+            "configuration": {
+              "input": "{{chatbot.service_selection}}",
+              "lookup_table": {
+                "1": "Legal Consultation",
+                "2": "Tax Planning",
+                "3": "Credit Repair",
+                "4": "Real Estate Funding",
+                "5": "Business Formation",
+                "6": "Investment Analysis",
+                "7": "CFPB Complaint",
+                "8": "ADA/Disability",
+                "9": "Crypto Tax",
+                "10": "Partnership Planning",
+                "tax": "Tax Planning",
+                "legal": "Legal Consultation",
+                "credit": "Credit Repair",
+                "funding": "Real Estate Funding",
+                "business": "Business Formation",
+                "investment": "Investment Analysis",
+                "cfpb": "CFPB Complaint",
+                "ada": "ADA/Disability",
+                "crypto": "Crypto Tax",
+                "partnership": "Partnership Planning"
+              },
+              "output": "Service name"
+            }
+          },
+          {
+            "step_number": 5,
+            "app": "Zapier Chatbot",
+            "action": "Send form",
+            "configuration": {
+              "form_selection": "Based on {{formatter.output}}",
+              "forms": {
+                "Legal Consultation": "Legal Consultation Intake Form",
+                "Tax Planning": "Tax Planning Questionnaire",
+                "Credit Repair": "Credit Repair Intake Form",
+                "Real Estate Funding": "Real Estate Funding Application",
+                "Business Formation": "Business Formation Questionnaire",
+                "Investment Analysis": "Investment Analysis Authorization",
+                "CFPB Complaint": "CFPB Complaint Intake Form",
+                "ADA/Disability": "ADA/Disability Consultation Form",
+                "Crypto Tax": "Crypto & Investment Tax Intake",
+                "Partnership Planning": "Partnership Structure Planning Form"
+              },
+              "message": "Great! I'll need some information to provide the best service. Please complete this quick form:"
+            }
+          },
+          {
+            "step_number": 6,
+            "app": "Paths by Zapier",
+            "action": "Trigger service-specific workflow",
+            "configuration": {
+              "paths": [
+                {
+                  "path": "A",
+                  "condition": "Service = Tax Planning",
+                  "action": "Trigger Tax Question Workflow"
+                },
+                {
+                  "path": "B",
+                  "condition": "Service = Legal Consultation",
+                  "action": "Trigger Legal Research Workflow"
+                },
+                {
+                  "path": "C",
+                  "condition": "Service = Credit Repair",
+                  "action": "Trigger Credit Analysis Workflow"
+                },
+                {
+                  "path": "D",
+                  "condition": "Service = Investment Analysis",
+                  "action": "Trigger Investment Damage Assessment Workflow"
+                },
+                {
+                  "path": "E",
+                  "condition": "Service = CFPB Complaint",
+                  "action": "Trigger CFPB Complaint Filing Workflow"
+                },
+                {
+                  "path": "F",
+                  "condition": "All other services",
+                  "action": "Send to general service queue"
+                }
+              ]
+            }
+          },
+          {
+            "step_number": 7,
+            "app": "Gmail",
+            "action": "Send email",
+            "configuration": {
+              "to": "{{airtable.Email}}",
+              "subject": "Thank you for contacting Legal AI Professional Services",
+              "body": "Dear {{airtable.Name}},\n\nThank you for your inquiry about {{formatter.output}}. We've received your information and our Harvard/Yale/MIT level team is reviewing your case.\n\nYou should expect a response within 24 hours.\n\nIn the meantime, you can:\n- Review our services at [website]\n- Schedule a consultation at [calendly link]\n- Email us at [email]\n\nBest regards,\nLegal AI Professional Services\n$500,000 Ivy League System"
+            }
+          },
+          {
+            "step_number": 8,
+            "app": "Slack",
+            "action": "Send channel message",
+            "configuration": {
+              "channel": "#new-clients",
+              "message_text": "🆕 New Client Lead",
+              "blocks": [
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "*New Client Lead*\n*Name:* {{airtable.Name}}\n*Service:* {{formatter.output}}\n*Source:* Chatbot"
+                  }
+                },
+                {
+                  "type": "section",
+                  "fields": [
+                    {
+                      "type": "mrkdwn",
+                      "text": "*Email:*\n{{airtable.Email}}"
+                    },
+                    {
+                      "type": "mrkdwn",
+                      "text": "*Phone:*\n{{airtable.Phone}}"
+                    }
+                  ]
+                },
+                {
+                  "type": "actions",
+                  "elements": [
+                    {
+                      "type": "button",
+                      "text": {
+                        "type": "plain_text",
+                        "text": "View in Airtable"
+                      },
+                      "url": "{{airtable.record_url}}"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        ],
+        "performance": {
+          "estimated_execution_time": "10-15 seconds",
+          "zapier_tasks_consumed": 8
+        }
+      },
+
+      {
+        "workflow_id": "workflow_2",
+        "name": "Tax Question Processing with Gemini AI",
+        "description": "Analyze tax questions and provide Harvard/Yale level tax advice",
+        "trigger": {
+          "app": "Zapier Chatbot",
+          "event": "Message received",
+          "filters": {
+            "message_contains": ["tax", "1040", "IRS", "deduction", "income", "s corp", "llc", "business structure", "w2", "1099"]
+          }
+        },
+        "steps": [
+          {
+            "step_number": 1,
+            "app": "Zapier Chatbot",
+            "action": "Extract information",
+            "configuration": {
+              "extract": {
+                "income_amount": "Extract dollar amount from message",
+                "filing_status": "Extract filing status (single, married, etc.)",
+                "business_type": "Extract business structure mentioned",
+                "state": "Extract state mentioned"
+              }
+            }
+          },
+          {
+            "step_number": 2,
+            "app": "Google Gemini AI",
+            "action": "Generate content",
+            "configuration": {
+              "api_key": "AIzaSyBqAbzJdyg7sP5tIhCddWk4Q1EEmSZSCT4",
+              "model": "gemini-1.5-pro",
+              "prompt": "You are a Harvard/Yale/MIT level CPA and tax expert. A client asks:\n\n{{chatbot.user_message}}\n\nClient details:\n- Income: {{extracted.income_amount}}\n- Filing status: {{extracted.filing_status}}\n- Business type: {{extracted.business_type}}\n- State: {{extracted.state}}\n\nProvide a detailed tax analysis covering:\n1. Current tax liability estimate (federal, state, SE tax)\n2. Optimal business structure recommendation (sole prop vs LLC vs S corp vs C corp)\n3. Estimated tax savings with recommended structure\n4. Specific deductions and credits available\n5. Action steps to implement\n\nUse actual tax rates for 2024 and cite IRS publications.\n\nFormat response in clear, client-friendly language with specific numbers.",
+              "temperature": 0.3,
+              "max_output_tokens": 2048
+            }
+          },
+          {
+            "step_number": 3,
+            "app": "Code by Zapier",
+            "action": "Run Python - CFO Suite Tax Calculator",
+            "configuration": {
+              "code": "# CFO Suite Tax Calculator\nimport json\n\nincome = float(input_data.get('income', 0))\nfiling_status = input_data.get('filing_status', 'single')\nbusiness_type = input_data.get('business_type', 'sole_prop')\n\n# 2024 Tax rates\nif filing_status == 'single':\n    standard_deduction = 14600\n    brackets = [(11600, 0.10), (47150, 0.12), (100525, 0.22), (191950, 0.24), (243725, 0.32), (609350, 0.35), (float('inf'), 0.37)]\nelif filing_status == 'married':\n    standard_deduction = 29200\n    brackets = [(23200, 0.10), (94300, 0.12), (201050, 0.22), (383900, 0.24), (487450, 0.32), (731200, 0.35), (float('inf'), 0.37)]\nelse:\n    standard_deduction = 14600\n    brackets = [(11600, 0.10), (47150, 0.12), (100525, 0.22), (191950, 0.24), (243725, 0.32), (609350, 0.35), (float('inf'), 0.37)]\n\n# Calculate federal tax\ntaxable_income = max(0, income - standard_deduction)\nfederal_tax = 0\nprev_bracket = 0\nfor bracket_limit, rate in brackets:\n    if taxable_income > prev_bracket:\n        taxable_in_bracket = min(taxable_income, bracket_limit) - prev_bracket\n        federal_tax += taxable_in_bracket * rate\n        prev_bracket = bracket_limit\n    else:\n        break\n\n# Self-employment tax (for sole prop and LLC)\nse_tax = 0\nif business_type in ['sole_prop', 'llc']:\n    se_tax = income * 0.9235 * 0.153  # 15.3% SE tax on 92.35% of income\n\n# S corp savings estimate\nif business_type == 's_corp':\n    reasonable_salary = income * 0.4  # 40% reasonable salary\n    distributions = income * 0.6\n    se_tax_on_salary = reasonable_salary * 0.9235 * 0.153\n    se_tax_savings = (income * 0.9235 * 0.153) - se_tax_on_salary\nelse:\n    se_tax_savings = 0\n\n# Total tax\ntotal_tax = federal_tax + se_tax\n\noutput = {\n    'income': income,\n    'federal_tax': round(federal_tax, 2),\n    'se_tax': round(se_tax, 2),\n    'total_tax': round(total_tax, 2),\n    'effective_rate': round((total_tax / income * 100), 2),\n    's_corp_savings': round(se_tax_savings, 2)\n}\n\nreturn output",
+              "input_data": {
+                "income": "{{extracted.income_amount}}",
+                "filing_status": "{{extracted.filing_status}}",
+                "business_type": "{{extracted.business_type}}"
+              }
+            }
+          },
+          {
+            "step_number": 4,
+            "app": "Formatter by Zapier",
+            "action": "Text - Markdown to HTML",
+            "configuration": {
+              "input": "{{gemini.response}}",
+              "output": "Formatted HTML for chatbot display"
+            }
+          },
+          {
+            "step_number": 5,
+            "app": "Zapier Chatbot",
+            "action": "Send message",
+            "configuration": {
+              "message": "Here's your comprehensive tax analysis:\n\n{{gemini.response}}\n\n---\n\n**CFO Suite Calculations:**\n💰 Estimated Federal Tax: ${{python.federal_tax}}\n📊 Self-Employment Tax: ${{python.se_tax}}\n💵 Total Tax Liability: ${{python.total_tax}}\n📈 Effective Tax Rate: {{python.effective_rate}}%\n\n💡 **S Corp Savings Opportunity:** ${{python.s_corp_savings}}/year\n\n---\n\nWould you like me to:\n1. Generate specific tax forms (1040, 1120S, etc.)\n2. Send you the Tax Planning Questionnaire for detailed analysis\n3. Schedule a consultation with our CPA\n\nReply with 1, 2, or 3."
+            }
+          },
+          {
+            "step_number": 6,
+            "app": "Filter by Zapier",
+            "action": "Only continue if user wants to proceed",
+            "configuration": {
+              "condition": "{{chatbot.user_response}} contains '1' OR '2' OR '3'"
+            }
+          },
+          {
+            "step_number": 7,
+            "app": "Paths by Zapier",
+            "action": "Route based on user choice",
+            "configuration": {
+              "paths": [
+                {
+                  "path": "A - Generate Forms",
+                  "condition": "{{chatbot.user_response}} contains '1'",
+                  "action": "Trigger form generation workflow"
+                },
+                {
+                  "path": "B - Send Questionnaire",
+                  "condition": "{{chatbot.user_response}} contains '2'",
+                  "action": "Send Tax Planning Questionnaire form"
+                },
+                {
+                  "path": "C - Schedule Consultation",
+                  "condition": "{{chatbot.user_response}} contains '3'",
+                  "action": "Send Calendly booking link"
+                }
+              ]
+            }
+          },
+          {
+            "step_number": 8,
+            "app": "Airtable",
+            "action": "Create record",
+            "configuration": {
+              "base": "Legal AI Clients",
+              "table": "Tax Consultations",
+              "fields": {
+                "Client Name": "{{chatbot.user_name}}",
+                "Email": "{{chatbot.user_email}}",
+                "Income": "{{extracted.income_amount}}",
+                "Filing Status": "{{extracted.filing_status}}",
+                "Business Type": "{{extracted.business_type}}",
+                "Tax Liability": "{{python.total_tax}}",
+                "S Corp Savings": "{{python.s_corp_savings}}",
+                "Gemini Analysis": "{{gemini.response}}",
+                "Status": "Analysis Provided",
+                "Date": "{{current_timestamp}}"
+              }
+            }
+          }
+        ],
+        "performance": {
+          "estimated_execution_time": "15-20 seconds",
+          "zapier_tasks_consumed": 8
+        }
+      },
+
+      {
+        "workflow_id": "workflow_3",
+        "name": "Legal Research with Gemini AI",
+        "description": "Harvard/Yale level legal research and brief generation",
+        "trigger": {
+          "app": "Zapier Chatbot",
+          "event": "Message received",
+          "filters": {
+            "message_contains": ["lawsuit", "sue", "rights", "discrimination", "ADA", "CFPB", "FTC", "consumer protection", "legal action", "complaint"]
+          }
+        },
+        "steps": [
+          {
+            "step_number": 1,
+            "app": "Zapier Chatbot",
+            "action": "Extract legal information",
+            "configuration": {
+              "extract": {
+                "legal_issue": "What is the main legal issue?",
+                "parties_involved": "Who are the parties involved?",
+                "desired_outcome": "What outcome are you seeking?",
+                "urgency": "How urgent is this matter?"
+              }
+            }
+          },
+          {
+            "step_number": 2,
+            "app": "Google Gemini AI",
+            "action": "Generate legal research",
+            "configuration": {
+              "api_key": "AIzaSyBqAbzJdyg7sP5tIhCddWk4Q1EEmSZSCT4",
+              "model": "gemini-1.5-pro",
+              "prompt": "You are a Harvard Law School graduate with expertise in consumer protection, civil rights, and discrimination law. A client presents this legal issue:\n\n{{chatbot.user_message}}\n\nExtracted details:\n- Legal issue: {{extracted.legal_issue}}\n- Parties: {{extracted.parties_involved}}\n- Desired outcome: {{extracted.desired_outcome}}\n- Urgency: {{extracted.urgency}}\n\nProvide a comprehensive legal analysis:\n\n1. **Legal Issues Identified**: Identify all applicable areas of law\n2. **Relevant Statutes and Regulations**: Cite specific laws (federal and state)\n3. **Case Law**: Reference relevant court decisions\n4. **Legal Violations**: Explain what laws may have been violated\n5. **Strength of Case**: Assess probability of success\n6. **Recommended Strategy**: Outline step-by-step legal strategy\n7. **Potential Remedies**: What damages or relief may be available\n8. **Timeline**: Expected timeline for resolution\n9. **Next Steps**: Immediate actions to take\n\nFormat as a legal brief with citations. Use authoritative language appropriate for Harvard/Yale level legal research.",
+              "temperature": 0.2,
+              "max_output_tokens": 3072
+            }
+          },
+          {
+            "step_number": 3,
+            "app": "Zapier Chatbot",
+            "action": "Search knowledge base",
+            "configuration": {
+              "query": "{{extracted.legal_issue}}",
+              "sources": ["IVY_LEAGUE_LEGAL_TAX_FINANCIAL_SYSTEM.json", "CFPB regulations", "FTC consumer protection", "ADA guidelines"],
+              "max_results": 5
+            }
+          },
+          {
+            "step_number": 4,
+            "app": "Google Gemini AI",
+            "action": "Generate legal brief or complaint",
+            "configuration": {
+              "api_key": "AIzaSyBqAbzJdyg7sP5tIhCddWk4Q1EEmSZSCT4",
+              "model": "gemini-1.5-pro",
+              "prompt": "Based on this legal analysis:\n\n{{gemini_step2.response}}\n\nAnd this knowledge base research:\n\n{{chatbot.knowledge_base_results}}\n\nGenerate one of the following documents (choose most appropriate):\n\n1. Demand letter to opposing party\n2. CFPB/FTC complaint\n3. Legal brief summarizing case\n4. Settlement proposal\n5. ADA accommodation request\n\nFormat the document professionally with:\n- Proper legal heading\n- Statement of facts\n- Legal arguments with citations\n- Demanded relief or resolution\n- Professional conclusion\n\nOutput as formal legal document ready for client review.",
+              "temperature": 0.3,
+              "max_output_tokens": 4096
+            }
+          },
+          {
+            "step_number": 5,
+            "app": "Zapier Chatbot",
+            "action": "Send message with legal analysis",
+            "configuration": {
+              "message": "I've completed a Harvard/Yale level legal research on your case. Here's the summary:\n\n{{gemini_step2.response}}\n\n---\n\n**Document Generated:**\nI've drafted a {{gemini_step4.document_type}} for your review.\n\n[Preview first 500 characters of document]\n\n---\n\nTo proceed:\n1. Complete the Legal Consultation Intake form for detailed case review\n2. Schedule consultation with senior attorney\n3. Download full legal brief and document\n\nWhich would you like to do?"
+            }
+          },
+          {
+            "step_number": 6,
+            "app": "Airtable",
+            "action": "Create record",
+            "configuration": {
+              "base": "Legal AI Clients",
+              "table": "Legal Cases",
+              "fields": {
+                "Client Name": "{{chatbot.user_name}}",
+                "Email": "{{chatbot.user_email}}",
+                "Legal Issue": "{{extracted.legal_issue}}",
+                "Parties Involved": "{{extracted.parties_involved}}",
+                "Desired Outcome": "{{extracted.desired_outcome}}",
+                "Urgency": "{{extracted.urgency}}",
+                "Gemini Legal Analysis": "{{gemini_step2.response}}",
+                "Generated Document": "{{gemini_step4.response}}",
+                "Document Type": "{{gemini_step4.document_type}}",
+                "Status": "Research Completed - Awaiting Client Action",
+                "Date Submitted": "{{current_timestamp}}",
+                "Assigned To": "Senior Legal Team"
+              }
+            }
+          },
+          {
+            "step_number": 7,
+            "app": "Google Docs",
+            "action": "Create document from text",
+            "configuration": {
+              "title": "Legal Brief - {{chatbot.user_name}} - {{current_date}}",
+              "body": "{{gemini_step4.response}}",
+              "folder": "Legal Briefs/{{current_year}}"
+            }
+          },
+          {
+            "step_number": 8,
+            "app": "Slack",
+            "action": "Send message to #legal-cases",
+            "configuration": {
+              "channel": "#legal-cases",
+              "message_text": "⚖️ New Legal Case Analysis",
+              "blocks": [
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "*New Legal Case Analyzed*\n*Client:* {{chatbot.user_name}}\n*Issue:* {{extracted.legal_issue}}\n*Urgency:* {{extracted.urgency}}"
+                  }
+                },
+                {
+                  "type": "section",
+                  "fields": [
+                    {
+                      "type": "mrkdwn",
+                      "text": "*Document Generated:*\n{{gemini_step4.document_type}}"
+                    },
+                    {
+                      "type": "mrkdwn",
+                      "text": "*Status:*\nAwaiting attorney review"
+                    }
+                  ]
+                },
+                {
+                  "type": "actions",
+                  "elements": [
+                    {
+                      "type": "button",
+                      "text": {
+                        "type": "plain_text",
+                        "text": "View in Airtable"
+                      },
+                      "url": "{{airtable.record_url}}"
+                    },
+                    {
+                      "type": "button",
+                      "text": {
+                        "type": "plain_text",
+                        "text": "View Legal Brief"
+                      },
+                      "url": "{{google_docs.document_url}}"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        ],
+        "performance": {
+          "estimated_execution_time": "20-30 seconds",
+          "zapier_tasks_consumed": 8
+        }
+      },
+
+      {
+        "workflow_id": "workflow_4",
+        "name": "Credit Repair Analysis",
+        "description": "Analyze credit reports and generate dispute strategies",
+        "trigger": {
+          "app": "Zapier Chatbot",
+          "event": "File uploaded",
+          "filters": {
+            "file_type": "PDF",
+            "context_contains": ["credit report", "credit score", "dispute", "credit repair"]
+          }
+        },
+        "steps": [
+          {
+            "step_number": 1,
+            "app": "Zapier Chatbot",
+            "action": "Collect credit information",
+            "configuration": {
+              "questions": [
+                "What is your current credit score (if known)?",
+                "What are your credit goals?",
+                "What negative items do you want to dispute?",
+                "Have you disputed these items before?"
+              ]
+            }
+          },
+          {
+            "step_number": 2,
+            "app": "Code by Zapier",
+            "action": "Parse PDF Credit Report",
+            "configuration": {
+              "code": "# Parse credit report PDF\nimport re\nimport json\n\n# This is placeholder code - in production, use PDF parsing library\npdf_text = input_data.get('pdf_content', '')\n\n# Extract key information\ncredit_score_match = re.search(r'(?:Score|FICO):?\\s*(\\d{3})', pdf_text)\ncredit_score = credit_score_match.group(1) if credit_score_match else 'Unknown'\n\n# Find negative items\nnegative_items = []\n\n# Late payments\nlate_payments = re.findall(r'Late Payment.*?\\$([0-9,]+).*?(\\d{1,2}/\\d{4})', pdf_text)\nfor amount, date in late_payments:\n    negative_items.append({\n        'type': 'Late Payment',\n        'amount': amount,\n        'date': date,\n        'disputable': 'High',\n        'reason': 'Verify accuracy of date and amount'\n    })\n\n# Collections\ncollections = re.findall(r'Collection.*?([A-Z][a-z]+ [A-Z][a-z]+).*?\\$([0-9,]+)', pdf_text)\nfor creditor, amount in collections:\n    negative_items.append({\n        'type': 'Collection',\n        'creditor': creditor,\n        'amount': amount,\n        'disputable': 'Very High',\n        'reason': 'Request validation under FDCPA'\n    })\n\n# Charge-offs\nchargeoffs = re.findall(r'Charge[- ]off.*?([A-Z][a-z]+ [A-Z][a-z]+).*?\\$([0-9,]+)', pdf_text)\nfor creditor, amount in chargeoffs:\n    negative_items.append({\n        'type': 'Charge-off',\n        'creditor': creditor,\n        'amount': amount,\n        'disputable': 'Medium',\n        'reason': 'Dispute accuracy, request deletion after 7 years'\n    })\n\noutput = {\n    'credit_score': credit_score,\n    'negative_items_count': len(negative_items),\n    'negative_items': negative_items,\n    'estimated_score_increase': len(negative_items) * 15  # Rough estimate\n}\n\nreturn output",
+              "input_data": {
+                "pdf_content": "{{chatbot.uploaded_file_content}}"
+              }
+            }
+          },
+          {
+            "step_number": 3,
+            "app": "Google Gemini AI",
+            "action": "Generate dispute strategy",
+            "configuration": {
+              "api_key": "AIzaSyBqAbzJdyg7sP5tIhCddWk4Q1EEmSZSCT4",
+              "model": "gemini-1.5-pro",
+              "prompt": "You are a credit repair expert with deep knowledge of the Fair Credit Reporting Act (FCRA), Fair Debt Collection Practices Act (FDCPA), and credit bureau dispute procedures.\n\nClient credit information:\n- Current credit score: {{python.credit_score}}\n- Negative items found: {{python.negative_items_count}}\n- Items: {{python.negative_items}}\n- Client goals: {{chatbot.credit_goals}}\n\nCreate a comprehensive credit repair strategy:\n\n1. **Priority Disputes**: Which items to dispute first and why\n2. **Dispute Method**: Validation request, inaccuracy dispute, goodwill letter, or pay-for-delete\n3. **Legal Basis**: Cite FCRA sections supporting each dispute\n4. **Timeline**: Expected timeline for each dispute (30-45 days per round)\n5. **Expected Results**: Realistic score increase estimate\n6. **Ongoing Strategy**: Credit building recommendations\n7. **Warning Signs**: Items that may be difficult to remove\n\nFormat as actionable step-by-step plan.",
+              "temperature": 0.2,
+              "max_output_tokens": 2048
+            }
+          },
+          {
+            "step_number": 4,
+            "app": "Code by Zapier",
+            "action": "Generate dispute letters",
+            "configuration": {
+              "code": "# Generate credit dispute letters\nimport json\nfrom datetime import datetime\n\nnegative_items = json.loads(input_data.get('negative_items', '[]'))\nclient_name = input_data.get('client_name', '')\nclient_address = input_data.get('client_address', '')\n\nletters = []\n\n# Template for validation request (FDCPA)\nvalidation_template = f'''Date: {datetime.now().strftime(\"%B %d, %Y\")}\n\n[Debt Collector Name]\n[Debt Collector Address]\n\nRe: Debt Validation Request - Account #[ACCOUNT_NUMBER]\n\nDear Sir/Madam:\n\nI am writing in response to a collection notice I received from your agency. This is a formal request for validation of the alleged debt pursuant to the Fair Debt Collection Practices Act (15 USC 1692g).\n\nI dispute this debt and request that you:\n\n1. Provide proof that I owe this debt\n2. Provide a copy of the original contract or agreement\n3. Provide proof that you are licensed to collect debts in my state\n4. Provide a complete account history\n5. Provide proof that the statute of limitations has not expired\n\nPursuant to 15 USC 1692g, I request that you cease all collection activities until you have properly validated this debt.\n\nAdditionally, I request that you do not report this debt to any credit reporting agencies until it has been properly validated.\n\nSincerely,\n{client_name}\n{client_address}\n'''\n\n# Template for credit bureau dispute (FCRA)\nbureau_dispute_template = f'''Date: {datetime.now().strftime(\"%B %d, %Y\")}\n\n[Credit Bureau Name]\nDispute Department\n[Credit Bureau Address]\n\nRe: Formal Dispute of Credit Report Information\n\nDear Sir/Madam:\n\nI am writing to dispute inaccurate information on my credit report. Pursuant to the Fair Credit Reporting Act (15 USC 1681), I request that you investigate and remove the following items:\n\n[ITEM_DETAILS]\n\nThis information is [inaccurate/unverifiable/outdated] because [REASON].\n\nUnder 15 USC 1681i, you must investigate this dispute within 30 days and remove any information that cannot be verified.\n\nPlease send me:\n1. Written confirmation of your investigation\n2. An updated credit report showing the correction\n3. Notice to all parties who received my credit report in the past 6 months\n\nEnclosed: [Copy of credit report highlighting disputed items]\n\nSincerely,\n{client_name}\n{client_address}\n'''\n\n# Generate letters for each item\nfor item in negative_items:\n    if item['type'] == 'Collection':\n        letter = validation_template.replace('[ACCOUNT_NUMBER]', item.get('amount', 'Unknown'))\n        letters.append({\n            'type': 'Validation Request',\n            'target': item.get('creditor', 'Collection Agency'),\n            'letter': letter\n        })\n    else:\n        letter = bureau_dispute_template.replace('[ITEM_DETAILS]', f\"{item['type']} - {item.get('creditor', 'Unknown')} - ${item.get('amount', '0')}\")\n        letter = letter.replace('[REASON]', item.get('reason', 'the information is inaccurate'))\n        letters.append({\n            'type': 'Credit Bureau Dispute',\n            'target': 'Experian, Equifax, TransUnion',\n            'letter': letter\n        })\n\noutput = {\n    'letters_generated': len(letters),\n    'letters': letters\n}\n\nreturn output",
+              "input_data": {
+                "negative_items": "{{python.negative_items}}",
+                "client_name": "{{chatbot.user_name}}",
+                "client_address": "{{chatbot.user_address}}"
+              }
+            }
+          },
+          {
+            "step_number": 5,
+            "app": "Zapier Chatbot",
+            "action": "Send credit repair strategy",
+            "configuration": {
+              "message": "✅ **Credit Report Analysis Complete**\n\n📊 **Current Status:**\n- Credit Score: {{python.credit_score}}\n- Negative Items Found: {{python.negative_items_count}}\n- Estimated Score Increase: +{{python.estimated_score_increase}} points\n\n---\n\n{{gemini.response}}\n\n---\n\n📝 **Dispute Letters Generated:**\nI've created {{python_step4.letters_generated}} customized dispute letters for you:\n\n{{#each python_step4.letters}}\n{{@index}}. {{type}} → {{target}}\n{{/each}}\n\n---\n\n**Next Steps:**\n1. Review and approve dispute letters\n2. Complete Credit Repair Intake form for full service\n3. Schedule consultation with credit specialist\n\nWhat would you like to do?"
+            }
+          },
+          {
+            "step_number": 6,
+            "app": "Google Docs",
+            "action": "Create document with dispute letters",
+            "configuration": {
+              "title": "Credit Dispute Letters - {{chatbot.user_name}} - {{current_date}}",
+              "body": "Credit Repair Dispute Letters\n\nGenerated for: {{chatbot.user_name}}\nDate: {{current_timestamp}}\n\n---\n\n{{#each python_step4.letters}}\n\nLETTER {{@index}}: {{type}}\nTarget: {{target}}\n\n{{letter}}\n\n---\n\n{{/each}}",
+              "folder": "Credit Repair/Dispute Letters/{{current_year}}"
+            }
+          },
+          {
+            "step_number": 7,
+            "app": "Airtable",
+            "action": "Create record",
+            "configuration": {
+              "base": "Legal AI Clients",
+              "table": "Credit Repair Clients",
+              "fields": {
+                "Client Name": "{{chatbot.user_name}}",
+                "Email": "{{chatbot.user_email}}",
+                "Current Credit Score": "{{python.credit_score}}",
+                "Negative Items Count": "{{python.negative_items_count}}",
+                "Negative Items Details": "{{python.negative_items}}",
+                "Estimated Score Increase": "{{python.estimated_score_increase}}",
+                "Dispute Strategy": "{{gemini.response}}",
+                "Letters Generated": "{{python_step4.letters_generated}}",
+                "Google Doc Link": "{{google_docs.document_url}}",
+                "Status": "Strategy Provided - Awaiting Client Decision",
+                "Date Analyzed": "{{current_timestamp}}"
+              }
+            }
+          }
+        ],
+        "performance": {
+          "estimated_execution_time": "25-35 seconds",
+          "zapier_tasks_consumed": 7
+        }
+      },
+
+      {
+        "workflow_id": "workflow_5",
+        "name": "Investment Damage Assessment with CFO Suite",
+        "description": "Analyze investment losses and assess recoverable damages",
+        "trigger": {
+          "app": "Zapier Chatbot",
+          "event": "File uploaded",
+          "filters": {
+            "file_type": ["CSV", "XLSX", "PDF"],
+            "context_contains": ["investment", "losses", "1099", "trading", "crypto", "stocks"]
+          }
+        },
+        "steps": [
+          {
+            "step_number": 1,
+            "app": "Code by Zapier",
+            "action": "Parse transaction data (CFO Suite)",
+            "configuration": {
+              "code": "# CFO Suite - Investment Transaction Parser\nimport csv\nimport json\nfrom io import StringIO\nfrom datetime import datetime\n\n# Parse CSV/Excel transaction data\nfile_content = input_data.get('file_content', '')\nfile_type = input_data.get('file_type', 'csv')\n\ntransactions = []\ntotal_invested = 0\ntotal_current_value = 0\nrealized_gains = 0\nrealized_losses = 0\nunrealized_gains = 0\nunrealized_losses = 0\n\nif file_type == 'csv':\n    reader = csv.DictReader(StringIO(file_content))\n    for row in reader:\n        # Standardize column names (handle different broker formats)\n        date = row.get('Date') or row.get('date') or row.get('DATE')\n        action = row.get('Action') or row.get('Type') or row.get('type')\n        symbol = row.get('Symbol') or row.get('Asset') or row.get('symbol')\n        quantity = float(row.get('Quantity') or row.get('Amount') or 0)\n        price = float(row.get('Price') or row.get('Unit Price') or 0)\n        amount = float(row.get('Amount') or row.get('Total') or (quantity * price))\n        \n        transaction = {\n            'date': date,\n            'action': action.lower(),\n            'symbol': symbol,\n            'quantity': quantity,\n            'price': price,\n            'amount': abs(amount)\n        }\n        \n        transactions.append(transaction)\n        \n        if action.lower() in ['buy', 'deposit', 'purchase']:\n            total_invested += abs(amount)\n        elif action.lower() in ['sell', 'withdrawal']:\n            total_current_value += abs(amount)\n            # Calculate gain/loss (simplified)\n            cost_basis = abs(amount) / 1.1  # Placeholder - should track actual basis\n            gain_loss = abs(amount) - cost_basis\n            if gain_loss > 0:\n                realized_gains += gain_loss\n            else:\n                realized_losses += abs(gain_loss)\n\n# Calculate net P&L\nnet_realized = realized_gains - realized_losses\ntotal_loss = total_invested - total_current_value if total_current_value < total_invested else 0\n\n# Assess fraud indicators\nfraud_indicators = []\nif total_loss > total_invested * 0.5:  # Lost more than 50%\n    fraud_indicators.append('Excessive losses (>50% of investment)')\nif len([t for t in transactions if 'unauthorized' in str(t).lower()]) > 0:\n    fraud_indicators.append('Potential unauthorized trades detected')\n\noutput = {\n    'total_transactions': len(transactions),\n    'total_invested': round(total_invested, 2),\n    'total_current_value': round(total_current_value, 2),\n    'realized_gains': round(realized_gains, 2),\n    'realized_losses': round(realized_losses, 2),\n    'net_realized_pl': round(net_realized, 2),\n    'total_loss': round(total_loss, 2),\n    'loss_percentage': round((total_loss / total_invested * 100) if total_invested > 0 else 0, 2),\n    'fraud_indicators': fraud_indicators,\n    'fraud_probability': 'High' if len(fraud_indicators) > 1 else 'Medium' if len(fraud_indicators) == 1 else 'Low',\n    'recoverable_damages': round(total_loss * 0.7, 2)  # Estimated recoverable damages\n}\n\nreturn output",
+              "input_data": {
+                "file_content": "{{chatbot.uploaded_file_content}}",
+                "file_type": "{{chatbot.uploaded_file_type}}"
+              }
+            }
+          },
+          {
+            "step_number": 2,
+            "app": "Google Gemini AI",
+            "action": "Analyze investment losses",
+            "configuration": {
+              "api_key": "AIzaSyBqAbzJdyg7sP5tIhCddWk4Q1EEmSZSCT4",
+              "model": "gemini-1.5-pro",
+              "prompt": "You are a CFO and forensic accountant specializing in investment fraud and loss recovery.\n\nClient investment analysis:\n- Total Invested: ${{python.total_invested}}\n- Current Value: ${{python.total_current_value}}\n- Total Loss: ${{python.total_loss}} ({{python.loss_percentage}}%)\n- Realized Gains: ${{python.realized_gains}}\n- Realized Losses: ${{python.realized_losses}}\n- Net P&L: ${{python.net_realized_pl}}\n- Fraud Probability: {{python.fraud_probability}}\n- Fraud Indicators: {{python.fraud_indicators}}\n\nClient context: {{chatbot.user_message}}\n\nProvide comprehensive damage assessment:\n\n1. **Financial Analysis**: Detailed breakdown of losses\n2. **Fraud Assessment**: Likelihood of fraud, misrepresentation, or unauthorized activity\n3. **Legal Violations**: Potential securities law violations (fraud, breach of fiduciary duty, FINRA violations)\n4. **Recoverable Damages**: Realistic estimate of recoverable damages\n5. **Tax Implications**: Capital loss tax deductions available (up to $3,000/year ordinary income offset, unlimited capital gains offset)\n6. **Recovery Strategy**: Steps to recover losses (arbitration, litigation, FINRA complaint, SEC complaint)\n7. **Timeline**: Expected timeline for recovery efforts\n8. **Cost-Benefit Analysis**: Is pursuing damages financially worthwhile?\n9. **Recommendations**: Should client pursue legal action or focus on tax planning?\n\nFormat as professional CFO damage assessment report.",
+              "temperature": 0.2,
+              "max_output_tokens": 3072
+            }
+          },
+          {
+            "step_number": 3,
+            "app": "Code by Zapier",
+            "action": "Calculate tax implications",
+            "configuration": {
+              "code": "# Tax implications calculator\nimport json\n\nrealized_losses = float(input_data.get('realized_losses', 0))\nrealized_gains = float(input_data.get('realized_gains', 0))\n\n# Net capital loss\nnet_capital_loss = realized_losses - realized_gains\n\n# Capital loss deduction (max $3,000/year against ordinary income)\ncurrent_year_deduction = min(3000, net_capital_loss)\n\n# Carryforward losses\ncarryforward_loss = max(0, net_capital_loss - 3000)\nyears_to_carryforward = int(carryforward_loss / 3000) if carryforward_loss > 0 else 0\n\n# Estimated tax savings (assuming 24% tax bracket)\ntax_savings_current_year = current_year_deduction * 0.24\ntotal_tax_savings = net_capital_loss * 0.24\n\noutput = {\n    'net_capital_loss': round(net_capital_loss, 2),\n    'current_year_deduction': round(current_year_deduction, 2),\n    'carryforward_loss': round(carryforward_loss, 2),\n    'years_to_carryforward': years_to_carryforward,\n    'tax_savings_current_year': round(tax_savings_current_year, 2),\n    'total_tax_savings': round(total_tax_savings, 2)\n}\n\nreturn output",
+              "input_data": {
+                "realized_losses": "{{python.realized_losses}}",
+                "realized_gains": "{{python.realized_gains}}"
+              }
+            }
+          },
+          {
+            "step_number": 4,
+            "app": "Zapier Chatbot",
+            "action": "Send damage assessment",
+            "configuration": {
+              "message": "💼 **CFO Suite Investment Analysis Complete**\n\n📊 **Financial Summary:**\n- Total Invested: ${{python.total_invested}}\n- Current Value: ${{python.total_current_value}}\n- Total Loss: ${{python.total_loss}} ({{python.loss_percentage}}%)\n\n---\n\n**Damage Assessment:**\n{{gemini.response}}\n\n---\n\n💰 **Tax Implications:**\n- Net Capital Loss: ${{python_step3.net_capital_loss}}\n- Current Year Deduction: ${{python_step3.current_year_deduction}}\n- Carryforward Loss: ${{python_step3.carryforward_loss}} ({{python_step3.years_to_carryforward}} years)\n- Tax Savings This Year: ${{python_step3.tax_savings_current_year}}\n- Total Tax Savings: ${{python_step3.total_tax_savings}}\n\n---\n\n⚖️ **Recovery Options:**\n- Estimated Recoverable Damages: ${{python.recoverable_damages}}\n- Fraud Probability: {{python.fraud_probability}}\n\n---\n\n**Recommended Next Steps:**\n{{#if python.fraud_probability == 'High'}}\n1. Connect with injury lawyer for fraud recovery\n2. File FINRA/SEC complaint\n3. Pursue arbitration or litigation\n4. Complete Crypto/Investment Tax Intake for tax planning\n{{else}}\n1. Focus on tax loss harvesting strategy\n2. Complete Crypto/Investment Tax Intake\n3. Optimize future investment strategy\n{{/if}}\n\nWhich path would you like to pursue?"
+            }
+          },
+          {
+            "step_number": 5,
+            "app": "Paths by Zapier",
+            "action": "Route based on fraud assessment",
+            "configuration": {
+              "paths": [
+                {
+                  "path": "A - High Fraud Probability",
+                  "condition": "{{python.fraud_probability}} equals 'High'",
+                  "next_step": "Connect with injury lawyer"
+                },
+                {
+                  "path": "B - Medium/Low Fraud",
+                  "condition": "{{python.fraud_probability}} in ['Medium', 'Low']",
+                  "next_step": "Send Crypto/Investment Tax Intake form"
+                }
+              ]
+            }
+          },
+          {
+            "step_number": 6,
+            "app": "Airtable",
+            "action": "Create record",
+            "configuration": {
+              "base": "Legal AI Clients",
+              "table": "Investment Analysis",
+              "fields": {
+                "Client Name": "{{chatbot.user_name}}",
+                "Email": "{{chatbot.user_email}}",
+                "Total Invested": "{{python.total_invested}}",
+                "Current Value": "{{python.total_current_value}}",
+                "Total Loss": "{{python.total_loss}}",
+                "Loss Percentage": "{{python.loss_percentage}}",
+                "Fraud Probability": "{{python.fraud_probability}}",
+                "Fraud Indicators": "{{python.fraud_indicators}}",
+                "Recoverable Damages": "{{python.recoverable_damages}}",
+                "Tax Savings": "{{python_step3.total_tax_savings}}",
+                "Gemini Analysis": "{{gemini.response}}",
+                "Status": "Analysis Complete",
+                "Recommended Action": "{{paths.selected_path}}",
+                "Date Analyzed": "{{current_timestamp}}"
+              }
+            }
+          },
+          {
+            "step_number": 7,
+            "app": "Gmail",
+            "action": "Send email to injury lawyer (if fraud detected)",
+            "configuration": {
+              "condition": "{{python.fraud_probability}} equals 'High'",
+              "to": "injury.lawyer@legalai.com",
+              "subject": "Investment Fraud Referral - {{chatbot.user_name}}",
+              "body": "New investment fraud case referral:\n\nClient: {{chatbot.user_name}}\nEmail: {{chatbot.user_email}}\nPhone: {{chatbot.user_phone}}\n\nFinancial Summary:\n- Total Loss: ${{python.total_loss}}\n- Loss Percentage: {{python.loss_percentage}}%\n- Recoverable Damages: ${{python.recoverable_damages}}\n\nFraud Assessment:\n- Probability: {{python.fraud_probability}}\n- Indicators: {{python.fraud_indicators}}\n\nGemini AI Analysis:\n{{gemini.response}}\n\nAirtable Record: {{airtable.record_url}}\n\nPlease contact client within 24 hours."
+            }
+          }
+        ],
+        "performance": {
+          "estimated_execution_time": "20-30 seconds",
+          "zapier_tasks_consumed": 7
+        }
+      },
+
+      {
+        "workflow_id": "workflow_6",
+        "name": "CFPB Complaint Filing",
+        "description": "Draft and file CFPB/FTC complaints automatically",
+        "trigger": {
+          "app": "Zapier Chatbot",
+          "event": "Form submitted",
+          "form_id": "CFPB Complaint Intake"
+        },
+        "steps": [
+          {
+            "step_number": 1,
+            "app": "Google Gemini AI",
+            "action": "Draft CFPB complaint",
+            "configuration": {
+              "api_key": "AIzaSyBqAbzJdyg7sP5tIhCddWk4Q1EEmSZSCT4",
+              "model": "gemini-1.5-pro",
+              "prompt": "You are a consumer protection attorney specializing in CFPB and FTC complaints.\n\nClient complaint information:\n- Company: {{form.company_name}}\n- Product Type: {{form.product_type}}\n- Issue Category: {{form.issue_category}}\n- Description: {{form.detailed_description}}\n- Resolution Attempted: {{form.resolution_attempted}}\n- Desired Resolution: {{form.desired_resolution}}\n- Financial Loss: ${{form.financial_loss}}\n\nDraft a formal CFPB complaint following official format:\n\n**ISSUE SUMMARY** (2-3 sentences)\n\n**DETAILED NARRATIVE** (chronological account with specific dates, amounts, names)\n\n**COMPANY RESPONSE** (what company did or didn't do)\n\n**DESIRED RESOLUTION** (specific, measurable outcome)\n\n**SUPPORTING EVIDENCE** (list of documents attached)\n\nUse professional language. Cite relevant consumer protection laws (TILA, RESPA, FCRA, FDCPA, ECOA, etc.) where applicable. Be factual and specific with dates, amounts, and parties.\n\nFormat for CFPB online submission portal.",
+              "temperature": 0.2,
+              "max_output_tokens": 2048
+            }
+          },
+          {
+            "step_number": 2,
+            "app": "Airtable",
+            "action": "Create record for human review",
+            "configuration": {
+              "base": "Legal AI Clients",
+              "table": "CFPB Complaints",
+              "fields": {
+                "Client Name": "{{form.client_name}}",
+                "Email": "{{form.email}}",
+                "Company": "{{form.company_name}}",
+                "Product Type": "{{form.product_type}}",
+                "Issue Category": "{{form.issue_category}}",
+                "Financial Loss": "{{form.financial_loss}}",
+                "Gemini Complaint Draft": "{{gemini.response}}",
+                "Status": "Pending Attorney Review",
+                "Date Submitted": "{{current_timestamp}}",
+                "Reviewer": "Senior Attorney"
+              }
+            }
+          },
+          {
+            "step_number": 3,
+            "app": "Slack",
+            "action": "Send to legal team for review",
+            "configuration": {
+              "channel": "#cfpb-complaints",
+              "message_text": "📋 New CFPB Complaint Ready for Review",
+              "blocks": [
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "*New CFPB Complaint Draft*\n*Client:* {{form.client_name}}\n*Company:* {{form.company_name}}\n*Issue:* {{form.issue_category}}\n*Financial Loss:* ${{form.financial_loss}}"
+                  }
+                },
+                {
+                  "type": "actions",
+                  "elements": [
+                    {
+                      "type": "button",
+                      "text": {
+                        "type": "plain_text",
+                        "text": "✅ Approve & File"
+                      },
+                      "value": "approve_{{airtable.record_id}}",
+                      "style": "primary"
+                    },
+                    {
+                      "type": "button",
+                      "text": {
+                        "type": "plain_text",
+                        "text": "✏️ Edit"
+                      },
+                      "value": "edit_{{airtable.record_id}}"
+                    },
+                    {
+                      "type": "button",
+                      "text": {
+                        "type": "plain_text",
+                        "text": "View in Airtable"
+                      },
+                      "url": "{{airtable.record_url}}"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "step_number": 4,
+            "app": "Filter by Zapier",
+            "action": "Wait for approval",
+            "configuration": {
+              "note": "In production, use Zapier's 'Wait for webhook' or manual approval workflow. For automation, skip to step 5 after attorney reviews in Airtable."
+            }
+          },
+          {
+            "step_number": 5,
+            "app": "Webhooks by Zapier",
+            "action": "POST to CFPB API (if available) or log for manual filing",
+            "configuration": {
+              "url": "https://www.consumerfinance.gov/api/complaint",
+              "method": "POST",
+              "headers": {
+                "Content-Type": "application/json",
+                "Authorization": "Bearer {{env.CFPB_API_KEY}}"
+              },
+              "data": {
+                "company": "{{form.company_name}}",
+                "product": "{{form.product_type}}",
+                "issue": "{{form.issue_category}}",
+                "narrative": "{{gemini.response}}",
+                "consumer_consent_provided": "Yes",
+                "submitted_via": "Web",
+                "consumer": {
+                  "name": "{{form.client_name}}",
+                  "email": "{{form.email}}",
+                  "phone": "{{form.phone}}"
+                }
+              },
+              "note": "CFPB may not have public API - in that case, use manual filing workflow"
+            }
+          },
+          {
+            "step_number": 6,
+            "app": "Airtable",
+            "action": "Update record with complaint ID",
+            "configuration": {
+              "record_id": "{{airtable.record_id}}",
+              "fields": {
+                "Status": "Filed with CFPB",
+                "CFPB Complaint ID": "{{webhook.complaint_id}}",
+                "Filed Date": "{{current_timestamp}}",
+                "Expected Response Date": "{{15_days_from_now}}"
+              }
+            }
+          },
+          {
+            "step_number": 7,
+            "app": "Gmail",
+            "action": "Send confirmation to client",
+            "configuration": {
+              "to": "{{form.email}}",
+              "subject": "Your CFPB Complaint Has Been Filed",
+              "body": "Dear {{form.client_name}},\n\nYour complaint against {{form.company_name}} has been successfully filed with the Consumer Financial Protection Bureau (CFPB).\n\n**Complaint Details:**\n- CFPB Complaint ID: {{webhook.complaint_id}}\n- Company: {{form.company_name}}\n- Product: {{form.product_type}}\n- Issue: {{form.issue_category}}\n- Filed Date: {{current_timestamp}}\n\n**What Happens Next:**\n\n1. CFPB will forward your complaint to {{form.company_name}} within 1-2 business days\n2. The company must respond within 15 days (by {{15_days_from_now}})\n3. You will receive their response via CFPB portal\n4. You can review and provide feedback on their response\n\n**Tracking Your Complaint:**\nYou can track your complaint status at:\nhttps://www.consumerfinance.gov/complaint/\n\nComplaint ID: {{webhook.complaint_id}}\n\nWe will monitor the company's response and follow up with you. If the company does not resolve this satisfactorily, we can explore legal action.\n\n**Our team will:**\n- Monitor the complaint status every 7 days\n- Review the company's response when received\n- Advise you on next steps\n- Escalate to lawsuit if necessary\n\nIf you have any questions, please don't hesitate to contact us.\n\nBest regards,\nLegal AI Professional Services\nHarvard/Yale/MIT Level Expertise"
+            }
+          },
+          {
+            "step_number": 8,
+            "app": "Zapier Schedule",
+            "action": "Schedule follow-up check in 7 days",
+            "configuration": {
+              "delay": "7 days",
+              "action": "Trigger CFPB complaint status check workflow"
+            }
+          }
+        ],
+        "performance": {
+          "estimated_execution_time": "15-20 seconds",
+          "zapier_tasks_consumed": 8
+        }
+      }
+    ],
+
+    "workflow_templates_summary": {
+      "total_workflows": 6,
+      "total_estimated_tasks_per_day": "Depends on client volume",
+      "zapier_plan_required": "Professional or higher (multi-step Zaps, Gemini AI, Code steps)",
+      "external_integrations": [
+        "Zapier Chatbot (included)",
+        "Google Gemini AI (API key: AIzaSyBqAbzJdyg7sP5tIhCddWk4Q1EEmSZSCT4)",
+        "Airtable (free or paid)",
+        "Gmail (free with Google Workspace or personal)",
+        "Slack (free or paid)",
+        "Google Docs (free with Google account)",
+        "Calendly (free or paid for scheduling)"
+      ]
+    },
+
+    "implementation_notes": {
+      "step_1": "Import or recreate these workflows in Zapier dashboard",
+      "step_2": "Connect all required app integrations",
+      "step_3": "Test each workflow with sample data",
+      "step_4": "Enable workflows one at a time to monitor performance",
+      "step_5": "Monitor Zapier task usage to stay within plan limits",
+      "step_6": "Optimize workflows based on actual usage patterns"
+    }
+  }
+}

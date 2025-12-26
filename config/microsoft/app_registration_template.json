@@ -1,0 +1,14 @@
+{
+  "appId": "YOUR_APPLICATION_ID",
+  "displayName": "Agent 5.0 Automation",
+  "tenantId": "YOUR_TENANT_ID",
+  "authority": "https://login.microsoftonline.com/YOUR_TENANT_ID",
+  "clientId": "YOUR_CLIENT_ID",
+  "clientSecret": "YOUR_CLIENT_SECRET",
+  "scopes": [
+    "https://graph.microsoft.com/Files.ReadWrite.All",
+    "https://graph.microsoft.com/Mail.ReadWrite",
+    "https://graph.microsoft.com/User.Read",
+    "https://graph.microsoft.com/Calendars.ReadWrite"
+  ]
+}
