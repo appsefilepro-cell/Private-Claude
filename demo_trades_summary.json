@@ -1,0 +1,12 @@
+{
+  "total_trades": 10000,
+  "starting_balance": 10000.0,
+  "ending_balance": 1.2534330965023514e+112,
+  "total_profit": 1.2534330965023514e+112,
+  "return_percentage": 1.2534330965023514e+110,
+  "win_rate": 65.44,
+  "total_wins": 6544,
+  "total_losses": 3456,
+  "avg_profit_per_trade": 1.2534330965023514e+108,
+  "generated_at": "2025-12-26T21:01:26.224083"
+}
