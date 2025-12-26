@@ -604,7 +604,7 @@ class ConnectorManager:
             html_content += """
                 <tr class="{status}">
                     <td>{name}</td>
-                    <td>{status}</td>
+                    <td>{status_text}</td>
                     <td>{last_check}</td>
                     <td>{error_count}</td>
                     <td>{health_score:.1f}%</td>
@@ -612,7 +612,7 @@ class ConnectorManager:
             """.format(
                 status=status_class,
                 name=name,
-                status=status['status'],
+                status_text=status['status'],
                 last_check=status['last_check'],
                 error_count=status['error_count'],
                 health_score=status['health_score']
