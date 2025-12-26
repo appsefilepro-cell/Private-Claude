@@ -1,0 +1,921 @@
+{
+  "info": {
+    "name": "AgentX5 - Complete API Collection",
+    "description": "Comprehensive API collection for Agent 5.0 - Trading, Legal, Financial, AI Automation\n\n**Systems Covered:**\n- Trading Operations (MT5, Binance, Pattern Recognition)\n- Legal Automation (Probate, Credit Repair, Document Generation)\n- Financial Management (Tax Filing, Invoicing, CRM)\n- AI Orchestration (Multi-model bridge, ML models)\n- Notifications (Email, SMS, Push)\n- System Monitoring\n\n**Base URLs:**\n- Local: http://localhost:8000\n- Staging: https://agentx5-staging.up.railway.app\n- Production: https://agentx5.up.railway.app",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_postman_id": "agentx5-complete-api",
+    "version": "5.0.0"
+  },
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{access_token}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:8000",
+      "type": "string"
+    },
+    {
+      "key": "api_version",
+      "value": "v1",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Authentication",
+      "description": "User authentication and authorization endpoints",
+      "item": [
+        {
+          "name": "Register User",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"terobinsony@gmail.com\",\n  \"password\": \"SecurePassword123!\",\n  \"full_name\": \"Thurman Malik Robinson Jr.\",\n  \"organization\": \"APPS Holdings WY Inc.\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/{{api_version}}/auth/register",
+              "host": ["{{base_url}}"],
+              "path": ["api", "{{api_version}}", "auth", "register"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Login",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var jsonData = pm.response.json();",
+                  "pm.environment.set(\"access_token\", jsonData.access_token);",
+                  "pm.environment.set(\"refresh_token\", jsonData.refresh_token);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              }
+            ],
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "username",
+                  "value": "terobinsony@gmail.com"
+                },
+                {
+                  "key": "password",
+                  "value": "SecurePassword123!"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{base_url}}/api/{{api_version}}/auth/token",
+              "host": ["{{base_url}}"],
+              "path": ["api", "{{api_version}}", "auth", "token"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Refresh Token",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"refresh_token\": \"{{refresh_token}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/{{api_version}}/auth/refresh",
+              "host": ["{{base_url}}"],
+              "path": ["api", "{{api_version}}", "auth", "refresh"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Current User",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/{{api_version}}/auth/me",
+              "host": ["{{base_url}}"],
+              "path": ["api", "{{api_version}}", "auth", "me"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Trading Operations",
+      "description": "MT5, Binance, pattern recognition, backtesting",
+      "item": [
+        {
+          "name": "Get Trading Status",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/{{api_version}}/trading/status",
+              "host": ["{{base_url}}"],
+              "path": ["api", "{{api_version}}", "trading", "status"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get All Trades",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/{{api_version}}/trading/trades?limit=50&status=all",
+              "host": ["{{base_url}}"],
+              "path": ["api", "{{api_version}}", "trading", "trades"],
+              "query": [
+                {
+                  "key": "limit",
+                  "value": "50"
+                },
+                {
+                  "key": "status",
+                  "value": "all"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Execute Trade",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"pair\": \"GBPJPY\",\n  \"pattern\": \"Inverse H&S\",\n  \"direction\": \"BUY\",\n  \"entry_price\": 185.432,\n  \"take_profit\": 186.132,\n  \"stop_loss\": 185.082,\n  \"lot_size\": 0.1,\n  \"account\": \"MT5_DEMO\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/{{api_version}}/trading/trades",
+              "host": ["{{base_url}}"],
+              "path": ["api", "{{api_version}}", "trading", "trades"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Close Trade",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/{{api_version}}/trading/trades/TRADE_001",
+              "host": ["{{base_url}}"],
+              "path": ["api", "{{api_version}}", "trading", "trades", "TRADE_001"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Run Backtest",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"pair\": \"GBPJPY\",\n  \"strategy\": \"pattern_recognition\",\n  \"start_date\": \"2024-01-01\",\n  \"end_date\": \"2024-12-31\",\n  \"initial_balance\": 10000,\n  \"risk_percent\": 2\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/{{api_version}}/trading/backtest",
+              "host": ["{{base_url}}"],
+              "path": ["api", "{{api_version}}", "trading", "backtest"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Live Signals",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/{{api_version}}/trading/signals?min_confidence=90",
+              "host": ["{{base_url}}"],
+              "path": ["api", "{{api_version}}", "trading", "signals"],
+              "query": [
+                {
+                  "key": "min_confidence",
+                  "value": "90"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Performance Analytics",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/{{api_version}}/trading/performance?period=30d",
+              "host": ["{{base_url}}"],
+              "path": ["api", "{{api_version}}", "trading", "performance"],
+              "query": [
+                {
+                  "key": "period",
+                  "value": "30d"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Set Risk Mode",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"mode\": \"conservative\",\n  \"risk_percent\": 1.0,\n  \"max_trades\": 3\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/{{api_version}}/trading/risk-settings",
+              "host": ["{{base_url}}"],
+              "path": ["api", "{{api_version}}", "trading", "risk-settings"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Legal Automation",
+      "description": "Probate, credit repair, document generation",
+      "item": [
+        {
+          "name": "Generate Probate Petition",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"decedent_name\": \"Thurman Earl Robinson Sr.\",\n  \"decedent_dod\": \"2025-02-15\",\n  \"petitioner_name\": \"Thurman Malik Robinson Jr.\",\n  \"estimated_estate_value\": 300000,\n  \"elder_abuse_alleged\": true,\n  \"court_jurisdiction\": \"Los Angeles County Superior Court\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/{{api_version}}/legal/documents/generate/probate",
+              "host": ["{{base_url}}"],
+              "path": ["api", "{{api_version}}", "legal", "documents", "generate", "probate"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create Credit Dispute",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"bureau\": \"Equifax\",\n  \"dispute_items\": [\n    {\n      \"account_name\": \"Capital One\",\n      \"account_number\": \"XXXX1234\",\n      \"dispute_reason\": \"Not mine\",\n      \"description\": \"I have never had an account with Capital One\"\n    }\n  ],\n  \"method\": \"411_method\",\n  \"send_certified_mail\": true\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/{{api_version}}/legal/credit-repair/disputes",
+              "host": ["{{base_url}}"],
+              "path": ["api", "{{api_version}}", "legal", "credit-repair", "disputes"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get All Disputes",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/{{api_version}}/legal/credit-repair/disputes",
+              "host": ["{{base_url}}"],
+              "path": ["api", "{{api_version}}", "legal", "credit-repair", "disputes"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "File CFPB Complaint",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"company\": \"Equifax\",\n  \"product\": \"Credit reporting\",\n  \"issue\": \"Incorrect information on credit report\",\n  \"complaint_narrative\": \"Equifax has failed to investigate my dispute properly...\",\n  \"desired_resolution\": \"Remove inaccurate information\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/{{api_version}}/legal/cfpb/complaints",
+              "host": ["{{base_url}}"],
+              "path": ["api", "{{api_version}}", "legal", "cfpb", "complaints"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Generate Settlement Demand",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"defendant_name\": \"XYZ Corporation\",\n  \"case_facts\": \"Elder abuse, financial exploitation...\",\n  \"damages_amount\": 1000000,\n  \"settlement_deadline_days\": 21,\n  \"writing_style\": \"harvard_law\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/{{api_version}}/legal/documents/generate/settlement-demand",
+              "host": ["{{base_url}}"],
+              "path": ["api", "{{api_version}}", "legal", "documents", "generate", "settlement-demand"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Calculate Damages",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"case_type\": \"elder_abuse\",\n  \"economic_damages\": 300000,\n  \"medical_expenses\": 50000,\n  \"lost_income\": 100000,\n  \"pain_and_suffering\": 500000,\n  \"punitive_eligible\": true\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/{{api_version}}/legal/damages/calculate",
+              "host": ["{{base_url}}"],
+              "path": ["api", "{{api_version}}", "legal", "damages", "calculate"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Case Management (Cleo)",
+      "description": "Multi-client case management system",
+      "item": [
+        {
+          "name": "Get All Clients",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/{{api_version}}/clients?limit=50",
+              "host": ["{{base_url}}"],
+              "path": ["api", "{{api_version}}", "clients"],
+              "query": [
+                {
+                  "key": "limit",
+                  "value": "50"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create Client",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Thurman Earl Robinson Sr. Estate\",\n  \"email\": \"terobinsony@gmail.com\",\n  \"phone\": \"+1-323-555-0100\",\n  \"client_type\": \"estate\",\n  \"case_category\": \"probate\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/{{api_version}}/clients",
+              "host": ["{{base_url}}"],
+              "path": ["api", "{{api_version}}", "clients"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Client Details",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/{{api_version}}/clients/1",
+              "host": ["{{base_url}}"],
+              "path": ["api", "{{api_version}}", "clients", "1"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create Matter/Case",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"client_id\": 1,\n  \"matter_name\": \"Estate of Thurman Earl Robinson Sr.\",\n  \"matter_type\": \"Probate Administration\",\n  \"court\": \"Los Angeles County Superior Court\",\n  \"case_number\": \"24STPB12345\",\n  \"estimated_value\": 300000,\n  \"damages_claimed\": 1000000\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/{{api_version}}/matters",
+              "host": ["{{base_url}}"],
+              "path": ["api", "{{api_version}}", "matters"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get All Matters",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/{{api_version}}/matters?client_id=1",
+              "host": ["{{base_url}}"],
+              "path": ["api", "{{api_version}}", "matters"],
+              "query": [
+                {
+                  "key": "client_id",
+                  "value": "1"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Add Case Task",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"matter_id\": 1,\n  \"task_name\": \"File probate petition\",\n  \"due_date\": \"2025-01-15\",\n  \"priority\": \"high\",\n  \"assigned_to\": \"Thurman Robinson\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/{{api_version}}/tasks",
+              "host": ["{{base_url}}"],
+              "path": ["api", "{{api_version}}", "tasks"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Financial Management",
+      "description": "Tax filing, invoicing, accounting",
+      "item": [
+        {
+          "name": "Generate Form 1040",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"tax_year\": 2024,\n  \"taxpayer_name\": \"Thurman Malik Robinson Jr.\",\n  \"ssn\": \"XXX-XX-XXXX\",\n  \"filing_status\": \"single\",\n  \"wages\": 75000,\n  \"self_employment_income\": 50000,\n  \"deductions\": \"standard\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/{{api_version}}/financial/tax/1040",
+              "host": ["{{base_url}}"],
+              "path": ["api", "{{api_version}}", "financial", "tax", "1040"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Generate Form 1065 (Partnership)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"tax_year\": 2024,\n  \"partnership_name\": \"APPS Holdings WY Inc.\",\n  \"ein\": \"XX-XXXXXXX\",\n  \"total_revenue\": 500000,\n  \"total_expenses\": 300000,\n  \"partners\": [\n    {\n      \"name\": \"Thurman Robinson\",\n      \"ownership_percent\": 100\n    }\n  ]\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/{{api_version}}/financial/tax/1065",
+              "host": ["{{base_url}}"],
+              "path": ["api", "{{api_version}}", "financial", "tax", "1065"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create Invoice",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"client_id\": 1,\n  \"invoice_date\": \"2024-12-20\",\n  \"due_date\": \"2025-01-20\",\n  \"line_items\": [\n    {\n      \"description\": \"Probate petition preparation\",\n      \"quantity\": 10,\n      \"rate\": 250,\n      \"amount\": 2500\n    },\n    {\n      \"description\": \"Court filing services\",\n      \"quantity\": 1,\n      \"rate\": 500,\n      \"amount\": 500\n    }\n  ],\n  \"total\": 3000\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/{{api_version}}/financial/invoices",
+              "host": ["{{base_url}}"],
+              "path": ["api", "{{api_version}}", "financial", "invoices"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get All Invoices",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/{{api_version}}/financial/invoices?status=unpaid",
+              "host": ["{{base_url}}"],
+              "path": ["api", "{{api_version}}", "financial", "invoices"],
+              "query": [
+                {
+                  "key": "status",
+                  "value": "unpaid"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Credit Score",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/{{api_version}}/financial/credit-score",
+              "host": ["{{base_url}}"],
+              "path": ["api", "{{api_version}}", "financial", "credit-score"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "AI Orchestration",
+      "description": "Multi-model AI bridge, ML models",
+      "item": [
+        {
+          "name": "Orchestrate AI Conversation",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"task\": \"Analyze this probate case and suggest optimal legal strategy\",\n  \"models\": [\"claude\", \"chatgpt\", \"gemini\"],\n  \"context\": {\n    \"case_type\": \"probate\",\n    \"estate_value\": 300000,\n    \"elder_abuse\": true\n  }\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/{{api_version}}/ai/orchestrate",
+              "host": ["{{base_url}}"],
+              "path": ["api", "{{api_version}}", "ai", "orchestrate"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Run ML Pattern Recognition",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"pair\": \"GBPJPY\",\n  \"timeframe\": \"H1\",\n  \"ohlcv_data\": [],\n  \"model\": \"lstm\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/{{api_version}}/ai/pattern-recognition",
+              "host": ["{{base_url}}"],
+              "path": ["api", "{{api_version}}", "ai", "pattern-recognition"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Classify Legal Document",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"document_text\": \"IN THE SUPERIOR COURT OF CALIFORNIA...\",\n  \"document_url\": \"https://example.com/document.pdf\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/{{api_version}}/ai/document-classification",
+              "host": ["{{base_url}}"],
+              "path": ["api", "{{api_version}}", "ai", "document-classification"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Notifications",
+      "description": "Email, SMS, push notifications",
+      "item": [
+        {
+          "name": "Send Notification",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Trade Executed\",\n  \"message\": \"GBPJPY trade executed at 185.432\",\n  \"channels\": [\"email\", \"sms\", \"push\"],\n  \"priority\": \"high\",\n  \"recipients\": [\"terobinsony@gmail.com\"]\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/{{api_version}}/notifications/send",
+              "host": ["{{base_url}}"],
+              "path": ["api", "{{api_version}}", "notifications", "send"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Notification History",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/{{api_version}}/notifications/history?limit=50",
+              "host": ["{{base_url}}"],
+              "path": ["api", "{{api_version}}", "notifications", "history"],
+              "query": [
+                {
+                  "key": "limit",
+                  "value": "50"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Notification Preferences",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email_enabled\": true,\n  \"sms_enabled\": true,\n  \"push_enabled\": true,\n  \"quiet_hours\": {\n    \"start\": \"22:00\",\n    \"end\": \"08:00\"\n  }\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/{{api_version}}/notifications/preferences",
+              "host": ["{{base_url}}"],
+              "path": ["api", "{{api_version}}", "notifications", "preferences"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Test Notification",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"channel\": \"email\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/{{api_version}}/notifications/test",
+              "host": ["{{base_url}}"],
+              "path": ["api", "{{api_version}}", "notifications", "test"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "System & Monitoring",
+      "description": "Health checks, metrics, status",
+      "item": [
+        {
+          "name": "Health Check",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/{{api_version}}/health",
+              "host": ["{{base_url}}"],
+              "path": ["api", "{{api_version}}", "health"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "System Status",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/{{api_version}}/status",
+              "host": ["{{base_url}}"],
+              "path": ["api", "{{api_version}}", "status"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Metrics",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/{{api_version}}/metrics",
+              "host": ["{{base_url}}"],
+              "path": ["api", "{{api_version}}", "metrics"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "API Documentation",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/docs",
+              "host": ["{{base_url}}"],
+              "path": ["api", "docs"]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          "// Auto-refresh token if expired",
+          "const tokenExpiry = pm.environment.get('token_expiry');",
+          "if (tokenExpiry && Date.now() > tokenExpiry) {",
+          "  pm.sendRequest({",
+          "    url: pm.environment.get('base_url') + '/api/v1/auth/refresh',",
+          "    method: 'POST',",
+          "    header: { 'Content-Type': 'application/json' },",
+          "    body: {",
+          "      mode: 'raw',",
+          "      raw: JSON.stringify({ refresh_token: pm.environment.get('refresh_token') })",
+          "    }",
+          "  }, function (err, res) {",
+          "    if (!err) {",
+          "      const jsonData = res.json();",
+          "      pm.environment.set('access_token', jsonData.access_token);",
+          "      pm.environment.set('token_expiry', Date.now() + 3600000);",
+          "    }",
+          "  });",
+          "}"
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          "// Global test: Check response time",
+          "pm.test('Response time is less than 2000ms', function () {",
+          "  pm.expect(pm.response.responseTime).to.be.below(2000);",
+          "});",
+          "",
+          "// Global test: Status code should be 2xx",
+          "pm.test('Status code is successful', function () {",
+          "  pm.expect(pm.response.code).to.be.oneOf([200, 201, 202, 204]);",
+          "});"
+        ]
+      }
+    }
+  ]
+}
