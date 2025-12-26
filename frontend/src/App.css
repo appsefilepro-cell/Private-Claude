@@ -1,0 +1,411 @@
+/* AgentX5 Dashboard Styles */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: #0f1419;
+  color: #e6edf3;
+}
+
+.App {
+  min-height: 100vh;
+}
+
+/* ============================================================================
+   HEADER
+   ============================================================================ */
+
+.app-header {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.header-content h1 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.header-content p {
+  opacity: 0.9;
+  font-size: 1.1rem;
+}
+
+.header-actions {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.status-badge {
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.status-badge.operational {
+  background: #10b981;
+  color: white;
+}
+
+.btn-primary {
+  background: #2563eb;
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+  background: #1d4ed8;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.4);
+}
+
+/* ============================================================================
+   DASHBOARD CONTAINER
+   ============================================================================ */
+
+.dashboard-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.section {
+  background: #161b22;
+  border-radius: 12px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.section h2 {
+  margin-bottom: 1.5rem;
+  color: #58a6ff;
+  font-size: 1.5rem;
+}
+
+/* ============================================================================
+   SYSTEM STATUS BANNER
+   ============================================================================ */
+
+.status-banner {
+  background: #1f2937;
+  border-left: 4px solid #10b981;
+  padding: 1.5rem;
+  border-radius: 8px;
+  margin-bottom: 2rem;
+}
+
+.status-banner.warning {
+  border-left-color: #f59e0b;
+}
+
+.status-banner h3 {
+  margin-bottom: 1rem;
+  color: #10b981;
+}
+
+.status-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1rem;
+}
+
+.status-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.status-icon {
+  font-size: 1.2rem;
+}
+
+.status-label {
+  font-weight: 500;
+}
+
+/* ============================================================================
+   METRICS GRID
+   ============================================================================ */
+
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.metric-card {
+  background: #161b22;
+  padding: 1.5rem;
+  border-radius: 12px;
+  border-left: 4px solid;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+}
+
+.metric-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.3);
+}
+
+.metric-card.green { border-left-color: #10b981; }
+.metric-card.blue { border-left-color: #3b82f6; }
+.metric-card.purple { border-left-color: #8b5cf6; }
+.metric-card.orange { border-left-color: #f59e0b; }
+
+.metric-card h3 {
+  color: #9ca3af;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.5rem;
+}
+
+.metric-value {
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 0.5rem 0;
+  color: #e6edf3;
+}
+
+.metric-subtitle {
+  color: #6b7280;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.trend-up { color: #10b981; font-size: 1.2rem; }
+.trend-down { color: #ef4444; font-size: 1.2rem; }
+.trend-neutral { color: #6b7280; font-size: 1.2rem; }
+
+/* ============================================================================
+   TRADES TABLE
+   ============================================================================ */
+
+.trades-table {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+thead {
+  background: #1f2937;
+}
+
+th {
+  padding: 1rem;
+  text-align: left;
+  font-weight: 600;
+  color: #9ca3af;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  letter-spacing: 0.05em;
+}
+
+td {
+  padding: 1rem;
+  border-bottom: 1px solid #374151;
+}
+
+tbody tr:hover {
+  background: #1f2937;
+}
+
+.status-badge.active {
+  background: #3b82f6;
+  color: white;
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.status-badge.won {
+  background: #10b981;
+  color: white;
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.status-badge.lost {
+  background: #ef4444;
+  color: white;
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.profit-positive {
+  color: #10b981;
+  font-weight: 600;
+}
+
+.profit-negative {
+  color: #ef4444;
+  font-weight: 600;
+}
+
+/* ============================================================================
+   SIGNALS PANEL
+   ============================================================================ */
+
+.signals-panel {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.signal-card {
+  background: #1f2937;
+  padding: 1.5rem;
+  border-radius: 8px;
+  border: 1px solid #374151;
+}
+
+.signal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.signal-header h4 {
+  font-size: 1.25rem;
+  color: #e6edf3;
+}
+
+.signal-badge.buy {
+  background: #10b981;
+  color: white;
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.signal-badge.sell {
+  background: #ef4444;
+  color: white;
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.signal-badge.neutral {
+  background: #6b7280;
+  color: white;
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.signal-pattern {
+  color: #9ca3af;
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.signal-price {
+  color: #e6edf3;
+  font-weight: 500;
+}
+
+/* ============================================================================
+   PERFORMANCE CHART
+   ============================================================================ */
+
+.performance-chart {
+  background: #1f2937;
+  padding: 2rem;
+  border-radius: 8px;
+  min-height: 300px;
+}
+
+.chart-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 300px;
+  border: 2px dashed #374151;
+  border-radius: 8px;
+}
+
+.chart-placeholder p {
+  color: #9ca3af;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.chart-note {
+  color: #6b7280;
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+}
+
+.chart-note code {
+  background: #161b22;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-family: 'Courier New', monospace;
+  color: #58a6ff;
+}
+
+/* ============================================================================
+   RESPONSIVE
+   ============================================================================ */
+
+@media (max-width: 768px) {
+  .app-header {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .header-actions {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .dashboard-container {
+    padding: 1rem;
+  }
+
+  .metrics-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .signals-panel {
+    grid-template-columns: 1fr;
+  }
+}
