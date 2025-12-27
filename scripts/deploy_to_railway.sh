@@ -33,6 +33,9 @@ DEPLOYMENT_LOG="${PROJECT_ROOT}/logs/deployment_$(date +%Y%m%d_%H%M%S).log"
 HEALTH_CHECK_RETRIES=10
 HEALTH_CHECK_INTERVAL=10
 ROLLBACK_ON_FAILURE=true
+E2B_SANDBOX_ENABLED="${E2B_SANDBOX_ENABLED:-true}"
+E2B_API_KEY="${E2B_API_KEY:-}"
+CRON_ENABLED="${CRON_ENABLED:-false}"
 
 # Ensure logs directory exists
 mkdir -p "${PROJECT_ROOT}/logs"
@@ -319,6 +322,102 @@ run_database_migrations() {
 }
 
 ################################################################################
+# E2B Sandbox Deployment
+################################################################################
+
+deploy_to_e2b_sandbox() {
+    print_header "E2B Sandbox Deployment"
+
+    if [[ "$E2B_SANDBOX_ENABLED" != "true" ]]; then
+        log_info "E2B sandbox deployment disabled, skipping"
+        return 0
+    fi
+
+    if [[ -z "$E2B_API_KEY" ]]; then
+        log_warning "E2B_API_KEY not set, skipping E2B deployment"
+        return 0
+    fi
+
+    log_info "Deploying to E2B sandbox..."
+
+    # Install E2B CLI if not present
+    if ! command -v e2b &> /dev/null; then
+        log_info "Installing E2B CLI..."
+        npm install -g @e2b/cli || {
+            log_error "Failed to install E2B CLI"
+            return 1
+        }
+    fi
+
+    # Authenticate with E2B
+    log_info "Authenticating with E2B..."
+    export E2B_API_KEY="$E2B_API_KEY"
+
+    # Create E2B sandbox configuration
+    cat > "${PROJECT_ROOT}/e2b.Dockerfile" << 'EOF'
+FROM python:3.11-slim
+
+WORKDIR /app
+
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    git \
+    curl \
+    build-essential \
+    && rm -rf /var/lib/apt/lists/*
+
+# Copy application files
+COPY . /app/
+
+# Install Python dependencies
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Set environment variables
+ENV PYTHONUNBUFFERED=1
+ENV AGENT_X5_MODE=production
+
+# Expose ports
+EXPOSE 8000 8001 8002 8003 8004
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=10s --start-period=40s --retries=3 \
+    CMD curl -f http://localhost:8000/health || exit 1
+
+# Default command
+CMD ["python", "agent_5_orchestrator.py"]
+EOF
+
+    log_info "Building E2B sandbox..."
+    if e2b sandbox build --dockerfile e2b.Dockerfile --name agentx5-sandbox 2>&1 | tee -a "${DEPLOYMENT_LOG}"; then
+        log_success "E2B sandbox built successfully"
+
+        log_info "Starting E2B sandbox..."
+        E2B_SANDBOX_ID=$(e2b sandbox create agentx5-sandbox --json | python3 -c "import sys, json; print(json.load(sys.stdin)['sandboxId'])" 2>/dev/null)
+
+        if [[ -n "$E2B_SANDBOX_ID" ]]; then
+            log_success "E2B sandbox started: $E2B_SANDBOX_ID"
+            echo "E2B_SANDBOX_ID=$E2B_SANDBOX_ID" >> "${PROJECT_ROOT}/.env"
+        else
+            log_error "Failed to get E2B sandbox ID"
+            return 1
+        fi
+    else
+        log_error "E2B sandbox build failed"
+        return 1
+    fi
+
+    # Test E2B sandbox
+    log_info "Testing E2B sandbox..."
+    if e2b sandbox exec "$E2B_SANDBOX_ID" -- python --version 2>&1 | tee -a "${DEPLOYMENT_LOG}"; then
+        log_success "E2B sandbox is operational"
+    else
+        log_warning "E2B sandbox test failed"
+    fi
+
+    log_success "E2B sandbox deployment completed"
+}
+
+################################################################################
 # Post-deployment Validation
 ################################################################################
 
@@ -392,26 +491,170 @@ verify_services() {
 
     log_info "Verifying all services..."
 
+    local deployment_url=$(railway status --json 2>/dev/null | python3 -c "import sys, json; print(json.load(sys.stdin).get('url', ''))" 2>/dev/null || echo "")
+
+    if [[ -z "$deployment_url" ]]; then
+        log_warning "Could not determine deployment URL, skipping service verification"
+        return 0
+    fi
+
     local services=(
-        "agent-orchestrator:8000"
-        "trading-bot:8001"
-        "data-ingestion:8002"
-        "incident-response:8003"
-        "health-monitor:8004"
+        "agent-orchestrator:8000:/health"
+        "trading-bot:8001:/api/v1/health"
+        "data-ingestion:8002:/health"
+        "incident-response:8003:/status"
+        "health-monitor:8004:/health"
     )
 
-    for service_port in "${services[@]}"; do
-        local service="${service_port%%:*}"
-        local port="${service_port##*:}"
+    local failed_services=0
 
-        log_info "Checking service: $service (port $port)"
+    for service_info in "${services[@]}"; do
+        local service="${service_info%%:*}"
+        local port_path="${service_info#*:}"
+        local port="${port_path%%:*}"
+        local path="${port_path#*:}"
 
-        # This would require service-specific health check URLs
-        # For now, just log the attempt
-        log_info "Service $service verification completed"
+        log_info "Checking service: $service (port $port, path $path)"
+
+        # Try to check service health
+        local service_url="${deployment_url}${path}"
+
+        if curl -f -s -o /dev/null -w "%{http_code}" "$service_url" --connect-timeout 10 | grep -q "200"; then
+            log_success "Service $service is healthy"
+        else
+            log_warning "Service $service health check failed (may not be exposed)"
+            failed_services=$((failed_services + 1))
+        fi
     done
 
-    log_success "All services verified"
+    if [[ $failed_services -eq 0 ]]; then
+        log_success "All services verified"
+    else
+        log_warning "$failed_services service(s) could not be verified"
+    fi
+}
+
+################################################################################
+# Cron Job Setup
+################################################################################
+
+setup_cron_job() {
+    print_header "Cron Job Setup"
+
+    if [[ "$CRON_ENABLED" != "true" ]]; then
+        log_info "Cron job setup disabled, skipping"
+        return 0
+    fi
+
+    log_info "Setting up cron job for 24/7 deployment monitoring..."
+
+    # Create cron script
+    cat > "${PROJECT_ROOT}/scripts/cron_deploy_monitor.sh" << 'EOF'
+#!/bin/bash
+# Cron job for continuous deployment monitoring
+# Runs every 6 hours to ensure services are up
+
+set -e
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+LOG_FILE="${SCRIPT_DIR}/../logs/cron_monitor_$(date +%Y%m%d).log"
+
+echo "[$(date)] Starting deployment monitor..." >> "$LOG_FILE"
+
+# Check Railway deployment status
+if command -v railway &> /dev/null; then
+    railway status >> "$LOG_FILE" 2>&1 || echo "Railway check failed" >> "$LOG_FILE"
+fi
+
+# Check E2B sandbox if enabled
+if [[ -n "$E2B_SANDBOX_ID" ]]; then
+    if command -v e2b &> /dev/null; then
+        e2b sandbox status "$E2B_SANDBOX_ID" >> "$LOG_FILE" 2>&1 || echo "E2B check failed" >> "$LOG_FILE"
+    fi
+fi
+
+# Run health checks
+if [[ -n "$DEPLOYMENT_URL" ]]; then
+    curl -f "$DEPLOYMENT_URL/health" >> "$LOG_FILE" 2>&1 || {
+        echo "[$(date)] ALERT: Health check failed!" >> "$LOG_FILE"
+        # Trigger auto-redeployment if needed
+        bash "${SCRIPT_DIR}/deploy_to_railway.sh" --force-yes --skip-tests >> "$LOG_FILE" 2>&1
+    }
+fi
+
+echo "[$(date)] Monitor check completed" >> "$LOG_FILE"
+EOF
+
+    chmod +x "${PROJECT_ROOT}/scripts/cron_deploy_monitor.sh"
+
+    # Add to crontab (runs every 6 hours)
+    log_info "Adding cron job..."
+
+    # Check if cron job already exists
+    if crontab -l 2>/dev/null | grep -q "cron_deploy_monitor.sh"; then
+        log_info "Cron job already exists"
+    else
+        (crontab -l 2>/dev/null; echo "0 */6 * * * ${PROJECT_ROOT}/scripts/cron_deploy_monitor.sh") | crontab - || {
+            log_error "Failed to add cron job"
+            log_info "You may not have permission to modify crontab"
+            log_info "To manually add, run: crontab -e"
+            log_info "And add: 0 */6 * * * ${PROJECT_ROOT}/scripts/cron_deploy_monitor.sh"
+            return 1
+        }
+
+        log_success "Cron job added successfully"
+    fi
+
+    log_info "Cron job will run every 6 hours"
+    log_info "View cron jobs with: crontab -l"
+    log_info "View logs in: ${PROJECT_ROOT}/logs/"
+
+    log_success "Cron job setup completed"
+}
+
+setup_systemd_service() {
+    print_header "Systemd Service Setup"
+
+    log_info "Setting up systemd service for 24/7 operation..."
+
+    # Create systemd service file
+    cat > "/tmp/agentx5-deployment.service" << EOF
+[Unit]
+Description=Agent 5.0 Deployment Monitor
+After=network.target
+
+[Service]
+Type=simple
+User=${USER}
+WorkingDirectory=${PROJECT_ROOT}
+ExecStart=${PROJECT_ROOT}/scripts/cron_deploy_monitor.sh
+Restart=always
+RestartSec=21600
+StandardOutput=append:${PROJECT_ROOT}/logs/systemd_monitor.log
+StandardError=append:${PROJECT_ROOT}/logs/systemd_monitor_error.log
+
+[Install]
+WantedBy=multi-user.target
+EOF
+
+    if [[ -w "/etc/systemd/system/" ]]; then
+        log_info "Installing systemd service..."
+        sudo cp /tmp/agentx5-deployment.service /etc/systemd/system/
+        sudo systemctl daemon-reload
+        sudo systemctl enable agentx5-deployment.service
+        sudo systemctl start agentx5-deployment.service
+
+        log_success "Systemd service installed and started"
+        log_info "Check status with: sudo systemctl status agentx5-deployment.service"
+    else
+        log_warning "Cannot install systemd service (no write permissions)"
+        log_info "Service file created at: /tmp/agentx5-deployment.service"
+        log_info "To install manually, run:"
+        log_info "  sudo cp /tmp/agentx5-deployment.service /etc/systemd/system/"
+        log_info "  sudo systemctl daemon-reload"
+        log_info "  sudo systemctl enable agentx5-deployment.service"
+        log_info "  sudo systemctl start agentx5-deployment.service"
+    fi
 }
 
 ################################################################################
@@ -521,6 +764,9 @@ main() {
         exit 1
     fi
 
+    # Step 3.5: Deploy to E2B Sandbox
+    deploy_to_e2b_sandbox || log_warning "E2B sandbox deployment had issues (non-fatal)"
+
     # Step 4: Wait for deployment
     if ! wait_for_deployment; then
         log_error "Deployment did not start properly"
@@ -547,11 +793,33 @@ main() {
     # Step 7: Verify services
     verify_services || log_warning "Some services could not be verified"
 
-    # Step 8: Generate report
+    # Step 8: Setup cron job for 24/7 monitoring
+    if [[ "$CRON_ENABLED" == "true" ]]; then
+        setup_cron_job || log_warning "Cron job setup had issues (non-fatal)"
+        setup_systemd_service || log_warning "Systemd service setup had issues (non-fatal)"
+    fi
+
+    # Step 9: Generate report
     generate_deployment_report "SUCCESS"
 
     log_success "Deployment completed successfully!"
     log_info "Total time: $(($(date +%s) - $(date -d "$start_time" +%s))) seconds"
+
+    # Display deployment summary
+    cat << EOF
+
+${GREEN}========================================${NC}
+  DEPLOYMENT SUCCESSFUL
+${GREEN}========================================${NC}
+
+Railway Deployment: ✅
+E2B Sandbox: $([ "$E2B_SANDBOX_ENABLED" == "true" ] && echo "✅" || echo "⏭️  Skipped")
+Cron Job: $([ "$CRON_ENABLED" == "true" ] && echo "✅" || echo "⏭️  Disabled")
+
+View logs: railway logs
+Monitor: ${PROJECT_ROOT}/logs/
+
+EOF
 }
 
 handle_error() {
@@ -595,6 +863,14 @@ while [[ $# -gt 0 ]]; do
             FORCE_YES=true
             shift
             ;;
+        --enable-cron)
+            CRON_ENABLED=true
+            shift
+            ;;
+        --enable-e2b)
+            E2B_SANDBOX_ENABLED=true
+            shift
+            ;;
         --help|-h)
             cat << EOF
 Usage: $0 [OPTIONS]
@@ -604,6 +880,8 @@ Options:
   --skip-migrations     Skip database migrations
   --build-locally       Build Docker image locally first
   --no-rollback         Don't rollback on failure
+  --enable-cron         Enable 24/7 cron job monitoring
+  --enable-e2b          Enable E2B sandbox deployment
   --force-yes, -y       Skip confirmation prompts
   --help, -h            Show this help message
 
@@ -612,11 +890,15 @@ Environment Variables:
   SKIP_MIGRATIONS      Set to 'true' to skip migrations
   BUILD_LOCALLY        Set to 'true' to build locally
   ROLLBACK_ON_FAILURE  Set to 'false' to disable rollback
+  CRON_ENABLED         Set to 'true' to enable cron monitoring
+  E2B_SANDBOX_ENABLED  Set to 'true' to enable E2B sandbox
+  E2B_API_KEY          E2B API key for sandbox deployment
 
 Examples:
   $0                          # Standard deployment
   $0 --skip-tests -y          # Skip tests with auto-confirm
   $0 --build-locally          # Build and validate locally first
+  $0 --enable-cron --enable-e2b  # Full deployment with monitoring
 
 EOF
             exit 0

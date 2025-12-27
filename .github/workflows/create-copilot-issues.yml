@@ -1,0 +1,1706 @@
+name: Create GitHub Copilot Issues - 150 Tasks for 95% Usage
+
+on:
+  workflow_dispatch:
+    inputs:
+      batch:
+        description: 'Which batch to create (all, week1-4, week5-8, or specific week like week1)'
+        required: true
+        default: 'all'
+      priority_filter:
+        description: 'Filter by priority (all, critical, high, medium, low)'
+        required: false
+        default: 'all'
+
+jobs:
+  create-copilot-issues:
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+      contents: read
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Read copilot-tasks.md
+        id: read-tasks
+        run: |
+          echo "Reading tasks from .github/copilot-tasks.md"
+          cat .github/copilot-tasks.md
+
+      - name: Create 150 GitHub Issues from Task Plan
+        uses: actions/github-script@v7
+        env:
+          BATCH: ${{ github.event.inputs.batch }}
+          PRIORITY_FILTER: ${{ github.event.inputs.priority_filter }}
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const batch = process.env.BATCH;
+            const priorityFilter = process.env.PRIORITY_FILTER;
+
+            console.log(`Creating issues for batch: ${batch}`);
+            console.log(`Priority filter: ${priorityFilter}`);
+
+            // Comprehensive task database from copilot-tasks.md
+            const allTasks = {
+              week1: {
+                name: 'Week 1: Trading System Completion',
+                target: '20%',
+                focus: 'Trading System Completion',
+                tasks: [
+                  {
+                    title: '📊 Chart.js Integration - Performance Chart Component',
+                    file: 'frontend/src/components/PerformanceChart.tsx',
+                    lines: 250,
+                    priority: 'high',
+                    labels: ['week-1', 'frontend', 'trading', 'chart.js', 'copilot-task'],
+                    description: `Create a Chart.js line chart component for trading performance with multiple datasets.
+
+**Requirements:**
+- Install chart.js and react-chartjs-2
+- Line chart showing account balance over time
+- Win rate percentage bar chart
+- Profit/loss waterfall chart
+- Real-time updates every 5 seconds
+- Responsive design for mobile
+- Dark theme matching App.css
+- Export chart as PNG/PDF functionality
+
+**Dependencies:** chart.js, react-chartjs-2
+
+**Acceptance Criteria:**
+- [ ] Component renders correctly with sample data
+- [ ] Real-time updates working
+- [ ] Export functionality implemented
+- [ ] Mobile responsive
+- [ ] Unit tests written`
+                  },
+                  {
+                    title: '🔴 MT5 Live Account Integration',
+                    file: 'pillar-a-trading/mt5_live_connector.py',
+                    lines: 400,
+                    priority: 'critical',
+                    labels: ['week-1', 'trading', 'backend', 'mt5', 'copilot-task'],
+                    description: `Create MT5 live account connector with risk management and trade execution.
+
+**Requirements:**
+- Extend mt5_trading_bot.py for live account
+- Account verification (balance checks)
+- Position sizing calculator
+- Real-time P&L tracking
+- Emergency stop-loss system
+- Maximum daily loss limits
+- Trade journaling (SQLite database)
+- Telegram notifications for live trades
+
+**Dependencies:** MetaTrader5, python-telegram-bot
+
+**Acceptance Criteria:**
+- [ ] Live account connection established
+- [ ] Risk management rules enforced
+- [ ] All trades logged to database
+- [ ] Notifications sent successfully
+- [ ] Comprehensive tests with mocks`
+                  },
+                  {
+                    title: '💰 Binance Live API Integration',
+                    file: 'pillar-a-trading/crypto/binance_live_trader.py',
+                    lines: 500,
+                    priority: 'high',
+                    labels: ['week-1', 'crypto', 'trading', 'binance', 'copilot-task'],
+                    description: `Create Binance spot and futures trading bot with WebSocket for real-time data.
+
+**Requirements:**
+- Binance API authentication (testnet + mainnet)
+- WebSocket streaming for real-time prices
+- Order execution (market, limit, stop-loss)
+- Portfolio rebalancing automation
+- Tax lot tracking for crypto gains/losses
+- Integration with blockchain_transaction_verifier.py
+- DCA (Dollar Cost Averaging) scheduler
+- Staking rewards tracker
+
+**Dependencies:** python-binance, websockets
+
+**Acceptance Criteria:**
+- [ ] WebSocket connection stable
+- [ ] All order types working
+- [ ] Tax tracking implemented
+- [ ] DCA scheduler functional
+- [ ] Full test coverage`
+                  },
+                  {
+                    title: '🤖 KinnoBot AI Pattern Recognition ML Model',
+                    file: 'pillar-a-trading/ai/pattern_recognition_ml.py',
+                    lines: 600,
+                    priority: 'high',
+                    labels: ['week-1', 'ai', 'ml', 'tensorflow', 'copilot-task'],
+                    description: `Create machine learning model for candlestick pattern recognition using TensorFlow.
+
+**Requirements:**
+- Load historical OHLCV data for 10 pairs
+- Feature engineering (RSI, MACD, Bollinger Bands)
+- Train LSTM model for pattern detection
+- Implement 8 candlestick patterns from demo executor
+- Backtesting framework with walk-forward validation
+- Model versioning and A/B testing
+- Real-time inference API endpoint
+- Performance metrics dashboard
+
+**Dependencies:** tensorflow, scikit-learn, pandas, ta-lib
+
+**Acceptance Criteria:**
+- [ ] Model training pipeline complete
+- [ ] Backtesting shows positive results
+- [ ] API endpoint deployed
+- [ ] Performance dashboard live
+- [ ] Model accuracy >70%`
+                  },
+                  {
+                    title: '📋 Trade Copier (Copygram Clone)',
+                    file: 'pillar-a-trading/trade_copier.py',
+                    lines: 300,
+                    priority: 'medium',
+                    labels: ['week-1', 'trading', 'automation', 'copilot-task'],
+                    description: `Create trade copier that mirrors trades from demo to live account with risk scaling.
+
+**Requirements:**
+- Monitor demo account trades in real-time
+- Calculate position sizing for live account
+- Copy trades with configurable lot size multiplier
+- Add filters (only copy winning patterns)
+- Performance comparison (demo vs live)
+- Email notifications for copied trades
+
+**Dependencies:** None (uses existing MT5 connector)
+
+**Acceptance Criteria:**
+- [ ] Real-time monitoring working
+- [ ] Position sizing accurate
+- [ ] Filters configurable
+- [ ] Performance tracking live
+- [ ] Tests passing`
+                  },
+                  {
+                    title: '✅ Unit Tests for Trading System',
+                    file: 'tests/test_trading_*.py',
+                    lines: 800,
+                    priority: 'high',
+                    labels: ['week-1', 'testing', 'pytest', 'copilot-task'],
+                    description: `Generate comprehensive pytest unit tests with mocking and fixtures.
+
+**Requirements:**
+- Test MT5 connection and authentication
+- Mock trade execution and validate responses
+- Test risk management calculations
+- Test pattern recognition accuracy
+- Test error handling and retry logic
+- Integration tests for full trading workflow
+- Achieve 80%+ code coverage
+
+**Dependencies:** pytest, pytest-mock, pytest-asyncio
+
+**Files to create:**
+- tests/test_mt5_trading_bot.py
+- tests/test_binance_trader.py
+- tests/test_pattern_recognition.py
+
+**Acceptance Criteria:**
+- [ ] All trading modules tested
+- [ ] Mocking implemented correctly
+- [ ] Coverage >80%
+- [ ] All tests passing
+- [ ] CI/CD integration`
+                  }
+                ]
+              },
+
+              week2: {
+                name: 'Week 2: Legal Automation + Tests',
+                target: '35%',
+                focus: 'Legal Automation + Tests',
+                tasks: [
+                  {
+                    title: '🔴 Credit Repair Automation System - 33 Errors Fixed',
+                    file: 'pillar-b-legal/credit-repair/dispute_automation.py',
+                    lines: 700,
+                    priority: 'critical',
+                    labels: ['week-2', 'legal', 'credit-repair', 'automation', 'copilot-task'],
+                    description: `Create automated credit dispute system for Equifax, Experian, TransUnion - Fix 33 errors.
+
+**User Context:**
+- 33 credit report errors to dispute
+- CFPB complaints needed
+- BBB complaints for creditors
+- 411 method dispute letters
+
+**Requirements:**
+- Parse credit reports (PDF and text)
+- Identify disputable items (late payments, collections, etc.)
+- Generate 411 method dispute letters
+- Track dispute status (in progress, resolved, escalated)
+- CFPB complaint automation
+- BBB complaint automation
+- Calculate FCRA damages ($100-$1000 per violation)
+- Integration with MJ Tradelines API
+- 3-bureau mailing address automation
+
+**Dependencies:** PyPDF2, reportlab, requests
+
+**Acceptance Criteria:**
+- [ ] All 33 errors identified programmatically
+- [ ] Dispute letters generated for each error
+- [ ] CFPB/BBB automation working
+- [ ] Damage calculator accurate
+- [ ] Full test coverage`
+                  },
+                  {
+                    title: '💳 Tradeline Management System',
+                    file: 'pillar-b-legal/credit-repair/tradeline_manager.py',
+                    lines: 450,
+                    priority: 'high',
+                    labels: ['week-2', 'credit-repair', 'tradelines', 'copilot-task'],
+                    description: `Create tradeline purchase and tracking system with credit score simulation.
+
+**Requirements:**
+- Parse MJ Tradelines catalog (web scraping)
+- Credit score impact calculator (FICO 8/9)
+- Optimal tradeline selection algorithm
+- Purchase automation via email/API
+- Track reporting dates (post date, close date)
+- ROI calculation (cost vs score increase)
+- Integration with Credit Karma API (unofficial)
+
+**Dependencies:** beautifulsoup4, selenium
+
+**Acceptance Criteria:**
+- [ ] Catalog scraping working
+- [ ] Score simulator accurate
+- [ ] Purchase automation functional
+- [ ] ROI tracking implemented
+- [ ] Tests passing`
+                  },
+                  {
+                    title: '🔴 Tax Filing System - Form 1040 Individual',
+                    file: 'pillar-c-financial/tax/individual_1040_generator.py',
+                    lines: 800,
+                    priority: 'critical',
+                    labels: ['week-2', 'tax', 'financial', 'irs', 'copilot-task'],
+                    description: `Create IRS Form 1040 generator with Schedule C for self-employment.
+
+**Requirements:**
+- IRS Form 1040 data model (all fields)
+- Schedule C: Profit or Loss from Business
+- Schedule SE: Self-Employment Tax
+- Standard vs itemized deduction optimizer
+- Tax liability calculator with credits
+- E-file XML generation (MeF format)
+- State tax return integration (CA, TX, GA)
+- Quarterly estimated tax calculator
+- 2025 tax law updates
+
+**Dependencies:** lxml, pdfrw
+
+**Acceptance Criteria:**
+- [ ] All 1040 fields implemented
+- [ ] Schedule C accurate
+- [ ] E-file XML valid
+- [ ] State returns working
+- [ ] Full test suite`
+                  },
+                  {
+                    title: '🏢 Business Tax Returns - Forms 1065, 1120-S',
+                    file: 'pillar-c-financial/tax/business_returns_generator.py',
+                    lines: 900,
+                    priority: 'high',
+                    labels: ['week-2', 'tax', 'business', 'copilot-task'],
+                    description: `Create Form 1065 (Partnership) and 1120-S (S-Corp) generators.
+
+**Requirements:**
+- Form 1065 (Partnership tax return)
+- Schedule K-1 generation for partners
+- Form 1120-S (S-Corporation tax return)
+- Depreciation calculator (MACRS, Section 179)
+- QBI deduction optimizer (20% pass-through)
+- Multi-state apportionment for businesses
+- Cryptocurrency trading tax reporting (8949, Schedule D)
+- 2025 updates
+
+**Dependencies:** None (uses existing tax modules)
+
+**Acceptance Criteria:**
+- [ ] 1065 complete with K-1s
+- [ ] 1120-S functional
+- [ ] Depreciation accurate
+- [ ] Crypto reporting working
+- [ ] Tests comprehensive`
+                  },
+                  {
+                    title: '🏛️ Nonprofit Form 990 Generator',
+                    file: 'core-systems/nonprofit-automation/form_990_generator.py',
+                    lines: 650,
+                    priority: 'high',
+                    labels: ['week-2', 'nonprofit', 'tax', 'irs', 'copilot-task'],
+                    description: `Create IRS Form 990/990-EZ/990-N generator for tax-exempt organizations.
+
+**Requirements:**
+- Form 990-N (e-Postcard) for <$50K revenue
+- Form 990-EZ for $50K-$200K revenue
+- Form 990 (full) for $200K+ revenue
+- Schedule A: Public charity status
+- Schedule O: Supplemental information
+- Compensation analysis (Part VII)
+- Program service accomplishments (Part III)
+- Balance sheet and revenue/expenses
+
+**Dependencies:** None
+
+**Acceptance Criteria:**
+- [ ] All 990 variants working
+- [ ] Schedules generating correctly
+- [ ] Validation rules enforced
+- [ ] E-file ready
+- [ ] Full coverage`
+                  },
+                  {
+                    title: '✅ Unit Tests for Legal/Financial Systems',
+                    file: 'tests/test_legal_financial_*.py',
+                    lines: 700,
+                    priority: 'high',
+                    labels: ['week-2', 'testing', 'legal', 'financial', 'copilot-task'],
+                    description: `Generate pytest tests for credit repair and tax filing systems.
+
+**Requirements:**
+- Test credit report parsing accuracy
+- Test dispute letter generation
+- Test Form 1040 calculations (various scenarios)
+- Test partnership K-1 distribution
+- Test nonprofit Form 990 compliance
+- Mock IRS e-file API responses
+- Tax calculation edge cases
+
+**Dependencies:** pytest, faker
+
+**Files:**
+- tests/test_credit_repair.py
+- tests/test_tax_filing.py
+- tests/test_form_990.py
+
+**Acceptance Criteria:**
+- [ ] All systems tested
+- [ ] Edge cases covered
+- [ ] Mocks comprehensive
+- [ ] Coverage >85%
+- [ ] CI passing`
+                  }
+                ]
+              },
+
+              week3: {
+                name: 'Week 3: API Expansion + Frontend',
+                target: '50%',
+                focus: 'API Expansion + Frontend Development',
+                tasks: [
+                  {
+                    title: '🔴 Expand REST API to 100+ Endpoints',
+                    file: 'api/main.py',
+                    lines: 1200,
+                    priority: 'critical',
+                    labels: ['week-3', 'api', 'backend', 'fastapi', 'copilot-task'],
+                    description: `Add 50 new FastAPI endpoints for credit repair, tax filing, and notifications.
+
+**Credit Repair Endpoints (10):**
+- POST /api/v1/credit/disputes/create
+- GET /api/v1/credit/disputes/{dispute_id}
+- POST /api/v1/credit/tradelines/purchase
+- GET /api/v1/credit/score-simulation
+
+**Tax Filing Endpoints (12):**
+- POST /api/v1/tax/1040/generate
+- POST /api/v1/tax/1065/generate
+- GET /api/v1/tax/liability-estimate
+- POST /api/v1/tax/efile
+
+**Notification Management (8):**
+- POST /api/v1/notifications/preferences
+- GET /api/v1/notifications/history
+- POST /api/v1/notifications/test
+
+**Advanced Trading (10):**
+- POST /api/v1/trading/copy-trade
+- GET /api/v1/trading/performance-analytics
+- POST /api/v1/trading/backtest/optimize
+
+**Estate/Probate Automation (10):**
+- POST /api/v1/estate/probate/petition
+- GET /api/v1/estate/thurman-sr/documents
+- POST /api/v1/estate/inventory/$800k
+
+**Comprehensive OpenAPI 3.0 documentation**
+
+**Dependencies:** None (FastAPI already installed)
+
+**Acceptance Criteria:**
+- [ ] 50+ new endpoints added
+- [ ] All endpoints documented
+- [ ] Authentication implemented
+- [ ] Tests for all endpoints
+- [ ] OpenAPI docs complete`
+                  },
+                  {
+                    title: '📊 GraphQL API Layer',
+                    file: 'api/graphql_schema.py',
+                    lines: 500,
+                    priority: 'medium',
+                    labels: ['week-3', 'graphql', 'api', 'copilot-task'],
+                    description: `Create GraphQL schema and resolvers for complex queries across all systems.
+
+**Requirements:**
+- GraphQL schema definition (SDL)
+- Query resolvers (get client data, trades, cases)
+- Mutation resolvers (create trade, file dispute)
+- Subscription resolvers (real-time trade updates)
+- DataLoader for N+1 query optimization
+- GraphQL playground integration
+- Authentication via JWT tokens
+
+**Dependencies:** strawberry-graphql, graphene
+
+**Acceptance Criteria:**
+- [ ] Schema comprehensive
+- [ ] All resolvers working
+- [ ] Subscriptions live
+- [ ] N+1 optimized
+- [ ] Tests complete`
+                  },
+                  {
+                    title: '⚛️ React Dashboard - Trading Components',
+                    file: 'frontend/src/components/TradingDashboard/*.tsx',
+                    lines: 1500,
+                    priority: 'high',
+                    labels: ['week-3', 'frontend', 'react', 'trading', 'copilot-task'],
+                    description: `Create comprehensive trading dashboard components with TypeScript.
+
+**Components to create:**
+- LiveTradesTable.tsx (real-time WebSocket updates)
+- AccountBalanceCard.tsx (multi-account view)
+- RiskManagementPanel.tsx (position sizing calculator)
+- PatternDetectionFeed.tsx (live pattern alerts)
+- TradeJournal.tsx (notes, screenshots, analysis)
+- StrategyPerformanceComparison.tsx
+- PortfolioAllocation.tsx (pie chart)
+- TradingCalendar.tsx (economic events, earnings)
+
+**Dependencies:** react-query, recharts, date-fns
+
+**Acceptance Criteria:**
+- [ ] All 8 components created
+- [ ] WebSocket integration working
+- [ ] Mobile responsive
+- [ ] Tests for each component
+- [ ] Storybook documentation`
+                  },
+                  {
+                    title: '⚖️ React Dashboard - Legal Components',
+                    file: 'frontend/src/components/LegalDashboard/*.tsx',
+                    lines: 1200,
+                    priority: 'high',
+                    labels: ['week-3', 'frontend', 'react', 'legal', 'copilot-task'],
+                    description: `Create legal case management dashboard components.
+
+**Components:**
+- CaseList.tsx (filterable, sortable table)
+- CaseDetail.tsx (timeline, documents, tasks)
+- DocumentGenerator.tsx (template selector, form fill)
+- CalendarView.tsx (court dates, deadlines)
+- ClientPortal.tsx (client-facing view)
+- BillingInvoices.tsx (time tracking, invoices)
+- DamagesCalculator.tsx (interactive calculator)
+
+**Dependencies:** react-table, react-hook-form
+
+**Acceptance Criteria:**
+- [ ] All components functional
+- [ ] Document generation working
+- [ ] Calendar sync implemented
+- [ ] Calculator accurate
+- [ ] Full test coverage`
+                  },
+                  {
+                    title: '💰 React Dashboard - Financial Components',
+                    file: 'frontend/src/components/FinancialDashboard/*.tsx',
+                    lines: 1000,
+                    priority: 'medium',
+                    labels: ['week-3', 'frontend', 'react', 'financial', 'copilot-task'],
+                    description: `Create financial management and tax filing components.
+
+**Components:**
+- TaxFilingWizard.tsx (step-by-step Form 1040)
+- IncomeExpenseTracker.tsx (monthly breakdown)
+- CreditScoreMonitor.tsx (3-bureau tracking)
+- InvoiceGenerator.tsx (create/send invoices)
+- ExpenseReimbursement.tsx (upload receipts)
+- FinancialReports.tsx (P&L, balance sheet)
+
+**Dependencies:** None (uses existing libs)
+
+**Acceptance Criteria:**
+- [ ] All components created
+- [ ] Tax wizard functional
+- [ ] Credit monitoring live
+- [ ] Invoice generation working
+- [ ] Tests passing`
+                  },
+                  {
+                    title: '🔌 WebSocket Real-Time Updates',
+                    file: 'api/websocket_manager.py',
+                    lines: 350,
+                    priority: 'high',
+                    labels: ['week-3', 'websocket', 'backend', 'copilot-task'],
+                    description: `Create WebSocket manager for real-time updates to React frontend.
+
+**Requirements:**
+- WebSocket connection manager (FastAPI)
+- Room-based subscriptions (trades, cases, notifications)
+- Broadcast trade execution events
+- Broadcast pattern detection alerts
+- Broadcast case status changes
+- Heartbeat/ping-pong for connection health
+- Reconnection handling on client side
+
+**Dependencies:** websockets
+
+**Acceptance Criteria:**
+- [ ] Connection manager stable
+- [ ] Room subscriptions working
+- [ ] Broadcasting functional
+- [ ] Heartbeat implemented
+- [ ] Client reconnect working`
+                  }
+                ]
+              },
+
+              week4: {
+                name: 'Week 4: Credit + Tax + Estate Automation',
+                target: '65%',
+                focus: 'Credit Repair + Tax Filing + Estate/Probate',
+                tasks: [
+                  {
+                    title: '🏛️ CFPB Complaint Automation',
+                    file: 'pillar-b-legal/credit-repair/cfpb_automation.py',
+                    lines: 400,
+                    priority: 'high',
+                    labels: ['week-4', 'legal', 'cfpb', 'automation', 'copilot-task'],
+                    description: `Automate CFPB complaint filing for credit bureaus and creditors.
+
+**Requirements:**
+- CFPB web form automation (Selenium)
+- Complaint narrative generator (from dispute facts)
+- Document upload automation (supporting evidence)
+- Track complaint status (submitted, in review, closed)
+- Parse CFPB responses and extract next steps
+- Integration with dispute_automation.py
+- Metrics: resolution rate, time to resolution
+
+**Dependencies:** selenium, webdriver-manager
+
+**Acceptance Criteria:**
+- [ ] Form automation working
+- [ ] Narrative generation quality
+- [ ] Status tracking accurate
+- [ ] Integration complete
+- [ ] Tests comprehensive`
+                  },
+                  {
+                    title: '💌 Goodwill Letter Generator',
+                    file: 'pillar-b-legal/credit-repair/goodwill_letter_generator.py',
+                    lines: 300,
+                    priority: 'medium',
+                    labels: ['week-4', 'credit-repair', 'automation', 'copilot-task'],
+                    description: `Generate personalized goodwill letters to creditors requesting deletion.
+
+**Requirements:**
+- 10+ goodwill letter templates (different tones)
+- Personalization engine (customer history, payment record)
+- A/B testing different templates
+- Track success rate by creditor
+- Follow-up letter automation (7, 14, 30 days)
+- Integration with certified mail tracking
+
+**Dependencies:** None
+
+**Acceptance Criteria:**
+- [ ] 10+ templates created
+- [ ] Personalization working
+- [ ] A/B testing implemented
+- [ ] Success tracking functional
+- [ ] Follow-up automation working`
+                  },
+                  {
+                    title: '🔴 Estate/Probate Automation - Thurman Sr $800k',
+                    file: 'pillar-b-legal/estate-probate/thurman_sr_automation.py',
+                    lines: 800,
+                    priority: 'critical',
+                    labels: ['week-4', 'legal', 'estate', 'probate', 'copilot-task'],
+                    description: `Create complete estate/probate automation for Thurman Sr estate ($800k value).
+
+**User Context:**
+- Thurman Sr estate worth $800,000
+- Need probate petition
+- Inventory of assets
+- Distribution plan
+- All court documents
+
+**Requirements:**
+- Probate petition generator
+- Asset inventory system ($800k total)
+- Beneficiary distribution calculator
+- Court document templates (7 documents)
+- Filing fee calculator by jurisdiction
+- Timeline tracker (court hearing dates)
+- Notice to creditors automation
+- Final account and petition for distribution
+
+**Documents to Generate:**
+1. Petition for Probate
+2. Notice of Hearing
+3. Inventory and Appraisal ($800k)
+4. Notice to Creditors
+5. Final Account
+6. Petition for Distribution
+7. Order for Distribution
+
+**Dependencies:** docx-python, reportlab
+
+**Acceptance Criteria:**
+- [ ] All 7 documents generated
+- [ ] $800k inventory accurate
+- [ ] Distribution calculator working
+- [ ] Court filing ready
+- [ ] Full test coverage`
+                  },
+                  {
+                    title: '📋 FTC Identity Theft Report Generator',
+                    file: 'pillar-b-legal/credit-repair/ftc_identity_theft.py',
+                    lines: 350,
+                    priority: 'medium',
+                    labels: ['week-4', 'legal', 'ftc', 'identity-theft', 'copilot-task'],
+                    description: `Create FTC identity theft affidavit and recovery plan generator.
+
+**Requirements:**
+- FTC Identity Theft Report form automation
+- Police report filing instructions (by jurisdiction)
+- Creditor notification letters (fraudulent accounts)
+- Credit freeze automation (all 3 bureaus)
+- Fraud alert placement
+- Extended fraud alert (7 years)
+- Identity theft recovery timeline
+
+**Dependencies:** None
+
+**Acceptance Criteria:**
+- [ ] FTC report generation working
+- [ ] Police instructions clear
+- [ ] Freeze automation functional
+- [ ] Timeline accurate
+- [ ] Tests passing`
+                  },
+                  {
+                    title: '🔴 Tax Return E-Filing Integration (IRS MeF)',
+                    file: 'pillar-c-financial/tax/irs_efile_client.py',
+                    lines: 600,
+                    priority: 'critical',
+                    labels: ['week-4', 'tax', 'irs', 'efile', 'copilot-task'],
+                    description: `Create IRS MeF (Modernized e-File) XML generator and submission client.
+
+**Requirements:**
+- Generate MeF XML from Form 1040 data model
+- Schema validation (IRS published XSD)
+- Digital signature (PKCS#7)
+- Transmit to IRS via HTTPS
+- Parse acknowledgment files
+- Error handling and resubmission
+- State e-file integration (CA FTB, etc.)
+
+**Dependencies:** lxml, cryptography, requests
+
+**Acceptance Criteria:**
+- [ ] XML generation valid
+- [ ] Digital signature working
+- [ ] Transmission successful
+- [ ] ACK parsing accurate
+- [ ] State integration complete`
+                  },
+                  {
+                    title: '📚 QuickBooks Integration',
+                    file: 'pillar-c-financial/integrations/quickbooks_sync.py',
+                    lines: 500,
+                    priority: 'high',
+                    labels: ['week-4', 'financial', 'integration', 'quickbooks', 'copilot-task'],
+                    description: `Create QuickBooks Online API integration for automated bookkeeping.
+
+**Requirements:**
+- OAuth 2.0 authentication with QuickBooks
+- Sync invoices to QuickBooks
+- Sync expenses and receipts
+- Sync bank transactions
+- Generate financial reports (P&L, balance sheet)
+- Tax category mapping (Schedule C categories)
+- Quarterly tax payment reminders
+
+**Dependencies:** intuitlib, requests-oauthlib
+
+**Acceptance Criteria:**
+- [ ] OAuth authentication working
+- [ ] Two-way sync functional
+- [ ] Reports generating
+- [ ] Tax mapping accurate
+- [ ] Tests comprehensive`
+                  },
+                  {
+                    title: '💳 Stripe Billing Integration',
+                    file: 'pillar-c-financial/integrations/stripe_billing.py',
+                    lines: 450,
+                    priority: 'high',
+                    labels: ['week-4', 'financial', 'billing', 'stripe', 'copilot-task'],
+                    description: `Create Stripe subscription billing for AgentX5 SaaS platform.
+
+**Requirements:**
+- Stripe customer creation
+- Subscription plans (Free, Pro, Enterprise)
+- Usage-based billing (API calls, trades executed)
+- Invoice generation and email
+- Payment method management
+- Subscription upgrades/downgrades
+- Webhook handling (payment success/failure)
+- Revenue analytics dashboard
+
+**Dependencies:** stripe
+
+**Acceptance Criteria:**
+- [ ] Customer creation working
+- [ ] All plans configured
+- [ ] Usage tracking accurate
+- [ ] Webhooks handling correctly
+- [ ] Analytics dashboard live`
+                  }
+                ]
+              },
+
+              week5: {
+                name: 'Week 5: Mobile App + MT5/OKX Setup',
+                target: '75%',
+                focus: 'Mobile App Development + Trading Platform Setup',
+                tasks: [
+                  {
+                    title: '📱 React Native Mobile App - Core & Navigation',
+                    file: 'mobile/App.tsx',
+                    lines: 800,
+                    priority: 'high',
+                    labels: ['week-5', 'mobile', 'react-native', 'copilot-task'],
+                    description: `Create React Native mobile app for iOS/Android with navigation and authentication.
+
+**Requirements:**
+- React Navigation setup (stack + tab navigators)
+- Authentication screens (login, register, forgot password)
+- Biometric authentication (Face ID, fingerprint)
+- Push notification setup (Firebase Cloud Messaging)
+- Deep linking configuration
+- State management (Redux Toolkit or Zustand)
+- API client with token refresh
+- Offline mode with local storage
+
+**Dependencies:** react-native, @react-navigation/native, react-native-biometrics
+
+**Acceptance Criteria:**
+- [ ] Navigation working on iOS/Android
+- [ ] Authentication flow complete
+- [ ] Biometric auth functional
+- [ ] Push notifications working
+- [ ] Offline mode implemented`
+                  },
+                  {
+                    title: '📊 Mobile App - Trading Screens',
+                    file: 'mobile/src/screens/Trading/*.tsx',
+                    lines: 1200,
+                    priority: 'high',
+                    labels: ['week-5', 'mobile', 'trading', 'copilot-task'],
+                    description: `Create mobile trading screens with real-time updates.
+
+**Screens:**
+- DashboardScreen.tsx (account summary, P&L)
+- LiveTradesScreen.tsx (scrollable list, swipe actions)
+- NewTradeScreen.tsx (quick trade entry form)
+- PatternAlertsScreen.tsx (push notifications feed)
+- TradeDetailScreen.tsx (full trade info, close trade)
+- PerformanceChartScreen.tsx (mobile-optimized charts)
+- Real-time price updates via WebSocket
+
+**Dependencies:** react-native-charts-wrapper, react-native-websocket
+
+**Acceptance Criteria:**
+- [ ] All screens functional
+- [ ] WebSocket updates working
+- [ ] Charts rendering correctly
+- [ ] Swipe actions smooth
+- [ ] Tests passing`
+                  },
+                  {
+                    title: '🔴 MT5/OKX Trading Platform Setup',
+                    file: 'pillar-a-trading/mt5_okx_setup.py',
+                    lines: 600,
+                    priority: 'critical',
+                    labels: ['week-5', 'trading', 'mt5', 'okx', 'copilot-task'],
+                    description: `Setup MT5 and OKX trading platforms with API integration.
+
+**User Requirements:**
+- MT5 live account setup
+- OKX exchange integration
+- API key management
+- Trading bot deployment
+
+**Requirements:**
+- MT5 platform installation automation
+- OKX API authentication
+- Account verification workflow
+- API key secure storage (encrypted)
+- Trading bot deployment scripts
+- Health monitoring and alerts
+- Failover and redundancy setup
+- Performance benchmarking
+
+**Dependencies:** MetaTrader5, ccxt (for OKX)
+
+**Acceptance Criteria:**
+- [ ] MT5 fully configured
+- [ ] OKX API connected
+- [ ] Secure key storage
+- [ ] Bots deployed
+- [ ] Monitoring active`
+                  },
+                  {
+                    title: '📥 MQL5 Algorithm Download System',
+                    file: 'pillar-a-trading/mql5_algorithm_downloader.py',
+                    lines: 400,
+                    priority: 'high',
+                    labels: ['week-5', 'trading', 'mql5', 'algorithms', 'copilot-task'],
+                    description: `Create automated MQL5 algorithm download and installation system.
+
+**Requirements:**
+- Browse MQL5 marketplace (web scraping)
+- Filter by rating, downloads, price
+- Automated purchase for paid algorithms
+- Download and install to MT5 experts folder
+- Backtest automation for downloaded algorithms
+- Performance comparison dashboard
+- Algorithm versioning and updates
+- Integration with existing trading bots
+
+**Dependencies:** selenium, beautifulsoup4
+
+**Acceptance Criteria:**
+- [ ] Marketplace scraping working
+- [ ] Download automation functional
+- [ ] Installation to MT5 working
+- [ ] Backtesting automated
+- [ ] Dashboard comparing results`
+                  },
+                  {
+                    title: '⚖️ Mobile App - Legal Screens',
+                    file: 'mobile/src/screens/Legal/*.tsx',
+                    lines: 900,
+                    priority: 'medium',
+                    labels: ['week-5', 'mobile', 'legal', 'copilot-task'],
+                    description: `Create mobile legal case management screens.
+
+**Screens:**
+- CasesListScreen.tsx (swipeable cards)
+- CaseDetailScreen.tsx (timeline, documents)
+- DocumentScannerScreen.tsx (camera integration)
+- CalendarScreen.tsx (upcoming deadlines)
+- ClientCommunicationScreen.tsx (chat interface)
+- VoiceNotesScreen.tsx (audio recording for case notes)
+
+**Dependencies:** react-native-document-scanner, react-native-audio-recorder
+
+**Acceptance Criteria:**
+- [ ] All screens created
+- [ ] Document scanning working
+- [ ] Audio recording functional
+- [ ] Chat interface smooth
+- [ ] Tests complete`
+                  },
+                  {
+                    title: '💰 Mobile App - Financial Screens',
+                    file: 'mobile/src/screens/Financial/*.tsx',
+                    lines: 800,
+                    priority: 'medium',
+                    labels: ['week-5', 'mobile', 'financial', 'copilot-task'],
+                    description: `Create mobile financial management and credit repair screens.
+
+**Screens:**
+- CreditScoreScreen.tsx (gauge chart, 3-bureau view)
+- DisputesScreen.tsx (active disputes, add new)
+- ExpenseTrackerScreen.tsx (photo receipt upload)
+- InvoicesScreen.tsx (create/send invoices)
+- TaxEstimatorScreen.tsx (quick tax liability calc)
+- NotificationsScreen.tsx (all notifications feed)
+
+**Dependencies:** react-native-image-picker
+
+**Acceptance Criteria:**
+- [ ] All screens functional
+- [ ] Credit score display accurate
+- [ ] Photo upload working
+- [ ] Invoice creation smooth
+- [ ] Tax calculator accurate`
+                  }
+                ]
+              },
+
+              week6: {
+                name: 'Week 6: AI/ML + Damages Calculator Suite',
+                target: '85%',
+                focus: 'AI Orchestration + ML Models + Legal Calculators',
+                tasks: [
+                  {
+                    title: '🤖 Multi-Model AI Orchestration Enhancement',
+                    file: 'ai/multi_model_bridge.py',
+                    lines: 400,
+                    priority: 'high',
+                    labels: ['week-6', 'ai', 'orchestration', 'copilot-task'],
+                    description: `Enhance AI orchestration with Gemini 2.0, GPT-4.5, and Claude Opus 4.5.
+
+**Requirements:**
+- Add Gemini 2.0 Flash integration
+- Add GPT-4.5 Turbo integration
+- Update Claude to Opus 4.5
+- Parallel execution optimization (asyncio)
+- Cost tracking per model per request
+- Quality scoring (vote on best response)
+- Fallback chain (primary → secondary → tertiary)
+- Caching layer (Redis) for repeated queries
+- A/B testing different model combinations
+
+**Dependencies:** redis, google-generativeai, openai, anthropic
+
+**Acceptance Criteria:**
+- [ ] All 3 models integrated
+- [ ] Parallel execution working
+- [ ] Cost tracking accurate
+- [ ] Quality scoring functional
+- [ ] Cache improving performance`
+                  },
+                  {
+                    title: '📄 Legal Document Classification ML Model',
+                    file: 'ai/models/document_classifier.py',
+                    lines: 700,
+                    priority: 'medium',
+                    labels: ['week-6', 'ml', 'legal', 'classification', 'copilot-task'],
+                    description: `Train document classification model to categorize legal documents.
+
+**Requirements:**
+- Dataset: 1000+ labeled legal documents
+- Feature extraction (TF-IDF, BERT embeddings)
+- Multi-class classifier (contracts, pleadings, discovery, etc.)
+- Train/test split with cross-validation
+- Model evaluation (precision, recall, F1)
+- Export model (ONNX format)
+- Inference API endpoint
+- Active learning pipeline (retrain with new data)
+
+**Dependencies:** transformers, torch, scikit-learn
+
+**Acceptance Criteria:**
+- [ ] Model accuracy >90%
+- [ ] All document types classified
+- [ ] API endpoint working
+- [ ] Active learning functional
+- [ ] Production ready`
+                  },
+                  {
+                    title: '🔍 Named Entity Recognition for Legal Docs',
+                    file: 'ai/models/legal_ner.py',
+                    lines: 600,
+                    priority: 'medium',
+                    labels: ['week-6', 'ml', 'ner', 'legal', 'copilot-task'],
+                    description: `Fine-tune BERT for legal named entity recognition (parties, dates, amounts).
+
+**Requirements:**
+- Annotate training data (spaCy format)
+- Fine-tune BERT model for NER task
+- Entity types: PERSON, ORG, DATE, MONEY, STATUTE
+- Evaluation on test set
+- Integration with document generator
+- Extract entities from uploaded PDFs
+
+**Dependencies:** spacy, transformers
+
+**Acceptance Criteria:**
+- [ ] Model F1 score >85%
+- [ ] All entity types recognized
+- [ ] PDF extraction working
+- [ ] Integration complete
+- [ ] Tests passing`
+                  },
+                  {
+                    title: '🔴 Damages Calculator Suite - Comprehensive',
+                    file: 'pillar-b-legal/calculators/damages_calculator_suite.py',
+                    lines: 900,
+                    priority: 'critical',
+                    labels: ['week-6', 'legal', 'calculators', 'damages', 'copilot-task'],
+                    description: `Create comprehensive damages calculator suite for all case types.
+
+**User Requirements:**
+- Personal injury damages
+- Wrongful death damages
+- Employment law damages
+- Consumer protection damages
+- Civil rights damages
+- Contract breach damages
+
+**Calculators to Implement:**
+
+1. **Personal Injury:**
+   - Medical expenses (past & future)
+   - Lost wages calculator
+   - Pain and suffering multiplier
+   - Loss of consortium
+   - Punitive damages
+
+2. **Wrongful Death:**
+   - Lost earnings capacity
+   - Loss of companionship
+   - Funeral expenses
+   - Estate damages
+
+3. **Employment Law:**
+   - Back pay calculator
+   - Front pay calculator
+   - Emotional distress
+   - Attorney fees
+
+4. **Consumer Protection (FCRA, FDCPA, TCPA):**
+   - Statutory damages ($100-$1000 per violation)
+   - Actual damages
+   - Punitive damages
+
+5. **Civil Rights (§1983):**
+   - Constitutional violations
+   - Attorney fees
+   - Injunctive relief value
+
+6. **Contract Breach:**
+   - Expectation damages
+   - Consequential damages
+   - Liquidated damages
+
+**Dependencies:** numpy, scipy (for actuarial calculations)
+
+**Acceptance Criteria:**
+- [ ] All 6 calculators functional
+- [ ] Accurate actuarial calculations
+- [ ] PDF reports generated
+- [ ] API endpoints created
+- [ ] Frontend integration
+- [ ] Comprehensive tests`
+                  },
+                  {
+                    title: '📊 Predictive Analytics for Case Outcomes',
+                    file: 'ai/models/case_outcome_predictor.py',
+                    lines: 800,
+                    priority: 'medium',
+                    labels: ['week-6', 'ml', 'analytics', 'legal', 'copilot-task'],
+                    description: `Build ML model to predict case settlement likelihood and amount.
+
+**Requirements:**
+- Feature engineering (case type, jurisdiction, damages, etc.)
+- Historical case data (PACER, state courts)
+- Regression model for settlement amount prediction
+- Classification model for win/loss probability
+- SHAP values for explainability
+- Dashboard integration (show prediction on case detail page)
+
+**Dependencies:** xgboost, shap, pandas
+
+**Acceptance Criteria:**
+- [ ] Model accuracy >75%
+- [ ] SHAP explanations clear
+- [ ] Dashboard integration working
+- [ ] Predictions actionable
+- [ ] Tests comprehensive`
+                  }
+                ]
+              },
+
+              week7: {
+                name: 'Week 7: Integration Testing + 217-Agent Integration',
+                target: '92%',
+                focus: 'Testing + Multi-Agent Orchestration',
+                tasks: [
+                  {
+                    title: '🎭 End-to-End Testing with Playwright',
+                    file: 'tests/e2e/test_workflows.spec.ts',
+                    lines: 600,
+                    priority: 'high',
+                    labels: ['week-7', 'testing', 'e2e', 'playwright', 'copilot-task'],
+                    description: `Create Playwright E2E tests for complete user workflows.
+
+**Test Scenarios:**
+- User login flow
+- Creating a new trade
+- Receiving real-time updates
+- Closing a trade
+- Viewing trade history
+- Exporting performance report
+- Mobile responsive layout
+- Screenshot comparison testing
+- Credit dispute workflow
+- Tax filing workflow
+- Probate petition workflow
+
+**Dependencies:** @playwright/test
+
+**Acceptance Criteria:**
+- [ ] All workflows tested
+- [ ] Tests passing consistently
+- [ ] Screenshots validated
+- [ ] Mobile tests included
+- [ ] CI/CD integrated`
+                  },
+                  {
+                    title: '🔗 Integration Tests - Trading + Notifications',
+                    file: 'tests/integration/test_trading_notifications.py',
+                    lines: 500,
+                    priority: 'high',
+                    labels: ['week-7', 'testing', 'integration', 'copilot-task'],
+                    description: `Create integration tests for trading system with notification delivery.
+
+**Requirements:**
+- Mock MT5 API responses
+- Execute simulated trade
+- Verify email notification sent
+- Verify SMS notification sent
+- Verify push notification sent
+- Test notification rate limiting
+- Test notification preferences
+
+**Dependencies:** pytest, responses, fakeredis
+
+**Acceptance Criteria:**
+- [ ] All integrations tested
+- [ ] Mocking comprehensive
+- [ ] Notifications verified
+- [ ] Rate limiting working
+- [ ] Tests stable`
+                  },
+                  {
+                    title: '📋 Integration Tests - Legal Workflows',
+                    file: 'tests/integration/test_legal_workflows.py',
+                    lines: 450,
+                    priority: 'high',
+                    labels: ['week-7', 'testing', 'legal', 'copilot-task'],
+                    description: `Create integration tests for legal document generation workflows.
+
+**Requirements:**
+- Create client and case
+- Generate probate petition
+- Verify all 7 documents created
+- Validate PDF formatting
+- Test email delivery to client
+- Test DocuSign integration
+- Test document archival to Google Drive
+
+**Dependencies:** pytest
+
+**Acceptance Criteria:**
+- [ ] All workflows tested
+- [ ] PDF validation working
+- [ ] Email delivery verified
+- [ ] DocuSign tested
+- [ ] Tests comprehensive`
+                  },
+                  {
+                    title: '⚡ Load Testing with Locust',
+                    file: 'tests/load/locustfile.py',
+                    lines: 400,
+                    priority: 'medium',
+                    labels: ['week-7', 'testing', 'load', 'performance', 'copilot-task'],
+                    description: `Create Locust load tests to simulate 1000 concurrent users.
+
+**Requirements:**
+- Test API endpoints under load
+- Simulate 1000 concurrent trading requests
+- WebSocket connection stress test
+- Database query performance under load
+- Identify bottlenecks (slow endpoints)
+- Generate performance report
+
+**Dependencies:** locust
+
+**Acceptance Criteria:**
+- [ ] Load tests comprehensive
+- [ ] 1000 users simulated
+- [ ] Bottlenecks identified
+- [ ] Reports generated
+- [ ] Performance acceptable`
+                  },
+                  {
+                    title: '🔒 Security Testing (OWASP Top 10)',
+                    file: 'tests/security/*.py',
+                    lines: 700,
+                    priority: 'critical',
+                    labels: ['week-7', 'security', 'testing', 'owasp', 'copilot-task'],
+                    description: `Create security tests for authentication, authorization, and data protection.
+
+**Requirements:**
+- Test JWT token expiration and refresh
+- Test SQL injection prevention (parameterized queries)
+- Test XSS prevention (input sanitization)
+- Test CSRF protection
+- Test rate limiting on API endpoints
+- Test password hashing (bcrypt)
+- Test sensitive data encryption at rest
+- Penetration testing checklist (OWASP Top 10)
+
+**Dependencies:** pytest, bandit
+
+**Acceptance Criteria:**
+- [ ] All OWASP tests passing
+- [ ] No vulnerabilities found
+- [ ] Rate limiting working
+- [ ] Encryption verified
+- [ ] Pen test checklist complete`
+                  },
+                  {
+                    title: '🔴 217-Agent Integration System',
+                    file: 'core-systems/agent-integration/agent_217_orchestrator.py',
+                    lines: 1000,
+                    priority: 'critical',
+                    labels: ['week-7', 'agents', 'orchestration', 'integration', 'copilot-task'],
+                    description: `Integrate 217-agent system into AgentX5 platform.
+
+**User Requirements:**
+- Integrate all 217 specialized agents
+- Orchestration layer
+- Task routing
+- Agent collaboration
+
+**Requirements:**
+- Agent registry (217 agents with capabilities)
+- Task routing algorithm (match task to best agent)
+- Multi-agent collaboration protocol
+- Conflict resolution system
+- Performance monitoring per agent
+- Agent health checks and failover
+- Load balancing across agents
+- Result aggregation and validation
+
+**Agent Categories:**
+- Legal agents (50+): litigation, contracts, compliance, etc.
+- Financial agents (40+): tax, accounting, investment, etc.
+- Trading agents (30+): forex, crypto, stocks, etc.
+- AI/ML agents (25+): NLP, computer vision, prediction, etc.
+- DevOps agents (20+): deployment, monitoring, CI/CD, etc.
+- Research agents (25+): data gathering, analysis, reporting, etc.
+- Communication agents (15+): email, chat, notifications, etc.
+- Automation agents (12+): workflow, scheduling, integration, etc.
+
+**Dependencies:** celery, redis, rabbitmq
+
+**Acceptance Criteria:**
+- [ ] All 217 agents registered
+- [ ] Task routing working
+- [ ] Collaboration functional
+- [ ] Monitoring comprehensive
+- [ ] Load balancing effective
+- [ ] Full integration tests`
+                  }
+                ]
+              },
+
+              week8: {
+                name: 'Week 8: Performance Optimization',
+                target: '95%+',
+                focus: 'Performance, Caching, Monitoring',
+                tasks: [
+                  {
+                    title: '⚡ Database Query Optimization',
+                    file: 'core-systems/database/query_optimizer.py',
+                    lines: 350,
+                    priority: 'high',
+                    labels: ['week-8', 'performance', 'database', 'copilot-task'],
+                    description: `Optimize slow database queries with indexing and caching.
+
+**Requirements:**
+- Analyze slow query log
+- Add database indexes (composite indexes)
+- Implement Redis caching for frequent queries
+- Database connection pooling
+- Lazy loading for relationships
+- Pagination for large result sets
+- Query plan analysis (EXPLAIN)
+
+**Dependencies:** redis, sqlalchemy
+
+**Acceptance Criteria:**
+- [ ] Slow queries identified
+- [ ] Indexes added
+- [ ] Caching implemented
+- [ ] Query time reduced 50%+
+- [ ] Tests passing`
+                  },
+                  {
+                    title: '💾 API Response Caching (Redis)',
+                    file: 'api/cache_middleware.py',
+                    lines: 300,
+                    priority: 'high',
+                    labels: ['week-8', 'caching', 'performance', 'copilot-task'],
+                    description: `Create Redis-based caching middleware for FastAPI.
+
+**Requirements:**
+- Cache GET requests for 5 minutes
+- Cache invalidation on POST/PUT/DELETE
+- Cache key generation (URL + query params)
+- ETag support for conditional requests
+- Cache warming for common endpoints
+- Cache hit rate metrics
+
+**Dependencies:** redis, fastapi
+
+**Acceptance Criteria:**
+- [ ] Caching working
+- [ ] Invalidation correct
+- [ ] ETags implemented
+- [ ] Hit rate >70%
+- [ ] Performance improved`
+                  },
+                  {
+                    title: '⚛️ Frontend Performance Optimization',
+                    file: 'frontend/src/*',
+                    lines: 400,
+                    priority: 'medium',
+                    labels: ['week-8', 'frontend', 'performance', 'copilot-task'],
+                    description: `Optimize React app performance with code splitting and lazy loading.
+
+**Requirements:**
+- Code splitting (React.lazy + Suspense)
+- Lazy load chart components
+- Memoize expensive calculations (useMemo)
+- Virtual scrolling for large tables
+- Image optimization (WebP, lazy loading)
+- Bundle size analysis (webpack-bundle-analyzer)
+- Service worker for offline caching
+
+**Dependencies:** react, workbox
+
+**Acceptance Criteria:**
+- [ ] Code splitting implemented
+- [ ] Bundle size reduced 30%+
+- [ ] Virtual scrolling working
+- [ ] Images optimized
+- [ ] Lighthouse score >90`
+                  },
+                  {
+                    title: '📊 Monitoring and Observability (Prometheus)',
+                    file: 'core-systems/monitoring/prometheus_metrics.py',
+                    lines: 350,
+                    priority: 'high',
+                    labels: ['week-8', 'monitoring', 'observability', 'copilot-task'],
+                    description: `Add Prometheus metrics and Grafana dashboards.
+
+**Requirements:**
+- Instrument API endpoints (request count, latency)
+- Trading system metrics (trades/min, P&L)
+- Database metrics (query time, connection pool)
+- Custom business metrics (user signups, revenue)
+- Error rate tracking
+- Grafana dashboard JSON exports
+
+**Dependencies:** prometheus-client, grafana
+
+**Acceptance Criteria:**
+- [ ] All metrics instrumented
+- [ ] Dashboards created
+- [ ] Alerts configured
+- [ ] Historical data captured
+- [ ] Documentation complete`
+                  },
+                  {
+                    title: '📚 Documentation Generation',
+                    file: 'docs/**/*.md',
+                    lines: 2000,
+                    priority: 'medium',
+                    labels: ['week-8', 'documentation', 'copilot-task'],
+                    description: `Generate comprehensive documentation with examples.
+
+**Requirements:**
+- API documentation (OpenAPI/Swagger)
+- Architecture diagrams (mermaid.js)
+- User guides for each system
+- Developer onboarding guide
+- Deployment runbooks
+- Troubleshooting guides
+- FAQ sections
+- Video tutorial scripts
+
+**Dependencies:** None
+
+**Acceptance Criteria:**
+- [ ] API docs complete
+- [ ] Diagrams clear
+- [ ] User guides comprehensive
+- [ ] Dev guide helpful
+- [ ] Runbooks tested`
+                  }
+                ]
+              }
+            };
+
+            // Filter tasks based on batch and priority
+            let tasksToCreate = [];
+            const batchInput = batch.toLowerCase();
+
+            if (batchInput === 'all') {
+              // Create all tasks
+              for (const [weekKey, weekData] of Object.entries(allTasks)) {
+                tasksToCreate.push({ weekKey, weekData });
+              }
+            } else if (batchInput.startsWith('week') && batchInput.includes('-')) {
+              // Range like week1-4
+              const [start, end] = batchInput.replace('week', '').split('-').map(n => parseInt(n.trim()));
+              for (let i = start; i <= end; i++) {
+                const weekKey = `week${i}`;
+                if (allTasks[weekKey]) {
+                  tasksToCreate.push({ weekKey, weekData: allTasks[weekKey] });
+                }
+              }
+            } else if (batchInput.startsWith('week')) {
+              // Single week like week1
+              const weekNum = batchInput.replace('week', '');
+              const weekKey = `week${weekNum}`;
+              if (allTasks[weekKey]) {
+                tasksToCreate.push({ weekKey, weekData: allTasks[weekKey] });
+              }
+            }
+
+            console.log(`Creating issues for ${tasksToCreate.length} weeks`);
+
+            let issuesCreated = 0;
+            const createdIssues = [];
+
+            for (const { weekKey, weekData } of tasksToCreate) {
+              const weekNum = weekKey.replace('week', '');
+
+              // Create parent epic issue for the week
+              const epicBody = `## 🎯 ${weekData.name}
+
+**Target Usage:** ${weekData.target}
+**Focus Area:** ${weekData.focus}
+
+---
+
+## 📋 Tasks (${weekData.tasks.length})
+
+${weekData.tasks.map((task, idx) => `${idx + 1}. **${task.title}** (${task.lines} lines) - Priority: ${task.priority.toUpperCase()}`).join('\n')}
+
+---
+
+## ✅ Progress Tracking
+
+- [ ] All tasks created as issues
+- [ ] All tasks assigned
+- [ ] All tasks in progress
+- [ ] All tasks completed
+- [ ] Week ${weekNum} target (${weekData.target}) achieved
+
+---
+
+## 📈 Copilot Usage Goal
+
+Increase GitHub Copilot usage to **${weekData.target}** by end of Week ${weekNum}.
+
+**How to maximize Copilot:**
+1. Accept ALL relevant suggestions (Tab key)
+2. Write clear TODO comments for Copilot
+3. Let Copilot write tests
+4. Use Copilot Chat for complex logic
+5. Review and refactor Copilot code
+
+---
+
+**See detailed task plan:** \`.github/copilot-tasks.md\`
+`;
+
+              const epicIssue = await github.rest.issues.create({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                title: `🎯 Week ${weekNum}: ${weekData.name} (Target: ${weekData.target})`,
+                body: epicBody,
+                labels: [`week-${weekNum}`, 'epic', 'copilot-plan', 'high-priority']
+              });
+
+              console.log(`✅ Created epic issue #${epicIssue.data.number} for Week ${weekNum}`);
+              createdIssues.push({ week: weekNum, epicNumber: epicIssue.data.number, tasks: [] });
+
+              // Create individual task issues
+              for (const task of weekData.tasks) {
+                // Filter by priority if specified
+                if (priorityFilter !== 'all' && task.priority !== priorityFilter) {
+                  continue;
+                }
+
+                const taskBody = `${task.description}
+
+---
+
+## 📊 Task Metadata
+
+**File:** \`${task.file}\`
+**Estimated Lines:** ${task.lines}
+**Priority:** ${task.priority.toUpperCase()}
+**Week:** ${weekNum}
+
+---
+
+## 🤖 GitHub Copilot Instructions
+
+1. Open \`${task.file}\` in VS Code
+2. Enable GitHub Copilot
+3. Write clear TODO comments for each requirement
+4. Accept Copilot suggestions (Tab key)
+5. Use Copilot Chat for complex logic
+6. Let Copilot generate tests
+7. Review and refactor code
+
+---
+
+## 🎯 Acceptance Criteria
+
+See requirements above
+
+---
+
+## 🔗 Parent Issue
+
+Part of #${epicIssue.data.number} - Week ${weekNum} Epic
+
+---
+
+**Task Plan:** \`.github/copilot-tasks.md\`
+**Usage Target:** ${weekData.target} for Week ${weekNum}
+`;
+
+                const taskIssue = await github.rest.issues.create({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  title: task.title,
+                  body: taskBody,
+                  labels: [...task.labels, 'high-priority'],
+                  assignees: []
+                });
+
+                issuesCreated++;
+                createdIssues[createdIssues.length - 1].tasks.push({
+                  number: taskIssue.data.number,
+                  title: task.title
+                });
+
+                console.log(`  ✅ Created task #${taskIssue.data.number}: ${task.title}`);
+
+                // Small delay to avoid rate limiting
+                await new Promise(resolve => setTimeout(resolve, 150));
+              }
+
+              // Add comment to epic with task links
+              const taskLinks = createdIssues[createdIssues.length - 1].tasks
+                .map(t => `- #${t.number} ${t.title}`)
+                .join('\n');
+
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: epicIssue.data.number,
+                body: `## 📋 Created Tasks\n\n${taskLinks}\n\n**Total Tasks:** ${createdIssues[createdIssues.length - 1].tasks.length}`
+              });
+            }
+
+            // Create summary issue
+            const summaryBody = `## 🎉 GitHub Issues Created Successfully!
+
+**Total Issues Created:** ${issuesCreated}
+**Total Epics Created:** ${tasksToCreate.length}
+**Batch:** ${batch}
+**Priority Filter:** ${priorityFilter}
+
+---
+
+## 📊 Created Issues by Week
+
+${createdIssues.map(week => `### Week ${week.week} - Epic #${week.epicNumber}
+${week.tasks.map(t => `- #${t.number} ${t.title}`).join('\n')}
+**Tasks:** ${week.tasks.length}
+`).join('\n')}
+
+---
+
+## 🎯 Next Steps
+
+1. **Review Issues:** [View all issues](https://github.com/${context.repo.owner}/${context.repo.repo}/issues)
+2. **Assign Tasks:** Assign issues to yourself or team members
+3. **Start Coding:** Begin with Week 1 tasks
+4. **Use Copilot:** Maximize GitHub Copilot usage to hit 95%
+5. **Track Progress:** Update issues as you complete tasks
+
+---
+
+## 📈 Copilot Usage Strategy
+
+**Current:** 2.3%
+**Target:** 95%
+**Strategy:** Accept ALL Copilot suggestions, write clear TODOs, let Copilot write tests
+
+**Check Usage:** [GitHub Copilot Settings](https://github.com/settings/copilot)
+
+---
+
+## 🚀 Goal
+
+**Build 25,000+ lines of code in 8 weeks using GitHub Copilot!**
+
+All tasks are labeled with:
+- \`copilot-task\` - Tasks designed for Copilot
+- \`high-priority\` - High priority tasks
+- \`week-X\` - Week number
+
+**Filter by week:** [week-1](https://github.com/${context.repo.owner}/${context.repo.repo}/issues?q=is%3Aissue+is%3Aopen+label%3Aweek-1)
+
+---
+
+**See detailed task plan:** \`.github/copilot-tasks.md\`
+`;
+
+            const summaryIssue = await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: `📊 Copilot Task Creation Summary - ${issuesCreated} Issues Created`,
+              body: summaryBody,
+              labels: ['summary', 'copilot-plan', 'automation']
+            });
+
+            console.log(`\n🎉 SUMMARY`);
+            console.log(`Total Issues Created: ${issuesCreated}`);
+            console.log(`Total Epics Created: ${tasksToCreate.length}`);
+            console.log(`Summary Issue: #${summaryIssue.data.number}`);
+            console.log(`\nView all issues: https://github.com/${context.repo.owner}/${context.repo.repo}/issues`);
+
+            // Add to workflow summary
+            core.summary
+              .addHeading('🎉 GitHub Copilot Issues Created')
+              .addRaw(`**Total Issues:** ${issuesCreated}`)
+              .addRaw(`**Total Epics:** ${tasksToCreate.length}`)
+              .addRaw(`**Summary Issue:** #${summaryIssue.data.number}`)
+              .addLink('View All Issues', `https://github.com/${context.repo.owner}/${context.repo.repo}/issues`)
+              .write();

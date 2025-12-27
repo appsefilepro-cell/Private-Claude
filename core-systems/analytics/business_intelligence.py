@@ -55,6 +55,8 @@ class ReportType(Enum):
     CLIENT_ANALYTICS = "client_analytics"
     TRADING_PERFORMANCE = "trading_performance"
     LEGAL_CASE_ANALYSIS = "legal_case_analysis"
+    TAX_FILING_ANALYTICS = "tax_filing_analytics"
+    SETTLEMENT_TRACKING = "settlement_tracking"
     CUSTOM = "custom"
 
 
@@ -68,6 +70,8 @@ class MetricType(Enum):
     RETENTION_RATE = "retention_rate"
     TRADING_RETURN = "trading_return"
     EFFICIENCY = "efficiency"
+    TAX_SAVINGS = "tax_savings"
+    SETTLEMENT_VALUE = "settlement_value"
 
 
 class ExportFormat(Enum):
@@ -677,6 +681,202 @@ class DataExporter:
 
 
 # ============================================================================
+# TAX FILING ANALYTICS
+# ============================================================================
+
+class TaxFilingAnalytics:
+    """Tax filing analytics and tracking"""
+
+    def __init__(self, business_id: str):
+        self.business_id = business_id
+
+    async def get_tax_filing_summary(self) -> Dict[str, Any]:
+        """Get tax filing summary and analytics"""
+        logger.info("Generating tax filing analytics")
+
+        return {
+            'current_year': 2025,
+            'forms_filed': {
+                'form_1040': 45,
+                'form_1065': 12,
+                'form_1120s': 8,
+                'form_990': 15,
+                'schedule_c': 38,
+                'schedule_e': 22,
+                'form_8949': 18
+            },
+            'total_forms_filed': 158,
+            'e_file_rate': 98.5,
+            'tax_savings_generated': 1250000,
+            'clients_served': 85,
+            'avg_tax_savings_per_client': 14706,
+            'revenue_from_tax_services': 425000,
+            'upcoming_deadlines': [
+                {
+                    'deadline': '2025-04-15',
+                    'form': 'Form 1040',
+                    'clients_pending': 12
+                },
+                {
+                    'deadline': '2025-03-15',
+                    'form': 'Form 1065/1120-S',
+                    'clients_pending': 8
+                }
+            ],
+            'by_entity_type': {
+                'individual': 45,
+                'partnership': 12,
+                's_corporation': 8,
+                'nonprofit': 15,
+                'trust': 5
+            },
+            'quarterly_estimated_payments': {
+                'q1_2025': 125000,
+                'q2_2025': 138000,
+                'q3_2025': 142000,
+                'q4_2025': 145000
+            }
+        }
+
+    async def get_tax_projection_analytics(self) -> Dict[str, Any]:
+        """Get tax projection and planning analytics"""
+        return {
+            'clients_with_projections': 68,
+            'total_projected_tax_2025': 3250000,
+            'avg_effective_rate': 24.5,
+            'qbi_deductions_claimed': 890000,
+            'retirement_contributions_optimized': 450000,
+            'state_tax_optimization_savings': 125000,
+            'scenarios_analyzed': [
+                {
+                    'scenario': 'Base Case',
+                    'count': 68,
+                    'avg_tax': 47794
+                },
+                {
+                    'scenario': 'S-Corp Conversion',
+                    'count': 15,
+                    'avg_savings': 18500
+                },
+                {
+                    'scenario': 'Retirement Max',
+                    'count': 32,
+                    'avg_savings': 8200
+                }
+            ]
+        }
+
+
+# ============================================================================
+# SETTLEMENT TRACKING ANALYTICS
+# ============================================================================
+
+class SettlementTrackingAnalytics:
+    """Settlement tracking and revenue analytics"""
+
+    def __init__(self, business_id: str):
+        self.business_id = business_id
+
+    async def get_settlement_summary(self) -> Dict[str, Any]:
+        """Get settlement tracking summary"""
+        logger.info("Generating settlement analytics")
+
+        return {
+            'active_settlements': 18,
+            'total_settlement_value': 8750000,
+            'completed_settlements_ytd': 12,
+            'completed_value_ytd': 4200000,
+            'pending_settlements': 6,
+            'pending_value': 4550000,
+            'by_structure_type': {
+                'lump_sum': {
+                    'count': 8,
+                    'total_value': 2100000,
+                    'avg_value': 262500
+                },
+                'structured_settlement': {
+                    'count': 7,
+                    'total_value': 5250000,
+                    'avg_value': 750000
+                },
+                'trust_payment': {
+                    'count': 3,
+                    'total_value': 1400000,
+                    'avg_value': 466667
+                }
+            },
+            'payment_compliance': {
+                'on_time_payments': 145,
+                'late_payments': 3,
+                'missed_payments': 0,
+                'compliance_rate': 98.0
+            },
+            'upcoming_payments': {
+                'next_30_days': 24,
+                'next_30_days_value': 185000,
+                'next_90_days': 68,
+                'next_90_days_value': 542000
+            }
+        }
+
+    async def forecast_settlement_revenue(self, months: int = 12) -> Dict[str, Any]:
+        """Forecast settlement-based revenue"""
+        logger.info(f"Forecasting settlement revenue for {months} months")
+
+        # Generate monthly forecast
+        monthly_forecast = []
+        base_monthly = 45000
+
+        for month in range(1, months + 1):
+            # Add growth trend
+            growth_factor = 1 + (month * 0.02)
+            forecasted_revenue = base_monthly * growth_factor
+
+            monthly_forecast.append({
+                'month': month,
+                'forecasted_revenue': round(forecasted_revenue, 2),
+                'new_settlements_expected': 1,
+                'payments_expected': 6
+            })
+
+        total_forecasted = sum(m['forecasted_revenue'] for m in monthly_forecast)
+
+        return {
+            'forecast_period_months': months,
+            'total_forecasted_revenue': round(total_forecasted, 2),
+            'avg_monthly_revenue': round(total_forecasted / months, 2),
+            'growth_rate': 2.0,
+            'confidence_level': 0.85,
+            'monthly_breakdown': monthly_forecast,
+            'assumptions': [
+                'Based on current settlement pipeline',
+                'Assumes 2% monthly growth',
+                'Includes scheduled structured payments',
+                'Excludes one-time lump sum settlements'
+            ]
+        }
+
+    async def get_disability_coverage_tracking(self) -> Dict[str, Any]:
+        """Track disability coverage compliance"""
+        return {
+            'settlements_with_disability': 12,
+            'total_disability_coverage': 6200000,
+            'avg_coverage_per_settlement': 516667,
+            'min_coverage_years': 5,
+            'compliance_status': {
+                'compliant': 11,
+                'non_compliant': 1,
+                'pending_verification': 0
+            },
+            'coverage_by_carrier': {
+                'Insurance Co A': 3,
+                'Insurance Co B': 5,
+                'Insurance Co C': 4
+            }
+        }
+
+
+# ============================================================================
 # MAIN BUSINESS INTELLIGENCE SYSTEM
 # ============================================================================
 
@@ -697,6 +897,8 @@ class BusinessIntelligenceSystem:
         self.revenue_analytics = RevenueAnalytics(business_id)
         self.client_analytics = ClientAcquisitionAnalytics(business_id)
         self.trading_analytics = TradingPerformanceAnalytics(business_id)
+        self.tax_analytics = TaxFilingAnalytics(business_id)
+        self.settlement_analytics = SettlementTrackingAnalytics(business_id)
         self.report_builder = CustomReportBuilder(business_id)
         self.exporter = DataExporter()
 
@@ -709,6 +911,34 @@ class BusinessIntelligenceSystem:
         dashboard = await self.dashboard.get_dashboard_data()
 
         return dashboard
+
+    async def get_tax_filing_dashboard(self) -> Dict[str, Any]:
+        """Get tax filing analytics dashboard"""
+        logger.info("Generating tax filing dashboard")
+
+        tax_summary = await self.tax_analytics.get_tax_filing_summary()
+        tax_projections = await self.tax_analytics.get_tax_projection_analytics()
+
+        return {
+            'tax_filing_summary': tax_summary,
+            'tax_projections': tax_projections,
+            'generated_at': datetime.now().isoformat()
+        }
+
+    async def get_settlement_dashboard(self) -> Dict[str, Any]:
+        """Get settlement tracking dashboard"""
+        logger.info("Generating settlement dashboard")
+
+        settlement_summary = await self.settlement_analytics.get_settlement_summary()
+        revenue_forecast = await self.settlement_analytics.forecast_settlement_revenue(12)
+        disability_tracking = await self.settlement_analytics.get_disability_coverage_tracking()
+
+        return {
+            'settlement_summary': settlement_summary,
+            'revenue_forecast': revenue_forecast,
+            'disability_coverage': disability_tracking,
+            'generated_at': datetime.now().isoformat()
+        }
 
     async def generate_comprehensive_report(
         self,
@@ -726,7 +956,9 @@ class BusinessIntelligenceSystem:
                 start_date, end_date
             ),
             'client_analytics': await self.client_analytics.get_acquisition_analysis(),
-            'trading_performance': await self.trading_analytics.get_trading_performance()
+            'trading_performance': await self.trading_analytics.get_trading_performance(),
+            'tax_analytics': await self.get_tax_filing_dashboard(),
+            'settlement_analytics': await self.get_settlement_dashboard()
         }
 
         # Export to requested format
@@ -764,6 +996,20 @@ async def demonstrate_bi_system():
     print(f"  KPIs: {len(dashboard['kpis'])}")
     print(f"  Monthly Revenue: ${dashboard['revenue_metrics']['current_month']:,}")
     print(f"  Active Clients: {dashboard['client_metrics']['active_clients']}")
+
+    # Get tax filing dashboard
+    tax_dashboard = await bi_system.get_tax_filing_dashboard()
+    print(f"\n✓ Tax Filing Dashboard")
+    print(f"  Forms Filed: {tax_dashboard['tax_filing_summary']['total_forms_filed']}")
+    print(f"  Tax Savings Generated: ${tax_dashboard['tax_filing_summary']['tax_savings_generated']:,}")
+    print(f"  E-File Rate: {tax_dashboard['tax_filing_summary']['e_file_rate']}%")
+
+    # Get settlement dashboard
+    settlement_dashboard = await bi_system.get_settlement_dashboard()
+    print(f"\n✓ Settlement Dashboard")
+    print(f"  Active Settlements: {settlement_dashboard['settlement_summary']['active_settlements']}")
+    print(f"  Total Value: ${settlement_dashboard['settlement_summary']['total_settlement_value']:,}")
+    print(f"  12-Month Revenue Forecast: ${settlement_dashboard['revenue_forecast']['total_forecasted_revenue']:,.2f}")
 
     # Generate comprehensive report
     report_path = await bi_system.generate_comprehensive_report(

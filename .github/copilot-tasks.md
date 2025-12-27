@@ -139,21 +139,26 @@
 
 ## 🎯 WEEK 2: LEGAL AUTOMATION + TESTS (Target: 35% Usage)
 
-### Day 8-9: Credit Repair Automation System
+### Day 8-9: Credit Repair Automation System - 33 ERRORS TO FIX
 **File:** `pillar-b-legal/credit-repair/dispute_automation.py`
-**Prompt for Copilot:** "Create automated credit dispute system for Equifax, Experian, TransUnion"
+**Prompt for Copilot:** "Create automated credit dispute system for Equifax, Experian, TransUnion - FIX 33 CREDIT REPORT ERRORS"
 ```python
-# TODO: Parse credit reports (PDF and text)
-# TODO: Identify disputable items (late payments, collections, etc.)
-# TODO: Generate 411 method dispute letters
+# TODO: Parse credit reports (PDF and text) - IDENTIFY ALL 33 ERRORS
+# TODO: Categorize errors (late payments, collections, inaccuracies, etc.)
+# TODO: Generate 411 method dispute letters (33 individual letters)
 # TODO: Track dispute status (in progress, resolved, escalated)
-# TODO: CFPB complaint automation
-# TODO: Calculate FCRA damages ($100-$1000 per violation)
+# TODO: CFPB complaint automation (for each error)
+# TODO: BBB complaint automation (for creditors)
+# TODO: Calculate FCRA damages ($100-$1000 per violation = $3,300-$33,000 potential)
 # TODO: Integration with MJ Tradelines API
 # TODO: 3-bureau mailing address automation
+# TODO: Certified mail tracking for all 33 disputes
+# TODO: 30-day response tracking per bureau
+# TODO: Escalation workflow for unresolved disputes
 ```
 **Estimated Lines:** 700 lines
 **Priority:** CRITICAL
+**User Context:** Fix 33 specific credit report errors, file CFPB/BBB complaints
 **Dependencies:** PyPDF2, reportlab, requests
 
 ---
@@ -449,6 +454,39 @@
 
 ---
 
+### Day 26-27: Estate/Probate Automation - Thurman Sr $800k Estate
+**File:** `pillar-b-legal/estate-probate/thurman_sr_automation.py`
+**Prompt for Copilot:** "Create complete estate/probate automation for Thurman Sr estate ($800,000 value)"
+```python
+# TODO: Probate petition generator (all jurisdictions)
+# TODO: Asset inventory system - $800,000 total valuation
+#   - Real property appraisal
+#   - Personal property inventory
+#   - Bank accounts and investments
+#   - Business interests
+#   - Life insurance proceeds
+# TODO: Beneficiary distribution calculator
+# TODO: Court document templates (7 documents):
+#   1. Petition for Probate
+#   2. Notice of Hearing
+#   3. Inventory and Appraisal ($800k)
+#   4. Notice to Creditors
+#   5. Final Account
+#   6. Petition for Distribution
+#   7. Order for Distribution
+# TODO: Filing fee calculator by jurisdiction
+# TODO: Timeline tracker (court hearing dates)
+# TODO: Notice to creditors automation
+# TODO: Final account and petition for distribution
+# TODO: Integration with court e-filing systems
+```
+**Estimated Lines:** 800 lines
+**Priority:** CRITICAL
+**User Context:** Thurman Sr estate worth $800,000 - need all probate documents
+**Dependencies:** docx-python, reportlab
+
+---
+
 ### Day 26-27: QuickBooks Integration
 **File:** `pillar-c-financial/integrations/quickbooks_sync.py`
 **Prompt for Copilot:** "Create QuickBooks Online API integration for automated bookkeeping"
@@ -522,6 +560,76 @@
 **Estimated Lines:** 1,200 lines
 **Priority:** HIGH
 **Dependencies:** react-native-charts-wrapper, react-native-websocket
+
+---
+
+### Day 33-34: MT5/OKX Trading Platform Complete Setup
+**File:** `pillar-a-trading/mt5_okx_complete_setup.py`
+**Prompt for Copilot:** "Create complete MT5 and OKX trading platform setup and integration"
+```python
+# TODO: MT5 Platform Setup
+#   - Automated MT5 installation
+#   - Live account verification
+#   - API key generation and secure storage
+#   - Expert Advisor deployment
+#   - Custom indicators setup
+# TODO: OKX Exchange Integration
+#   - OKX account setup automation
+#   - API key management (encrypted storage)
+#   - Spot and futures trading setup
+#   - WebSocket connection for real-time data
+# TODO: Cross-Platform Trading Bridge
+#   - Mirror trades between MT5 and OKX
+#   - Position synchronization
+#   - Risk management across platforms
+# TODO: Health Monitoring & Alerts
+#   - Platform uptime monitoring
+#   - Connection health checks
+#   - Automated failover system
+# TODO: Performance Benchmarking
+#   - Latency testing
+#   - Execution speed analysis
+#   - Slippage tracking
+```
+**Estimated Lines:** 600 lines
+**Priority:** CRITICAL
+**User Context:** Need MT5 and OKX fully setup and integrated for live trading
+**Dependencies:** MetaTrader5, ccxt (for OKX), cryptography
+
+---
+
+### Day 33-34: MQL5 Algorithm Download & Deployment System
+**File:** `pillar-a-trading/mql5_algorithm_downloader.py`
+**Prompt for Copilot:** "Create automated MQL5 algorithm download, backtest, and deployment system"
+```python
+# TODO: MQL5 Marketplace Automation
+#   - Browse MQL5 marketplace (web scraping)
+#   - Filter by rating, downloads, price, reviews
+#   - Automated purchase for paid algorithms
+#   - Download automation (handle authentication)
+# TODO: Installation & Configuration
+#   - Auto-install to MT5 experts folder
+#   - Parameter optimization
+#   - Symbol and timeframe configuration
+# TODO: Backtesting Automation
+#   - Automated backtesting for each algorithm
+#   - Walk-forward analysis
+#   - Monte Carlo simulation
+#   - Performance comparison dashboard
+# TODO: Algorithm Management
+#   - Version control for algorithms
+#   - Automatic updates
+#   - Performance tracking
+#   - A/B testing multiple algorithms
+# TODO: Integration with Trading Bots
+#   - Connect to mt5_trading_bot.py
+#   - Multi-algorithm portfolio
+#   - Risk allocation per algorithm
+```
+**Estimated Lines:** 550 lines
+**Priority:** HIGH
+**User Context:** Automate downloading and testing MQL5 algorithms from marketplace
+**Dependencies:** selenium, beautifulsoup4, MetaTrader5
 
 ---
 
@@ -616,7 +724,66 @@
 
 ---
 
-### Day 40-42: Predictive Analytics for Case Outcomes
+### Day 40-41: Comprehensive Damages Calculator Suite
+**File:** `pillar-b-legal/calculators/damages_calculator_suite.py`
+**Prompt for Copilot:** "Create comprehensive damages calculator suite for all case types"
+```python
+# TODO: Personal Injury Damages Calculator
+#   - Medical expenses (past & future with inflation)
+#   - Lost wages calculator (hourly, salary, self-employed)
+#   - Pain and suffering multiplier (1.5x to 5x)
+#   - Loss of consortium
+#   - Punitive damages calculator
+#   - Life expectancy tables
+#   - Earning capacity analysis
+
+# TODO: Wrongful Death Damages
+#   - Lost earnings capacity (actuarial tables)
+#   - Loss of companionship value
+#   - Funeral and burial expenses
+#   - Estate damages
+#   - Survivor trauma damages
+
+# TODO: Employment Law Damages
+#   - Back pay calculator (with interest)
+#   - Front pay calculator (mitigation analysis)
+#   - Emotional distress damages
+#   - Attorney fees (lodestar method)
+#   - Liquidated damages calculator
+
+# TODO: Consumer Protection Damages
+#   - FCRA violations ($100-$1000 per violation)
+#   - FDCPA violations ($1000 per violation)
+#   - TCPA violations ($500-$1500 per call)
+#   - Actual damages calculator
+#   - Punitive damages (2:1 to 9:1 ratio)
+
+# TODO: Civil Rights Damages (§1983)
+#   - Constitutional violations
+#   - Qualified immunity analysis
+#   - Attorney fees calculator
+#   - Injunctive relief valuation
+
+# TODO: Contract Breach Damages
+#   - Expectation damages
+#   - Consequential damages
+#   - Liquidated damages
+#   - Lost profits calculator
+#   - Mitigation credit
+
+# TODO: Report Generation
+#   - PDF damages report with charts
+#   - Expert witness summary
+#   - Settlement demand package
+```
+**Estimated Lines:** 950 lines
+**Priority:** CRITICAL
+**User Context:** Need calculators for all major case types with actuarial accuracy
+**Dependencies:** numpy, scipy, pandas, reportlab
+
+---
+
+### Day 41-42: Predictive Analytics for Case Outcomes
 **File:** `ai/models/case_outcome_predictor.py`
 **Prompt for Copilot:** "Build ML model to predict case settlement likelihood and amount"
 ```python
@@ -707,7 +874,7 @@
 
 ---
 
-### Day 47-49: Security Testing
+### Day 47-48: Security Testing
 **Files:** `tests/security/*.py`
 **Prompt for Copilot:** "Create security tests for authentication, authorization, and data protection"
 ```python
@@ -723,6 +890,60 @@
 **Estimated Lines:** 700 lines
 **Priority:** CRITICAL
 **Dependencies:** pytest, bandit
+
+---
+
+### Day 48-49: 217-Agent Integration & Orchestration System
+**File:** `core-systems/agent-integration/agent_217_orchestrator.py`
+**Prompt for Copilot:** "Create 217-agent integration and orchestration system for AgentX5"
+```python
+# TODO: Agent Registry System
+#   - Register all 217 specialized agents
+#   - Agent capability metadata (skills, inputs, outputs)
+#   - Agent health status monitoring
+#   - Version management per agent
+
+# TODO: Task Routing & Orchestration
+#   - Intelligent task routing algorithm
+#   - Match task requirements to agent capabilities
+#   - Priority queue management
+#   - Load balancing across agents
+#   - Failover and redundancy
+
+# TODO: Multi-Agent Collaboration Protocol
+#   - Agent-to-agent communication
+#   - Shared context and state management
+#   - Conflict resolution system
+#   - Result aggregation and validation
+#   - Consensus mechanisms
+
+# TODO: Agent Categories (217 total):
+#   - Legal Agents (50): litigation, contracts, compliance, research, etc.
+#   - Financial Agents (40): tax, accounting, investment, analysis, etc.
+#   - Trading Agents (30): forex, crypto, stocks, algorithms, etc.
+#   - AI/ML Agents (25): NLP, vision, prediction, optimization, etc.
+#   - DevOps Agents (20): deployment, monitoring, CI/CD, security, etc.
+#   - Research Agents (25): data gathering, analysis, reporting, etc.
+#   - Communication Agents (15): email, chat, SMS, notifications, etc.
+#   - Automation Agents (12): workflow, scheduling, integration, etc.
+
+# TODO: Performance Monitoring
+#   - Track agent execution time
+#   - Success/failure rates per agent
+#   - Resource utilization
+#   - Cost tracking per agent
+#   - Quality metrics
+
+# TODO: Integration Layer
+#   - REST API for agent invocation
+#   - WebSocket for real-time agent updates
+#   - Message queue (RabbitMQ/Celery)
+#   - Event-driven architecture
+```
+**Estimated Lines:** 1200 lines
+**Priority:** CRITICAL
+**User Context:** Integrate all 217 specialized agents into unified orchestration system
+**Dependencies:** celery, redis, rabbitmq, asyncio
 
 ---
 

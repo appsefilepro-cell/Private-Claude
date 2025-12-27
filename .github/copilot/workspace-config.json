@@ -1,0 +1,386 @@
+{
+  "$schema": "https://json.schemastore.org/github-copilot-workspace.json",
+  "version": "1.0",
+  "name": "Private-Claude AgentX5 Workspace",
+  "description": "GitHub Copilot Business configuration for maximum AI-assisted development (Target: 95% usage)",
+
+  "copilot": {
+    "enable": true,
+    "tier": "business",
+    "features": {
+      "codeCompletions": {
+        "enabled": true,
+        "mode": "aggressive",
+        "multiline": true,
+        "wholeLine": true,
+        "inlineChat": true,
+        "suggestionDelay": 0,
+        "maxSuggestions": 10,
+        "contextWindow": "large"
+      },
+      "copilotChat": {
+        "enabled": true,
+        "agentMode": true,
+        "slashCommands": true,
+        "contextFiles": "all",
+        "codebaseIndexing": true,
+        "semanticSearch": true
+      },
+      "copilotForDocs": {
+        "enabled": true,
+        "autoGenerate": true,
+        "formats": ["markdown", "html", "pdf"]
+      },
+      "copilotForPRs": {
+        "enabled": true,
+        "autoReview": true,
+        "autoSummarize": true,
+        "suggestImprovements": true
+      },
+      "copilotForTests": {
+        "enabled": true,
+        "autoGenerate": true,
+        "frameworks": ["pytest", "jest", "playwright", "locust"],
+        "coverage": {
+          "target": 85,
+          "enforceMinimum": true
+        }
+      },
+      "copilotForCommits": {
+        "enabled": true,
+        "autoSuggest": true,
+        "conventionalCommits": true,
+        "detailedMessages": true
+      }
+    }
+  },
+
+  "languages": {
+    "python": {
+      "enabled": true,
+      "suggestions": "max",
+      "frameworks": ["fastapi", "django", "flask", "tensorflow", "pytorch"],
+      "linters": ["pylint", "black", "mypy"],
+      "testFrameworks": ["pytest"]
+    },
+    "typescript": {
+      "enabled": true,
+      "suggestions": "max",
+      "frameworks": ["react", "next.js", "express", "nest.js"],
+      "linters": ["eslint", "prettier"],
+      "testFrameworks": ["jest", "playwright"]
+    },
+    "javascript": {
+      "enabled": true,
+      "suggestions": "max",
+      "frameworks": ["react", "node.js", "express"],
+      "linters": ["eslint", "prettier"],
+      "testFrameworks": ["jest", "mocha"]
+    },
+    "tsx": {
+      "enabled": true,
+      "suggestions": "max",
+      "frameworks": ["react", "react-native"],
+      "componentPatterns": true
+    },
+    "jsx": {
+      "enabled": true,
+      "suggestions": "max",
+      "frameworks": ["react"]
+    },
+    "json": {
+      "enabled": true,
+      "suggestions": "max",
+      "validation": true
+    },
+    "yaml": {
+      "enabled": true,
+      "suggestions": "max",
+      "validation": true
+    },
+    "markdown": {
+      "enabled": true,
+      "suggestions": "max",
+      "documentation": true
+    },
+    "sql": {
+      "enabled": true,
+      "suggestions": "max",
+      "dialects": ["postgresql", "mysql", "sqlite"]
+    },
+    "shell": {
+      "enabled": true,
+      "suggestions": "max",
+      "scripts": ["bash", "zsh"]
+    },
+    "dockerfile": {
+      "enabled": true,
+      "suggestions": "max"
+    },
+    "html": {
+      "enabled": true,
+      "suggestions": "max"
+    },
+    "css": {
+      "enabled": true,
+      "suggestions": "max",
+      "preprocessors": ["scss", "sass", "less"]
+    }
+  },
+
+  "filePatterns": {
+    "include": [
+      "**/*.py",
+      "**/*.ts",
+      "**/*.tsx",
+      "**/*.js",
+      "**/*.jsx",
+      "**/*.json",
+      "**/*.yml",
+      "**/*.yaml",
+      "**/*.md",
+      "**/*.sql",
+      "**/*.sh",
+      "**/*.html",
+      "**/*.css",
+      "**/*.scss",
+      "**/Dockerfile",
+      "**/.env.example"
+    ],
+    "exclude": [
+      "**/node_modules/**",
+      "**/.venv/**",
+      "**/venv/**",
+      "**/__pycache__/**",
+      "**/dist/**",
+      "**/build/**",
+      "**/.next/**",
+      "**/.git/**",
+      "**/coverage/**",
+      "**/*.pyc",
+      "**/.DS_Store"
+    ]
+  },
+
+  "contextSources": {
+    "codebase": {
+      "enabled": true,
+      "indexing": "full",
+      "semanticSearch": true
+    },
+    "documentation": {
+      "enabled": true,
+      "sources": [
+        ".github/copilot-tasks.md",
+        "README.md",
+        "docs/**/*.md"
+      ]
+    },
+    "recentFiles": {
+      "enabled": true,
+      "maxFiles": 50
+    },
+    "openTabs": {
+      "enabled": true,
+      "maxTabs": 20
+    },
+    "gitHistory": {
+      "enabled": true,
+      "commits": 100
+    },
+    "dependencies": {
+      "enabled": true,
+      "packageFiles": [
+        "package.json",
+        "requirements.txt",
+        "Pipfile",
+        "pyproject.toml"
+      ]
+    }
+  },
+
+  "suggestions": {
+    "inline": {
+      "enabled": true,
+      "automatic": true,
+      "delay": 0,
+      "multiline": true,
+      "wholeLine": true
+    },
+    "ghost": {
+      "enabled": true,
+      "color": "gray",
+      "opacity": 0.6
+    },
+    "cycling": {
+      "enabled": true,
+      "maxAlternatives": 10,
+      "shortcuts": {
+        "next": "Alt+]",
+        "previous": "Alt+[",
+        "accept": "Tab",
+        "dismiss": "Esc"
+      }
+    }
+  },
+
+  "analytics": {
+    "enabled": true,
+    "tracking": {
+      "suggestionsShown": true,
+      "suggestionsAccepted": true,
+      "suggestionsRejected": true,
+      "linesGenerated": true,
+      "filesModified": true,
+      "chatInteractions": true,
+      "prReviews": true
+    },
+    "reporting": {
+      "frequency": "weekly",
+      "format": "json",
+      "destination": "github-issues"
+    },
+    "goals": {
+      "usageTarget": 95,
+      "linesPerWeek": 3000,
+      "testCoverage": 85,
+      "prReviews": 20
+    }
+  },
+
+  "performance": {
+    "caching": {
+      "enabled": true,
+      "duration": 3600,
+      "size": "1GB"
+    },
+    "parallelization": {
+      "enabled": true,
+      "maxThreads": 4
+    },
+    "optimization": {
+      "lowLatency": true,
+      "highThroughput": true,
+      "backgroundIndexing": true
+    }
+  },
+
+  "security": {
+    "secretScanning": {
+      "enabled": true,
+      "patterns": [
+        "API_KEY",
+        "SECRET_KEY",
+        "PASSWORD",
+        "TOKEN",
+        "PRIVATE_KEY",
+        "AWS_ACCESS_KEY",
+        "DATABASE_URL"
+      ],
+      "action": "warn"
+    },
+    "codeAnalysis": {
+      "enabled": true,
+      "vulnerabilityScanning": true,
+      "dependencyCheck": true
+    },
+    "privacy": {
+      "telemetry": "business",
+      "dataRetention": "30days",
+      "shareWithMicrosoft": false
+    }
+  },
+
+  "experimental": {
+    "enableExperimentalFeatures": true,
+    "features": [
+      "advanced-code-completion",
+      "multi-file-editing",
+      "auto-refactoring",
+      "intelligent-debugging",
+      "performance-optimization-suggestions",
+      "architecture-recommendations",
+      "security-vulnerability-detection",
+      "automatic-documentation-generation"
+    ]
+  },
+
+  "integrations": {
+    "github": {
+      "enabled": true,
+      "features": [
+        "issue-automation",
+        "pr-automation",
+        "code-review",
+        "actions-integration"
+      ]
+    },
+    "vscode": {
+      "enabled": true,
+      "extensions": [
+        "GitHub.copilot",
+        "GitHub.copilot-chat",
+        "ms-python.python",
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode"
+      ]
+    }
+  },
+
+  "customInstructions": {
+    "global": [
+      "Maximize GitHub Copilot usage to reach 95% acceptance rate",
+      "Follow PEP 8 for Python and Airbnb style guide for JavaScript/TypeScript",
+      "Write comprehensive unit tests with 85%+ coverage",
+      "Generate detailed docstrings and comments",
+      "Prioritize code readability and maintainability",
+      "Use type hints for Python and TypeScript strict mode",
+      "Implement error handling and logging for all functions",
+      "Optimize for performance and scalability"
+    ],
+    "byFileType": {
+      "python": [
+        "Use FastAPI for API development",
+        "Use SQLAlchemy for database operations",
+        "Use Pydantic for data validation",
+        "Write pytest tests for all functions",
+        "Use async/await for I/O operations"
+      ],
+      "typescript": [
+        "Use React hooks and functional components",
+        "Implement proper TypeScript types (no 'any')",
+        "Use React Query for data fetching",
+        "Write Jest tests for components",
+        "Follow React best practices"
+      ],
+      "markdown": [
+        "Generate comprehensive documentation",
+        "Include code examples",
+        "Add diagrams where applicable",
+        "Maintain consistent formatting"
+      ]
+    }
+  },
+
+  "automation": {
+    "autoFormat": true,
+    "autoLint": true,
+    "autoTest": true,
+    "autoCommit": false,
+    "autoDeploy": false
+  },
+
+  "team": {
+    "sharing": {
+      "enabled": true,
+      "suggestions": true,
+      "customInstructions": true,
+      "codePatterns": true
+    },
+    "collaboration": {
+      "pairProgramming": true,
+      "codeReview": true,
+      "knowledgeSharing": true
+    }
+  }
+}
