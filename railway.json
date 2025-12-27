@@ -1,11 +1,391 @@
 {
   "$schema": "https://railway.app/railway.schema.json",
+  "version": "2.0",
+  "name": "Agent 5.0 Production System",
+  "description": "Complete Agent 5.0 deployment with all microservices and dependencies",
+
   "build": {
-    "builder": "NIXPACKS"
+    "builder": "DOCKERFILE",
+    "dockerfilePath": "Dockerfile",
+    "buildCommand": null,
+    "watchPatterns": [
+      "**/*.py",
+      "requirements.txt",
+      "Dockerfile"
+    ]
   },
+
   "deploy": {
-    "startCommand": "python3 RUN_COMPLETE_AUTOMATION.py",
+    "startCommand": "python3 agent_5_orchestrator.py",
     "restartPolicyType": "ON_FAILURE",
-    "restartPolicyMaxRetries": 10
+    "restartPolicyMaxRetries": 10,
+    "healthcheckPath": "/health",
+    "healthcheckTimeout": 30,
+    "numReplicas": 1,
+    "sleepApplication": false,
+    "region": "us-west1"
+  },
+
+  "services": [
+    {
+      "name": "agent-orchestrator",
+      "build": {
+        "builder": "DOCKERFILE",
+        "dockerfilePath": "Dockerfile"
+      },
+      "deploy": {
+        "startCommand": "python3 agent_5_orchestrator.py",
+        "restartPolicyType": "ON_FAILURE",
+        "restartPolicyMaxRetries": 10
+      },
+      "environment": {
+        "SERVICE_NAME": "agent-orchestrator",
+        "PORT": "8000",
+        "PYTHON_VERSION": "3.11",
+        "ENVIRONMENT": "production"
+      },
+      "healthcheck": {
+        "path": "/health",
+        "interval": 30,
+        "timeout": 10,
+        "retries": 3
+      }
+    },
+    {
+      "name": "trading-bot",
+      "build": {
+        "builder": "DOCKERFILE",
+        "dockerfilePath": "Dockerfile"
+      },
+      "deploy": {
+        "startCommand": "python3 pillar-a-trading/trading_bot.py",
+        "restartPolicyType": "ALWAYS",
+        "restartPolicyMaxRetries": 999
+      },
+      "environment": {
+        "SERVICE_NAME": "trading-bot",
+        "PORT": "8001",
+        "ENABLE_TRADING": "true",
+        "RISK_LEVEL": "medium"
+      },
+      "healthcheck": {
+        "path": "/health",
+        "interval": 60,
+        "timeout": 15,
+        "retries": 5
+      }
+    },
+    {
+      "name": "data-ingestion",
+      "build": {
+        "builder": "DOCKERFILE",
+        "dockerfilePath": "Dockerfile"
+      },
+      "deploy": {
+        "startCommand": "python3 core-systems/backend/data_ingestion_engine.py",
+        "restartPolicyType": "ON_FAILURE",
+        "restartPolicyMaxRetries": 5
+      },
+      "environment": {
+        "SERVICE_NAME": "data-ingestion",
+        "PORT": "8002",
+        "BATCH_SIZE": "1000",
+        "WORKER_THREADS": "4"
+      }
+    },
+    {
+      "name": "incident-response",
+      "build": {
+        "builder": "DOCKERFILE",
+        "dockerfilePath": "Dockerfile"
+      },
+      "deploy": {
+        "startCommand": "python3 core-systems/incident-response/error_remediation.py",
+        "restartPolicyType": "ALWAYS",
+        "restartPolicyMaxRetries": 999
+      },
+      "environment": {
+        "SERVICE_NAME": "incident-response",
+        "PORT": "8003",
+        "AUTO_HEALING_ENABLED": "true"
+      }
+    },
+    {
+      "name": "health-monitor",
+      "build": {
+        "builder": "DOCKERFILE",
+        "dockerfilePath": "Dockerfile"
+      },
+      "deploy": {
+        "startCommand": "python3 core-systems/monitoring/system_health_monitor.py",
+        "restartPolicyType": "ALWAYS",
+        "restartPolicyMaxRetries": 999
+      },
+      "environment": {
+        "SERVICE_NAME": "health-monitor",
+        "PORT": "8004",
+        "CHECK_INTERVAL": "30",
+        "ALERT_ENABLED": "true"
+      }
+    }
+  ],
+
+  "environments": {
+    "production": {
+      "variables": {
+        "ENVIRONMENT": "production",
+        "DEBUG": "false",
+        "LOG_LEVEL": "INFO",
+        "PYTHON_VERSION": "3.11"
+      }
+    },
+    "staging": {
+      "variables": {
+        "ENVIRONMENT": "staging",
+        "DEBUG": "true",
+        "LOG_LEVEL": "DEBUG",
+        "PYTHON_VERSION": "3.11"
+      }
+    }
+  },
+
+  "env": {
+    "PYTHON_VERSION": {
+      "description": "Python version to use",
+      "default": "3.11"
+    },
+    "PORT": {
+      "description": "Application port",
+      "default": "8000"
+    },
+    "ENVIRONMENT": {
+      "description": "Deployment environment",
+      "default": "production"
+    },
+    "DATABASE_URL": {
+      "description": "PostgreSQL database connection URL",
+      "required": false
+    },
+    "REDIS_URL": {
+      "description": "Redis cache connection URL",
+      "required": false,
+      "default": "redis://localhost:6379/0"
+    },
+    "MONGODB_URI": {
+      "description": "MongoDB connection URI",
+      "required": false
+    },
+    "BINANCE_API_KEY": {
+      "description": "Binance API key for trading",
+      "required": false
+    },
+    "BINANCE_API_SECRET": {
+      "description": "Binance API secret",
+      "required": false
+    },
+    "OPENAI_API_KEY": {
+      "description": "OpenAI API key",
+      "required": false
+    },
+    "ANTHROPIC_API_KEY": {
+      "description": "Anthropic Claude API key",
+      "required": false
+    },
+    "GMAIL_CLIENT_ID": {
+      "description": "Gmail API client ID",
+      "required": false
+    },
+    "GMAIL_CLIENT_SECRET": {
+      "description": "Gmail API client secret",
+      "required": false
+    },
+    "SLACK_WEBHOOK_URL": {
+      "description": "Slack webhook URL for alerts",
+      "required": false
+    },
+    "SENTRY_DSN": {
+      "description": "Sentry error tracking DSN",
+      "required": false
+    },
+    "MAX_WORKERS": {
+      "description": "Maximum number of worker threads",
+      "default": "4"
+    },
+    "REQUEST_TIMEOUT": {
+      "description": "HTTP request timeout in seconds",
+      "default": "30"
+    },
+    "ENABLE_MONITORING": {
+      "description": "Enable health monitoring",
+      "default": "true"
+    },
+    "ENABLE_AUTO_HEALING": {
+      "description": "Enable automatic error remediation",
+      "default": "true"
+    },
+    "CACHE_TTL": {
+      "description": "Default cache TTL in seconds",
+      "default": "3600"
+    },
+    "RATE_LIMIT_PER_MINUTE": {
+      "description": "API rate limit per minute",
+      "default": "100"
+    }
+  },
+
+  "networking": {
+    "internalPort": 8000,
+    "externalPort": 443,
+    "enableIPv6": true
+  },
+
+  "scaling": {
+    "minReplicas": 1,
+    "maxReplicas": 5,
+    "targetCPUUtilizationPercentage": 70,
+    "targetMemoryUtilizationPercentage": 80,
+    "scaleDownStabilizationWindowSeconds": 300
+  },
+
+  "resources": {
+    "cpu": {
+      "request": "500m",
+      "limit": "2000m"
+    },
+    "memory": {
+      "request": "512Mi",
+      "limit": "2Gi"
+    },
+    "disk": {
+      "size": "10Gi",
+      "type": "ssd"
+    }
+  },
+
+  "volumes": [
+    {
+      "name": "logs",
+      "mountPath": "/app/logs",
+      "size": "5Gi"
+    },
+    {
+      "name": "data",
+      "mountPath": "/app/data",
+      "size": "10Gi"
+    }
+  ],
+
+  "cron": [
+    {
+      "name": "daily-cleanup",
+      "schedule": "0 2 * * *",
+      "command": "python3 scripts/cleanup.py"
+    },
+    {
+      "name": "hourly-health-report",
+      "schedule": "0 * * * *",
+      "command": "python3 scripts/health_report.py"
+    },
+    {
+      "name": "backup-database",
+      "schedule": "0 0 * * *",
+      "command": "python3 scripts/backup.py"
+    }
+  ],
+
+  "dependencies": [
+    {
+      "name": "redis",
+      "image": "redis:7-alpine",
+      "port": 6379,
+      "environment": {
+        "REDIS_PASSWORD": "$REDIS_PASSWORD"
+      },
+      "healthcheck": {
+        "command": "redis-cli ping",
+        "interval": 10,
+        "timeout": 5,
+        "retries": 3
+      }
+    },
+    {
+      "name": "postgres",
+      "image": "postgres:15-alpine",
+      "port": 5432,
+      "environment": {
+        "POSTGRES_DB": "agent5_db",
+        "POSTGRES_USER": "$DB_USER",
+        "POSTGRES_PASSWORD": "$DB_PASSWORD"
+      },
+      "volumes": [
+        {
+          "name": "postgres-data",
+          "mountPath": "/var/lib/postgresql/data",
+          "size": "20Gi"
+        }
+      ],
+      "healthcheck": {
+        "command": "pg_isready -U $DB_USER",
+        "interval": 10,
+        "timeout": 5,
+        "retries": 5
+      }
+    }
+  ],
+
+  "observability": {
+    "metrics": {
+      "enabled": true,
+      "port": 9090,
+      "path": "/metrics"
+    },
+    "logging": {
+      "enabled": true,
+      "level": "INFO",
+      "format": "json",
+      "retention": "7d"
+    },
+    "tracing": {
+      "enabled": true,
+      "samplingRate": 0.1
+    }
+  },
+
+  "security": {
+    "runAsNonRoot": true,
+    "readOnlyRootFilesystem": false,
+    "allowPrivilegeEscalation": false,
+    "capabilities": {
+      "drop": ["ALL"],
+      "add": ["NET_BIND_SERVICE"]
+    }
+  },
+
+  "backup": {
+    "enabled": true,
+    "schedule": "0 0 * * *",
+    "retention": 30,
+    "destinations": [
+      {
+        "type": "s3",
+        "bucket": "$BACKUP_BUCKET",
+        "region": "us-west-1"
+      }
+    ]
+  },
+
+  "notifications": {
+    "deploymentSuccess": {
+      "channels": ["slack", "email"],
+      "enabled": true
+    },
+    "deploymentFailure": {
+      "channels": ["slack", "email", "sms"],
+      "enabled": true
+    },
+    "healthCheckFailure": {
+      "channels": ["slack"],
+      "enabled": true
+    }
   }
 }
