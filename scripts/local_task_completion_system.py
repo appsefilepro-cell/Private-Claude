@@ -9,6 +9,7 @@ import sys
 import json
 import time
 import logging
+import requests
 from pathlib import Path
 from datetime import datetime
 from typing import List, Dict, Optional, Any
@@ -46,6 +47,9 @@ class LocalTaskCompletionSystem:
         self.task_queue = []
         self.completed_tasks = []
         self.failed_tasks = []
+
+        # ZAPIER WEBHOOK - Set your webhook URL here or in environment
+        self.zapier_webhook = os.getenv('ZAPIER_WEBHOOK_URL', None)
 
     def load_all_tasks(self) -> List[Dict]:
         """Load all pending tasks from task queue"""
@@ -164,6 +168,16 @@ class LocalTaskCompletionSystem:
                 task['result'] = 'success'
                 self.completed_tasks.append(task)
                 logger.info(f"✅ TASK #{task_id} COMPLETED: {task_name}\n")
+
+                # SEND TO ZAPIER
+                self.send_to_zapier({
+                    'event': 'task_completed',
+                    'task_id': task_id,
+                    'task_name': task_name,
+                    'status': 'success',
+                    'timestamp': task['end_time']
+                })
+
                 return True
             else:
                 task['status'] = 'failed'
@@ -171,6 +185,16 @@ class LocalTaskCompletionSystem:
                 task['result'] = 'failed'
                 self.failed_tasks.append(task)
                 logger.error(f"❌ TASK #{task_id} FAILED: {task_name}\n")
+
+                # SEND FAILURE TO ZAPIER
+                self.send_to_zapier({
+                    'event': 'task_failed',
+                    'task_id': task_id,
+                    'task_name': task_name,
+                    'status': 'failed',
+                    'timestamp': task['end_time']
+                })
+
                 return False
 
         except Exception as e:
@@ -379,6 +403,18 @@ class LocalTaskCompletionSystem:
             logger.info("\nWaiting 60 seconds before next iteration...\n")
             time.sleep(60)
 
+    def send_to_zapier(self, data: dict):
+        """Send data to Zapier webhook"""
+        if not self.zapier_webhook:
+            return  # No webhook configured, skip silently
+
+        try:
+            response = requests.post(self.zapier_webhook, json=data, timeout=5)
+            if response.status_code == 200:
+                logger.info(f"📤 Sent to Zapier: {data.get('event', 'unknown')}")
+        except:
+            pass  # Fail silently if Zapier unavailable
+
     def generate_summary(self):
         """Generate execution summary"""
         logger.info("\n" + "="*70)
@@ -415,6 +451,14 @@ class LocalTaskCompletionSystem:
             json.dump(summary, f, indent=2)
 
         logger.info(f"📄 Summary saved to: {summary_file}\n")
+
+        # SEND SUMMARY TO ZAPIER
+        self.send_to_zapier({
+            'event': 'summary',
+            'completed': len(self.completed_tasks),
+            'failed': len(self.failed_tasks),
+            'timestamp': datetime.now().isoformat()
+        })
 
     def add_task(self, name: str, task_type: str, priority: str = "medium", command: str = None):
         """Add a new task to the queue"""
