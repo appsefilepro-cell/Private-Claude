@@ -1,0 +1,22 @@
+[sandbox]
+name = "agentx5-sandbox"
+template = "base"
+
+[sandbox.build]
+dockerfile = "e2b.Dockerfile"
+
+[sandbox.resources]
+memory = 4096
+cpu = 2
+disk = 10240
+
+[sandbox.ports]
+8000 = { public = true }
+8001 = { public = true }
+8002 = { public = false }
+8003 = { public = false }
+8004 = { public = false }
+
+[sandbox.env]
+PYTHONUNBUFFERED = "1"
+APP_ENV = "production"
