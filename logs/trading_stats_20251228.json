@@ -1,5 +1,5 @@
 {
-  "timestamp": "2025-12-28T19:44:29.963720",
+  "timestamp": "2025-12-28T19:49:29.965317",
   "accounts": {
     "ACC-001": {
       "name": "Beginner-$100-Paper",
@@ -98,7 +98,7 @@
       "environment": "paper",
       "initial_capital": 100000,
       "current_capital": 100000,
-      "total_trades": 1,
+      "total_trades": 2,
       "winning_trades": 0,
       "losing_trades": 0,
       "total_profit": 0.0,
@@ -113,9 +113,19 @@
           "price": 49948.203027050055,
           "size": 2000.0,
           "profit_loss": 0
+        },
+        {
+          "timestamp": "2025-12-28T19:49:13.951225",
+          "type": "SELL",
+          "pair": "BTC/USD",
+          "pattern": "EVENING_STAR",
+          "confidence": 0.85,
+          "price": 48179.882497369836,
+          "size": 2000.0,
+          "profit_loss": 0
         }
       ],
-      "last_trade_time": "2025-12-28T19:39:13.940902",
+      "last_trade_time": "2025-12-28T19:49:13.951225",
       "uptime_start": "2025-12-28T19:39:13.940715",
       "status": "RUNNING"
     },
@@ -248,7 +258,7 @@
       "environment": "sandbox",
       "initial_capital": 300000,
       "current_capital": 300000,
-      "total_trades": 1,
+      "total_trades": 2,
       "winning_trades": 0,
       "losing_trades": 0,
       "total_profit": 0.0,
@@ -263,9 +273,19 @@
           "price": 51103.71190177529,
           "size": 6000.0,
           "profit_loss": 0
+        },
+        {
+          "timestamp": "2025-12-28T19:48:21.960256",
+          "type": "BUY",
+          "pair": "BTC/USD",
+          "pattern": "BULLISH_ENGULFING",
+          "confidence": 0.8,
+          "price": 50039.39914093361,
+          "size": 6000.0,
+          "profit_loss": 0
         }
       ],
-      "last_trade_time": "2025-12-28T19:43:21.956496",
+      "last_trade_time": "2025-12-28T19:48:21.960256",
       "uptime_start": "2025-12-28T19:39:21.952743",
       "status": "RUNNING"
     },
@@ -291,13 +311,34 @@
       "environment": "sandbox",
       "initial_capital": 250,
       "current_capital": 250,
-      "total_trades": 0,
+      "total_trades": 2,
       "winning_trades": 0,
       "losing_trades": 0,
       "total_profit": 0.0,
       "total_loss": 0.0,
-      "current_positions": [],
-      "last_trade_time": null,
+      "current_positions": [
+        {
+          "timestamp": "2025-12-28T19:46:23.960601",
+          "type": "BUY",
+          "pair": "BTC/USD",
+          "pattern": "HAMMER",
+          "confidence": 0.75,
+          "price": 49558.91268672503,
+          "size": 5.0,
+          "profit_loss": 0
+        },
+        {
+          "timestamp": "2025-12-28T19:48:23.963205",
+          "type": "SELL",
+          "pair": "BTC/USD",
+          "pattern": "BEARISH_ENGULFING",
+          "confidence": 0.8,
+          "price": 51548.1762912199,
+          "size": 5.0,
+          "profit_loss": 0
+        }
+      ],
+      "last_trade_time": "2025-12-28T19:48:23.963205",
       "uptime_start": "2025-12-28T19:39:23.955657",
       "status": "RUNNING"
     },
@@ -307,13 +348,34 @@
       "environment": "sandbox",
       "initial_capital": 500,
       "current_capital": 500,
-      "total_trades": 0,
+      "total_trades": 2,
       "winning_trades": 0,
       "losing_trades": 0,
       "total_profit": 0.0,
       "total_loss": 0.0,
-      "current_positions": [],
-      "last_trade_time": null,
+      "current_positions": [
+        {
+          "timestamp": "2025-12-28T19:47:24.962655",
+          "type": "SELL",
+          "pair": "BTC/USD",
+          "pattern": "EVENING_STAR",
+          "confidence": 0.85,
+          "price": 49549.621732033935,
+          "size": 10.0,
+          "profit_loss": 0
+        },
+        {
+          "timestamp": "2025-12-28T19:49:24.964897",
+          "type": "BUY",
+          "pair": "BTC/USD",
+          "pattern": "BULLISH_ENGULFING",
+          "confidence": 0.8,
+          "price": 49880.14729014376,
+          "size": 10.0,
+          "profit_loss": 0
+        }
+      ],
+      "last_trade_time": "2025-12-28T19:49:24.964897",
       "uptime_start": "2025-12-28T19:39:24.956966",
       "status": "RUNNING"
     },
@@ -323,13 +385,24 @@
       "environment": "sandbox",
       "initial_capital": 1000,
       "current_capital": 1000,
-      "total_trades": 0,
+      "total_trades": 1,
       "winning_trades": 0,
       "losing_trades": 0,
       "total_profit": 0.0,
       "total_loss": 0.0,
-      "current_positions": [],
-      "last_trade_time": null,
+      "current_positions": [
+        {
+          "timestamp": "2025-12-28T19:47:25.963419",
+          "type": "BUY",
+          "pair": "BTC/USD",
+          "pattern": "MORNING_STAR",
+          "confidence": 0.85,
+          "price": 50953.01091098083,
+          "size": 20.0,
+          "profit_loss": 0
+        }
+      ],
+      "last_trade_time": "2025-12-28T19:47:25.963419",
       "uptime_start": "2025-12-28T19:39:25.958079",
       "status": "RUNNING"
     },
