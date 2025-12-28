@@ -1,0 +1,53 @@
+{
+  "timestamp": "2025-12-28 19:37:27",
+  "tests": [
+    {
+      "test": "Connection Test",
+      "status": "\u2705 PASS",
+      "passed": true,
+      "details": "Connected successfully",
+      "timestamp": "19:37:27"
+    },
+    {
+      "test": "Email Alert Test",
+      "status": "\u2705 PASS",
+      "passed": true,
+      "details": "Test email sent to appsefilepro@gmail.com",
+      "timestamp": "19:37:27"
+    },
+    {
+      "test": "Trading Signal Test",
+      "status": "\u2705 PASS",
+      "passed": true,
+      "details": "Sent BUY signal for BTC/USD",
+      "timestamp": "19:37:27"
+    },
+    {
+      "test": "Google Sheets Test",
+      "status": "\u2705 PASS",
+      "passed": true,
+      "details": "Test data logged to Google Sheets",
+      "timestamp": "19:37:27"
+    },
+    {
+      "test": "SharePoint Upload Test",
+      "status": "\u274c FAIL",
+      "passed": false,
+      "details": "ZapierMCPConnector.send_to_sharepoint() got an unexpected keyword argument 'file_path'",
+      "timestamp": "19:37:27"
+    },
+    {
+      "test": "Case Notification Test",
+      "status": "\u2705 PASS",
+      "passed": true,
+      "details": "Legal case notification sent",
+      "timestamp": "19:37:27"
+    }
+  ],
+  "summary": {
+    "total": 6,
+    "passed": 5,
+    "failed": 1,
+    "pass_rate": 83.33
+  }
+}

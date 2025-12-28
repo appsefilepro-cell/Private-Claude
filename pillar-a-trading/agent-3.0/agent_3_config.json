@@ -1,0 +1,51 @@
+{
+  "version": "3.0.0",
+  "deployment_date": "2025-12-28",
+  "environments": {
+    "paper": {
+      "enabled": true,
+      "description": "Paper trading for learning",
+      "default_profile": "beginner"
+    },
+    "sandbox": {
+      "enabled": true,
+      "description": "Sandbox testing with Kraken sandbox API",
+      "default_profile": "novice",
+      "requires_approval": false
+    },
+    "live": {
+      "enabled": false,
+      "description": "Live trading with real money",
+      "default_profile": "beginner",
+      "requires_approval": true,
+      "requires_2fa": true
+    }
+  },
+  "risk_management": {
+    "global_kill_switch": true,
+    "max_daily_loss_percent": 5,
+    "max_weekly_loss_percent": 10,
+    "emergency_halt_threshold": 15,
+    "require_manual_approval_above": 1000
+  },
+  "integrations": {
+    "zapier_mcp": {
+      "enabled": true,
+      "log_all_trades": true,
+      "alert_on_loss": true,
+      "alert_on_win": false,
+      "daily_summary": true
+    },
+    "microsoft_365": {
+      "enabled": true,
+      "sharepoint_logging": true,
+      "teams_alerts": false
+    }
+  },
+  "monitoring": {
+    "log_level": "INFO",
+    "performance_tracking": true,
+    "send_daily_report": true,
+    "send_weekly_summary": true
+  }
+}
