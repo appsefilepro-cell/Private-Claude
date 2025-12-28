@@ -40,10 +40,11 @@
         "trading_intermediate",
         "backtesting"
       ],
-      "status": "idle",
+      "status": "disabled",
       "current_task": null,
       "tasks_completed": 0,
-      "errors_encountered": 0
+      "errors_encountered": 0,
+      "auto_start": false
     },
     {
       "id": 3,
@@ -1080,5 +1081,6 @@
       "tasks_completed": 0,
       "errors_encountered": 0
     }
-  ]
+  ],
+  "last_updated": "2025-12-28T19:08:00.236309"
 }
