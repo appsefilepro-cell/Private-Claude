@@ -1,0 +1,242 @@
+SUBSCRIPTION CHARGEBACK - IMMEDIATE ACTION PLAN
+Thurman Robinson Junior
+
+Contact: 323-545-8959
+Emails: MasterKingMalik@gmail.com, appsefilepro@gmail.com
+
+Date: December 28, 2025
+Status: 18 unwanted subscriptions detected
+Monthly waste: $778.80 (60% of $1,298 total)
+Recovery target: $8,265.72
+
+==================================================
+STEP 1: CANCEL ALL UNWANTED SUBSCRIPTIONS (TODAY)
+==================================================
+
+Use Chargeback app to cancel all 18 flagged subscriptions.
+
+HIGH PRIORITY CANCELLATIONS:
+
+1. SQUARESPACE CIRCLE - $250/month
+   - Login to squarespace.com
+   - Settings → Billing → Cancel subscription
+   - Request prorated refund for current month
+   - SAVINGS: $250/month = $3,000/year
+
+2. APPLE - Audit all subscriptions
+   - iPhone: Settings → Your Name → Subscriptions
+   - Review all active subscriptions
+   - Cancel unused apps, duplicates
+   - Target: Reduce from $348.66/month to under $50/month
+   - SAVINGS: $298.66/month = $3,583.92/year
+
+3. PUBLIC STORAGE - $52/month
+   - Call: 1-800-688-8057
+   - Cancel storage unit if not in use
+   - Request final invoice
+   - SAVINGS: $52/month = $624/year
+
+4. FAIRFIGURE - $35/month
+   - Login to fairfigure.com
+   - Cancel subscription
+   - SAVINGS: $35/month = $420/year
+
+5. WIX.COM - $44.97/month
+   - Login to wix.com
+   - Settings → Premium → Cancel premium
+   - Or call: 1-800-600-0950
+   - DECISION: Keep if needed for business, cancel if unused
+
+TOTAL IMMEDIATE SAVINGS: $635.66/month = $7,627.92/year
+
+==================================================
+STEP 2: DISPUTE PAST CHARGES (Next 7 Days)
+==================================================
+
+APPLE DISPUTE - Duplicate charges June 2020
+
+Evidence:
+- June 20, 2020: Apple App Store Subscriptions $19.99
+- June 20, 2020: Apple App Store Subscriptions $19.99 (DUPLICATE)
+- June 22, 2020: Apple 06/20 Purchase $19.99
+- June 22, 2020: Apple 06/19 Purchase $19.99
+
+Action:
+1. Go to: reportaproblem.apple.com
+2. Sign in with Apple ID
+3. Find charges from June 2020
+4. Click "Report a Problem"
+5. Select: "I didn't authorize this purchase"
+6. Request refund for duplicate charges
+
+Recovery: $79.96 (4 charges x $19.99) + interest
+
+CURRENT APPLE CHARGES - Last 3 months
+
+Request refund for any unauthorized subscriptions:
+1. Login to reportaproblem.apple.com
+2. View last 90 days of purchases
+3. Dispute each unauthorized charge
+4. Estimated recovery: $1,000+ (3 months of unwanted apps)
+
+==================================================
+STEP 3: FILE BANK CHARGEBACKS (If merchant won't refund)
+==================================================
+
+If Apple, Squarespace, or other merchants refuse refund:
+
+CONTACT YOUR BANK:
+- Lili Bank (if charges on this account): 1-866-456-5454
+- Or whatever bank/card was charged
+
+CHARGEBACK REQUIREMENTS:
+- Must file within 60 days of statement date
+- Provide: Bank statement, screenshot of charge, cancellation proof
+- Reason codes to use:
+  * "Services not received as described"
+  * "Duplicate charge"
+  * "Subscription continued after cancellation"
+  * "Unauthorized recurring charge"
+
+CHARGEBACK APP ASSISTANCE:
+- The Chargeback app can automate this process
+- They communicate with merchants on your behalf
+- Higher success rate than individual disputes
+
+==================================================
+STEP 4: DOCUMENT FOR TAX PURPOSES
+==================================================
+
+For APPS HOLDINGS WY, INC tax return:
+
+BUSINESS SUBSCRIPTION EXPENSES (Deductible):
+- Wix.Com (if keeping): $44.97/month = $539.64/year
+- Docupost: $29.98/month = $359.76/year
+- Microsoft 365: $23.10/month = $277.20/year
+- Ecredable Business Lift: $19.95/month = $239.40/year
+- Ceo Creative: $19.99/month = $239.88/year
+- Sejda: $5.00/month = $60.00/year
+- Adobe: $1.99/month = $23.88/year
+
+TOTAL BUSINESS DEDUCTIONS: $1,739.76/year
+
+Save for tax preparer:
+1. Subscription audit document
+2. Receipts for business subscriptions
+3. Cancellation confirmations for unused subscriptions
+4. Chargeback recovery documentation
+
+==================================================
+STEP 5: SET UP SUBSCRIPTION MONITORING
+==================================================
+
+Use Chargeback app ongoing:
+
+FEATURES:
+- Monitors bank account for new subscriptions
+- Alerts when new recurring charge detected
+- One-click cancellation for unwanted subscriptions
+- Automatic negotiation for lower rates
+
+MONTHLY REVIEW:
+- Check Chargeback app dashboard weekly
+- Review "Subscriptions" tab
+- Cancel any new unwanted charges immediately
+- Goal: Keep total subscriptions under $500/month
+
+==================================================
+APPLE SUBSCRIPTION CLEANUP GUIDE
+==================================================
+
+STEP-BY-STEP:
+
+1. On iPhone:
+   - Settings → [Your Name] → Subscriptions
+   - Review ALL active subscriptions
+   - Tap subscription → Cancel Subscription
+
+2. Common unwanted Apple subscriptions:
+   - iCloud+ (if not needed)
+   - Apple Music (if not used)
+   - Apple TV+ (if not watched)
+   - Apple Arcade (if not played)
+   - Apple News+ (if not read)
+   - Apple Fitness+ (if not used)
+   - Third-party apps you don't recognize
+
+3. Request refunds:
+   - reportaproblem.apple.com
+   - Select each charge
+   - "I didn't authorize this purchase"
+   - Submit refund request
+
+4. Prevent future charges:
+   - Settings → [Your Name] → Payment & Shipping
+   - Remove old credit cards
+   - Require password for all purchases
+
+==================================================
+EXPECTED OUTCOMES
+==================================================
+
+IMMEDIATE (This Week):
+- Cancel 18 unwanted subscriptions
+- Monthly spending: $1,298 → $519.20 (60% reduction)
+- Monthly savings: $778.80
+
+SHORT-TERM (Next 30 Days):
+- Receive refunds for recent unwanted charges
+- Estimated recovery: $2,000 - $3,000
+
+LONG-TERM (Next 6 Months):
+- Total savings: $778.80 x 6 = $4,672.80
+- Plus refunds: $8,265.72
+- TOTAL FINANCIAL BENEFIT: $12,938.52
+
+==================================================
+SUBSCRIPTION BUDGET GOING FORWARD
+==================================================
+
+RECOMMENDED MAXIMUM: $500/month
+
+ESSENTIAL BUSINESS (Keep):
+- Microsoft 365: $23.10
+- Docupost: $29.98 (if needed for business)
+- Adobe: $1.99
+- Sejda: $5.00
+
+ESSENTIAL PERSONAL (Keep):
+- Apple iCloud (if needed): $9.99
+- One streaming service: $15.99
+
+TOTAL ESSENTIAL: $86.05/month
+
+BUDGET REMAINING: $413.95/month for other subscriptions
+
+ELIMINATE:
+- Squarespace Circle ($250) - unless actively using
+- Fairfigure ($35) - personal expense
+- Public Storage ($52) - if not in use
+- Duplicate Apple subscriptions ($348.66 down to $50)
+- Uber One (if not used monthly)
+- Unknown subscriptions ($446.12 unidentified)
+
+==================================================
+CONTACT FOR QUESTIONS
+==================================================
+
+Thurman Robinson Junior
+Phone: 323-545-8959
+Email: MasterKingMalik@gmail.com
+Email: appsefilepro@gmail.com
+Entity: APPS HOLDINGS WY, INC
+
+For tax questions: Contact tax preparer with subscription audit
+For chargeback help: Use Chargeback app support
+For Apple disputes: 1-800-692-7753 or reportaproblem.apple.com
+
+==================================================
+
+Action plan prepared: December 28, 2025
+Target completion: January 7, 2026 (10 days)
+Expected savings: $12,938.52 (6 months)

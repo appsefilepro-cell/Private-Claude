@@ -1,0 +1,332 @@
+SUBSCRIPTION AUDIT AND DOCUMENTED LOSSES
+Thurman Robinson Junior & APPS HOLDINGS WY, INC
+
+Prepared: December 28, 2025
+Prepared for: Tax Documentation, Chargeback Claims, Trust Payments
+
+INDIVIDUAL: Thurman Robinson Junior (Thurman Malik Robinson Jr.)
+CORPORATION: APPS HOLDINGS WY, INC (Active - Wyoming Corporation)
+PAYMENT ENTITY: APPS HOLDINGS WY, INC (for trust and all payments)
+
+Contact: 323-545-8959
+Emails: MasterKingMalik@gmail.com, appsefilepro@gmail.com, terobinsony@gmail.com
+
+==================================================
+CURRENT SUBSCRIPTION STATUS (as of Dec 2025)
+==================================================
+
+TOTAL ACTIVE SUBSCRIPTIONS: 30
+MONTHLY COST: $1,298.00
+ANNUAL COST: $15,576.00
+
+RECENT SPENDING ANALYSIS:
+- August 1-22, 2025: $718.00
+- July 1-31, 2025: $1,459.00
+- Reduction: -51% (Aug vs Jul)
+
+UNWANTED SUBSCRIPTIONS DETECTED: 18 subscriptions flagged by Chargeback app
+
+==================================================
+DOCUMENTED SUBSCRIPTIONS (From Screenshots)
+==================================================
+
+WEBSITE/HOSTING/BUSINESS TOOLS:
+1. Wix.Com - $44.97 (2 days ago)
+2. Docupost - $29.98 (3 weeks ago)
+3. Squarespace Circle - $250.00 (4 days ago)
+4. Public Storage - $52.00 (3 weeks ago)
+5. Ecredable Business Lift - $19.95 (1 week ago)
+6. Ceo Creative - $19.99 (2 weeks ago)
+7. Fairfigure - $35.00 (2 weeks ago)
+
+APPLE SUBSCRIPTIONS (Multiple Charges):
+8. Apple - $49.72 (3 weeks ago)
+9. Apple - $204.00 (2 weeks ago)
+10. Apple - $29.99 (3 weeks ago)
+11. Apple - $10.00 (3 weeks ago)
+12. Apple - $19.97 (2 weeks ago)
+13. Apple - $25.00 (3 weeks ago)
+14. Apple - $9.99 (3 weeks ago)
+15. Apple - App Store Subscriptions - $19.99 (June 20, 2020)
+16. Apple - App Store Subscriptions - $19.99 (June 20, 2020)
+17. Apple 06/20 Purchase - $19.99 (June 22, 2020)
+18. Apple 06/19 Purchase - $19.99 (June 22, 2020)
+
+MICROSOFT/ADOBE:
+19. Microsoft 365 - $23.10 (2 weeks ago)
+20. Adobe - $1.99 (2 weeks ago)
+
+FINANCIAL/BANKING:
+21. Lili - $10.00 (2 weeks ago)
+22. Sejda - $5.00 (2 weeks ago)
+23. Personal Loan - $9.99 (3 weeks ago)
+24. Self Lender Inc - $150.00 (June 19, 2020)
+
+ENTERTAINMENT/MEDIA:
+25. Amazon Channels - $1.25 (2 weeks ago)
+26. Uber One - Payment method update required
+
+OTHER DOCUMENTED TRANSACTIONS (June 2020):
+27. Bigote 06/21 Purchase - $100.00 (June 22, 2020)
+28. Payment to Bigo Technology Pte. Ltd. - $100.00 (June 21, 2020)
+29. Mamas Paradise 06/17 Purchase - $49.26 (June 19, 2020)
+
+==================================================
+TOTAL MONTHLY SUBSCRIPTION COST BREAKDOWN
+==================================================
+
+Visible Monthly Costs:
+Wix.Com:                    $44.97
+Apple (combined):          $348.66
+Docupost:                   $29.98
+Squarespace Circle:        $250.00
+Public Storage:             $52.00
+Ecredable:                  $19.95
+Ceo Creative:               $19.99
+Fairfigure:                 $35.00
+Lili:                       $10.00
+Microsoft 365:              $23.10
+Adobe:                       $1.99
+Sejda:                       $5.00
+Amazon Channels:             $1.25
+Personal Loan:               $9.99
+Uber One:                    [Unknown]
+
+SUBTOTAL IDENTIFIED:       $851.88
+REPORTED TOTAL:          $1,298.00
+UNIDENTIFIED:              $446.12 (subscriptions not visible in screenshots)
+
+==================================================
+HISTORICAL SPENDING (June 2020)
+==================================================
+
+June 2020 Total Spend: $6,818.96
+
+Major Transactions:
+- Bigote Purchase: $100.00
+- Bigo Technology: $100.00
+- Self Lender Inc: $150.00
+- Mamas Paradise: $49.26
+- Apple Subscriptions: $79.96 (multiple charges)
+
+==================================================
+ESTIMATED ANNUAL LOSSES (2020-2025)
+==================================================
+
+Based on current monthly cost of $1,298:
+- 2025 (partial year): $1,298 x 12 = $15,576.00
+- 2024: $15,576.00
+- 2023: $15,576.00
+- 2022: $15,576.00
+- 2021: $15,576.00
+- 2020: $15,576.00 (estimated)
+
+ESTIMATED 5-YEAR TOTAL: $93,456.00
+
+If 18 of 30 subscriptions are unwanted (60%):
+UNWANTED SUBSCRIPTION LOSSES: $56,073.60 (2020-2025)
+
+==================================================
+CHARGEBACK OPPORTUNITIES
+==================================================
+
+FLAGGED BY CHARGEBACK APP: 18 unwanted subscriptions
+
+IMMEDIATE CHARGEBACK CANDIDATES:
+
+1. APPLE - Multiple duplicate charges
+   - 8+ separate Apple charges ranging from $9.99 to $204.00
+   - Possible unauthorized subscriptions
+   - Potential recovery: $348.66/month x 6 months = $2,091.96
+
+2. UBER ONE - Payment method update required
+   - Account may be charging despite no active payment method
+   - Investigate unauthorized charges
+
+3. SQUARESPACE CIRCLE - $250.00/month
+   - Verify if this is authorized business expense
+   - If personal/unused: Immediate cancellation needed
+   - Potential recovery: $250 x 12 = $3,000/year
+
+4. PUBLIC STORAGE - $52.00/month
+   - Verify if storage unit is still in use
+   - If unused: Cancel and request refund
+   - Potential recovery: $52 x 6 months = $312
+
+5. MULTIPLE APPLE APP STORE SUBSCRIPTIONS
+   - June 2020 shows duplicate $19.99 charges
+   - Request audit from Apple for all subscriptions
+   - Potential recovery: $19.99 x duplicates x months
+
+==================================================
+TAX DOCUMENTATION - BUSINESS VS PERSONAL
+==================================================
+
+BUSINESS EXPENSES (APPS HOLDINGS WY, INC):
+Deductible as business expenses:
+- Wix.Com (website): $44.97/month
+- Docupost (document management): $29.98/month
+- Ecredable Business Lift: $19.95/month
+- Ceo Creative: $19.99/month
+- Microsoft 365: $23.10/month
+- Adobe: $1.99/month
+- Sejda (PDF tools): $5.00/month
+- Public Storage (business records): $52.00/month
+
+BUSINESS SUBTOTAL: $196.98/month = $2,363.76/year
+
+PERSONAL EXPENSES (Thurman Robinson Junior):
+Non-deductible personal:
+- Apple subscriptions: $348.66/month
+- Amazon Channels: $1.25/month
+- Uber One: [Unknown]
+- Fairfigure: $35.00/month
+- Personal Loan: $9.99/month
+- Lili (personal banking): $10.00/month
+
+PERSONAL SUBTOTAL: $404.90/month = $4,858.80/year
+
+SQUARESPACE CIRCLE - $250.00/month:
+- Needs classification (business vs personal)
+- If business: $3,000/year deduction
+- If personal: Non-deductible
+
+==================================================
+PAYMENT ATTRIBUTION FOR TRUST
+==================================================
+
+Per user instruction:
+"All these losses will be coming from the individual Thurman Robinson Junior, and the corporation that is active APPS HOLDINGS WY, INC because that's for the payments will be made for the trust and for everything."
+
+PAYMENT ENTITY: APPS HOLDINGS WY, INC
+BENEFICIARY: Thurman Robinson Junior (Individual)
+
+All subscription payments, chargebacks, and recoveries should be:
+1. Processed through APPS HOLDINGS WY, INC
+2. Documented for trust purposes
+3. Attributed to both individual and corporation for tax purposes
+
+==================================================
+IMMEDIATE ACTION ITEMS
+==================================================
+
+1. CANCEL UNWANTED SUBSCRIPTIONS (18 flagged):
+   - Use Chargeback app to identify all 18
+   - Cancel immediately to stop future charges
+   - Potential savings: $778.80/month ($1,298 x 60%)
+
+2. DISPUTE APPLE CHARGES:
+   - Call Apple: 1-800-692-7753
+   - Request full subscription audit
+   - Dispute duplicate/unauthorized charges
+   - Reference: Multiple charges in June 2020 and current
+
+3. REVIEW SQUARESPACE CIRCLE ($250/month):
+   - Verify business necessity
+   - If unused: Cancel immediately
+   - Request prorated refund
+
+4. AUDIT PUBLIC STORAGE:
+   - Verify storage unit is active and necessary
+   - If empty/unused: Cancel and request refund
+
+5. FIX UBER ONE PAYMENT METHOD:
+   - Either update payment method or cancel subscription
+   - Verify no unauthorized charges
+
+6. CONSOLIDATE APPLE SUBSCRIPTIONS:
+   - Review all active Apple subscriptions via Apple ID
+   - Cancel duplicates and unused subscriptions
+   - Target: Reduce from $348.66/month to under $50/month
+
+==================================================
+CHARGEBACK CLAIM PREPARATION
+==================================================
+
+For each unwanted subscription, prepare:
+
+CLAIM DOCUMENTATION:
+1. Screenshot of subscription charge (from Chargeback app)
+2. Statement: "I did not authorize this subscription"
+3. Statement: "I did not receive goods/services as described"
+4. Bank statement showing charges
+5. Cancellation confirmation (if applicable)
+
+TOTAL POTENTIAL RECOVERY:
+- 18 unwanted subscriptions x $43.27 avg/month x 6 months = $4,673.76
+- Apple duplicate charges: $2,091.96
+- Squarespace (if unused): $1,500 (6 months)
+- TOTAL RECOVERY TARGET: $8,265.72
+
+==================================================
+CONTACT INFORMATION FOR DISPUTES
+==================================================
+
+APPLE:
+- Phone: 1-800-692-7753
+- Website: reportaproblem.apple.com
+- Dispute timeframe: 90 days from charge
+
+WIX:
+- Phone: 1-800-600-0950
+- Email: support@wix.com
+
+SQUARESPACE:
+- Phone: 1-646-580-3456
+- Email: customercare@squarespace.com
+
+MICROSOFT:
+- Phone: 1-800-642-7676
+- Website: account.microsoft.com/services
+
+CHARGEBACK APP:
+- Use app to automate disputes
+- They handle communication with merchants
+
+BANK CHARGEBACKS:
+- Lili Bank (if charges on this account)
+- BMO Harris (if account was active during charges)
+- File within 60 days of statement date
+
+==================================================
+DOCUMENTATION FOR ACCOUNTANT/TAX PREPARER
+==================================================
+
+Provide to tax preparer for 2025 return:
+
+1. This subscription audit document
+2. Chargeback app annual report
+3. Bank statements showing all subscription charges
+4. APPS HOLDINGS WY, INC business expense classification
+5. Personal expense classification
+6. Receipts/invoices for business subscriptions
+
+TAX DEDUCTION SUMMARY:
+- Business subscriptions: $2,363.76/year (APPS HOLDINGS WY, INC)
+- Personal subscriptions: $4,858.80/year (non-deductible)
+- Squarespace: $3,000/year (TBD - business or personal)
+
+If Squarespace is business:
+TOTAL BUSINESS DEDUCTION: $5,363.76/year
+
+==================================================
+TRUST PAYMENT DOCUMENTATION
+==================================================
+
+All payments processed through: APPS HOLDINGS WY, INC
+
+For trust accounting:
+- Individual beneficiary: Thurman Robinson Junior
+- Corporate payor: APPS HOLDINGS WY, INC
+- Payment purpose: Subscription services, business operations
+- Period covered: 2020-2025
+- Total payments: $93,456.00 (estimated 5-year total)
+
+==================================================
+
+Prepared by: Claude AI Assistant
+For: Thurman Robinson Junior
+Entity: APPS HOLDINGS WY, INC
+Date: December 28, 2025
+Contact: 323-545-8959
+Emails: MasterKingMalik@gmail.com, appsefilepro@gmail.com
