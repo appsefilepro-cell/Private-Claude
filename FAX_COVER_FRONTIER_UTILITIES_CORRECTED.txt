@@ -8,9 +8,9 @@ FROM: Thurman Earl Robinson Jr.
 DATE: December 28, 2025
 PAGES: 4 (including cover)
 
-RE: PAYMENT PLAN REQUEST - ACCOUNT [YOUR ACCOUNT NUMBER]
+RE: PAYMENT PLAN REQUEST - ACCOUNT [Insert your account number]
 
-SERVICE ADDRESS: [YOUR CURRENT APARTMENT ADDRESS]
+SERVICE ADDRESS: 15455 Point Northwest Blvd. W. 1410, Houston, Texas
 
 PURPOSE: Request emergency payment plan to resolve past due balance and prevent service disconnection.
 
@@ -31,7 +31,7 @@ PROPOSED PAYMENT PLAN:
 CONTACT INFORMATION:
 Thurman Earl Robinson Jr.
 Email: terobinsony@gmail.com
-Phone: [YOUR PHONE NUMBER]
+Phone: [Insert your phone number]
 Available: Monday-Friday 9am-5pm
 
 URGENT: Please contact within 48 hours to finalize payment arrangement and prevent disconnection.
