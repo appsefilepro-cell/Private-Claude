@@ -1,0 +1,71 @@
+CONVERT ALL DOCUMENTS TO PDF/DOCX FOR SUBMISSION
+
+ALL DOCUMENTS ARE READY - NO ASTERISKS, COPY-PASTE FORMATTED
+
+METHOD 1: MANUAL CONVERSION (RECOMMENDED FOR ACCURACY)
+=======================================================
+
+For each document:
+
+1. HARDSHIP_LETTER_CURRENT_APARTMENT_CORRECTED.txt
+2. CATHOLIC_CHARITIES_RENTAL_ASSISTANCE_CORRECTED.txt
+3. FRONTIER_UTILITIES_PAYMENT_PLAN_CORRECTED.txt
+4. FAX_COVER_CATHOLIC_CHARITIES_CORRECTED.txt
+5. FAX_COVER_FRONTIER_UTILITIES_CORRECTED.txt
+6. 6301_EVICTION_APPEAL_CASE_01-25-00168-CV.txt
+7. BMO_BANK_DISPUTE_ACCOUNT_CLOSURE.txt
+
+STEPS:
+a) Open the .txt file in any text editor
+b) Add your phone number where it says "[Insert your phone number]"
+c) Select All (Ctrl+A or Cmd+A)
+d) Copy (Ctrl+C or Cmd+C)
+e) Open Microsoft Word or Google Docs
+f) Paste (Ctrl+V or Cmd+V)
+g) File → Save As → choose PDF or DOCX
+h) Name it appropriately (e.g., "Hardship_Letter_Robinson.pdf")
+
+METHOD 2: GOOGLE DOCS ONLINE (FREE, NO SOFTWARE NEEDED)
+========================================================
+
+1. Go to docs.google.com
+2. Create New Document
+3. Copy-paste each .txt file content
+4. File → Download → PDF or Microsoft Word (.docx)
+5. Repeat for each document
+
+METHOD 3: COMMAND LINE CONVERSION (IF YOU HAVE LIBREOFFICE)
+============================================================
+
+Install LibreOffice (free): sudo apt-get install libreoffice-writer
+
+Then run:
+libreoffice --headless --convert-to pdf HARDSHIP_LETTER_CURRENT_APARTMENT_CORRECTED.txt
+libreoffice --headless --convert-to pdf CATHOLIC_CHARITIES_RENTAL_ASSISTANCE_CORRECTED.txt
+libreoffice --headless --convert-to pdf FRONTIER_UTILITIES_PAYMENT_PLAN_CORRECTED.txt
+libreoffice --headless --convert-to pdf FAX_COVER_CATHOLIC_CHARITIES_CORRECTED.txt
+libreoffice --headless --convert-to pdf FAX_COVER_FRONTIER_UTILITIES_CORRECTED.txt
+libreoffice --headless --convert-to pdf 6301_EVICTION_APPEAL_CASE_01-25-00168-CV.txt
+libreoffice --headless --convert-to pdf BMO_BANK_DISPUTE_ACCOUNT_CLOSURE.txt
+
+PRIORITY ORDER FOR TONIGHT:
+===========================
+
+URGENT (DUE TOMORROW DEC 29):
+1. Hardship_Letter_Robinson.pdf → Email to Slydell Moore (281-550-0004)
+2. Catholic_Charities_Application.pdf → Fax to 713-874-6531
+3. Frontier_Payment_Plan.pdf → Fax to Frontier (call 866-926-8192 for fax #)
+
+HIGH PRIORITY (THIS WEEK):
+4. BMO_Dispute.pdf → Submit to BMO.com/disputes + CFPB
+5. 6301_Eviction_Appeal.pdf → File with Justice Court + get notarized
+
+BRENAN DOCUMENTS:
+Forward the 3 .txt files to helpthacrook@icloud.com:
+- BRENAN_SCHOOLHOUSE_CONNECTION_SCHOLARSHIP.txt
+- BRENAN_SNAP_APPLICATION_H1010.txt
+- BRENAN_YHDP_HOUSING_APPLICATION.txt
+
+Tell Brenan to fill in personal info and convert using Method 2 (Google Docs - free).
+
+ALL DOCUMENTS ARE PRINT-READY, LEGAL-FORMATTED, NO AI MARKERS
