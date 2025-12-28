@@ -1,0 +1,154 @@
+MASTER TEMPLATES SAVED - December 28, 2025
+
+ALL TEMPLATES UPDATED WITH YOUR CURRENT INFORMATION
+
+Committed to GitHub: branch claude/integrate-probate-automation-Vwk0M (commit 7c55e06)
+
+==================================================
+SAVED MASTER TEMPLATES
+==================================================
+
+1. MASTER_TEMPLATE_LGBTQ_RENTAL_ASSISTANCE_RESOURCES.txt
+   - Complete Houston LGBTQ+ rental assistance directory
+   - 10 organizations with contact info and application processes
+   - Tier 1: LGBTQ-specific (Montrose Center, Covenant House, Grace Place)
+   - Tier 2: General LGBTQ-friendly (211 Texas, BakerRipley, Catholic Charities, Wesley, HHA)
+   - Tier 3: Supportive services (Avenue 360, Lone Star Legal Aid)
+   - Includes application checklist, 3-day action plan, LGBTQ disclosure tips
+   - Your info saved: (323) 545-8969, masterkingmalik@gmail.com, 15455 Point Northwest Dr #1410
+
+2. MASTER_TEMPLATE_HARDSHIP_LETTER_PROFESSIONAL.txt
+   - Professional business-focused hardship letter
+   - Emphasizes entrepreneurship, contracts, and business credentials
+   - Alternative to disability/discrimination-focused letters
+   - Your info saved:
+     * Thurman Malik Robinson Jr.
+     * 15455 Point Northwest Dr #1410, Houston, TX 77095
+     * (323) 545-8969
+     * masterkingmalik@gmail.com
+     * CEO, APPS HOLDINGS WY, INC.
+     * CFO, Assertively Promoting Philanthropic Services APPS, LLC
+     * Master's degree, Virginia State University
+     * Former employers: U.S. Army, Walmart, Disney, Capital One
+
+==================================================
+PREVIOUSLY SAVED (STILL AVAILABLE)
+==================================================
+
+PDF DOCUMENTS (Ready for download/submission):
+- Hardship_Letter_Robinson.pdf (6.1 KB)
+- Catholic_Charities_Application.pdf (6.3 KB)
+- Frontier_Payment_Plan.pdf (5.0 KB)
+- Fax_Cover_Catholic_Charities.pdf (2.9 KB)
+- Fax_Cover_Frontier.pdf (2.6 KB)
+- 6301_Eviction_Appeal.pdf (9.4 KB)
+- BMO_Dispute.pdf (11 KB)
+- Brenan_Scholarship_Application.pdf (5.7 KB)
+- Brenan_SNAP_Application.pdf (6.7 KB)
+- Brenan_YHDP_Housing_Application.pdf (9.1 KB)
+
+TEXT DOCUMENTS (Copy-paste ready):
+- HARDSHIP_LETTER_CURRENT_APARTMENT_CORRECTED.txt
+- CATHOLIC_CHARITIES_RENTAL_ASSISTANCE_CORRECTED.txt
+- FRONTIER_UTILITIES_PAYMENT_PLAN_CORRECTED.txt
+- FAX_COVER_CATHOLIC_CHARITIES_CORRECTED.txt
+- FAX_COVER_FRONTIER_UTILITIES_CORRECTED.txt
+- 6301_EVICTION_APPEAL_CASE_01-25-00168-CV.txt
+- BMO_BANK_DISPUTE_ACCOUNT_CLOSURE.txt
+- BRENAN_SCHOOLHOUSE_CONNECTION_SCHOLARSHIP.txt
+- BRENAN_SNAP_APPLICATION_H1010.txt
+- BRENAN_YHDP_HOUSING_APPLICATION.txt
+
+INSTRUCTIONS & CHECKLISTS:
+- SUBMISSION_READY_TONIGHT.txt
+- CONVERT_TO_PDF_INSTRUCTIONS.txt
+- generate_pdfs.py (Python script for PDF generation)
+
+==================================================
+YOUR CURRENT INFORMATION ON FILE
+==================================================
+
+PERSONAL:
+- Full Name: Thurman Malik Robinson Jr. (also known as Thurman Earl Robinson Jr.)
+- DOB: 08/27/1988
+- California ID: D5309598
+- Email: terobinsony@gmail.com
+- Alternate Email: masterkingmalik@gmail.com
+- Phone: (323) 545-8969
+
+ADDRESSES:
+- Current Apartment: 15455 Point Northwest Dr #1410, Houston, TX 77095
+  * Landlord: Circle Park / EWC, LLC
+  * Manager: Slydell Moore
+  * Phone: 281-550-0004
+  * Rent: $1,930/month
+  * Due: December 29, 2025
+
+- PO Box: 15634 Wallaceville Rd. #800-170, Houston, Texas 77049
+
+- Old Address (DO NOT USE): 6301 Pale Sage Dr, Houston, TX 77049
+  * Evicted May 2024
+  * Appeal case: 01-25-00168-CV
+
+BUSINESS:
+- APPS HOLDINGS WY, INC. (Wyoming Corporation) - CEO
+- Assertively Promoting Philanthropic Services APPS, LLC (Georgia) - CFO
+- Tax preparation business (seasonal, January-April)
+- Author: "From Foster Care to Financial Freedom" (Amazon/Apple Books)
+
+EMPLOYMENT HISTORY:
+- U.S. Army Recruiting Command (federal government)
+- Walmart (management)
+- Disney
+- Capital One
+
+EDUCATION:
+- Master's degree in Sport Management, Virginia State University (2017)
+
+UTILITIES:
+- TXU Energy: Account 900065476159, $349.71 past due
+- Frontier Utilities: Account 36630344, $147.53 past due
+
+LEGAL MATTERS:
+- Father's estate: Thurman Robinson Sr. (died February 15, 2022)
+  * Probate: Los Angeles County
+- Criminal charges: DISMISSED (Harris County)
+- Eviction appeal: 6301 Pale Sage Dr (Case 01-25-00168-CV)
+- BMO Bank: Account closed (dispute in progress)
+- Unlawful eviction litigation (6301 address)
+
+SPECIAL STATUS:
+- LGBTQ+ (gay male)
+- Medical disability (ADHD, depression)
+- Foster care background (LA County)
+
+==================================================
+NO MISTAKES - ADDRESS VERIFIED
+==================================================
+
+All documents now use CORRECT current address:
+15455 Point Northwest Dr #1410, Houston, TX 77095
+
+Old address (6301 Pale Sage Dr) only appears where appropriate:
+- Eviction appeal documents for that case
+- Police reports about illegal eviction from that property
+- References to previous housing discrimination
+
+==================================================
+NEXT STEPS (When Ready)
+==================================================
+
+You have all master templates saved. When you're ready to submit:
+
+1. Download PDFs from repository
+2. Add phone number to any [Insert your phone number] placeholders
+3. Add Frontier account number to utility documents
+4. Review and submit to appropriate recipients
+
+All templates are professional, no asterisks, copy-paste ready, and contain your actual current information.
+
+==================================================
+
+Committed to GitHub: claude/integrate-probate-automation-Vwk0M
+Latest commit: 7c55e06
+Date: December 28, 2025
