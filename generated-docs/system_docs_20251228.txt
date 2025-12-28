@@ -1,0 +1,13 @@
+SYSTEM DOCUMENTATION
+======================================================================
+
+Agent X5 - Multi-Agent Trading and Automation System
+
+Components:
+- 50 specialized agents
+- Local task completion system
+- Autonomous background runner
+- Clean document generator
+- Agent control panel
+
+Generated: 2025-12-28T19:12:11.771171
