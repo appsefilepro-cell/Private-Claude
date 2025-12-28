@@ -20,10 +20,11 @@
         "trading_basics",
         "risk_management"
       ],
-      "status": "idle",
+      "status": "enabled",
       "current_task": null,
       "tasks_completed": 0,
-      "errors_encountered": 0
+      "errors_encountered": 0,
+      "auto_start": true
     },
     {
       "id": 2,
@@ -62,10 +63,11 @@
         "risk_management",
         "live_execution"
       ],
-      "status": "idle",
+      "status": "enabled",
       "current_task": null,
       "tasks_completed": 0,
-      "errors_encountered": 0
+      "errors_encountered": 0,
+      "auto_start": true
     },
     {
       "id": 4,
@@ -84,10 +86,11 @@
         "technical_analysis",
         "fundamental_analysis"
       ],
-      "status": "idle",
+      "status": "enabled",
       "current_task": null,
       "tasks_completed": 0,
-      "errors_encountered": 0
+      "errors_encountered": 0,
+      "auto_start": true
     },
     {
       "id": 5,
@@ -105,10 +108,11 @@
         "greeks",
         "volatility_analysis"
       ],
-      "status": "idle",
+      "status": "enabled",
       "current_task": null,
       "tasks_completed": 0,
-      "errors_encountered": 0
+      "errors_encountered": 0,
+      "auto_start": true
     },
     {
       "id": 6,
@@ -126,10 +130,11 @@
         "macroeconomics",
         "currency_analysis"
       ],
-      "status": "idle",
+      "status": "enabled",
       "current_task": null,
       "tasks_completed": 0,
-      "errors_encountered": 0
+      "errors_encountered": 0,
+      "auto_start": true
     },
     {
       "id": 7,
@@ -147,10 +152,11 @@
         "blockchain",
         "defi"
       ],
-      "status": "idle",
+      "status": "enabled",
       "current_task": null,
       "tasks_completed": 0,
-      "errors_encountered": 0
+      "errors_encountered": 0,
+      "auto_start": true
     },
     {
       "id": 8,
@@ -169,10 +175,11 @@
         "portfolio_theory",
         "statistics"
       ],
-      "status": "idle",
+      "status": "enabled",
       "current_task": null,
       "tasks_completed": 0,
-      "errors_encountered": 0
+      "errors_encountered": 0,
+      "auto_start": true
     },
     {
       "id": 9,
@@ -191,10 +198,11 @@
         "statistics",
         "reporting"
       ],
-      "status": "idle",
+      "status": "enabled",
       "current_task": null,
       "tasks_completed": 0,
-      "errors_encountered": 0
+      "errors_encountered": 0,
+      "auto_start": true
     },
     {
       "id": 10,
@@ -212,10 +220,11 @@
         "text_parsing",
         "signal_validation"
       ],
-      "status": "idle",
+      "status": "enabled",
       "current_task": null,
       "tasks_completed": 0,
-      "errors_encountered": 0
+      "errors_encountered": 0,
+      "auto_start": true
     },
     {
       "id": 11,
@@ -1082,5 +1091,5 @@
       "errors_encountered": 0
     }
   ],
-  "last_updated": "2025-12-28T19:08:00.236309"
+  "last_updated": "2025-12-28T19:39:25.782352"
 }
