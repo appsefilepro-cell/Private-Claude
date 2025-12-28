@@ -1,0 +1,44 @@
+╔══════════════════════════════════════════════════════════════╗
+║                                                              ║
+║         ZAPIER WEBHOOK - GET IT WORKING IN 2 MINUTES        ║
+║                                                              ║
+╚══════════════════════════════════════════════════════════════╝
+
+STEP 1: CREATE WEBHOOK (1 minute)
+==================================
+1. Go to: https://zapier.com/app/zaps
+2. Click "Create Zap"
+3. Search "Webhooks by Zapier"
+4. Select "Catch Hook"
+5. Copy the URL (looks like: https://hooks.zapier.com/hooks/catch/123456/abcdef)
+
+STEP 2: TEST IT NOW (30 seconds)
+==================================
+Run this command:
+
+curl -X POST https://hooks.zapier.com/hooks/catch/YOUR_WEBHOOK_ID/YOUR_HOOK_ID \
+  -H "Content-Type: application/json" \
+  -d '{"event":"test","message":"Agent X5 is working"}'
+
+You should see "status: success" in Zapier
+
+STEP 3: ADD YOUR WEBHOOK URL
+==================================
+Edit config/.env and add:
+
+ZAPIER_WEBHOOK_URL=https://hooks.zapier.com/hooks/catch/YOUR_WEBHOOK_ID/YOUR_HOOK_ID
+
+STEP 4: USE IT FOR DOCUMENTS
+==================================
+When you need to draft a document, Zapier receives the data and:
+→ Sends to Claude API to draft document
+→ Saves to Google Drive
+→ Emails you the link
+
+NO PYTHON NEEDED. All happens in Zapier.
+
+YOUR WEBHOOK URL GOES HERE:
+==================================
+Get it from: https://zapier.com/app/zaps
+
+Then paste it in config/.env
