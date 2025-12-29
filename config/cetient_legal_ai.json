@@ -1,0 +1,97 @@
+{
+  "name": "Cetient Legal Research AI Integration",
+  "version": "1.0.0",
+  "description": "Integration with Cetient Legal Research AI Platform - 9M+ legal decisions",
+  "api_base_url": "https://api.cetient.com/v1",
+  "platform_url": "https://www.cetient.com",
+
+  "capabilities": {
+    "legal_research": {
+      "enabled": true,
+      "database_size": "9,000,000+ legal decisions",
+      "jurisdictions": ["Federal", "State", "International"],
+      "search_types": ["case_law", "statutes", "regulations", "secondary_sources"]
+    },
+    "document_drafting": {
+      "enabled": true,
+      "document_types": [
+        "motions",
+        "complaints",
+        "briefs",
+        "contracts",
+        "legal_memos",
+        "discovery_requests",
+        "pleadings",
+        "demand_letters"
+      ]
+    },
+    "case_analysis": {
+      "enabled": true,
+      "features": [
+        "precedent_analysis",
+        "jurisdiction_mapping",
+        "outcome_prediction",
+        "citation_verification"
+      ]
+    }
+  },
+
+  "agent_x5_integration": {
+    "division": "legal",
+    "assigned_agents": 35,
+    "agent_roles": [
+      {
+        "role": "Legal Research Specialist",
+        "count": 10,
+        "tasks": ["case_research", "precedent_finding", "citation_verification"]
+      },
+      {
+        "role": "Document Drafting Agent",
+        "count": 10,
+        "tasks": ["motion_drafting", "brief_writing", "contract_generation"]
+      },
+      {
+        "role": "Compliance Monitor",
+        "count": 8,
+        "tasks": ["regulatory_tracking", "compliance_verification", "risk_assessment"]
+      },
+      {
+        "role": "Legal Strategy Analyst",
+        "count": 7,
+        "tasks": ["case_strategy", "outcome_analysis", "settlement_evaluation"]
+      }
+    ]
+  },
+
+  "automation_triggers": {
+    "new_case_alert": {
+      "enabled": true,
+      "webhook_url": "${ZAPIER_WEBHOOK_URL}",
+      "schedule": "realtime"
+    },
+    "compliance_check": {
+      "enabled": true,
+      "schedule": "0 6 * * *",
+      "description": "Daily compliance verification at 6 AM"
+    },
+    "precedent_update": {
+      "enabled": true,
+      "schedule": "0 */4 * * *",
+      "description": "Check for new relevant precedents every 4 hours"
+    }
+  },
+
+  "api_endpoints": {
+    "search": "/search",
+    "document": "/document/draft",
+    "analyze": "/case/analyze",
+    "precedents": "/precedents/find",
+    "citations": "/citations/verify"
+  },
+
+  "authentication": {
+    "method": "api_key",
+    "header": "Authorization",
+    "format": "Bearer ${CETIENT_API_KEY}"
+  }
+}

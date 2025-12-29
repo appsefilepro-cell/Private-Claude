@@ -5,7 +5,7 @@ FROM python:3.11-slim
 
 LABEL maintainer="APPS Holdings WY Inc."
 LABEL version="5.0.0"
-LABEL description="Agent X5.0 - 219 Agents Multi-Agent Orchestration System"
+LABEL description="Agent X5.0 - 250 Agents Multi-Agent Orchestration System"
 
 # Set environment variables
 ENV PYTHONDONTWRITEBYTECODE=1

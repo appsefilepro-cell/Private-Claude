@@ -1,25 +1,29 @@
 # Agent X5.0 - Docker Compose Configuration
-# Multi-service orchestration for full system deployment
+# 250 Agents - Full System Deployment
 
 version: '3.8'
 
 services:
-  # Main Agent X5 Orchestrator (219 Agents)
+  # Main Agent X5 Orchestrator (250 Agents)
   agent-x5:
     build:
       context: .
       dockerfile: Dockerfile
     container_name: agent-x5-orchestrator
+    command: ["python", "scripts/agent_x5_master_orchestrator.py"]
     environment:
+      - TRADING_MODE=PAPER
       - LIVE_TRADING=false
       - LOG_LEVEL=INFO
       - E2B_API_KEY=${E2B_API_KEY}
       - GEMINI_API_KEY=${GEMINI_API_KEY}
-      - OPENAI_API_KEY=${OPENAI_API_KEY}
-      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+      - OKX_API_KEY=${OKX_API_KEY}
+      - OKX_SECRET_KEY=${OKX_SECRET_KEY}
+      - OKX_PASSPHRASE=${OKX_PASSPHRASE}
     volumes:
       - ./logs:/app/logs
       - ./config:/app/config:ro
+      - ./data:/app/data
     ports:
       - "8080:8080"
     restart: unless-stopped
@@ -28,6 +32,9 @@ services:
       interval: 30s
       timeout: 10s
       retries: 3
+    depends_on:
+      - redis
+      - postgres
     networks:
       - agent-network
 
@@ -41,31 +48,56 @@ services:
     environment:
       - LIVE_TRADING=false
       - LOG_LEVEL=INFO
+      - GEMINI_API_KEY=${GEMINI_API_KEY}
     volumes:
       - ./logs:/app/logs
       - ./agent-4.0/state:/app/agent-4.0/state
     ports:
       - "8081:8080"
     restart: unless-stopped
+    depends_on:
+      - redis
     networks:
       - agent-network
 
-  # Trading Service (24/7)
+  # Trading Service (24/7 Paper Trading)
   trading:
     build:
       context: .
       dockerfile: Dockerfile
     container_name: agent-trading
-    command: ["python", "pillar-a-trading/agent-3.0/agent_3_orchestrator.py"]
+    command: ["python", "scripts/start_24_7_trading.py"]
     environment:
-      - LIVE_TRADING=false
       - TRADING_MODE=PAPER
+      - LIVE_TRADING=false
       - LOG_LEVEL=INFO
+      - OKX_API_KEY=${OKX_API_KEY}
+      - OKX_SECRET_KEY=${OKX_SECRET_KEY}
+      - OKX_PASSPHRASE=${OKX_PASSPHRASE}
     volumes:
       - ./logs:/app/logs
-      - ./pillar-a-trading:/app/pillar-a-trading
+      - ./data:/app/data
     ports:
       - "8082:8080"
+    restart: unless-stopped
+    depends_on:
+      - redis
+    networks:
+      - agent-network
+
+  # E2B Sandbox Service
+  e2b-sandbox:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: e2b-sandbox
+    command: ["python", "scripts/e2b_sandbox_launcher.py"]
+    environment:
+      - E2B_API_KEY=${E2B_API_KEY}
+      - LOG_LEVEL=INFO
+    volumes:
+      - ./sandbox:/app/sandbox
+      - ./logs:/app/logs
     restart: unless-stopped
     networks:
       - agent-network
@@ -94,6 +126,23 @@ services:
       - "6379:6379"
     volumes:
       - redis-data:/data
+    command: redis-server --appendonly yes
+    restart: unless-stopped
+    networks:
+      - agent-network
+
+  # PostgreSQL Database
+  postgres:
+    image: postgres:15-alpine
+    container_name: agent-postgres
+    environment:
+      - POSTGRES_USER=agentx5
+      - POSTGRES_PASSWORD=agentx5_secure_2024
+      - POSTGRES_DB=agent_x5_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
     restart: unless-stopped
     networks:
       - agent-network
@@ -104,3 +153,4 @@ networks:
 
 volumes:
   redis-data:
+  postgres-data:
