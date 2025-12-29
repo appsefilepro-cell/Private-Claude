@@ -53,7 +53,7 @@ logger = logging.getLogger("AgentX5")
 
 @dataclass
 class AgentConfig:
-    """Configuration for each of the 219 agents"""
+    """Configuration for each of the 250 agents"""
     id: int
     name: str
     division: str
@@ -85,7 +85,7 @@ class RemediationTask:
 
 class AgentX5Orchestrator:
     """
-    Master orchestrator coordinating all 219 agents across 8 divisions
+    Master orchestrator coordinating all 250 agents across 9 divisions
     """
 
     def __init__(self):
@@ -173,8 +173,8 @@ class AgentX5Orchestrator:
                 role="Tax & CFO Suite"
             )
 
-        # Committee 100 (remaining agents)
-        for i in range(200, 220):
+        # Committee 100 (50 agents)
+        for i in range(200, 250):
             agents[i] = AgentConfig(
                 id=i,
                 name=f"Committee_Agent_{i}",
@@ -182,12 +182,12 @@ class AgentX5Orchestrator:
                 role="Specialized Tasks"
             )
 
-        logger.info(f"Initialized {len(agents)} agents across 8 divisions + Committee 100")
+        logger.info(f"Initialized {len(agents)} agents across 9 divisions")
         return agents
 
     async def activate_all_agents(self):
-        """Activate all 219 agents in parallel"""
-        logger.info("🚀 ACTIVATING ALL 219 AGENTS IN PARALLEL")
+        """Activate all 250 agents in parallel"""
+        logger.info("🚀 ACTIVATING ALL 250 AGENTS IN PARALLEL")
 
         async def activate_agent(agent_id: int):
             agent = self.agents[agent_id]
@@ -196,7 +196,7 @@ class AgentX5Orchestrator:
             await asyncio.sleep(0.1)  # Simulate activation
 
         await asyncio.gather(*[activate_agent(i) for i in self.agents.keys()])
-        logger.info("✅ ALL 219 AGENTS ACTIVATED")
+        logger.info("✅ ALL 250 AGENTS ACTIVATED")
 
     async def start_trading_systems(self):
         """Start 24/7 trading across all timezones"""
@@ -282,7 +282,7 @@ class AgentX5Orchestrator:
                 "Communication": 26,
                 "DevOps/Security": 12,
                 "Financial": 20,
-                "Committee 100": 20
+                "Committee 100": 50
             }
         }
 
