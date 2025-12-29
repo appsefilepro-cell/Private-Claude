@@ -1,0 +1,43 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Run Agent X5",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/scripts/agent_x5_master_orchestrator.py",
+      "console": "integratedTerminal",
+      "env": {
+        "TRADING_MODE": "PAPER",
+        "LIVE_TRADING": "false"
+      }
+    },
+    {
+      "name": "Run E2B Sandbox",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/scripts/e2b_sandbox_launcher.py",
+      "console": "integratedTerminal",
+      "env": {
+        "E2B_API_KEY": "e2b_fcc08e8c733b3eab00bdb3ad5857f5966afc2773"
+      }
+    },
+    {
+      "name": "Run Trading Demo",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/scripts/start_24_7_trading.py",
+      "console": "integratedTerminal",
+      "env": {
+        "TRADING_MODE": "PAPER"
+      }
+    },
+    {
+      "name": "Run All Tests",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/scripts/run_all_tests.py",
+      "console": "integratedTerminal"
+    }
+  ]
+}
