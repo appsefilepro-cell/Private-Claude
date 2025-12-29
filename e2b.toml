@@ -1,0 +1,78 @@
+# E2B Sandbox Configuration for Agent X5.0
+# Uses Docker template for full container orchestration in cloud sandbox
+# Documentation: https://e2b.dev/docs
+
+# ===========================================
+# SANDBOX SETTINGS
+# ===========================================
+[sandbox]
+# Use base template with Docker support
+template_id = "base"
+name = "agent-x5-docker-sandbox"
+timeout = 3600  # 1 hour max runtime
+cpu_count = 2
+memory_mb = 4096
+
+# ===========================================
+# DOCKERFILE CONFIGURATION
+# ===========================================
+# E2B will build this Dockerfile in the sandbox
+dockerfile = "Dockerfile"
+docker_context = "."
+
+# ===========================================
+# STARTUP CONFIGURATION
+# ===========================================
+[start]
+# Commands to run when sandbox starts
+on_start = [
+    "pip install -r requirements.txt",
+    "docker-compose up -d"
+]
+
+# ===========================================
+# FILE SYNC
+# ===========================================
+[filesystem]
+# Files to upload to sandbox
+include = [
+    "Dockerfile",
+    "docker-compose.yml",
+    "requirements.txt",
+    "scripts/",
+    "agent-4.0/",
+    "config/",
+    "pillar-a-trading/",
+    "core-systems/"
+]
+
+exclude = [
+    ".git/",
+    "venv/",
+    "__pycache__/",
+    "*.pyc",
+    ".env",
+    "node_modules/"
+]
+
+# ===========================================
+# NETWORK & PORTS
+# ===========================================
+[network]
+# Expose these ports from sandbox
+ports = [
+    { port = 8080, protocol = "http", name = "agent-x5" },
+    { port = 8081, protocol = "http", name = "agent-4" },
+    { port = 8082, protocol = "http", name = "trading" },
+    { port = 6379, protocol = "tcp", name = "redis" }
+]
+
+# ===========================================
+# ENVIRONMENT VARIABLES
+# ===========================================
+[env]
+PYTHONDONTWRITEBYTECODE = "1"
+PYTHONUNBUFFERED = "1"
+LIVE_TRADING = "false"
+TRADING_MODE = "PAPER"
+LOG_LEVEL = "INFO"
