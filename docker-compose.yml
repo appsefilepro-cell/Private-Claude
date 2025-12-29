@@ -1,0 +1,106 @@
+# Agent X5.0 - Docker Compose Configuration
+# Multi-service orchestration for full system deployment
+
+version: '3.8'
+
+services:
+  # Main Agent X5 Orchestrator (219 Agents)
+  agent-x5:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: agent-x5-orchestrator
+    environment:
+      - LIVE_TRADING=false
+      - LOG_LEVEL=INFO
+      - E2B_API_KEY=${E2B_API_KEY}
+      - GEMINI_API_KEY=${GEMINI_API_KEY}
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+    volumes:
+      - ./logs:/app/logs
+      - ./config:/app/config:ro
+    ports:
+      - "8080:8080"
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "python", "-c", "print('healthy')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    networks:
+      - agent-network
+
+  # Agent 4.0 Service (50 Agents)
+  agent-4:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: agent-4-orchestrator
+    command: ["python", "agent-4.0/orchestrator/master_orchestrator.py"]
+    environment:
+      - LIVE_TRADING=false
+      - LOG_LEVEL=INFO
+    volumes:
+      - ./logs:/app/logs
+      - ./agent-4.0/state:/app/agent-4.0/state
+    ports:
+      - "8081:8080"
+    restart: unless-stopped
+    networks:
+      - agent-network
+
+  # Trading Service (24/7)
+  trading:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: agent-trading
+    command: ["python", "pillar-a-trading/agent-3.0/agent_3_orchestrator.py"]
+    environment:
+      - LIVE_TRADING=false
+      - TRADING_MODE=PAPER
+      - LOG_LEVEL=INFO
+    volumes:
+      - ./logs:/app/logs
+      - ./pillar-a-trading:/app/pillar-a-trading
+    ports:
+      - "8082:8080"
+    restart: unless-stopped
+    networks:
+      - agent-network
+
+  # Remediation Service
+  remediation:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: agent-remediation
+    command: ["python", "core-systems/remediation/remediation_engine.py"]
+    environment:
+      - LOG_LEVEL=INFO
+    volumes:
+      - ./logs:/app/logs
+      - ./core-systems:/app/core-systems
+    restart: unless-stopped
+    networks:
+      - agent-network
+
+  # Redis for caching and messaging
+  redis:
+    image: redis:7-alpine
+    container_name: agent-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    restart: unless-stopped
+    networks:
+      - agent-network
+
+networks:
+  agent-network:
+    driver: bridge
+
+volumes:
+  redis-data:

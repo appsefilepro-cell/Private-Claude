@@ -1,0 +1,542 @@
+{
+  "CRITICAL_INSTRUCTIONS": {
+    "NO_CUSTOM_CODING": "Use ONLY Zapier native actions and integrations",
+    "USE_GITLAB_DUO_DATA": "GitLab Duo and GitLab Copilot should use their own data, not user's data",
+    "USE_FREE_TOOLS_ONLY": "Everything must be within FREE tier limits",
+    "PARALLEL_EXECUTION": "All automations run simultaneously across all timezones",
+    "DATA_MINIMIZATION": "Use least amount of data possible, prefer Zapier/GitLab data over user data"
+  },
+
+  "ZAPIER_COPILOT_EXTRACTED_ARCHITECTURE": {
+    "phase_1_multi_ai_research_pipeline": {
+      "description": "All 3 AI models running simultaneously for comprehensive coverage",
+      "models": {
+        "claude_anthropic": {
+          "purpose": "Deep technical analysis and documentation",
+          "zapier_action": "Anthropic (Claude) - Conversation",
+          "trigger": "Webhook or Schedule",
+          "free_tier": true
+        },
+        "chatgpt_openai": {
+          "purpose": "Trend analysis and practical applications",
+          "zapier_action": "ChatGPT - Conversation",
+          "trigger": "Webhook or Schedule",
+          "free_tier": true
+        },
+        "gemini_google": {
+          "purpose": "Data patterns and predictive insights",
+          "zapier_action": "Google Gemini - Generate Content",
+          "trigger": "Webhook or Schedule",
+          "free_tier": true,
+          "api_key": "AIzaSyBqAbzJdyg7sP5tIhCddWk4Q1EEmSZSCT4",
+          "project": "projects/190831837188"
+        }
+      }
+    },
+
+    "phase_2_memory_storage_system": {
+      "description": "Store all results in multiple knowledge repositories",
+      "storage_locations": {
+        "google_sheets": {
+          "purpose": "Primary knowledge database",
+          "zapier_action": "Google Sheets - Create Spreadsheet Row",
+          "data_stored": "Research results, trading signals, portfolio tracking"
+        },
+        "notion": {
+          "purpose": "Structured documentation and wiki",
+          "zapier_action": "Notion - Create Database Item",
+          "data_stored": "Organized documentation, project tracking"
+        },
+        "sharepoint": {
+          "purpose": "Enterprise knowledge repository",
+          "zapier_action": "Microsoft SharePoint - Create File",
+          "data_stored": "Documents, reports, compliance records"
+        },
+        "github": {
+          "purpose": "Code examples and technical implementations",
+          "zapier_action": "GitHub - Create Issue",
+          "data_stored": "Code snippets, technical specifications, bug tracking"
+        }
+      }
+    },
+
+    "phase_3_free_sandbox_coding_environment": {
+      "description": "Free coding environment using Zapier native tools",
+      "components": {
+        "code_execution": {
+          "tool": "Code by Zapier",
+          "languages": ["Python", "JavaScript"],
+          "use_case": "Execute custom logic when needed",
+          "cost": "FREE (built into Zapier)"
+        },
+        "api_connections": {
+          "tool": "Webhooks by Zapier",
+          "use_case": "Connect to external APIs (TradingView, exchanges, bonds APIs)",
+          "cost": "FREE (built into Zapier)"
+        },
+        "version_control": {
+          "tool": "GitHub (connected app)",
+          "use_case": "Store code, track changes, GitLab Duo integration",
+          "cost": "FREE"
+        },
+        "data_storage": {
+          "tool": "Google Sheets (connected app)",
+          "use_case": "Store trading data, portfolio, results",
+          "cost": "FREE"
+        }
+      }
+    },
+
+    "phase_4_trading_app_integration": {
+      "description": "Complete trading automation with FREE tools",
+      "architecture": {
+        "trigger": {
+          "source": "TradingView Alerts (FREE)",
+          "method": "Webhook by Zapier",
+          "triggers_on": ["Price alerts", "Technical indicators", "Strategy signals"]
+        },
+        "analysis": {
+          "step_1": {
+            "action": "Claude (Anthropic) - Conversation",
+            "input": "TradingView alert data",
+            "output": "Technical analysis and recommendation"
+          },
+          "step_2": {
+            "action": "ChatGPT - Conversation",
+            "input": "Claude's analysis + market context",
+            "output": "Strategy validation and risk assessment"
+          }
+        },
+        "storage": {
+          "action": "Google Sheets - Create Spreadsheet Row",
+          "data": "Alert details, AI analysis, timestamp, portfolio impact"
+        },
+        "notification": {
+          "action": "Slack - Send Channel Message",
+          "recipients": "Trading alerts channel",
+          "format": "Structured message with analysis and recommendation"
+        }
+      }
+    },
+
+    "automated_trading_coding_system_architecture": {
+      "description": "The exact architecture Zapier Copilot is building (from screenshot 4)",
+      "workflow": "Webhook Trigger → Claude Analysis → Google Sheets + Slack Notifications",
+      "components": {
+        "step_1_webhook_trigger": {
+          "app": "Webhooks by Zapier",
+          "action": "Catch Hook",
+          "purpose": "Receive trading signals, market data, bond prices, alerts",
+          "sources": [
+            "TradingView (FREE alerts)",
+            "Bond market APIs",
+            "Crypto exchange webhooks",
+            "Forex data feeds"
+          ]
+        },
+        "step_2_claude_analysis": {
+          "app": "Anthropic (Claude)",
+          "action": "Conversation",
+          "purpose": "Analyze incoming data and generate insights",
+          "prompt_template": "Analyze this trading signal: {{webhook_data}}. Provide: 1) Technical analysis 2) Risk level 3) Recommendation 4) Position sizing"
+        },
+        "step_3a_google_sheets": {
+          "app": "Google Sheets",
+          "action": "Create Spreadsheet Row",
+          "purpose": "Log all trades and analysis",
+          "fields": [
+            "Timestamp",
+            "Asset",
+            "Signal Type",
+            "Claude Analysis",
+            "Recommendation",
+            "Risk Level",
+            "Position Size"
+          ]
+        },
+        "step_3b_slack_notification": {
+          "app": "Slack",
+          "action": "Send Channel Message",
+          "purpose": "Real-time notifications",
+          "message_format": "🚨 *{{Asset}}* Signal\n📊 Analysis: {{Claude_Analysis}}\n✅ Recommendation: {{Recommendation}}\n⚠️ Risk: {{Risk_Level}}"
+        }
+      }
+    }
+  },
+
+  "ZAPIER_COPILOT_EXACT_TASKS": {
+    "TASK_1_BONDS_TRADING_24_7": {
+      "description": "Set up bonds trading across all timezones using FREE tools",
+      "zapier_zap_name": "24/7 Bonds Trading Automation",
+      "trigger": {
+        "app": "Schedule by Zapier",
+        "frequency": "Every hour (24 times/day)",
+        "timezones": ["US/Eastern", "Europe/London", "Asia/Tokyo", "Australia/Sydney"]
+      },
+      "actions": [
+        {
+          "step": 1,
+          "app": "Webhooks by Zapier",
+          "action": "GET Request",
+          "url": "https://api.fiscaldata.treasury.gov/services/api/fiscal_service/v2/accounting/od/avg_interest_rates",
+          "purpose": "Fetch US Treasury bond rates (FREE API)"
+        },
+        {
+          "step": 2,
+          "app": "Code by Zapier",
+          "action": "Run Python",
+          "purpose": "Parse bond data and calculate yields",
+          "note": "Minimal code, just data transformation"
+        },
+        {
+          "step": 3,
+          "app": "Google Gemini",
+          "action": "Generate Content",
+          "prompt": "Analyze these bond rates: {{bond_data}}. Identify opportunities and risks. Consider current economic conditions.",
+          "purpose": "AI analysis of bond market"
+        },
+        {
+          "step": 4,
+          "app": "Google Sheets",
+          "action": "Create Spreadsheet Row",
+          "spreadsheet": "Bonds Trading 24/7 Log",
+          "purpose": "Track all bond data and analysis"
+        },
+        {
+          "step": 5,
+          "app": "Slack",
+          "action": "Send Channel Message",
+          "channel": "#bonds-trading",
+          "condition": "Only if Gemini identifies opportunity",
+          "purpose": "Alert when bond opportunities detected"
+        }
+      ],
+      "cost": "FREE (within 100 tasks/month limit)"
+    },
+
+    "TASK_2_MULTI_TIMEZONE_FOREX_CRYPTO": {
+      "description": "Trade forex and crypto 24 hours across all markets",
+      "zapier_zap_name": "24-Hour Global Trading",
+      "trigger": {
+        "app": "Webhooks by Zapier",
+        "type": "Catch Hook",
+        "source": "TradingView alerts (FREE tier allows 1 alert per chart)",
+        "markets": {
+          "tokyo_session": "7PM-4AM EST (Asia open)",
+          "london_session": "3AM-12PM EST (Europe open)",
+          "new_york_session": "8AM-5PM EST (US open)",
+          "sydney_session": "5PM-2AM EST (Australia open)"
+        }
+      },
+      "actions": [
+        {
+          "step": 1,
+          "app": "Filter by Zapier",
+          "condition": "Only continue if signal strength > 70%",
+          "purpose": "Reduce noise and unnecessary tasks"
+        },
+        {
+          "step": 2,
+          "app": "Anthropic (Claude)",
+          "action": "Conversation",
+          "prompt": "Trading signal received: {{alert_data}}. Market: {{market_session}}. Analyze: 1) Trend strength 2) Support/resistance 3) Entry/exit points 4) Risk/reward ratio",
+          "purpose": "Deep technical analysis"
+        },
+        {
+          "step": 3,
+          "app": "ChatGPT",
+          "action": "Conversation",
+          "prompt": "Review Claude's analysis: {{claude_output}}. Validate strategy and suggest position sizing for account size: ${{account_balance}}",
+          "purpose": "Second opinion and risk management"
+        },
+        {
+          "step": 4,
+          "app": "Google Sheets",
+          "action": "Lookup Spreadsheet Row",
+          "spreadsheet": "Trading Portfolio",
+          "purpose": "Check current positions and available capital"
+        },
+        {
+          "step": 5,
+          "app": "Google Sheets",
+          "action": "Create Spreadsheet Row",
+          "spreadsheet": "24-Hour Trading Log",
+          "data": "All signal data + AI analysis + decision"
+        },
+        {
+          "step": 6,
+          "app": "Slack",
+          "action": "Send Direct Message",
+          "recipient": "User",
+          "message": "📈 {{Asset}} Signal in {{Session}}\n🤖 Claude: {{claude_analysis}}\n🤖 ChatGPT: {{chatgpt_validation}}\n💰 Suggested Position: {{position_size}}"
+        }
+      ],
+      "frequency": "Continuous (webhook-triggered, 24/7)",
+      "cost": "FREE (webhooks don't count toward task limit if properly filtered)"
+    },
+
+    "TASK_3_API_FINALIZATION": {
+      "description": "Finalize and test all API connections",
+      "apis_to_configure": {
+        "openai_api": {
+          "connection": "ChatGPT (connected in Zapier)",
+          "test_action": "Conversation",
+          "test_prompt": "Respond with: OpenAI API is working correctly",
+          "verification": "Store response in Google Sheets",
+          "status": "ZAPIER COPILOT TO COMPLETE"
+        },
+        "anthropic_api": {
+          "connection": "Anthropic (Claude) (connected in Zapier)",
+          "test_action": "Conversation",
+          "test_prompt": "Respond with: Anthropic Claude API is working correctly",
+          "verification": "Store response in Google Sheets",
+          "status": "ZAPIER COPILOT TO COMPLETE"
+        },
+        "gemini_api": {
+          "connection": "Google Gemini (connected in Zapier)",
+          "api_key": "AIzaSyBqAbzJdyg7sP5tIhCddWk4Q1EEmSZSCT4",
+          "project": "projects/190831837188",
+          "test_action": "Generate Content",
+          "test_prompt": "Respond with: Google Gemini API is working correctly",
+          "verification": "Store response in Google Sheets",
+          "status": "ZAPIER COPILOT TO COMPLETE"
+        },
+        "okx_bitcoin_futures": {
+          "api_key": "a5b57cd3-0bee-44f-b8e9-7c5b330a5c28",
+          "connection_method": "Webhooks by Zapier",
+          "endpoint": "https://www.okx.com/api/v5/market/ticker",
+          "test": "Fetch BTC-USDT-SWAP price",
+          "verification": "Store price in Google Sheets",
+          "status": "ZAPIER COPILOT TO COMPLETE"
+        },
+        "treasury_bonds_api": {
+          "provider": "US Treasury (fiscaldata.treasury.gov)",
+          "connection_method": "Webhooks by Zapier",
+          "endpoint": "https://api.fiscaldata.treasury.gov/services/api/fiscal_service/v2/accounting/od/avg_interest_rates",
+          "test": "Fetch current bond rates",
+          "cost": "FREE (public API)",
+          "verification": "Store rates in Google Sheets",
+          "status": "ZAPIER COPILOT TO COMPLETE"
+        }
+      },
+      "verification_zap": {
+        "name": "API Health Check Dashboard",
+        "trigger": "Schedule by Zapier (Daily at 6 AM)",
+        "actions": [
+          "Test all 5 APIs in parallel",
+          "Record results in Google Sheets 'API Status Dashboard'",
+          "Send Slack notification if any API fails",
+          "Update SharePoint with daily API report"
+        ]
+      }
+    },
+
+    "TASK_4_TRADING_RESULTS_DASHBOARD": {
+      "description": "Create automated dashboard to see all trading results",
+      "zapier_zap_name": "Trading Results Auto-Dashboard",
+      "trigger": {
+        "app": "Schedule by Zapier",
+        "frequency": "Every 6 hours (4 times/day)"
+      },
+      "actions": [
+        {
+          "step": 1,
+          "app": "Google Sheets",
+          "action": "Lookup Spreadsheet Rows (advanced)",
+          "spreadsheet": "24-Hour Trading Log",
+          "query": "Timestamp > today",
+          "purpose": "Get all trades from today"
+        },
+        {
+          "step": 2,
+          "app": "Code by Zapier",
+          "action": "Run Python",
+          "purpose": "Calculate: Total P&L, Win rate, Best trade, Worst trade, Number of trades",
+          "note": "Minimal calculation code"
+        },
+        {
+          "step": 3,
+          "app": "Google Gemini",
+          "action": "Generate Content",
+          "prompt": "Analyze today's trading performance: {{stats}}. Provide insights on: 1) What worked 2) What didn't 3) Tomorrow's strategy adjustments",
+          "purpose": "AI performance review"
+        },
+        {
+          "step": 4,
+          "app": "Google Sheets",
+          "action": "Update Spreadsheet Row",
+          "spreadsheet": "Trading Dashboard Summary",
+          "purpose": "Update daily dashboard with latest stats"
+        },
+        {
+          "step": 5,
+          "app": "Slack",
+          "action": "Send Channel Message",
+          "channel": "#trading-results",
+          "message": "📊 *Daily Trading Dashboard Update*\n\n💰 Total P&L: {{total_pnl}}\n📈 Win Rate: {{win_rate}}%\n🏆 Best Trade: {{best_trade}}\n📉 Worst Trade: {{worst_trade}}\n🔢 Total Trades: {{trade_count}}\n\n🤖 AI Analysis:\n{{gemini_insights}}"
+        }
+      ]
+    },
+
+    "TASK_5_COMPLETE_MISSING_COMPONENTS": {
+      "description": "All components that were started but not finished",
+      "missing_items": [
+        {
+          "item": "Master Prompts (8000 words × 8 divisions)",
+          "delegated_to": "Committee 100 (assigned below)",
+          "zapier_role": "Store completed prompts in SharePoint + GitHub"
+        },
+        {
+          "item": "OpenAI API Key configuration",
+          "delegated_to": "Zapier Copilot",
+          "action": "Use existing ChatGPT connection in Zapier (already connected)",
+          "no_coding_needed": true
+        },
+        {
+          "item": "Anthropic API Key configuration",
+          "delegated_to": "Zapier Copilot",
+          "action": "Use existing Anthropic (Claude) connection in Zapier (already connected)",
+          "no_coding_needed": true
+        },
+        {
+          "item": "Bonds trading implementation",
+          "delegated_to": "Zapier Copilot",
+          "zap_name": "24/7 Bonds Trading Automation (defined above)",
+          "status": "ZAPIER COPILOT TO BUILD"
+        },
+        {
+          "item": "24-hour multi-timezone trading",
+          "delegated_to": "Zapier Copilot",
+          "zap_name": "24-Hour Global Trading (defined above)",
+          "status": "ZAPIER COPILOT TO BUILD"
+        },
+        {
+          "item": "Trading results verification",
+          "delegated_to": "Zapier Copilot",
+          "zap_name": "Trading Results Auto-Dashboard (defined above)",
+          "status": "ZAPIER COPILOT TO BUILD"
+        }
+      ]
+    }
+  },
+
+  "GITLAB_DUO_INTEGRATION": {
+    "purpose": "Use GitLab Duo's data and AI assistance, not user's data",
+    "tasks_for_gitlab_duo": {
+      "task_1": {
+        "description": "Review all code in Private-Claude repository",
+        "gitlab_duo_action": "Code Suggestions",
+        "purpose": "Find incomplete implementations",
+        "output": "List of files with TODO, FIXME, or incomplete code"
+      },
+      "task_2": {
+        "description": "Complete master prompts using GitLab Duo AI",
+        "gitlab_duo_action": "Code Generation",
+        "input": "Master prompts template structure",
+        "output": "8000-word prompts for all 8 divisions",
+        "note": "GitLab Duo generates content using its training data, not user data"
+      },
+      "task_3": {
+        "description": "Merge all Zapier automations with Agent 5.0",
+        "gitlab_duo_action": "Merge Request Review",
+        "purpose": "Ensure all integrations are connected",
+        "output": "Validated, merged system"
+      }
+    },
+    "how_to_use_gitlab_duo": {
+      "method_1": "Code Suggestions in IDE",
+      "method_2": "GitLab Duo Chat in web interface",
+      "method_3": "GitLab CI/CD pipeline integration",
+      "data_source": "GitLab's training data + repository context (not user's personal data)"
+    }
+  },
+
+  "AGENT_5_PARALLEL_EXECUTION_MERGE": {
+    "description": "Merge Zapier automations with Agent 5.0 master loop",
+    "master_loop_architecture": {
+      "orchestrator": "Master CFO (Agent 5.0)",
+      "co_primary_agents": [
+        "Zapier Copilot (handles ALL automations)",
+        "Claude Code (handles technical implementation)",
+        "GitLab Duo (handles code review and completion)"
+      ],
+      "execution_pattern": "QUANTUM (all agents work simultaneously)",
+      "workflow": {
+        "step_1": "User request arrives",
+        "step_2": "Master CFO analyzes and delegates",
+        "step_3": "All 3 co-primary agents execute in parallel",
+        "step_4": "Results aggregated in Google Sheets",
+        "step_5": "Slack notification sent to user"
+      }
+    },
+    "integration_points": {
+      "zapier_to_agent5": {
+        "method": "Webhooks by Zapier",
+        "trigger": "When Zapier completes automation",
+        "action": "Send results to Agent 5.0 Google Sheets",
+        "notification": "Slack message confirming completion"
+      },
+      "agent5_to_zapier": {
+        "method": "Webhooks by Zapier",
+        "trigger": "When Agent 5.0 needs automation",
+        "action": "Trigger specific Zapier zap",
+        "response": "Zapier executes and returns results"
+      },
+      "gitlab_duo_to_agent5": {
+        "method": "GitLab API + Webhooks",
+        "trigger": "When code changes pushed to GitHub",
+        "action": "GitLab Duo reviews and suggests improvements",
+        "sync": "Bidirectional sync between GitHub and GitLab"
+      }
+    }
+  },
+
+  "COMMITTEE_100_ASSIGNMENTS": {
+    "description": "100 specialized roles to complete master prompts",
+    "note": "Defined in separate file below",
+    "status": "TO BE ASSIGNED"
+  },
+
+  "IMMEDIATE_ACTIONS_FOR_ZAPIER_COPILOT": [
+    {
+      "priority": 1,
+      "action": "Build '24/7 Bonds Trading Automation' Zap",
+      "use": "Schedule by Zapier + Webhooks + Gemini + Google Sheets + Slack",
+      "no_coding": "Use only native Zapier actions"
+    },
+    {
+      "priority": 2,
+      "action": "Build '24-Hour Global Trading' Zap",
+      "use": "Webhooks + Filter + Claude + ChatGPT + Google Sheets + Slack",
+      "no_coding": "Use only native Zapier actions"
+    },
+    {
+      "priority": 3,
+      "action": "Build 'API Health Check Dashboard' Zap",
+      "use": "Schedule + Webhooks (test all APIs) + Google Sheets + Slack",
+      "no_coding": "Use only native Zapier actions"
+    },
+    {
+      "priority": 4,
+      "action": "Build 'Trading Results Auto-Dashboard' Zap",
+      "use": "Schedule + Google Sheets lookup + Code (calculations) + Gemini + Slack",
+      "minimal_coding": "Only for P&L calculations"
+    },
+    {
+      "priority": 5,
+      "action": "Test all 5 APIs and verify results appear",
+      "apis": ["OpenAI/ChatGPT", "Anthropic/Claude", "Gemini", "OKX", "Treasury Bonds"],
+      "verification": "Results must appear in Google Sheets"
+    }
+  ],
+
+  "SUCCESS_CRITERIA": {
+    "bonds_trading": "Hourly updates in Google Sheets 'Bonds Trading 24/7 Log'",
+    "multi_timezone_trading": "Alerts from all 4 trading sessions (Tokyo, London, NY, Sydney)",
+    "api_verification": "All 5 APIs showing 'Success' in Google Sheets 'API Status Dashboard'",
+    "trading_results": "Daily dashboard updates in Slack #trading-results channel",
+    "master_prompts": "8000 words × 8 divisions = 64,000 words completed by Committee 100",
+    "cost": "$0/month (all FREE tools)",
+    "data_usage": "Minimal - use Zapier/GitLab data, not user's personal data"
+  }
+}
