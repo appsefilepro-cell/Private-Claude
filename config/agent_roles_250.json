@@ -1,0 +1,70 @@
+{
+  "agent_x5_role_configuration": {
+    "version": "5.0.0",
+    "total_agents": 250,
+    "description": "Complete agent role assignments for Agent X5 system",
+
+    "executive_roles": {
+      "count": 100,
+      "description": "Executive decision-making and orchestration agents",
+      "roles": [
+        {"id": 1, "title": "Chief Executive Agent", "division": "Master CFO", "responsibilities": ["Strategic decisions", "Final approvals", "Crisis management"]},
+        {"id": 2, "title": "Chief Operations Agent", "division": "Master CFO", "responsibilities": ["Daily operations", "Resource allocation", "Process optimization"]},
+        {"id": 3, "title": "Chief Technology Agent", "division": "AI/ML", "responsibilities": ["Tech strategy", "Architecture decisions", "Innovation"]},
+        {"id": 4, "title": "Chief Financial Agent", "division": "Financial", "responsibilities": ["Budget management", "Financial reporting", "Cost control"]},
+        {"id": 5, "title": "Chief Legal Agent", "division": "Legal", "responsibilities": ["Compliance", "Contract review", "Risk assessment"]},
+        {"id": 6, "title": "Chief Trading Agent", "division": "Trading", "responsibilities": ["Trading strategy", "Risk management", "Market analysis"]},
+        {"id": 7, "title": "Chief Integration Agent", "division": "Integration", "responsibilities": ["API management", "System connectivity", "Data sync"]},
+        {"id": 8, "title": "Chief Security Agent", "division": "DevOps/Security", "responsibilities": ["Security policy", "Vulnerability management", "Access control"]},
+        {"id": 9, "title": "Chief Communication Agent", "division": "Communication", "responsibilities": ["Client relations", "Internal comms", "Reporting"]},
+        {"id": 10, "title": "Chief Analytics Agent", "division": "AI/ML", "responsibilities": ["Data analysis", "Insights generation", "Predictive modeling"]}
+      ],
+      "remaining_executives": "IDs 11-100 assigned across all divisions for specialized executive functions"
+    },
+
+    "multi_unit_agents": {
+      "count": 50,
+      "description": "Cross-functional agents handling multiple domains",
+      "assignments": [
+        {"id_range": "101-110", "function": "Trading + AI/ML", "capabilities": ["Algorithmic trading", "ML model deployment", "Signal generation"]},
+        {"id_range": "111-120", "function": "Legal + Financial", "capabilities": ["Tax compliance", "Financial regulations", "Audit support"]},
+        {"id_range": "121-130", "function": "Integration + DevOps", "capabilities": ["CI/CD pipelines", "API gateways", "Infrastructure"]},
+        {"id_range": "131-140", "function": "Communication + Legal", "capabilities": ["Client contracts", "Dispute resolution", "Documentation"]},
+        {"id_range": "141-150", "function": "AI/ML + Security", "capabilities": ["Threat detection", "Anomaly analysis", "Security AI"]}
+      ]
+    },
+
+    "co_support_agents": {
+      "count": 50,
+      "description": "Support agents for primary divisions",
+      "assignments": [
+        {"id_range": "151-160", "support_for": "Trading Division", "tasks": ["Order execution", "Position monitoring", "Risk alerts"]},
+        {"id_range": "161-170", "support_for": "Legal Division", "tasks": ["Document review", "Research assistance", "Filing support"]},
+        {"id_range": "171-180", "support_for": "Financial Division", "tasks": ["Data entry", "Report generation", "Reconciliation"]},
+        {"id_range": "181-190", "support_for": "Integration Division", "tasks": ["API testing", "Connection monitoring", "Error handling"]},
+        {"id_range": "191-200", "support_for": "Communication Division", "tasks": ["Message routing", "Response drafting", "Scheduling"]}
+      ]
+    },
+
+    "coding_developer_agents": {
+      "count": 50,
+      "description": "Development, coding, and automation agents",
+      "assignments": [
+        {"id_range": "201-210", "specialty": "GitHub Copilot", "capabilities": ["Code generation", "PR reviews", "Issue resolution"]},
+        {"id_range": "211-220", "specialty": "GitLab Duo", "capabilities": ["Code review", "Security scanning", "CI/CD"]},
+        {"id_range": "221-230", "specialty": "Zapier Automation", "capabilities": ["Workflow creation", "Integration setup", "Trigger configuration"]},
+        {"id_range": "231-240", "specialty": "Claude Integration", "capabilities": ["AI prompting", "Response handling", "Context management"]},
+        {"id_range": "241-250", "specialty": "E2B/Docker Deployment", "capabilities": ["Container management", "Sandbox execution", "Cloud deployment"]}
+      ]
+    },
+
+    "activation_status": {
+      "executive_roles": "ACTIVE",
+      "multi_unit_agents": "ACTIVE",
+      "co_support_agents": "ACTIVE",
+      "coding_developer_agents": "ACTIVE",
+      "total_active": 250,
+      "timestamp": "2025-12-29T01:15:00Z"
+    }
+  }
+}

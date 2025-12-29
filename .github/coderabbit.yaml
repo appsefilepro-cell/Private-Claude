@@ -1,0 +1,21 @@
+# CodeRabbit AI Configuration
+# DISABLED - Using GitHub Copilot and GitLab Duo instead
+
+reviews:
+  enabled: false
+  auto_review: false
+
+chat:
+  enabled: false
+
+knowledge_base:
+  enabled: false
+
+# CodeRabbit is disabled for this repository
+# All code review is handled by:
+# - GitHub Business Copilot
+# - GitLab Duo
+# - Agent X5 DevOps Division (12 agents)
+
+# To re-enable CodeRabbit, set reviews.enabled to true
+# However, this may conflict with other AI code review tools

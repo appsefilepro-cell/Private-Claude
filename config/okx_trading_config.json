@@ -1,0 +1,105 @@
+{
+  "okx_trading_configuration": {
+    "version": "5.0.0",
+    "description": "OKX trading configuration for Agent X5 - PAPER MODE",
+    "account_type": "DEMO",
+    "live_trading": false,
+
+    "trading_parameters": {
+      "mode": "PAPER",
+      "initial_capital_usd": 500,
+      "max_position_size_percent": 2,
+      "max_daily_loss_percent": 5,
+      "max_trades_per_day": 10,
+      "risk_per_trade_percent": 1
+    },
+
+    "trading_pairs": [
+      {
+        "symbol": "BTC-USDT-SWAP",
+        "enabled": true,
+        "leverage": 1,
+        "position_size_usd": 10,
+        "stop_loss_percent": 2,
+        "take_profit_percent": 3
+      },
+      {
+        "symbol": "ETH-USDT-SWAP",
+        "enabled": true,
+        "leverage": 1,
+        "position_size_usd": 10,
+        "stop_loss_percent": 2,
+        "take_profit_percent": 3
+      },
+      {
+        "symbol": "SOL-USDT-SWAP",
+        "enabled": true,
+        "leverage": 1,
+        "position_size_usd": 5,
+        "stop_loss_percent": 3,
+        "take_profit_percent": 4
+      },
+      {
+        "symbol": "XRP-USDT-SWAP",
+        "enabled": true,
+        "leverage": 1,
+        "position_size_usd": 5,
+        "stop_loss_percent": 3,
+        "take_profit_percent": 4
+      }
+    ],
+
+    "api_endpoints": {
+      "rest_base": "https://www.okx.com",
+      "websocket": "wss://ws.okx.com:8443/ws/v5/public",
+      "demo_rest": "https://www.okx.com",
+      "demo_websocket": "wss://wspap.okx.com:8443/ws/v5/public?brokerId=9999"
+    },
+
+    "api_credentials": {
+      "api_key": "${OKX_API_KEY}",
+      "secret_key": "${OKX_SECRET_KEY}",
+      "passphrase": "${OKX_PASSPHRASE}",
+      "note": "Store credentials in environment variables or secrets manager"
+    },
+
+    "trading_schedule": {
+      "enabled_24_7": true,
+      "sessions": [
+        {"name": "Tokyo", "start": "00:00", "end": "09:00", "timezone": "UTC"},
+        {"name": "London", "start": "08:00", "end": "17:00", "timezone": "UTC"},
+        {"name": "New York", "start": "13:00", "end": "22:00", "timezone": "UTC"},
+        {"name": "Sydney", "start": "22:00", "end": "07:00", "timezone": "UTC"}
+      ]
+    },
+
+    "risk_management": {
+      "max_drawdown_percent": 10,
+      "daily_loss_limit_usd": 25,
+      "weekly_loss_limit_usd": 100,
+      "auto_stop_on_limit": true,
+      "cooldown_after_loss_minutes": 30
+    },
+
+    "agent_assignments": {
+      "trading_division": 30,
+      "monitoring_agents": 10,
+      "risk_management_agents": 5,
+      "execution_agents": 15
+    },
+
+    "automation": {
+      "github_actions_trigger": "trading-signal",
+      "webhook_enabled": true,
+      "auto_execute": true,
+      "require_confirmation": false
+    },
+
+    "safety_warnings": {
+      "warning_1": "THIS IS PAPER TRADING ONLY",
+      "warning_2": "Do NOT enable live trading without thorough testing",
+      "warning_3": "Always use stop losses",
+      "warning_4": "Never risk more than you can afford to lose"
+    }
+  }
+}

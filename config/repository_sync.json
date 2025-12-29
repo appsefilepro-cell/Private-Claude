@@ -1,0 +1,86 @@
+{
+  "repository_synchronization": {
+    "description": "Configuration for syncing private and public repositories",
+    "version": "5.0.0",
+
+    "primary_repository": {
+      "name": "Private-Claude",
+      "owner": "appsefilepro-cell",
+      "type": "private",
+      "url": "https://github.com/appsefilepro-cell/Private-Claude",
+      "role": "source_of_truth"
+    },
+
+    "sync_targets": [
+      {
+        "name": "Public Repository 1",
+        "type": "public",
+        "sync_mode": "mirror",
+        "direction": "private_to_public",
+        "exclude_files": [
+          ".env",
+          "**/secrets/**",
+          "**/credentials/**",
+          "config/*_secrets.json"
+        ],
+        "sync_schedule": "on_push"
+      },
+      {
+        "name": "GitLab Mirror",
+        "type": "mirror",
+        "platform": "gitlab",
+        "sync_mode": "full_mirror",
+        "direction": "bidirectional",
+        "use_for": "GitLab Duo code review"
+      }
+    ],
+
+    "sync_workflow": {
+      "trigger": "push to main",
+      "steps": [
+        "Validate no secrets in files to sync",
+        "Create sanitized copy of repository",
+        "Push to public repository",
+        "Verify sync completion",
+        "Update sync status log"
+      ]
+    },
+
+    "security_filters": {
+      "remove_patterns": [
+        "api_key\\s*=\\s*['\"][^'\"]+['\"]",
+        "password\\s*=\\s*['\"][^'\"]+['\"]",
+        "secret\\s*=\\s*['\"][^'\"]+['\"]",
+        "token\\s*=\\s*['\"][^'\"]+['\"]"
+      ],
+      "replace_with": "${ENV_VAR}",
+      "scan_before_sync": true
+    },
+
+    "files_to_sync": [
+      "README.md",
+      "scripts/*.py",
+      "config/*.json",
+      ".github/workflows/*.yml",
+      "Dockerfile",
+      "docker-compose.yml",
+      "requirements.txt",
+      "docs/**"
+    ],
+
+    "files_to_exclude": [
+      ".env",
+      ".env.*",
+      "*.secret",
+      "credentials.json",
+      "private_keys/**"
+    ],
+
+    "automation": {
+      "github_action": "repository-sync",
+      "on_push": true,
+      "on_schedule": "0 0 * * *",
+      "notify_on_failure": true
+    }
+  }
+}

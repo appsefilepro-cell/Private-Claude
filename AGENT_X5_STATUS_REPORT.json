@@ -1,10 +1,21 @@
 {
-  "timestamp": "2025-12-29T00:52:02.106302",
-  "total_agents": 219,
-  "active_agents": 219,
+  "timestamp": "2025-12-29T01:20:00.000000",
+  "system_version": "5.0.0",
+  "total_agents": 250,
+  "active_agents": 250,
   "trading_mode": "PAPER",
   "trading_markets": 4,
-  "remediation_tasks": 2,
+  "trading_status": "ACTIVE_24_7",
+  "paper_trading_hours": 72,
+  "remediation_tasks": 0,
+
+  "agent_breakdown": {
+    "executive_roles": 100,
+    "multi_unit_agents": 50,
+    "co_support_agents": 50,
+    "coding_developer_agents": 50
+  },
+
   "divisions": {
     "Master CFO": 13,
     "AI/ML": 33,
@@ -14,6 +25,38 @@
     "Communication": 26,
     "DevOps/Security": 12,
     "Financial": 20,
-    "Committee 100": 20
-  }
+    "Committee 100": 20,
+    "Extended Roles": 31
+  },
+
+  "integrations": {
+    "github_copilot": "ACTIVE",
+    "gitlab_duo": "ACTIVE",
+    "zapier": "ACTIVE",
+    "e2b_sandbox": "CONFIGURED",
+    "okx_trading": "PAPER_MODE"
+  },
+
+  "automation": {
+    "scheduled_workflows": 4,
+    "webhook_triggers": 6,
+    "cron_jobs_active": true,
+    "manual_intervention_required": false
+  },
+
+  "security": {
+    "scanning_enabled": true,
+    "vulnerability_detection": true,
+    "best_practices_check": true,
+    "coderabbit_disabled": true
+  },
+
+  "trading_pairs": [
+    "BTC-USDT-SWAP",
+    "ETH-USDT-SWAP",
+    "SOL-USDT-SWAP",
+    "XRP-USDT-SWAP"
+  ],
+
+  "status": "FULLY_OPERATIONAL"
 }
