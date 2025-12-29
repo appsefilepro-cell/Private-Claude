@@ -1,0 +1,283 @@
+{
+  "info": {
+    "_postman_id": "agent-x5-api-collection",
+    "name": "Agent X5 - Complete API Collection",
+    "description": "All APIs connected for Agent X5 system - 250 agents",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {"key": "gemini_api_key", "value": "AIzaSyBqAbzJdyg7sP5tIhCddWk4Q1EEmSZSCT4", "type": "string"},
+    {"key": "okx_api_key", "value": "a5b57cd3-0bee-44f-b8e9-7c5b330a5c28", "type": "string"},
+    {"key": "github_token", "value": "{{GITHUB_TOKEN}}", "type": "string"},
+    {"key": "e2b_api_key", "value": "{{E2B_API_KEY}}", "type": "string"}
+  ],
+  "item": [
+    {
+      "name": "Trading APIs",
+      "item": [
+        {
+          "name": "OKX - Get BTC Price",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://www.okx.com/api/v5/market/ticker?instId=BTC-USDT-SWAP",
+              "protocol": "https",
+              "host": ["www", "okx", "com"],
+              "path": ["api", "v5", "market", "ticker"],
+              "query": [{"key": "instId", "value": "BTC-USDT-SWAP"}]
+            }
+          }
+        },
+        {
+          "name": "OKX - Get ETH Price",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://www.okx.com/api/v5/market/ticker?instId=ETH-USDT-SWAP",
+              "protocol": "https",
+              "host": ["www", "okx", "com"],
+              "path": ["api", "v5", "market", "ticker"],
+              "query": [{"key": "instId", "value": "ETH-USDT-SWAP"}]
+            }
+          }
+        },
+        {
+          "name": "OKX - Get SOL Price",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://www.okx.com/api/v5/market/ticker?instId=SOL-USDT-SWAP",
+              "protocol": "https",
+              "host": ["www", "okx", "com"],
+              "path": ["api", "v5", "market", "ticker"],
+              "query": [{"key": "instId", "value": "SOL-USDT-SWAP"}]
+            }
+          }
+        },
+        {
+          "name": "OKX - Get All Tickers",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://www.okx.com/api/v5/market/tickers?instType=SWAP",
+              "protocol": "https",
+              "host": ["www", "okx", "com"],
+              "path": ["api", "v5", "market", "tickers"],
+              "query": [{"key": "instType", "value": "SWAP"}]
+            }
+          }
+        },
+        {
+          "name": "Treasury - Bond Rates",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://api.fiscaldata.treasury.gov/services/api/fiscal_service/v2/accounting/od/avg_interest_rates?sort=-record_date&page[size]=10",
+              "protocol": "https",
+              "host": ["api", "fiscaldata", "treasury", "gov"],
+              "path": ["services", "api", "fiscal_service", "v2", "accounting", "od", "avg_interest_rates"],
+              "query": [
+                {"key": "sort", "value": "-record_date"},
+                {"key": "page[size]", "value": "10"}
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "AI APIs",
+      "item": [
+        {
+          "name": "Gemini - Generate Content",
+          "request": {
+            "method": "POST",
+            "header": [
+              {"key": "Content-Type", "value": "application/json"}
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"contents\": [{\n    \"parts\": [{\n      \"text\": \"Analyze the current BTC market sentiment and provide trading recommendation\"\n    }]\n  }]\n}"
+            },
+            "url": {
+              "raw": "https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key={{gemini_api_key}}",
+              "protocol": "https",
+              "host": ["generativelanguage", "googleapis", "com"],
+              "path": ["v1beta", "models", "gemini-pro:generateContent"],
+              "query": [{"key": "key", "value": "{{gemini_api_key}}"}]
+            }
+          }
+        },
+        {
+          "name": "Gemini - Trading Analysis",
+          "request": {
+            "method": "POST",
+            "header": [
+              {"key": "Content-Type", "value": "application/json"}
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"contents\": [{\n    \"parts\": [{\n      \"text\": \"You are a trading analyst. Given current market volatility, should we go LONG or SHORT on BTC? Provide confidence percentage.\"\n    }]\n  }]\n}"
+            },
+            "url": {
+              "raw": "https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key={{gemini_api_key}}",
+              "protocol": "https",
+              "host": ["generativelanguage", "googleapis", "com"],
+              "path": ["v1beta", "models", "gemini-pro:generateContent"],
+              "query": [{"key": "key", "value": "{{gemini_api_key}}"}]
+            }
+          }
+        },
+        {
+          "name": "Gemini - Bond Analysis",
+          "request": {
+            "method": "POST",
+            "header": [
+              {"key": "Content-Type", "value": "application/json"}
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"contents\": [{\n    \"parts\": [{\n      \"text\": \"Analyze US Treasury bond rates and recommend whether to buy short-term or long-term bonds.\"\n    }]\n  }]\n}"
+            },
+            "url": {
+              "raw": "https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key={{gemini_api_key}}",
+              "protocol": "https",
+              "host": ["generativelanguage", "googleapis", "com"],
+              "path": ["v1beta", "models", "gemini-pro:generateContent"],
+              "query": [{"key": "key", "value": "{{gemini_api_key}}"}]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "GitHub Actions",
+      "item": [
+        {
+          "name": "Trigger Trading Signal",
+          "request": {
+            "method": "POST",
+            "header": [
+              {"key": "Authorization", "value": "Bearer {{github_token}}"},
+              {"key": "Accept", "value": "application/vnd.github.v3+json"},
+              {"key": "Content-Type", "value": "application/json"}
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"event_type\": \"trading-signal\",\n  \"client_payload\": {\n    \"symbol\": \"BTC-USDT\",\n    \"signal\": \"BUY\",\n    \"source\": \"postman\"\n  }\n}"
+            },
+            "url": {
+              "raw": "https://api.github.com/repos/appsefilepro-cell/Private-Claude/dispatches",
+              "protocol": "https",
+              "host": ["api", "github", "com"],
+              "path": ["repos", "appsefilepro-cell", "Private-Claude", "dispatches"]
+            }
+          }
+        },
+        {
+          "name": "Trigger Bonds Alert",
+          "request": {
+            "method": "POST",
+            "header": [
+              {"key": "Authorization", "value": "Bearer {{github_token}}"},
+              {"key": "Accept", "value": "application/vnd.github.v3+json"},
+              {"key": "Content-Type", "value": "application/json"}
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"event_type\": \"bonds-alert\",\n  \"client_payload\": {\n    \"action\": \"analyze\",\n    \"source\": \"postman\"\n  }\n}"
+            },
+            "url": {
+              "raw": "https://api.github.com/repos/appsefilepro-cell/Private-Claude/dispatches",
+              "protocol": "https",
+              "host": ["api", "github", "com"],
+              "path": ["repos", "appsefilepro-cell", "Private-Claude", "dispatches"]
+            }
+          }
+        },
+        {
+          "name": "Trigger API Health Check",
+          "request": {
+            "method": "POST",
+            "header": [
+              {"key": "Authorization", "value": "Bearer {{github_token}}"},
+              {"key": "Accept", "value": "application/vnd.github.v3+json"},
+              {"key": "Content-Type", "value": "application/json"}
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"event_type\": \"api-health\",\n  \"client_payload\": {\n    \"check_all\": true\n  }\n}"
+            },
+            "url": {
+              "raw": "https://api.github.com/repos/appsefilepro-cell/Private-Claude/dispatches",
+              "protocol": "https",
+              "host": ["api", "github", "com"],
+              "path": ["repos", "appsefilepro-cell", "Private-Claude", "dispatches"]
+            }
+          }
+        },
+        {
+          "name": "Get Workflow Runs",
+          "request": {
+            "method": "GET",
+            "header": [
+              {"key": "Authorization", "value": "Bearer {{github_token}}"},
+              {"key": "Accept", "value": "application/vnd.github.v3+json"}
+            ],
+            "url": {
+              "raw": "https://api.github.com/repos/appsefilepro-cell/Private-Claude/actions/runs",
+              "protocol": "https",
+              "host": ["api", "github", "com"],
+              "path": ["repos", "appsefilepro-cell", "Private-Claude", "actions", "runs"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "E2B Sandbox",
+      "item": [
+        {
+          "name": "Create Sandbox",
+          "request": {
+            "method": "POST",
+            "header": [
+              {"key": "Authorization", "value": "Bearer {{e2b_api_key}}"},
+              {"key": "Content-Type", "value": "application/json"}
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"template\": \"base\",\n  \"timeout\": 3600\n}"
+            },
+            "url": {
+              "raw": "https://api.e2b.dev/sandboxes",
+              "protocol": "https",
+              "host": ["api", "e2b", "dev"],
+              "path": ["sandboxes"]
+            }
+          }
+        },
+        {
+          "name": "List Sandboxes",
+          "request": {
+            "method": "GET",
+            "header": [
+              {"key": "Authorization", "value": "Bearer {{e2b_api_key}}"}
+            ],
+            "url": {
+              "raw": "https://api.e2b.dev/sandboxes",
+              "protocol": "https",
+              "host": ["api", "e2b", "dev"],
+              "path": ["sandboxes"]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
