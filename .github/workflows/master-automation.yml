@@ -37,7 +37,14 @@ on:
 env:
   TRADING_MODE: PAPER
   LIVE_TRADING: 'false'
-  AGENT_COUNT: 219
+  AGENT_COUNT: 250
+  GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+  ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+  OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+  OKX_API_KEY: ${{ secrets.OKX_API_KEY }}
+  OKX_SECRET_KEY: ${{ secrets.OKX_SECRET_KEY }}
+  OKX_PASSPHRASE: ${{ secrets.OKX_PASSPHRASE }}
+  E2B_API_KEY: ${{ secrets.E2B_API_KEY }}
 
 jobs:
   # ============================================
