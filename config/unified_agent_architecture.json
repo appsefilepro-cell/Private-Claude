@@ -1,0 +1,103 @@
+{
+  "unified_agent_architecture": {
+    "version": "5.0.0",
+    "description": "Merged architecture from all agent systems",
+    "total_agents": 250,
+
+    "core_components": {
+      "orchestration_layer": {
+        "name": "Master Orchestrator",
+        "type": "microservice",
+        "file": "scripts/agent_x5_master_orchestrator.py",
+        "responsibilities": [
+          "Agent lifecycle management",
+          "Task distribution",
+          "Result aggregation",
+          "Error handling"
+        ]
+      },
+      "trading_engine": {
+        "name": "Trading Engine",
+        "type": "microservice",
+        "files": [
+          "pillar-a-trading/",
+          "scripts/start_24_7_trading.py"
+        ],
+        "capabilities": [
+          "Multi-market trading",
+          "Risk management",
+          "Signal generation",
+          "Position tracking"
+        ]
+      },
+      "integration_hub": {
+        "name": "Integration Hub",
+        "type": "microservice",
+        "files": [
+          "core-systems/api-connectors/",
+          "config/zapier_connector.json"
+        ],
+        "connections": [
+          "GitHub API",
+          "GitLab API",
+          "Zapier",
+          "E2B Sandbox",
+          "OKX Exchange"
+        ]
+      },
+      "ai_processor": {
+        "name": "AI Processing Layer",
+        "type": "microservice",
+        "providers": [
+          {"name": "Gemini", "use": "Trading analysis"},
+          {"name": "Claude", "use": "Code generation"},
+          {"name": "GPT", "use": "Fallback"}
+        ]
+      }
+    },
+
+    "communication_patterns": {
+      "internal": {
+        "type": "event-driven",
+        "protocol": "async",
+        "message_queue": "redis"
+      },
+      "external": {
+        "type": "REST/Webhook",
+        "authentication": "Bearer token",
+        "rate_limiting": true
+      }
+    },
+
+    "deployment": {
+      "containerization": "Docker",
+      "orchestration": "Docker Compose",
+      "cloud_sandbox": "E2B",
+      "ci_cd": "GitHub Actions"
+    },
+
+    "monitoring": {
+      "health_checks": "Every 15 minutes",
+      "security_scans": "Every 4 hours",
+      "trading_reports": "Every 6 hours",
+      "api_verification": "Daily"
+    },
+
+    "scaling": {
+      "horizontal": true,
+      "max_instances": 10,
+      "auto_scale": false,
+      "load_balancing": "round-robin"
+    },
+
+    "merged_from": [
+      "agent-4.0/orchestrator/",
+      "pillar-a-trading/",
+      "pillar-b-legal/",
+      "core-systems/",
+      "scripts/"
+    ],
+
+    "architecture_complete": true
+  }
+}

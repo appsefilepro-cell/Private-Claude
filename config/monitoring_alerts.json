@@ -1,0 +1,89 @@
+{
+  "monitoring_configuration": {
+    "version": "5.0.0",
+    "description": "Monitoring and alerting configuration for Agent X5",
+
+    "health_checks": {
+      "trading_engine": {
+        "endpoint": "/health",
+        "interval": "15m",
+        "timeout": "30s",
+        "alert_on_failure": true
+      },
+      "api_connectivity": {
+        "check_apis": ["gemini", "okx", "treasury", "github"],
+        "interval": "1h",
+        "alert_on_failure": true
+      },
+      "agent_status": {
+        "check": "agent_count >= 250",
+        "interval": "15m",
+        "alert_on_failure": true
+      }
+    },
+
+    "alerts": {
+      "trading_failure": {
+        "condition": "trade_error_rate > 5%",
+        "severity": "high",
+        "channels": ["slack", "email"],
+        "cooldown": "30m"
+      },
+      "api_down": {
+        "condition": "api_response_code != 200",
+        "severity": "critical",
+        "channels": ["slack", "email"],
+        "cooldown": "15m"
+      },
+      "agent_offline": {
+        "condition": "active_agents < 250",
+        "severity": "high",
+        "channels": ["slack"],
+        "cooldown": "15m"
+      },
+      "security_issue": {
+        "condition": "vulnerability_detected",
+        "severity": "critical",
+        "channels": ["slack", "email"],
+        "cooldown": "0"
+      }
+    },
+
+    "notification_channels": {
+      "slack": {
+        "webhook_url": "${SLACK_WEBHOOK_URL}",
+        "channels": {
+          "trading": "#trading-alerts",
+          "system": "#agent-status",
+          "security": "#security-alerts"
+        }
+      },
+      "email": {
+        "smtp_host": "${SMTP_HOST}",
+        "recipients": ["admin@example.com"]
+      }
+    },
+
+    "dashboards": {
+      "trading": {
+        "metrics": ["pnl", "win_rate", "trade_count", "open_positions"],
+        "refresh": "5m"
+      },
+      "system": {
+        "metrics": ["agent_count", "api_latency", "error_rate", "uptime"],
+        "refresh": "1m"
+      },
+      "security": {
+        "metrics": ["vulnerabilities", "secret_scans", "access_attempts"],
+        "refresh": "15m"
+      }
+    },
+
+    "logging": {
+      "level": "INFO",
+      "format": "json",
+      "retention": "30d",
+      "destinations": ["console", "file", "github_actions"]
+    }
+  }
+}
