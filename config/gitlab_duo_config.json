@@ -1,0 +1,136 @@
+{
+  "gitlab_duo_integration": {
+    "name": "Agent X5 GitLab Duo Integration",
+    "version": "5.0.0",
+    "description": "GitLab Duo AI integration for 219 agents - code review, completion, and security",
+
+    "features": {
+      "code_suggestions": {
+        "enabled": true,
+        "auto_complete": true,
+        "context_aware": true,
+        "supported_languages": ["python", "javascript", "typescript", "go", "rust"]
+      },
+      "code_review": {
+        "enabled": true,
+        "auto_review_on_mr": true,
+        "security_scanning": true,
+        "best_practices_check": true
+      },
+      "vulnerability_detection": {
+        "enabled": true,
+        "scan_on_push": true,
+        "block_on_critical": true
+      },
+      "test_generation": {
+        "enabled": true,
+        "coverage_target": 80
+      },
+      "documentation": {
+        "enabled": true,
+        "auto_docstrings": true,
+        "readme_generation": true
+      }
+    },
+
+    "agent_assignments": {
+      "code_review_agents": {
+        "division": "DevOps/Security",
+        "agent_ids": [180, 181, 182, 183, 184, 185, 186, 187, 188, 189, 190, 191],
+        "count": 12,
+        "responsibilities": [
+          "Review all merge requests",
+          "Security vulnerability scanning",
+          "Code quality enforcement",
+          "Best practices validation"
+        ]
+      },
+      "code_completion_agents": {
+        "division": "AI/ML",
+        "agent_ids": [14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46],
+        "count": 33,
+        "responsibilities": [
+          "Complete unfinished code",
+          "Generate tests",
+          "Optimize algorithms",
+          "Add documentation"
+        ]
+      },
+      "integration_agents": {
+        "division": "Integration",
+        "agent_ids": [117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146],
+        "count": 30,
+        "responsibilities": [
+          "API integration testing",
+          "Webhook management",
+          "Third-party service connections"
+        ]
+      }
+    },
+
+    "automation_workflows": {
+      "on_push": {
+        "trigger": "Any push to repository",
+        "actions": [
+          "Run GitLab Duo security scan",
+          "Generate code suggestions",
+          "Check for incomplete TODOs"
+        ]
+      },
+      "on_merge_request": {
+        "trigger": "Merge request opened or updated",
+        "actions": [
+          "Full code review by GitLab Duo",
+          "Assign DevOps agents for review",
+          "Security vulnerability assessment",
+          "Best practices check"
+        ]
+      },
+      "scheduled": {
+        "trigger": "Daily at 6:00 AM UTC",
+        "actions": [
+          "Full repository scan",
+          "Generate weekly report",
+          "Update documentation",
+          "Complete pending TODOs"
+        ]
+      }
+    },
+
+    "ci_cd_integration": {
+      "gitlab_ci_enabled": true,
+      "pipeline_stages": [
+        "lint",
+        "test",
+        "security-scan",
+        "duo-review",
+        "deploy"
+      ],
+      "auto_merge": {
+        "enabled": false,
+        "require_duo_approval": true,
+        "require_all_checks_pass": true
+      }
+    },
+
+    "api_configuration": {
+      "base_url": "https://gitlab.com/api/v4",
+      "project_path": "appsefilepro-cell/Private-Claude",
+      "authentication": {
+        "type": "token",
+        "header": "PRIVATE-TOKEN"
+      }
+    },
+
+    "duo_settings": {
+      "model": "gitlab-duo-code",
+      "max_suggestions": 5,
+      "context_lines": 50,
+      "confidence_threshold": 0.7,
+      "rate_limit": {
+        "requests_per_minute": 30,
+        "max_daily_requests": 1000
+      }
+    }
+  }
+}
