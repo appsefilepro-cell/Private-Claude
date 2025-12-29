@@ -1,5 +1,57 @@
 {
-  "image": "mcr.microsoft.com/devcontainers/universal:2",
-  "features": {}
-}
+  "name": "Agent X5 - Dev Container",
+  "image": "mcr.microsoft.com/devcontainers/python:3.11",
 
+  "features": {
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {},
+    "ghcr.io/devcontainers/features/github-cli:1": {},
+    "ghcr.io/devcontainers/features/node:1": {}
+  },
+
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-python.python",
+        "ms-python.vscode-pylance",
+        "github.copilot",
+        "github.copilot-chat",
+        "ms-azuretools.vscode-docker",
+        "redhat.vscode-yaml",
+        "esbenp.prettier-vscode"
+      ],
+      "settings": {
+        "python.defaultInterpreterPath": "/usr/local/bin/python",
+        "python.linting.enabled": true,
+        "python.linting.flake8Enabled": true,
+        "editor.formatOnSave": true
+      }
+    }
+  },
+
+  "postCreateCommand": "pip install -r requirements.txt && python scripts/run_all_tests.py",
+
+  "postStartCommand": "docker-compose up -d",
+
+  "forwardPorts": [8080, 8081, 8082, 6379],
+
+  "portsAttributes": {
+    "8080": {"label": "Agent X5", "onAutoForward": "notify"},
+    "8081": {"label": "Agent 4.0", "onAutoForward": "notify"},
+    "8082": {"label": "Trading", "onAutoForward": "notify"},
+    "6379": {"label": "Redis", "onAutoForward": "silent"}
+  },
+
+  "remoteEnv": {
+    "TRADING_MODE": "PAPER",
+    "LIVE_TRADING": "false",
+    "LOG_LEVEL": "INFO",
+    "GEMINI_API_KEY": "${localEnv:GEMINI_API_KEY}",
+    "E2B_API_KEY": "${localEnv:E2B_API_KEY}",
+    "OKX_API_KEY": "${localEnv:OKX_API_KEY}"
+  },
+
+  "containerEnv": {
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "PYTHONUNBUFFERED": "1"
+  }
+}
