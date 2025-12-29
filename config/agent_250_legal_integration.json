@@ -1,0 +1,157 @@
+{
+  "name": "250 Agent Legal Integration",
+  "version": "1.0.0",
+  "description": "Connects all 250 agents to the legal document automation system",
+
+  "total_agents": 250,
+
+  "divisions": {
+    "master_cfo": {
+      "count": 13,
+      "agent_ids": "1-13",
+      "legal_role": "Oversight & Approval",
+      "permissions": ["approve_filings", "review_damages", "authorize_settlements"]
+    },
+    "ai_ml": {
+      "count": 33,
+      "agent_ids": "14-46",
+      "legal_role": "Legal Research & Analysis",
+      "permissions": ["case_law_research", "precedent_analysis", "document_review"]
+    },
+    "legal_division": {
+      "count": 35,
+      "agent_ids": "47-81",
+      "legal_role": "Primary Legal Operations",
+      "permissions": [
+        "draft_documents",
+        "file_motions",
+        "generate_exhibits",
+        "calculate_damages",
+        "probate_administration",
+        "trust_management"
+      ],
+      "sub_teams": {
+        "probate_team": {
+          "agents": 10,
+          "focus": ["Robinson Family Trust", "Estate of Hegstad", "Burnett Estate"]
+        },
+        "litigation_team": {
+          "agents": 10,
+          "focus": ["Roy v. NewForte", "Settlement Demands", "TRO Motions"]
+        },
+        "corporate_team": {
+          "agents": 8,
+          "focus": ["APPS Holdings WY INC", "8a Applications", "Corporate Compliance"]
+        },
+        "research_team": {
+          "agents": 7,
+          "focus": ["Cetient Integration", "Case Law", "Statutory Research"]
+        }
+      }
+    },
+    "trading": {
+      "count": 30,
+      "agent_ids": "82-111",
+      "legal_role": "Financial Evidence Support",
+      "permissions": ["generate_financial_reports", "calculate_lost_income"]
+    },
+    "integration": {
+      "count": 30,
+      "agent_ids": "112-141",
+      "legal_role": "Document Distribution & Filing",
+      "permissions": ["electronic_filing", "email_service", "fax_service", "zapier_automation"]
+    },
+    "communication": {
+      "count": 26,
+      "agent_ids": "142-167",
+      "legal_role": "Client & Court Communication",
+      "permissions": ["creditor_notices", "court_correspondence", "client_updates"]
+    },
+    "devops_security": {
+      "count": 12,
+      "agent_ids": "168-179",
+      "legal_role": "Document Security & Compliance",
+      "permissions": ["document_encryption", "access_control", "audit_logging"]
+    },
+    "financial": {
+      "count": 20,
+      "agent_ids": "180-199",
+      "legal_role": "Damages Calculation & Tax",
+      "permissions": ["damages_calculation", "tax_analysis", "asset_valuation"]
+    },
+    "committee_100": {
+      "count": 50,
+      "agent_ids": "200-249",
+      "legal_role": "Specialized Tasks",
+      "permissions": ["multi_jurisdiction_filing", "expert_coordination", "special_projects"]
+    }
+  },
+
+  "legal_document_flows": {
+    "probate_flow": {
+      "trigger": "new_probate_case",
+      "agents_involved": ["47-56", "142-150", "180-185"],
+      "steps": [
+        "Create case in system (Legal Team)",
+        "Generate Letters of Administration (Legal Team)",
+        "Send Creditor Notices (Communication Team)",
+        "Calculate Estate Value (Financial Team)",
+        "File with Court (Integration Team)"
+      ]
+    },
+    "litigation_flow": {
+      "trigger": "new_lawsuit",
+      "agents_involved": ["57-66", "14-30", "186-195"],
+      "steps": [
+        "Research case law (AI/ML Team)",
+        "Draft complaint/motion (Legal Team)",
+        "Calculate damages (Financial Team)",
+        "Generate exhibits (Legal Team)",
+        "E-file with court (Integration Team)"
+      ]
+    },
+    "corporate_flow": {
+      "trigger": "corporate_filing",
+      "agents_involved": ["67-74", "180-189"],
+      "steps": [
+        "Prepare corporate documents (Legal Team)",
+        "Review compliance (Financial Team)",
+        "File with state (Integration Team)"
+      ]
+    }
+  },
+
+  "document_templates_linked": [
+    "config/estate_documents_master.json",
+    "config/ca_probate_filing.json",
+    "config/apps_holdings_wy_funding.json",
+    "config/texas_jurisdiction_venues.json",
+    "config/damages_matrix_5m.json",
+    "pillar-b-legal/templates/MASTER_LEGAL_TOC.json"
+  ],
+
+  "automation_scripts_linked": [
+    "pillar-b-legal/probate-automation/probate_administrator.py",
+    "pillar-b-legal/automation-flows/comprehensive_legal_doc_generator.py",
+    "scripts/cetient_legal_connector.py",
+    "scripts/issue_resolution_automation.py"
+  ],
+
+  "active_cases": {
+    "robinson_family_trust": {
+      "status": "active",
+      "jurisdiction": "California",
+      "assigned_agents": ["47", "48", "49", "180", "181"]
+    },
+    "roy_v_newforte": {
+      "status": "active",
+      "jurisdiction": "Texas - Southern District",
+      "assigned_agents": ["57", "58", "59", "14", "15", "186"]
+    },
+    "apps_holdings_compliance": {
+      "status": "active",
+      "jurisdiction": "Wyoming/Federal",
+      "assigned_agents": ["67", "68", "69", "182"]
+    }
+  }
+}

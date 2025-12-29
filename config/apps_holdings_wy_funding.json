@@ -1,0 +1,94 @@
+{
+  "name": "APPS Holdings WY INC",
+  "entity_type": "Wyoming Corporation",
+  "status": "Active",
+
+  "corporate_identifiers": {
+    "ein": "",
+    "uei": "",
+    "duns": "",
+    "cage_code": ""
+  },
+
+  "funding_compliance_package": {
+    "part_1": {
+      "name": "Corp Gov Binder Internal",
+      "category": "Banks/Lenders",
+      "documents": [
+        "Articles of Incorporation",
+        "Bylaws",
+        "Operating Agreement",
+        "Board Resolutions",
+        "Stock Certificates",
+        "Meeting Minutes",
+        "Corporate Seal",
+        "Good Standing Certificate"
+      ]
+    },
+    "part_2": {
+      "name": "Funding Appl Rules External",
+      "category": "Banks/Lenders",
+      "documents": [
+        "Business Plan",
+        "Financial Projections",
+        "Tax Returns (3 years)",
+        "Bank Statements (12 months)",
+        "Accounts Receivable Aging",
+        "Accounts Payable Aging",
+        "Personal Financial Statement",
+        "Resume of Principals"
+      ]
+    },
+    "part_3": {
+      "name": "8a Application Support Package",
+      "status": "Ready/Use",
+      "program": "SBA 8(a) Business Development",
+      "documents": [
+        "SBA Form 1010",
+        "Personal History Statement",
+        "Business Profile",
+        "Capability Statement",
+        "Past Performance Records",
+        "Financial Statements",
+        "Certifications"
+      ]
+    },
+    "part_4": {
+      "name": "Execution Plan",
+      "programs": {
+        "sum": {
+          "name": "SUM Program",
+          "status": "pending"
+        },
+        "apex": {
+          "name": "APEX Accelerator",
+          "description": "Government contracting assistance",
+          "status": "active"
+        },
+        "cdfi": {
+          "name": "CDFI Fund",
+          "description": "Community Development Financial Institutions",
+          "status": "application_ready"
+        }
+      }
+    }
+  },
+
+  "corporate_binder_location": "Place In: Corporate Binder",
+
+  "agent_automation": {
+    "enabled": true,
+    "prompt_integration": true,
+    "auto_document_generation": false,
+    "review_required": true
+  },
+
+  "compliance_checklist": [
+    {"item": "Wyoming Annual Report", "due": "annually"},
+    {"item": "Registered Agent Fee", "due": "annually"},
+    {"item": "Business License Renewal", "due": "varies"},
+    {"item": "Tax Filings", "due": "quarterly/annually"},
+    {"item": "SAM.gov Registration", "due": "annually"},
+    {"item": "8a Certification Renewal", "due": "as_required"}
+  ]
+}

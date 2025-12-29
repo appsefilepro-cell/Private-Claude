@@ -1,0 +1,99 @@
+{
+  "name": "Texas Multi-Jurisdictional Venue Configuration",
+  "state": "Texas",
+  "primary_county": "Harris County",
+
+  "damages_claim": {
+    "total_amount": 5000000,
+    "currency": "USD",
+    "breakdown": {
+      "compensatory_damages": {
+        "property_damage": 0,
+        "lost_wages": 0,
+        "medical_expenses": 0,
+        "lost_business_income": 0
+      },
+      "punitive_damages": {
+        "amount": 0,
+        "multiplier": "TBD"
+      },
+      "special_damages": {
+        "legal_fees": 0,
+        "court_costs": 0,
+        "expert_witnesses": 0
+      },
+      "general_damages": {
+        "pain_suffering": 0,
+        "emotional_distress": 0,
+        "loss_of_consortium": 0
+      }
+    }
+  },
+
+  "court_hierarchy": {
+    "level_1_justice_court": {
+      "name": "Harris County Justice Court",
+      "jurisdiction": "Claims up to $20,000",
+      "appeal_type": "de novo appeal",
+      "filing_fee_range": "$50-$200"
+    },
+    "level_2_county_civil": {
+      "name": "Harris County Civil Court at Law",
+      "jurisdiction": "Claims $200 - $250,000",
+      "appeal_type": "Expanded Damages",
+      "notes": "Multiple courts available"
+    },
+    "level_3_district_court": {
+      "name": "Harris County District Court",
+      "jurisdiction": "Claims over $250,000 or equity matters",
+      "appeal_type": "Standard appeal"
+    },
+    "level_4_appellate": {
+      "name": "First Court of Appeals in Houston",
+      "jurisdiction": "Appeals from Harris County",
+      "appeal_type": "Review of law"
+    },
+    "level_5_federal": {
+      "name": "US District Court for the Southern District of Texas",
+      "jurisdiction": "Federal questions, diversity jurisdiction ($75,000+)",
+      "divisions": ["Houston", "Galveston", "Brownsville", "Corpus Christi", "Laredo", "McAllen", "Victoria"]
+    }
+  },
+
+  "cases": {
+    "newforte_case": {
+      "case_title": "Roy v. NewForte",
+      "defendants": ["Heather", "Stephanie"],
+      "status": "Federal Complaint Filed",
+      "motions": {
+        "tro": "Motion For TRO",
+        "preliminary_injunction": "Prelim Inj/sealed"
+      }
+    },
+    "settlement_demand": {
+      "case_title": "Settlement Demand Letter v. NewForte",
+      "status": "Fix no order & dismissed",
+      "date": "2/24/2025"
+    }
+  },
+
+  "required_filings": {
+    "apd_package": [
+      "Finalized Police Report",
+      "FTC Affidavit"
+    ],
+    "venue_memo": "Multi-Jurisdictional Venue Memo & Filing Pending",
+    "subpoena_packet": {
+      "name": "Comprehensive Subpoena Packet Bundle",
+      "targets": ["Bank", "Howard", "US", "NY County"]
+    },
+    "damages_matrix": "Damages & Relief Matrix"
+  },
+
+  "filing_deadlines": {
+    "justice_court_appeal": "10 days from judgment",
+    "county_court_appeal": "30 days from judgment",
+    "federal_answer": "21 days from service",
+    "discovery_responses": "30 days from request"
+  }
+}

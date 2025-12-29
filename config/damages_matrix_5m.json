@@ -1,0 +1,81 @@
+{
+  "name": "$5 Million Damages Figure - Complete Breakdown",
+  "total_claim": 5000000,
+  "currency": "USD",
+
+  "breakdown": {
+    "category_1_compensatory": {
+      "subtotal": 1500000,
+      "items": [
+        {"name": "Property Damage/Loss", "amount": 300000},
+        {"name": "Lost Wages/Income", "amount": 400000},
+        {"name": "Lost Business Opportunities", "amount": 500000},
+        {"name": "Medical Expenses", "amount": 100000},
+        {"name": "Future Lost Earnings", "amount": 200000}
+      ]
+    },
+    "category_2_punitive": {
+      "subtotal": 1500000,
+      "multiplier": "3x compensatory (conservative)",
+      "basis": "Willful misconduct, fraud, malice",
+      "items": [
+        {"name": "Punitive Damages", "amount": 1500000}
+      ]
+    },
+    "category_3_special": {
+      "subtotal": 500000,
+      "items": [
+        {"name": "Attorney Fees", "amount": 250000},
+        {"name": "Court Costs", "amount": 50000},
+        {"name": "Expert Witness Fees", "amount": 75000},
+        {"name": "Investigation Costs", "amount": 50000},
+        {"name": "Document Production Costs", "amount": 25000},
+        {"name": "Filing Fees (Multi-Jurisdiction)", "amount": 50000}
+      ]
+    },
+    "category_4_general": {
+      "subtotal": 1000000,
+      "items": [
+        {"name": "Pain and Suffering", "amount": 300000},
+        {"name": "Emotional Distress", "amount": 250000},
+        {"name": "Mental Anguish", "amount": 200000},
+        {"name": "Loss of Enjoyment of Life", "amount": 150000},
+        {"name": "Reputational Harm", "amount": 100000}
+      ]
+    },
+    "category_5_statutory": {
+      "subtotal": 500000,
+      "items": [
+        {"name": "DTPA Treble Damages (Texas)", "amount": 200000},
+        {"name": "FDCPA Violations", "amount": 100000},
+        {"name": "FCRA Violations", "amount": 100000},
+        {"name": "State Consumer Protection", "amount": 100000}
+      ]
+    }
+  },
+
+  "verification": {
+    "total_calculated": 5000000,
+    "matches_claim": true
+  },
+
+  "supporting_exhibits": [
+    "Tax Returns (lost income proof)",
+    "Medical Records",
+    "Expert Economic Analysis",
+    "Property Appraisals",
+    "Business Financial Statements",
+    "Employment Records",
+    "Police Reports",
+    "FTC Complaints"
+  ],
+
+  "jurisdictional_limits": {
+    "texas_justice_court": 20000,
+    "texas_county_civil": 250000,
+    "texas_district_court": "Unlimited",
+    "federal_diversity": 75000
+  },
+
+  "recommended_venue": "Federal Court (Southern District of Texas) or Texas District Court"
+}

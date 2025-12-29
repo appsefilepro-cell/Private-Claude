@@ -1,0 +1,166 @@
+{
+  "name": "California Probate Filing Package",
+  "jurisdiction": "California",
+  "court": "Superior Court of California",
+
+  "cases": [
+    {
+      "case_name": "Robinson Family Trust",
+      "decedent": "Thurman E. Robinson Sr.",
+      "trust_date": "9/22/21",
+      "type": "Revocable Living Trust"
+    },
+    {
+      "case_name": "Estate of Hegstad",
+      "status": "Fix Required",
+      "documents_needed": ["deed", "PCOR", "POSA"]
+    }
+  ],
+
+  "required_documents": {
+    "initial_filing": [
+      {
+        "form": "DE-111",
+        "name": "Petition for Probate",
+        "status": "required"
+      },
+      {
+        "form": "DE-121",
+        "name": "Notice of Petition to Administer Estate",
+        "status": "required"
+      },
+      {
+        "form": "DE-140",
+        "name": "Order for Probate",
+        "status": "required"
+      },
+      {
+        "form": "DE-147",
+        "name": "Duties and Liabilities of Personal Representative",
+        "status": "required"
+      }
+    ],
+    "trust_documents": [
+      {
+        "name": "Trust Certification",
+        "description": "CA Thurman E Robinson Sr. Rev Trust"
+      },
+      {
+        "name": "CA Rev Liv Trust Agreement",
+        "status": "draft"
+      },
+      {
+        "name": "Trust Certificate",
+        "status": "required"
+      }
+    ],
+    "property_transfer": [
+      {
+        "name": "CA Quit Claim Deed",
+        "description": "Quit Claim Deed + chain of transfer w/ tar finestac"
+      },
+      {
+        "name": "POD/Deed Transfer",
+        "status": "required"
+      },
+      {
+        "name": "Property Transfer Deed",
+        "status": "required"
+      }
+    ],
+    "court_orders": [
+      {
+        "name": "PCOR",
+        "full_name": "Preliminary Change of Ownership Report",
+        "status": "required"
+      },
+      {
+        "name": "POSA",
+        "status": "required"
+      },
+      {
+        "name": "Nunc Pro Tunc Order",
+        "description": "Retroactive court order",
+        "status": "motion_required"
+      },
+      {
+        "name": "Court Order",
+        "status": "pending"
+      }
+    ],
+    "notices": [
+      {
+        "name": "Notice to Creditors",
+        "package": "Probated Exhibits"
+      },
+      {
+        "name": "Fee Waivers",
+        "form": "FW-001",
+        "status": "if_applicable"
+      }
+    ],
+    "supporting_documents": [
+      {
+        "name": "Death Certificate",
+        "certified_copies": 3,
+        "status": "required"
+      },
+      {
+        "name": "Police Report",
+        "description": "Finalized Police Report Items (Wakeelah Abdullah)",
+        "status": "if_applicable"
+      },
+      {
+        "name": "Recorders Filing Sub-Packet",
+        "status": "required"
+      },
+      {
+        "name": "Bill of Sale Agreement",
+        "status": "if_applicable"
+      },
+      {
+        "name": "I. Dent/Bene Drawing Summary",
+        "status": "required"
+      },
+      {
+        "name": "Ingram Reports",
+        "status": "supporting"
+      }
+    ]
+  },
+
+  "exhibits": {
+    "A": "POD/Deed Transfer",
+    "B": "Fee Waivers",
+    "C": "Police Report",
+    "D": "Recorders Filing Sub-Packet",
+    "E": "PCOR/POSA"
+  },
+
+  "appellant_brief_package": {
+    "documents": [
+      "Appellant Brief",
+      "Motion - Nunc Pro Tunc Order",
+      "Notarized Quit Claim",
+      "Cover Letter for Recorder & Probate"
+    ],
+    "serving": {
+      "dated_sign": true,
+      "serving_notices": true,
+      "proof_of_service": true,
+      "electronic_signature": true
+    }
+  },
+
+  "all_occupants": {
+    "documentation_required": true,
+    "fix_estate_of_hegstad": true
+  },
+
+  "automation": {
+    "auto_populate_forms": true,
+    "calculate_fees": true,
+    "generate_cover_letters": true,
+    "track_deadlines": true
+  }
+}

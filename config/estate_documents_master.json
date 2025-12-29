@@ -1,0 +1,218 @@
+{
+  "name": "Estate Documents Master Configuration",
+  "version": "1.0.0",
+  "description": "Complete estate/probate document automation for Robinson Family Trust & APPS Holdings",
+  "created": "2024-12-29",
+
+  "cases": {
+    "robinson_family_trust": {
+      "decedent": "Thurman E. Robinson Sr.",
+      "trust_name": "Robinson Family Trust",
+      "trust_certification_date": "9/22/21",
+      "jurisdiction": "California",
+      "status": "Active Probate"
+    },
+    "burnett_estate": {
+      "property": "1981 Burnet Realty",
+      "original_owner": "Grover Burnett Sr.",
+      "trust": "Trust > Rosetta Burnett",
+      "trustee": "Slukey",
+      "status": "Executing Deeds"
+    },
+    "hegstad_estate": {
+      "case_name": "Estate of Hegstad",
+      "documents_needed": ["deed", "PCOR", "POSA"],
+      "occupants": "ALL Occupants",
+      "status": "Fix Required"
+    }
+  },
+
+  "document_packages": {
+    "1_documents": {
+      "name": "Corporate Transfer/Asset Documents",
+      "items": [
+        "Trust Certification",
+        "Stock Certificate",
+        "Int Board Resolutions",
+        "Corp ByLaws",
+        "Property Transfer Deed"
+      ]
+    },
+    "2_probate": {
+      "name": "Probate Package",
+      "items": [
+        "Death Certificate",
+        "POD/Deed Transfer",
+        "Fee Waivers",
+        "Police Report",
+        "Recorders Filing Sub-Packet",
+        "PCOR/POSA",
+        "All Occupants Documentation"
+      ],
+      "exhibits": ["A", "B", "C", "D", "E"]
+    },
+    "3_new_focus": {
+      "name": "Appellant Brief Package",
+      "items": [
+        "CA Probate Filing",
+        "Appellant Brief",
+        "Motion - Nunc Pro Tunc Order",
+        "Notarized Quit Claim",
+        "Cover Letter for Recorder & Probate"
+      ]
+    },
+    "4_centient_master": {
+      "name": "Centient Master Prompt Integration",
+      "prompts": {
+        "a": "CA Probate Filing",
+        "b": "APPS Holdings WY INC Funding & Compliance Package"
+      }
+    },
+    "5_copilot_probate_records": {
+      "name": "Copilot Probate & Records Docs",
+      "documents": [
+        {"num": 1, "name": "CA Quit Claim Deed"},
+        {"num": 2, "name": "CA Rev Liv Trust Agreement"},
+        {"num": 3, "name": "PCOR"},
+        {"num": 4, "name": "Probate Forms"},
+        {"num": 5, "name": "Bill of Sale Agreement"},
+        {"num": 6, "name": "I. Dent/Bene Drawing Summary"},
+        {"num": 7, "name": "Ingram Reports"},
+        {"num": 8, "name": "Court Order"},
+        {"num": 9, "name": "Nunc Pro Tunc Order"}
+      ],
+      "additional": [
+        "Exhibits + Evidence",
+        "Wyoming Integration"
+      ]
+    },
+    "6_centient_roles_permissions": {
+      "name": "Centient Roles & Permissions",
+      "legal_documents": [
+        "Identity Th Aff of Thurman Jr.",
+        "Settlement Demand Letter v. NewForte (Fix no order & dismissed 2/24/2025)",
+        "APA Avon Comp Letter",
+        "Master Exhibit Index",
+        "Finalized Police Report Items (Wakeelah Abdullah)",
+        "FTC ITA for Decedent Thurman Sr",
+        "Comprehensive Subpoena Packet Bundle (Bank/Howard/US/NY County)",
+        "Multi-Jurisdictional Venue Memo & Filing Pending",
+        "Damages & Relief Matrix",
+        "Federal Complaint Roy n. NewForte (Heather/Stephanie)",
+        "Motion For TRO & Prelim Inj/sealed",
+        "CA Probate Package"
+      ]
+    }
+  },
+
+  "apps_holdings_wy_inc": {
+    "name": "APPS Holdings WY INC",
+    "funding_compliance_package": {
+      "pt1": {
+        "name": "Corp Gov Binder Internal",
+        "type": "Banks/Lenders"
+      },
+      "pt2": {
+        "name": "Funding Appl Rules External",
+        "type": "Banks/Lenders"
+      },
+      "pt3": {
+        "name": "8a Application Support Pkg",
+        "status": "Ready/Use"
+      },
+      "pt4": {
+        "name": "Execution Plan",
+        "programs": ["Sum", "APEX", "CDFI"]
+      }
+    },
+    "corporate_binder": {
+      "ein": "",
+      "uei": "",
+      "agent_automation_prompt": true
+    }
+  },
+
+  "damages_figure": {
+    "total": 5000000,
+    "currency": "USD",
+    "breakdown_required": true,
+    "categories": [
+      "Compensatory Damages",
+      "Punitive Damages",
+      "Lost Income",
+      "Property Damages",
+      "Legal Fees",
+      "Emotional Distress"
+    ]
+  },
+
+  "texas_jurisdiction": {
+    "name": "Texas Multi-Jurisdictional Venue",
+    "courts": {
+      "justice_court": {
+        "name": "Harris County Justice Court",
+        "appeal_type": "de novo appeal"
+      },
+      "county_civil": {
+        "name": "Harris County Civil Court at Law",
+        "damages": "Expanded Damages"
+      },
+      "appellate": {
+        "name": "First Court of Appeals in Houston"
+      },
+      "federal": {
+        "name": "US District Court for the Southern District of TX"
+      }
+    }
+  },
+
+  "serving_notices": {
+    "dated_sign": true,
+    "serving_notices": true,
+    "send_letters_to_creditors": true,
+    "executing_deeds": true,
+    "proof_of_service": true,
+    "electronic_signature": true,
+    "damages_table_schedules": true
+  },
+
+  "exhibits_package": {
+    "proof_of_service": true,
+    "electronic_signature": true,
+    "custodian_physical": true,
+    "damages_table": true,
+    "schedules": true
+  },
+
+  "package_contents": {
+    "notice_to_creditors": {
+      "package": "Probated",
+      "exhibits": true
+    },
+    "probate_exhibit_pkg": {
+      "cases": "4 Cases Fed Complaint TRO"
+    },
+    "trust_certificate": true,
+    "stock_certificate": true,
+    "int_board_resolutions": {
+      "includes": "Court Fee/Waiver Packet"
+    },
+    "corp_bylaws": true,
+    "property_transfer_deed": true
+  },
+
+  "finalized_documents": {
+    "apd_package": [
+      "Finalized Police Report",
+      "FTC Affidavit"
+    ]
+  },
+
+  "automation_config": {
+    "agent_division": "legal",
+    "assigned_agents": 35,
+    "auto_generate": true,
+    "auto_file": false,
+    "review_required": true
+  }
+}
