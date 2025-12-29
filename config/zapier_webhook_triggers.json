@@ -1,0 +1,146 @@
+{
+  "zapier_webhook_configuration": {
+    "description": "Webhook URLs for triggering GitHub Actions from Zapier",
+    "repository": "appsefilepro-cell/Private-Claude",
+
+    "github_repository_dispatch_endpoint": {
+      "url": "https://api.github.com/repos/appsefilepro-cell/Private-Claude/dispatches",
+      "method": "POST",
+      "headers": {
+        "Accept": "application/vnd.github.v3+json",
+        "Authorization": "Bearer ${GITHUB_TOKEN}"
+      },
+      "note": "Replace ${GITHUB_TOKEN} with your GitHub Personal Access Token"
+    },
+
+    "webhook_triggers": {
+      "trading_signal": {
+        "event_type": "trading-signal",
+        "description": "Trigger trading automation from TradingView or market alerts",
+        "zapier_action": "Webhooks by Zapier - POST",
+        "payload_example": {
+          "event_type": "trading-signal",
+          "client_payload": {
+            "symbol": "BTC/USDT",
+            "signal": "BUY",
+            "price": 42000,
+            "source": "TradingView"
+          }
+        }
+      },
+      "bonds_alert": {
+        "event_type": "bonds-alert",
+        "description": "Trigger bonds trading analysis",
+        "zapier_action": "Webhooks by Zapier - POST",
+        "payload_example": {
+          "event_type": "bonds-alert",
+          "client_payload": {
+            "bond_type": "Treasury",
+            "rate": 4.5,
+            "action": "analyze"
+          }
+        }
+      },
+      "api_health": {
+        "event_type": "api-health",
+        "description": "Trigger API health check",
+        "zapier_action": "Schedule by Zapier + Webhooks",
+        "payload_example": {
+          "event_type": "api-health",
+          "client_payload": {
+            "check_all": true
+          }
+        }
+      },
+      "zapier_trigger": {
+        "event_type": "zapier-trigger",
+        "description": "Generic Zapier automation trigger",
+        "zapier_action": "Any Zapier trigger",
+        "payload_example": {
+          "event_type": "zapier-trigger",
+          "client_payload": {
+            "task": "custom_task",
+            "data": {}
+          }
+        }
+      }
+    },
+
+    "zapier_zap_configurations": {
+      "bonds_trading_24_7": {
+        "name": "24/7 Bonds Trading Automation",
+        "trigger": "Schedule by Zapier (every hour)",
+        "actions": [
+          {
+            "step": 1,
+            "action": "Webhooks by Zapier",
+            "type": "POST",
+            "url": "https://api.github.com/repos/appsefilepro-cell/Private-Claude/dispatches",
+            "headers": {
+              "Authorization": "Bearer {{GITHUB_TOKEN}}",
+              "Accept": "application/vnd.github.v3+json"
+            },
+            "body": {
+              "event_type": "bonds-alert",
+              "client_payload": {
+                "source": "zapier_scheduled",
+                "timestamp": "{{zap_meta_human_now}}"
+              }
+            }
+          }
+        ]
+      },
+      "trading_signals": {
+        "name": "24-Hour Global Trading",
+        "trigger": "Webhooks by Zapier - Catch Hook",
+        "webhook_url": "Zapier will provide unique URL",
+        "actions": [
+          {
+            "step": 1,
+            "action": "Filter",
+            "condition": "signal_strength > 70"
+          },
+          {
+            "step": 2,
+            "action": "Webhooks by Zapier",
+            "type": "POST",
+            "url": "https://api.github.com/repos/appsefilepro-cell/Private-Claude/dispatches",
+            "body": {
+              "event_type": "trading-signal",
+              "client_payload": "{{trigger_data}}"
+            }
+          }
+        ]
+      },
+      "api_health_daily": {
+        "name": "API Health Check Dashboard",
+        "trigger": "Schedule by Zapier (daily at 6 AM)",
+        "actions": [
+          {
+            "step": 1,
+            "action": "Webhooks by Zapier",
+            "type": "POST",
+            "url": "https://api.github.com/repos/appsefilepro-cell/Private-Claude/dispatches",
+            "body": {
+              "event_type": "api-health",
+              "client_payload": {
+                "check_all": true,
+                "notify": true
+              }
+            }
+          }
+        ]
+      }
+    },
+
+    "setup_instructions": {
+      "step_1": "Create a GitHub Personal Access Token with 'repo' scope",
+      "step_2": "In Zapier, create new Zap with 'Schedule by Zapier' trigger",
+      "step_3": "Add 'Webhooks by Zapier' action with POST method",
+      "step_4": "Set URL to: https://api.github.com/repos/appsefilepro-cell/Private-Claude/dispatches",
+      "step_5": "Add headers: Authorization: Bearer YOUR_TOKEN, Accept: application/vnd.github.v3+json",
+      "step_6": "Set body with event_type and client_payload",
+      "step_7": "Turn on Zap - automation will run automatically"
+    }
+  }
+}

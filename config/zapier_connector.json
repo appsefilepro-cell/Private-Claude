@@ -1,8 +1,57 @@
 {
   "zapier_integration": {
-    "name": "Private-Claude E2B Sync",
-    "version": "1.0.0",
-    "description": "Sync E2B code executions and outputs to Zapier for automation workflows"
+    "name": "Agent X5 - Zapier Automation Hub",
+    "version": "5.0.0",
+    "description": "Full automation integration - triggers GitHub Actions, E2B sandbox, and 219 agents"
+  },
+
+  "github_actions_triggers": {
+    "repository_dispatch_url": "https://api.github.com/repos/appsefilepro-cell/Private-Claude/dispatches",
+    "method": "POST",
+    "required_headers": {
+      "Authorization": "Bearer ${GITHUB_TOKEN}",
+      "Accept": "application/vnd.github.v3+json",
+      "Content-Type": "application/json"
+    },
+    "event_types": [
+      "trading-signal",
+      "bonds-alert",
+      "api-health",
+      "issue-created",
+      "zapier-trigger",
+      "external-automation"
+    ]
+  },
+
+  "scheduled_automations": {
+    "bonds_trading": {
+      "schedule": "Every hour",
+      "cron": "0 * * * *",
+      "event_type": "bonds-alert",
+      "agents": 30,
+      "division": "Trading"
+    },
+    "trading_dashboard": {
+      "schedule": "Every 6 hours",
+      "cron": "0 */6 * * *",
+      "event_type": "trading-signal",
+      "agents": 30,
+      "division": "Trading"
+    },
+    "api_health_check": {
+      "schedule": "Daily at 6 AM UTC",
+      "cron": "0 6 * * *",
+      "event_type": "api-health",
+      "agents": 12,
+      "division": "DevOps"
+    },
+    "issue_monitoring": {
+      "schedule": "Every 15 minutes",
+      "cron": "*/15 * * * *",
+      "event_type": "issue-created",
+      "agents": 219,
+      "division": "All"
+    }
   },
 
   "triggers": {
@@ -25,6 +74,16 @@
         {"key": "file_url", "label": "File URL"},
         {"key": "file_size", "label": "File Size"},
         {"key": "mime_type", "label": "MIME Type"}
+      ]
+    },
+    "github_workflow_complete": {
+      "event": "workflow.completed",
+      "description": "Triggers when GitHub Actions workflow completes",
+      "output_fields": [
+        {"key": "workflow_name", "label": "Workflow Name"},
+        {"key": "status", "label": "Status"},
+        {"key": "run_id", "label": "Run ID"},
+        {"key": "conclusion", "label": "Conclusion"}
       ]
     }
   },
