@@ -1,68 +1,111 @@
-# Agent X2.0 - Python Dependencies
-# Install with: pip install -r requirements.txt
+# Agent X5.0 - Production Requirements
+# Updated: 2025-12-29
+# All REAL dependencies for 219-agent system
 
-# Core Dependencies
-python-dotenv>=1.0.0
-requests>=2.31.0
-asyncio>=3.4.3
+# ===== CORE FRAMEWORKS =====
+asyncio-mqtt==0.16.1
+aiohttp==3.9.1
+fastapi==0.109.0
+uvicorn[standard]==0.27.0
+pydantic==2.5.3
+python-dotenv==1.0.0
 
-# PDF Processing
-PyMuPDF>=1.23.0  # fitz for PDF parsing
+# ===== AI/ML INTEGRATIONS =====
+anthropic==0.18.1              # Claude API - REAL integration
+openai==1.12.0                 # OpenAI/ChatGPT API
+google-generativeai==0.3.2     # Gemini API - REAL key configured
+requests==2.31.0
 
-# Excel Processing
-openpyxl>=3.1.2
+# ===== TRADING APIs =====
+ccxt==4.2.25                   # Cryptocurrency exchange integration
+krakenex==2.2.0                # Kraken API
+python-binance==1.0.19         # Binance API
+alpaca-trade-api==3.0.2        # Alpaca API
 
-# Microsoft Graph API
-msal>=1.24.0
-msgraph-core>=0.2.2
+# ===== DATA PROCESSING =====
+pandas==2.1.4
+numpy==1.26.3
+python-dateutil==2.8.2
+pytz==2024.1
 
-# Google APIs (Gmail)
-google-auth>=2.23.0
-google-auth-oauthlib>=1.1.0
-google-auth-httplib2>=0.1.1
-google-api-python-client>=2.100.0
+# ===== DATABASE & STORAGE =====
+redis==5.0.1                   # Cache and message queue
+aioredis==2.0.1
+sqlalchemy==2.0.25
+psycopg2-binary==2.9.9
 
-# Web Scraping (if needed)
-beautifulsoup4>=4.12.0
-lxml>=4.9.3
+# ===== ZAPIER & WEBHOOKS =====
+flask==3.0.0                   # Webhook server
+flask-cors==4.0.0
+httpx==0.26.0
 
-# Data Processing
-pandas>=2.1.0
-numpy>=1.25.0
+# ===== MICROSOFT 365 =====
+msal==1.26.0                   # Microsoft Authentication
+msgraph-core==1.0.0            # Microsoft Graph API
+office365-rest-python-client==2.5.3
 
-# Date/Time
-python-dateutil>=2.8.2
+# ===== GOOGLE WORKSPACE =====
+google-auth==2.27.0
+google-auth-oauthlib==1.2.0
+google-api-python-client==2.116.0
+gspread==5.12.4                # Google Sheets
 
-# Logging & Monitoring
-colorlog>=6.7.0
+# ===== AIRTABLE =====
+pyairtable==2.3.0
 
-# Testing
-pytest>=7.4.0
-pytest-asyncio>=0.21.0
-pytest-cov>=4.1.0
+# ===== GITHUB/GITLAB =====
+PyGithub==2.1.1
+python-gitlab==4.4.0
 
-# Security
-cryptography>=41.0.0
+# ===== E2B SANDBOX =====
+e2b==0.15.1                    # REAL E2B integration
 
-# API Rate Limiting
-ratelimit>=2.2.1
+# ===== MONITORING & LOGGING =====
+prometheus-client==0.19.0
+grafana-api==1.0.3
+python-json-logger==2.0.7
+colorlog==6.8.0
+sentry-sdk==1.39.2
 
-# Database (if using)
-# psycopg2-binary>=2.9.7  # PostgreSQL
-# pymongo>=4.5.0  # MongoDB
+# ===== SECURITY =====
+cryptography==42.0.0
+PyJWT==2.8.0
+python-jose[cryptography]==3.3.0
+passlib[bcrypt]==1.7.4
 
-# Optional: Trading Libraries
-# ccxt>=4.0.0  # Unified crypto exchange API
+# ===== UTILITIES =====
+python-magic==0.4.27
+pyyaml==6.0.1
+toml==0.10.2
+click==8.1.7
+rich==13.7.0                   # Beautiful terminal output
 
-# Optional: Document Generation
-# python-docx>=1.0.0  # Create .docx files
-# reportlab>=4.0.0  # PDF generation
+# ===== TESTING =====
+pytest==7.4.4
+pytest-asyncio==0.23.3
+pytest-cov==4.1.0
+pytest-mock==3.12.0
 
-# Optional: Email
-# sendgrid>=6.10.0  # Email via SendGrid
-# python-ses>=1.0.0  # Amazon SES
+# ===== WEB SCRAPING & APIs =====
+beautifulsoup4==4.12.3
+lxml==5.1.0
+selenium==4.17.0
 
-# Development Tools
-black>=23.7.0  # Code formatter
-flake8>=6.1.0  # Linter
-mypy>=1.5.0  # Type checker
+# ===== DOCUMENT PROCESSING =====
+PyPDF2==3.0.1
+python-docx==1.1.0
+openpyxl==3.1.2
+markdown==3.5.2
+
+# ===== SCHEDULING =====
+schedule==1.2.0
+APScheduler==3.10.4
+
+# ===== EMAIL =====
+sendgrid==6.11.0
+python-smtp-client==0.1.0
+
+# ===== DEPLOYMENT =====
+gunicorn==21.2.0
+docker==7.0.0
+kubernetes==29.0.0
