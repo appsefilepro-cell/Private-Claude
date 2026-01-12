@@ -95,6 +95,11 @@ Agent 5.0 (219 Agents + Committee 100 + Full Orchestration) ← CURRENT
 ./ACTIVATE_EVERYTHING.sh
 ```
 
+### Set Up Postman API Integration
+```bash
+./scripts/setup_postman_mcp.sh
+```
+
 ### Run Agent X5 Orchestrator
 ```bash
 python scripts/agent_x5_master_orchestrator.py
@@ -120,6 +125,7 @@ docker-compose up -d
 ## INTEGRATIONS
 
 - **Zapier Copilot** - 5000+ app connections
+- **Postman API** - API testing and monitoring
 - **GitLab Duo** - AI code assistance
 - **GitHub Copilot** - Code generation
 - **Microsoft 365** - SharePoint, Teams, Power BI
