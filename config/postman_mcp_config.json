@@ -1,0 +1,256 @@
+{
+  "postman_integration": {
+    "name": "Agent X5.0 Postman MCP Integration",
+    "version": "1.0.0",
+    "description": "Postman API integration for automated API testing, monitoring, and collection management"
+  },
+
+  "api_endpoints": {
+    "base_url": "https://api.getpostman.com",
+    "auth_type": "API Key",
+    "auth_header": "X-Api-Key",
+    "rate_limit": {
+      "requests_per_minute": 60,
+      "daily_limit": 1000
+    }
+  },
+
+  "vscode_extension": {
+    "extension_id": "Postman.postman-for-vscode",
+    "marketplace_url": "https://marketplace.visualstudio.com/items?itemName=Postman.postman-for-vscode",
+    "auth_url_template": "vscode://Postman.postman-for-vscode?code={AUTH_CODE}",
+    "features": [
+      "Send API requests from VS Code",
+      "Manage collections and environments",
+      "View and debug responses",
+      "Sync with Postman Cloud"
+    ]
+  },
+
+  "collections": {
+    "agent_x5_trading_api": {
+      "name": "Agent X5.0 Trading API Tests",
+      "description": "Automated tests for trading bot API endpoints",
+      "endpoints": [
+        {
+          "name": "Health Check",
+          "method": "GET",
+          "path": "/health",
+          "tests": [
+            "Status code is 200",
+            "Response time < 500ms",
+            "Returns JSON with status field"
+          ]
+        },
+        {
+          "name": "Get Market Data",
+          "method": "GET",
+          "path": "/api/market/BTC-USD",
+          "tests": [
+            "Status code is 200",
+            "Response contains price field",
+            "Price is a valid number"
+          ]
+        },
+        {
+          "name": "Execute Trade Signal",
+          "method": "POST",
+          "path": "/api/trade/signal",
+          "body": {
+            "pair": "BTC/USDT",
+            "action": "BUY",
+            "confidence": 0.85
+          },
+          "tests": [
+            "Status code is 200 or 201",
+            "Response contains trade_id",
+            "Trade status is 'executed' or 'pending'"
+          ]
+        }
+      ]
+    },
+    "legal_automation_api": {
+      "name": "Legal Automation API Tests",
+      "description": "Tests for legal document automation endpoints",
+      "endpoints": [
+        {
+          "name": "Generate Motion",
+          "method": "POST",
+          "path": "/api/legal/generate-motion",
+          "tests": [
+            "Status code is 200",
+            "Response contains document_id"
+          ]
+        }
+      ]
+    }
+  },
+
+  "monitors": {
+    "trading_api_monitor": {
+      "name": "Trading API Health Monitor",
+      "schedule": {
+        "cron": "0 */6 * * *",
+        "timezone": "America/Los_Angeles"
+      },
+      "collection": "agent_x5_trading_api",
+      "notifications": {
+        "on_failure": true,
+        "on_error": true,
+        "email": "${ALERT_EMAIL}",
+        "slack_webhook": "${SLACK_WEBHOOK}"
+      }
+    },
+    "e2b_webhook_monitor": {
+      "name": "E2B Webhook Monitor",
+      "schedule": {
+        "cron": "0 */4 * * *",
+        "timezone": "America/Los_Angeles"
+      },
+      "notifications": {
+        "on_failure": true
+      }
+    }
+  },
+
+  "environments": {
+    "production": {
+      "name": "Production Environment",
+      "variables": {
+        "base_url": "https://api.production.agentx5.com",
+        "api_version": "v1",
+        "timeout": "30000"
+      }
+    },
+    "staging": {
+      "name": "Staging Environment",
+      "variables": {
+        "base_url": "https://api.staging.agentx5.com",
+        "api_version": "v1",
+        "timeout": "30000"
+      }
+    },
+    "sandbox": {
+      "name": "Sandbox Environment",
+      "variables": {
+        "base_url": "http://localhost:8000",
+        "api_version": "v1",
+        "timeout": "10000"
+      }
+    }
+  },
+
+  "automation_workflows": [
+    {
+      "name": "Daily API Health Check",
+      "trigger": "schedule",
+      "schedule": "0 9 * * *",
+      "actions": [
+        "Run trading API collection",
+        "Check response times",
+        "Validate all endpoints",
+        "Send status report to Slack"
+      ]
+    },
+    {
+      "name": "Pre-Deployment Validation",
+      "trigger": "manual",
+      "actions": [
+        "Run all test collections",
+        "Verify environment variables",
+        "Check API rate limits",
+        "Generate test report"
+      ]
+    },
+    {
+      "name": "Incident Response",
+      "trigger": "monitor_failure",
+      "actions": [
+        "Log failure details",
+        "Send alert to on-call engineer",
+        "Create GitHub issue",
+        "Trigger failover if needed"
+      ]
+    }
+  ],
+
+  "integrations": {
+    "zapier": {
+      "enabled": true,
+      "webhook_url": "${ZAPIER_WEBHOOK_URL}",
+      "triggers": [
+        "collection_run_completed",
+        "monitor_failure",
+        "api_error_threshold_exceeded"
+      ]
+    },
+    "github": {
+      "enabled": true,
+      "actions": [
+        "Create issue on test failure",
+        "Update PR status with test results",
+        "Post test reports as comments"
+      ]
+    },
+    "slack": {
+      "enabled": true,
+      "webhook_url": "${SLACK_WEBHOOK}",
+      "channels": {
+        "alerts": "#api-alerts",
+        "monitoring": "#system-monitoring",
+        "trading": "#trading-ops"
+      }
+    }
+  },
+
+  "security": {
+    "api_key_rotation": {
+      "enabled": true,
+      "rotation_days": 90,
+      "notification_days_before": 7
+    },
+    "secrets_management": {
+      "provider": "environment_variables",
+      "encryption": true,
+      "audit_logging": true
+    }
+  },
+
+  "common_use_cases": [
+    {
+      "use_case": "Trading Bot API Validation",
+      "description": "Automated testing of trading bot endpoints",
+      "collections": ["agent_x5_trading_api"],
+      "frequency": "Every 6 hours"
+    },
+    {
+      "use_case": "Integration Testing",
+      "description": "Test API integrations between systems",
+      "collections": ["agent_x5_trading_api", "legal_automation_api"],
+      "frequency": "Daily"
+    },
+    {
+      "use_case": "Performance Monitoring",
+      "description": "Track API response times and availability",
+      "monitors": ["trading_api_monitor", "e2b_webhook_monitor"],
+      "frequency": "Continuous"
+    },
+    {
+      "use_case": "Documentation Generation",
+      "description": "Generate API documentation from collections",
+      "action": "Export collection as documentation",
+      "frequency": "On release"
+    }
+  ],
+
+  "newman_cli": {
+    "installation": "npm install -g newman",
+    "usage": "newman run collection.json -e environment.json",
+    "reporters": ["cli", "json", "html"],
+    "ci_cd_integration": {
+      "github_actions": true,
+      "gitlab_ci": true,
+      "jenkins": true
+    }
+  }
+}
