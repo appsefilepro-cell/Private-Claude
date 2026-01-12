@@ -357,9 +357,9 @@ class MultiStrategyValidator:
             original_win_rate = strategy_results['win_rate']
 
             all_match = (
-                abs(method1_win_rate - original_win_rate) < 0.01 and
-                abs(method2_win_rate - original_win_rate) < 0.01 and
-                abs(method3_win_rate - original_win_rate) < 0.01
+                abs(method1_win_rate - original_win_rate) < 0.01
+                and abs(method2_win_rate - original_win_rate) < 0.01
+                and abs(method3_win_rate - original_win_rate) < 0.01
             )
 
             verification[strategy_name] = {

@@ -46,9 +46,9 @@ def main():
     """Main execution flow"""
     print_banner()
 
-    logger.info("="*80)
+    logger.info("=" * 80)
     logger.info("PHASE 1: INITIALIZATION")
-    logger.info("="*80)
+    logger.info("=" * 80)
 
     # Step 1: Initialize forensic analyzer
     logger.info("Initializing Forensic Data Analyzer...")
@@ -60,9 +60,9 @@ def main():
     orchestrator = MultiSourceOrchestrator()
     logger.info("✓ Data source connectors initialized")
 
-    logger.info("\n" + "="*80)
+    logger.info("\n" + "=" * 80)
     logger.info("PHASE 2: AUTHENTICATION & CONNECTION")
-    logger.info("="*80)
+    logger.info("=" * 80)
 
     # Step 3: Authenticate with all data sources
     logger.info("Attempting authentication with all data sources...")
@@ -80,9 +80,9 @@ def main():
         print(f"  {icon} {source}: {status}")
     print("-" * 60)
 
-    logger.info("\n" + "="*80)
+    logger.info("\n" + "=" * 80)
     logger.info("PHASE 3: DATA COLLECTION")
-    logger.info("="*80)
+    logger.info("=" * 80)
 
     if authenticated_count == 0:
         logger.warning("⚠ No data sources authenticated")
@@ -105,9 +105,9 @@ def main():
         logger.info(f"✓ Indexed {stats['total_documents_indexed']} documents")
         logger.info(f"✓ Created {stats['total_mappings']} case-to-document mappings")
 
-    logger.info("\n" + "="*80)
+    logger.info("\n" + "=" * 80)
     logger.info("PHASE 4: CASE DOSSIER GENERATION")
-    logger.info("="*80)
+    logger.info("=" * 80)
 
     # Step 4: Generate all 40 case dossiers
     logger.info("Generating case dossiers for all 40 cases...")
@@ -117,9 +117,9 @@ def main():
     logger.info(f"✓ Generated all dossiers in {output_dir}/")
     logger.info(f"✓ Master report: {output_dir}/MASTER_ALL_40_CASES.md")
 
-    logger.info("\n" + "="*80)
+    logger.info("\n" + "=" * 80)
     logger.info("PHASE 5: COMPLETION & SUMMARY")
-    logger.info("="*80)
+    logger.info("=" * 80)
 
     # Final statistics
     stats = analyzer.get_statistics()
@@ -147,7 +147,7 @@ def main():
     else:
         print("\n✅ Full forensic analysis complete with real data.")
 
-    logger.info("="*80)
+    logger.info("=" * 80)
 
     return 0
 

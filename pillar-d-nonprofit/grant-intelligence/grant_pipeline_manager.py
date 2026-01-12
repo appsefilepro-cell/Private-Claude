@@ -98,17 +98,17 @@ class GrantPipelineManager:
         upcoming = self.get_upcoming_deadlines(30)
         week_ago = (datetime.now() - timedelta(days=7)).strftime("%Y-%m-%d")
         recently_added = [g for g in self.pipeline if g["date_added"] >= week_ago]
-        
+
         status_counts = {"Research": 0, "Drafting": 0, "Submitted": 0, "Awarded": 0, "Declined": 0}
         for grant in self.pipeline:
             if grant["status"] in status_counts:
                 status_counts[grant["status"]] += 1
-        
+
         awarded = [g for g in self.pipeline if g["status"] == "Awarded"]
         declined = [g for g in self.pipeline if g["status"] == "Declined"]
         total_decided = len(awarded) + len(declined)
         win_rate = len(awarded) / total_decided if total_decided > 0 else 0
-        
+
         return {
             "week_ending": datetime.now().strftime("%Y-%m-%d"),
             "upcoming_deadlines": upcoming,

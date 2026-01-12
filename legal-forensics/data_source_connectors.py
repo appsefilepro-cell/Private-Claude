@@ -384,16 +384,16 @@ def main():
     auth_results = orchestrator.authenticate_all()
 
     # Print status
-    print("\n" + "="*60)
+    print("\n" + "=" * 60)
     print("DATA SOURCE CONNECTION STATUS")
-    print("="*60)
+    print("=" * 60)
 
     status = orchestrator.get_connection_status()
     for source, state in status.items():
         icon = "✓" if state == "CONNECTED" else "✗"
         print(f"{icon} {source}: {state}")
 
-    print("="*60)
+    print("=" * 60)
 
     # Print configuration instructions
     print("\nTO ENABLE DATA COLLECTION:")

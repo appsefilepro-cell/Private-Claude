@@ -253,15 +253,15 @@ Keep responses concise and actionable."""
             return
 
         logger.info("🔄 Starting 24/7 continuous monitoring...")
-        logger.info(f"Check interval: {check_interval} seconds ({check_interval/60:.1f} minutes)")
+        logger.info(f"Check interval: {check_interval} seconds ({check_interval / 60:.1f} minutes)")
 
         iteration = 0
         while True:
             try:
                 iteration += 1
-                logger.info(f"\n{'='*70}")
+                logger.info(f"\n{'=' * 70}")
                 logger.info(f"🔍 Monitoring iteration #{iteration} - {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
-                logger.info(f"{'='*70}\n")
+                logger.info(f"{'=' * 70}\n")
 
                 # Check system status
                 status_check = await self.agent_conversation(
@@ -348,9 +348,9 @@ class ClaudeTaskRouter:
 
 async def main():
     """Main CLI entry point"""
-    print("\n" + "="*70)
+    print("\n" + "=" * 70)
     print("🤖 CLAUDE API 24/7 INTEGRATION - Agent X5.0")
-    print("="*70 + "\n")
+    print("=" * 70 + "\n")
 
     claude = ClaudeAPI247()
 
@@ -373,9 +373,9 @@ async def main():
     print(f"Claude: {response}\n")
 
     # Example task analysis
-    print("\n" + "="*70)
+    print("\n" + "=" * 70)
     print("📋 Example: Task Analysis")
-    print("="*70 + "\n")
+    print("=" * 70 + "\n")
 
     task = "Set up automated trading for BTC/USDT with paper trading mode"
     analysis = await claude.analyze_task(task, {
@@ -387,9 +387,9 @@ async def main():
     print(f"Analysis:\n{json.dumps(analysis, indent=2)}\n")
 
     # Demonstrate 24/7 monitoring (just one iteration for demo)
-    print("\n" + "="*70)
+    print("\n" + "=" * 70)
     print("🔄 24/7 Monitoring Demo (1 iteration)")
-    print("="*70 + "\n")
+    print("=" * 70 + "\n")
     print("(In production, this runs continuously)")
     print("Checking system health...\n")
 
@@ -400,9 +400,9 @@ async def main():
     )
     print(f"Status: {status}\n")
 
-    print("="*70)
+    print("=" * 70)
     print("✅ Claude API 24/7 Integration Test Complete")
-    print("="*70 + "\n")
+    print("=" * 70 + "\n")
 
     return 0
 

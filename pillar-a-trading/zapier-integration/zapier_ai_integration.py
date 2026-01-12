@@ -218,7 +218,7 @@ class ZapierAIIntegration:
         # When all 3 AIs agree, confidence is 91-95%!
 
         logger.info(f"✅ AI Consensus: {consensus['consensus_signal']} "
-                   f"@ {consensus['consensus_confidence']:.0f}% confidence")
+                    f"@ {consensus['consensus_confidence']:.0f}% confidence")
 
         return consensus
 
@@ -430,7 +430,7 @@ def main():
     print("=" * 70)
 
     workflows = ['high_confidence_trade', 'daily_summary', 'error_monitoring',
-                'social_sentiment', 'news_alerts']
+                 'social_sentiment', 'news_alerts']
 
     for wf in workflows:
         template = integrator.create_automated_workflow(wf)

@@ -51,6 +51,7 @@ logger = logging.getLogger("AgentX5")
 # DATA MODELS
 # ═══════════════════════════════════════════════════════════════════════════
 
+
 @dataclass
 class AgentConfig:
     """Configuration for each of the 219 agents"""
@@ -59,6 +60,7 @@ class AgentConfig:
     division: str
     role: str
     status: str = "PENDING"  # PENDING, ACTIVE, COMPLETED, FAILED
+
 
 @dataclass
 class TradingConfig:
@@ -69,6 +71,7 @@ class TradingConfig:
     position_size: float = 0.01  # % of capital per trade
     max_daily_trades: int = 10
     stop_loss_pct: float = 0.015  # 1.5%
+
 
 @dataclass
 class RemediationTask:
@@ -82,6 +85,7 @@ class RemediationTask:
 # ═══════════════════════════════════════════════════════════════════════════
 # AGENT X5 MASTER ORCHESTRATOR
 # ═══════════════════════════════════════════════════════════════════════════
+
 
 class AgentX5Orchestrator:
     """

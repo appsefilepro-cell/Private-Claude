@@ -405,14 +405,14 @@ def save_webhook_event(event: Dict):
 
 def main():
     """Start webhook server"""
-    print("\n" + "="*70)
+    print("\n" + "=" * 70)
     print("🌐 E2B WEBHOOK SERVER - Agent X5.0")
-    print("="*70 + "\n")
+    print("=" * 70 + "\n")
 
     print(f"📡 Starting webhook server on port {PORT}...")
     print(f"🔑 E2B API Key: {E2B_API_KEY[:20]}...")
     print(f"🔒 Webhook Secret: {'Configured' if WEBHOOK_SECRET else 'Not set'}")
-    print("\n" + "="*70)
+    print("\n" + "=" * 70)
     print("ENDPOINTS:")
     print(f"  GET  /health                    - Health check")
     print(f"  POST /webhook/e2b               - E2B events")
@@ -423,7 +423,7 @@ def main():
     print(f"  POST /webhook/trading           - Trading signals")
     print(f"  GET  /events                    - Get recent events")
     print(f"  POST /events/clear              - Clear events")
-    print("="*70 + "\n")
+    print("=" * 70 + "\n")
 
     print(f"🚀 Server running at http://0.0.0.0:{PORT}")
     print("Press Ctrl+C to stop\n")

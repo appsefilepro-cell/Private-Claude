@@ -192,7 +192,7 @@ class SAMOpportunityMonitor:
             else:
                 return "LOW"
 
-        except:
+        except Exception:
             return "MEDIUM"
 
     def send_email_alert(self, alerts: List[Dict[str, Any]]) -> None:

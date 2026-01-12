@@ -241,7 +241,7 @@ class DropboxCaseManager:
                         public_url = public_url.replace('?dl=0', '?dl=1')
                         return public_url
 
-                except:
+                except Exception:
                     pass
 
         except Exception as e:

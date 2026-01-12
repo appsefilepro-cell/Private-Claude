@@ -248,9 +248,9 @@ class IntegrationTestSuite:
 
     def run_all_tests(self):
         """Run complete integration test suite"""
-        logger.info("="*70)
+        logger.info("=" * 70)
         logger.info("AGENT X2.0 - COMPREHENSIVE INTEGRATION TEST SUITE")
-        logger.info("="*70 + "\n")
+        logger.info("=" * 70 + "\n")
 
         # Run all tests
         self.test_environment_config()
@@ -269,14 +269,14 @@ class IntegrationTestSuite:
         total = self.passed + self.failed
         pass_rate = (self.passed / total * 100) if total > 0 else 0
 
-        logger.info("\n" + "="*70)
+        logger.info("\n" + "=" * 70)
         logger.info("TEST SUMMARY")
-        logger.info("="*70)
+        logger.info("=" * 70)
         logger.info(f"Total Tests: {total}")
         logger.info(f"Passed: {self.passed} ✅")
         logger.info(f"Failed: {self.failed} ❌")
         logger.info(f"Pass Rate: {pass_rate:.1f}%")
-        logger.info("="*70 + "\n")
+        logger.info("=" * 70 + "\n")
 
         return self.results
 

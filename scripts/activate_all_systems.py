@@ -40,9 +40,9 @@ class SystemActivator:
 
     def check_environment_config(self):
         """Check and verify environment configuration"""
-        logger.info("\n" + "="*70)
+        logger.info("\n" + "=" * 70)
         logger.info("PHASE 1: ENVIRONMENT CONFIGURATION")
-        logger.info("="*70)
+        logger.info("=" * 70)
 
         env_file = self.config_dir / '.env'
 
@@ -80,9 +80,9 @@ class SystemActivator:
 
     def activate_zapier_integrations(self):
         """Activate Zapier MCP integrations"""
-        logger.info("\n" + "="*70)
+        logger.info("\n" + "=" * 70)
         logger.info("PHASE 2: ZAPIER MCP INTEGRATION")
-        logger.info("="*70)
+        logger.info("=" * 70)
 
         try:
             sys.path.insert(0, str(Path(__file__).parent.parent / 'pillar-a-trading' / 'zapier-integration'))
@@ -116,9 +116,9 @@ class SystemActivator:
 
     def sync_microsoft_365(self):
         """Check Microsoft 365 configuration"""
-        logger.info("\n" + "="*70)
+        logger.info("\n" + "=" * 70)
         logger.info("PHASE 3: MICROSOFT 365 SYNC")
-        logger.info("="*70)
+        logger.info("=" * 70)
 
         required_vars = [
             'MICROSOFT_TENANT_ID',
@@ -156,9 +156,9 @@ class SystemActivator:
 
     def activate_trading_systems(self):
         """Activate trading bot systems"""
-        logger.info("\n" + "="*70)
+        logger.info("\n" + "=" * 70)
         logger.info("PHASE 4: TRADING SYSTEMS")
-        logger.info("="*70)
+        logger.info("=" * 70)
 
         try:
             # Load risk profiles
@@ -189,9 +189,9 @@ class SystemActivator:
 
     def activate_legal_systems(self):
         """Activate legal forensics systems"""
-        logger.info("\n" + "="*70)
+        logger.info("\n" + "=" * 70)
         logger.info("PHASE 5: LEGAL FORENSICS")
-        logger.info("="*70)
+        logger.info("=" * 70)
 
         try:
             sys.path.insert(0, str(Path(__file__).parent.parent / 'legal-forensics'))
@@ -209,9 +209,9 @@ class SystemActivator:
 
     def activate_grant_intelligence(self):
         """Activate grant intelligence systems"""
-        logger.info("\n" + "="*70)
+        logger.info("\n" + "=" * 70)
         logger.info("PHASE 6: GRANT INTELLIGENCE")
-        logger.info("="*70)
+        logger.info("=" * 70)
 
         try:
             sys.path.insert(0, str(Path(__file__).parent.parent / 'pillar-d-nonprofit' / 'grant-intelligence'))
@@ -228,9 +228,9 @@ class SystemActivator:
 
     def run_remediation_check(self):
         """Run remediation engine check"""
-        logger.info("\n" + "="*70)
+        logger.info("\n" + "=" * 70)
         logger.info("PHASE 7: REMEDIATION CHECK")
-        logger.info("="*70)
+        logger.info("=" * 70)
 
         try:
             sys.path.insert(0, str(Path(__file__).parent.parent / 'core-systems' / 'remediation'))
@@ -260,9 +260,9 @@ class SystemActivator:
 
     def generate_activation_report(self):
         """Generate comprehensive activation report"""
-        logger.info("\n" + "="*70)
+        logger.info("\n" + "=" * 70)
         logger.info("ACTIVATION COMPLETE - GENERATING REPORT")
-        logger.info("="*70 + "\n")
+        logger.info("=" * 70 + "\n")
 
         # Count successes, warnings, errors
         success_count = sum(1 for log in self.activation_log if log['status'] == 'SUCCESS')
@@ -272,12 +272,12 @@ class SystemActivator:
         total = len(self.activation_log)
 
         print("📊 SYSTEM ACTIVATION SUMMARY")
-        print("-"*70)
+        print("-" * 70)
         print(f"Total Actions: {total}")
         print(f"✅ Success: {success_count}")
         print(f"⚠️  Warnings: {warning_count}")
         print(f"❌ Errors: {error_count}")
-        print("-"*70)
+        print("-" * 70)
 
         # Export detailed log
         log_file = Path(__file__).parent.parent / 'logs' / f'activation_{datetime.now().strftime("%Y%m%d_%H%M%S")}.json'
@@ -299,7 +299,7 @@ class SystemActivator:
 
         # Next steps
         print("\n📋 NEXT STEPS:")
-        print("-"*70)
+        print("-" * 70)
 
         if warning_count > 0 or error_count > 0:
             print("1. Review warnings and errors above")
@@ -312,13 +312,13 @@ class SystemActivator:
             print("2. Run integration tests: python tests/integration_test_suite.py")
             print("3. Execute forensic analysis: python legal-forensics/execute_forensic_analysis.py")
 
-        print("-"*70 + "\n")
+        print("-" * 70 + "\n")
 
     def activate_all(self):
         """Run complete system activation"""
-        logger.info("\n" + "="*70)
+        logger.info("\n" + "=" * 70)
         logger.info("AGENT X2.0 - SYSTEM-WIDE ACTIVATION")
-        logger.info("="*70)
+        logger.info("=" * 70)
 
         self.check_environment_config()
         self.activate_zapier_integrations()

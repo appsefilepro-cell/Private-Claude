@@ -222,10 +222,10 @@ class BacktestingEngine:
 
     def run_backtest(self, days: int = 1) -> Dict[str, Any]:
         """Run complete backtest simulation"""
-        logger.info(f"="*70)
+        logger.info(f"=" * 70)
         logger.info(f"STARTING {days}-DAY BACKTEST - Profile: {self.profile_name.upper()}")
         logger.info(f"Initial Capital: ${self.initial_capital:,.2f}")
-        logger.info(f"="*70)
+        logger.info(f"=" * 70)
 
         # Generate test data
         market_data = self.generate_test_data(days)
@@ -238,7 +238,7 @@ class BacktestingEngine:
 
             # Look for new patterns (need at least 3 candles)
             if i >= 2:
-                recent_candles = market_data[max(0, i-10):i+1]
+                recent_candles = market_data[max(0, i - 10):i + 1]
                 signal = self.detect_pattern(recent_candles)
 
                 if signal and self.should_execute_trade(signal):
@@ -300,16 +300,16 @@ class BacktestingEngine:
             "largest_loss": min((t['profit_loss'] for t in losing_trades), default=0)
         }
 
-        logger.info(f"\n{'='*70}")
+        logger.info(f"\n{'=' * 70}")
         logger.info(f"BACKTEST RESULTS - {self.profile_name.upper()}")
-        logger.info(f"{'='*70}")
+        logger.info(f"{'=' * 70}")
         logger.info(f"Total Trades: {self.performance_metrics['total_trades']}")
         logger.info(f"Win Rate: {self.performance_metrics['win_rate']}%")
         logger.info(f"Net Profit: ${self.performance_metrics['net_profit']:.2f}")
         logger.info(f"ROI: {self.performance_metrics['roi_percentage']}%")
         logger.info(f"Final Capital: ${self.performance_metrics['final_capital']:,.2f}")
         logger.info(f"Profit Factor: {self.performance_metrics['profit_factor']:.2f}")
-        logger.info(f"{'='*70}\n")
+        logger.info(f"{'=' * 70}\n")
 
     def export_results(self, output_dir: str = "backtest-results"):
         """Export backtest results to JSON and readable report"""
@@ -340,10 +340,10 @@ def run_all_profiles_backtest(days: int = 1):
     profiles = ['beginner', 'novice', 'advanced']
     all_results = {}
 
-    print("\n" + "="*70)
+    print("\n" + "=" * 70)
     print("COMPREHENSIVE BACKTEST - ALL RISK PROFILES")
     print(f"Duration: {days} day(s)")
-    print("="*70 + "\n")
+    print("=" * 70 + "\n")
 
     for profile in profiles:
         engine = BacktestingEngine(profile)
@@ -352,11 +352,11 @@ def run_all_profiles_backtest(days: int = 1):
         all_results[profile] = results
 
     # Comparative summary
-    print("\n" + "="*70)
+    print("\n" + "=" * 70)
     print("COMPARATIVE PERFORMANCE SUMMARY")
-    print("="*70)
+    print("=" * 70)
     print(f"{'Profile':<12} {'Trades':<8} {'Win Rate':<10} {'ROI':<10} {'Final Capital':<15}")
-    print("-"*70)
+    print("-" * 70)
 
     for profile, results in all_results.items():
         if 'total_trades' in results and results['total_trades'] > 0:
@@ -366,7 +366,7 @@ def run_all_profiles_backtest(days: int = 1):
                   f"{results['roi_percentage']}%{'':<7} "
                   f"${results['final_capital']:,.2f}")
 
-    print("="*70 + "\n")
+    print("=" * 70 + "\n")
 
     return all_results
 

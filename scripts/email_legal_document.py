@@ -73,7 +73,7 @@ def send_legal_document():
                     <h3>Document Information:</h3>
                     <ul>
                         <li><strong>File Name:</strong> {doc_file.name}</li>
-                        <li><strong>File Size:</strong> {doc_file.stat().st_size / (1024*1024):.2f} MB</li>
+                        <li><strong>File Size:</strong> {doc_file.stat().st_size / (1024 * 1024):.2f} MB</li>
                         <li><strong>Pages:</strong> 652 pages</li>
                         <li><strong>Generated:</strong> {datetime.fromtimestamp(doc_file.stat().st_mtime).strftime('%B %d, %Y at %I:%M %p')}</li>
                         <li><strong>Format:</strong> Microsoft Word (.docx)</li>
@@ -117,7 +117,7 @@ def send_legal_document():
             part['Content-Disposition'] = f'attachment; filename="{doc_file.name}"'
             msg.attach(part)
 
-        logger.info(f"✅ Attached document: {doc_file.name} ({doc_file.stat().st_size / (1024*1024):.2f} MB)")
+        logger.info(f"✅ Attached document: {doc_file.name} ({doc_file.stat().st_size / (1024 * 1024):.2f} MB)")
 
     except Exception as e:
         logger.error(f"❌ Failed to attach document: {e}")
@@ -135,7 +135,7 @@ def send_legal_document():
 
         logger.info(f"✅ Email sent successfully to {email_to}")
         logger.info(f"📄 Document: {doc_file.name}")
-        logger.info(f"📊 Size: {doc_file.stat().st_size / (1024*1024):.2f} MB")
+        logger.info(f"📊 Size: {doc_file.stat().st_size / (1024 * 1024):.2f} MB")
 
         return True
 
@@ -149,7 +149,7 @@ def send_legal_document():
             f.write(f"Legal Document Location\n")
             f.write(f"=" * 70 + "\n\n")
             f.write(f"File: {doc_file.absolute()}\n")
-            f.write(f"Size: {doc_file.stat().st_size / (1024*1024):.2f} MB\n")
+            f.write(f"Size: {doc_file.stat().st_size / (1024 * 1024):.2f} MB\n")
             f.write(f"Pages: 652\n")
             f.write(f"Generated: {datetime.fromtimestamp(doc_file.stat().st_mtime).strftime('%B %d, %Y at %I:%M %p')}\n")
 

@@ -492,7 +492,7 @@ Estate of {case_info['decedent_name']}
             with open(document_path, 'rb') as f:
                 attachment = MIMEApplication(f.read(), _subtype='docx')
                 attachment.add_header('Content-Disposition', 'attachment',
-                                    filename=Path(document_path).name)
+                                      filename=Path(document_path).name)
                 msg.attach(attachment)
 
             # Send

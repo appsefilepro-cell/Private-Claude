@@ -305,7 +305,7 @@ class FreeDataAggregator:
                             'date': latest[0],
                             'value': float(latest[1]) if latest[1] != '.' else None
                         }
-                except:
+                except Exception:
                     continue
 
             return {
@@ -338,7 +338,7 @@ class FreeDataAggregator:
                 reddit_response = requests.get(reddit_url, timeout=10)
                 reddit_data = reddit_response.json()
                 sentiment['reddit_mentions'] = len(reddit_data.get('data', []))
-            except:
+            except Exception:
                 pass
 
             # Calculate sentiment score from mentions
@@ -633,9 +633,9 @@ def main():
     test_symbols = ['AAPL', 'BTC', 'SPY']
 
     for symbol in test_symbols:
-        print(f"\n{'='*70}")
+        print(f"\n{'=' * 70}")
         print(f"Testing {symbol}")
-        print(f"{'='*70}")
+        print(f"{'=' * 70}")
 
         signal = aggregator.generate_trading_signal(symbol)
 

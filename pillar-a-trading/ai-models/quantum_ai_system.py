@@ -149,7 +149,7 @@ class QuantumDecisionEngine:
         chosen_decision['quantum_enhanced'] = True
 
         logger.info(f"🎲 Quantum decision: {chosen_decision.get('action', 'UNKNOWN')} "
-                   f"(P={state.probabilities[chosen_index]:.2%}, Coherence={state.coherence:.2%})")
+                    f"(P={state.probabilities[chosen_index]:.2%}, Coherence={state.coherence:.2%})")
 
         return chosen_decision
 
@@ -219,7 +219,7 @@ class QuantumMachineLearning:
             'BULLISH_MOMENTUM': np.linspace(0, 1, length),
             'BEARISH_MOMENTUM': np.linspace(1, 0, length),
             'CONSOLIDATION': np.ones(length) * 0.5,
-            'BREAKOUT': np.concatenate([np.ones(length//2) * 0.5, np.linspace(0.5, 1, length//2)]),
+            'BREAKOUT': np.concatenate([np.ones(length // 2) * 0.5, np.linspace(0.5, 1, length // 2)]),
             'REVERSAL': np.sin(np.linspace(0, np.pi, length))
         }
 
@@ -280,7 +280,7 @@ class QuantumMachineLearning:
                 inv_cov = np.linalg.inv(pattern['covariance'] + np.eye(len(pattern['mean'])) * 1e-6)
                 distance = np.sqrt(np.dot(np.dot(diff, inv_cov), diff))
                 overlap = 1 / (1 + distance)  # Convert distance to similarity
-            except:
+            except Exception:
                 overlap = 0.0
 
             if overlap > max_overlap:
@@ -334,7 +334,7 @@ class QuantumRealTimeProcessor:
 
         # Quantum Fourier Transform (frequency analysis)
         fft = np.fft.fft(data)
-        dominant_freq = np.argmax(np.abs(fft[:len(fft)//2]))
+        dominant_freq = np.argmax(np.abs(fft[:len(fft) // 2]))
 
         # Quantum phase estimation
         phase = np.angle(fft[dominant_freq])
@@ -472,7 +472,7 @@ class QuantumAISystem:
         }
 
         logger.info(f"✅ Quantum analysis complete: {result['recommendation']} "
-                   f"(Confidence: {result['confidence_level']:.2%})")
+                    f"(Confidence: {result['confidence_level']:.2%})")
 
         return result
 
@@ -497,9 +497,9 @@ def main():
 
     # Initialize all versions
     for version in [QuantumVersion.V3_0, QuantumVersion.V3_4, QuantumVersion.V4_0]:
-        print(f"\n{'='*70}")
+        print(f"\n{'=' * 70}")
         print(f"Testing Quantum AI v{version.value}")
-        print(f"{'='*70}")
+        print(f"{'=' * 70}")
 
         system = QuantumAISystem(version)
 

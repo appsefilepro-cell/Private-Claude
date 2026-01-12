@@ -19,7 +19,7 @@ sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'data-ingestion'))
 try:
     from ingestion_orchestrator import PDFProcessor, ExcelProcessor, CustomerContact, DataValidator
     PROCESSORS_AVAILABLE = True
-except:
+except Exception:
     PROCESSORS_AVAILABLE = False
     logging.warning("Ingestion processors not available")
 
@@ -333,11 +333,11 @@ def main():
     engine = RemediationEngine()
     report = engine.run()
 
-    print("\n" + "="*60)
+    print("\n" + "=" * 60)
     print("REMEDIATION REPORT")
-    print("="*60)
+    print("=" * 60)
     print(json.dumps(report, indent=2))
-    print("="*60)
+    print("=" * 60)
 
 
 if __name__ == "__main__":

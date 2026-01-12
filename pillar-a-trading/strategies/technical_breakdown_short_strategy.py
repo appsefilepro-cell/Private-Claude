@@ -66,10 +66,10 @@ class TechnicalBreakdownShortStrategy:
 
             if break_pct > self.criteria['support_break_confirm']:
                 score += 35
-                signal['reasons'].append(f"Support broken: {break_pct*100:.1f}% below support")
+                signal['reasons'].append(f"Support broken: {break_pct * 100:.1f}% below support")
             elif break_pct > 0:
                 score += 20
-                signal['reasons'].append(f"Testing support: {break_pct*100:.1f}% below")
+                signal['reasons'].append(f"Testing support: {break_pct * 100:.1f}% below")
 
         max_score += 35
 

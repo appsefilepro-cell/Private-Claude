@@ -101,7 +101,7 @@ class ContinuousTradingOrchestrator:
                 if iteration % 100 == 0:
                     self.save_account_stats()
                     logger.info(f"📊 {account_name}: {self.account_stats[account_id]['total_trades']} trades, "
-                              f"Capital: ${self.account_stats[account_id]['current_capital']:,.2f}")
+                                f"Capital: ${self.account_stats[account_id]['current_capital']:,.2f}")
 
                 # Sleep for configured interval (default: 60 seconds)
                 time.sleep(account.get('check_interval_seconds', 60))
@@ -166,7 +166,7 @@ class ContinuousTradingOrchestrator:
         stats['current_positions'].append(trade)
 
         logger.info(f"💰 {stats['name']} executed {signal['type']} - {signal['pattern']} "
-                   f"@ ${signal.get('price', 0):,.2f} (Confidence: {signal['confidence']:.2%})")
+                    f"@ ${signal.get('price', 0):,.2f} (Confidence: {signal['confidence']:.2%})")
 
     def save_account_stats(self):
         """Save all account statistics"""

@@ -41,7 +41,7 @@ class BigShortStrategy:
         self.criteria = {
             'pe_ratio_max': 50,  # P/E above this = overvalued
             'pb_ratio_max': 10,   # P/B above this = overvalued
-            'debt_equity_min': 3, # D/E above this = overleveraged
+            'debt_equity_min': 3,  # D/E above this = overleveraged
             'rsi_overbought': 70,  # RSI above this = overbought
             'vix_euphoria': 12    # VIX below this = market euphoria
         }

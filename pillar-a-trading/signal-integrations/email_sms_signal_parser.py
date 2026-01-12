@@ -140,12 +140,12 @@ class EmailSMSSignalParser:
                 if part.get_content_type() == "text/plain":
                     try:
                         body += part.get_payload(decode=True).decode()
-                    except:
+                    except Exception:
                         pass
         else:
             try:
                 body = msg.get_payload(decode=True).decode()
-            except:
+            except Exception:
                 pass
 
         return body

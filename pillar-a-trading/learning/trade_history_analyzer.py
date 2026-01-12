@@ -205,7 +205,7 @@ class TradeHistoryAnalyzer:
             # Best days to trade
             day_performance = df.groupby('day_of_week')['profit_loss'].mean()
             analysis['best_entry_times']['best_days'] = day_performance.nlargest(3).to_dict()
-        except:
+        except Exception:
             pass
 
         # Position size analysis

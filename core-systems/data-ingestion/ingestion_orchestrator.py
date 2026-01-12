@@ -265,7 +265,7 @@ class ExcelProcessor:
                         if value:
                             try:
                                 contact.dependents = int(value)
-                            except:
+                            except Exception:
                                 contact.dependents = 0
 
                 if contact.email or contact.phone:  # Only add if we have contact info

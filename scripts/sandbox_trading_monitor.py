@@ -63,9 +63,9 @@ class SandboxTradingMonitor:
 
     def check_live_readiness(self) -> Dict[str, Any]:
         """Check if system is ready for live trading"""
-        logger.info("\n" + "="*70)
+        logger.info("\n" + "=" * 70)
         logger.info("LIVE TRADING READINESS CHECK")
-        logger.info("="*70 + "\n")
+        logger.info("=" * 70 + "\n")
 
         checks = {
             "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
@@ -162,13 +162,13 @@ class SandboxTradingMonitor:
 
         # Print results
         logger.info("READINESS CHECK RESULTS:")
-        logger.info("-"*70)
+        logger.info("-" * 70)
         for check in checks["checks"]:
             status = "✅" if check["passed"] else "❌"
             critical = " [CRITICAL]" if check["critical"] else ""
             logger.info(f"{status} {check['name']}{critical}")
             logger.info(f"   Required: {check['required']} | Actual: {check['actual']}")
-        logger.info("-"*70)
+        logger.info("-" * 70)
 
         if checks["ready"]:
             logger.info("\n✅ SYSTEM READY FOR LIVE TRADING")
@@ -201,9 +201,9 @@ class SandboxTradingMonitor:
             kraken_key = os.getenv('KRAKEN_API_KEY')
             kraken_secret = os.getenv('KRAKEN_API_SECRET')
 
-            return bool(kraken_key and kraken_secret and
-                       not kraken_key.startswith('your_'))
-        except:
+            return bool(kraken_key and kraken_secret
+                        and not kraken_key.startswith('your_'))
+        except Exception:
             return False
 
     def check_zapier_integration(self) -> bool:
@@ -212,7 +212,7 @@ class SandboxTradingMonitor:
             from zapier_mcp_connector import ZapierMCPConnector
             connector = ZapierMCPConnector()
             return bool(connector.bearer_token)
-        except:
+        except Exception:
             return False
 
     def generate_performance_report(self) -> str:
@@ -230,7 +230,7 @@ TRADING ACTIVITY:
   Total Trades: {self.metrics['total_trades']}
   Winning Trades: {self.metrics['wins']}
   Losing Trades: {self.metrics['losses']}
-  Win Rate: {(self.metrics['wins']/self.metrics['total_trades']*100) if self.metrics['total_trades'] > 0 else 0:.1f}%
+  Win Rate: {(self.metrics['wins'] / self.metrics['total_trades'] * 100) if self.metrics['total_trades'] > 0 else 0:.1f}%
 
 FINANCIAL PERFORMANCE:
   Starting Capital: $10,000.00
@@ -309,10 +309,10 @@ def create_agent_30_config():
 
 def main():
     """Run sandbox monitoring and readiness check"""
-    print("\n" + "🎯"*35)
+    print("\n" + "🎯" * 35)
     print("    AGENT 3.0 - SANDBOX TRADING MONITOR")
     print("    Live Trading Readiness Assessment")
-    print("🎯"*35 + "\n")
+    print("🎯" * 35 + "\n")
 
     # Create Agent 3.0 config
     create_agent_30_config()

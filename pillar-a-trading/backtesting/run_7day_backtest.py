@@ -27,13 +27,13 @@ class ExtendedBacktestRunner:
 
     def run_7day_backtest(self):
         """Run 7-day backtest for all profiles"""
-        logger.info("\n" + "="*70)
+        logger.info("\n" + "=" * 70)
         logger.info("7-DAY COMPREHENSIVE BACKTEST")
-        logger.info("="*70)
+        logger.info("=" * 70)
         logger.info(f"Start Time: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
         logger.info("Testing: Beginner, Novice, Advanced profiles")
         logger.info("Duration: 7 days (168 hours)")
-        logger.info("="*70 + "\n")
+        logger.info("=" * 70 + "\n")
 
         # Run backtest for all profiles
         self.results = run_all_profiles_backtest(days=7)
@@ -47,9 +47,9 @@ class ExtendedBacktestRunner:
 
     def analyze_performance(self):
         """Analyze performance across all profiles"""
-        logger.info("\n" + "="*70)
+        logger.info("\n" + "=" * 70)
         logger.info("PERFORMANCE ANALYSIS")
-        logger.info("="*70 + "\n")
+        logger.info("=" * 70 + "\n")
 
         for profile, metrics in self.results.items():
             if 'total_trades' not in metrics or metrics['total_trades'] == 0:
@@ -76,9 +76,9 @@ class ExtendedBacktestRunner:
 
     def generate_recommendations(self):
         """Generate recommendations based on backtest results"""
-        logger.info("\n" + "="*70)
+        logger.info("\n" + "=" * 70)
         logger.info("RISK PARAMETER RECOMMENDATIONS")
-        logger.info("="*70 + "\n")
+        logger.info("=" * 70 + "\n")
 
         for profile, metrics in self.results.items():
             if 'total_trades' not in metrics or metrics['total_trades'] == 0:
@@ -180,13 +180,13 @@ class ExtendedBacktestRunner:
         with open(report_file, 'w') as f:
             f.write(markdown_report)
 
-        logger.info("\n" + "="*70)
+        logger.info("\n" + "=" * 70)
         logger.info("REPORTS EXPORTED")
-        logger.info("="*70)
+        logger.info("=" * 70)
         logger.info(f"Recommendations: {recommendations_file}")
         logger.info(f"Full Results: {results_file}")
         logger.info(f"Markdown Report: {report_file}")
-        logger.info("="*70 + "\n")
+        logger.info("=" * 70 + "\n")
 
     def generate_markdown_report(self):
         """Generate markdown backtest report"""
@@ -270,10 +270,10 @@ class ExtendedBacktestRunner:
 
 def main():
     """Run 7-day comprehensive backtest"""
-    print("\n" + "📊"*35)
+    print("\n" + "📊" * 35)
     print("    7-DAY COMPREHENSIVE BACKTEST")
     print("    All Risk Profiles - Extended Analysis")
-    print("📊"*35 + "\n")
+    print("📊" * 35 + "\n")
 
     runner = ExtendedBacktestRunner()
     results = runner.run_7day_backtest()

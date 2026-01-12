@@ -314,7 +314,7 @@ class ForensicDataAnalyzer:
 
             # Add to master report
             master_report += dossier
-            master_report += "\n\n" + "="*80 + "\n\n"
+            master_report += "\n\n" + "=" * 80 + "\n\n"
 
         # Save master report
         master_filepath = os.path.join(output_dir, "MASTER_ALL_40_CASES.md")

@@ -57,9 +57,9 @@ class ZapierIntegrationTester:
 
     def test_connection(self):
         """Test basic Zapier MCP connection"""
-        logger.info("\n" + "="*70)
+        logger.info("\n" + "=" * 70)
         logger.info("TEST 1: ZAPIER MCP CONNECTION")
-        logger.info("="*70)
+        logger.info("=" * 70)
 
         try:
             status = self.connector.check_connection()
@@ -75,9 +75,9 @@ class ZapierIntegrationTester:
 
     def test_email_alert(self):
         """Test email alert functionality"""
-        logger.info("\n" + "="*70)
+        logger.info("\n" + "=" * 70)
         logger.info("TEST 2: EMAIL ALERTS")
-        logger.info("="*70)
+        logger.info("=" * 70)
 
         try:
             # Test email alert
@@ -109,9 +109,9 @@ class ZapierIntegrationTester:
 
     def test_trading_signal(self):
         """Test trading signal transmission"""
-        logger.info("\n" + "="*70)
+        logger.info("\n" + "=" * 70)
         logger.info("TEST 3: TRADING SIGNAL TRANSMISSION")
-        logger.info("="*70)
+        logger.info("=" * 70)
 
         try:
             # Test trading signal
@@ -139,9 +139,9 @@ class ZapierIntegrationTester:
 
     def test_google_sheets_logging(self):
         """Test Google Sheets logging"""
-        logger.info("\n" + "="*70)
+        logger.info("\n" + "=" * 70)
         logger.info("TEST 4: GOOGLE SHEETS LOGGING")
-        logger.info("="*70)
+        logger.info("=" * 70)
 
         try:
             # Test Google Sheets logging
@@ -170,9 +170,9 @@ class ZapierIntegrationTester:
 
     def test_sharepoint_upload(self):
         """Test SharePoint upload functionality"""
-        logger.info("\n" + "="*70)
+        logger.info("\n" + "=" * 70)
         logger.info("TEST 5: SHAREPOINT UPLOAD")
-        logger.info("="*70)
+        logger.info("=" * 70)
 
         try:
             # Create test report file
@@ -201,9 +201,9 @@ This is a test file to verify SharePoint upload functionality via Zapier MCP.
 
     def test_case_notification(self):
         """Test legal case notification"""
-        logger.info("\n" + "="*70)
+        logger.info("\n" + "=" * 70)
         logger.info("TEST 6: LEGAL CASE NOTIFICATION")
-        logger.info("="*70)
+        logger.info("=" * 70)
 
         try:
             # Test case notification
@@ -230,11 +230,11 @@ This is a test file to verify SharePoint upload functionality via Zapier MCP.
 
     def run_all_tests(self):
         """Run complete Zapier integration test suite"""
-        logger.info("\n" + "="*70)
+        logger.info("\n" + "=" * 70)
         logger.info("ZAPIER MCP - COMPREHENSIVE INTEGRATION TEST SUITE")
-        logger.info("="*70)
+        logger.info("=" * 70)
         logger.info(f"Start Time: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
-        logger.info("="*70 + "\n")
+        logger.info("=" * 70 + "\n")
 
         # Test 1: Connection
         connection_ok = self.test_connection()
@@ -264,14 +264,14 @@ This is a test file to verify SharePoint upload functionality via Zapier MCP.
         total = self.passed + self.failed
         pass_rate = (self.passed / total * 100) if total > 0 else 0
 
-        logger.info("\n" + "="*70)
+        logger.info("\n" + "=" * 70)
         logger.info("ZAPIER INTEGRATION TEST SUMMARY")
-        logger.info("="*70)
+        logger.info("=" * 70)
         logger.info(f"Total Tests: {total}")
         logger.info(f"Passed: {self.passed} ✅")
         logger.info(f"Failed: {self.failed} ❌")
         logger.info(f"Pass Rate: {pass_rate:.1f}%")
-        logger.info("="*70 + "\n")
+        logger.info("=" * 70 + "\n")
 
         if self.failed == 0:
             logger.info("🎉 ALL ZAPIER INTEGRATIONS WORKING PERFECTLY!")
@@ -306,10 +306,10 @@ This is a test file to verify SharePoint upload functionality via Zapier MCP.
 
 def main():
     """Run Zapier integration tests"""
-    print("\n" + "🔔"*35)
+    print("\n" + "🔔" * 35)
     print("    ZAPIER MCP INTEGRATION TEST SUITE")
     print("    Run after 3am when spending cap resets")
-    print("🔔"*35 + "\n")
+    print("🔔" * 35 + "\n")
 
     tester = ZapierIntegrationTester()
     success = tester.run_all_tests()

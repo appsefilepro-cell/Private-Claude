@@ -323,7 +323,7 @@ class BigShortBacktester:
                     total_profit += profit_pct
 
                 logger.info(f"   {stock['symbol']}: {signal['action']} @ {signal['confidence']:.2%} → "
-                          f"{'✅ SUCCESS' if trade['success'] else '❌ LOSS'} ({profit_pct:+.1f}%)")
+                            f"{'✅ SUCCESS' if trade['success'] else '❌ LOSS'} ({profit_pct:+.1f}%)")
 
         # Calculate metrics
         success_rate = (correct_predictions / total_predictions * 100) if total_predictions > 0 else 0
@@ -392,11 +392,16 @@ class BigShortBacktester:
 
             # Probability of crash based on fundamentals
             crash_prob = 0
-            if pe_ratio > 50: crash_prob += 0.20
-            if pb_ratio > 10: crash_prob += 0.15
-            if debt_equity > 3: crash_prob += 0.20
-            if rsi > 70: crash_prob += 0.15
-            if vix < 12: crash_prob += 0.10
+            if pe_ratio > 50:
+                crash_prob += 0.20
+            if pb_ratio > 10:
+                crash_prob += 0.15
+            if debt_equity > 3:
+                crash_prob += 0.20
+            if rsi > 70:
+                crash_prob += 0.15
+            if vix < 12:
+                crash_prob += 0.10
 
             # Random market factors
             crash_prob += np.random.uniform(-0.1, 0.1)
@@ -454,7 +459,7 @@ class BigShortBacktester:
         logger.info(f"Success Rate: {overall_success_rate:.2f}%")
         logger.info(f"Avg Profit: {overall_avg_profit:+.2f}%")
         logger.info(f"95% Confidence: {simulation_results['confidence_interval_95'][0]:.2f}% - "
-                   f"{simulation_results['confidence_interval_95'][1]:.2f}%")
+                    f"{simulation_results['confidence_interval_95'][1]:.2f}%")
         logger.info(f"Target Met: {'✅ YES' if simulation_results['target_met'] else '❌ NO'}")
         logger.info("=" * 70)
 

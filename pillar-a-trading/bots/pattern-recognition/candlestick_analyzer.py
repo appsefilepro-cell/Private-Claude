@@ -52,9 +52,9 @@ class CandlestickPattern:
         upper_shadow = c['high'] - max(c['open'], c['close'])
 
         is_hammer = (
-            lower_shadow >= 2 * body and
-            upper_shadow <= 0.1 * body and
-            body > 0
+            lower_shadow >= 2 * body
+            and upper_shadow <= 0.1 * body
+            and body > 0
         )
 
         confidence = 0.75 if is_hammer else 0.0
@@ -81,18 +81,18 @@ class CandlestickPattern:
         if bullish:
             # Bullish engulfing: prev is red, curr is green and engulfs
             is_engulfing = (
-                prev['close'] < prev['open'] and  # Previous is bearish
-                curr['close'] > curr['open'] and   # Current is bullish
-                curr_body_bottom < prev_body_bottom and
-                curr_body_top > prev_body_top
+                prev['close'] < prev['open']  # Previous is bearish
+                and curr['close'] > curr['open']   # Current is bullish
+                and curr_body_bottom < prev_body_bottom
+                and curr_body_top > prev_body_top
             )
         else:
             # Bearish engulfing: prev is green, curr is red and engulfs
             is_engulfing = (
-                prev['close'] > prev['open'] and  # Previous is bullish
-                curr['close'] < curr['open'] and   # Current is bearish
-                curr_body_bottom < prev_body_bottom and
-                curr_body_top > prev_body_top
+                prev['close'] > prev['open']  # Previous is bullish
+                and curr['close'] < curr['open']   # Current is bearish
+                and curr_body_bottom < prev_body_bottom
+                and curr_body_top > prev_body_top
             )
 
         confidence = 0.80 if is_engulfing else 0.0
@@ -159,11 +159,11 @@ class CandlestickPattern:
         third_body = abs(third['close'] - third['open'])
 
         is_morning_star = (
-            first['close'] < first['open'] and  # First is bearish
-            star_body < first_body * 0.3 and    # Star has small body
-            third['close'] > third['open'] and  # Third is bullish
-            third_body > first_body * 0.5 and   # Third has substantial body
-            third['close'] > (first['open'] + first['close']) / 2  # Third closes above midpoint
+            first['close'] < first['open']  # First is bearish
+            and star_body < first_body * 0.3    # Star has small body
+            and third['close'] > third['open']  # Third is bullish
+            and third_body > first_body * 0.5   # Third has substantial body
+            and third['close'] > (first['open'] + first['close']) / 2  # Third closes above midpoint
         )
 
         confidence = 0.85 if is_morning_star else 0.0
@@ -187,11 +187,11 @@ class CandlestickPattern:
         third_body = abs(third['close'] - third['open'])
 
         is_evening_star = (
-            first['close'] > first['open'] and  # First is bullish
-            star_body < first_body * 0.3 and    # Star has small body
-            third['close'] < third['open'] and  # Third is bearish
-            third_body > first_body * 0.5 and   # Third has substantial body
-            third['close'] < (first['open'] + first['close']) / 2  # Third closes below midpoint
+            first['close'] > first['open']  # First is bullish
+            and star_body < first_body * 0.3    # Star has small body
+            and third['close'] < third['open']  # Third is bearish
+            and third_body > first_body * 0.5   # Third has substantial body
+            and third['close'] < (first['open'] + first['close']) / 2  # Third closes below midpoint
         )
 
         confidence = 0.85 if is_evening_star else 0.0

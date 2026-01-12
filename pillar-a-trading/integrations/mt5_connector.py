@@ -204,8 +204,8 @@ class MT5Connector:
         return candles
 
     def place_order(self, symbol: str, order_type: str, volume: float,
-                   price: float = None, sl: float = None, tp: float = None,
-                   comment: str = "Agent X2.0") -> Optional[Dict]:
+                    price: float = None, sl: float = None, tp: float = None,
+                    comment: str = "Agent X2.0") -> Optional[Dict]:
         """
         Place a trading order
 
