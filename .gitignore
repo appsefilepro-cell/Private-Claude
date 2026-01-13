@@ -146,3 +146,11 @@ positions*.json
 
 # Allow specific config files
 !config/agent_3_config.json
+
+# Protocol Output (keep initial samples, exclude subsequent runs)
+core-systems/protocol_output/*_202601[4-9]*.txt
+core-systems/protocol_output/*_202601[4-9]*.json
+core-systems/protocol_output/*_20260[2-9]*.txt
+core-systems/protocol_output/*_20260[2-9]*.json
+core-systems/protocol_output/*_202[7-9]*.txt
+core-systems/protocol_output/*_202[7-9]*.json
