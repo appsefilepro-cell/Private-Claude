@@ -40,7 +40,7 @@
 - **Credit Damage/Repair**: $12,000
 - **Identity Theft Recovery**: $8,500
 - **Emotional Distress (Economic Impact)**: $150,000
-- **Future Economic Loss (5 years)**: $701,500
+- **Future Economic Loss (5 years)**: $501,500
 
 **SUBTOTAL ECONOMIC DAMAGES**: $1,292,450
 

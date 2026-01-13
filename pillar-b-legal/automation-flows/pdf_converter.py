@@ -125,7 +125,9 @@ class LegalDocumentPDFConverter:
         
         # Footer
         c.setFont("Helvetica-Italic", 10)
-        c.drawString(inch, inch/2, f"Generated: {docx_path.stat().st_mtime}")
+        from datetime import datetime
+        timestamp = datetime.fromtimestamp(docx_path.stat().st_mtime).strftime("%Y-%m-%d %H:%M:%S")
+        c.drawString(inch, inch/2, f"Generated: {timestamp}")
         
         c.save()
         return True

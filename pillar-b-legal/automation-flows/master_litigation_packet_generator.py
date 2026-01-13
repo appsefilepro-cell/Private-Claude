@@ -32,6 +32,12 @@ class MasterLitigationPacketGenerator:
 REDLINE DISBURSEMENT ADDRESS: 15455 Pt NW Blvd Apt #W1410
 FUNDS MUST BE WIRED TO DESIGNATED TRUST ACCOUNT WITHIN 5 BUSINESS DAYS
 ═══════════════════════════════════════════════════════════════════"""
+    
+    # Pleading paper margin constants (in inches)
+    MARGIN_LEFT = 1.5  # Space for line numbers
+    MARGIN_RIGHT = 0.5
+    MARGIN_TOP = 0.5
+    MARGIN_BOTTOM = 0.5
 
     def __init__(self):
         """Initialize the generator"""
@@ -59,13 +65,13 @@ FUNDS MUST BE WIRED TO DESIGNATED TRUST ACCOUNT WITHIN 5 BUSINESS DAYS
         """Create document with 28-line pleading paper formatting"""
         doc = Document()
         
-        # Set page margins (1.5" left for line numbers, 0.5" others)
+        # Set page margins using class constants
         sections = doc.sections
         for section in sections:
-            section.left_margin = Inches(1.5)
-            section.right_margin = Inches(0.5)
-            section.top_margin = Inches(0.5)
-            section.bottom_margin = Inches(0.5)
+            section.left_margin = Inches(self.MARGIN_LEFT)
+            section.right_margin = Inches(self.MARGIN_RIGHT)
+            section.top_margin = Inches(self.MARGIN_TOP)
+            section.bottom_margin = Inches(self.MARGIN_BOTTOM)
         
         return doc
 
