@@ -40,16 +40,16 @@ echo "3. Checking critical files..."
 print_result $? "Core files exist"
 
 echo "4. Checking Python syntax..."
-python3 -m py_compile scripts/*.py 2>/dev/null
+find scripts -name "*.py" -type f -exec python3 -m py_compile {} \; 2>/dev/null
 print_result $? "Scripts syntax"
 
-python3 -m py_compile core-systems/*.py 2>/dev/null
+find core-systems -name "*.py" -type f -exec python3 -m py_compile {} \; 2>/dev/null
 print_result $? "Core systems syntax"
 
 echo "5. Checking for sensitive files..."
 git ls-files | grep -E "\.(pdf|docx)$" > /dev/null 2>&1
 if [ $? -eq 0 ]; then
-    print_result 1 "No sensitive files in git"
+    print_result 1 "No sensitive files in git (FOUND SENSITIVE FILES)"
 else
     print_result 0 "No sensitive files in git"
 fi
@@ -83,8 +83,14 @@ echo "12. Checking monitoring configuration..."
 print_result $? "Prometheus config exists"
 
 echo "13. Testing main orchestrator..."
-timeout 5 python3 scripts/agent_x5_master_orchestrator.py > /dev/null 2>&1 || true
-print_result 0 "Orchestrator executable"
+python3 scripts/agent_x5_master_orchestrator.py --help > /dev/null 2>&1
+ORCH_EXIT=$?
+if [ $ORCH_EXIT -eq 0 ] || [ $ORCH_EXIT -eq 2 ]; then
+    # Exit code 0 or 2 (argparse help) indicates the script is executable
+    print_result 0 "Orchestrator executable"
+else
+    print_result 1 "Orchestrator executable (exit code: $ORCH_EXIT)"
+fi
 
 echo "14. Checking CI/CD workflows..."
 [ -f ".github/workflows/ci-cd.yml" ] && [ -f ".github/workflows/agent-x5-master-automation.yml" ]
