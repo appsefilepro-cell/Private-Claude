@@ -120,6 +120,12 @@ python pillar-a-trading/agent-3.0/agent_3_orchestrator.py
 docker-compose up -d
 ```
 
+### Execute Optimized Master Protocol
+```bash
+./scripts/execute_master_protocol.sh
+```
+Handles: Repository sync, PDF generation, FCRA disputes, CFO dashboard updates
+
 ---
 
 ## INTEGRATIONS

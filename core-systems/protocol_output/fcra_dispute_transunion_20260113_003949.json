@@ -1,0 +1,42 @@
+{
+  "bureau": "TransUnion",
+  "dispute_type": "identity_erasure",
+  "timestamp": "2026-01-13T00:39:49.674051",
+  "identity_erasure_protocol": {
+    "method": "15 USC 1681 - FCRA Section 609(a)(1)(A)",
+    "demand": "Complete removal of all tradelines not properly verified",
+    "legal_basis": [
+      "Right to accurate reporting (15 USC 1681e(b))",
+      "Right to dispute inaccurate information (15 USC 1681i)",
+      "Right to deletion of unverifiable information",
+      "Identity theft provisions (15 USC 1681c-2)"
+    ]
+  },
+  "dispute_items": [
+    {
+      "category": "Identity Verification",
+      "demand": "Proof of original signed application with valid signature",
+      "reason": "No lawful agreement exists without signed contract"
+    },
+    {
+      "category": "Account Validation",
+      "demand": "Complete payment history from inception",
+      "reason": "Incomplete or inaccurate reporting violates FCRA"
+    },
+    {
+      "category": "Legal Standing",
+      "demand": "Proof of legal right to report on credit",
+      "reason": "Third-party collectors must demonstrate chain of custody"
+    }
+  ],
+  "delivery_method": {
+    "type": "Certified Mail with Return Receipt",
+    "tracking_required": true,
+    "proof_of_delivery": true
+  },
+  "timeline": {
+    "dispatch_date": "2026-01-13",
+    "response_deadline": "30 days from receipt",
+    "deletion_required": "Upon failure to verify"
+  }
+}
