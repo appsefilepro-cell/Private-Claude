@@ -189,6 +189,8 @@ export LIVE_TRADING=true
 - [API Setup](docs/API_SETUP_INSTRUCTIONS.md) - API configuration
 - [Zapier Action Plan](ZAPIER_COPILOT_ACTION_PLAN.md) - Automation specs
 - [Master Prompts](docs/MASTER_PROMPT_ARCHIVE.md) - All system prompts
+- [Open Pull Requests](OPEN_PULL_REQUESTS.md) - Current PRs and how to list them
+- [List PRs Guide](docs/LIST_PULL_REQUESTS.md) - Detailed PR listing instructions
 
 ---
 
