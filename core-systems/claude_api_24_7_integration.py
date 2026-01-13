@@ -47,7 +47,11 @@ class ClaudeAPI247:
     """
 
     def __init__(self):
-        """Initialize Claude API connection"""
+        """
+        Initialize the Claude API integration by loading configuration, validating the environment, and creating client instances if possible.
+        
+        Reads the ANTHROPIC_API_KEY environment variable and validates it; if the key is missing, invalid, or the Anthropic package is unavailable, the synchronous and asynchronous client attributes are set to None and appropriate log messages are emitted. When initialization succeeds, both synchronous and asynchronous Anthropic clients are created. Also sets the default model, max token limit, and initializes an empty conversation history.
+        """
         self.api_key = os.getenv('ANTHROPIC_API_KEY', '')
 
         if not self.api_key or self.api_key.startswith('your_'):
@@ -75,19 +79,29 @@ class ClaudeAPI247:
         self.conversation_history: List[Dict] = []
 
     def is_available(self) -> bool:
-        """Check if Claude API is available"""
+        """
+        Return whether both the synchronous and asynchronous Anthropic clients are initialized.
+        
+        Returns:
+            True if both sync and async clients are initialized, False otherwise.
+        """
         return self.client is not None and self.async_client is not None
 
     async def analyze_task(self, task_description: str, context: Dict = None) -> Dict[str, Any]:
         """
-        Analyze a task using Claude API
-
-        Args:
-            task_description: Description of the task
-            context: Optional context information
-
+        Produce a structured JSON analysis of a task tailored for Agent X5.0.
+        
+        Parameters:
+            task_description (str): Natural-language description of the task to analyze.
+            context (Dict, optional): Additional contextual data to include in the prompt; will be JSON-serialized and sent to the model.
+        
         Returns:
-            Analysis results from Claude
+            Dict[str, Any]: On success, a dictionary containing the parsed analysis (the model's JSON fields), plus metadata keys:
+                - `timestamp`: ISO 8601 timestamp when the analysis was produced.
+                - `model_used`: model identifier used for the request.
+                - `tokens_used`: total tokens consumed (input + output).
+                If the model response could not be parsed as JSON, the analysis text is provided under the `analysis` key.
+                On failure or if the API is unavailable, returns a dictionary containing an `error` key (and may include a `suggestion` key when the API key is missing).
         """
         if not self.is_available():
             return {
@@ -149,15 +163,15 @@ Format as JSON."""
         maintain_context: bool = True
     ) -> str:
         """
-        Have a conversation with Claude API as an agent
-
-        Args:
-            message: Message to send
-            agent_id: Optional agent ID for context
-            maintain_context: Whether to maintain conversation history
-
+        Start a context-aware conversation with Claude acting as an agent within Agent X5.0.
+        
+        Parameters:
+            message (str): The message to send to Claude.
+            agent_id (int, optional): Agent identifier to include in the system context; if omitted, 'Master CFO' is used.
+            maintain_context (bool, optional): If True, append this exchange to in-memory conversation history (history is trimmed to the most recent 20 messages).
+        
         Returns:
-            Claude's response
+            str: Claude's reply text, or an error string beginning with "ERROR:" if the API is unavailable or an exception occurs.
         """
         if not self.is_available():
             return "ERROR: Claude API not available. Please configure ANTHROPIC_API_KEY."
@@ -214,19 +228,23 @@ Keep responses concise and actionable."""
             return f"ERROR: {str(e)}"
 
     def clear_conversation_history(self):
-        """Clear conversation history"""
+        """
+        Clear the in-memory conversation history used for agent conversations.
+        
+        Also logs that the conversation history was cleared.
+        """
         self.conversation_history = []
         logger.info("🗑️  Conversation history cleared")
 
     async def batch_analyze(self, tasks: List[str]) -> List[Dict]:
         """
-        Analyze multiple tasks in parallel
-
-        Args:
-            tasks: List of task descriptions
-
+        Analyze a list of task descriptions concurrently and return their analyses.
+        
+        Parameters:
+            tasks (List[str]): Task description strings to analyze.
+        
         Returns:
-            List of analysis results
+            List[Dict]: A list where each element is the analysis result dictionary corresponding to the input task at the same index. If the Claude API is unavailable, returns an error dictionary for each task (e.g., `{"error": "Claude API not available"}`).
         """
         if not self.is_available():
             return [{"error": "Claude API not available"} for _ in tasks]
@@ -243,10 +261,15 @@ Keep responses concise and actionable."""
 
     async def continuous_monitoring(self, check_interval: int = 300):
         """
-        Run continuous monitoring loop (24/7)
-
-        Args:
-            check_interval: Seconds between checks (default: 5 minutes)
+        Run a perpetual monitoring loop that periodically checks system health using the configured Claude API client.
+        
+        Parameters:
+            check_interval (int): Seconds to wait between health checks (default: 300).
+        
+        Behavior:
+            - Logs each monitoring iteration and a short excerpt of the status response.
+            - Stops cleanly on KeyboardInterrupt.
+            - On unexpected errors, logs the exception, waits 60 seconds, and then continues.
         """
         if not self.is_available():
             logger.error("❌ Cannot start monitoring - Claude API not available")
@@ -289,19 +312,34 @@ class ClaudeTaskRouter:
     """Routes tasks to appropriate Claude API instances"""
 
     def __init__(self):
+        """
+        Initialize a task router with a Claude API client, an empty task queue, and an empty results store.
+        
+        Attributes:
+            claude: Instance of ClaudeAPI247 used to analyze and converse with Claude.
+            task_queue (List[Dict]): Pending tasks to be processed.
+            results (Dict[str, Any]): Mapping of task IDs to analysis results.
+        """
         self.claude = ClaudeAPI247()
         self.task_queue: List[Dict] = []
         self.results: Dict[str, Any] = {}
 
     async def route_task(self, task: Dict) -> Dict:
         """
-        Route a task to Claude API for analysis
-
-        Args:
-            task: Task dictionary with 'description' and optional 'context'
-
+        Route a single task to Claude for analysis, store the analysis in the router results, and return the aggregated result.
+        
+        Parameters:
+            task (dict): Task data. Expected keys:
+                - 'id' (str, optional): Unique task identifier; generated if missing.
+                - 'description' (str): Text describing the task to analyze.
+                - 'context' (dict, optional): Additional context passed to the analyzer.
+        
         Returns:
-            Routed task with analysis
+            dict: Aggregated routing result with the following keys:
+                - 'task_id' (str): Resolved task identifier.
+                - 'original_task' (dict): The input task dictionary.
+                - 'claude_analysis' (dict): Analysis result returned by Claude.
+                - 'timestamp' (str): ISO-formatted timestamp when the result was produced.
         """
         task_id = task.get('id', f"task_{len(self.task_queue)}")
         description = task.get('description', '')
@@ -325,7 +363,14 @@ class ClaudeTaskRouter:
         return result
 
     async def process_queue(self):
-        """Process all tasks in queue"""
+        """
+        Process and route all tasks currently in the queue.
+        
+        Routes each queued task via the router, collects their results, stores results in self.results, and clears the queue.
+        
+        Returns:
+            results (List[Dict]): A list of result dictionaries corresponding to each processed task.
+        """
         if not self.task_queue:
             logger.info("📭 Task queue is empty")
             return []
@@ -347,7 +392,14 @@ class ClaudeTaskRouter:
 # ========================================
 
 async def main():
-    """Main CLI entry point"""
+    """
+    Run a demo CLI that verifies Claude API availability, performs sample interactions, and returns an exit code.
+    
+    Performs a readiness check for the Claude (Anthropic) API, prints setup guidance if unavailable, executes a test conversational exchange, runs an example task analysis, and demonstrates one iteration of the 24/7 monitoring workflow for demonstration purposes.
+    
+    Returns:
+        exit_code (int): `0` on successful demo completion, `1` if the Claude API is not available or not configured.
+    """
     print("\n" + "="*70)
     print("🤖 CLAUDE API 24/7 INTEGRATION - Agent X5.0")
     print("="*70 + "\n")
