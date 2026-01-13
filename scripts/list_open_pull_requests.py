@@ -33,11 +33,11 @@ def list_open_pull_requests(owner="appsefilepro-cell", repo="Private-Claude", to
     url = f"https://api.github.com/repos/{owner}/{repo}/pulls"
     
     headers = {
-        "Accept": "application/vnd.github.v3+json"
+        "Accept": "application/vnd.github+json"
     }
     
     if token:
-        headers["Authorization"] = f"token {token}"
+        headers["Authorization"] = f"Bearer {token}"
     
     params = {
         "state": "open",
@@ -60,7 +60,7 @@ def format_date(date_string):
     try:
         dt = datetime.fromisoformat(date_string.replace('Z', '+00:00'))
         return dt.strftime("%Y-%m-%d %H:%M:%S UTC")
-    except:
+    except (ValueError, AttributeError, TypeError):
         return date_string
 
 

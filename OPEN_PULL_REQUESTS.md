@@ -129,7 +129,7 @@ For the most up-to-date list of open pull requests, use one of these methods:
    python3 scripts/list_open_pull_requests.py
    ```
 
-For detailed documentation, see [docs/LIST_PULL_REQUESTS.md](./LIST_PULL_REQUESTS.md)
+For detailed documentation, see [docs/LIST_PULL_REQUESTS.md](docs/LIST_PULL_REQUESTS.md)
 
 ---
 
