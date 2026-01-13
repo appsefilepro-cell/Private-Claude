@@ -1,0 +1,50 @@
+{
+  "metrics": {
+    "total_damages_value": 11450000.0,
+    "economic_damages": 8500000.0,
+    "non_economic_damages": 2000000.0,
+    "punitive_damages": 950000.0
+  },
+  "last_updated": "2026-01-13T00:37:48.611508",
+  "damages_matrix": {
+    "total_damages": 11450000.0,
+    "currency": "USD",
+    "date_calculated": "2026-01-13T00:37:48.611445",
+    "breakdown": {
+      "economic_damages": {
+        "amount": 8500000.0,
+        "categories": {
+          "lost_business_opportunities": 3200000.0,
+          "credit_damage_impact": 2800000.0,
+          "lost_income": 1500000.0,
+          "out_of_pocket_expenses": 1000000.0
+        }
+      },
+      "non_economic_damages": {
+        "amount": 2000000.0,
+        "categories": {
+          "emotional_distress": 1200000.0,
+          "reputational_harm": 800000.0
+        }
+      },
+      "punitive_damages": {
+        "amount": 950000.0,
+        "basis": "Willful violations of FCRA and state law"
+      }
+    },
+    "legal_basis": [
+      "Fair Credit Reporting Act (15 USC \u00a7 1681n) - Willful noncompliance",
+      "Fair Credit Reporting Act (15 USC \u00a7 1681o) - Negligent noncompliance",
+      "State consumer protection laws",
+      "Common law defamation",
+      "Breach of contract"
+    ],
+    "supporting_documentation": {
+      "financial_records": "Complete",
+      "expert_reports": "Economic and psychological experts retained",
+      "third_party_verification": "Independent verification completed"
+    },
+    "calculation_method": "Industry standard methodology with expert validation",
+    "updated_at": "2026-01-13T00:37:48.611452"
+  }
+}

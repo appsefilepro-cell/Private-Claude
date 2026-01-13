@@ -1,0 +1,11 @@
+{
+  "source_repo": "Private-Claude",
+  "target_repo": "Copy-Agentx5",
+  "sync_type": "mirror",
+  "force": true,
+  "branches": [
+    "main",
+    "copilot/*"
+  ],
+  "timestamp": "2026-01-13T00:37:48.608798"
+}
