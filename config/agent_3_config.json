@@ -113,7 +113,7 @@
   },
 
   "instructions": [
-    "This is the master configuration for Agent X2.0",
+    "This is the master configuration for AgentX5.0",
     "Update API keys and credentials using environment variables",
     "Never commit credentials to version control",
     "Use .env file for sensitive values",
