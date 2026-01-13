@@ -9,6 +9,9 @@ from typing import Dict, List, Optional, Union
 from datetime import datetime
 import base64
 
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+
 try:
     import PyPDF2
     import pdfplumber
@@ -18,10 +21,10 @@ try:
     DEPS_AVAILABLE = True
 except ImportError:
     DEPS_AVAILABLE = False
-    logging.warning("PDF processing dependencies not installed. Install with: pip install PyPDF2 pdfplumber reportlab")
-
-logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger(__name__)
+    logger.warning("PDF processing dependencies not installed. Install with: pip install PyPDF2 pdfplumber reportlab")
+    # Define placeholders for missing dependencies
+    letter = (612, 792)  # 8.5 x 11 inches in points
+    A4 = (595, 842)  # A4 size in points
 
 
 class PDFProcessor:
