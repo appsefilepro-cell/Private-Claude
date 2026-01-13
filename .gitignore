@@ -116,6 +116,9 @@ secrets/
 *secret*
 *private*
 *.pfx
+*.pdf
+*.docx
+*.doc
 
 # Local Configuration
 local_settings.py
