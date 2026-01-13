@@ -69,10 +69,12 @@ Agent 5.0 (219 Agents + Committee 100 + Full Orchestration) ← CURRENT
 
 ### Pillar B: Legal Automation
 - Probate administration
-- 100+ page motion generation
+- 100+ page motion generation (Cetient Legal Framework v9.0)
 - Case management (Dropbox)
 - Client intake (Google Forms)
 - Court filing automation
+- "Council of 50" elite legal team persona
+- "7-Cycle Forge" document methodology
 
 ### Pillar C: Federal Contracting
 - SAM.gov opportunity monitoring
@@ -195,6 +197,8 @@ export LIVE_TRADING=true
 - [API Setup](docs/API_SETUP_INSTRUCTIONS.md) - API configuration
 - [Zapier Action Plan](ZAPIER_COPILOT_ACTION_PLAN.md) - Automation specs
 - [Master Prompts](docs/MASTER_PROMPT_ARCHIVE.md) - All system prompts
+- [Master Cetient Legal Prompts](docs/MASTER_CETIENT_LEGAL_PROMPTS.md) - Apex legal framework (v9.0)
+- [GitHub Copilot Instructions](.github/copilot-instructions.md) - Deep Web Crawl protocol
 
 ---
 
