@@ -81,8 +81,46 @@ Validation passed!
 Add to your workflow:
 
 ```yaml
+- name: Checkout code
+  uses: actions/checkout@v4
+
+- name: Setup Python
+  uses: actions/setup-python@v5
+  with:
+    python-version: '3.11'
+
 - name: Validate requirements
   run: python scripts/validate_requirements.py
+```
+
+Complete workflow example:
+
+```yaml
+name: Validate Requirements
+
+on:
+  pull_request:
+    paths:
+      - 'requirements.txt'
+  push:
+    branches:
+      - main
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      
+      - name: Install validation dependencies
+        run: pip install --upgrade pip
+      
+      - name: Validate requirements.txt
+        run: python scripts/validate_requirements.py
 ```
 
 ### Pre-commit Hook

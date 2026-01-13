@@ -53,8 +53,9 @@ def parse_requirements(file_path: Path) -> List[Tuple[str, str, str]]:
             if not line or line.startswith('#'):
                 continue
             
-            # Parse package name and version
-            match = re.match(r'^([a-zA-Z0-9_-]+)([>=<~!]+.*)?$', line)
+            # Parse package name and version (PEP 508 compliant)
+            # Package names can contain letters, numbers, dots, hyphens, and underscores
+            match = re.match(r'^([a-zA-Z0-9][a-zA-Z0-9._-]*[a-zA-Z0-9]|[a-zA-Z0-9])([>=<~!]+.*)?$', line)
             if match:
                 package_name = match.group(1)
                 version_spec = match.group(2) if match.group(2) else ''
@@ -83,8 +84,11 @@ def check_package_exists(package_name: str, version_spec: str = '') -> Tuple[boo
         
         # If specific version is specified, check if it's available
         if version_spec.startswith('=='):
+            # Extract the exact version number
             version = version_spec[2:].strip()
-            if version not in result.stdout:
+            # Use regex to match exact version in output (with word boundaries)
+            version_pattern = re.compile(r'\b' + re.escape(version) + r'\b')
+            if not version_pattern.search(result.stdout):
                 return False, f"Version {version} not available (may be yanked)"
         
         return True, "OK"
@@ -110,9 +114,11 @@ def check_dry_run_install(requirements_file: Path) -> Tuple[bool, str]:
         )
         
         if result.returncode != 0:
-            # Extract error message
-            error_lines = result.stderr.split('\n')
-            error_msg = '\n'.join([line for line in error_lines if 'ERROR' in line])
+            # Extract error message with more context
+            stderr_lines = result.stderr.strip().split('\n')
+            # Get last 10 lines which usually contain the most relevant error info
+            relevant_errors = stderr_lines[-10:] if len(stderr_lines) > 10 else stderr_lines
+            error_msg = '\n'.join(relevant_errors)
             return False, error_msg
         
         return True, "All dependencies can be installed"
