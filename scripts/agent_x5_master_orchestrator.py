@@ -53,7 +53,7 @@ logger = logging.getLogger("AgentX5")
 
 @dataclass
 class AgentConfig:
-    """Configuration for each of the 250 agents"""
+    """Configuration for each of the 219 agents"""
     id: int
     name: str
     division: str
@@ -85,10 +85,15 @@ class RemediationTask:
 
 class AgentX5Orchestrator:
     """
-    Master orchestrator coordinating all 250 agents across 9 divisions
+    Master orchestrator coordinating all 219 agents across 8 divisions
     """
 
     def __init__(self):
+        """
+        Initialize the orchestrator's core runtime state for agents, trading, and remediation.
+        
+        Creates the full set of AgentConfig instances, a TradingConfig set to "LIVE" when TRADING_MODE is truthy and "PAPER" otherwise (with default markets and timeframes), and an empty list for active remediation tasks.
+        """
         self.agents = self._initialize_agents()
         self.trading_config = TradingConfig(
             mode="PAPER" if not TRADING_MODE else "LIVE",
@@ -98,7 +103,25 @@ class AgentX5Orchestrator:
         self.active_tasks: List[RemediationTask] = []
 
     def _initialize_agents(self) -> Dict[int, AgentConfig]:
-        """Initialize all 219 agents"""
+        """
+        Create and return the full registry of 219 AgentConfig instances grouped by division.
+        
+        The returned registry contains agents with IDs and assigned divisions/roles as follows:
+        - IDs 1–13: Master CFO (13 agents)
+        - IDs 14–46: AI/ML (33 agents)
+        - IDs 47–81: Legal (35 agents)
+        - IDs 82–111: Trading (30 agents)
+        - IDs 112–141: Integration (30 agents)
+        - IDs 142–167: Communication (26 agents)
+        - IDs 168–179: DevOps/Security (12 agents)
+        - IDs 180–199: Financial (20 agents)
+        - IDs 200–219: Committee 100 (20 agents)
+        
+        Each AgentConfig is initialized with its id, name, division, role, and the default status ("PENDING").
+        
+        Returns:
+            Dict[int, AgentConfig]: Mapping from agent ID to the corresponding AgentConfig for all 219 agents.
+        """
         agents = {}
 
         # Division 1: Master CFO (13 agents)
@@ -173,8 +196,8 @@ class AgentX5Orchestrator:
                 role="Tax & CFO Suite"
             )
 
-        # Committee 100 (50 agents)
-        for i in range(200, 250):
+        # Committee 100 (remaining agents)
+        for i in range(200, 220):
             agents[i] = AgentConfig(
                 id=i,
                 name=f"Committee_Agent_{i}",
@@ -182,24 +205,40 @@ class AgentX5Orchestrator:
                 role="Specialized Tasks"
             )
 
-        logger.info(f"Initialized {len(agents)} agents across 9 divisions")
+        logger.info(f"Initialized {len(agents)} agents across 8 divisions + Committee 100")
         return agents
 
     async def activate_all_agents(self):
-        """Activate all 250 agents in parallel"""
-        logger.info("🚀 ACTIVATING ALL 250 AGENTS IN PARALLEL")
+        """
+        Activate all registered agents by setting their status to "ACTIVE".
+        
+        Runs activations concurrently for every agent in the orchestrator's agents mapping, marking each AgentConfig.status as "ACTIVE".
+        """
+        logger.info("🚀 ACTIVATING ALL 219 AGENTS IN PARALLEL")
 
         async def activate_agent(agent_id: int):
+            """
+            Mark an agent as active and log its activation.
+            
+            Sets the agent's status to "ACTIVE", logs the activation with the agent's name and division, and introduces a short simulated delay to mimic activation timing.
+            
+            Parameters:
+                agent_id (int): Identifier of the agent to activate.
+            """
             agent = self.agents[agent_id]
             agent.status = "ACTIVE"
             logger.debug(f"✅ Activated: {agent.name} ({agent.division})")
             await asyncio.sleep(0.1)  # Simulate activation
 
         await asyncio.gather(*[activate_agent(i) for i in self.agents.keys()])
-        logger.info("✅ ALL 250 AGENTS ACTIVATED")
+        logger.info("✅ ALL 219 AGENTS ACTIVATED")
 
     async def start_trading_systems(self):
-        """Start 24/7 trading across all timezones"""
+        """
+        Start trading systems and activate trading agents across configured markets and timeframes.
+        
+        Logs the current trading mode and emits a warning when running in LIVE mode. Identifies the trading agent group (IDs 82–111) and activates each agent to begin trading according to the orchestrator's TradingConfig.
+        """
         logger.info(f"📈 STARTING TRADING SYSTEMS (Mode: {self.trading_config.mode})")
 
         if self.trading_config.mode == "LIVE":
@@ -211,6 +250,12 @@ class AgentX5Orchestrator:
         trading_agents = [self.agents[i] for i in range(82, 112)]
 
         async def start_trading_agent(agent: AgentConfig):
+            """
+            Start trading routines for the given agent using the orchestrator's trading configuration.
+            
+            Parameters:
+                agent (AgentConfig): The agent to initialize for trading; used to identify which agent will begin market activity.
+            """
             logger.info(f"Starting {agent.name} for markets: {self.trading_config.markets}")
             # Simulate trading activation
             await asyncio.sleep(0.5)
@@ -219,14 +264,22 @@ class AgentX5Orchestrator:
         logger.info("✅ 24/7 TRADING ACTIVE ACROSS ALL TIMEZONES")
 
     async def start_bonds_trading(self):
-        """Start hourly bonds trading automation"""
+        """
+        Start hourly bonds trading monitoring.
+        
+        Enables the hourly bonds trading automation and marks bonds trading monitoring as active. In this implementation the method logs the start and activation but does not perform external API calls or place trades.
+        """
         logger.info("🏦 STARTING BONDS TRADING (Hourly Updates)")
 
         # In real implementation, would connect to Treasury API
         logger.info("✅ Bonds trading monitoring active")
 
     async def run_system_remediation(self):
-        """Run continuous system improvement"""
+        """
+        Queue remediation tasks for configured repositories to drive continuous system improvement.
+        
+        This method creates a RemediationTask for each repository the orchestrator scans and appends it to the instance's active_tasks list; tasks are created with priority "HIGH". It does not perform remediation work immediately — it only schedules tasks for later processing and logs the queued count.
+        """
         logger.info("🔧 STARTING CONTINUOUS REMEDIATION")
 
         # Scan all repos
@@ -263,7 +316,19 @@ class AgentX5Orchestrator:
         logger.info("✅ Zapier integration active")
 
     async def generate_status_report(self) -> Dict:
-        """Generate comprehensive system status"""
+        """
+        Builds a snapshot of the orchestrator's current status.
+        
+        Returns:
+            report (Dict): A dictionary with the following keys:
+                - `timestamp`: UTC ISO-format timestamp string of the snapshot.
+                - `total_agents`: Total number of configured agents.
+                - `active_agents`: Number of agents whose status is "ACTIVE".
+                - `trading_mode`: Current trading mode (e.g., "PAPER" or "LIVE").
+                - `trading_markets`: Count of configured trading markets.
+                - `remediation_tasks`: Number of active remediation tasks.
+                - `divisions`: Mapping of division names to their configured agent counts.
+        """
         active_count = sum(1 for a in self.agents.values() if a.status == "ACTIVE")
 
         report = {
@@ -282,14 +347,21 @@ class AgentX5Orchestrator:
                 "Communication": 26,
                 "DevOps/Security": 12,
                 "Financial": 20,
-                "Committee 100": 50
+                "Committee 100": 20
             }
         }
 
         return report
 
     async def run(self):
-        """Main execution loop"""
+        """
+        Orchestrates full system startup: activates agents, launches trading/remediation/integration subsystems concurrently, and produces a status report.
+        
+        Performs these steps in order: activates all agents, concurrently starts trading systems, bonds monitoring, remediation scanning, and Zapier delegation, then generates a status dictionary and writes it as AGENT_X5_STATUS_REPORT.json under WORKSPACE_ROOT.
+        
+        Returns:
+            dict: Status report containing keys such as `timestamp`, `total_agents`, `active_agents`, `trading_mode`, `trading_markets`, `remediation_tasks`, and `divisions`.
+        """
         logger.info("═" * 80)
         logger.info("AGENT X5 MASTER ORCHESTRATOR - STARTING COMPLETE SYSTEM")
         logger.info("═" * 80)
@@ -333,7 +405,12 @@ class ContinuousRemediation:
 
     @staticmethod
     async def run_full_scan():
-        """Run complete system scan"""
+        """
+        Run a full-system scan that reports the status of static analysis, security, and test checks.
+        
+        Returns:
+            dict: Mapping of check names to status strings. Expected keys include "flake8", "bandit", "pytest", and "security", each with values like "PASS" or other status indicators.
+        """
         logger.info("Running full system scan...")
 
         # Placeholder for actual scanning logic
@@ -353,7 +430,14 @@ class ContinuousRemediation:
 # ═══════════════════════════════════════════════════════════════════════════
 
 async def main():
-    """Main entry point"""
+    """
+    Orchestrates startup of the Agent X5 system, including a live-trading safety confirmation when enabled.
+    
+    If live trading mode is active, prompts the user for explicit confirmation before proceeding. Initializes and runs the AgentX5Orchestrator, logs readiness and status report location, and then exits with an appropriate code.
+    
+    Returns:
+        int: `0` on successful startup, `1` if startup was cancelled due to failed safety confirmation.
+    """
 
     # Safety check
     if TRADING_MODE:
