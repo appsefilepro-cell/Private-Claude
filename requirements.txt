@@ -1,2 +1,39 @@
+# Core dependencies
 urllib3<2.0.0
 requests==2.31.0
+
+# Testing
+pytest>=7.4.0
+pytest-cov>=4.1.0
+pytest-asyncio>=0.21.0
+
+# Code quality
+flake8>=6.0.0
+black>=23.0.0
+pylint>=2.17.0
+
+# API and Web
+fastapi>=0.100.0
+uvicorn>=0.23.0
+pydantic>=2.0.0
+
+# Data processing
+pandas>=2.0.0
+numpy>=1.24.0
+
+# Async support
+aiohttp>=3.8.5
+asyncio>=3.4.3
+
+# Logging and monitoring
+loguru>=0.7.0
+
+# Trading and financial
+ccxt>=4.0.0
+
+# Environment management
+python-dotenv>=1.0.0
+
+# Document processing
+PyMuPDF>=1.23.0
+openpyxl>=3.1.0
