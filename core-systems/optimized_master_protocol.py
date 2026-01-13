@@ -22,6 +22,9 @@ from pathlib import Path
 from typing import Dict, Any, List, Tuple
 from dataclasses import dataclass, asdict
 
+# Ensure logs directory exists before configuring logging
+Path('logs').mkdir(exist_ok=True)
+
 # Configure logging
 logging.basicConfig(
     level=logging.INFO,
@@ -32,6 +35,10 @@ logging.basicConfig(
     ]
 )
 logger = logging.getLogger('MasterProtocol')
+
+# Constants
+TIMESTAMP_FORMAT = "%Y%m%d_%H%M%S"
+DATE_FORMAT = "%B %d, %Y"
 
 
 @dataclass
@@ -88,16 +95,22 @@ class OptimizedMasterProtocol:
         
         start_time = datetime.now()
         
-        # Execute all tasks
-        await asyncio.gather(
+        # Execute all tasks (with exception handling to allow partial completion)
+        results = await asyncio.gather(
             self.task_1_repository_sync(),
             self.task_2_generate_exhibit_a(),
             self.task_3_generate_greystar_demand(),
             self.task_4_dispatch_experian(),
             self.task_5_dispatch_equifax(),
             self.task_6_dispatch_transunion(),
-            self.task_7_update_cfo_dashboard()
+            self.task_7_update_cfo_dashboard(),
+            return_exceptions=True
         )
+        
+        # Log any exceptions that occurred
+        for idx, result in enumerate(results):
+            if isinstance(result, Exception):
+                logger.error(f"Task {idx + 1} raised an exception: {result}")
         
         end_time = datetime.now()
         duration = (end_time - start_time).total_seconds()
@@ -106,7 +119,8 @@ class OptimizedMasterProtocol:
         report = self.generate_completion_report(duration)
         
         # Save report
-        report_path = self.output_dir / f"protocol_report_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json"
+        timestamp = datetime.now().strftime(TIMESTAMP_FORMAT)
+        report_path = self.output_dir / f"protocol_report_{timestamp}.json"
         with open(report_path, 'w') as f:
             json.dump(report, f, indent=2)
         
@@ -492,7 +506,7 @@ echo "To execute: gh repo sync appsefilepro-cell/Copy-Agentx5 --source appsefile
         """Generate a legal document in PDF format"""
         
         # Create JSON representation of the document
-        json_path = self.output_dir / f"{document_name}_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json"
+        json_path = self.output_dir / f"{document_name}_{datetime.now().strftime(TIMESTAMP_FORMAT)}.json"
         with open(json_path, 'w') as f:
             json.dump(content, f, indent=2)
         
@@ -524,7 +538,7 @@ echo "To execute: gh repo sync appsefilepro-cell/Copy-Agentx5 --source appsefile
                 text_content.append(f"{line}\n")
         
         # Save as text file (PDF generation would require additional libraries)
-        txt_path = self.output_dir / f"{document_name}_{datetime.now().strftime('%Y%m%d_%H%M%S')}.txt"
+        txt_path = self.output_dir / f"{document_name}_{datetime.now().strftime(TIMESTAMP_FORMAT)}.txt"
         with open(txt_path, 'w') as f:
             f.writelines(text_content)
         
@@ -552,13 +566,13 @@ echo "To execute: gh repo sync appsefilepro-cell/Copy-Agentx5 --source appsefile
             "dispute_type": dispute_type,
             "timestamp": datetime.now().isoformat(),
             "identity_erasure_protocol": {
-                "method": "15 USC 1681 - FCRA Section 609(a)(1)(A)",
+                "method": "15 USC § 1681 - Fair Credit Reporting Act",
                 "demand": "Complete removal of all tradelines not properly verified",
                 "legal_basis": [
-                    "Right to accurate reporting (15 USC 1681e(b))",
-                    "Right to dispute inaccurate information (15 USC 1681i)",
-                    "Right to deletion of unverifiable information",
-                    "Identity theft provisions (15 USC 1681c-2)"
+                    "Right to accurate reporting (15 USC § 1681e(b))",
+                    "Right to dispute inaccurate information (15 USC § 1681i)",
+                    "Right to deletion of unverifiable information (15 USC § 1681i(a)(5))",
+                    "Identity theft provisions (15 USC § 1681c-2)"
                 ]
             },
             "dispute_items": [
@@ -591,7 +605,8 @@ echo "To execute: gh repo sync appsefilepro-cell/Copy-Agentx5 --source appsefile
         }
         
         # Save dispute package
-        filename = f"fcra_dispute_{bureau.lower()}_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json"
+        timestamp = datetime.now().strftime(TIMESTAMP_FORMAT)
+        filename = f"fcra_dispute_{bureau.lower()}_{timestamp}.json"
         dispute_path = self.output_dir / filename
         
         with open(dispute_path, 'w') as f:
@@ -599,7 +614,7 @@ echo "To execute: gh repo sync appsefilepro-cell/Copy-Agentx5 --source appsefile
         
         # Generate dispute letter
         letter_content = self.generate_fcra_dispute_letter(bureau, dispute_package)
-        letter_path = self.output_dir / f"fcra_letter_{bureau.lower()}_{datetime.now().strftime('%Y%m%d_%H%M%S')}.txt"
+        letter_path = self.output_dir / f"fcra_letter_{bureau.lower()}_{timestamp}.txt"
         
         with open(letter_path, 'w') as f:
             f.write(letter_content)
@@ -664,7 +679,7 @@ You are required to verify the complete accuracy of these items within 30 days. 
 
 IV. DELETION REQUIRED
 
-If you cannot provide complete verification, you are REQUIRED to delete these items immediately pursuant to 15 USC § 1681i(a)(5)(A).
+If you cannot provide complete verification, you are REQUIRED to delete these items immediately pursuant to 15 USC § 1681i(a)(5).
 
 V. NO RESPONSE = DELETION
 
@@ -768,7 +783,8 @@ CC: Consumer Financial Protection Bureau
             json.dump(dashboard_data, f, indent=2)
         
         # Also save a timestamped copy
-        archive_path = self.output_dir / f"dashboard_update_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json"
+        timestamp = datetime.now().strftime(TIMESTAMP_FORMAT)
+        archive_path = self.output_dir / f"dashboard_update_{timestamp}.json"
         with open(archive_path, 'w') as f:
             json.dump(dashboard_data, f, indent=2)
         
