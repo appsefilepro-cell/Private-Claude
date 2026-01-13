@@ -190,7 +190,7 @@ export LIVE_TRADING=true
 ## DOCUMENTATION
 
 - [Agent Evolution](AGENT_EVOLUTION.md) - Full version history
-- [Agent 4.0 Architecture](AGENT_4.0_ARCHITECTURE.md) - 50-agent system
+- [Agent X5.0_ARCHITECTURE.md) - 50-agent system
 - [Deployment Guide](docs/DEPLOYMENT_GUIDE.md) - Setup instructions
 - [API Setup](docs/API_SETUP_INSTRUCTIONS.md) - API configuration
 - [Zapier Action Plan](ZAPIER_COPILOT_ACTION_PLAN.md) - Automation specs
