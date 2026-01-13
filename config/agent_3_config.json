@@ -1,6 +1,6 @@
 {
-  "system_name": "Agent X2.0",
-  "version": "5.0.0",
+  "system_name": "AgentX5.0",
+  "version": "AgentX5.0",
   "deployment_date": "2025-12-05",
   "owner": "Thurman Malik Robinson",
   "organization": "APPS Holdings WY Inc.",
@@ -113,7 +113,7 @@
   },
 
   "instructions": [
-    "This is the master configuration for Agent X2.0",
+    "This is the master configuration for AgentX5.0",
     "Update API keys and credentials using environment variables",
     "Never commit credentials to version control",
     "Use .env file for sensitive values",
