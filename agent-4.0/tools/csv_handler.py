@@ -143,8 +143,21 @@ class CSVHandler:
                     if name and formula:
                         for row in self.loaded_data:
                             try:
-                                # Safe evaluation with row values
-                                result = eval(formula, {"__builtins__": {}}, row)
+                                # Safe evaluation with restricted operations
+                                # Only allow basic arithmetic operations
+                                allowed_ops = {
+                                    '__builtins__': {},
+                                    'abs': abs,
+                                    'min': min,
+                                    'max': max,
+                                    'sum': sum,
+                                    'round': round,
+                                    'int': int,
+                                    'float': float
+                                }
+                                # Combine allowed operations with row values
+                                eval_context = {**allowed_ops, **row}
+                                result = eval(formula, {"__builtins__": {}}, eval_context)
                                 row[name] = result
                             except Exception:
                                 row[name] = None
