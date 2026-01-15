@@ -195,10 +195,17 @@ export LIVE_TRADING=true
 
 ## DOCUMENTATION
 
+### 🔴 Critical Documentation
+- [**Automation Scope Limitations**](docs/AUTOMATION_SCOPE_LIMITATIONS.md) - **READ THIS FIRST** - What automation CAN and CANNOT do
+- [**Repository Assessment**](docs/REPOSITORY_ASSESSMENT.md) - Current state analysis and actionable recommendations
+
+### System Architecture
 - [Agent Evolution](AGENT_EVOLUTION.md) - Full version history
 - [Agent X5.0_ARCHITECTURE.md) - 50-agent system
 - [Deployment Guide](docs/DEPLOYMENT_GUIDE.md) - Setup instructions
 - [API Setup](docs/API_SETUP_INSTRUCTIONS.md) - API configuration
+
+### Operations & Maintenance
 - [Zapier Action Plan](ZAPIER_COPILOT_ACTION_PLAN.md) - Automation specs
 - [Master Prompts](docs/MASTER_PROMPT_ARCHIVE.md) - All system prompts
 - [Open Pull Requests](OPEN_PULL_REQUESTS.md) - Current PRs and how to list them
