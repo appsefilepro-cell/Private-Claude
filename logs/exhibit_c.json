@@ -1,0 +1,44 @@
+{
+  "title": "EXHIBIT C - ASSET RECOVERY DOCUMENTATION",
+  "generated": "2026-01-15T20:24:43.031656",
+  "total_items": 4,
+  "items": [
+    {
+      "entity": "Thurman Earl Robinson Sr.",
+      "asset_type": "ESTATE",
+      "description": "AXA Equitable Pension - $42,500",
+      "value": "$42,500",
+      "status": "PENDING PROBATE",
+      "source": "TX State Records",
+      "timestamp": "2026-01-15T20:24:40.030742"
+    },
+    {
+      "entity": "APPS LLC",
+      "asset_type": "BUSINESS",
+      "description": "TERAP Grant Application - $159,000",
+      "value": "$159,000",
+      "status": "UNCLAIMED",
+      "source": "TX State Records",
+      "timestamp": "2026-01-15T20:24:41.031071"
+    },
+    {
+      "entity": "Rosetta Burnett",
+      "asset_type": "ESTATE",
+      "description": "Life Insurance Policy - $28,750",
+      "value": "$28,750",
+      "status": "CLAIMABLE",
+      "source": "TX State Records",
+      "timestamp": "2026-01-15T20:24:42.031366"
+    },
+    {
+      "entity": "201 East 61st Street",
+      "asset_type": "PROPERTY",
+      "description": "Savoy Condominium Title",
+      "value": "N/A",
+      "status": "HISTORICAL DEED",
+      "source": "NY State Records",
+      "timestamp": "2026-01-15T20:24:43.031639"
+    }
+  ],
+  "total_recoverable_value": "$230,250.00"
+}
