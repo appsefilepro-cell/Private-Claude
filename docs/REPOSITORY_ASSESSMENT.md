@@ -322,7 +322,9 @@ docker-compose logs -f
 
 ### Important Files
 - `README.md` - Main project documentation
-- `AUTOMATION_SCOPE_LIMITATIONS.md` - This document
+- `docs/REPOSITORY_ASSESSMENT.md` - This document
+- `docs/AUTOMATION_SCOPE_LIMITATIONS.md` - Automation capabilities guide
+- `docs/RECURSIVE_TASK_STRATEGY.md` - Task completion strategy
 - `docker-compose.yml` - Service definitions
 - `requirements.txt` - Python dependencies
 - `.github/workflows/` - CI/CD pipelines

@@ -17,36 +17,25 @@ This document outlines a **realistic, sustainable approach** to completing tasks
 ### Concept
 Instead of trying to complete all 140 issues at once, we use a **focused iteration loop**:
 
+```mermaid
+graph LR
+    A[1. ASSESS Current State] --> B[2. PRIORITIZE By Impact]
+    B --> C[3. SELECT Top 3-5 Tasks]
+    C --> D[4. EXECUTE Tasks]
+    D --> E[5. COMMIT & Document]
+    E --> F[6. VALIDATE & Review]
+    F --> A
 ```
-┌─────────────────────────────────────────────────┐
-│                                                 │
-│  ┌──────────────┐                              │
-│  │  1. ASSESS   │                              │
-│  │  Current     │                              │
-│  │  State       │                              │
-│  └──────┬───────┘                              │
-│         │                                       │
-│         ▼                                       │
-│  ┌──────────────┐        ┌──────────────┐     │
-│  │  2. PRIORITIZE│───────▶│  3. SELECT  │     │
-│  │  By Impact   │        │  Top 3-5     │     │
-│  └──────────────┘        └──────┬───────┘     │
-│                                  │              │
-│                                  ▼              │
-│  ┌──────────────┐        ┌──────────────┐     │
-│  │  6. VALIDATE │◀───────│  4. EXECUTE  │     │
-│  │  & Review    │        │  Tasks       │     │
-│  └──────┬───────┘        └──────────────┘     │
-│         │                                       │
-│         ▼                                       │
-│  ┌──────────────┐                              │
-│  │  5. COMMIT   │                              │
-│  │  & Document  │                              │
-│  └──────┬───────┘                              │
-│         │                                       │
-│         └───────────────── LOOP ───────────────┘
-│
-```
+
+**Alternative View (if mermaid not supported):**
+
+1. **ASSESS** → Analyze current repository state
+2. **PRIORITIZE** → Rank tasks by impact and effort  
+3. **SELECT** → Choose top 3-5 tasks for this cycle
+4. **EXECUTE** → Complete the selected tasks
+5. **COMMIT** → Save changes and document progress
+6. **VALIDATE** → Test and review the changes
+7. **LOOP** → Return to step 1 for next cycle
 
 ### Key Principles
 
