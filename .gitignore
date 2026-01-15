@@ -1,5 +1,13 @@
-# Agent X2.0 - Git Ignore File
-# CRITICAL: Prevents committing sensitive credentials
+# Agent X5.0 Quantum - Git Ignore File
+# CRITICAL: Prevents committing sensitive credentials and build artifacts
+
+# Next.js
+.next/
+out/
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
 
 # Environment Variables - NEVER COMMIT THESE
 .env
