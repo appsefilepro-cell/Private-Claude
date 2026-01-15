@@ -15,17 +15,19 @@ The Deep Web Crawl protocol ensures comprehensive research and verification acro
 
 ### Action Steps
 
-#### Step 1: Activate All Agents
-- **Deploy all 500 specialized agents** for comprehensive research coverage
-- Agents operate in parallel across multiple domains
-- Each agent specializes in specific research areas:
-  - Legal research agents (case law, statutes, regulations)
-  - Financial analysis agents (market data, SEC filings)
-  - Technical research agents (code analysis, system architecture)
-  - Documentation agents (API docs, technical specifications)
-  - Compliance agents (security, privacy, regulatory)
+#### Step 1: Activate Research Capabilities
+- **Leverage Copilot's available research and reasoning capabilities** for comprehensive coverage
+- Focus research across multiple domains simultaneously
+- Specialize research in key areas:
+  - Legal research (case law, statutes, regulations)
+  - Financial analysis (market data, SEC filings)
+  - Technical research (code analysis, system architecture)
+  - Documentation (API docs, technical specifications)
+  - Compliance (security, privacy, regulatory)
 
-#### Step 2: Comprehensive Crawl
+#### Step 2: Research Scope
+
+**Note:** This section outlines aspirational research sources. GitHub Copilot does not have direct access to external databases or the ability to perform web crawling. Users should manually consult these resources as needed for comprehensive legal research.
 
 **Legal Databases:**
 - Westlaw and LexisNexis for authoritative legal research
@@ -63,7 +65,7 @@ The Deep Web Crawl protocol ensures comprehensive research and verification acro
 - Freedom of Information Act (FOIA) responses
 
 #### Step 3: Verify Against Knowledge Base
-- Cross-reference all findings with the **"700-Page Knowledge Base"**
+- Cross-reference all findings with the project's internal knowledge base or documentation (if such resources are provided in this repository or linked documentation)
 - Validate that information is current and accurate
 - Check for any conflicts or inconsistencies
 - Verify citations are still good law (no negative treatment)
@@ -197,9 +199,9 @@ All documents produced must meet the following minimum standards:
 ## SECURITY AND COMPLIANCE
 
 ### Sensitive Information Handling
-- **Never** include real API keys, passwords, or credentials in code or documentation
+- **Never** include real API keys, passwords, credentials, or other sensitive personal data (e.g., home addresses, phone numbers, government IDs) in code or documentation
 - Use placeholder values with clear instructions for user substitution
-- Redact personally identifiable information (PII) unless specifically required
+- Redact personally identifiable information (PII), including specific physical addresses, unless specifically required and legally permitted
 - Mark confidential documents appropriately
 
 ### Code Security
@@ -306,9 +308,7 @@ When multiple tasks are pending, prioritize in the following order:
 
 This instruction set is **ACTIVE AND OPERATIONAL** for all GitHub Copilot interactions within the Agent X5 Diamond system.
 
-All 500 agents are authorized and ready for deployment.
-
-The Deep Web Crawl protocol is enabled for all complex queries and document generation tasks.
+The research and reasoning capabilities are enabled for all complex queries and document generation tasks.
 
 **Status:** READY
 **Integration:** COMPLETE

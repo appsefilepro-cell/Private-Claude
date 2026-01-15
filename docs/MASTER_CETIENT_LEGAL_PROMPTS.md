@@ -202,7 +202,7 @@ Every document must include the following footer on each page:
 ```
 _____________________________________________________________________________
 CETIENT LEGAL SERVICES - APEX DIVISION
-Attorney Disbursement Address: 15455 Pt NW Blvd Apt #W1410
+[Attorney Disbursement Address - Insert Business Mailing Address]
 [City, State, ZIP - Complete as per jurisdiction requirements]
 [Contact Information - Phone/Email as required]
 Page [X] of [Total]
@@ -218,8 +218,8 @@ Page [X] of [Total]
 
 #### Step 1: Agent Activation
 - Activate all specialized research agents (automated retrieval and analysis modules) for comprehensive research
-- Deploy agents across multiple research domains simultaneously
-- Coordinate agent findings through central synthesis hub
+- Deploy research capabilities across multiple domains simultaneously
+- Coordinate findings through central synthesis hub
 
 #### Step 2: Comprehensive Crawl
 - **Legal Databases:** 
@@ -247,7 +247,7 @@ Page [X] of [Total]
   - Practice guides and CLE materials
 
 #### Step 3: Verification
-- Cross-reference all findings with the "700-Page Knowledge Base"
+- Cross-reference all findings with the internal knowledge base (a curated corpus of prior research memoranda, exemplar filings, and strategy documents maintained alongside this prompt; if this corpus is not available in your environment, cross-reference instead with your organization's equivalent internal knowledge repository)
 - Verify citations are still good law (Shepardize/KeyCite)
 - Confirm no subsequent history affects precedential value
 - Check for pending legislation or proposed rule changes
@@ -422,7 +422,7 @@ CROSS-REF: Legal documentation if dispute exists
 ## VERSION CONTROL AND UPDATES
 
 **Current Version:** 9.0 - APEX Edition
-**Last Updated:** [Auto-populated by system]
+**Last Updated:** See git commit history for modification dates
 **Next Review Date:** [90 days from implementation]
 
 ### Changelog:
