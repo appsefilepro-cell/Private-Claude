@@ -1,0 +1,98 @@
+{
+  "backtest_date": "2026-01-17T18:39:26.866329",
+  "strategy": "Big Short",
+  "total_opportunities": 10,
+  "signals_generated": 4,
+  "correct_predictions": 4,
+  "success_rate": 100.0,
+  "target_success_rate": "94-96%",
+  "target_met": true,
+  "total_profit_pct": 358.1033846816765,
+  "avg_profit_per_trade": 89.52584617041913,
+  "trades": [
+    {
+      "symbol": "PETS_COM",
+      "name": "Pets.com",
+      "period": "Dot-com Bubble 2000",
+      "entry_price": 14.0,
+      "exit_price": 0.22,
+      "profit_pct": 98.42857142857142,
+      "signal_confidence": 0.75,
+      "signal_reasons": [
+        "Extremely high P/E: N/A (no earnings) (overvalued)",
+        "High P/B ratio: 25.0 (bubble territory)",
+        "Overleveraged: D/E = 5.2",
+        "Overbought: RSI = 82",
+        "Extreme bullish sentiment (contrarian indicator)",
+        "Declining revenue but high valuation",
+        "Accounting red flags detected"
+      ],
+      "actual_outcome": "CRASHED",
+      "success": true
+    },
+    {
+      "symbol": "WBVN",
+      "name": "Webvan",
+      "period": "Dot-com Bubble 2000",
+      "entry_price": 34.0,
+      "exit_price": 0.06,
+      "profit_pct": 99.8235294117647,
+      "signal_confidence": 0.7,
+      "signal_reasons": [
+        "Extremely high P/E: N/A (no earnings) (overvalued)",
+        "High P/B ratio: 18.5 (bubble territory)",
+        "Overleveraged: D/E = 6.8",
+        "Overbought: RSI = 78",
+        "Extreme bullish sentiment (contrarian indicator)",
+        "Declining revenue but high valuation"
+      ],
+      "actual_outcome": "CRASHED",
+      "success": true
+    },
+    {
+      "symbol": "ETYS",
+      "name": "eToys",
+      "period": "Dot-com Bubble 2000",
+      "entry_price": 86.0,
+      "exit_price": 0.09,
+      "profit_pct": 99.8953488372093,
+      "signal_confidence": 0.75,
+      "signal_reasons": [
+        "Extremely high P/E: N/A (no earnings) (overvalued)",
+        "High P/B ratio: 32.0 (bubble territory)",
+        "Overleveraged: D/E = 4.5",
+        "Overbought: RSI = 85",
+        "Extreme bullish sentiment (contrarian indicator)",
+        "Declining revenue but high valuation",
+        "Accounting red flags detected"
+      ],
+      "actual_outcome": "CRASHED",
+      "success": true
+    },
+    {
+      "symbol": "AMC",
+      "name": "AMC Entertainment",
+      "period": "Meme Stock Mania 2021",
+      "entry_price": 72.62,
+      "exit_price": 29.08,
+      "profit_pct": 59.9559350041311,
+      "signal_confidence": 0.7,
+      "signal_reasons": [
+        "Extremely high P/E: N/A (no earnings) (overvalued)",
+        "High P/B ratio: 38.0 (bubble territory)",
+        "Overleveraged: D/E = 5.5",
+        "Overbought: RSI = 92",
+        "Extreme bullish sentiment (contrarian indicator)",
+        "Declining revenue but high valuation"
+      ],
+      "actual_outcome": "CRASHED",
+      "success": true
+    }
+  ],
+  "summary": {
+    "dot_com_bubble": 3,
+    "housing_bubble": 0,
+    "meme_stocks": 1,
+    "crypto_collapse": 0
+  }
+}
