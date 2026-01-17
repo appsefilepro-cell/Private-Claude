@@ -1,0 +1,62 @@
+{
+  "version": "1.0",
+  "last_updated": "2026-01-17",
+  "trading_accounts": {
+    "paper_account": {
+      "enabled": true,
+      "mode": "paper",
+      "initial_balance": 100000,
+      "risk_per_trade": 0.02,
+      "max_positions": 5
+    },
+    "kraken_account": {
+      "enabled": false,
+      "exchange": "kraken",
+      "api_key_env": "KRAKEN_API_KEY",
+      "api_secret_env": "KRAKEN_API_SECRET",
+      "trading_pairs": ["BTC/USD", "ETH/USD"],
+      "risk_per_trade": 0.01,
+      "max_positions": 3
+    },
+    "binance_account": {
+      "enabled": false,
+      "exchange": "binance",
+      "api_key_env": "BINANCE_API_KEY",
+      "api_secret_env": "BINANCE_API_SECRET",
+      "trading_pairs": ["BTCUSDT", "ETHUSDT"],
+      "risk_per_trade": 0.01,
+      "max_positions": 3
+    },
+    "alpaca_account": {
+      "enabled": false,
+      "exchange": "alpaca",
+      "api_key_env": "ALPACA_API_KEY",
+      "api_secret_env": "ALPACA_API_SECRET",
+      "trading_type": "stocks",
+      "risk_per_trade": 0.02,
+      "max_positions": 5
+    }
+  },
+  "global_settings": {
+    "default_confidence_threshold": 0.9,
+    "max_total_positions": 10,
+    "stop_loss_percent": 10,
+    "take_profit_percent": 15,
+    "enable_notifications": false,
+    "notification_webhook_url": ""
+  },
+  "strategy_settings": {
+    "big_short": {
+      "enabled": true,
+      "weight": 0.4
+    },
+    "momentum_short": {
+      "enabled": true,
+      "weight": 0.3
+    },
+    "technical_breakdown": {
+      "enabled": true,
+      "weight": 0.3
+    }
+  }
+}
