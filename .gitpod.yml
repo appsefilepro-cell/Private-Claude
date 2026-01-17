@@ -1,0 +1,84 @@
+# AGENT X5 QUANTUM ENVIRONMENT CONFIGURATION
+# ============================================
+# Auto-configures Gitpod/Ona for 759-Agent Swarm deployment
+# 
+# Components:
+# - Next.js Dashboard (Frontend)
+# - Swarm Manager (759 Agents)
+# - Titan X Trading Engine
+# - CFO Forensic Suite
+
+image: gitpod/workspace-full
+
+tasks:
+  - name: "Phase 1: Environment Setup"
+    init: |
+      echo ">>> INITIALIZING AGENT X5 QUANTUM ENVIRONMENT..."
+      
+      # Install Python dependencies
+      pip install pandas numpy requests ccxt aiohttp loguru python-dotenv
+      
+      # Install Node.js dependencies
+      npm install
+      
+      # Create logs directory
+      mkdir -p logs
+      
+      echo ">>> ENVIRONMENT READY"
+    command: |
+      echo ">>> LAUNCHING AGENT X5 SYSTEMS..."
+      
+      # Start the Next.js dashboard
+      npm run dev &
+      
+      # Wait for dashboard to initialize
+      sleep 5
+      
+      echo ">>> Dashboard starting on port 3000"
+      echo ">>> Access the Quantum Dashboard in the preview panel"
+
+  - name: "Phase 2: Agent Swarm"
+    command: |
+      echo ">>> LAUNCHING 759-AGENT SWARM..."
+      sleep 10
+      python3 scripts/swarm_manager.py
+
+  - name: "Phase 3: Titan X Trading"
+    command: |
+      echo ">>> LAUNCHING TITAN X TRADING ENGINE..."
+      sleep 15
+      python3 scripts/titan_x_quantum.py
+
+  - name: "Phase 4: CFO Forensics"
+    command: |
+      echo ">>> LAUNCHING CFO FORENSIC SUITE..."
+      sleep 20
+      python3 scripts/cfo_quantum.py
+
+ports:
+  - port: 3000
+    onOpen: open-preview
+    name: "Quantum Dashboard"
+    visibility: public
+  - port: 8000
+    onOpen: ignore
+    name: "Swarm API"
+
+vscode:
+  extensions:
+    - GitHub.copilot
+    - GitHub.copilot-chat
+    - esbenp.prettier-vscode
+    - ms-python.python
+    - bradlc.vscode-tailwindcss
+    - dbaeumer.vscode-eslint
+
+github:
+  prebuilds:
+    master: true
+    branches: true
+    pullRequests: true
+    pullRequestsFromForks: false
+    addCheck: true
+    addComment: false
+    addBadge: true
