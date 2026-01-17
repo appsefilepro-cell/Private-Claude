@@ -20,10 +20,11 @@ PROJECT_ROOT = BASE_DIR.parent
 # Ensure imports resolve
 sys.path.insert(0, str(PROJECT_ROOT))
 sys.path.insert(0, str(PROJECT_ROOT / "scripts"))
+sys.path.insert(0, str(PROJECT_ROOT / "pillar-a-trading"))
 
-from pillar_a_trading.strategies.big_short_strategy import BigShortStrategy
-from pillar_a_trading.strategies.momentum_short_strategy import MomentumShortStrategy
-from pillar_a_trading.strategies.technical_breakdown_short_strategy import TechnicalBreakdownShortStrategy
+from strategies.big_short_strategy import BigShortStrategy
+from strategies.momentum_short_strategy import MomentumShortStrategy
+from strategies.technical_breakdown_short_strategy import TechnicalBreakdownShortStrategy
 from paper_trade_executor import PaperTradeExecutor
 
 # Logging
