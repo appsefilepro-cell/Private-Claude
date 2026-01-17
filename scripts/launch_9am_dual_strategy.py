@@ -51,9 +51,31 @@ def load_env(env_path: Path) -> None:
         if "=" not in line:
             continue
         key, val = line.split("=", 1)
-        os.environ.setdefault(key.strip(), val.strip())
+        key = key.strip()
+        val = val.strip()
 
+        # Basic validation for critical parameters to avoid dangerous misconfigurations.
+        if key == "RISK_PER_TRADE":
+            try:
+                risk = float(val)
+            except ValueError:
+                logger.error("Invalid RISK_PER_TRADE value %r in %s; must be a float between 0 and 1.", val, env_path)
+                raise ValueError(f"Invalid RISK_PER_TRADE value {val!r}; must be a float between 0 and 1.")
+            if not (0.0 < risk <= 1.0):
+                logger.error("Out-of-range RISK_PER_TRADE value %r in %s; must be in (0, 1].", val, env_path)
+                raise ValueError(f"Out-of-range RISK_PER_TRADE value {val!r}; must be in (0, 1].")
 
+        if key == "MAX_POSITIONS":
+            try:
+                max_positions = int(val)
+            except ValueError:
+                logger.error("Invalid MAX_POSITIONS value %r in %s; must be a positive integer.", val, env_path)
+                raise ValueError(f"Invalid MAX_POSITIONS value {val!r}; must be a positive integer.")
+            if max_positions <= 0:
+                logger.error("Non-positive MAX_POSITIONS value %r in %s; must be a positive integer.", val, env_path)
+                raise ValueError(f"Non-positive MAX_POSITIONS value {val!r}; must be a positive integer.")
+
+        os.environ.setdefault(key, val)
 def wait_until_9am(skip_wait: bool) -> None:
     if skip_wait:
         return
