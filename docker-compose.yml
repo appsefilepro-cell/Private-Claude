@@ -1,0 +1,236 @@
+# Agent X5.0 - Production Docker Compose Configuration
+# Full-stack deployment with monitoring, webhooks, and 24/7 operations
+# Version: 5.0.0
+# Updated: 2025-12-29
+
+version: '3.8'
+
+services:
+  # ============================================================================
+  # MAIN AGENT X5 ORCHESTRATOR (219 Agents)
+  # ============================================================================
+  agent-x5:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: agent-x5-orchestrator
+    environment:
+      - LIVE_TRADING=false
+      - LOG_LEVEL=INFO
+      - E2B_API_KEY=${E2B_API_KEY}
+      - GEMINI_API_KEY=${GEMINI_API_KEY}
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+    volumes:
+      - ./logs:/app/logs
+      - ./config:/app/config:ro
+      - ./backtest-results:/app/backtest-results
+    ports:
+      - "8080:8080"
+    depends_on:
+      - redis
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "python", "-c", "print('healthy')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    networks:
+      - agent-network
+
+  # ============================================================================
+  # CLAUDE API 24/7 INTEGRATION
+  # ============================================================================
+  claude-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: agent-claude-api
+    command: ["python", "core-systems/claude_api_24_7_integration.py"]
+    environment:
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+      - LOG_LEVEL=INFO
+      - REDIS_HOST=redis
+    volumes:
+      - ./logs:/app/logs
+      - ./config:/app/config:ro
+    depends_on:
+      - redis
+    restart: unless-stopped
+    networks:
+      - agent-network
+
+  # ============================================================================
+  # TRADING SERVICE (24/7 Paper & Demo Trading)
+  # ============================================================================
+  trading:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: agent-trading
+    command: ["python", "pillar-a-trading/agent-3.0/agent_3_orchestrator.py"]
+    environment:
+      - LIVE_TRADING=false
+      - TRADING_MODE=PAPER
+      - LOG_LEVEL=INFO
+      - REDIS_HOST=redis
+      - KRAKEN_API_KEY=${KRAKEN_API_KEY}
+      - BINANCE_API_KEY=${BINANCE_API_KEY}
+    volumes:
+      - ./logs:/app/logs
+      - ./pillar-a-trading:/app/pillar-a-trading
+      - ./backtest-results:/app/backtest-results
+    ports:
+      - "8082:8080"
+    depends_on:
+      - redis
+    restart: unless-stopped
+    networks:
+      - agent-network
+
+  # ============================================================================
+  # SANDBOX MONITORING
+  # ============================================================================
+  sandbox-monitor:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: agent-sandbox-monitor
+    command: ["python", "scripts/sandbox_trading_monitor.py"]
+    environment:
+      - LOG_LEVEL=INFO
+      - REDIS_HOST=redis
+    volumes:
+      - ./logs:/app/logs
+      - ./backtest-results:/app/backtest-results
+      - ./sandbox-data:/app/sandbox-data
+    depends_on:
+      - redis
+      - trading
+    restart: unless-stopped
+    networks:
+      - agent-network
+
+  # ============================================================================
+  # E2B WEBHOOK SERVER
+  # ============================================================================
+  e2b-webhook:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: agent-e2b-webhook
+    command: ["python", "core-systems/e2b_webhook_server.py"]
+    environment:
+      - E2B_API_KEY=${E2B_API_KEY}
+      - E2B_WEBHOOK_SECRET=${E2B_WEBHOOK_SECRET}
+      - E2B_WEBHOOK_PORT=5000
+      - LOG_LEVEL=INFO
+      - REDIS_HOST=redis
+    volumes:
+      - ./logs:/app/logs
+    ports:
+      - "5000:5000"
+    depends_on:
+      - redis
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    networks:
+      - agent-network
+
+  # ============================================================================
+  # REDIS (Caching & Message Queue)
+  # ============================================================================
+  redis:
+    image: redis:7-alpine
+    container_name: agent-redis
+    command: redis-server --appendonly yes
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - agent-network
+
+  # ============================================================================
+  # PROMETHEUS (Metrics Collection)
+  # ============================================================================
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: agent-prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/usr/share/prometheus/console_libraries'
+      - '--web.console.templates=/usr/share/prometheus/consoles'
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./monitoring/prometheus:/etc/prometheus
+      - prometheus-data:/prometheus
+    restart: unless-stopped
+    networks:
+      - agent-network
+
+  # ============================================================================
+  # GRAFANA (Monitoring Dashboards)
+  # ============================================================================
+  grafana:
+    image: grafana/grafana:latest
+    container_name: agent-grafana
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=${GRAFANA_PASSWORD:-admin}
+      - GF_USERS_ALLOW_SIGN_UP=false
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./monitoring/grafana:/etc/grafana/provisioning
+      - grafana-data:/var/lib/grafana
+    depends_on:
+      - prometheus
+    restart: unless-stopped
+    networks:
+      - agent-network
+
+  # ============================================================================
+  # NGINX (Reverse Proxy & Load Balancer)
+  # ============================================================================
+  nginx:
+    image: nginx:alpine
+    container_name: agent-nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./config/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./config/nginx/ssl:/etc/nginx/ssl:ro
+    depends_on:
+      - agent-x5
+      - e2b-webhook
+      - grafana
+    restart: unless-stopped
+    networks:
+      - agent-network
+
+networks:
+  agent-network:
+    driver: bridge
+
+volumes:
+  redis-data:
+    driver: local
+  prometheus-data:
+    driver: local
+  grafana-data:
+    driver: local

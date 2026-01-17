@@ -1,5 +1,13 @@
-# Agent X2.0 - Git Ignore File
-# CRITICAL: Prevents committing sensitive credentials
+# Agent X5.0 Quantum - Git Ignore File
+# CRITICAL: Prevents committing sensitive credentials and build artifacts
+
+# Next.js
+.next/
+out/
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
 
 # Environment Variables - NEVER COMMIT THESE
 .env
@@ -116,6 +124,9 @@ secrets/
 *secret*
 *private*
 *.pfx
+*.pdf
+*.docx
+*.doc
 
 # Local Configuration
 local_settings.py
@@ -143,3 +154,11 @@ positions*.json
 
 # Allow specific config files
 !config/agent_3_config.json
+
+# Protocol Output (keep initial samples, exclude subsequent runs)
+core-systems/protocol_output/*_202601[4-9]*.txt
+core-systems/protocol_output/*_202601[4-9]*.json
+core-systems/protocol_output/*_20260[2-9]*.txt
+core-systems/protocol_output/*_20260[2-9]*.json
+core-systems/protocol_output/*_202[7-9]*.txt
+core-systems/protocol_output/*_202[7-9]*.json
