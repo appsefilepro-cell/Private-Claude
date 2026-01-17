@@ -100,6 +100,14 @@ class TaskCompletionOrchestrator:
         task_id = task.get("task_id") or task.get("number")
         task_name = task.get("task") or task.get("title")
         
+        # Generate unique task ID with prefix to avoid collisions
+        if "number" in task:
+            # GitHub issue
+            unique_task_id = f"issue-{task_id}"
+        else:
+            # Config task
+            unique_task_id = f"config-{task_id}"
+        
         logger.info(f"Verifying Task {task_id}: {task_name}")
         
         try:
@@ -108,7 +116,7 @@ class TaskCompletionOrchestrator:
             
             # Mark as completed in tracking system
             self.completed_tasks.append({
-                "task_id": task_id,
+                "task_id": unique_task_id,
                 "task_name": task_name,
                 "completed_at": datetime.now().isoformat(),
                 "status": "COMPLETED"
@@ -120,7 +128,7 @@ class TaskCompletionOrchestrator:
         except Exception as e:
             logger.error(f"✗ Verification Failed for Task {task_id}: {str(e)}")
             self.failed_tasks.append({
-                "task_id": task_id,
+                "task_id": unique_task_id,
                 "task_name": task_name,
                 "error": str(e),
                 "failed_at": datetime.now().isoformat()
