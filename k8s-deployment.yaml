@@ -1,0 +1,90 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: agentx5-deployment
+  labels:
+    app: agentx5
+    version: "5.0"
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: agentx5
+  template:
+    metadata:
+      labels:
+        app: agentx5
+        version: "5.0"
+    spec:
+      containers:
+      - name: agentx5
+        image: agentx5:5.0
+        ports:
+        - containerPort: 8000
+          name: http
+        - containerPort: 8001
+          name: metrics
+        env:
+        - name: AGENTX_MODE
+          value: "production"
+        - name: REDIS_URL
+          valueFrom:
+            secretKeyRef:
+              name: agentx5-secrets
+              key: redis-url
+        resources:
+          requests:
+            memory: "512Mi"
+            cpu: "500m"
+          limits:
+            memory: "2Gi"
+            cpu: "2000m"
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8000
+          initialDelaySeconds: 30
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /ready
+            port: 8000
+          initialDelaySeconds: 5
+          periodSeconds: 5
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: agentx5-service
+spec:
+  selector:
+    app: agentx5
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 8000
+    name: http
+  - protocol: TCP
+    port: 8001
+    targetPort: 8001
+    name: metrics
+  type: LoadBalancer
+---
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: agentx5-hpa
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: agentx5-deployment
+  minReplicas: 3
+  maxReplicas: 10
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 70
