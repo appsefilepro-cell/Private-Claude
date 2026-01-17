@@ -1,0 +1,15 @@
+PROMPT: Motion for Preliminary Injunction
+
+Generate emergency motion for preliminary injunction with complete package including:
+1. Notice of Motion
+2. Memorandum of Points & Authorities  
+3. Declaration in Support
+4. Proposed Order
+
+LEGAL STANDARD (4 FACTORS):
+1. Likelihood of success on the merits
+2. Irreparable harm without injunction
+3. Balance of equities favors plaintiff
+4. Public interest served by injunction
+
+Include detailed analysis of each factor with case citations and specific evidence of irreparable harm occurring now.

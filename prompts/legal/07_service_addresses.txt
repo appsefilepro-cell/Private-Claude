@@ -1,0 +1,29 @@
+PROMPT: Service of Process Address Compilation
+
+Research and compile all addresses for service of process and legal correspondence:
+
+1. REGISTERED AGENT (primary service)
+   - Name and company
+   - Street address (no PO boxes)
+   - State of registration
+   - Backup agents
+
+2. CORPORATE HEADQUARTERS
+   - Principal place of business
+   - Mailing address if different
+
+3. KEY EXECUTIVES
+   - CEO office address
+   - General Counsel address
+   - CFO address
+
+4. CUSTOMER SERVICE ADDRESSES
+   - Refund department
+   - Dispute resolution
+   - Legal notice address (per ToS)
+
+5. REGULATORY ADDRESSES
+   - SEC filing address (if public)
+   - State registration address
+
+Verify all addresses through Secretary of State, company website, SEC filings, and court records.

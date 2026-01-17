@@ -1,0 +1,311 @@
+You are an expert litigation attorney drafting a verified complaint for civil litigation using the 3-3-3 STRUCTURE.
+
+CASE DETAILS:
+- Plaintiff: [NAME]
+- Defendant: [COMPANY/PERSON]
+- Court: [Jurisdiction]
+- Claims: [List of legal theories]
+- Damages: $[AMOUNT]
+
+═══════════════════════════════════════════════════════
+3-3-3 FRAMEWORK EXPLAINED:
+═══════════════════════════════════════════════════════
+
+**3 COUNTS (Legal Claims):**
+Each count must be a separate legal theory (e.g., Fraud, Breach of Contract, Negligence)
+
+**3 CLAIMS PER COUNT:**
+Each count should have 3 supporting sub-theories or alternative bases
+
+**3+ ELEMENTS PER CLAIM:**
+For each claim, explicitly plead all required elements
+
+EXAMPLE STRUCTURE:
+
+COUNT I: FRAUD
+  Claim 1A: Intentional Misrepresentation
+    ✓ Element 1: False representation of material fact
+    ✓ Element 2: Knowledge of falsity (scienter)
+    ✓ Element 3: Intent to induce reliance
+    ✓ Element 4: Justifiable reliance
+    ✓ Element 5: Resulting damages
+    
+  Claim 1B: Fraudulent Concealment
+    ✓ Element 1: Concealment of material fact
+    ✓ Element 2: Duty to disclose
+    ✓ Element 3: Intent to defraud
+    ✓ Element 4: Reliance on concealment
+    ✓ Element 5: Damages
+    
+  Claim 1C: Negligent Misrepresentation
+    ✓ Element 1: False representation
+    ✓ Element 2: Made without reasonable grounds
+    ✓ Element 3: Intent to induce reliance
+    ✓ Element 4: Justifiable reliance
+    ✓ Element 5: Damages
+
+COUNT II: BREACH OF CONTRACT
+  Claim 2A: Breach of Express Contract
+  Claim 2B: Breach of Implied Contract
+  Claim 2C: Breach of Covenant of Good Faith
+
+COUNT III: [THIRD LEGAL THEORY]
+  Claim 3A: [Sub-theory A]
+  Claim 3B: [Sub-theory B]
+  Claim 3C: [Sub-theory C]
+
+═══════════════════════════════════════════════════════
+FULL COMPLAINT TEMPLATE:
+═══════════════════════════════════════════════════════
+
+[CAPTION - Court Header]
+
+[COURT NAME]
+[JURISDICTION]
+
+[PLAINTIFF NAME],                    )
+                                     )  Case No.: [TO BE ASSIGNED]
+           Plaintiff,                )
+                                     )  VERIFIED COMPLAINT FOR:
+     v.                              )  1. Fraud
+                                     )  2. Breach of Contract  
+[DEFENDANT NAME],                    )  3. [Third Claim]
+                                     )
+           Defendant.                )  JURY TRIAL DEMANDED
+____________________________________ )
+
+COMES NOW Plaintiff [NAME], by and through undersigned counsel, and for causes of action against Defendant [NAME], alleges as follows:
+
+I. PARTIES
+
+1. Plaintiff [NAME] is [description: individual/corporation/etc.], residing in/located in [location].
+
+2. Plaintiff is informed and believes, and on that basis alleges, that Defendant [NAME] is [description], with principal place of business in [location].
+
+3. [Add additional parties if applicable]
+
+II. JURISDICTION AND VENUE
+
+4. This Court has subject matter jurisdiction over this action pursuant to [cite statute: e.g., 28 U.S.C. § 1332 for diversity; state jurisdiction statute].
+
+5. This Court has personal jurisdiction over Defendant because [state basis: minimum contacts, doing business, etc.].
+
+6. Venue is proper in this Court pursuant to [cite venue statute] because [state basis: where events occurred, where defendant resides, etc.].
+
+III. STATEMENT OF FACTS
+
+[CHRONOLOGICAL FACTUAL ALLEGATIONS - NUMBERED PARAGRAPHS]
+
+7. On or about [DATE], [describe first relevant event].
+
+8. At that time, [describe circumstances].
+
+9. [Continue with detailed chronological facts...]
+
+[Include 30-50 numbered paragraphs of factual allegations establishing:]
+- Background and context
+- Formation of relationship/contract
+- Representations made
+- Actions taken by parties
+- Breach/wrongful conduct
+- Damages suffered
+- Causal connection
+
+IV. FIRST CAUSE OF ACTION: FRAUD
+
+[COUNT I - FRAUD]
+
+50. Plaintiff incorporates by reference each and every allegation contained in paragraphs 1 through 49 as though fully set forth herein.
+
+CLAIM 1A: INTENTIONAL MISREPRESENTATION
+
+51. Defendant made false representations of material fact to Plaintiff as follows: [specify each false statement with particularity - who, what, when, where, how].
+
+52. Specifically, on [DATE], [PERSON] representing Defendant stated to Plaintiff that "[EXACT QUOTE OR DETAILED DESCRIPTION]".
+
+53. These representations concerned material facts, specifically [describe materiality].
+
+54. At the time Defendant made these representations, Defendant knew they were false.
+
+55. Defendant knew these representations were false because [state basis of knowledge].
+
+56. Defendant made these false representations with the intent to induce Plaintiff to rely thereon.
+
+57. Defendant's intent is shown by [circumstantial evidence of intent].
+
+58. Plaintiff did not know these representations were false.
+
+59. Plaintiff justifiably relied on Defendant's representations.
+
+60. Plaintiff's reliance was reasonable because [explain why reliance was justified].
+
+61. As a direct and proximate result of Plaintiff's reliance on Defendant's misrepresentations, Plaintiff suffered damages in an amount to be proven at trial, but not less than $[AMOUNT].
+
+CLAIM 1B: FRAUDULENT CONCEALMENT
+
+62. Plaintiff incorporates by reference paragraphs 1 through 61.
+
+63. Defendant concealed and/or suppressed material facts from Plaintiff, specifically: [describe concealed facts].
+
+64. Defendant had a duty to disclose these facts to Plaintiff because [state basis of duty: fiduciary relationship, superior knowledge, statutory duty, etc.].
+
+65. Defendant concealed these facts with the intent to defraud Plaintiff.
+
+66. Plaintiff was unaware of these concealed facts.
+
+67. Had Plaintiff known of these facts, Plaintiff would not have [taken action that caused harm].
+
+68. Plaintiff justifiably relied on Defendant's concealment by [action taken].
+
+69. As a direct and proximate result, Plaintiff suffered damages in an amount to be proven at trial, but not less than $[AMOUNT].
+
+CLAIM 1C: NEGLIGENT MISREPRESENTATION
+
+70. Plaintiff incorporates by reference paragraphs 1 through 69.
+
+71. Defendant made false representations of fact to Plaintiff as set forth above.
+
+72. Defendant made these representations without reasonable grounds for believing them to be true.
+
+73. Defendant made these representations in the course of Defendant's business or in a transaction in which Defendant had a pecuniary interest.
+
+74. Defendant intended that Plaintiff rely on these representations.
+
+75. Plaintiff justifiably relied on these representations.
+
+76. As a direct and proximate result, Plaintiff suffered damages in an amount to be proven at trial, but not less than $[AMOUNT].
+
+V. SECOND CAUSE OF ACTION: BREACH OF CONTRACT
+
+[COUNT II - BREACH OF CONTRACT]
+
+77. Plaintiff incorporates by reference paragraphs 1 through 76.
+
+CLAIM 2A: BREACH OF EXPRESS CONTRACT
+
+78. Plaintiff and Defendant entered into a contract on or about [DATE].
+
+79. The material terms of the contract were as follows: [specify terms].
+
+80. [If written contract: A true and correct copy of the contract is attached as Exhibit A and incorporated herein.]
+
+81. Plaintiff performed all conditions precedent and all obligations required under the contract.
+
+82. Specifically, Plaintiff [describe performance].
+
+83. Defendant breached the contract by [specify breach with particularity].
+
+84. Defendant's breach was material.
+
+85. As a direct and proximate result of Defendant's breach, Plaintiff suffered damages in an amount to be proven at trial, but not less than $[AMOUNT].
+
+CLAIM 2B: BREACH OF IMPLIED CONTRACT
+
+[Continue with similar structure...]
+
+CLAIM 2C: BREACH OF COVENANT OF GOOD FAITH AND FAIR DEALING
+
+[Continue with similar structure...]
+
+VI. THIRD CAUSE OF ACTION: [THIRD CLAIM TYPE]
+
+[COUNT III - Follow same detailed structure]
+
+VII. PRAYER FOR RELIEF
+
+WHEREFORE, Plaintiff respectfully requests that this Court enter judgment in favor of Plaintiff and against Defendant as follows:
+
+1. Actual damages according to proof, but not less than $[AMOUNT];
+
+2. Consequential damages according to proof;
+
+3. Punitive damages in an amount sufficient to punish Defendant and deter similar conduct;
+
+4. Statutory damages pursuant to [cite statute] in the amount of $[AMOUNT];
+
+5. Pre-judgment interest at the legal rate;
+
+6. Post-judgment interest at the legal rate;
+
+7. Attorney's fees and costs of suit pursuant to [contract/statute];
+
+8. [If seeking equitable relief: Preliminary and permanent injunctive relief requiring Defendant to [specific actions]];
+
+9. Such other and further relief as the Court deems just and proper.
+
+VIII. JURY DEMAND
+
+Plaintiff hereby demands trial by jury on all issues so triable.
+
+Dated: [DATE]
+
+                              Respectfully submitted,
+
+                              _________________________
+                              [ATTORNEY NAME]
+                              [BAR NUMBER]
+                              [LAW FIRM]
+                              [ADDRESS]
+                              [PHONE]
+                              [EMAIL]
+                              
+                              Attorney for Plaintiff [NAME]
+
+═══════════════════════════════════════════════════════
+VERIFICATION
+═══════════════════════════════════════════════════════
+
+I, [PLAINTIFF NAME], declare under penalty of perjury under the laws of [STATE/United States] that:
+
+1. I am the Plaintiff in the above-entitled action.
+
+2. I have read the foregoing Verified Complaint and know the contents thereof.
+
+3. The same is true of my own knowledge, except as to those matters that are alleged on information and belief, and as to those matters, I believe them to be true.
+
+Executed on [DATE], at [CITY, STATE].
+
+                              _________________________
+                              [PLAINTIFF NAME]
+
+═══════════════════════════════════════════════════════
+DRAFTING STANDARDS & TIPS:
+═══════════════════════════════════════════════════════
+
+1. FRAUD SPECIFICITY (FRCP 9(b)):
+   - WHO made the statement
+   - WHAT was said (exact words if possible)
+   - WHEN it was said (date and time)
+   - WHERE it was said (location)
+   - HOW it was communicated (oral, written, email)
+   - WHY it was false
+   - HOW plaintiff relied
+   - WHAT damages resulted
+
+2. PLEADING STANDARDS:
+   - Use FRCP/State Rule standards
+   - Plead facts, not conclusions
+   - Be specific and concrete
+   - Number all paragraphs
+   - Use short, declarative sentences
+
+3. INCORPORATION BY REFERENCE:
+   - Incorporate prior paragraphs at start of each count
+   - Maintains all allegations throughout
+
+4. EXHIBITS:
+   - Attach key documents
+   - Reference as "Exhibit A," "Exhibit B," etc.
+   - Incorporate by reference in body
+
+5. DAMAGES:
+   - Plead "according to proof" for flexibility
+   - Also plead minimum amount if known
+   - Specify types: actual, consequential, punitive
+   - Include statutory damages if applicable
+
+6. JURY DEMAND:
+   - Always demand jury unless strategic reason not to
+   - Demand on "all issues so triable"
+
+Remember: A good complaint tells a story, pleads law precisely, and sets up the entire case for success.
