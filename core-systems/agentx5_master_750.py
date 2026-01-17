@@ -239,6 +239,7 @@ class AgentX5MasterOrchestrator:
         await asyncio.sleep(duration)
         
         return {
+            'success': True,
             'task_id': task.task_id,
             'task_type': task.task_type,
             'division': task.payload.get('division', 'Unknown'),
