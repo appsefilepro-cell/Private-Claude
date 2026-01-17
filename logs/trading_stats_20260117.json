@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-01-17T12:26:29.171810",
+  "timestamp": "2026-01-17T12:31:29.226972",
   "accounts": {
     "ACC-003": {
       "name": "Beginner-$500-Paper",
@@ -54,7 +54,7 @@
       "environment": "paper",
       "initial_capital": 100,
       "current_capital": 100,
-      "total_trades": 4,
+      "total_trades": 5,
       "winning_trades": 0,
       "losing_trades": 0,
       "total_profit": 0.0,
@@ -99,9 +99,19 @@
           "price": 51224.588674707185,
           "size": 2.0,
           "profit_loss": 0
+        },
+        {
+          "timestamp": "2026-01-17T12:28:11.481301",
+          "type": "BUY",
+          "pair": "BTC/USD",
+          "pattern": "MORNING_STAR",
+          "confidence": 0.85,
+          "price": 49963.26983726399,
+          "size": 2.0,
+          "profit_loss": 0
         }
       ],
-      "last_trade_time": "2026-01-17T12:24:11.462974",
+      "last_trade_time": "2026-01-17T12:28:11.481301",
       "uptime_start": "2026-01-17T11:51:11.375980",
       "status": "RUNNING"
     },
@@ -111,7 +121,7 @@
       "environment": "paper",
       "initial_capital": 1000,
       "current_capital": 1000,
-      "total_trades": 2,
+      "total_trades": 3,
       "winning_trades": 0,
       "losing_trades": 0,
       "total_profit": 0.0,
@@ -136,9 +146,19 @@
           "price": 48320.837009132825,
           "size": 20.0,
           "profit_loss": 0
+        },
+        {
+          "timestamp": "2026-01-17T12:31:11.447369",
+          "type": "BUY",
+          "pair": "BTC/USD",
+          "pattern": "BULLISH_ENGULFING",
+          "confidence": 0.8,
+          "price": 50012.07314098967,
+          "size": 20.0,
+          "profit_loss": 0
         }
       ],
-      "last_trade_time": "2026-01-17T12:23:11.429758",
+      "last_trade_time": "2026-01-17T12:31:11.447369",
       "uptime_start": "2026-01-17T11:51:11.376256",
       "status": "RUNNING"
     },
@@ -185,7 +205,7 @@
       "environment": "paper",
       "initial_capital": 10000,
       "current_capital": 10000,
-      "total_trades": 8,
+      "total_trades": 9,
       "winning_trades": 0,
       "losing_trades": 0,
       "total_profit": 0.0,
@@ -270,9 +290,19 @@
           "price": 52241.66375034414,
           "size": 200.0,
           "profit_loss": 0
+        },
+        {
+          "timestamp": "2026-01-17T12:29:11.708862",
+          "type": "SELL",
+          "pair": "BTC/USD",
+          "pattern": "BEARISH_ENGULFING",
+          "confidence": 0.8,
+          "price": 53341.28469342843,
+          "size": 200.0,
+          "profit_loss": 0
         }
       ],
-      "last_trade_time": "2026-01-17T12:26:11.692565",
+      "last_trade_time": "2026-01-17T12:29:11.708862",
       "uptime_start": "2026-01-17T11:51:11.607532",
       "status": "RUNNING"
     },
@@ -621,7 +651,7 @@
       "environment": "sandbox",
       "initial_capital": 100000,
       "current_capital": 100000,
-      "total_trades": 4,
+      "total_trades": 6,
       "winning_trades": 0,
       "losing_trades": 0,
       "total_profit": 0.0,
@@ -666,9 +696,29 @@
           "price": 47565.004367786154,
           "size": 2000.0,
           "profit_loss": 0
+        },
+        {
+          "timestamp": "2026-01-17T12:28:19.680387",
+          "type": "SELL",
+          "pair": "BTC/USD",
+          "pattern": "EVENING_STAR",
+          "confidence": 0.85,
+          "price": 46245.77851828346,
+          "size": 2000.0,
+          "profit_loss": 0
+        },
+        {
+          "timestamp": "2026-01-17T12:29:19.690498",
+          "type": "SELL",
+          "pair": "BTC/USD",
+          "pattern": "BEARISH_ENGULFING",
+          "confidence": 0.8,
+          "price": 50285.81772600575,
+          "size": 2000.0,
+          "profit_loss": 0
         }
       ],
-      "last_trade_time": "2026-01-17T12:07:19.647345",
+      "last_trade_time": "2026-01-17T12:29:19.690498",
       "uptime_start": "2026-01-17T11:51:19.614540",
       "status": "RUNNING"
     },
@@ -862,7 +912,7 @@
       "environment": "sandbox",
       "initial_capital": 10000,
       "current_capital": 10000,
-      "total_trades": 6,
+      "total_trades": 8,
       "winning_trades": 0,
       "losing_trades": 0,
       "total_profit": 0.0,
@@ -927,9 +977,29 @@
           "price": 51868.37160164876,
           "size": 200.0,
           "profit_loss": 0
+        },
+        {
+          "timestamp": "2026-01-17T12:29:25.740591",
+          "type": "BUY",
+          "pair": "BTC/USD",
+          "pattern": "MORNING_STAR",
+          "confidence": 0.85,
+          "price": 51171.22803748758,
+          "size": 200.0,
+          "profit_loss": 0
+        },
+        {
+          "timestamp": "2026-01-17T12:31:25.756142",
+          "type": "BUY",
+          "pair": "BTC/USD",
+          "pattern": "BULLISH_ENGULFING",
+          "confidence": 0.8,
+          "price": 51479.57654784702,
+          "size": 200.0,
+          "profit_loss": 0
         }
       ],
-      "last_trade_time": "2026-01-17T12:16:25.721845",
+      "last_trade_time": "2026-01-17T12:31:25.756142",
       "uptime_start": "2026-01-17T11:51:25.630134",
       "status": "RUNNING"
     },
