@@ -54,7 +54,7 @@ export function ChatBox({
     if (!input.trim() || isLoading) return;
 
     const userMessage: Message = {
-      id: Date.now().toString(),
+      id: `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
       role: 'user',
       content: input.trim(),
       timestamp: new Date(),
@@ -62,6 +62,7 @@ export function ChatBox({
     };
 
     setMessages(prev => [...prev, userMessage]);
+    const currentInput = input.trim();
     setInput('');
     setIsLoading(true);
 
@@ -74,11 +75,17 @@ export function ChatBox({
         )
       );
 
+      // Build conversation context for API
+      const conversationMessages = messages
+        .filter(m => m.role !== 'system')
+        .map(m => ({ role: m.role, content: m.content }));
+      conversationMessages.push({ role: 'user', content: currentInput });
+
       const response = await fetch(apiEndpoint, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ 
-          messages: [{ role: 'user', content: input.trim() }]
+          messages: conversationMessages
         }),
       });
 
@@ -87,7 +94,7 @@ export function ChatBox({
       const data = await response.json();
 
       const assistantMessage: Message = {
-        id: (Date.now() + 1).toString(),
+        id: `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
         role: 'assistant',
         content: data.message || data.response || 'I apologize, but I encountered an error.',
         timestamp: new Date(),
@@ -111,7 +118,7 @@ export function ChatBox({
       );
 
       const errorMessage: Message = {
-        id: (Date.now() + 2).toString(),
+        id: `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
         role: 'system',
         content: '❌ Failed to send message. Please try again.',
         timestamp: new Date(),

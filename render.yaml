@@ -16,7 +16,7 @@ services:
         sync: false
       - key: OPENAI_API_KEY
         sync: false
-    healthCheckPath: /
+    healthCheckPath: /api/health
     autoDeploy: true
     buildFilter:
       paths:
