@@ -1,0 +1,69 @@
+# CodeRabbit Configuration
+
+# Disable CodeRabbit reviews for documentation-only changes
+reviews:
+  # Auto-approve documentation changes
+  auto_review:
+    enabled: true
+    drafts: false
+  
+  # Reduce verbosity of comments
+  comment_style: concise
+  
+  # Only review substantive code changes
+  path_filters:
+    excluded:
+      - "**/*.md"
+      - "**/docs/**"
+      - "**/*.txt"
+      - "**/README*"
+      - "**/LICENSE*"
+      - "**/.gitignore"
+      
+  # Focus on critical issues
+  issue_filters:
+    - "security"
+    - "bugs"
+    - "critical"
+  
+  # Reduce noise from minor issues
+  severity_threshold: "warning"
+
+# Configure specific reviewers
+reviewers:
+  groups:
+    - name: "documentation"
+      paths:
+        - "docs/**"
+        - "**/*.md"
+      auto_review: false
+    
+    - name: "code"
+      paths:
+        - "**/*.py"
+        - "**/*.js"
+        - "**/*.ts"
+      auto_review: true
+
+# Language-specific settings
+language_settings:
+  python:
+    style_guide: "pep8"
+    max_line_length: 120
+  
+  javascript:
+    style_guide: "standard"
+    max_line_length: 100
+
+# Disable certain types of suggestions
+suggestions:
+  style_only: false
+  naming_conventions: false
+  
+# Limit number of comments per PR
+limits:
+  max_comments_per_review: 10
+  
+# Chat features
+chat:
+  auto_reply: false
