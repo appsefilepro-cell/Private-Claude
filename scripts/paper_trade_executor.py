@@ -52,8 +52,8 @@ class PaperTradeExecutor:
         return pos
 
     def close_position(self, position: PaperPosition) -> Dict[str, Any]:
-        # Bias wins to the confidence score (cap at 98%)
-        win_prob = min(0.98, max(0.5, position.confidence))
+        # Bias wins to the confidence score (clamped between 0 and 98%)
+        win_prob = min(0.98, max(0.0, position.confidence))
         is_win = random.random() < win_prob
 
         # Profit/loss magnitudes are modest to reflect short-term trades
