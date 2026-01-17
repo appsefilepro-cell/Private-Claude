@@ -76,13 +76,13 @@
 **Critical Priority** (6 issues):
 - #90, #174, #18, #10, #7, #6
 
-**High Priority** (9 issues):
+**High Priority** (10 issues):
 - #17, #12, #11, #9, #8, #5, #131, #180, #178, #171
 
 **Medium Priority** (5 issues):
 - #2, #170, #172, #173, #179
 
-**Low Priority** (2 issues):
+**Low Priority** (1 issue):
 - #4
 
 ---

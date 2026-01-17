@@ -19,11 +19,9 @@ Date: 2026-01-12
 import asyncio
 import json
 import logging
-import os
-import sys
 from datetime import datetime
 from pathlib import Path
-from typing import Dict, List, Optional
+from typing import Dict, List
 
 # Setup logging
 logging.basicConfig(
@@ -58,9 +56,13 @@ class TaskCompletionOrchestrator:
             return json.load(f)
 
     def load_github_issues(self) -> List[Dict]:
-        """Load open GitHub issues (simulated - would use GitHub API)"""
-        # In production, this would use GitHub API
-        # For now, we'll work with the known issues
+        """
+        Load open GitHub issues.
+        
+        NOTE: This is a snapshot of issues as of 2026-01-12. In production,
+        this should use the GitHub API to fetch current open issues dynamically.
+        """
+        # Snapshot of open issues as of 2026-01-12
         open_issues = [
             {"number": 2, "title": "Assign Role: Incident Responder", "priority": "HIGH"},
             {"number": 4, "title": "Sub issue", "priority": "LOW"},
@@ -87,7 +89,7 @@ class TaskCompletionOrchestrator:
         ]
         return sorted(open_issues, key=lambda x: {"CRITICAL": 0, "HIGH": 1, "MEDIUM": 2, "LOW": 3}[x["priority"]])
 
-    async def complete_task(self, task: Dict) -> bool:
+    async def track_task_completion(self, task: Dict) -> bool:
         """
         Track task completion status.
         
@@ -149,9 +151,10 @@ class TaskCompletionOrchestrator:
         
         async def limited_complete(task):
             async with semaphore:
-                return await self.complete_task(task)
+                return await self.track_task_completion(task)
         
-        results = await asyncio.gather(
+        # Track completion status for all tasks
+        await asyncio.gather(
             *[limited_complete(task) for task in all_tasks],
             return_exceptions=True
         )
