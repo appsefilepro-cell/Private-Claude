@@ -1,0 +1,1061 @@
+{
+  "timestamp": "2026-01-17T12:26:29.171810",
+  "accounts": {
+    "ACC-003": {
+      "name": "Beginner-$500-Paper",
+      "profile": "beginner",
+      "environment": "paper",
+      "initial_capital": 500,
+      "current_capital": 500,
+      "total_trades": 3,
+      "winning_trades": 0,
+      "losing_trades": 0,
+      "total_profit": 0.0,
+      "total_loss": 0.0,
+      "current_positions": [
+        {
+          "timestamp": "2026-01-17T12:07:11.395598",
+          "type": "BUY",
+          "pair": "BTC/USD",
+          "pattern": "MORNING_STAR",
+          "confidence": 0.85,
+          "price": 49713.94408178706,
+          "size": 10.0,
+          "profit_loss": 0
+        },
+        {
+          "timestamp": "2026-01-17T12:19:11.423482",
+          "type": "BUY",
+          "pair": "BTC/USD",
+          "pattern": "BULLISH_ENGULFING",
+          "confidence": 0.8,
+          "price": 50119.45666510072,
+          "size": 10.0,
+          "profit_loss": 0
+        },
+        {
+          "timestamp": "2026-01-17T12:24:11.465939",
+          "type": "BUY",
+          "pair": "BTC/USD",
+          "pattern": "HAMMER",
+          "confidence": 0.75,
+          "price": 48538.37278271048,
+          "size": 10.0,
+          "profit_loss": 0
+        }
+      ],
+      "last_trade_time": "2026-01-17T12:24:11.465939",
+      "uptime_start": "2026-01-17T11:51:11.375684",
+      "status": "RUNNING"
+    },
+    "ACC-001": {
+      "name": "Beginner-$100-Paper",
+      "profile": "beginner",
+      "environment": "paper",
+      "initial_capital": 100,
+      "current_capital": 100,
+      "total_trades": 4,
+      "winning_trades": 0,
+      "losing_trades": 0,
+      "total_profit": 0.0,
+      "total_loss": 0.0,
+      "current_positions": [
+        {
+          "timestamp": "2026-01-17T11:53:11.378220",
+          "type": "BUY",
+          "pair": "BTC/USD",
+          "pattern": "BULLISH_ENGULFING",
+          "confidence": 0.8,
+          "price": 50138.714848446805,
+          "size": 2.0,
+          "profit_loss": 0
+        },
+        {
+          "timestamp": "2026-01-17T11:56:11.389690",
+          "type": "BUY",
+          "pair": "BTC/USD",
+          "pattern": "HAMMER",
+          "confidence": 0.75,
+          "price": 50237.87060781361,
+          "size": 2.0,
+          "profit_loss": 0
+        },
+        {
+          "timestamp": "2026-01-17T11:58:11.404400",
+          "type": "BUY",
+          "pair": "BTC/USD",
+          "pattern": "MORNING_STAR",
+          "confidence": 0.85,
+          "price": 53662.92833869688,
+          "size": 2.0,
+          "profit_loss": 0
+        },
+        {
+          "timestamp": "2026-01-17T12:24:11.462974",
+          "type": "BUY",
+          "pair": "BTC/USD",
+          "pattern": "BULLISH_ENGULFING",
+          "confidence": 0.8,
+          "price": 51224.588674707185,
+          "size": 2.0,
+          "profit_loss": 0
+        }
+      ],
+      "last_trade_time": "2026-01-17T12:24:11.462974",
+      "uptime_start": "2026-01-17T11:51:11.375980",
+      "status": "RUNNING"
+    },
+    "ACC-004": {
+      "name": "Beginner-$1000-Paper",
+      "profile": "beginner",
+      "environment": "paper",
+      "initial_capital": 1000,
+      "current_capital": 1000,
+      "total_trades": 2,
+      "winning_trades": 0,
+      "losing_trades": 0,
+      "total_profit": 0.0,
+      "total_loss": 0.0,
+      "current_positions": [
+        {
+          "timestamp": "2026-01-17T11:53:11.379312",
+          "type": "SELL",
+          "pair": "BTC/USD",
+          "pattern": "BEARISH_ENGULFING",
+          "confidence": 0.8,
+          "price": 49620.64245493764,
+          "size": 20.0,
+          "profit_loss": 0
+        },
+        {
+          "timestamp": "2026-01-17T12:23:11.429758",
+          "type": "BUY",
+          "pair": "BTC/USD",
+          "pattern": "MORNING_STAR",
+          "confidence": 0.85,
+          "price": 48320.837009132825,
+          "size": 20.0,
+          "profit_loss": 0
+        }
+      ],
+      "last_trade_time": "2026-01-17T12:23:11.429758",
+      "uptime_start": "2026-01-17T11:51:11.376256",
+      "status": "RUNNING"
+    },
+    "ACC-002": {
+      "name": "Beginner-$250-Paper",
+      "profile": "beginner",
+      "environment": "paper",
+      "initial_capital": 250,
+      "current_capital": 250,
+      "total_trades": 2,
+      "winning_trades": 0,
+      "losing_trades": 0,
+      "total_profit": 0.0,
+      "total_loss": 0.0,
+      "current_positions": [
+        {
+          "timestamp": "2026-01-17T12:03:11.391748",
+          "type": "SELL",
+          "pair": "BTC/USD",
+          "pattern": "BEARISH_ENGULFING",
+          "confidence": 0.8,
+          "price": 51807.09133590029,
+          "size": 5.0,
+          "profit_loss": 0
+        },
+        {
+          "timestamp": "2026-01-17T12:24:11.465579",
+          "type": "SELL",
+          "pair": "BTC/USD",
+          "pattern": "BEARISH_ENGULFING",
+          "confidence": 0.8,
+          "price": 49437.31595914466,
+          "size": 5.0,
+          "profit_loss": 0
+        }
+      ],
+      "last_trade_time": "2026-01-17T12:24:11.465579",
+      "uptime_start": "2026-01-17T11:51:11.376522",
+      "status": "RUNNING"
+    },
+    "ACC-005": {
+      "name": "Beginner-$10000-Paper",
+      "profile": "beginner",
+      "environment": "paper",
+      "initial_capital": 10000,
+      "current_capital": 10000,
+      "total_trades": 8,
+      "winning_trades": 0,
+      "losing_trades": 0,
+      "total_profit": 0.0,
+      "total_loss": 0.0,
+      "current_positions": [
+        {
+          "timestamp": "2026-01-17T12:04:11.620082",
+          "type": "BUY",
+          "pair": "BTC/USD",
+          "pattern": "MORNING_STAR",
+          "confidence": 0.85,
+          "price": 50544.86194775235,
+          "size": 200.0,
+          "profit_loss": 0
+        },
+        {
+          "timestamp": "2026-01-17T12:05:11.630881",
+          "type": "BUY",
+          "pair": "BTC/USD",
+          "pattern": "MORNING_STAR",
+          "confidence": 0.85,
+          "price": 50721.96860121813,
+          "size": 200.0,
+          "profit_loss": 0
+        },
+        {
+          "timestamp": "2026-01-17T12:10:11.647853",
+          "type": "SELL",
+          "pair": "BTC/USD",
+          "pattern": "EVENING_STAR",
+          "confidence": 0.85,
+          "price": 49227.356040098464,
+          "size": 200.0,
+          "profit_loss": 0
+        },
+        {
+          "timestamp": "2026-01-17T12:13:11.654601",
+          "type": "SELL",
+          "pair": "BTC/USD",
+          "pattern": "BEARISH_ENGULFING",
+          "confidence": 0.8,
+          "price": 47226.27246052793,
+          "size": 200.0,
+          "profit_loss": 0
+        },
+        {
+          "timestamp": "2026-01-17T12:14:11.662006",
+          "type": "BUY",
+          "pair": "BTC/USD",
+          "pattern": "BULLISH_ENGULFING",
+          "confidence": 0.8,
+          "price": 50628.499991842,
+          "size": 200.0,
+          "profit_loss": 0
+        },
+        {
+          "timestamp": "2026-01-17T12:17:11.669195",
+          "type": "SELL",
+          "pair": "BTC/USD",
+          "pattern": "BEARISH_ENGULFING",
+          "confidence": 0.8,
+          "price": 51603.21266541334,
+          "size": 200.0,
+          "profit_loss": 0
+        },
+        {
+          "timestamp": "2026-01-17T12:21:11.684094",
+          "type": "SELL",
+          "pair": "BTC/USD",
+          "pattern": "EVENING_STAR",
+          "confidence": 0.85,
+          "price": 49392.398884350376,
+          "size": 200.0,
+          "profit_loss": 0
+        },
+        {
+          "timestamp": "2026-01-17T12:26:11.692565",
+          "type": "BUY",
+          "pair": "BTC/USD",
+          "pattern": "HAMMER",
+          "confidence": 0.75,
+          "price": 52241.66375034414,
+          "size": 200.0,
+          "profit_loss": 0
+        }
+      ],
+      "last_trade_time": "2026-01-17T12:26:11.692565",
+      "uptime_start": "2026-01-17T11:51:11.607532",
+      "status": "RUNNING"
+    },
+    "ACC-006": {
+      "name": "Beginner-$100000-Paper",
+      "profile": "beginner",
+      "environment": "paper",
+      "initial_capital": 100000,
+      "current_capital": 100000,
+      "total_trades": 2,
+      "winning_trades": 0,
+      "losing_trades": 0,
+      "total_profit": 0.0,
+      "total_loss": 0.0,
+      "current_positions": [
+        {
+          "timestamp": "2026-01-17T12:19:12.644697",
+          "type": "BUY",
+          "pair": "BTC/USD",
+          "pattern": "MORNING_STAR",
+          "confidence": 0.85,
+          "price": 49562.19517272845,
+          "size": 2000.0,
+          "profit_loss": 0
+        },
+        {
+          "timestamp": "2026-01-17T12:25:12.660989",
+          "type": "BUY",
+          "pair": "BTC/USD",
+          "pattern": "BULLISH_ENGULFING",
+          "confidence": 0.8,
+          "price": 50650.192708676244,
+          "size": 2000.0,
+          "profit_loss": 0
+        }
+      ],
+      "last_trade_time": "2026-01-17T12:25:12.660989",
+      "uptime_start": "2026-01-17T11:51:12.608264",
+      "status": "RUNNING"
+    },
+    "ACC-007": {
+      "name": "Beginner-$300000-Paper",
+      "profile": "beginner",
+      "environment": "paper",
+      "initial_capital": 300000,
+      "current_capital": 300000,
+      "total_trades": 5,
+      "winning_trades": 0,
+      "losing_trades": 0,
+      "total_profit": 0.0,
+      "total_loss": 0.0,
+      "current_positions": [
+        {
+          "timestamp": "2026-01-17T11:55:13.608291",
+          "type": "BUY",
+          "pair": "BTC/USD",
+          "pattern": "MORNING_STAR",
+          "confidence": 0.85,
+          "price": 50707.570401210425,
+          "size": 6000.0,
+          "profit_loss": 0
+        },
+        {
+          "timestamp": "2026-01-17T11:57:13.623328",
+          "type": "BUY",
+          "pair": "BTC/USD",
+          "pattern": "MORNING_STAR",
+          "confidence": 0.85,
+          "price": 49432.07291075203,
+          "size": 6000.0,
+          "profit_loss": 0
+        },
+        {
+          "timestamp": "2026-01-17T12:10:13.655438",
+          "type": "SELL",
+          "pair": "BTC/USD",
+          "pattern": "EVENING_STAR",
+          "confidence": 0.85,
+          "price": 49330.12985069658,
+          "size": 6000.0,
+          "profit_loss": 0
+        },
+        {
+          "timestamp": "2026-01-17T12:16:13.665693",
+          "type": "BUY",
+          "pair": "BTC/USD",
+          "pattern": "HAMMER",
+          "confidence": 0.75,
+          "price": 51488.47664024622,
+          "size": 6000.0,
+          "profit_loss": 0
+        },
+        {
+          "timestamp": "2026-01-17T12:17:13.684804",
+          "type": "BUY",
+          "pair": "BTC/USD",
+          "pattern": "MORNING_STAR",
+          "confidence": 0.85,
+          "price": 51640.98048755673,
+          "size": 6000.0,
+          "profit_loss": 0
+        }
+      ],
+      "last_trade_time": "2026-01-17T12:17:13.684804",
+      "uptime_start": "2026-01-17T11:51:13.604737",
+      "status": "RUNNING"
+    },
+    "ACC-008": {
+      "name": "Novice-$100-Sandbox",
+      "profile": "novice",
+      "environment": "sandbox",
+      "initial_capital": 100,
+      "current_capital": 100,
+      "total_trades": 3,
+      "winning_trades": 0,
+      "losing_trades": 0,
+      "total_profit": 0.0,
+      "total_loss": 0.0,
+      "current_positions": [
+        {
+          "timestamp": "2026-01-17T11:54:14.611135",
+          "type": "SELL",
+          "pair": "BTC/USD",
+          "pattern": "BEARISH_ENGULFING",
+          "confidence": 0.8,
+          "price": 52183.133590322315,
+          "size": 2.0,
+          "profit_loss": 0
+        },
+        {
+          "timestamp": "2026-01-17T11:55:14.619732",
+          "type": "BUY",
+          "pair": "BTC/USD",
+          "pattern": "MORNING_STAR",
+          "confidence": 0.85,
+          "price": 48757.037572981426,
+          "size": 2.0,
+          "profit_loss": 0
+        },
+        {
+          "timestamp": "2026-01-17T12:15:14.645860",
+          "type": "BUY",
+          "pair": "BTC/USD",
+          "pattern": "MORNING_STAR",
+          "confidence": 0.85,
+          "price": 50380.18212757847,
+          "size": 2.0,
+          "profit_loss": 0
+        }
+      ],
+      "last_trade_time": "2026-01-17T12:15:14.645860",
+      "uptime_start": "2026-01-17T11:51:14.608874",
+      "status": "RUNNING"
+    },
+    "ACC-009": {
+      "name": "Novice-$250-Sandbox",
+      "profile": "novice",
+      "environment": "sandbox",
+      "initial_capital": 250,
+      "current_capital": 250,
+      "total_trades": 2,
+      "winning_trades": 0,
+      "losing_trades": 0,
+      "total_profit": 0.0,
+      "total_loss": 0.0,
+      "current_positions": [
+        {
+          "timestamp": "2026-01-17T12:02:15.615682",
+          "type": "BUY",
+          "pair": "BTC/USD",
+          "pattern": "MORNING_STAR",
+          "confidence": 0.85,
+          "price": 50540.82404200201,
+          "size": 5.0,
+          "profit_loss": 0
+        },
+        {
+          "timestamp": "2026-01-17T12:20:15.641881",
+          "type": "SELL",
+          "pair": "BTC/USD",
+          "pattern": "BEARISH_ENGULFING",
+          "confidence": 0.8,
+          "price": 51157.81267617773,
+          "size": 5.0,
+          "profit_loss": 0
+        }
+      ],
+      "last_trade_time": "2026-01-17T12:20:15.641881",
+      "uptime_start": "2026-01-17T11:51:15.608003",
+      "status": "RUNNING"
+    },
+    "ACC-010": {
+      "name": "Novice-$500-Sandbox",
+      "profile": "novice",
+      "environment": "sandbox",
+      "initial_capital": 500,
+      "current_capital": 500,
+      "total_trades": 2,
+      "winning_trades": 0,
+      "losing_trades": 0,
+      "total_profit": 0.0,
+      "total_loss": 0.0,
+      "current_positions": [
+        {
+          "timestamp": "2026-01-17T11:53:16.617071",
+          "type": "SELL",
+          "pair": "BTC/USD",
+          "pattern": "BEARISH_ENGULFING",
+          "confidence": 0.8,
+          "price": 51171.542397192956,
+          "size": 10.0,
+          "profit_loss": 0
+        },
+        {
+          "timestamp": "2026-01-17T11:56:16.655734",
+          "type": "BUY",
+          "pair": "BTC/USD",
+          "pattern": "BULLISH_ENGULFING",
+          "confidence": 0.8,
+          "price": 50783.09769773147,
+          "size": 10.0,
+          "profit_loss": 0
+        }
+      ],
+      "last_trade_time": "2026-01-17T11:56:16.655734",
+      "uptime_start": "2026-01-17T11:51:16.615413",
+      "status": "RUNNING"
+    },
+    "ACC-011": {
+      "name": "Novice-$1000-Sandbox",
+      "profile": "novice",
+      "environment": "sandbox",
+      "initial_capital": 1000,
+      "current_capital": 1000,
+      "total_trades": 5,
+      "winning_trades": 0,
+      "losing_trades": 0,
+      "total_profit": 0.0,
+      "total_loss": 0.0,
+      "current_positions": [
+        {
+          "timestamp": "2026-01-17T11:57:17.622280",
+          "type": "BUY",
+          "pair": "BTC/USD",
+          "pattern": "MORNING_STAR",
+          "confidence": 0.85,
+          "price": 53123.45773739041,
+          "size": 20.0,
+          "profit_loss": 0
+        },
+        {
+          "timestamp": "2026-01-17T12:03:17.641927",
+          "type": "BUY",
+          "pair": "BTC/USD",
+          "pattern": "MORNING_STAR",
+          "confidence": 0.85,
+          "price": 52805.82841431093,
+          "size": 20.0,
+          "profit_loss": 0
+        },
+        {
+          "timestamp": "2026-01-17T12:16:17.695910",
+          "type": "SELL",
+          "pair": "BTC/USD",
+          "pattern": "EVENING_STAR",
+          "confidence": 0.85,
+          "price": 50842.37275720606,
+          "size": 20.0,
+          "profit_loss": 0
+        },
+        {
+          "timestamp": "2026-01-17T12:20:17.708059",
+          "type": "SELL",
+          "pair": "BTC/USD",
+          "pattern": "EVENING_STAR",
+          "confidence": 0.85,
+          "price": 49320.127215113724,
+          "size": 20.0,
+          "profit_loss": 0
+        },
+        {
+          "timestamp": "2026-01-17T12:26:17.721460",
+          "type": "BUY",
+          "pair": "BTC/USD",
+          "pattern": "HAMMER",
+          "confidence": 0.75,
+          "price": 52391.0382312492,
+          "size": 20.0,
+          "profit_loss": 0
+        }
+      ],
+      "last_trade_time": "2026-01-17T12:26:17.721460",
+      "uptime_start": "2026-01-17T11:51:17.614582",
+      "status": "RUNNING"
+    },
+    "ACC-012": {
+      "name": "Novice-$10000-Sandbox",
+      "profile": "novice",
+      "environment": "sandbox",
+      "initial_capital": 10000,
+      "current_capital": 10000,
+      "total_trades": 3,
+      "winning_trades": 0,
+      "losing_trades": 0,
+      "total_profit": 0.0,
+      "total_loss": 0.0,
+      "current_positions": [
+        {
+          "timestamp": "2026-01-17T11:58:18.624364",
+          "type": "SELL",
+          "pair": "BTC/USD",
+          "pattern": "BEARISH_ENGULFING",
+          "confidence": 0.8,
+          "price": 50432.220270632286,
+          "size": 200.0,
+          "profit_loss": 0
+        },
+        {
+          "timestamp": "2026-01-17T12:11:18.653666",
+          "type": "BUY",
+          "pair": "BTC/USD",
+          "pattern": "HAMMER",
+          "confidence": 0.75,
+          "price": 51122.908367065356,
+          "size": 200.0,
+          "profit_loss": 0
+        },
+        {
+          "timestamp": "2026-01-17T12:18:18.664556",
+          "type": "BUY",
+          "pair": "BTC/USD",
+          "pattern": "MORNING_STAR",
+          "confidence": 0.85,
+          "price": 49145.746309576156,
+          "size": 200.0,
+          "profit_loss": 0
+        }
+      ],
+      "last_trade_time": "2026-01-17T12:18:18.664556",
+      "uptime_start": "2026-01-17T11:51:18.613587",
+      "status": "RUNNING"
+    },
+    "ACC-013": {
+      "name": "Novice-$100000-Sandbox",
+      "profile": "novice",
+      "environment": "sandbox",
+      "initial_capital": 100000,
+      "current_capital": 100000,
+      "total_trades": 4,
+      "winning_trades": 0,
+      "losing_trades": 0,
+      "total_profit": 0.0,
+      "total_loss": 0.0,
+      "current_positions": [
+        {
+          "timestamp": "2026-01-17T11:52:19.615974",
+          "type": "BUY",
+          "pair": "BTC/USD",
+          "pattern": "MORNING_STAR",
+          "confidence": 0.85,
+          "price": 51584.98655903477,
+          "size": 2000.0,
+          "profit_loss": 0
+        },
+        {
+          "timestamp": "2026-01-17T11:53:19.624439",
+          "type": "SELL",
+          "pair": "BTC/USD",
+          "pattern": "EVENING_STAR",
+          "confidence": 0.85,
+          "price": 50318.780997292895,
+          "size": 2000.0,
+          "profit_loss": 0
+        },
+        {
+          "timestamp": "2026-01-17T11:57:19.631817",
+          "type": "BUY",
+          "pair": "BTC/USD",
+          "pattern": "MORNING_STAR",
+          "confidence": 0.85,
+          "price": 50549.423353446,
+          "size": 2000.0,
+          "profit_loss": 0
+        },
+        {
+          "timestamp": "2026-01-17T12:07:19.647345",
+          "type": "BUY",
+          "pair": "BTC/USD",
+          "pattern": "HAMMER",
+          "confidence": 0.75,
+          "price": 47565.004367786154,
+          "size": 2000.0,
+          "profit_loss": 0
+        }
+      ],
+      "last_trade_time": "2026-01-17T12:07:19.647345",
+      "uptime_start": "2026-01-17T11:51:19.614540",
+      "status": "RUNNING"
+    },
+    "ACC-014": {
+      "name": "Novice-$300000-Sandbox",
+      "profile": "novice",
+      "environment": "sandbox",
+      "initial_capital": 300000,
+      "current_capital": 300000,
+      "total_trades": 2,
+      "winning_trades": 0,
+      "losing_trades": 0,
+      "total_profit": 0.0,
+      "total_loss": 0.0,
+      "current_positions": [
+        {
+          "timestamp": "2026-01-17T12:04:20.630470",
+          "type": "BUY",
+          "pair": "BTC/USD",
+          "pattern": "MORNING_STAR",
+          "confidence": 0.85,
+          "price": 50938.321205478554,
+          "size": 6000.0,
+          "profit_loss": 0
+        },
+        {
+          "timestamp": "2026-01-17T12:14:20.661257",
+          "type": "BUY",
+          "pair": "BTC/USD",
+          "pattern": "BULLISH_ENGULFING",
+          "confidence": 0.8,
+          "price": 51073.628978840956,
+          "size": 6000.0,
+          "profit_loss": 0
+        }
+      ],
+      "last_trade_time": "2026-01-17T12:14:20.661257",
+      "uptime_start": "2026-01-17T11:51:20.619720",
+      "status": "RUNNING"
+    },
+    "ACC-015": {
+      "name": "Advanced-$100-Sandbox",
+      "profile": "advanced",
+      "environment": "sandbox",
+      "initial_capital": 100,
+      "current_capital": 100,
+      "total_trades": 2,
+      "winning_trades": 0,
+      "losing_trades": 0,
+      "total_profit": 0.0,
+      "total_loss": 0.0,
+      "current_positions": [
+        {
+          "timestamp": "2026-01-17T11:56:21.625875",
+          "type": "BUY",
+          "pair": "BTC/USD",
+          "pattern": "BULLISH_ENGULFING",
+          "confidence": 0.8,
+          "price": 50647.14413097587,
+          "size": 2.0,
+          "profit_loss": 0
+        },
+        {
+          "timestamp": "2026-01-17T12:25:21.677587",
+          "type": "SELL",
+          "pair": "BTC/USD",
+          "pattern": "EVENING_STAR",
+          "confidence": 0.85,
+          "price": 47967.880150076526,
+          "size": 2.0,
+          "profit_loss": 0
+        }
+      ],
+      "last_trade_time": "2026-01-17T12:25:21.677587",
+      "uptime_start": "2026-01-17T11:51:21.621649",
+      "status": "RUNNING"
+    },
+    "ACC-016": {
+      "name": "Advanced-$250-Sandbox",
+      "profile": "advanced",
+      "environment": "sandbox",
+      "initial_capital": 250,
+      "current_capital": 250,
+      "total_trades": 5,
+      "winning_trades": 0,
+      "losing_trades": 0,
+      "total_profit": 0.0,
+      "total_loss": 0.0,
+      "current_positions": [
+        {
+          "timestamp": "2026-01-17T11:59:22.626669",
+          "type": "BUY",
+          "pair": "BTC/USD",
+          "pattern": "MORNING_STAR",
+          "confidence": 0.85,
+          "price": 50020.77135270125,
+          "size": 5.0,
+          "profit_loss": 0
+        },
+        {
+          "timestamp": "2026-01-17T12:03:22.636358",
+          "type": "SELL",
+          "pair": "BTC/USD",
+          "pattern": "BEARISH_ENGULFING",
+          "confidence": 0.8,
+          "price": 48883.58481814459,
+          "size": 5.0,
+          "profit_loss": 0
+        },
+        {
+          "timestamp": "2026-01-17T12:09:22.657298",
+          "type": "SELL",
+          "pair": "BTC/USD",
+          "pattern": "EVENING_STAR",
+          "confidence": 0.85,
+          "price": 49220.51488284252,
+          "size": 5.0,
+          "profit_loss": 0
+        },
+        {
+          "timestamp": "2026-01-17T12:12:22.680784",
+          "type": "SELL",
+          "pair": "BTC/USD",
+          "pattern": "BEARISH_ENGULFING",
+          "confidence": 0.8,
+          "price": 52500.84911784779,
+          "size": 5.0,
+          "profit_loss": 0
+        },
+        {
+          "timestamp": "2026-01-17T12:19:22.710522",
+          "type": "BUY",
+          "pair": "BTC/USD",
+          "pattern": "BULLISH_ENGULFING",
+          "confidence": 0.8,
+          "price": 51954.93563391832,
+          "size": 5.0,
+          "profit_loss": 0
+        }
+      ],
+      "last_trade_time": "2026-01-17T12:19:22.710522",
+      "uptime_start": "2026-01-17T11:51:22.620226",
+      "status": "RUNNING"
+    },
+    "ACC-017": {
+      "name": "Advanced-$500-Sandbox",
+      "profile": "advanced",
+      "environment": "sandbox",
+      "initial_capital": 500,
+      "current_capital": 500,
+      "total_trades": 1,
+      "winning_trades": 0,
+      "losing_trades": 0,
+      "total_profit": 0.0,
+      "total_loss": 0.0,
+      "current_positions": [
+        {
+          "timestamp": "2026-01-17T12:12:23.690544",
+          "type": "BUY",
+          "pair": "BTC/USD",
+          "pattern": "MORNING_STAR",
+          "confidence": 0.85,
+          "price": 50939.60158074122,
+          "size": 10.0,
+          "profit_loss": 0
+        }
+      ],
+      "last_trade_time": "2026-01-17T12:12:23.690544",
+      "uptime_start": "2026-01-17T11:51:23.619463",
+      "status": "RUNNING"
+    },
+    "ACC-018": {
+      "name": "Advanced-$1000-Sandbox",
+      "profile": "advanced",
+      "environment": "sandbox",
+      "initial_capital": 1000,
+      "current_capital": 1000,
+      "total_trades": 0,
+      "winning_trades": 0,
+      "losing_trades": 0,
+      "total_profit": 0.0,
+      "total_loss": 0.0,
+      "current_positions": [],
+      "last_trade_time": null,
+      "uptime_start": "2026-01-17T11:51:24.622262",
+      "status": "RUNNING"
+    },
+    "ACC-019": {
+      "name": "Advanced-$10000-Sandbox",
+      "profile": "advanced",
+      "environment": "sandbox",
+      "initial_capital": 10000,
+      "current_capital": 10000,
+      "total_trades": 6,
+      "winning_trades": 0,
+      "losing_trades": 0,
+      "total_profit": 0.0,
+      "total_loss": 0.0,
+      "current_positions": [
+        {
+          "timestamp": "2026-01-17T11:54:25.635170",
+          "type": "BUY",
+          "pair": "BTC/USD",
+          "pattern": "BULLISH_ENGULFING",
+          "confidence": 0.8,
+          "price": 49185.807546590964,
+          "size": 200.0,
+          "profit_loss": 0
+        },
+        {
+          "timestamp": "2026-01-17T11:55:25.644813",
+          "type": "BUY",
+          "pair": "BTC/USD",
+          "pattern": "MORNING_STAR",
+          "confidence": 0.85,
+          "price": 50810.90300624678,
+          "size": 200.0,
+          "profit_loss": 0
+        },
+        {
+          "timestamp": "2026-01-17T12:04:25.657227",
+          "type": "SELL",
+          "pair": "BTC/USD",
+          "pattern": "BEARISH_ENGULFING",
+          "confidence": 0.8,
+          "price": 50827.276260901024,
+          "size": 200.0,
+          "profit_loss": 0
+        },
+        {
+          "timestamp": "2026-01-17T12:11:25.678344",
+          "type": "BUY",
+          "pair": "BTC/USD",
+          "pattern": "MORNING_STAR",
+          "confidence": 0.85,
+          "price": 52103.13680657925,
+          "size": 200.0,
+          "profit_loss": 0
+        },
+        {
+          "timestamp": "2026-01-17T12:15:25.694865",
+          "type": "SELL",
+          "pair": "BTC/USD",
+          "pattern": "EVENING_STAR",
+          "confidence": 0.85,
+          "price": 50278.99478696844,
+          "size": 200.0,
+          "profit_loss": 0
+        },
+        {
+          "timestamp": "2026-01-17T12:16:25.721845",
+          "type": "BUY",
+          "pair": "BTC/USD",
+          "pattern": "BULLISH_ENGULFING",
+          "confidence": 0.8,
+          "price": 51868.37160164876,
+          "size": 200.0,
+          "profit_loss": 0
+        }
+      ],
+      "last_trade_time": "2026-01-17T12:16:25.721845",
+      "uptime_start": "2026-01-17T11:51:25.630134",
+      "status": "RUNNING"
+    },
+    "ACC-020": {
+      "name": "Advanced-$100000-Sandbox",
+      "profile": "advanced",
+      "environment": "sandbox",
+      "initial_capital": 100000,
+      "current_capital": 100000,
+      "total_trades": 3,
+      "winning_trades": 0,
+      "losing_trades": 0,
+      "total_profit": 0.0,
+      "total_loss": 0.0,
+      "current_positions": [
+        {
+          "timestamp": "2026-01-17T11:53:26.634816",
+          "type": "BUY",
+          "pair": "BTC/USD",
+          "pattern": "MORNING_STAR",
+          "confidence": 0.85,
+          "price": 49024.99205754189,
+          "size": 2000.0,
+          "profit_loss": 0
+        },
+        {
+          "timestamp": "2026-01-17T11:57:26.649229",
+          "type": "SELL",
+          "pair": "BTC/USD",
+          "pattern": "EVENING_STAR",
+          "confidence": 0.85,
+          "price": 48615.82615599149,
+          "size": 2000.0,
+          "profit_loss": 0
+        },
+        {
+          "timestamp": "2026-01-17T12:00:26.662102",
+          "type": "SELL",
+          "pair": "BTC/USD",
+          "pattern": "BEARISH_ENGULFING",
+          "confidence": 0.8,
+          "price": 52227.65292688696,
+          "size": 2000.0,
+          "profit_loss": 0
+        }
+      ],
+      "last_trade_time": "2026-01-17T12:00:26.662102",
+      "uptime_start": "2026-01-17T11:51:26.632723",
+      "status": "RUNNING"
+    },
+    "ACC-021": {
+      "name": "Advanced-$300000-Sandbox",
+      "profile": "advanced",
+      "environment": "sandbox",
+      "initial_capital": 300000,
+      "current_capital": 300000,
+      "total_trades": 6,
+      "winning_trades": 0,
+      "losing_trades": 0,
+      "total_profit": 0.0,
+      "total_loss": 0.0,
+      "current_positions": [
+        {
+          "timestamp": "2026-01-17T11:52:27.631863",
+          "type": "BUY",
+          "pair": "BTC/USD",
+          "pattern": "BULLISH_ENGULFING",
+          "confidence": 0.8,
+          "price": 50848.058871595415,
+          "size": 6000.0,
+          "profit_loss": 0
+        },
+        {
+          "timestamp": "2026-01-17T12:03:27.644624",
+          "type": "BUY",
+          "pair": "BTC/USD",
+          "pattern": "BULLISH_ENGULFING",
+          "confidence": 0.8,
+          "price": 47756.514274116555,
+          "size": 6000.0,
+          "profit_loss": 0
+        },
+        {
+          "timestamp": "2026-01-17T12:04:27.653932",
+          "type": "BUY",
+          "pair": "BTC/USD",
+          "pattern": "MORNING_STAR",
+          "confidence": 0.85,
+          "price": 50650.726990688294,
+          "size": 6000.0,
+          "profit_loss": 0
+        },
+        {
+          "timestamp": "2026-01-17T12:07:27.666924",
+          "type": "BUY",
+          "pair": "BTC/USD",
+          "pattern": "HAMMER",
+          "confidence": 0.75,
+          "price": 50626.25447903517,
+          "size": 6000.0,
+          "profit_loss": 0
+        },
+        {
+          "timestamp": "2026-01-17T12:16:27.694859",
+          "type": "SELL",
+          "pair": "BTC/USD",
+          "pattern": "EVENING_STAR",
+          "confidence": 0.85,
+          "price": 48467.39086862745,
+          "size": 6000.0,
+          "profit_loss": 0
+        },
+        {
+          "timestamp": "2026-01-17T12:21:27.714179",
+          "type": "SELL",
+          "pair": "BTC/USD",
+          "pattern": "EVENING_STAR",
+          "confidence": 0.85,
+          "price": 49906.49705382431,
+          "size": 6000.0,
+          "profit_loss": 0
+        }
+      ],
+      "last_trade_time": "2026-01-17T12:21:27.714179",
+      "uptime_start": "2026-01-17T11:51:27.630844",
+      "status": "RUNNING"
+    }
+  }
+}
