@@ -2,7 +2,10 @@
 
 ## Pre-Launch (08:55)
 
-- [ ] Activate venv: `& "C:/AgentX/VS CODE GITHUB/.venv/Scripts/Activate.ps1"`
+- [ ] Activate venv (from project root):
+  - PowerShell (Windows): `.venv\Scripts\Activate.ps1`
+  - CMD (Windows): `.venv\Scripts\activate.bat`
+  - Unix/macOS: `source .venv/bin/activate`
 - [ ] Copy config/.env.example to config/.env and set values
 - [ ] Ensure TRADING_MODE/ENVIRONMENT = paper (for safety)
 - [ ] Confirm logs directory exists (`logs/`)
