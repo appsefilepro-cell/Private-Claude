@@ -1,0 +1,36 @@
+services:
+  # Web Application
+  - type: web
+    name: private-claude-web
+    env: node
+    region: oregon
+    plan: starter
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: E2B_API_KEY
+        sync: false
+      - key: ANTHROPIC_API_KEY
+        sync: false
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: GOOGLE_API_KEY
+        sync: false
+    healthCheckPath: /api/health
+    autoDeploy: true
+
+  # Python Backend  
+  - type: worker
+    name: agentx5-orchestrator
+    env: python
+    region: oregon
+    plan: starter
+    buildCommand: pip install -r requirements.txt
+    startCommand: python scripts/agent_x5_master_orchestrator.py
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.0
+      - key: E2B_API_KEY
+        sync: false
