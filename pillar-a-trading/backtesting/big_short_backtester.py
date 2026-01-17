@@ -342,7 +342,7 @@ class BigShortBacktester:
             'correct_predictions': correct_predictions,
             'success_rate': success_rate,
             'target_success_rate': '94-96%',
-            'target_met': success_rate >= 94,
+            'target_met': 94 <= success_rate <= 96,
             'total_profit_pct': total_profit,
             'avg_profit_per_trade': avg_profit,
             'trades': trades,
