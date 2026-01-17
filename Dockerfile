@@ -45,4 +45,4 @@ HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
     CMD curl -f http://localhost:8000/health || exit 1
 
 # Run master orchestrator
-CMD ["python", "-m", "scripts.execute_all_systems"]
+CMD ["python", "scripts/execute_all_systems.py"]
