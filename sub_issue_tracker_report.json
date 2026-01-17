@@ -1,0 +1,75 @@
+{
+  "timestamp": "2026-01-17T12:21:32.775257",
+  "total_parent_issues": 1,
+  "total_sub_issues": 10,
+  "issues": [
+    {
+      "id": "pr-141",
+      "title": "Complete all system tasks and integrations",
+      "total_sub_issues": 10,
+      "completion": 0.0,
+      "sub_issues": [
+        {
+          "id": "pr-141-sub-1",
+          "title": "Security: Path Traversal Scanner",
+          "status": "open",
+          "assignee": null
+        },
+        {
+          "id": "pr-141-sub-2",
+          "title": "Trading: 100 Task Execution",
+          "status": "open",
+          "assignee": null
+        },
+        {
+          "id": "pr-141-sub-3",
+          "title": "PR Management System",
+          "status": "open",
+          "assignee": null
+        },
+        {
+          "id": "pr-141-sub-4",
+          "title": "GitLab Integration",
+          "status": "open",
+          "assignee": null
+        },
+        {
+          "id": "pr-141-sub-5",
+          "title": "Zapier Integration",
+          "status": "open",
+          "assignee": null
+        },
+        {
+          "id": "pr-141-sub-6",
+          "title": "Copilot Multi-Agent",
+          "status": "open",
+          "assignee": null
+        },
+        {
+          "id": "pr-141-sub-7",
+          "title": "Job Failure Debugger",
+          "status": "open",
+          "assignee": null
+        },
+        {
+          "id": "pr-141-sub-8",
+          "title": "AgentX 5.0 Container",
+          "status": "open",
+          "assignee": null
+        },
+        {
+          "id": "pr-141-sub-9",
+          "title": "Agent Orchestration",
+          "status": "open",
+          "assignee": null
+        },
+        {
+          "id": "pr-141-sub-10",
+          "title": "AI Testing Framework",
+          "status": "open",
+          "assignee": null
+        }
+      ]
+    }
+  ]
+}

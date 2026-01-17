@@ -1,0 +1,23 @@
+{
+  "timestamp": "2026-01-17T12:21:32.731567",
+  "agentx_version": "5.0",
+  "container_platform": "Docker/Kubernetes",
+  "components": [
+    "AgentX 5.0 Master",
+    "Redis Cache",
+    "PostgreSQL Database",
+    "Celery Workers",
+    "Celery Beat Scheduler",
+    "Nginx Reverse Proxy"
+  ],
+  "scaling": {
+    "min_replicas": 3,
+    "max_replicas": 10,
+    "auto_scaling": true
+  },
+  "monitoring": {
+    "health_checks": true,
+    "metrics_endpoint": ":8001/metrics",
+    "logging": "enabled"
+  }
+}

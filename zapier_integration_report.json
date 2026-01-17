@@ -1,0 +1,161 @@
+{
+  "timestamp": "2026-01-17T12:21:32.613183",
+  "total_zaps": 4,
+  "total_runs": 0,
+  "zaps": [
+    {
+      "id": "zap_1",
+      "name": "Trading Signal Alerts",
+      "trigger": {
+        "app": "webhook",
+        "event": "catch_hook",
+        "config": {
+          "url": "https://hooks.zapier.com/trading-signals"
+        }
+      },
+      "actions": [
+        {
+          "app": "email",
+          "event": "send_email",
+          "config": {
+            "to": "trader@example.com",
+            "subject": "Trading Signal Alert",
+            "body": "{{trigger.signal_data}}"
+          }
+        },
+        {
+          "app": "slack",
+          "event": "send_message",
+          "config": {
+            "channel": "#trading-alerts",
+            "message": "New trading signal: {{trigger.signal_type}}"
+          }
+        }
+      ],
+      "status": "active",
+      "created_at": "2026-01-17T12:21:32.612975",
+      "runs": 0
+    },
+    {
+      "id": "zap_2",
+      "name": "PR Status Notifications",
+      "trigger": {
+        "app": "github",
+        "event": "pull_request",
+        "config": {
+          "repo": "Private-Claude",
+          "events": [
+            "opened",
+            "closed"
+          ]
+        }
+      },
+      "actions": [
+        {
+          "app": "discord",
+          "event": "send_message",
+          "config": {
+            "channel": "dev-notifications",
+            "message": "PR {{trigger.action}}: {{trigger.pr_title}}"
+          }
+        },
+        {
+          "app": "airtable",
+          "event": "create_record",
+          "config": {
+            "base": "dev_tracking",
+            "table": "pull_requests",
+            "fields": {
+              "pr_number": "{{trigger.pr_number}}",
+              "status": "{{trigger.status}}"
+            }
+          }
+        }
+      ],
+      "status": "active",
+      "created_at": "2026-01-17T12:21:32.613062",
+      "runs": 0
+    },
+    {
+      "id": "zap_3",
+      "name": "Error Alert System",
+      "trigger": {
+        "app": "webhook",
+        "event": "catch_hook",
+        "config": {
+          "url": "https://hooks.zapier.com/errors"
+        }
+      },
+      "actions": [
+        {
+          "app": "pagerduty",
+          "event": "trigger_incident",
+          "config": {
+            "severity": "high",
+            "description": "{{trigger.error_message}}"
+          }
+        },
+        {
+          "app": "jira",
+          "event": "create_issue",
+          "config": {
+            "project": "SYS",
+            "issue_type": "Bug",
+            "summary": "Production Error: {{trigger.error_type}}"
+          }
+        }
+      ],
+      "status": "active",
+      "created_at": "2026-01-17T12:21:32.613101",
+      "runs": 0
+    },
+    {
+      "id": "zap_4",
+      "name": "Trading Data Sync",
+      "trigger": {
+        "app": "schedule",
+        "event": "every_hour",
+        "config": {}
+      },
+      "actions": [
+        {
+          "app": "google_sheets",
+          "event": "create_row",
+          "config": {
+            "spreadsheet": "Trading Analytics",
+            "worksheet": "Hourly Data",
+            "data": "{{trigger.market_data}}"
+          }
+        },
+        {
+          "app": "postgres",
+          "event": "insert_row",
+          "config": {
+            "table": "market_snapshots",
+            "data": "{{trigger.market_data}}"
+          }
+        }
+      ],
+      "status": "active",
+      "created_at": "2026-01-17T12:21:32.613140",
+      "runs": 0
+    }
+  ],
+  "mcp_connector": {
+    "name": "Zapier MCP Connector",
+    "version": "2.0",
+    "endpoints": {
+      "trigger": "/api/v1/trigger",
+      "action": "/api/v1/action",
+      "webhook": "/api/v1/webhook"
+    },
+    "capabilities": [
+      "multi_step_workflows",
+      "conditional_logic",
+      "error_handling",
+      "rate_limiting",
+      "batch_processing"
+    ],
+    "status": "active"
+  }
+}

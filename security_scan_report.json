@@ -1,0 +1,919 @@
+{
+  "scan_date": "2026-01-17T12:21:32.486777",
+  "root_directory": "/home/runner/work/Private-Claude/Private-Claude",
+  "total_vulnerabilities": 112,
+  "severity_breakdown": {
+    "CRITICAL": 0,
+    "HIGH": 6,
+    "MEDIUM": 106,
+    "LOW": 0
+  },
+  "vulnerabilities": [
+    {
+      "file": "/home/runner/work/Private-Claude/Private-Claude/scripts/automated_reporting_system.py",
+      "line": 42,
+      "code": "with open(stats_files[0], 'r') as f:",
+      "vulnerability": "File open without path validation",
+      "severity": "MEDIUM",
+      "timestamp": "2026-01-17T12:21:32.350546"
+    },
+    {
+      "file": "/home/runner/work/Private-Claude/Private-Claude/scripts/automated_reporting_system.py",
+      "line": 243,
+      "code": "with open(file_path, 'rb') as f:",
+      "vulnerability": "File open without path validation",
+      "severity": "MEDIUM",
+      "timestamp": "2026-01-17T12:21:32.351373"
+    },
+    {
+      "file": "/home/runner/work/Private-Claude/Private-Claude/scripts/automated_reporting_system.py",
+      "line": 261,
+      "code": "with open(backup_file, 'w') as f:",
+      "vulnerability": "File open without path validation",
+      "severity": "MEDIUM",
+      "timestamp": "2026-01-17T12:21:32.351454"
+    },
+    {
+      "file": "/home/runner/work/Private-Claude/Private-Claude/scripts/activate_all_systems.py",
+      "line": 171,
+      "code": "with open(profiles_file, 'r') as f:",
+      "vulnerability": "File open without path validation",
+      "severity": "MEDIUM",
+      "timestamp": "2026-01-17T12:21:32.353741"
+    },
+    {
+      "file": "/home/runner/work/Private-Claude/Private-Claude/scripts/activate_all_systems.py",
+      "line": 245,
+      "code": "with open(tasks_file, 'r') as f:",
+      "vulnerability": "File open without path validation",
+      "severity": "MEDIUM",
+      "timestamp": "2026-01-17T12:21:32.354030"
+    },
+    {
+      "file": "/home/runner/work/Private-Claude/Private-Claude/scripts/activate_all_systems.py",
+      "line": 286,
+      "code": "with open(log_file, 'w') as f:",
+      "vulnerability": "File open without path validation",
+      "severity": "MEDIUM",
+      "timestamp": "2026-01-17T12:21:32.354195"
+    },
+    {
+      "file": "/home/runner/work/Private-Claude/Private-Claude/scripts/part2_integration_demo.py",
+      "line": 25,
+      "code": "print(\"Testing scaling from 219 to 500 parallel agents with asyncio.Semaphore...\\n\")",
+      "vulnerability": "Path traversal pattern",
+      "severity": "HIGH",
+      "timestamp": "2026-01-17T12:21:32.354674"
+    },
+    {
+      "file": "/home/runner/work/Private-Claude/Private-Claude/scripts/part2_integration_demo.py",
+      "line": 70,
+      "code": "print(\"Testing financial data parsing and cashflow monitoring...\\n\")",
+      "vulnerability": "Path traversal pattern",
+      "severity": "HIGH",
+      "timestamp": "2026-01-17T12:21:32.354853"
+    },
+    {
+      "file": "/home/runner/work/Private-Claude/Private-Claude/scripts/part2_integration_demo.py",
+      "line": 132,
+      "code": "print(\"Testing automated demand letter generation for estate restitution...\\n\")",
+      "vulnerability": "Path traversal pattern",
+      "severity": "HIGH",
+      "timestamp": "2026-01-17T12:21:32.355095"
+    },
+    {
+      "file": "/home/runner/work/Private-Claude/Private-Claude/scripts/e2b_webhook_handler.py",
+      "line": 34,
+      "code": "with open(config_path, 'r') as f:",
+      "vulnerability": "File open without path validation",
+      "severity": "MEDIUM",
+      "timestamp": "2026-01-17T12:21:32.355704"
+    },
+    {
+      "file": "/home/runner/work/Private-Claude/Private-Claude/scripts/start_24_7_trading.py",
+      "line": 42,
+      "code": "with open(self.config_file, 'r') as f:",
+      "vulnerability": "File open without path validation",
+      "severity": "MEDIUM",
+      "timestamp": "2026-01-17T12:21:32.356486"
+    },
+    {
+      "file": "/home/runner/work/Private-Claude/Private-Claude/scripts/start_24_7_trading.py",
+      "line": 175,
+      "code": "with open(stats_file, 'w') as f:",
+      "vulnerability": "File open without path validation",
+      "severity": "MEDIUM",
+      "timestamp": "2026-01-17T12:21:32.357008"
+    },
+    {
+      "file": "/home/runner/work/Private-Claude/Private-Claude/scripts/realtime_trading_dashboard.py",
+      "line": 357,
+      "code": "with open(stats_files[0], 'r') as f:",
+      "vulnerability": "File open without path validation",
+      "severity": "MEDIUM",
+      "timestamp": "2026-01-17T12:21:32.358900"
+    },
+    {
+      "file": "/home/runner/work/Private-Claude/Private-Claude/scripts/sandbox_trading_monitor.py",
+      "line": 52,
+      "code": "with open(config_file, 'r') as f:",
+      "vulnerability": "File open without path validation",
+      "severity": "MEDIUM",
+      "timestamp": "2026-01-17T12:21:32.361583"
+    },
+    {
+      "file": "/home/runner/work/Private-Claude/Private-Claude/scripts/sandbox_trading_monitor.py",
+      "line": 303,
+      "code": "with open(output_file, 'w') as f:",
+      "vulnerability": "File open without path validation",
+      "severity": "MEDIUM",
+      "timestamp": "2026-01-17T12:21:32.362553"
+    },
+    {
+      "file": "/home/runner/work/Private-Claude/Private-Claude/scripts/sandbox_trading_monitor.py",
+      "line": 335,
+      "code": "with open(output_file, 'w') as f:",
+      "vulnerability": "File open without path validation",
+      "severity": "MEDIUM",
+      "timestamp": "2026-01-17T12:21:32.362679"
+    },
+    {
+      "file": "/home/runner/work/Private-Claude/Private-Claude/scripts/email_legal_document.py",
+      "line": 115,
+      "code": "with open(doc_file, 'rb') as f:",
+      "vulnerability": "File open without path validation",
+      "severity": "MEDIUM",
+      "timestamp": "2026-01-17T12:21:32.363317"
+    },
+    {
+      "file": "/home/runner/work/Private-Claude/Private-Claude/scripts/email_legal_document.py",
+      "line": 148,
+      "code": "with open(info_file, 'w') as f:",
+      "vulnerability": "File open without path validation",
+      "severity": "MEDIUM",
+      "timestamp": "2026-01-17T12:21:32.363452"
+    },
+    {
+      "file": "/home/runner/work/Private-Claude/Private-Claude/core-systems/agentx5_master_750.py",
+      "line": 292,
+      "code": "with open(filepath, 'w') as f:",
+      "vulnerability": "File open without path validation",
+      "severity": "MEDIUM",
+      "timestamp": "2026-01-17T12:21:32.365059"
+    },
+    {
+      "file": "/home/runner/work/Private-Claude/Private-Claude/core-systems/master_orchestrator.py",
+      "line": 263,
+      "code": "with open('MASTER_EXECUTION_REPORT.json', 'w') as f:",
+      "vulnerability": "File open without path validation",
+      "severity": "MEDIUM",
+      "timestamp": "2026-01-17T12:21:32.366688"
+    },
+    {
+      "file": "/home/runner/work/Private-Claude/Private-Claude/core-systems/e2b_webhook_server.py",
+      "line": 395,
+      "code": "with open(log_file, 'a') as f:",
+      "vulnerability": "File open without path validation",
+      "severity": "MEDIUM",
+      "timestamp": "2026-01-17T12:21:32.368642"
+    },
+    {
+      "file": "/home/runner/work/Private-Claude/Private-Claude/core-systems/cfo_demand_letters.py",
+      "line": 259,
+      "code": "with open(output_path, 'w', encoding='utf-8') as f:",
+      "vulnerability": "File open without path validation",
+      "severity": "MEDIUM",
+      "timestamp": "2026-01-17T12:21:32.369971"
+    },
+    {
+      "file": "/home/runner/work/Private-Claude/Private-Claude/core-systems/cfo_demand_letters.py",
+      "line": 285,
+      "code": "with open(letter_file, 'w', encoding='utf-8') as f:",
+      "vulnerability": "File open without path validation",
+      "severity": "MEDIUM",
+      "timestamp": "2026-01-17T12:21:32.370075"
+    },
+    {
+      "file": "/home/runner/work/Private-Claude/Private-Claude/core-systems/cfo_demand_letters.py",
+      "line": 291,
+      "code": "with open(metadata_file, 'w', encoding='utf-8') as f:",
+      "vulnerability": "File open without path validation",
+      "severity": "MEDIUM",
+      "timestamp": "2026-01-17T12:21:32.370103"
+    },
+    {
+      "file": "/home/runner/work/Private-Claude/Private-Claude/core-systems/cfo_demand_letters.py",
+      "line": 380,
+      "code": "print(letter['content'][:500] + \"...\\n\")",
+      "vulnerability": "Path traversal pattern",
+      "severity": "HIGH",
+      "timestamp": "2026-01-17T12:21:32.370487"
+    },
+    {
+      "file": "/home/runner/work/Private-Claude/Private-Claude/core-systems/claude_api_24_7_integration.py",
+      "line": 368,
+      "code": "print(\"\ud83e\uddea Testing API connection...\\n\")",
+      "vulnerability": "Path traversal pattern",
+      "severity": "HIGH",
+      "timestamp": "2026-01-17T12:21:32.372193"
+    },
+    {
+      "file": "/home/runner/work/Private-Claude/Private-Claude/core-systems/claude_api_24_7_integration.py",
+      "line": 394,
+      "code": "print(\"Checking system health...\\n\")",
+      "vulnerability": "Path traversal pattern",
+      "severity": "HIGH",
+      "timestamp": "2026-01-17T12:21:32.372310"
+    },
+    {
+      "file": "/home/runner/work/Private-Claude/Private-Claude/core-systems/integer_watchdog.py",
+      "line": 74,
+      "code": "with open(data_file, 'r', encoding='utf-8') as f:",
+      "vulnerability": "File open without path validation",
+      "severity": "MEDIUM",
+      "timestamp": "2026-01-17T12:21:32.372806"
+    },
+    {
+      "file": "/home/runner/work/Private-Claude/Private-Claude/core-systems/integer_watchdog.py",
+      "line": 227,
+      "code": "with open(output_path, 'w', encoding='utf-8') as f:",
+      "vulnerability": "File open without path validation",
+      "severity": "MEDIUM",
+      "timestamp": "2026-01-17T12:21:32.373403"
+    },
+    {
+      "file": "/home/runner/work/Private-Claude/Private-Claude/tests/integration_test_suite.py",
+      "line": 169,
+      "code": "with open(config_file, 'r') as f:",
+      "vulnerability": "File open without path validation",
+      "severity": "MEDIUM",
+      "timestamp": "2026-01-17T12:21:32.376503"
+    },
+    {
+      "file": "/home/runner/work/Private-Claude/Private-Claude/tests/integration_test_suite.py",
+      "line": 294,
+      "code": "with open(output_file, 'w') as f:",
+      "vulnerability": "File open without path validation",
+      "severity": "MEDIUM",
+      "timestamp": "2026-01-17T12:21:32.376979"
+    },
+    {
+      "file": "/home/runner/work/Private-Claude/Private-Claude/tests/test_zapier_integrations.py",
+      "line": 180,
+      "code": "with open(test_file, 'w') as f:",
+      "vulnerability": "File open without path validation",
+      "severity": "MEDIUM",
+      "timestamp": "2026-01-17T12:21:32.377887"
+    },
+    {
+      "file": "/home/runner/work/Private-Claude/Private-Claude/tests/test_zapier_integrations.py",
+      "line": 301,
+      "code": "with open(output_file, 'w') as f:",
+      "vulnerability": "File open without path validation",
+      "severity": "MEDIUM",
+      "timestamp": "2026-01-17T12:21:32.378368"
+    },
+    {
+      "file": "/home/runner/work/Private-Claude/Private-Claude/tests/comprehensive_system_test.py",
+      "line": 327,
+      "code": "with open(ma_config, 'r') as f:",
+      "vulnerability": "File open without path validation",
+      "severity": "MEDIUM",
+      "timestamp": "2026-01-17T12:21:32.379888"
+    },
+    {
+      "file": "/home/runner/work/Private-Claude/Private-Claude/tests/comprehensive_system_test.py",
+      "line": 359,
+      "code": "with open(latest, 'r') as f:",
+      "vulnerability": "File open without path validation",
+      "severity": "MEDIUM",
+      "timestamp": "2026-01-17T12:21:32.380019"
+    },
+    {
+      "file": "/home/runner/work/Private-Claude/Private-Claude/tests/comprehensive_system_test.py",
+      "line": 441,
+      "code": "with open(report_path, 'w') as f:",
+      "vulnerability": "File open without path validation",
+      "severity": "MEDIUM",
+      "timestamp": "2026-01-17T12:21:32.380353"
+    },
+    {
+      "file": "/home/runner/work/Private-Claude/Private-Claude/tests/test_postman_integration.py",
+      "line": 134,
+      "code": "with open(config_path) as f:",
+      "vulnerability": "File open without path validation",
+      "severity": "MEDIUM",
+      "timestamp": "2026-01-17T12:21:32.381156"
+    },
+    {
+      "file": "/home/runner/work/Private-Claude/Private-Claude/legal-forensics/forensic_data_analyzer.py",
+      "line": 312,
+      "code": "with open(filepath, 'w') as f:",
+      "vulnerability": "File open without path validation",
+      "severity": "MEDIUM",
+      "timestamp": "2026-01-17T12:21:32.383771"
+    },
+    {
+      "file": "/home/runner/work/Private-Claude/Private-Claude/legal-forensics/forensic_data_analyzer.py",
+      "line": 321,
+      "code": "with open(master_filepath, 'w') as f:",
+      "vulnerability": "File open without path validation",
+      "severity": "MEDIUM",
+      "timestamp": "2026-01-17T12:21:32.383812"
+    },
+    {
+      "file": "/home/runner/work/Private-Claude/Private-Claude/pillar-a-trading/agent-3.0/agent_3_orchestrator.py",
+      "line": 70,
+      "code": "with open(config_path, 'r') as f:",
+      "vulnerability": "File open without path validation",
+      "severity": "MEDIUM",
+      "timestamp": "2026-01-17T12:21:32.388710"
+    },
+    {
+      "file": "/home/runner/work/Private-Claude/Private-Claude/pillar-a-trading/agent-3.0/agent_3_orchestrator.py",
+      "line": 83,
+      "code": "with open(signal_file, 'r') as f:",
+      "vulnerability": "File open without path validation",
+      "severity": "MEDIUM",
+      "timestamp": "2026-01-17T12:21:32.388767"
+    },
+    {
+      "file": "/home/runner/work/Private-Claude/Private-Claude/pillar-a-trading/agent-3.0/agent_3_orchestrator.py",
+      "line": 181,
+      "code": "with open(log_file, 'a') as f:",
+      "vulnerability": "File open without path validation",
+      "severity": "MEDIUM",
+      "timestamp": "2026-01-17T12:21:32.389143"
+    },
+    {
+      "file": "/home/runner/work/Private-Claude/Private-Claude/pillar-a-trading/agent-3.0/agent_3_orchestrator.py",
+      "line": 215,
+      "code": "with open(opps_file, 'r') as f:",
+      "vulnerability": "File open without path validation",
+      "severity": "MEDIUM",
+      "timestamp": "2026-01-17T12:21:32.389292"
+    },
+    {
+      "file": "/home/runner/work/Private-Claude/Private-Claude/pillar-a-trading/agent-3.0/agent_3_orchestrator.py",
+      "line": 226,
+      "code": "with open(grants_file, 'r') as f:",
+      "vulnerability": "File open without path validation",
+      "severity": "MEDIUM",
+      "timestamp": "2026-01-17T12:21:32.389339"
+    },
+    {
+      "file": "/home/runner/work/Private-Claude/Private-Claude/pillar-a-trading/signal-integrations/email_sms_signal_parser.py",
+      "line": 250,
+      "code": "with open(sms_file, 'r') as f:",
+      "vulnerability": "File open without path validation",
+      "severity": "MEDIUM",
+      "timestamp": "2026-01-17T12:21:32.393547"
+    },
+    {
+      "file": "/home/runner/work/Private-Claude/Private-Claude/pillar-a-trading/signal-integrations/email_sms_signal_parser.py",
+      "line": 321,
+      "code": "with open(output_path, 'w') as f:",
+      "vulnerability": "File open without path validation",
+      "severity": "MEDIUM",
+      "timestamp": "2026-01-17T12:21:32.393826"
+    },
+    {
+      "file": "/home/runner/work/Private-Claude/Private-Claude/pillar-a-trading/execution/trading_task_executor.py",
+      "line": 60,
+      "code": "with open(output_file, 'w') as f:",
+      "vulnerability": "File open without path validation",
+      "severity": "MEDIUM",
+      "timestamp": "2026-01-17T12:21:32.399260"
+    },
+    {
+      "file": "/home/runner/work/Private-Claude/Private-Claude/pillar-a-trading/learning/trade_history_analyzer.py",
+      "line": 304,
+      "code": "with open(output_path, 'w') as f:",
+      "vulnerability": "File open without path validation",
+      "severity": "MEDIUM",
+      "timestamp": "2026-01-17T12:21:32.403994"
+    },
+    {
+      "file": "/home/runner/work/Private-Claude/Private-Claude/pillar-a-trading/integrations/robinhood_parser.py",
+      "line": 48,
+      "code": "with open(file_path, 'r', encoding='utf-8') as f:",
+      "vulnerability": "File open without path validation",
+      "severity": "MEDIUM",
+      "timestamp": "2026-01-17T12:21:32.406482"
+    },
+    {
+      "file": "/home/runner/work/Private-Claude/Private-Claude/pillar-a-trading/integrations/robinhood_parser.py",
+      "line": 102,
+      "code": "with open(file_path, 'r', encoding='utf-8') as f:",
+      "vulnerability": "File open without path validation",
+      "severity": "MEDIUM",
+      "timestamp": "2026-01-17T12:21:32.406696"
+    },
+    {
+      "file": "/home/runner/work/Private-Claude/Private-Claude/pillar-a-trading/integrations/robinhood_parser.py",
+      "line": 228,
+      "code": "with open(output_path, 'w', encoding='utf-8') as f:",
+      "vulnerability": "File open without path validation",
+      "severity": "MEDIUM",
+      "timestamp": "2026-01-17T12:21:32.407176"
+    },
+    {
+      "file": "/home/runner/work/Private-Claude/Private-Claude/pillar-a-trading/backtesting/big_short_backtester.py",
+      "line": 354,
+      "code": "with open(output_file, 'w') as f:",
+      "vulnerability": "File open without path validation",
+      "severity": "MEDIUM",
+      "timestamp": "2026-01-17T12:21:32.409158"
+    },
+    {
+      "file": "/home/runner/work/Private-Claude/Private-Claude/pillar-a-trading/backtesting/run_7day_backtest.py",
+      "line": 163,
+      "code": "with open(recommendations_file, 'w') as f:",
+      "vulnerability": "File open without path validation",
+      "severity": "MEDIUM",
+      "timestamp": "2026-01-17T12:21:32.410848"
+    },
+    {
+      "file": "/home/runner/work/Private-Claude/Private-Claude/pillar-a-trading/backtesting/run_7day_backtest.py",
+      "line": 168,
+      "code": "with open(results_file, 'w') as f:",
+      "vulnerability": "File open without path validation",
+      "severity": "MEDIUM",
+      "timestamp": "2026-01-17T12:21:32.410874"
+    },
+    {
+      "file": "/home/runner/work/Private-Claude/Private-Claude/pillar-a-trading/backtesting/run_7day_backtest.py",
+      "line": 180,
+      "code": "with open(report_file, 'w') as f:",
+      "vulnerability": "File open without path validation",
+      "severity": "MEDIUM",
+      "timestamp": "2026-01-17T12:21:32.410924"
+    },
+    {
+      "file": "/home/runner/work/Private-Claude/Private-Claude/pillar-a-trading/backtesting/backtesting_engine.py",
+      "line": 41,
+      "code": "with open(config_path, 'r') as f:",
+      "vulnerability": "File open without path validation",
+      "severity": "MEDIUM",
+      "timestamp": "2026-01-17T12:21:32.411672"
+    },
+    {
+      "file": "/home/runner/work/Private-Claude/Private-Claude/pillar-a-trading/backtesting/backtesting_engine.py",
+      "line": 322,
+      "code": "with open(trades_file, 'w') as f:",
+      "vulnerability": "File open without path validation",
+      "severity": "MEDIUM",
+      "timestamp": "2026-01-17T12:21:32.412773"
+    },
+    {
+      "file": "/home/runner/work/Private-Claude/Private-Claude/pillar-a-trading/backtesting/backtesting_engine.py",
+      "line": 327,
+      "code": "with open(metrics_file, 'w') as f:",
+      "vulnerability": "File open without path validation",
+      "severity": "MEDIUM",
+      "timestamp": "2026-01-17T12:21:32.412801"
+    },
+    {
+      "file": "/home/runner/work/Private-Claude/Private-Claude/pillar-a-trading/backtesting/multi_strategy_validator.py",
+      "line": 530,
+      "code": "with open(output_file, 'w') as f:",
+      "vulnerability": "File open without path validation",
+      "severity": "MEDIUM",
+      "timestamp": "2026-01-17T12:21:32.415423"
+    },
+    {
+      "file": "/home/runner/work/Private-Claude/Private-Claude/pillar-a-trading/bots/pattern-recognition/candlestick_analyzer.py",
+      "line": 307,
+      "code": "with open(output_file, 'w') as f:",
+      "vulnerability": "File open without path validation",
+      "severity": "MEDIUM",
+      "timestamp": "2026-01-17T12:21:32.425282"
+    },
+    {
+      "file": "/home/runner/work/Private-Claude/Private-Claude/pillar-c-federal/sam-monitoring/sam_opportunity_monitor.py",
+      "line": 126,
+      "code": "with open(self.opportunities_file, 'r') as f:",
+      "vulnerability": "File open without path validation",
+      "severity": "MEDIUM",
+      "timestamp": "2026-01-17T12:21:32.426948"
+    },
+    {
+      "file": "/home/runner/work/Private-Claude/Private-Claude/pillar-c-federal/sam-monitoring/sam_opportunity_monitor.py",
+      "line": 140,
+      "code": "with open(self.opportunities_file, 'w') as f:",
+      "vulnerability": "File open without path validation",
+      "severity": "MEDIUM",
+      "timestamp": "2026-01-17T12:21:32.427009"
+    },
+    {
+      "file": "/home/runner/work/Private-Claude/Private-Claude/pillar-c-federal/sam-monitoring/sam_opportunity_monitor.py",
+      "line": 170,
+      "code": "with open(self.alerts_file, 'w') as f:",
+      "vulnerability": "File open without path validation",
+      "severity": "MEDIUM",
+      "timestamp": "2026-01-17T12:21:32.427130"
+    },
+    {
+      "file": "/home/runner/work/Private-Claude/Private-Claude/core-systems/remediation/remediation_engine.py",
+      "line": 63,
+      "code": "with open(self.remediation_log, 'a', encoding='utf-8') as f:",
+      "vulnerability": "File open without path validation",
+      "severity": "MEDIUM",
+      "timestamp": "2026-01-17T12:21:32.428311"
+    },
+    {
+      "file": "/home/runner/work/Private-Claude/Private-Claude/core-systems/remediation/remediation_engine.py",
+      "line": 75,
+      "code": "with open(self.tasks_file, 'r') as f:",
+      "vulnerability": "File open without path validation",
+      "severity": "MEDIUM",
+      "timestamp": "2026-01-17T12:21:32.428365"
+    },
+    {
+      "file": "/home/runner/work/Private-Claude/Private-Claude/core-systems/remediation/remediation_engine.py",
+      "line": 192,
+      "code": "with open(self.output_csv, 'w', newline='', encoding='utf-8') as f:",
+      "vulnerability": "File open without path validation",
+      "severity": "MEDIUM",
+      "timestamp": "2026-01-17T12:21:32.428814"
+    },
+    {
+      "file": "/home/runner/work/Private-Claude/Private-Claude/core-systems/remediation/remediation_engine.py",
+      "line": 200,
+      "code": "with open(self.output_csv, 'a', newline='', encoding='utf-8') as f:",
+      "vulnerability": "File open without path validation",
+      "severity": "MEDIUM",
+      "timestamp": "2026-01-17T12:21:32.428849"
+    },
+    {
+      "file": "/home/runner/work/Private-Claude/Private-Claude/core-systems/remediation/remediation_engine.py",
+      "line": 214,
+      "code": "with open(self.tasks_file, 'w') as f:",
+      "vulnerability": "File open without path validation",
+      "severity": "MEDIUM",
+      "timestamp": "2026-01-17T12:21:32.428905"
+    },
+    {
+      "file": "/home/runner/work/Private-Claude/Private-Claude/core-systems/remediation/remediation_engine.py",
+      "line": 238,
+      "code": "with open(self.output_csv, 'r', encoding='utf-8') as f:",
+      "vulnerability": "File open without path validation",
+      "severity": "MEDIUM",
+      "timestamp": "2026-01-17T12:21:32.428999"
+    },
+    {
+      "file": "/home/runner/work/Private-Claude/Private-Claude/core-systems/agent-orchestration/agent_sync_orchestrator.py",
+      "line": 257,
+      "code": "with open(output_file, 'w') as f:",
+      "vulnerability": "File open without path validation",
+      "severity": "MEDIUM",
+      "timestamp": "2026-01-17T12:21:32.430668"
+    },
+    {
+      "file": "/home/runner/work/Private-Claude/Private-Claude/core-systems/container-config/agentx5_container.py",
+      "line": 293,
+      "code": "with open(file_path, 'w') as f:",
+      "vulnerability": "File open without path validation",
+      "severity": "MEDIUM",
+      "timestamp": "2026-01-17T12:21:32.432165"
+    },
+    {
+      "file": "/home/runner/work/Private-Claude/Private-Claude/core-systems/container-config/agentx5_container.py",
+      "line": 330,
+      "code": "with open(output_path, 'w') as f:",
+      "vulnerability": "File open without path validation",
+      "severity": "MEDIUM",
+      "timestamp": "2026-01-17T12:21:32.432320"
+    },
+    {
+      "file": "/home/runner/work/Private-Claude/Private-Claude/core-systems/job-debugger/job_failure_resolver.py",
+      "line": 219,
+      "code": "with open(output_file, 'w') as f:",
+      "vulnerability": "File open without path validation",
+      "severity": "MEDIUM",
+      "timestamp": "2026-01-17T12:21:32.433545"
+    },
+    {
+      "file": "/home/runner/work/Private-Claude/Private-Claude/core-systems/api-connectors/microsoft_365_connector.py",
+      "line": 98,
+      "code": "with open(self.credentials_file, 'w') as f:",
+      "vulnerability": "File open without path validation",
+      "severity": "MEDIUM",
+      "timestamp": "2026-01-17T12:21:32.434343"
+    },
+    {
+      "file": "/home/runner/work/Private-Claude/Private-Claude/core-systems/api-connectors/microsoft_365_connector.py",
+      "line": 223,
+      "code": "# with open(local_file, 'rb') as f:",
+      "vulnerability": "File open without path validation",
+      "severity": "MEDIUM",
+      "timestamp": "2026-01-17T12:21:32.434815"
+    },
+    {
+      "file": "/home/runner/work/Private-Claude/Private-Claude/core-systems/api-connectors/gmail_connector.py",
+      "line": 79,
+      "code": "with open(self.credentials_file, 'w') as f:",
+      "vulnerability": "File open without path validation",
+      "severity": "MEDIUM",
+      "timestamp": "2026-01-17T12:21:32.435957"
+    },
+    {
+      "file": "/home/runner/work/Private-Claude/Private-Claude/core-systems/data-ingestion/ingestion_orchestrator.py",
+      "line": 165,
+      "code": "doc = fitz.open(pdf_path)",
+      "vulnerability": "File open without path validation",
+      "severity": "MEDIUM",
+      "timestamp": "2026-01-17T12:21:32.437405"
+    },
+    {
+      "file": "/home/runner/work/Private-Claude/Private-Claude/core-systems/data-ingestion/ingestion_orchestrator.py",
+      "line": 310,
+      "code": "with open(self.output_file, 'w', newline='', encoding='utf-8') as f:",
+      "vulnerability": "File open without path validation",
+      "severity": "MEDIUM",
+      "timestamp": "2026-01-17T12:21:32.437964"
+    },
+    {
+      "file": "/home/runner/work/Private-Claude/Private-Claude/core-systems/data-ingestion/ingestion_orchestrator.py",
+      "line": 375,
+      "code": "with open(self.output_file, 'a', newline='', encoding='utf-8') as f:",
+      "vulnerability": "File open without path validation",
+      "severity": "MEDIUM",
+      "timestamp": "2026-01-17T12:21:32.438219"
+    },
+    {
+      "file": "/home/runner/work/Private-Claude/Private-Claude/core-systems/data-ingestion/ingestion_orchestrator.py",
+      "line": 399,
+      "code": "with open(self.log_file, 'r') as f:",
+      "vulnerability": "File open without path validation",
+      "severity": "MEDIUM",
+      "timestamp": "2026-01-17T12:21:32.438327"
+    },
+    {
+      "file": "/home/runner/work/Private-Claude/Private-Claude/core-systems/data-ingestion/ingestion_orchestrator.py",
+      "line": 404,
+      "code": "with open(self.log_file, 'w') as f:",
+      "vulnerability": "File open without path validation",
+      "severity": "MEDIUM",
+      "timestamp": "2026-01-17T12:21:32.438349"
+    },
+    {
+      "file": "/home/runner/work/Private-Claude/Private-Claude/core-systems/sub-issue-tracker/sub_issue_manager.py",
+      "line": 210,
+      "code": "with open(output_file, 'w') as f:",
+      "vulnerability": "File open without path validation",
+      "severity": "MEDIUM",
+      "timestamp": "2026-01-17T12:21:32.439606"
+    },
+    {
+      "file": "/home/runner/work/Private-Claude/Private-Claude/core-systems/security/path_traversal_scanner.py",
+      "line": 76,
+      "code": "with open(resolved_path, 'r', encoding='utf-8', errors='ignore') as f:",
+      "vulnerability": "File open without path validation",
+      "severity": "MEDIUM",
+      "timestamp": "2026-01-17T12:21:32.440302"
+    },
+    {
+      "file": "/home/runner/work/Private-Claude/Private-Claude/core-systems/security/path_traversal_scanner.py",
+      "line": 126,
+      "code": "with open(output_path, 'w') as f:",
+      "vulnerability": "File open without path validation",
+      "severity": "MEDIUM",
+      "timestamp": "2026-01-17T12:21:32.440503"
+    },
+    {
+      "file": "/home/runner/work/Private-Claude/Private-Claude/core-systems/security/path_traversal_scanner.py",
+      "line": 180,
+      "code": "with open(resolved_path, 'r', encoding='utf-8') as f:",
+      "vulnerability": "File open without path validation",
+      "severity": "MEDIUM",
+      "timestamp": "2026-01-17T12:21:32.440707"
+    },
+    {
+      "file": "/home/runner/work/Private-Claude/Private-Claude/core-systems/security/path_traversal_scanner.py",
+      "line": 185,
+      "code": "with open(backup_path, 'w', encoding='utf-8') as f:",
+      "vulnerability": "File open without path validation",
+      "severity": "MEDIUM",
+      "timestamp": "2026-01-17T12:21:32.440729"
+    },
+    {
+      "file": "/home/runner/work/Private-Claude/Private-Claude/core-systems/security/path_traversal_scanner.py",
+      "line": 191,
+      "code": "with open(resolved_path, 'w', encoding='utf-8') as f:",
+      "vulnerability": "File open without path validation",
+      "severity": "MEDIUM",
+      "timestamp": "2026-01-17T12:21:32.440754"
+    },
+    {
+      "file": "/home/runner/work/Private-Claude/Private-Claude/core-systems/pr-management/pr_task_manager.py",
+      "line": 192,
+      "code": "with open(output_file, 'w') as f:",
+      "vulnerability": "File open without path validation",
+      "severity": "MEDIUM",
+      "timestamp": "2026-01-17T12:21:32.442013"
+    },
+    {
+      "file": "/home/runner/work/Private-Claude/Private-Claude/core-systems/ai-testing/ai_integration_tests.py",
+      "line": 285,
+      "code": "with open(output_file, 'w') as f:",
+      "vulnerability": "File open without path validation",
+      "severity": "MEDIUM",
+      "timestamp": "2026-01-17T12:21:32.444128"
+    },
+    {
+      "file": "/home/runner/work/Private-Claude/Private-Claude/core-systems/gitlab-integration/gitlab_connector.py",
+      "line": 135,
+      "code": "with open(output_file, 'w') as f:",
+      "vulnerability": "File open without path validation",
+      "severity": "MEDIUM",
+      "timestamp": "2026-01-17T12:21:32.445115"
+    },
+    {
+      "file": "/home/runner/work/Private-Claude/Private-Claude/core-systems/zapier-integration/zapier_advanced_connector.py",
+      "line": 210,
+      "code": "with open(output_file, 'w') as f:",
+      "vulnerability": "File open without path validation",
+      "severity": "MEDIUM",
+      "timestamp": "2026-01-17T12:21:32.446324"
+    },
+    {
+      "file": "/home/runner/work/Private-Claude/Private-Claude/core-systems/copilot-integration/copilot_agents.py",
+      "line": 208,
+      "code": "with open(output_file, 'w') as f:",
+      "vulnerability": "File open without path validation",
+      "severity": "MEDIUM",
+      "timestamp": "2026-01-17T12:21:32.447525"
+    },
+    {
+      "file": "/home/runner/work/Private-Claude/Private-Claude/pillar-d-nonprofit/grant-intelligence/grant_pipeline_manager.py",
+      "line": 41,
+      "code": "with open(config_path, 'r') as f:",
+      "vulnerability": "File open without path validation",
+      "severity": "MEDIUM",
+      "timestamp": "2026-01-17T12:21:32.448416"
+    },
+    {
+      "file": "/home/runner/work/Private-Claude/Private-Claude/pillar-d-nonprofit/grant-intelligence/grant_pipeline_manager.py",
+      "line": 49,
+      "code": "with open(self.pipeline_file, 'r') as f:",
+      "vulnerability": "File open without path validation",
+      "severity": "MEDIUM",
+      "timestamp": "2026-01-17T12:21:32.448454"
+    },
+    {
+      "file": "/home/runner/work/Private-Claude/Private-Claude/pillar-d-nonprofit/grant-intelligence/grant_pipeline_manager.py",
+      "line": 56,
+      "code": "with open(self.pipeline_file, 'w') as f:",
+      "vulnerability": "File open without path validation",
+      "severity": "MEDIUM",
+      "timestamp": "2026-01-17T12:21:32.448485"
+    },
+    {
+      "file": "/home/runner/work/Private-Claude/Private-Claude/agent-4.0/orchestrator/master_orchestrator.py",
+      "line": 81,
+      "code": "with open(config_path, 'r') as f:",
+      "vulnerability": "File open without path validation",
+      "severity": "MEDIUM",
+      "timestamp": "2026-01-17T12:21:32.449453"
+    },
+    {
+      "file": "/home/runner/work/Private-Claude/Private-Claude/agent-4.0/orchestrator/master_orchestrator.py",
+      "line": 411,
+      "code": "with open(config_path, 'w') as f:",
+      "vulnerability": "File open without path validation",
+      "severity": "MEDIUM",
+      "timestamp": "2026-01-17T12:21:32.450731"
+    },
+    {
+      "file": "/home/runner/work/Private-Claude/Private-Claude/agent-4.0/orchestrator/multi_agent_system.py",
+      "line": 880,
+      "code": "with open(state_path, 'w') as f:",
+      "vulnerability": "File open without path validation",
+      "severity": "MEDIUM",
+      "timestamp": "2026-01-17T12:21:32.455002"
+    },
+    {
+      "file": "/home/runner/work/Private-Claude/Private-Claude/pillar-b-legal/probate-automation/client_intake_form.py",
+      "line": 411,
+      "code": "with open(output_file, 'w') as f:",
+      "vulnerability": "File open without path validation",
+      "severity": "MEDIUM",
+      "timestamp": "2026-01-17T12:21:32.457193"
+    },
+    {
+      "file": "/home/runner/work/Private-Claude/Private-Claude/pillar-b-legal/probate-automation/client_intake_form.py",
+      "line": 457,
+      "code": "with open(response_file, 'w') as f:",
+      "vulnerability": "File open without path validation",
+      "severity": "MEDIUM",
+      "timestamp": "2026-01-17T12:21:32.457392"
+    },
+    {
+      "file": "/home/runner/work/Private-Claude/Private-Claude/pillar-b-legal/probate-automation/probate_administrator.py",
+      "line": 95,
+      "code": "with open(case_folder / \"case_info.json\", 'w') as f:",
+      "vulnerability": "File open without path validation",
+      "severity": "MEDIUM",
+      "timestamp": "2026-01-17T12:21:32.458742"
+    },
+    {
+      "file": "/home/runner/work/Private-Claude/Private-Claude/pillar-b-legal/probate-automation/probate_administrator.py",
+      "line": 492,
+      "code": "with open(document_path, 'rb') as f:",
+      "vulnerability": "File open without path validation",
+      "severity": "MEDIUM",
+      "timestamp": "2026-01-17T12:21:32.460286"
+    },
+    {
+      "file": "/home/runner/work/Private-Claude/Private-Claude/pillar-b-legal/probate-automation/probate_administrator.py",
+      "line": 566,
+      "code": "with open(case_file, 'r') as f:",
+      "vulnerability": "File open without path validation",
+      "severity": "MEDIUM",
+      "timestamp": "2026-01-17T12:21:32.460577"
+    },
+    {
+      "file": "/home/runner/work/Private-Claude/Private-Claude/pillar-b-legal/automation-flows/legal_document_generator.py",
+      "line": 31,
+      "code": "with open(template_path, 'r') as f:",
+      "vulnerability": "File open without path validation",
+      "severity": "MEDIUM",
+      "timestamp": "2026-01-17T12:21:32.461084"
+    },
+    {
+      "file": "/home/runner/work/Private-Claude/Private-Claude/pillar-b-legal/automation-flows/legal_document_generator.py",
+      "line": 61,
+      "code": "with open(txt_path, 'w') as f:",
+      "vulnerability": "File open without path validation",
+      "severity": "MEDIUM",
+      "timestamp": "2026-01-17T12:21:32.461207"
+    },
+    {
+      "file": "/home/runner/work/Private-Claude/Private-Claude/pillar-b-legal/automation-flows/legal_document_generator.py",
+      "line": 100,
+      "code": "with open(case_file, 'r') as f:",
+      "vulnerability": "File open without path validation",
+      "severity": "MEDIUM",
+      "timestamp": "2026-01-17T12:21:32.461377"
+    },
+    {
+      "file": "/home/runner/work/Private-Claude/Private-Claude/pillar-b-legal/automation-flows/comprehensive_legal_doc_generator.py",
+      "line": 40,
+      "code": "with open(toc_file, 'r') as f:",
+      "vulnerability": "File open without path validation",
+      "severity": "MEDIUM",
+      "timestamp": "2026-01-17T12:21:32.462811"
+    },
+    {
+      "file": "/home/runner/work/Private-Claude/Private-Claude/pillar-b-legal/automation-flows/comprehensive_legal_doc_generator.py",
+      "line": 603,
+      "code": "with open(output_path, 'w') as f:",
+      "vulnerability": "File open without path validation",
+      "severity": "MEDIUM",
+      "timestamp": "2026-01-17T12:21:32.464978"
+    },
+    {
+      "file": "/home/runner/work/Private-Claude/Private-Claude/pillar-b-legal/case-management/dropbox_case_manager.py",
+      "line": 108,
+      "code": "with open(index_file, 'w') as f:",
+      "vulnerability": "File open without path validation",
+      "severity": "MEDIUM",
+      "timestamp": "2026-01-17T12:21:32.465877"
+    },
+    {
+      "file": "/home/runner/work/Private-Claude/Private-Claude/pillar-b-legal/case-management/dropbox_case_manager.py",
+      "line": 168,
+      "code": "with open(local_file_path, 'rb') as f:",
+      "vulnerability": "File open without path validation",
+      "severity": "MEDIUM",
+      "timestamp": "2026-01-17T12:21:32.466114"
+    },
+    {
+      "file": "/home/runner/work/Private-Claude/Private-Claude/pillar-b-legal/case-management/dropbox_case_manager.py",
+      "line": 260,
+      "code": "with open(case_file, 'r') as f:",
+      "vulnerability": "File open without path validation",
+      "severity": "MEDIUM",
+      "timestamp": "2026-01-17T12:21:32.466488"
+    },
+    {
+      "file": "/home/runner/work/Private-Claude/Private-Claude/pillar-b-legal/case-management/dropbox_case_manager.py",
+      "line": 314,
+      "code": "with open(case_file, 'r') as f:",
+      "vulnerability": "File open without path validation",
+      "severity": "MEDIUM",
+      "timestamp": "2026-01-17T12:21:32.466695"
+    }
+  ],
+  "recommendations": [
+    "1. Always validate and sanitize file paths before use",
+    "2. Use os.path.abspath() and os.path.realpath() to resolve paths",
+    "3. Implement allowlist-based path validation",
+    "4. Never concatenate user input directly into file paths",
+    "5. Use secure_filename() for user-provided filenames",
+    "6. Restrict file operations to specific directories",
+    "7. Implement proper error handling for file operations",
+    "8. Use Path.resolve() for modern Python path handling"
+  ]
+}
