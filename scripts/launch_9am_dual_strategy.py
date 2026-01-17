@@ -300,6 +300,12 @@ def main() -> int:
         TechnicalBreakdownShortStrategy(),
     ]
 
+    if environment.lower() != "paper":
+        logger.warning(
+            "Environment '%s' is configured, but this launcher only supports PAPER trading. "
+            "A PaperTradeExecutor will be used and NO live orders will be sent.",
+            environment,
+        )
     executor = PaperTradeExecutor(balance=initial_balance, risk_per_trade=risk_per_trade)
 
     iteration = 0
