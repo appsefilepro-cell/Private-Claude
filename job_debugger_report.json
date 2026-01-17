@@ -1,11 +1,11 @@
 {
-  "timestamp": "2026-01-17T12:15:23.684660",
+  "timestamp": "2026-01-17T12:21:32.692760",
   "total_jobs_analyzed": 1,
   "auto_fixes_applied": 1,
   "jobs": [
     {
       "job_id": "59014433637",
-      "timestamp": "2026-01-17T12:15:23.684624",
+      "timestamp": "2026-01-17T12:21:32.692729",
       "failure_type": "dependency",
       "root_cause": "Missing or incompatible dependencies",
       "resolution": [
@@ -20,7 +20,7 @@
   "resolutions": [
     {
       "job_id": "59014433637",
-      "fixed_at": "2026-01-17T12:15:23.684653",
+      "fixed_at": "2026-01-17T12:21:32.692754",
       "actions_taken": [
         "Installed missing dependencies",
         "Updated package versions",

@@ -1,12 +1,12 @@
 {
-  "timestamp": "2026-01-17T12:15:23.696901",
+  "timestamp": "2026-01-17T12:21:32.864855",
   "framework_version": "1.0",
   "test_suites": 5,
   "test_results": [
     {
       "suite_id": "suite_1",
       "suite_name": "Security Testing",
-      "start_time": "2026-01-17T12:15:23.695076",
+      "start_time": "2026-01-17T12:21:32.863476",
       "tests_run": 5,
       "passed": 5,
       "failed": 0,
@@ -17,7 +17,7 @@
           "name": "Path Traversal Scanner",
           "type": "security",
           "status": "passed",
-          "duration": 0.000904,
+          "duration": 0.000774,
           "error": null
         },
         {
@@ -33,7 +33,7 @@
           "name": "XSS Detection",
           "type": "security",
           "status": "passed",
-          "duration": 3e-06,
+          "duration": 1e-06,
           "error": null
         },
         {
@@ -41,7 +41,7 @@
           "name": "Authentication Security",
           "type": "security",
           "status": "passed",
-          "duration": 2e-06,
+          "duration": 1e-06,
           "error": null
         },
         {
@@ -49,20 +49,20 @@
           "name": "Data Encryption",
           "type": "security",
           "status": "passed",
-          "duration": 2e-06,
+          "duration": 1e-06,
           "error": null
         }
       ],
-      "end_time": "2026-01-17T12:15:23.696188",
+      "end_time": "2026-01-17T12:21:32.864393",
       "success_rate": 100.0
     },
     {
       "suite_id": "suite_2",
       "suite_name": "Integration Testing",
-      "start_time": "2026-01-17T12:15:23.696239",
+      "start_time": "2026-01-17T12:21:32.864417",
       "tests_run": 5,
-      "passed": 5,
-      "failed": 0,
+      "passed": 4,
+      "failed": 1,
       "skipped": 0,
       "test_results": [
         {
@@ -70,7 +70,7 @@
           "name": "GitLab Integration",
           "type": "integration",
           "status": "passed",
-          "duration": 3e-06,
+          "duration": 1e-06,
           "error": null
         },
         {
@@ -78,23 +78,23 @@
           "name": "Zapier Integration",
           "type": "integration",
           "status": "passed",
-          "duration": 2e-06,
+          "duration": 1e-06,
           "error": null
         },
         {
           "test_id": "int_3",
           "name": "GitHub Copilot Integration",
           "type": "integration",
-          "status": "passed",
-          "duration": 2e-06,
-          "error": null
+          "status": "failed",
+          "duration": 1e-06,
+          "error": "Test assertion failed"
         },
         {
           "test_id": "int_4",
           "name": "Trading System Integration",
           "type": "integration",
           "status": "passed",
-          "duration": 2e-06,
+          "duration": 1e-06,
           "error": null
         },
         {
@@ -102,20 +102,20 @@
           "name": "Database Integration",
           "type": "integration",
           "status": "passed",
-          "duration": 2e-06,
+          "duration": 1e-06,
           "error": null
         }
       ],
-      "end_time": "2026-01-17T12:15:23.696418",
-      "success_rate": 100.0
+      "end_time": "2026-01-17T12:21:32.864518",
+      "success_rate": 80.0
     },
     {
       "suite_id": "suite_3",
       "suite_name": "Performance Testing",
-      "start_time": "2026-01-17T12:15:23.696451",
+      "start_time": "2026-01-17T12:21:32.864538",
       "tests_run": 5,
-      "passed": 3,
-      "failed": 2,
+      "passed": 5,
+      "failed": 0,
       "skipped": 0,
       "test_results": [
         {
@@ -123,16 +123,16 @@
           "name": "Agent Response Time",
           "type": "performance",
           "status": "passed",
-          "duration": 3e-06,
+          "duration": 1e-06,
           "error": null
         },
         {
           "test_id": "perf_2",
           "name": "Concurrent Tasks",
           "type": "performance",
-          "status": "failed",
-          "duration": 3e-06,
-          "error": "Test assertion failed"
+          "status": "passed",
+          "duration": 1e-06,
+          "error": null
         },
         {
           "test_id": "perf_3",
@@ -147,25 +147,25 @@
           "name": "API Throughput",
           "type": "performance",
           "status": "passed",
-          "duration": 1e-06,
+          "duration": 0.0,
           "error": null
         },
         {
           "test_id": "perf_5",
           "name": "Memory Usage",
           "type": "performance",
-          "status": "failed",
+          "status": "passed",
           "duration": 1e-06,
-          "error": "Test assertion failed"
+          "error": null
         }
       ],
-      "end_time": "2026-01-17T12:15:23.696623",
-      "success_rate": 60.0
+      "end_time": "2026-01-17T12:21:32.864622",
+      "success_rate": 100.0
     },
     {
       "suite_id": "suite_4",
       "suite_name": "End-to-End Testing",
-      "start_time": "2026-01-17T12:15:23.696650",
+      "start_time": "2026-01-17T12:21:32.864645",
       "tests_run": 5,
       "passed": 5,
       "failed": 0,
@@ -176,7 +176,7 @@
           "name": "Trading Workflow",
           "type": "end_to_end",
           "status": "passed",
-          "duration": 2e-06,
+          "duration": 1e-06,
           "error": null
         },
         {
@@ -192,7 +192,7 @@
           "name": "PR Management Flow",
           "type": "end_to_end",
           "status": "passed",
-          "duration": 2e-06,
+          "duration": 1e-06,
           "error": null
         },
         {
@@ -200,7 +200,7 @@
           "name": "Agent Orchestration",
           "type": "end_to_end",
           "status": "passed",
-          "duration": 2e-06,
+          "duration": 1e-06,
           "error": null
         },
         {
@@ -212,16 +212,16 @@
           "error": null
         }
       ],
-      "end_time": "2026-01-17T12:15:23.696788",
+      "end_time": "2026-01-17T12:21:32.864735",
       "success_rate": 100.0
     },
     {
       "suite_id": "suite_5",
       "suite_name": "Load Testing",
-      "start_time": "2026-01-17T12:15:23.696808",
+      "start_time": "2026-01-17T12:21:32.864753",
       "tests_run": 5,
-      "passed": 5,
-      "failed": 0,
+      "passed": 4,
+      "failed": 1,
       "skipped": 0,
       "test_results": [
         {
@@ -244,9 +244,9 @@
           "test_id": "load_3",
           "name": "Extended Duration",
           "type": "load",
-          "status": "passed",
-          "duration": 0.0,
-          "error": null
+          "status": "failed",
+          "duration": 1e-06,
+          "error": "Test assertion failed"
         },
         {
           "test_id": "load_4",
@@ -265,8 +265,8 @@
           "error": null
         }
       ],
-      "end_time": "2026-01-17T12:15:23.696895",
-      "success_rate": 100.0
+      "end_time": "2026-01-17T12:21:32.864848",
+      "success_rate": 80.0
     }
   ],
   "summary": {

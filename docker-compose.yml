@@ -47,33 +47,31 @@ services:
     networks:
       - agentx-network
 
-  # Note: Celery workers disabled - using background task processing instead
-  # Uncomment and configure if Celery is needed
-  # celery-worker:
-  #   build: .
-  #   container_name: agentx5-worker
-  #   restart: unless-stopped
-  #   command: celery -A your_celery_app worker --loglevel=info
-  #   environment:
-  #     - REDIS_URL=redis://redis:6379
-  #   depends_on:
-  #     - redis
-  #     - agentx5
-  #   networks:
-  #     - agentx-network
+  celery-worker:
+    build: .
+    container_name: agentx5-worker
+    restart: unless-stopped
+    command: celery -A core_systems.agentx5_master_750 worker --loglevel=info
+    environment:
+      - REDIS_URL=redis://redis:6379
+    depends_on:
+      - redis
+      - agentx5
+    networks:
+      - agentx-network
 
-  # celery-beat:
-  #   build: .
-  #   container_name: agentx5-scheduler
-  #   restart: unless-stopped
-  #   command: celery -A your_celery_app beat --loglevel=info
-  #   environment:
-  #     - REDIS_URL=redis://redis:6379
-  #   depends_on:
-  #     - redis
-  #     - agentx5
-  #   networks:
-  #     - agentx-network
+  celery-beat:
+    build: .
+    container_name: agentx5-scheduler
+    restart: unless-stopped
+    command: celery -A core_systems.agentx5_master_750 beat --loglevel=info
+    environment:
+      - REDIS_URL=redis://redis:6379
+    depends_on:
+      - redis
+      - agentx5
+    networks:
+      - agentx-network
 
   nginx:
     image: nginx:alpine
