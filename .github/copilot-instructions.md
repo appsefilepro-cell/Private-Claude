@@ -64,8 +64,9 @@ The Deep Web Crawl protocol ensures comprehensive research and verification acro
 - Agency guidance documents and policy statements
 - Freedom of Information Act (FOIA) responses
 
-#### Step 3: Verify Against Knowledge Base
-- Cross-reference all findings with the project's internal knowledge base or documentation (if such resources are provided in this repository or linked documentation)
+#### Step 3: Verify Against Project Documentation
+- Cross-reference all findings with this repository's actual project documentation (README files, `/docs` content, in-code comments) and any explicitly linked public resources
+- Do not assume the existence of any proprietary knowledge bases or internal corpora unless they are clearly included in this repository or provided as part of the project materials
 - Validate that information is current and accurate
 - Check for any conflicts or inconsistencies
 - Verify citations are still good law (no negative treatment)
@@ -128,9 +129,11 @@ The Agent X5 Diamond system operates on a 4-pillar architecture. Copilot must un
 
 ## AGENT ORCHESTRATOR (AGENT 3.0) COMMANDS
 
-The Agent Orchestrator manages workflow between pillars. Copilot should recognize and execute these commands:
+The Agent Orchestrator manages workflow between pillars. The following command patterns represent the intended design for coordinating different system components:
 
-### Legal Document Generation
+**Note:** These are conceptual command structures for prompt engineering and system design. Actual implementation requires corresponding code in the orchestration layer.
+
+### Legal Document Generation (Design Pattern)
 ```
 ACTIVATE: Pillar B - Legal
 PERSONA: Council of 50
@@ -295,24 +298,24 @@ When multiple tasks are pending, prioritize in the following order:
 
 ## VERSION CONTROL
 
-**Current Version:** 1.0 - Initial Implementation
+**Current Version:** 1.0 - Initial Documentation
 **Last Updated:** 2026-01-13
 **Next Review Date:** 2026-04-13 (90 days)
 
 ### Changelog
-- v1.0 (2026-01-13): Initial implementation with Deep Web Crawl protocol, 4-Pillar integration, and Agent Orchestrator commands
+- v1.0 (2026-01-13): Initial documentation describing Deep Web Crawl research guidance, 4-Pillar system architecture concepts, and Agent Orchestrator command patterns for future implementation
 
 ---
 
-## ACTIVATION CONFIRMATION
+## DOCUMENTATION STATUS
 
-This instruction set is **ACTIVE AND OPERATIONAL** for all GitHub Copilot interactions within the Agent X5 Diamond system.
+This instruction set provides **GUIDANCE AND REFERENCE DOCUMENTATION** for configuring GitHub Copilot interactions within the Agent X5 Diamond system.
 
-The research and reasoning capabilities are enabled for all complex queries and document generation tasks.
+The research and reasoning approaches described here represent intended design patterns; their actual implementation and effectiveness depend on corresponding code development, integration work, and proper configuration.
 
-**Status:** READY
-**Integration:** COMPLETE
-**Clearance Level:** APEX
+**Document Status:** DESIGN SPECIFICATION AND GUIDANCE
+**Implementation Status:** DOCUMENTATION ONLY (CODE IMPLEMENTATION PENDING)
+**Clearance Level:** INTERNAL REFERENCE
 
 ---
 

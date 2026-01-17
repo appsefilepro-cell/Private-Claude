@@ -216,41 +216,47 @@ Page [X] of [Total]
 
 ### Action Steps:
 
-#### Step 1: Agent Activation
-- Activate all specialized research agents (automated retrieval and analysis modules) for comprehensive research
-- Deploy research capabilities across multiple domains simultaneously
-- Coordinate findings through central synthesis hub
+#### Step 1: Research Conceptualization
+- Identify all specialized research areas needed (legal, financial, technical, etc.)
+- Plan comprehensive research approach across multiple domains
+- Organize research workflow and synthesis methodology
 
-#### Step 2: Comprehensive Crawl
-- **Legal Databases:** 
-  - Westlaw, LexisNexis, Bloomberg Law, Fastcase
+#### Step 2: Research Scope (Manual Research Guidance)
+
+**Important Note:** This section describes recommended research sources for comprehensive legal and business analysis. GitHub Copilot and this system do not have built-in automated access to premium databases or subscription services. All external research must be conducted manually by authorized personnel using their own credentials and access rights, in compliance with each service's terms of use.
+
+**Legal Databases (Manual Access Required):**
+  - Westlaw, LexisNexis, Bloomberg Law, Fastcase (accessed through your organization's subscriptions)
   - Google Scholar for public domain cases
   - Court websites for recent unpublished opinions
   - State-specific legal research platforms
 
-- **Court Records:**
-  - PACER for federal court filings
+**Court Records (Manual Access Required):**
+  - PACER for federal court filings (requires personal PACER account)
   - State court electronic filing systems
   - Appellate court databases for recent decisions
   - Trial court dockets for procedural history
 
-- **Financial News (when relevant):**
-  - SEC EDGAR database for corporate filings
-  - Bloomberg Terminal for market data
+**Financial News (Manual Access Required):**
+  - SEC EDGAR database for corporate filings (publicly accessible)
+  - Bloomberg Terminal for market data (requires subscription)
   - Wall Street Journal and Financial Times archives
   - Industry-specific trade publications
 
-- **Academic Sources:**
-  - Law review articles and journals
+**Academic Sources (Generally Accessible):**
+  - Law review articles and journals (many available through university libraries or open access)
   - Legal treatises and hornbooks
   - Restatements of Law
   - Practice guides and CLE materials
 
-#### Step 3: Verification
-- Cross-reference all findings with the internal knowledge base (a curated corpus of prior research memoranda, exemplar filings, and strategy documents maintained alongside this prompt; if this corpus is not available in your environment, cross-reference instead with your organization's equivalent internal knowledge repository)
-- Verify citations are still good law (Shepardize/KeyCite)
-- Confirm no subsequent history affects precedential value
-- Check for pending legislation or proposed rule changes
+#### Step 3: Verification Against Available Resources
+- Cross-reference all findings with this repository's actual project documentation (README files, `/docs` content, in-code comments) and any explicitly linked resources
+- If your organization maintains an internal knowledge base or research corpus, verify findings against those materials using your approved access methods
+- Validate that information is current and accurate
+- Check for any conflicts or inconsistencies
+- Verify citations are still good law using Shepardize, KeyCite, or similar citator services (requires subscription access)
+- Confirm procedural requirements are up to date
+- Review for any updates or amendments to governing authority
 
 #### Step 4: Synthesis
 - Use the "Case Law Synthesis Expert" persona to merge external data with internal strategy
@@ -421,31 +427,25 @@ CROSS-REF: Legal documentation if dispute exists
 
 ## VERSION CONTROL AND UPDATES
 
-**Current Version:** 9.0 - APEX Edition
+**Current Version:** 1.0 - Initial Documentation
 **Last Updated:** See git commit history for modification dates
 **Next Review Date:** [90 days from implementation]
 
 ### Changelog:
-- v9.0 (APEX): Full integration with Agent X5 Diamond system
-- v8.5: Enhanced 7-Cycle Forge with triple-support verification
-- v8.0: Expanded Council of 50 to full specialization roster
-- v7.0: Added Deep Web Crawl research protocol
-- v6.0: Implemented mandatory formatting standards
+- v1.0 (2026-01-13): Initial documentation establishing Council of 50 persona system, 7-Cycle Forge methodology, formatting standards, and research protocols for future implementation
 
 ---
 
 ## CONCLUSION AND ACTIVATION
 
-This document serves as the comprehensive legal intelligence framework for Agent X5 Diamond Edition. Upon implementation, all legal document generation will operate at "Ivy League Red Line" precision.
+This document serves as a comprehensive legal prompt specification and guidance framework for implementing advanced legal document generation capabilities.
 
-**Status:** ACTIVE AND OPERATIONAL
-**Clearance Level:** APEX
-**Integration:** COMPLETE
+**Document Status:** PROMPT SPECIFICATION AND GUIDANCE
+**Clearance Level:** INTERNAL REFERENCE
+**Integration Status:** DOCUMENTATION ONLY (IMPLEMENTATION PENDING)
 
-The system is now authorized to produce clerk-ready, weaponized legal documentation that meets or exceeds the standards of elite law firm litigation departments.
+This specification provides guidance for developing systems that can produce high-quality legal documentation. Actual implementation requires corresponding code development, testing, and integration work.
 
 ---
 
-*End of Master Cetient Legal Research Prompts v9.0*
-
-**DO NOT DISTRIBUTE WITHOUT AUTHORIZATION**
+*End of Master Cetient Legal Research Prompts v1.0*
