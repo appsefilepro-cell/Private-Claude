@@ -31,6 +31,6 @@ services:
     startCommand: python scripts/agent_x5_master_orchestrator.py
     envVars:
       - key: PYTHON_VERSION
-        value: 3.11.0
+        value: "3.11"
       - key: E2B_API_KEY
         sync: false

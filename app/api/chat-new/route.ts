@@ -11,10 +11,10 @@ export async function POST(req: NextRequest) {
     // Check if Anthropic API key is configured
     const anthropicApiKey = process.env.ANTHROPIC_API_KEY;
     
-    if (anthropicApiKey && anthropicApiKey !== 'sk-ant-your-anthropic-key-here') {
+    if (typeof anthropicApiKey === 'string' && anthropicApiKey.trim().length >= 20) {
       // Use Anthropic SDK if available
       try {
-        const Anthropic = require('@anthropic-ai/sdk');
+        const { default: Anthropic } = await import('@anthropic-ai/sdk');
         const anthropic = new Anthropic({
           apiKey: anthropicApiKey,
         });
@@ -41,7 +41,13 @@ export async function POST(req: NextRequest) {
         });
       } catch (apiError) {
         console.error('Anthropic API error:', apiError);
-        // Fall through to mock response
+        return NextResponse.json(
+          {
+            error: 'Failed to get response from Anthropic API',
+            details: apiError instanceof Error ? apiError.message : 'Unknown Anthropic API error',
+          },
+          { status: 502 }
+        );
       }
     }
 

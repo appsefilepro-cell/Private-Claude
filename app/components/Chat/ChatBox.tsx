@@ -53,10 +53,11 @@ export function ChatBox({
   const handleSendMessage = async () => {
     if (!input.trim() || isLoading) return;
 
+    const messageContent = input.trim();
     const userMessage: Message = {
       id: Date.now().toString(),
       role: 'user',
-      content: input.trim(),
+      content: messageContent,
       timestamp: new Date(),
       status: 'sending'
     };
@@ -78,7 +79,7 @@ export function ChatBox({
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ 
-          message: input.trim(),
+          message: messageContent,
           conversationId: messages[0]?.id || 'new'
         }),
       });
@@ -120,6 +121,9 @@ export function ChatBox({
       };
 
       setMessages(prev => [...prev, errorMessage]);
+      
+      // Restore input on error so user can retry
+      setInput(messageContent);
     } finally {
       setIsLoading(false);
     }

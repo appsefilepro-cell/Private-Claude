@@ -36,9 +36,12 @@ export default function DemoPage() {
 
       {/* Tabs */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-        <div className="flex gap-4 mb-6">
+        <div className="flex gap-4 mb-6" role="tablist" aria-label="Component demos">
           <button
             onClick={() => setActiveTab('chat')}
+            role="tab"
+            aria-selected={activeTab === 'chat'}
+            aria-controls="chat-panel"
             className={`flex items-center gap-2 px-6 py-3 rounded-xl font-semibold transition-all ${
               activeTab === 'chat'
                 ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg'
@@ -50,6 +53,9 @@ export default function DemoPage() {
           </button>
           <button
             onClick={() => setActiveTab('dashboard')}
+            role="tab"
+            aria-selected={activeTab === 'dashboard'}
+            aria-controls="dashboard-panel"
             className={`flex items-center gap-2 px-6 py-3 rounded-xl font-semibold transition-all ${
               activeTab === 'dashboard'
                 ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg'
@@ -64,7 +70,7 @@ export default function DemoPage() {
         {/* Content */}
         <div className="animate-fadeIn">
           {activeTab === 'chat' ? (
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <div id="chat-panel" role="tabpanel" aria-labelledby="chat-tab" className="grid grid-cols-1 lg:grid-cols-3 gap-6">
               {/* Chat Box */}
               <div className="lg:col-span-2 h-[600px]">
                 <ChatBox 
@@ -122,7 +128,7 @@ export default function DemoPage() {
               </div>
             </div>
           ) : (
-            <div>
+            <div id="dashboard-panel" role="tabpanel" aria-labelledby="dashboard-tab">
               <AgentDashboard />
               
               {/* Info Panel */}

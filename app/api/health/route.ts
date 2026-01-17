@@ -1,6 +1,6 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { NextResponse } from 'next/server';
 
-export async function GET(req: NextRequest) {
+export async function GET() {
   try {
     const health = {
       status: 'healthy',
@@ -12,7 +12,6 @@ export async function GET(req: NextRequest) {
         database: 'not_configured',
         agents: 'operational',
       },
-      environment: process.env.NODE_ENV || 'development',
     };
 
     return NextResponse.json(health);

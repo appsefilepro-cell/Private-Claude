@@ -18,21 +18,57 @@ export function AgentDashboard() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetchAgents();
-    const interval = setInterval(fetchAgents, 5000);
-    return () => clearInterval(interval);
+    let isMounted = true;
+    let retryCount = 0;
+    const maxRetries = 5;
+    const baseDelay = 5000; // 5 seconds
+    let timeoutId: ReturnType<typeof setTimeout> | null = null;
+
+    const fetchWithBackoff = async () => {
+      if (!isMounted) return;
+
+      const success = await fetchAgents();
+
+      if (!isMounted) return;
+
+      if (!success) {
+        if (retryCount >= maxRetries) {
+          // Stop retrying after reaching the maximum number of consecutive failures.
+          return;
+        }
+        retryCount += 1;
+      } else {
+        // Reset retry count on success to resume normal polling cadence.
+        retryCount = 0;
+      }
+
+      const delay = baseDelay * Math.pow(2, Math.min(retryCount, 3));
+      timeoutId = setTimeout(fetchWithBackoff, delay);
+    };
+
+    // Initial fetch with subsequent retries handled by fetchWithBackoff.
+    fetchWithBackoff();
+
+    return () => {
+      isMounted = false;
+      if (timeoutId !== null) {
+        clearTimeout(timeoutId);
+      }
+    };
   }, []);
 
-  const fetchAgents = async () => {
+  const fetchAgents = async (): Promise<boolean> => {
     try {
       const response = await fetch('/api/agents/status-new');
       const data = await response.json();
       setAgents(data.agents || getMockAgents());
+      setLoading(false);
+      return true;
     } catch (error) {
       console.error('Failed to fetch agents:', error);
       setAgents(getMockAgents());
-    } finally {
       setLoading(false);
+      return false;
     }
   };
 
