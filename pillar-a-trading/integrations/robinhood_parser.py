@@ -54,12 +54,12 @@ class RobinhoodParser:
                 tax_info['year'] = int(year_match.group(1))
             
             # Extract proceeds (box 1d)
-            proceeds_match = re.search(r'proceeds.*?[\$]?\s*([\d,]+\.?\d*)', content, re.IGNORECASE)
+            proceeds_match = re.search(r'proceeds.*?[\$]?\s*([\d,]+(?:\.\d+)?)', content, re.IGNORECASE)
             if proceeds_match:
                 tax_info['total_proceeds'] = float(proceeds_match.group(1).replace(',', ''))
             
             # Extract cost basis (box 1e)
-            basis_match = re.search(r'(?:cost|basis).*?[\$]?\s*([\d,]+\.?\d*)', content, re.IGNORECASE)
+            basis_match = re.search(r'(?:cost|basis).*?[\$]?\s*([\d,]+(?:\.\d+)?)', content, re.IGNORECASE)
             if basis_match:
                 tax_info['cost_basis'] = float(basis_match.group(1).replace(',', ''))
             
@@ -68,12 +68,12 @@ class RobinhoodParser:
                 tax_info['gains_losses'] = tax_info['total_proceeds'] - tax_info['cost_basis']
             
             # Extract dividend income (box 1a)
-            dividend_match = re.search(r'dividend.*?[\$]?\s*([\d,]+\.?\d*)', content, re.IGNORECASE)
+            dividend_match = re.search(r'dividend.*?[\$]?\s*([\d,]+(?:\.\d+)?)', content, re.IGNORECASE)
             if dividend_match:
                 tax_info['dividend_income'] = float(dividend_match.group(1).replace(',', ''))
             
             # Extract interest income
-            interest_match = re.search(r'interest.*?[\$]?\s*([\d,]+\.?\d*)', content, re.IGNORECASE)
+            interest_match = re.search(r'interest.*?[\$]?\s*([\d,]+(?:\.\d+)?)', content, re.IGNORECASE)
             if interest_match:
                 tax_info['interest_income'] = float(interest_match.group(1).replace(',', ''))
             
