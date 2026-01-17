@@ -8,6 +8,19 @@ const AGENT_CONFIG = {
   agentx5: { enabled: true, name: 'AgentX 5.0', capabilities: ['swarm', 'quantum', '24_7'] },
 };
 
+type AgentKey = keyof typeof AGENT_CONFIG;
+
+function isValidAgent(agent: string): agent is AgentKey {
+  return agent in AGENT_CONFIG;
+}
+
+function getAgentName(agent: string): string {
+  if (isValidAgent(agent)) {
+    return AGENT_CONFIG[agent].name;
+  }
+  return 'AgentX5';
+}
+
 export async function POST(req: NextRequest) {
   try {
     const { messages, agent } = await req.json();
@@ -17,7 +30,8 @@ export async function POST(req: NextRequest) {
     }
 
     const lastMessage = messages[messages.length - 1]?.content || '';
-    const selectedAgent = agent || 'agentx5';
+    const rawAgent = agent || 'agentx5';
+    const selectedAgent = isValidAgent(rawAgent) ? rawAgent : 'agentx5';
 
     // Agent X5 Command Processing with multi-agent support
     const response = processCommand(lastMessage, selectedAgent);
@@ -169,7 +183,7 @@ Agent: ${agent.toUpperCase()}`;
   // Default response
   return `📡 Command received: "${input}"
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Processing via ${AGENT_CONFIG[agent as keyof typeof AGENT_CONFIG]?.name || 'AgentX5'} neural network...
+Processing via ${getAgentName(agent)} neural network...
 Type "help" for available commands.
 Type "activate all" to start all agents.`;
 }
