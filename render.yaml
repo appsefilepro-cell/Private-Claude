@@ -1,0 +1,131 @@
+# Render Blueprint Configuration
+# Deploy AgentX5 to Render.com
+# Version: 5.0.0
+
+services:
+  # ============================================================================
+  # NEXT.JS DASHBOARD (Main Frontend)
+  # ============================================================================
+  - type: web
+    name: agentx5-dashboard
+    runtime: node
+    region: oregon
+    plan: free
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: ANTHROPIC_API_KEY
+        sync: false
+      - key: NEXT_PUBLIC_API_URL
+        fromService:
+          name: agentx5-api
+          type: web
+          property: host
+    healthCheckPath: /
+    autoDeploy: true
+
+  # ============================================================================
+  # PYTHON API SERVER (Backend Services)
+  # ============================================================================
+  - type: web
+    name: agentx5-api
+    runtime: python
+    region: oregon
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: python core-systems/e2b_webhook_server.py
+    envVars:
+      - key: PYTHON_VERSION
+        value: "3.11"
+      - key: E2B_API_KEY
+        sync: false
+      - key: ANTHROPIC_API_KEY
+        sync: false
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: E2B_WEBHOOK_PORT
+        value: "10000"
+      - key: LOG_LEVEL
+        value: INFO
+    healthCheckPath: /health
+    autoDeploy: true
+
+  # ============================================================================
+  # TRADING BOT SERVICE (Background Worker)
+  # ============================================================================
+  - type: worker
+    name: agentx5-trading
+    runtime: python
+    region: oregon
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: python scripts/start_24_7_trading.py
+    envVars:
+      - key: PYTHON_VERSION
+        value: "3.11"
+      - key: LIVE_TRADING
+        value: "false"
+      - key: TRADING_MODE
+        value: PAPER
+      - key: KRAKEN_API_KEY
+        sync: false
+      - key: LOG_LEVEL
+        value: INFO
+    autoDeploy: true
+
+  # ============================================================================
+  # AGENT ORCHESTRATOR (Background Worker)
+  # ============================================================================
+  - type: worker
+    name: agentx5-orchestrator
+    runtime: python
+    region: oregon
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: python scripts/agent_x5_master_orchestrator.py
+    envVars:
+      - key: PYTHON_VERSION
+        value: "3.11"
+      - key: ANTHROPIC_API_KEY
+        sync: false
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: TOTAL_AGENTS
+        value: "759"
+      - key: LOG_LEVEL
+        value: INFO
+    autoDeploy: true
+
+# ============================================================================
+# DATABASES (Optional - for persistent state)
+# ============================================================================
+databases:
+  - name: agentx5-redis
+    plan: free
+    region: oregon
+    ipAllowList: []
+
+# ============================================================================
+# ENVIRONMENT GROUPS
+# ============================================================================
+envVarGroups:
+  - name: agentx5-secrets
+    envVars:
+      - key: ANTHROPIC_API_KEY
+        sync: false
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: E2B_API_KEY
+        sync: false
+      - key: KRAKEN_API_KEY
+        sync: false
+      - key: GITHUB_TOKEN
+        sync: false
