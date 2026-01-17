@@ -155,16 +155,132 @@ def collect_signals(strategies, market_data: List[Dict[str, Any]], threshold: fl
     return signals
 
 
+def _get_float_env(
+    name: str,
+    default: float,
+    *,
+    min_value: float | None = None,
+    max_value: float | None = None,
+) -> float:
+    """
+    Safely read a float environment variable with optional bounds checking.
+    Falls back to `default` and logs a warning on parse or validation failure.
+    """
+    raw = os.getenv(name)
+    if raw is None:
+        return default
+    try:
+        value = float(raw)
+    except ValueError:
+        logger.warning("Invalid value for %s=%r; using default %s", name, raw, default)
+        return default
+    if min_value is not None and value < min_value:
+        logger.warning(
+            "Value for %s=%r is below minimum %s; using default %s",
+            name,
+            raw,
+            min_value,
+            default,
+        )
+        return default
+    if max_value is not None and value > max_value:
+        logger.warning(
+            "Value for %s=%r is above maximum %s; using default %s",
+            name,
+            raw,
+            max_value,
+            default,
+        )
+        return default
+    return value
+
+
+def _get_int_env(
+    name: str,
+    default: int,
+    *,
+    min_value: int | None = None,
+    max_value: int | None = None,
+) -> int:
+    """
+    Safely read an int environment variable with optional bounds checking.
+    Falls back to `default` and logs a warning on parse or validation failure.
+    """
+    raw = os.getenv(name)
+    if raw is None:
+        return default
+    try:
+        value = int(raw)
+    except ValueError:
+        logger.warning("Invalid value for %s=%r; using default %s", name, raw, default)
+        return default
+    if min_value is not None and value < min_value:
+        logger.warning(
+            "Value for %s=%r is below minimum %s; using default %s",
+            name,
+            raw,
+            min_value,
+            default,
+        )
+        return default
+    if max_value is not None and value > max_value:
+        logger.warning(
+            "Value for %s=%r is above maximum %s; using default %s",
+            name,
+            raw,
+            max_value,
+            default,
+        )
+        return default
+    return value
+
+
+def _get_bool_env(name: str, default: bool = False) -> bool:
+    """
+    Safely read a boolean environment variable.
+    Accepts typical truthy/falsey strings; falls back to `default` and logs
+    a warning on unexpected values.
+    """
+    raw = os.getenv(name)
+    if raw is None:
+        return default
+    normalized = raw.strip().lower()
+    if normalized in {"1", "true", "yes", "y", "on"}:
+        return True
+    if normalized in {"0", "false", "no", "n", "off"}:
+        return False
+    logger.warning("Unexpected boolean value for %s=%r; using default %s", name, raw, default)
+    return default
+
+
 def main() -> int:
     env_file = PROJECT_ROOT / "config" / ".env"
     load_env(env_file)
 
     environment = os.getenv("ENVIRONMENT", os.getenv("TRADING_MODE", "paper")).lower()
-    confidence_threshold = float(os.getenv("CONFIDENCE_THRESHOLD", "0.9"))
-    risk_per_trade = float(os.getenv("RISK_PER_TRADE", "0.02"))
-    max_positions = int(os.getenv("MAX_POSITIONS", "5"))
-    initial_balance = float(os.getenv("INITIAL_BALANCE", "100000"))
-    skip_wait = os.getenv("SKIP_WAIT_FOR_9AM", "0") == "1"
+    confidence_threshold = _get_float_env(
+        "CONFIDENCE_THRESHOLD",
+        0.9,
+        min_value=0.0,
+        max_value=1.0,
+    )
+    risk_per_trade = _get_float_env(
+        "RISK_PER_TRADE",
+        0.02,
+        min_value=0.0,
+        max_value=1.0,
+    )
+    max_positions = _get_int_env(
+        "MAX_POSITIONS",
+        5,
+        min_value=1,
+    )
+    initial_balance = _get_float_env(
+        "INITIAL_BALANCE",
+        100000.0,
+        min_value=0.0,
+    )
+    skip_wait = _get_bool_env("SKIP_WAIT_FOR_9AM", default=False)
 
     logger.info("=" * 80)
     logger.info("9 AM DUAL/TRIPLE SHORT STRATEGY LAUNCHER")
