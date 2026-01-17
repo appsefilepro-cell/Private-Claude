@@ -17,10 +17,11 @@ from typing import Dict, Any, List
 BASE_DIR = Path(__file__).resolve().parent
 PROJECT_ROOT = BASE_DIR.parent
 
-# Ensure imports resolve
-sys.path.insert(0, str(PROJECT_ROOT))
-sys.path.insert(0, str(PROJECT_ROOT / "scripts"))
+# NOTE: sys.path manipulation required due to directory names with hyphens
+# (pillar-a-trading) which cannot be imported as Python packages
+# Alternative would be to rename all directories, but that breaks existing structure
 sys.path.insert(0, str(PROJECT_ROOT / "pillar-a-trading"))
+sys.path.insert(0, str(PROJECT_ROOT / "scripts"))
 
 from strategies.big_short_strategy import BigShortStrategy
 from strategies.momentum_short_strategy import MomentumShortStrategy

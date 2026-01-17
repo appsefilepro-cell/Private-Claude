@@ -21,7 +21,8 @@ from datetime import datetime, timedelta
 from pathlib import Path
 from typing import Dict, List, Any, Optional
 
-# Add parent directory to path
+# NOTE: sys.path manipulation required due to directory names with hyphens
+# (pillar-a-trading) which cannot be imported as Python packages
 sys.path.insert(0, str(Path(__file__).parent.parent))
 from strategies.big_short_strategy import BigShortStrategy
 
