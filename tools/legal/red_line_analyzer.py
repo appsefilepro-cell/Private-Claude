@@ -4,8 +4,14 @@ Identifies gaps, weaknesses, and potential objections in legal documents
 """
 
 from typing import List, Dict, Any, Optional
-import anthropic
 import os
+
+try:
+    import anthropic
+    ANTHROPIC_AVAILABLE = True
+except ImportError:
+    ANTHROPIC_AVAILABLE = False
+    print("Warning: anthropic package not installed. AI features will be limited.")
 
 
 class RedLineAnalyzer:
@@ -17,7 +23,7 @@ class RedLineAnalyzer:
     def __init__(self, api_key: Optional[str] = None):
         """Initialize the red line analyzer"""
         self.api_key = api_key or os.getenv('ANTHROPIC_API_KEY')
-        if self.api_key:
+        if self.api_key and ANTHROPIC_AVAILABLE:
             self.claude_client = anthropic.Anthropic(api_key=self.api_key)
         else:
             self.claude_client = None

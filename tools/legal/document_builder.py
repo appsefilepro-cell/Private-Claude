@@ -8,7 +8,13 @@ import json
 from pathlib import Path
 from typing import List, Dict, Optional, Any
 from datetime import datetime
-import anthropic
+
+try:
+    import anthropic
+    ANTHROPIC_AVAILABLE = True
+except ImportError:
+    ANTHROPIC_AVAILABLE = False
+    print("Warning: anthropic package not installed. AI features will be limited.")
 
 
 class LegalDocumentBuilder:
@@ -20,11 +26,12 @@ class LegalDocumentBuilder:
     def __init__(self, api_key: Optional[str] = None):
         """Initialize the legal document builder with API credentials"""
         self.api_key = api_key or os.getenv('ANTHROPIC_API_KEY')
-        if self.api_key:
+        if self.api_key and ANTHROPIC_AVAILABLE:
             self.claude_client = anthropic.Anthropic(api_key=self.api_key)
         else:
             self.claude_client = None
-            print("Warning: No Anthropic API key provided. AI features will be limited.")
+            if not ANTHROPIC_AVAILABLE:
+                print("Warning: Anthropic SDK not available. AI features will be limited.")
         
         self.master_toc = []
         self.documents = {}
