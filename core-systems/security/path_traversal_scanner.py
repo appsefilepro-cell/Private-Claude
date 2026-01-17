@@ -66,7 +66,14 @@ class PathTraversalScanner:
     def _scan_file(self, file_path: Path):
         """Scan individual file for vulnerabilities"""
         try:
-            with open(file_path, 'r', encoding='utf-8', errors='ignore') as f:
+            # Validate file path is within root directory
+            resolved_path = file_path.resolve()
+            resolved_root = self.root_dir.resolve()
+            if not str(resolved_path).startswith(str(resolved_root)):
+                logger.warning(f"Skipping file outside root: {file_path}")
+                return
+            
+            with open(resolved_path, 'r', encoding='utf-8', errors='ignore') as f:
                 content = f.read()
                 lines = content.split('\n')
                 
@@ -111,9 +118,14 @@ class PathTraversalScanner:
         }
         
         if output_file:
-            with open(output_file, 'w') as f:
+            # Validate output file path
+            output_path = Path(output_file).resolve()
+            if not output_path.parent.exists():
+                output_path.parent.mkdir(parents=True, exist_ok=True)
+            
+            with open(output_path, 'w') as f:
                 json.dump(report, f, indent=2)
-            logger.info(f"Report saved to {output_file}")
+            logger.info(f"Report saved to {output_path}")
         
         return report
     
@@ -158,21 +170,28 @@ class PathTraversalScanner:
     def _fix_file(self, file_path: str, vulnerabilities: List[Dict], backup: bool) -> bool:
         """Fix vulnerabilities in a single file"""
         try:
-            with open(file_path, 'r', encoding='utf-8') as f:
+            # Validate file path is within root directory
+            resolved_path = Path(file_path).resolve()
+            resolved_root = self.root_dir.resolve()
+            if not str(resolved_path).startswith(str(resolved_root)):
+                logger.error(f"Cannot fix file outside root: {file_path}")
+                return False
+            
+            with open(resolved_path, 'r', encoding='utf-8') as f:
                 content = f.read()
             
             if backup:
-                backup_path = f"{file_path}.bak"
+                backup_path = f"{resolved_path}.bak"
                 with open(backup_path, 'w', encoding='utf-8') as f:
                     f.write(content)
             
             # Apply fixes
             fixed_content = self._apply_fixes(content)
             
-            with open(file_path, 'w', encoding='utf-8') as f:
+            with open(resolved_path, 'w', encoding='utf-8') as f:
                 f.write(fixed_content)
             
-            logger.info(f"Fixed {file_path}")
+            logger.info(f"Fixed {resolved_path}")
             return True
         except Exception as e:
             logger.error(f"Failed to fix {file_path}: {e}")

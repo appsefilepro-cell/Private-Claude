@@ -271,8 +271,11 @@ spec:
     
     def save_configs(self, output_dir: str = "."):
         """Save all configuration files"""
-        output_path = Path(output_dir)
-        output_path.mkdir(exist_ok=True)
+        output_path = Path(output_dir).resolve()
+        
+        # Ensure we're not writing outside intended directory
+        if not output_path.exists():
+            output_path.mkdir(parents=True, exist_ok=True)
         
         configs = {
             'Dockerfile': self.generate_dockerfile(),
@@ -282,6 +285,11 @@ spec:
         
         for filename, content in configs.items():
             file_path = output_path / filename
+            # Validate file path is within output directory
+            if not str(file_path.resolve()).startswith(str(output_path)):
+                logger.error(f"Invalid file path: {filename}")
+                continue
+            
             with open(file_path, 'w') as f:
                 f.write(content)
             logger.info(f"Generated {filename}")
@@ -314,7 +322,12 @@ spec:
             }
         }
         
-        with open(output_file, 'w') as f:
+        # Validate output file path
+        output_path = Path(output_file).resolve()
+        if not output_path.parent.exists():
+            output_path.parent.mkdir(parents=True, exist_ok=True)
+        
+        with open(output_path, 'w') as f:
             json.dump(report, f, indent=2)
         
         return report

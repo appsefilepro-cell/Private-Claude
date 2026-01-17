@@ -26,6 +26,11 @@ class TradingTaskExecutor:
         """Execute 100 trading analysis tasks"""
         logger.info("Starting execution of 100 trading tasks...")
         
+        # Validate output directory path
+        resolved_output = self.output_dir.resolve()
+        if not resolved_output.exists():
+            resolved_output.mkdir(parents=True, exist_ok=True)
+        
         tasks = self._generate_task_list()
         results = {
             'start_time': datetime.now().isoformat(),
@@ -50,8 +55,8 @@ class TradingTaskExecutor:
         results['end_time'] = datetime.now().isoformat()
         results['success_rate'] = (results['completed'] / results['total_tasks']) * 100
         
-        # Save results
-        output_file = self.output_dir / f"trading_tasks_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json"
+        # Save results with validated path
+        output_file = resolved_output / f"trading_tasks_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json"
         with open(output_file, 'w') as f:
             json.dump(results, f, indent=2)
         

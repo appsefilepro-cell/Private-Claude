@@ -51,7 +51,7 @@ services:
     build: .
     container_name: agentx5-worker
     restart: unless-stopped
-    command: celery -A core_systems.agentx5_master_750 worker --loglevel=info
+    command: python scripts/execute_all_systems.py
     environment:
       - REDIS_URL=redis://redis:6379
     depends_on:
@@ -64,7 +64,7 @@ services:
     build: .
     container_name: agentx5-scheduler
     restart: unless-stopped
-    command: celery -A core_systems.agentx5_master_750 beat --loglevel=info
+    command: python scripts/execute_all_systems.py
     environment:
       - REDIS_URL=redis://redis:6379
     depends_on:
