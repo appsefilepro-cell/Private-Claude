@@ -1,0 +1,86 @@
+# Prometheus Configuration for Agent X5.0
+# Version: 5.0.0
+# Monitors all services in the Agent X5 ecosystem
+
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+  external_labels:
+    cluster: 'agent-x5'
+    environment: 'production'
+
+# Alertmanager configuration
+alerting:
+  alertmanagers:
+    - static_configs:
+        - targets: []
+          # - 'alertmanager:9093'
+
+# Load rules once and periodically evaluate them
+rule_files:
+  - 'alerts/*.yml'
+
+# Scrape configurations
+scrape_configs:
+  # Agent X5 Orchestrator
+  - job_name: 'agent-x5'
+    static_configs:
+      - targets: ['agent-x5:8080']
+        labels:
+          service: 'orchestrator'
+          agents: '219'
+
+  # Claude API Integration
+  - job_name: 'claude-api'
+    static_configs:
+      - targets: ['claude-api:8080']
+        labels:
+          service: 'claude-integration'
+
+  # Trading Service
+  - job_name: 'trading'
+    static_configs:
+      - targets: ['trading:8082']
+        labels:
+          service: 'trading'
+          mode: 'paper'
+
+  # Sandbox Monitor
+  - job_name: 'sandbox-monitor'
+    static_configs:
+      - targets: ['sandbox-monitor:8080']
+        labels:
+          service: 'monitoring'
+
+  # E2B Webhook Server
+  - job_name: 'e2b-webhook'
+    static_configs:
+      - targets: ['e2b-webhook:5000']
+        labels:
+          service: 'webhooks'
+
+  # Redis
+  - job_name: 'redis'
+    static_configs:
+      - targets: ['redis:6379']
+        labels:
+          service: 'cache'
+
+  # Prometheus itself
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['localhost:9090']
+
+  # Grafana
+  - job_name: 'grafana'
+    static_configs:
+      - targets: ['grafana:3000']
+        labels:
+          service: 'visualization'
+
+  # Node Exporter (if installed)
+  - job_name: 'node'
+    static_configs:
+      - targets: ['node-exporter:9100']
+        labels:
+          service: 'system-metrics'

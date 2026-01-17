@@ -1,0 +1,63 @@
+{
+  "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {},
+  "triggers": {
+    "Recurrence": {
+      "type": "Recurrence",
+      "recurrence": {
+        "frequency": "Month",
+        "interval": 3
+      }
+    }
+  },
+  "actions": {
+    "Get_All_Documents": {
+      "type": "OpenApiConnection",
+      "inputs": {
+        "host": {
+          "connection": {
+            "name": "@parameters('$connections')['sharepoint']['connectionId']"
+          }
+        },
+        "operationId": "GetItems",
+        "parameters": {
+          "dataset": "https://<tenant>.sharepoint.com/sites/<YourSite>",
+          "table": "Documents"
+        }
+      }
+    },
+    "Create_CSV_Table_Quarterly": {
+      "type": "ApiConnection",
+      "inputs": {
+        "host": {
+          "connection": {
+            "name": "@parameters('$connections')['dataoperations']['connectionId']"
+          }
+        },
+        "operationId": "CreateCSVTable",
+        "parameters": {
+          "from": "@outputs('Get_All_Documents')?['body/value']"
+        }
+      }
+    },
+    "Create_Quarterly_Report": {
+      "type": "OpenApiConnection",
+      "inputs": {
+        "host": {
+          "connection": {
+            "name": "@parameters('$connections')['sharepoint']['connectionId']"
+          }
+        },
+        "operationId": "CreateFile",
+        "parameters": {
+          "dataset": "https://<tenant>.sharepoint.com/sites/<YourSite>",
+          "folderPath": "/Shared Documents/Reports",
+          "filename": "QuarterlyAudit_@utcNow('yyyy-MM').csv",
+          "fileContent": "@outputs('Create_CSV_Table_Quarterly')"
+        }
+      }
+    }
+  },
+  "outputs": {}
+}

@@ -1,17 +1,17 @@
 {
-  "timestamp": "2025-12-14 04:51:35",
+  "timestamp": "2026-01-13 00:04:25",
   "tests": [
     {
       "test": "Environment Configuration",
-      "status": "\u2705 PASS",
-      "passed": true,
-      "message": ".env file found"
+      "status": "\u274c FAIL",
+      "passed": false,
+      "message": ".env file not found"
     },
     {
       "test": "Required Dependencies",
-      "status": "\u2705 PASS",
-      "passed": true,
-      "message": "All dependencies installed"
+      "status": "\u274c FAIL",
+      "passed": false,
+      "message": "Missing: python-dotenv, PyMuPDF, openpyxl"
     },
     {
       "test": "Package Structure",
@@ -33,9 +33,9 @@
     },
     {
       "test": "Zapier MCP Connection",
-      "status": "\u2705 PASS",
-      "passed": true,
-      "message": "Zapier MCP configured"
+      "status": "\u274c FAIL",
+      "passed": false,
+      "message": "Bearer token not configured"
     },
     {
       "test": "Agent 3.0 Orchestrator",
@@ -70,8 +70,8 @@
   ],
   "summary": {
     "total": 11,
-    "passed": 11,
-    "failed": 0,
-    "pass_rate": 100.0
+    "passed": 8,
+    "failed": 3,
+    "pass_rate": 72.73
   }
 }
