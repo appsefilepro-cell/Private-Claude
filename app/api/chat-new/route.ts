@@ -94,6 +94,4 @@ function generateMockResponse(message: string): string {
   return `I received your message: "${message}"\n\nI'm processing your request with my neural network. While I'm configured for demo mode, I can help you with:\n\n• Agent status and coordination\n• Trading strategies and analysis\n• Asset recovery investigations\n• System reports\n\nType "help" to see all available commands!`;
 }
 
-export const config = {
-  runtime: 'nodejs',
-};
+export const runtime = 'nodejs';

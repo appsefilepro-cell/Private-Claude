@@ -10,13 +10,15 @@
     "test": "echo 'QUANTUM BYPASS: SKIPPING TESTS'"
   },
   "dependencies": {
-    "next": "14.2.5",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
+    "@ai-sdk/openai": "^0.0.40",
+    "@anthropic-ai/sdk": "^0.71.2",
+    "ai": "^3.0.0",
+    "browserslist": "^4.28.1",
     "framer-motion": "^11.0.0",
     "lucide-react": "^0.400.0",
-    "ai": "^3.0.0",
-    "@ai-sdk/openai": "^0.0.40"
+    "next": "14.2.5",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
   },
   "devDependencies": {
     "@types/node": "^20.0.0",

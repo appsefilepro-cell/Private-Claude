@@ -28,6 +28,4 @@ export async function GET(req: NextRequest) {
   }
 }
 
-export const config = {
-  runtime: 'nodejs',
-};
+export const runtime = 'nodejs';
