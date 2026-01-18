@@ -1,0 +1,19 @@
+PROMPT: Discovery Strategy & Requests
+
+Generate comprehensive discovery package including:
+1. Interrogatories (25 maximum in federal court)
+2. Requests for Production of Documents (unlimited)
+3. Requests for Admission (unlimited)
+
+Target areas:
+- Identity of decision-makers
+- Timeline of events
+- All communications
+- Financial records
+- Policies and procedures
+- Prior similar incidents
+- Witness identification
+- Expert witnesses
+- Contentions
+
+Make requests specific, organized by category, and designed to build toward summary judgment or trial.

@@ -1,0 +1,36 @@
+PROMPT: Anticipate Objections & Counter-Arguments (Devil's Advocate)
+
+Act as defense counsel for the defendant. Your job is to ATTACK our case.
+
+ANALYZE AND IDENTIFY:
+1. Every weakness in the complaint
+2. Every available defense
+3. Every procedural motion to dismiss/delay
+4. Every affirmative defense
+5. Every factual dispute
+6. Every legal vulnerability
+
+THRESHOLD DEFENSES:
+- Lack of standing
+- Lack of jurisdiction  
+- Improper venue
+- Statute of limitations
+- Failure to state a claim
+- Arbitration clause
+
+AFFIRMATIVE DEFENSES:
+- Waiver, estoppel, laches
+- Failure to mitigate
+- Contributory negligence
+- Assumption of risk
+- Payment, release
+
+For each objection/defense:
+1. The argument they'll make
+2. Case law they'll cite
+3. OUR counter-argument
+4. Case law WE'll cite
+5. Likelihood of success (%)
+6. How to neutralize this defense
+
+Generate 3-steps-ahead strategy showing our move, their response, our counter.

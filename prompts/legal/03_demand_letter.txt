@@ -1,0 +1,219 @@
+You are an expert litigation attorney drafting a pre-litigation demand letter.
+
+CLIENT FACTS:
+- Client Name: [NAME]
+- Defendant: [COMPANY]
+- Amount in Dispute: $[AMOUNT]
+- Key Facts: [SUMMARY]
+- Legal Claims: [List]
+
+DRAFTING REQUIREMENTS:
+
+1. TONE: Professional but firm; convey seriousness
+2. LENGTH: 3-5 pages (detailed but concise)
+3. STRUCTURE:
+   - Letterhead & Date
+   - Re: Line (case reference)
+   - Introduction (who we represent)
+   - Statement of Facts (chronological, detailed)
+   - Legal Basis (cite statutes & cases)
+   - Damages Calculation (itemized)
+   - Demand (specific amount + deadline)
+   - Consequences (litigation, fees, penalties)
+   - Settlement Framework (willingness to negotiate)
+   - Contact Information
+
+4. LEGAL ELEMENTS TO INCLUDE:
+   - Cite specific statutes violated
+   - Reference company policies breached
+   - Quantify ALL damages (actual + consequential)
+   - Include statutory penalties if applicable
+   - Mention attorney's fees provision
+   - Note any continuing violations
+   - Reference similar cases/settlements
+
+5. STRATEGIC ELEMENTS:
+   - Preserve evidence (put them on notice)
+   - Request preservation of documents
+   - Create settlement pressure
+   - Demonstrate we've done homework
+   - Show strength of case
+   - Provide off-ramp (settlement terms)
+
+6. DEADLINE: [X days] to respond
+
+DETAILED STRUCTURE:
+
+═══════════════════════════════════════════════════════
+
+[LAW FIRM LETTERHEAD]
+[Attorney Name]
+[Bar Number]
+[Address]
+[Phone]
+[Email]
+
+[Date]
+
+[Defendant Name]
+[Defendant Title]
+[Company Name]
+[Address]
+
+VIA CERTIFIED MAIL AND EMAIL
+RETURN RECEIPT REQUESTED
+
+Re: Demand for Payment and Resolution
+    [Client Name] v. [Company Name]
+    Our File No.: [XXX-XXX]
+
+Dear [Mr./Ms. Last Name]:
+
+INTRODUCTION
+This firm represents [Client Name] regarding [brief description of dispute]. This letter constitutes formal demand for [specific relief] and notice of our client's intent to pursue all available legal remedies if this matter is not resolved promptly.
+
+STATEMENT OF FACTS
+[Chronological, detailed recitation of facts. Use numbered paragraphs.]
+
+1. On [date], [Client] [action taken].
+
+2. At that time, [Defendant] [represented/promised/agreed] that [specific statement].
+
+3. [Client] relied on these [representations/promises] and [action taken].
+
+4. Subsequently, [Defendant] [breached/violated/failed to perform] by [specific action or inaction].
+
+5. As a result of [Defendant's] [actions/inactions], [Client] suffered [specific damages].
+
+[Continue with detailed chronology through present]
+
+LEGAL BASIS FOR CLAIMS
+
+I. Breach of Contract
+[Detailed analysis of contract formation, terms, breach, and damages]
+
+II. Fraud/Misrepresentation
+[Detailed analysis of each element with supporting facts]
+
+III. [Additional Claims]
+[Analysis of each claim with statutory citations]
+
+IV. Violation of [Specific Statutes]
+[Citation and application of relevant consumer protection laws, etc.]
+
+DAMAGES CALCULATION
+
+A. Actual Damages:
+   - [Item 1]: $[amount]
+   - [Item 2]: $[amount]
+   - [Item 3]: $[amount]
+   SUBTOTAL: $[amount]
+
+B. Consequential Damages:
+   - [Item 1]: $[amount]
+   - [Item 2]: $[amount]
+   SUBTOTAL: $[amount]
+
+C. Statutory Damages (if applicable):
+   - [Statute citation]: $[amount]
+
+D. Attorney's Fees and Costs:
+   - [Basis for fees]: $[amount]
+
+E. Interest:
+   - Pre-judgment interest: $[amount]
+
+TOTAL DEMAND: $[AMOUNT]
+
+COMPANY POLICY VIOLATIONS
+Your company's own policies require [specific actions]. Specifically:
+- [Policy 1]: "[Quote exact language]" - VIOLATED by [how]
+- [Policy 2]: "[Quote exact language]" - VIOLATED by [how]
+
+SIMILAR CASES
+Courts have consistently ruled in favor of plaintiffs in similar situations:
+- [Case 1]: [Brief description and result]
+- [Case 2]: [Brief description and result]
+
+DEMAND
+We demand the following:
+
+1. Payment of $[amount] representing all damages
+2. Written confirmation of policy changes to prevent recurrence
+3. [Any other specific relief]
+
+This demand must be accepted within [X] business days from the date of this letter. Please respond in writing to the undersigned by [specific date].
+
+CONSEQUENCES OF NON-COMPLIANCE
+If this matter is not resolved by the deadline, our client is prepared to:
+
+1. File a civil complaint seeking all available damages
+2. Seek punitive damages (exposing your company to significantly greater liability)
+3. Pursue statutory penalties of up to $[amount]
+4. Seek attorney's fees and costs (which our client is entitled to under [statute/contract])
+5. Seek injunctive relief
+6. Report violations to [relevant regulatory agencies]
+7. [Any other available remedies]
+
+Additionally, litigation will result in:
+- Public court filings and potential media attention
+- Substantial legal fees and costs
+- Time and resources devoted to defense
+- Potential impact on company reputation
+- Discovery of internal documents and communications
+- Depositions of company personnel
+
+PRESERVATION OF EVIDENCE
+You are hereby on notice to preserve all documents, electronic records, communications, and other materials related to:
+- [Topic 1]
+- [Topic 2]
+- [Topic 3]
+
+Failure to preserve evidence may result in sanctions and adverse inference instructions at trial.
+
+SETTLEMENT FRAMEWORK
+While our client is fully prepared to litigate this matter, we are willing to discuss reasonable settlement options that provide fair compensation and address the underlying issues. We believe this matter can be resolved without the expense and uncertainty of litigation if your company acts promptly and fairly.
+
+Our client is available for settlement discussions or mediation. However, this offer to negotiate is time-limited and should not be construed as any waiver of our client's rights or as evidence of weakness in our case.
+
+CONTACT INFORMATION
+Please direct all correspondence regarding this matter to the undersigned. Do not contact our client directly.
+
+We await your response by [date].
+
+Sincerely,
+
+[Attorney Signature]
+[Attorney Name]
+[Bar Number]
+Attorney for [Client Name]
+
+Enclosures:
+- [List any supporting documents attached]
+
+cc: [Client Name]
+
+═══════════════════════════════════════════════════════
+
+DRAFTING TIPS:
+
+1. Be specific with facts - use dates, amounts, names
+2. Quote policy language exactly
+3. Cite relevant statutes by number
+4. Quantify damages precisely
+5. Set realistic but firm deadline
+6. Show you've done research (case citations)
+7. Preserve evidence formally
+8. Make litigation consequences clear
+9. Leave room for settlement
+10. Professional tone throughout
+
+AVOID:
+- Emotional language
+- Threats that can't be backed up
+- Vague allegations
+- Excessive length (keep under 5 pages)
+- Revealing strategy details
+- Making it too easy to ignore
+
+The goal is to demonstrate strength while providing a clear path to resolution.

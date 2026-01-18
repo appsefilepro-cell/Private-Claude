@@ -142,6 +142,12 @@ positions*.json
 # pillar-b-legal/case-management/*/Evidence/*
 # pillar-b-legal/automation-flows/output/*
 
+# Generated Legal Documents (privileged attorney work product)
+legal_docs/*/
+!legal_docs/.gitkeep
+*.legal.json
+*_case_file/
+
 # Grant Data
 # pillar-d-nonprofit/grant-intelligence/pipeline.json
 
