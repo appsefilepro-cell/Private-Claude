@@ -1,0 +1,42 @@
+{
+  "timestamp": "2026-01-18T12:48:28.343780",
+  "days_missed": 24,
+  "total_missed": 1338.58,
+  "accounts": [
+    {
+      "account": "OKX-BigShort-1",
+      "strategy": "BIG_SHORT",
+      "initial": 100,
+      "estimated_current": 388.05,
+      "missed_revenue": 288.05
+    },
+    {
+      "account": "OKX-BigShort-2",
+      "strategy": "BIG_SHORT",
+      "initial": 100,
+      "estimated_current": 325.89,
+      "missed_revenue": 225.89
+    },
+    {
+      "account": "OKX-Challenge-1",
+      "strategy": "CHALLENGE_LONG",
+      "initial": 100,
+      "estimated_current": 388.05,
+      "missed_revenue": 288.05
+    },
+    {
+      "account": "OKX-Challenge-2",
+      "strategy": "CHALLENGE_LONG",
+      "initial": 100,
+      "estimated_current": 361.87,
+      "missed_revenue": 261.87
+    },
+    {
+      "account": "OKX-Hybrid-1",
+      "strategy": "HYBRID_OPTIMIZED",
+      "initial": 100,
+      "estimated_current": 374.73,
+      "missed_revenue": 274.73
+    }
+  ]
+}

@@ -1,0 +1,59 @@
+{
+  "description": "OKX Demo Trading Configuration - 5x00 Accounts",
+  "exchange": "okx",
+  "environment": "demo",
+  "accounts": [
+    {
+      "id": "OKX-DEMO-001",
+      "name": "OKX-BigShort-1",
+      "initial_capital": 100,
+      "strategy": "BIG_SHORT",
+      "win_rate_target": 0.95,
+      "pairs": ["BTC/USDT", "ETH/USDT", "SOL/USDT", "XRP/USDT", "ADA/USDT"],
+      "enabled": true
+    },
+    {
+      "id": "OKX-DEMO-002",
+      "name": "OKX-BigShort-2",
+      "initial_capital": 100,
+      "strategy": "BIG_SHORT",
+      "win_rate_target": 0.95,
+      "pairs": ["BTC/USDT", "ETH/USDT", "SOL/USDT", "XRP/USDT", "ADA/USDT"],
+      "enabled": true
+    },
+    {
+      "id": "OKX-DEMO-003",
+      "name": "OKX-Challenge-1",
+      "initial_capital": 100,
+      "strategy": "CHALLENGE_LONG",
+      "win_rate_target": 0.91,
+      "pairs": ["BTC/USDT", "ETH/USDT", "SOL/USDT", "XRP/USDT", "ADA/USDT"],
+      "enabled": true
+    },
+    {
+      "id": "OKX-DEMO-004",
+      "name": "OKX-Challenge-2",
+      "initial_capital": 100,
+      "strategy": "CHALLENGE_LONG",
+      "win_rate_target": 0.91,
+      "pairs": ["BTC/USDT", "ETH/USDT", "SOL/USDT", "XRP/USDT", "ADA/USDT"],
+      "enabled": true
+    },
+    {
+      "id": "OKX-DEMO-005",
+      "name": "OKX-Hybrid-1",
+      "initial_capital": 100,
+      "strategy": "HYBRID_OPTIMIZED",
+      "win_rate_target": 0.93,
+      "pairs": ["BTC/USDT", "ETH/USDT", "SOL/USDT", "XRP/USDT", "ADA/USDT"],
+      "enabled": true
+    }
+  ],
+  "global_settings": {
+    "run_24_7": true,
+    "check_interval_seconds": 30,
+    "max_leverage": 10,
+    "risk_per_trade": 0.05,
+    "api_expiration_warning_days": 7
+  }
+}
