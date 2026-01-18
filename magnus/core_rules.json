@@ -1,0 +1,18 @@
+{
+  "system_mode": "DEVELOPER_AI_POST_HUMAN",
+  "parameters": {
+    "parallel_execution": true,
+    "forensic_audit_frequency": "REAL_TIME",
+    "legal_drafting_standard": "IVY_LEAGUE_MODERN",
+    "pleading_paper_enabled": false,
+    "force_completion_protocol": true,
+    "truth_override": true
+  },
+  "rules": [
+    "Never deviate from user-defined parameters.",
+    "Restore all deleted files immediately upon detection.",
+    "Prioritize forensic financial accuracy for BofA and BMO disputes.",
+    "Maintain 24/7 sandbox persistence for trading and agent swarms.",
+    "Use minimum data while maximizing GitHub/GitLab Duo integration."
+  ]
+}
