@@ -2,7 +2,7 @@
   "total_agents": 50,
   "idle": 50,
   "working": 0,
-  "total_tasks_completed": 0,
+  "total_tasks_completed": 100,
   "total_errors": 0,
   "agents": [
     {
@@ -22,7 +22,7 @@
       ],
       "status": "idle",
       "current_task": null,
-      "tasks_completed": 0,
+      "tasks_completed": 21,
       "errors_encountered": 0
     },
     {
@@ -42,7 +42,7 @@
       ],
       "status": "idle",
       "current_task": null,
-      "tasks_completed": 0,
+      "tasks_completed": 21,
       "errors_encountered": 0
     },
     {
@@ -63,7 +63,7 @@
       ],
       "status": "idle",
       "current_task": null,
-      "tasks_completed": 0,
+      "tasks_completed": 20,
       "errors_encountered": 0
     },
     {
@@ -85,7 +85,7 @@
       ],
       "status": "idle",
       "current_task": null,
-      "tasks_completed": 0,
+      "tasks_completed": 19,
       "errors_encountered": 0
     },
     {
@@ -106,7 +106,7 @@
       ],
       "status": "idle",
       "current_task": null,
-      "tasks_completed": 0,
+      "tasks_completed": 19,
       "errors_encountered": 0
     },
     {
@@ -1080,5 +1080,13 @@
       "tasks_completed": 0,
       "errors_encountered": 0
     }
-  ]
+  ],
+  "revival_system": {
+    "is_running": false,
+    "tasks_in_queue": 0,
+    "active_tasks": 0,
+    "completed_tasks": 100,
+    "failed_tasks": 0,
+    "worker_threads": 0
+  }
 }

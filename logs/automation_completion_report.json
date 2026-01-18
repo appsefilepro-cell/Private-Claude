@@ -11,8 +11,8 @@
     },
     {
       "task": "Security scan",
-      "files_scanned": 76,
-      "vulnerabilities": 17
+      "files_scanned": 80,
+      "vulnerabilities": 18
     },
     {
       "task": "Pillar framework verification",
@@ -76,5 +76,5 @@
     }
   ],
   "failed": [],
-  "timestamp": "2026-01-17T21:30:16.030707"
+  "timestamp": "2026-01-18T12:47:03.781372"
 }

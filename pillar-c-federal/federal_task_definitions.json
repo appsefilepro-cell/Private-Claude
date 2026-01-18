@@ -3,14 +3,14 @@
   "name": "Federal Automation",
   "total_tasks": 100,
   "categories": [
-    "Budget Management",
-    "Security Compliance",
-    "Performance Monitoring",
-    "Contract Management",
     "FOIA Processing",
-    "Compliance Reporting",
+    "Security Compliance",
     "Procurement",
-    "Grant Administration"
+    "Grant Administration",
+    "Compliance Reporting",
+    "Budget Management",
+    "Performance Monitoring",
+    "Contract Management"
   ],
   "tasks": [
     {
