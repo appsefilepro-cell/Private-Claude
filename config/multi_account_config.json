@@ -1,0 +1,208 @@
+{
+  "description": "Multi-account trading configuration for 24/7 testing with various capital levels",
+  "total_accounts": 21,
+  "accounts": [
+    {
+      "id": "ACC-001",
+      "name": "Beginner-$100-Paper",
+      "profile": "beginner",
+      "environment": "paper",
+      "initial_capital": 100,
+      "enabled": true,
+      "run_24_7": true
+    },
+    {
+      "id": "ACC-002",
+      "name": "Beginner-$250-Paper",
+      "profile": "beginner",
+      "environment": "paper",
+      "initial_capital": 250,
+      "enabled": true,
+      "run_24_7": true
+    },
+    {
+      "id": "ACC-003",
+      "name": "Beginner-$500-Paper",
+      "profile": "beginner",
+      "environment": "paper",
+      "initial_capital": 500,
+      "enabled": true,
+      "run_24_7": true
+    },
+    {
+      "id": "ACC-004",
+      "name": "Beginner-$1000-Paper",
+      "profile": "beginner",
+      "environment": "paper",
+      "initial_capital": 1000,
+      "enabled": true,
+      "run_24_7": true
+    },
+    {
+      "id": "ACC-005",
+      "name": "Beginner-$10000-Paper",
+      "profile": "beginner",
+      "environment": "paper",
+      "initial_capital": 10000,
+      "enabled": true,
+      "run_24_7": true
+    },
+    {
+      "id": "ACC-006",
+      "name": "Beginner-$100000-Paper",
+      "profile": "beginner",
+      "environment": "paper",
+      "initial_capital": 100000,
+      "enabled": true,
+      "run_24_7": true
+    },
+    {
+      "id": "ACC-007",
+      "name": "Beginner-$300000-Paper",
+      "profile": "beginner",
+      "environment": "paper",
+      "initial_capital": 300000,
+      "enabled": true,
+      "run_24_7": true
+    },
+    {
+      "id": "ACC-008",
+      "name": "Novice-$100-Sandbox",
+      "profile": "novice",
+      "environment": "sandbox",
+      "initial_capital": 100,
+      "enabled": true,
+      "run_24_7": true
+    },
+    {
+      "id": "ACC-009",
+      "name": "Novice-$250-Sandbox",
+      "profile": "novice",
+      "environment": "sandbox",
+      "initial_capital": 250,
+      "enabled": true,
+      "run_24_7": true
+    },
+    {
+      "id": "ACC-010",
+      "name": "Novice-$500-Sandbox",
+      "profile": "novice",
+      "environment": "sandbox",
+      "initial_capital": 500,
+      "enabled": true,
+      "run_24_7": true
+    },
+    {
+      "id": "ACC-011",
+      "name": "Novice-$1000-Sandbox",
+      "profile": "novice",
+      "environment": "sandbox",
+      "initial_capital": 1000,
+      "enabled": true,
+      "run_24_7": true
+    },
+    {
+      "id": "ACC-012",
+      "name": "Novice-$10000-Sandbox",
+      "profile": "novice",
+      "environment": "sandbox",
+      "initial_capital": 10000,
+      "enabled": true,
+      "run_24_7": true
+    },
+    {
+      "id": "ACC-013",
+      "name": "Novice-$100000-Sandbox",
+      "profile": "novice",
+      "environment": "sandbox",
+      "initial_capital": 100000,
+      "enabled": true,
+      "run_24_7": true
+    },
+    {
+      "id": "ACC-014",
+      "name": "Novice-$300000-Sandbox",
+      "profile": "novice",
+      "environment": "sandbox",
+      "initial_capital": 300000,
+      "enabled": true,
+      "run_24_7": true
+    },
+    {
+      "id": "ACC-015",
+      "name": "Advanced-$100-Sandbox",
+      "profile": "advanced",
+      "environment": "sandbox",
+      "initial_capital": 100,
+      "enabled": true,
+      "run_24_7": true
+    },
+    {
+      "id": "ACC-016",
+      "name": "Advanced-$250-Sandbox",
+      "profile": "advanced",
+      "environment": "sandbox",
+      "initial_capital": 250,
+      "enabled": true,
+      "run_24_7": true
+    },
+    {
+      "id": "ACC-017",
+      "name": "Advanced-$500-Sandbox",
+      "profile": "advanced",
+      "environment": "sandbox",
+      "initial_capital": 500,
+      "enabled": true,
+      "run_24_7": true
+    },
+    {
+      "id": "ACC-018",
+      "name": "Advanced-$1000-Sandbox",
+      "profile": "advanced",
+      "environment": "sandbox",
+      "initial_capital": 1000,
+      "enabled": true,
+      "run_24_7": true
+    },
+    {
+      "id": "ACC-019",
+      "name": "Advanced-$10000-Sandbox",
+      "profile": "advanced",
+      "environment": "sandbox",
+      "initial_capital": 10000,
+      "enabled": true,
+      "run_24_7": true
+    },
+    {
+      "id": "ACC-020",
+      "name": "Advanced-$100000-Sandbox",
+      "profile": "advanced",
+      "environment": "sandbox",
+      "initial_capital": 100000,
+      "enabled": true,
+      "run_24_7": true
+    },
+    {
+      "id": "ACC-021",
+      "name": "Advanced-$300000-Sandbox",
+      "profile": "advanced",
+      "environment": "sandbox",
+      "initial_capital": 300000,
+      "enabled": true,
+      "run_24_7": true
+    }
+  ],
+  "monitoring": {
+    "check_interval_seconds": 60,
+    "performance_tracking": true,
+    "daily_reports": true,
+    "email_alerts": true,
+    "consolidate_reports": true
+  },
+  "scheduler": {
+    "enabled": true,
+    "run_24_7": true,
+    "restart_on_error": true,
+    "max_retries": 3
+  }
+}

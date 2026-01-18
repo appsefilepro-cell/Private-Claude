@@ -101,6 +101,10 @@ class ProbateAdministrator:
 
         return case_id
 
+    def create_case_folder(self, case_info: Dict[str, Any]) -> str:
+        """Alias for create_new_case for backward compatibility"""
+        return self.create_new_case(case_info)
+
     def generate_letter_of_administration(self, case_id: str) -> str:
         """Generate Letter of Administration document"""
         case_info = self._load_case_info(case_id)

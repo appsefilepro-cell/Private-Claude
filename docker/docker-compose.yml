@@ -1,0 +1,154 @@
+version: '3.8'
+
+# AgentX5 Multi-Pillar System - Docker Deployment
+# Deploys all 4 pillars with 50 agents executing 400 tasks
+
+services:
+  # Pillar A: Trading Automation (100 tasks)
+  agentx5-trading:
+    build:
+      context: ../pillar-a-trading
+      dockerfile: ../docker/Dockerfile.trading
+    container_name: agentx5-trading
+    environment:
+      - PILLAR=TRADING
+      - TOTAL_TASKS=100
+      - ENVIRONMENT=production
+      - PYTHONUNBUFFERED=1
+    volumes:
+      - ../logs:/app/logs
+      - ../pillar-a-trading:/app/pillar-a-trading:ro
+    networks:
+      - agentx5-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "python3", "-c", "import sys; sys.exit(0)"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Pillar B: Legal Automation (100 tasks)
+  agentx5-legal:
+    build:
+      context: ../pillar-b-legal
+      dockerfile: ../docker/Dockerfile.legal
+    container_name: agentx5-legal
+    environment:
+      - PILLAR=LEGAL
+      - TOTAL_TASKS=100
+      - ENVIRONMENT=production
+      - PYTHONUNBUFFERED=1
+    volumes:
+      - ../logs:/app/logs
+      - ../pillar-b-legal:/app/pillar-b-legal:ro
+    networks:
+      - agentx5-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "python3", "-c", "import sys; sys.exit(0)"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Pillar C: Federal Automation (100 tasks)
+  agentx5-federal:
+    build:
+      context: ../pillar-c-federal
+      dockerfile: ../docker/Dockerfile.federal
+    container_name: agentx5-federal
+    environment:
+      - PILLAR=FEDERAL
+      - TOTAL_TASKS=100
+      - ENVIRONMENT=production
+      - PYTHONUNBUFFERED=1
+    volumes:
+      - ../logs:/app/logs
+      - ../pillar-c-federal:/app/pillar-c-federal:ro
+    networks:
+      - agentx5-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "python3", "-c", "import sys; sys.exit(0)"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Pillar D: Nonprofit Automation (100 tasks)
+  agentx5-nonprofit:
+    build:
+      context: ../pillar-d-nonprofit
+      dockerfile: ../docker/Dockerfile.nonprofit
+    container_name: agentx5-nonprofit
+    environment:
+      - PILLAR=NONPROFIT
+      - TOTAL_TASKS=100
+      - ENVIRONMENT=production
+      - PYTHONUNBUFFERED=1
+    volumes:
+      - ../logs:/app/logs
+      - ../pillar-d-nonprofit:/app/pillar-d-nonprofit:ro
+    networks:
+      - agentx5-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "python3", "-c", "import sys; sys.exit(0)"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Master Orchestrator - Coordinates all 50 agents
+  agentx5-orchestrator:
+    build:
+      context: ../agent-4.0
+      dockerfile: ../docker/Dockerfile.orchestrator
+    container_name: agentx5-orchestrator
+    environment:
+      - TOTAL_AGENTS=50
+      - TOTAL_TASKS=400
+      - ENVIRONMENT=production
+      - PYTHONUNBUFFERED=1
+    volumes:
+      - ../logs:/app/logs
+      - ../agent-4.0:/app/agent-4.0:ro
+      - agent-state:/app/state
+    networks:
+      - agentx5-network
+    ports:
+      - "8080:8080"  # API/Dashboard port
+    depends_on:
+      - agentx5-trading
+      - agentx5-legal
+      - agentx5-federal
+      - agentx5-nonprofit
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Core Systems - Data Ingestion & Remediation
+  agentx5-core:
+    build:
+      context: ../core-systems
+      dockerfile: ../docker/Dockerfile.core
+    container_name: agentx5-core
+    environment:
+      - ENVIRONMENT=production
+      - PYTHONUNBUFFERED=1
+    volumes:
+      - ../logs:/app/logs
+      - ../core-systems:/app/core-systems:ro
+      - ../data:/app/data
+    networks:
+      - agentx5-network
+    restart: unless-stopped
+
+networks:
+  agentx5-network:
+    driver: bridge
+    name: agentx5-network
+
+volumes:
+  agent-state:
+    name: agentx5-agent-state

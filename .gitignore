@@ -131,6 +131,9 @@ positions*.json
 # pillar-b-legal/case-management/*/Evidence/*
 # pillar-b-legal/automation-flows/output/*
 
+# Test-generated case folders
+pillar-b-legal/probate-automation/cases/PROBATE_Test_Case_*/
+
 # Grant Data
 # pillar-d-nonprofit/grant-intelligence/pipeline.json
 
