@@ -1,0 +1,155 @@
+{
+  "unified_agent_system": {
+    "name": "AgentX5 Unified Multi-Agent System",
+    "version": "5.0.0",
+    "description": "Centralized configuration for all agent versions and integrations",
+    "updated_at": "2026-01-17T10:15:00Z"
+  },
+
+  "agent_versions": {
+    "agentx2": {
+      "enabled": true,
+      "description": "Legacy orchestration layer",
+      "capabilities": ["basic_automation", "task_routing"],
+      "status": "active"
+    },
+    "agentx3": {
+      "enabled": true,
+      "description": "Enhanced trading and legal automation",
+      "capabilities": ["trading", "legal_docs", "zapier_integration"],
+      "config_file": "agent_3_config.json",
+      "status": "active"
+    },
+    "agentx4": {
+      "enabled": true,
+      "description": "Multi-pillar architecture support",
+      "capabilities": ["multi_pillar", "workflow_orchestration", "api_connectors"],
+      "status": "active"
+    },
+    "agentx5": {
+      "enabled": true,
+      "description": "Quantum swarm intelligence with 759 agents",
+      "capabilities": ["swarm_intelligence", "quantum_trading", "forensic_recovery", "24_7_operations"],
+      "total_agents": 759,
+      "squads": {
+        "legal": 253,
+        "trading": 253,
+        "research": 253
+      },
+      "status": "active"
+    }
+  },
+
+  "integrations": {
+    "github_copilot": {
+      "enabled": true,
+      "endpoint": "github.copilot.agent",
+      "capabilities": ["code_generation", "code_review", "automation"]
+    },
+    "gitlab_duo": {
+      "enabled": true,
+      "endpoint": "gitlab.duo.agent",
+      "capabilities": ["ci_cd", "merge_requests", "code_analysis"]
+    },
+    "vscode": {
+      "enabled": true,
+      "extensions": [
+        "github.copilot",
+        "ms-python.python",
+        "anthropics.claude-dev"
+      ],
+      "workspace_settings": ".vscode/settings.json"
+    },
+    "claude_api": {
+      "enabled": true,
+      "model": "claude-sonnet-4-20250514",
+      "max_tokens": 8192,
+      "temperature": 0.7
+    },
+    "openai": {
+      "enabled": true,
+      "model": "gpt-4o",
+      "max_tokens": 4096
+    },
+    "gemini": {
+      "enabled": true,
+      "model": "gemini-2.0-flash",
+      "max_tokens": 8192
+    }
+  },
+
+  "deployment_targets": {
+    "render": {
+      "enabled": true,
+      "services": [
+        {
+          "name": "agentx5-api",
+          "type": "web",
+          "runtime": "python",
+          "build_command": "pip install -r requirements.txt",
+          "start_command": "python core-systems/e2b_webhook_server.py"
+        },
+        {
+          "name": "agentx5-dashboard",
+          "type": "web",
+          "runtime": "node",
+          "build_command": "npm install && npm run build",
+          "start_command": "npm start"
+        }
+      ]
+    },
+    "vercel": {
+      "enabled": true,
+      "framework": "nextjs",
+      "build_command": "npm run build"
+    },
+    "docker": {
+      "enabled": true,
+      "compose_file": "docker-compose.yml",
+      "services": 9
+    }
+  },
+
+  "chatbox_config": {
+    "default_agent": "agentx5",
+    "fallback_agents": ["claude_api", "openai", "gemini"],
+    "multi_agent_consensus": true,
+    "confidence_threshold": 0.75,
+    "max_response_time_ms": 30000,
+    "context_window": 10
+  },
+
+  "automation_loops": {
+    "trading_loop": {
+      "enabled": true,
+      "interval_seconds": 60,
+      "markets": ["crypto", "forex", "indices", "options"]
+    },
+    "remediation_loop": {
+      "enabled": true,
+      "interval_seconds": 300,
+      "targets": ["code_quality", "security", "documentation"]
+    },
+    "monitoring_loop": {
+      "enabled": true,
+      "interval_seconds": 30,
+      "checks": ["health", "performance", "errors"]
+    }
+  },
+
+  "api_keys_required": [
+    "ANTHROPIC_API_KEY",
+    "OPENAI_API_KEY",
+    "GEMINI_API_KEY",
+    "E2B_API_KEY",
+    "KRAKEN_API_KEY",
+    "GITHUB_TOKEN"
+  ],
+
+  "logging": {
+    "level": "INFO",
+    "format": "json",
+    "output_dir": "logs/",
+    "retention_days": 30
+  }
+}
