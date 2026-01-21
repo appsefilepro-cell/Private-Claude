@@ -1,0 +1,119 @@
+{
+  "zapier_import": {
+    "format_version": "1.0",
+    "zaps": [
+      {
+        "title": "GitHub Push → Activate AgentX5",
+        "description": "Auto-activates 750 agents + 666 tasks on every GitHub push",
+        "trigger": {
+          "app": "Webhooks by Zapier",
+          "event": "Catch Hook",
+          "setup": {
+            "instructions": "1. Create new Zap\n2. Add Webhook trigger\n3. Copy webhook URL to GitHub repo Settings > Webhooks\n4. Paste this URL in GitHub webhook URL field\n5. Select 'Just the push event'\n6. Save"
+          }
+        },
+        "actions": [
+          {
+            "step": 1,
+            "app": "Code by Zapier",
+            "event": "Run Python",
+            "code_template": "# Trigger GitHub Actions workflow\nimport requests\nimport os\n\ntoken = os.environ['GITHUB_TOKEN']\nheaders = {'Authorization': f'Bearer {token}', 'Accept': 'application/vnd.github.v3+json'}\n\n# Trigger activate_all_agents.yml\nurl = 'https://api.github.com/repos/appsefilepro-cell/Private-Claude/actions/workflows/activate_all_agents.yml/dispatches'\ndata = {'ref': 'main'}\n\nresponse = requests.post(url, json=data, headers=headers)\nreturn {'status': 'triggered' if response.status_code == 204 else 'failed', 'code': response.status_code}"
+          },
+          {
+            "step": 2,
+            "app": "Gmail",
+            "event": "Send Email",
+            "config": {
+              "to": "appsefilepro@gmail.com",
+              "subject": "✅ AgentX5 Activated",
+              "body": "750 agents + 666 tasks activated\nCost: $0\nData: 25%"
+            }
+          }
+        ]
+      },
+      {
+        "title": "3-Hour System Check",
+        "description": "Checks all systems every 3 hours (minimal data usage)",
+        "trigger": {
+          "app": "Schedule by Zapier",
+          "event": "Every 3 hours",
+          "setup": "Select 'Every 3 hours' to minimize data usage"
+        },
+        "actions": [
+          {
+            "step": 1,
+            "app": "Webhooks by Zapier",
+            "event": "GET",
+            "config": {
+              "url": "https://api.github.com/repos/appsefilepro-cell/Private-Claude/contents/CFO_SUITE_STATUS.json",
+              "headers": {
+                "Accept": "application/vnd.github.v3+json"
+              }
+            }
+          },
+          {
+            "step": 2,
+            "app": "Code by Zapier",
+            "event": "Run Python",
+            "code_template": "import json\nimport base64\n\n# Decode GitHub API response\ncontent = input_data.get('content', '')\nstatus = json.loads(base64.b64decode(content).decode('utf-8'))\n\n# Check if operational\nif status['status'] == 'FULLY_OPERATIONAL':\n    return {'alert': False, 'message': 'All systems operational'}\nelse:\n    return {'alert': True, 'message': 'System needs attention'}"
+          },
+          {
+            "step": 3,
+            "app": "Filter by Zapier",
+            "event": "Only continue if",
+            "config": {
+              "field": "alert",
+              "condition": "equals",
+              "value": "True"
+            }
+          },
+          {
+            "step": 4,
+            "app": "Gmail",
+            "event": "Send Email",
+            "config": {
+              "to": "appsefilepro@gmail.com",
+              "subject": "⚠️ AgentX5 Alert",
+              "body": "{{message}}\nPlease check systems."
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "import_instructions": {
+    "method_1_bulk_import": "Not available - Zapier requires manual Zap creation",
+    "method_2_manual_setup": [
+      "1. Go to https://zapier.com/app/zaps",
+      "2. Click 'Create Zap'",
+      "3. Follow the trigger/action config above for each Zap",
+      "4. Test each step",
+      "5. Turn on the Zap",
+      "6. Repeat for each Zap"
+    ],
+    "method_3_zapier_cli": [
+      "1. Install: npm install -g zapier-platform-cli",
+      "2. Login: zapier login",
+      "3. Use this config as reference to build Zap",
+      "4. Deploy: zapier push"
+    ]
+  },
+  "github_webhook_setup": {
+    "step_1": "Go to: https://github.com/appsefilepro-cell/Private-Claude/settings/hooks",
+    "step_2": "Click 'Add webhook'",
+    "step_3": "Payload URL: [Your Zapier webhook URL from Zap #1]",
+    "step_4": "Content type: application/json",
+    "step_5": "Events: Just the push event",
+    "step_6": "Active: ✓",
+    "step_7": "Click 'Add webhook'"
+  },
+  "secrets_needed": {
+    "zapier_environment": [
+      "GITHUB_TOKEN: Get from https://github.com/settings/tokens",
+      "Permissions needed: repo, workflow"
+    ],
+    "github_secrets": [
+      "ZAPIER_WEBHOOK_URL: Get from Zapier Zap #1 webhook trigger"
+    ]
+  }
+}

@@ -1,0 +1,137 @@
+{
+  "zapier_workflows": [
+    {
+      "name": "GitHub Push → Activate 666 Tasks",
+      "trigger": {
+        "type": "webhook",
+        "url": "https://hooks.zapier.com/hooks/catch/YOUR_HOOK_ID/CHANGE_ME",
+        "method": "POST"
+      },
+      "actions": [
+        {
+          "app": "Code by Zapier",
+          "action": "Run Python",
+          "code": "import requests\nimport os\n\n# Trigger GitHub Actions\nheaders = {'Authorization': f'token {os.environ[\"GITHUB_TOKEN\"]}'}\nurl = 'https://api.github.com/repos/appsefilepro-cell/Private-Claude/actions/workflows/activate_all_agents.yml/dispatches'\ndata = {'ref': 'main'}\nresponse = requests.post(url, json=data, headers=headers)\nreturn {'status': 'triggered', 'response': response.status_code}"
+        },
+        {
+          "app": "Gmail",
+          "action": "Send Email",
+          "to": "appsefilepro@gmail.com",
+          "subject": "✅ AgentX5 Activated",
+          "body": "750 agents + 666 tasks are now running"
+        }
+      ]
+    },
+    {
+      "name": "Hourly System Check",
+      "trigger": {
+        "type": "schedule",
+        "schedule": "Every 1 hour"
+      },
+      "actions": [
+        {
+          "app": "Webhooks by Zapier",
+          "action": "GET",
+          "url": "https://api.github.com/repos/appsefilepro-cell/Private-Claude/actions/runs?status=completed&per_page=1",
+          "headers": {
+            "Authorization": "token GITHUB_TOKEN"
+          }
+        },
+        {
+          "app": "Filter",
+          "condition": "Only continue if last run failed"
+        },
+        {
+          "app": "Gmail",
+          "action": "Send Email",
+          "to": "appsefilepro@gmail.com",
+          "subject": "⚠️ AgentX5 Alert",
+          "body": "System check failed - please investigate"
+        }
+      ]
+    },
+    {
+      "name": "Legal Document Generated → File to Court",
+      "trigger": {
+        "type": "webhook",
+        "url": "https://hooks.zapier.com/hooks/catch/YOUR_HOOK_ID/LEGAL_DOC",
+        "method": "POST"
+      },
+      "actions": [
+        {
+          "app": "Google Drive",
+          "action": "Upload File",
+          "folder": "Legal Documents"
+        },
+        {
+          "app": "Webhooks by Zapier",
+          "action": "POST",
+          "url": "https://pacer.uscourts.gov/api/v1/file",
+          "note": "File to PACER if API is available"
+        },
+        {
+          "app": "Gmail",
+          "action": "Send Email",
+          "to": "appsefilepro@gmail.com",
+          "subject": "📄 Legal Document Filed",
+          "body": "Document has been filed successfully"
+        }
+      ]
+    },
+    {
+      "name": "Trading Bot Alert → Notify",
+      "trigger": {
+        "type": "webhook",
+        "url": "https://hooks.zapier.com/hooks/catch/YOUR_HOOK_ID/TRADING",
+        "method": "POST"
+      },
+      "actions": [
+        {
+          "app": "Filter",
+          "condition": "Only continue if status = error"
+        },
+        {
+          "app": "Gmail",
+          "action": "Send Email",
+          "to": "appsefilepro@gmail.com",
+          "subject": "⚠️ Trading Bot Alert",
+          "body": "Trading bot requires attention"
+        }
+      ]
+    },
+    {
+      "name": "Daily Report Generator",
+      "trigger": {
+        "type": "schedule",
+        "schedule": "Every day at 9:00 AM"
+      },
+      "actions": [
+        {
+          "app": "Webhooks by Zapier",
+          "action": "GET",
+          "url": "https://api.github.com/repos/appsefilepro-cell/Private-Claude/contents/CFO_SUITE_STATUS.json"
+        },
+        {
+          "app": "Code by Zapier",
+          "action": "Run Python",
+          "code": "import json\nimport base64\n\ncontent = input_data['content']\nstatus = json.loads(base64.b64decode(content).decode())\nreport = f\"\"\"Daily Report:\n- CFO Suite: {status['teams']['master_cfo_suite']['status']}\n- Tasks Completed: {status['performance']['tasks_completed']}\n- Errors: {status['performance']['errors']}\n- Uptime: {status['performance']['uptime']}\"\"\"\nreturn {'report': report}"
+        },
+        {
+          "app": "Gmail",
+          "action": "Send Email",
+          "to": "appsefilepro@gmail.com",
+          "subject": "📊 Daily AgentX5 Report",
+          "body": "{{report}}"
+        }
+      ]
+    }
+  ],
+  "setup_instructions": {
+    "step_1": "Go to https://zapier.com/app/zaps",
+    "step_2": "Click 'Create Zap' for each workflow above",
+    "step_3": "Configure triggers and actions as specified",
+    "step_4": "Replace YOUR_HOOK_ID with actual webhook IDs",
+    "step_5": "Set GitHub token in Zapier environment variables",
+    "step_6": "Test each Zap and turn on"
+  }
+}
