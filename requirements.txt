@@ -1,3 +1,8 @@
+# MASTER AGENTX5 ORCHESTRATION - DEPENDENCIES
+# ============================================
+# All packages use FREE tier or open source - Cost: $0/month
+
+# Core Dependencies
 urllib3<2.0.0
 requests==2.31.0
 python-docx==1.2.0
@@ -6,3 +11,51 @@ pandas==2.3.3
 python-dotenv==1.2.1
 PyMuPDF==1.26.7
 openpyxl==3.1.5
+
+# Async/Performance
+aiohttp==3.9.1
+aiofiles==23.2.1
+
+# Google Services (FREE tier - 60 req/min, 1500 req/day)
+google-generativeai>=0.3.0
+google-api-python-client>=2.100.0
+google-auth>=2.20.0
+google-auth-oauthlib>=1.0.0
+
+# Web Scraping/Crawling (Grok Pro level)
+beautifulsoup4>=4.12.0
+lxml>=4.9.0
+scrapy>=2.11.0
+
+# Legal Document Processing
+PyPDF2>=3.0.0
+pdfplumber>=0.10.0
+
+# Trading (Paper/Demo only)
+ccxt>=4.0.0
+
+# Automation & Webhooks
+schedule>=1.2.0
+webhooks>=0.5.0
+
+# GitHub Integration
+PyGithub>=2.0.0
+
+# Monitoring/Logging
+loguru>=0.7.0
+
+# Testing
+pytest>=7.4.0
+pytest-asyncio>=0.21.0
+
+# Additional Tools
+pyyaml>=6.0.0
+jsonschema>=4.0.0
+validators>=0.20.0
+tenacity>=8.0.0
+cachetools>=5.0.0
+rich>=13.0.0
+click>=8.0.0
+
+# NLP for Legal Analysis
+nltk>=3.8.0
