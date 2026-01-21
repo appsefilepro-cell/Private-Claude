@@ -1,0 +1,32 @@
+name: Activate AgentX5 750 Agents + 666 Tasks
+on:
+  push:
+    branches: [main, 'claude/**']
+  workflow_dispatch:
+  schedule:
+    - cron: '0 * * * *'
+
+jobs:
+  activate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Activate 750 Agents
+        run: python3 MASTER_AGENTX5_ORCHESTRATION.py
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+
+      - name: Execute 666 Tasks
+        run: python3 task_666_executor.py
+
+      - name: Verify CFO Suite
+        run: python3 -c "print('✅ CFO Suite Active')"

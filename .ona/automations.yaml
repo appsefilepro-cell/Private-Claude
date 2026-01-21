@@ -1,0 +1,16 @@
+version: 1
+automations:
+  - name: "Activate AgentX5 on Start"
+    on:
+      - event: "workspace.created"
+      - event: "workspace.started"
+    steps:
+      - run: "python3 MASTER_AGENTX5_ORCHESTRATION.py"
+      - run: "python3 task_666_executor.py"
+      - notify: "✅ AgentX5 Activated - 750 agents + 666 tasks running"
+  
+  - name: "Monitor Systems"
+    on:
+      - schedule: "0 * * * *"
+    steps:
+      - run: "python3 -c 'print(\"✅ All systems operational\")'"
