@@ -60,6 +60,7 @@ Agent 5.0 (219 Agents + Committee 100 + Full Orchestration) ← CURRENT
 ## SYSTEM CAPABILITIES
 
 ### Pillar A: Trading Operations
+
 - 24/7 Multi-timezone trading (Tokyo, London, NY, Sydney)
 - Markets: BTC/USDT, ETH/USDT, SOL/USDT, XRP/USDT
 - Candlestick pattern recognition
@@ -68,6 +69,7 @@ Agent 5.0 (219 Agents + Committee 100 + Full Orchestration) ← CURRENT
 - Paper/Demo/Live modes
 
 ### Pillar B: Legal Automation
+
 - Probate administration
 - 100+ page motion generation
 - Case management (Dropbox)
@@ -75,12 +77,14 @@ Agent 5.0 (219 Agents + Committee 100 + Full Orchestration) ← CURRENT
 - Court filing automation
 
 ### Pillar C: Federal Contracting
+
 - SAM.gov opportunity monitoring
 - Grant writing (Grants.gov)
 - RFP/RFQ response automation
 - Compliance tracking
 
 ### Pillar D: Nonprofit Management
+
 - Fundraising campaign management
 - Donor database tracking
 - Grant pipeline management
@@ -91,26 +95,31 @@ Agent 5.0 (219 Agents + Committee 100 + Full Orchestration) ← CURRENT
 ## QUICK START
 
 ### One-Click Activation
+
 ```bash
 ./ACTIVATE_EVERYTHING.sh
 ```
 
 ### Run Agent X5 Orchestrator
+
 ```bash
 python scripts/agent_x5_master_orchestrator.py
 ```
 
 ### Run Agent X5.0 (50 agents)
+
 ```bash
 python agent-4.0/orchestrator/master_orchestrator.py
 ```
 
 ### Run Agent X5.0 (Trading)
+
 ```bash
 python pillar-a-trading/agent-3.0/agent_3_orchestrator.py
 ```
 
 ### Docker Deployment
+
 ```bash
 docker-compose up -d
 ```
@@ -163,9 +172,10 @@ Private-Claude/
 | DEMO | Exchange demo accounts | NONE |
 | LIVE | Real money trading | HIGH |
 
-**Default: PAPER MODE (Safe)**
+### Default: PAPER MODE (Safe)
 
 To enable LIVE trading:
+
 ```bash
 export LIVE_TRADING=true
 ./ACTIVATE_EVERYTHING.sh

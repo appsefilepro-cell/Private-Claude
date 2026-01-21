@@ -230,7 +230,7 @@ class ComprehensiveSystemTest:
                 'state': 'Test State'
             }
 
-            case_id = admin.create_case_folder(test_case)
+            case_id = admin.create_new_case(test_case)
 
             if not case_id:
                 self.errors_found.append("Probate case creation failed")

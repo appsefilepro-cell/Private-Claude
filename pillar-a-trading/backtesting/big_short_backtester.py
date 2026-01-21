@@ -51,9 +51,14 @@ class BigShortBacktester:
         self.data_path.mkdir(exist_ok=True)
         self.results_path.mkdir(exist_ok=True)
 
+        self._log_section_header("📉 BIG SHORT BACKTESTER INITIALIZED", "   Target: 94-96% success rate")
+
+    def _log_section_header(self, title: str, *messages: str):
+        """Log a formatted section header with separator lines"""
         logger.info("=" * 70)
-        logger.info("📉 BIG SHORT BACKTESTER INITIALIZED")
-        logger.info("   Target: 94-96% success rate")
+        logger.info(title)
+        for msg in messages:
+            logger.info(msg)
         logger.info("=" * 70)
 
     def load_historical_bubble_stocks(self) -> List[Dict]:
@@ -342,10 +347,10 @@ class BigShortBacktester:
             'avg_profit_per_trade': avg_profit,
             'trades': trades,
             'summary': {
-                'dot_com_bubble': sum(1 for t in trades if '2000' in t['period'] and t['success']),
-                'housing_bubble': sum(1 for t in trades if '2008' in t['period'] and t['success']),
-                'meme_stocks': sum(1 for t in trades if '2021' in t['period'] and t['success']),
-                'crypto_collapse': sum(1 for t in trades if '2022' in t['period'] and t['success'])
+                'dot_com_bubble': sum(t['success'] for t in trades if '2000' in t['period']),
+                'housing_bubble': sum(t['success'] for t in trades if '2008' in t['period']),
+                'meme_stocks': sum(t['success'] for t in trades if '2021' in t['period']),
+                'crypto_collapse': sum(t['success'] for t in trades if '2022' in t['period'])
             }
         }
 
@@ -354,18 +359,17 @@ class BigShortBacktester:
         with open(output_file, 'w') as f:
             json.dump(results, f, indent=2)
 
-        logger.info("=" * 70)
-        logger.info("📊 BACKTEST RESULTS - BIG SHORT STRATEGY")
-        logger.info("=" * 70)
-        logger.info(f"Total Stocks Analyzed: {len(bubble_stocks)}")
-        logger.info(f"Signals Generated: {total_predictions}")
-        logger.info(f"Successful Shorts: {correct_predictions}/{total_predictions}")
-        logger.info(f"Success Rate: {success_rate:.2f}%")
-        logger.info(f"Target: 94-96%")
-        logger.info(f"Target Met: {'✅ YES' if results['target_met'] else '❌ NO'}")
-        logger.info(f"Total Profit: {total_profit:+.2f}%")
-        logger.info(f"Avg Profit/Trade: {avg_profit:+.2f}%")
-        logger.info("=" * 70)
+        self._log_section_header(
+            "📊 BACKTEST RESULTS - BIG SHORT STRATEGY",
+            f"Total Stocks Analyzed: {len(bubble_stocks)}",
+            f"Signals Generated: {total_predictions}",
+            f"Successful Shorts: {correct_predictions}/{total_predictions}",
+            f"Success Rate: {success_rate:.2f}%",
+            f"Target: 94-96%",
+            f"Target Met: {'✅ YES' if results['target_met'] else '❌ NO'}",
+            f"Total Profit: {total_profit:+.2f}%",
+            f"Avg Profit/Trade: {avg_profit:+.2f}%"
+        )
 
         logger.info(f"\n💾 Results saved to: {output_file}")
 
@@ -447,16 +451,15 @@ class BigShortBacktester:
             'target_met': 94 <= overall_success_rate <= 96
         }
 
-        logger.info("=" * 70)
-        logger.info("🎲 MONTE CARLO SIMULATION RESULTS")
-        logger.info("=" * 70)
-        logger.info(f"Simulations: {num_simulations:,}")
-        logger.info(f"Success Rate: {overall_success_rate:.2f}%")
-        logger.info(f"Avg Profit: {overall_avg_profit:+.2f}%")
-        logger.info(f"95% Confidence: {simulation_results['confidence_interval_95'][0]:.2f}% - "
-                   f"{simulation_results['confidence_interval_95'][1]:.2f}%")
-        logger.info(f"Target Met: {'✅ YES' if simulation_results['target_met'] else '❌ NO'}")
-        logger.info("=" * 70)
+        self._log_section_header(
+            "🎲 MONTE CARLO SIMULATION RESULTS",
+            f"Simulations: {num_simulations:,}",
+            f"Success Rate: {overall_success_rate:.2f}%",
+            f"Avg Profit: {overall_avg_profit:+.2f}%",
+            f"95% Confidence: {simulation_results['confidence_interval_95'][0]:.2f}% - "
+            f"{simulation_results['confidence_interval_95'][1]:.2f}%",
+            f"Target Met: {'✅ YES' if simulation_results['target_met'] else '❌ NO'}"
+        )
 
         return simulation_results
 
@@ -571,7 +574,7 @@ def main():
     print("\n" + "=" * 70)
     print("✅ BACKTEST COMPLETE")
     print("=" * 70)
-    print(f"Results saved to: pillar-a-trading/backtesting/backtest_results/")
+    print("Results saved to: pillar-a-trading/backtesting/backtest_results/")
 
 
 if __name__ == "__main__":

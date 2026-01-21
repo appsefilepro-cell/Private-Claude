@@ -1,0 +1,12 @@
+{
+  "decedent_name": "Test Case",
+  "date_of_death": "2024-01-01",
+  "case_number": "TEST-001",
+  "administrator_name": "Test Admin",
+  "administrator_address": "Test Address",
+  "court_name": "Test Court",
+  "county": "Test County",
+  "state": "Test State",
+  "case_id": "PROBATE_Test_Case_20260117",
+  "created_date": "2026-01-17T18:37:52.267494"
+}

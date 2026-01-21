@@ -10,7 +10,6 @@ Strategy:
 - Target 94-96% win rate
 """
 
-import numpy as np
 import logging
 from datetime import datetime
 from typing import Dict, List, Any, Optional

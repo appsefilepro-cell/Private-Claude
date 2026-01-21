@@ -14,7 +14,6 @@ Targets:
 - Market euphoria peaks (VIX < 12, extreme greed)
 """
 
-import numpy as np
 import logging
 from datetime import datetime
 from typing import Dict, List, Any, Optional

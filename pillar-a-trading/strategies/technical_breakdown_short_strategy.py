@@ -11,7 +11,6 @@ Strategy:
 - Target 94-96% win rate
 """
 
-import numpy as np
 import logging
 from datetime import datetime
 from typing import Dict, List, Any, Optional
@@ -55,7 +54,6 @@ class TechnicalBreakdownShortStrategy:
         }
 
         score = 0
-        max_score = 0
 
         # 1. SUPPORT BREAK (35 points)
         price = data.get('price', 0)
@@ -71,8 +69,6 @@ class TechnicalBreakdownShortStrategy:
                 score += 20
                 signal['reasons'].append(f"Testing support: {break_pct*100:.1f}% below")
 
-        max_score += 35
-
         # 2. DEATH CROSS (30 points)
         ma_50 = data.get('ma_50', 0)
         ma_200 = data.get('ma_200', 0)
@@ -82,15 +78,13 @@ class TechnicalBreakdownShortStrategy:
 
             if ma_ratio < (1 - self.criteria['ma_death_cross_buffer']):
                 score += 30
-                signal['reasons'].append(f"Death cross: 50-day MA < 200-day MA")
+                signal['reasons'].append("Death cross: 50-day MA < 200-day MA")
             elif ma_ratio < 1.0:
                 score += 15
                 signal['reasons'].append("50-day MA approaching 200-day MA")
 
-        max_score += 30
-
         # 3. BEARISH PATTERN (20 points)
-        pattern = data.get('pattern', None)
+        pattern = data.get('pattern')
 
         if pattern in ['head_and_shoulders', 'double_top', 'descending_triangle']:
             score += 20
@@ -98,8 +92,6 @@ class TechnicalBreakdownShortStrategy:
         elif pattern in ['rising_wedge', 'bear_flag']:
             score += 10
             signal['reasons'].append(f"Continuation pattern: {pattern}")
-
-        max_score += 20
 
         # 4. VOLUME CONFIRMATION (10 points)
         volume = data.get('volume', 0)
@@ -115,8 +107,6 @@ class TechnicalBreakdownShortStrategy:
                 score += 5
                 signal['reasons'].append("Volume increasing")
 
-        max_score += 10
-
         # 5. MACD BEARISH (5 points)
         macd = data.get('macd', 'neutral')
 
@@ -124,10 +114,9 @@ class TechnicalBreakdownShortStrategy:
             score += 5
             signal['reasons'].append("MACD bearish")
 
-        max_score += 5
-
         # Calculate confidence
-        signal['confidence'] = (score / max_score) if max_score > 0 else 0
+        max_score = 100  # Total possible points: 35 + 30 + 20 + 10 + 5
+        signal['confidence'] = score / max_score
 
         # Determine action
         if signal['confidence'] >= 0.75:  # 75%+ confidence
