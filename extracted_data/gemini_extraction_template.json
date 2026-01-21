@@ -1,0 +1,25 @@
+{
+  "conversation_id": "10bca5b75028b824",
+  "extraction_date": "2026-01-21T15:33:40.381217",
+  "url": "https://gemini.google.com/app/10bca5b75028b824",
+  "status": "READY_FOR_MANUAL_EXPORT",
+  "instructions": {
+    "step_1": "Open the Gemini conversation URL in browser",
+    "step_2": "Click the Share button",
+    "step_3": "Copy all conversation text",
+    "step_4": "Save to: gemini_conversation_export.txt",
+    "step_5": "Run this script again to process the export"
+  },
+  "auto_extraction_method": {
+    "method_1": "Use Gemini API to fetch conversation history",
+    "method_2": "Use browser automation (Selenium) to extract",
+    "method_3": "Use Google Takeout to download all Gemini data"
+  },
+  "extraction_template": {
+    "conversations": [],
+    "code_blocks": [],
+    "documents": [],
+    "tasks": [],
+    "updated_data": []
+  }
+}
