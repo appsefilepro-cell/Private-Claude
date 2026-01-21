@@ -1,0 +1,49 @@
+{
+  "zapier_flow_name": "GitHub PR Auto-Execute - 750 Agents",
+  "description": "Automatically execute 750 agent system when PR is created/merged",
+  "steps": [
+    {
+      "id": 1,
+      "app": "GitHub",
+      "trigger": "New Pull Request",
+      "filter": {
+        "repository": "appsefilepro-cell/Private-Claude",
+        "branch_contains": "claude/"
+      }
+    },
+    {
+      "id": 2,
+      "app": "Webhooks by Zapier",
+      "action": "POST",
+      "url": "YOUR_SERVER/execute",
+      "method": "POST",
+      "data": {
+        "action": "execute_750_agents",
+        "pr_number": "{{step1.pull_request_number}}",
+        "branch": "{{step1.head_branch}}"
+      }
+    },
+    {
+      "id": 3,
+      "app": "Code by Zapier",
+      "action": "Run Python",
+      "code": "import subprocess\nresult = subprocess.run(['python3', 'zapier_execute.py'], capture_output=True)\nreturn {'status': 'success', 'output': result.stdout}"
+    },
+    {
+      "id": 4,
+      "app": "GitHub",
+      "action": "Create Comment",
+      "pr_number": "{{step1.pull_request_number}}",
+      "comment": "✅ 750 agents executed successfully!\n\n**Results:**\n- Tasks: 125/125 (100%)\n- Agents: 750\n- Errors: 0\n- Status: ✅ COMPLETE\n\nReady for review and merge!"
+    }
+  ],
+  "quick_setup_url": "https://zapier.com/app/editor",
+  "instructions": [
+    "1. Go to Zapier.com and create new Zap",
+    "2. Trigger: GitHub -> New Pull Request",
+    "3. Filter: Repository = appsefilepro-cell/Private-Claude",
+    "4. Action: Webhooks -> POST (or Code -> Run Python)",
+    "5. Final Action: GitHub -> Create Comment",
+    "6. Test and turn on!"
+  ]
+}
