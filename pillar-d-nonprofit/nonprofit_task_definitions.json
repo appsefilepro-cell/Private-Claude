@@ -1,0 +1,1017 @@
+{
+  "pillar": "D",
+  "name": "Nonprofit Automation",
+  "total_tasks": 100,
+  "categories": [
+    "Financial Management",
+    "Volunteer Coordination",
+    "Impact Tracking",
+    "Grant Management",
+    "Donor Management",
+    "Program Management",
+    "Fundraising",
+    "Marketing/Outreach"
+  ],
+  "tasks": [
+    {
+      "id": "FR001",
+      "name": "Fundraising Campaign Planning",
+      "category": "Fundraising",
+      "description": "Plan and develop fundraising campaigns",
+      "priority": 1,
+      "estimated_time_minutes": 30,
+      "requires_human_review": true,
+      "status": "pending"
+    },
+    {
+      "id": "FR002",
+      "name": "Donor Prospect Research",
+      "category": "Fundraising",
+      "description": "Research potential major donors",
+      "priority": 1,
+      "estimated_time_minutes": 25,
+      "requires_human_review": false,
+      "status": "pending"
+    },
+    {
+      "id": "FR003",
+      "name": "Grant Opportunity Research",
+      "category": "Fundraising",
+      "description": "Research and identify grant opportunities",
+      "priority": 1,
+      "estimated_time_minutes": 30,
+      "requires_human_review": false,
+      "status": "pending"
+    },
+    {
+      "id": "FR004",
+      "name": "Campaign Material Creation",
+      "category": "Fundraising",
+      "description": "Create fundraising campaign materials",
+      "priority": 1,
+      "estimated_time_minutes": 45,
+      "requires_human_review": true,
+      "status": "pending"
+    },
+    {
+      "id": "FR005",
+      "name": "Direct Mail Campaign",
+      "category": "Fundraising",
+      "description": "Prepare and track direct mail campaigns",
+      "priority": 2,
+      "estimated_time_minutes": 30,
+      "requires_human_review": false,
+      "status": "pending"
+    },
+    {
+      "id": "FR006",
+      "name": "Email Campaign Management",
+      "category": "Fundraising",
+      "description": "Create and manage email fundraising campaigns",
+      "priority": 1,
+      "estimated_time_minutes": 20,
+      "requires_human_review": false,
+      "status": "pending"
+    },
+    {
+      "id": "FR007",
+      "name": "Social Media Campaign Promotion",
+      "category": "Fundraising",
+      "description": "Promote fundraising campaigns on social media",
+      "priority": 2,
+      "estimated_time_minutes": 15,
+      "requires_human_review": false,
+      "status": "pending"
+    },
+    {
+      "id": "FR008",
+      "name": "Event Planning and Coordination",
+      "category": "Fundraising",
+      "description": "Plan and coordinate fundraising events",
+      "priority": 1,
+      "estimated_time_minutes": 60,
+      "requires_human_review": true,
+      "status": "pending"
+    },
+    {
+      "id": "FR009",
+      "name": "Peer-to-Peer Fundraising Setup",
+      "category": "Fundraising",
+      "description": "Set up peer-to-peer fundraising campaigns",
+      "priority": 2,
+      "estimated_time_minutes": 25,
+      "requires_human_review": false,
+      "status": "pending"
+    },
+    {
+      "id": "FR010",
+      "name": "Corporate Sponsorship Solicitation",
+      "category": "Fundraising",
+      "description": "Prepare corporate sponsorship proposals",
+      "priority": 1,
+      "estimated_time_minutes": 40,
+      "requires_human_review": true,
+      "status": "pending"
+    },
+    {
+      "id": "FR011",
+      "name": "Major Gift Cultivation",
+      "category": "Fundraising",
+      "description": "Develop major gift prospects and cultivation plans",
+      "priority": 1,
+      "estimated_time_minutes": 35,
+      "requires_human_review": false,
+      "status": "pending"
+    },
+    {
+      "id": "FR012",
+      "name": "Pledge Tracking",
+      "category": "Fundraising",
+      "description": "Track pledges and commitment letters",
+      "priority": 2,
+      "estimated_time_minutes": 10,
+      "requires_human_review": false,
+      "status": "pending"
+    },
+    {
+      "id": "FR013",
+      "name": "Crowdfunding Campaign Management",
+      "category": "Fundraising",
+      "description": "Set up and manage crowdfunding campaigns",
+      "priority": 2,
+      "estimated_time_minutes": 30,
+      "requires_human_review": false,
+      "status": "pending"
+    },
+    {
+      "id": "FR014",
+      "name": "Fundraising ROI Analysis",
+      "category": "Fundraising",
+      "description": "Analyze fundraising ROI and effectiveness",
+      "priority": 3,
+      "estimated_time_minutes": 25,
+      "requires_human_review": false,
+      "status": "pending"
+    },
+    {
+      "id": "FR015",
+      "name": "Legacy Giving Program",
+      "category": "Fundraising",
+      "description": "Manage planned and legacy giving program",
+      "priority": 2,
+      "estimated_time_minutes": 20,
+      "requires_human_review": false,
+      "status": "pending"
+    },
+    {
+      "id": "FR016",
+      "name": "Annual Fund Management",
+      "category": "Fundraising",
+      "description": "Manage annual fund campaigns",
+      "priority": 1,
+      "estimated_time_minutes": 25,
+      "requires_human_review": false,
+      "status": "pending"
+    },
+    {
+      "id": "FR017",
+      "name": "Gift Acknowledgment Letters",
+      "category": "Fundraising",
+      "description": "Generate gift acknowledgment and thank you letters",
+      "priority": 1,
+      "estimated_time_minutes": 10,
+      "requires_human_review": false,
+      "status": "pending"
+    },
+    {
+      "id": "FR018",
+      "name": "Matching Gift Processing",
+      "category": "Fundraising",
+      "description": "Process and track matching gift programs",
+      "priority": 2,
+      "estimated_time_minutes": 15,
+      "requires_human_review": false,
+      "status": "pending"
+    },
+    {
+      "id": "FR019",
+      "name": "Campaign Performance Reporting",
+      "category": "Fundraising",
+      "description": "Generate campaign performance reports",
+      "priority": 2,
+      "estimated_time_minutes": 20,
+      "requires_human_review": false,
+      "status": "pending"
+    },
+    {
+      "id": "FR020",
+      "name": "Fundraising Database Maintenance",
+      "category": "Fundraising",
+      "description": "Maintain fundraising database and records",
+      "priority": 2,
+      "estimated_time_minutes": 15,
+      "requires_human_review": false,
+      "status": "pending"
+    },
+    {
+      "id": "DM001",
+      "name": "Donor Profile Creation",
+      "category": "Donor Management",
+      "description": "Create and maintain donor profiles",
+      "priority": 1,
+      "estimated_time_minutes": 15,
+      "requires_human_review": false,
+      "status": "pending"
+    },
+    {
+      "id": "DM002",
+      "name": "Donation Recording",
+      "category": "Donor Management",
+      "description": "Record donations in system",
+      "priority": 1,
+      "estimated_time_minutes": 5,
+      "requires_human_review": false,
+      "status": "pending"
+    },
+    {
+      "id": "DM003",
+      "name": "Donor Segmentation",
+      "category": "Donor Management",
+      "description": "Segment donors by giving level and interests",
+      "priority": 2,
+      "estimated_time_minutes": 20,
+      "requires_human_review": false,
+      "status": "pending"
+    },
+    {
+      "id": "DM004",
+      "name": "Stewardship Planning",
+      "category": "Donor Management",
+      "description": "Plan donor stewardship activities",
+      "priority": 1,
+      "estimated_time_minutes": 25,
+      "requires_human_review": false,
+      "status": "pending"
+    },
+    {
+      "id": "DM005",
+      "name": "Donor Communication Log",
+      "category": "Donor Management",
+      "description": "Maintain logs of donor communications",
+      "priority": 2,
+      "estimated_time_minutes": 10,
+      "requires_human_review": false,
+      "status": "pending"
+    },
+    {
+      "id": "DM006",
+      "name": "Lapsed Donor Reactivation",
+      "category": "Donor Management",
+      "description": "Identify and reactivate lapsed donors",
+      "priority": 2,
+      "estimated_time_minutes": 20,
+      "requires_human_review": false,
+      "status": "pending"
+    },
+    {
+      "id": "DM007",
+      "name": "Donor Retention Analysis",
+      "category": "Donor Management",
+      "description": "Analyze donor retention metrics",
+      "priority": 3,
+      "estimated_time_minutes": 25,
+      "requires_human_review": false,
+      "status": "pending"
+    },
+    {
+      "id": "DM008",
+      "name": "Giving History Report",
+      "category": "Donor Management",
+      "description": "Generate donor giving history reports",
+      "priority": 2,
+      "estimated_time_minutes": 15,
+      "requires_human_review": false,
+      "status": "pending"
+    },
+    {
+      "id": "DM009",
+      "name": "Recurring Giving Setup",
+      "category": "Donor Management",
+      "description": "Set up and manage recurring giving programs",
+      "priority": 1,
+      "estimated_time_minutes": 20,
+      "requires_human_review": false,
+      "status": "pending"
+    },
+    {
+      "id": "DM010",
+      "name": "Donor Tax Receipt Generation",
+      "category": "Donor Management",
+      "description": "Generate tax receipts for donors",
+      "priority": 1,
+      "estimated_time_minutes": 10,
+      "requires_human_review": false,
+      "status": "pending"
+    },
+    {
+      "id": "DM011",
+      "name": "Year-End Giving Campaign",
+      "category": "Donor Management",
+      "description": "Manage year-end giving campaigns",
+      "priority": 1,
+      "estimated_time_minutes": 30,
+      "requires_human_review": false,
+      "status": "pending"
+    },
+    {
+      "id": "DM012",
+      "name": "Donor Appreciation Events",
+      "category": "Donor Management",
+      "description": "Organize donor appreciation events",
+      "priority": 2,
+      "estimated_time_minutes": 40,
+      "requires_human_review": false,
+      "status": "pending"
+    },
+    {
+      "id": "DM013",
+      "name": "Personal Solicitation Tracking",
+      "category": "Donor Management",
+      "description": "Track personal donor solicitations",
+      "priority": 2,
+      "estimated_time_minutes": 15,
+      "requires_human_review": false,
+      "status": "pending"
+    },
+    {
+      "id": "DM014",
+      "name": "Donor Prospect Qualification",
+      "category": "Donor Management",
+      "description": "Qualify donor prospects",
+      "priority": 2,
+      "estimated_time_minutes": 20,
+      "requires_human_review": false,
+      "status": "pending"
+    },
+    {
+      "id": "DM015",
+      "name": "Donor Feedback Collection",
+      "category": "Donor Management",
+      "description": "Collect and analyze donor feedback",
+      "priority": 3,
+      "estimated_time_minutes": 15,
+      "requires_human_review": false,
+      "status": "pending"
+    },
+    {
+      "id": "GM001",
+      "name": "Grant Opportunity Identification",
+      "category": "Grant Management",
+      "description": "Identify relevant grant opportunities",
+      "priority": 1,
+      "estimated_time_minutes": 20,
+      "requires_human_review": false,
+      "status": "pending"
+    },
+    {
+      "id": "GM002",
+      "name": "Grant Application Preparation",
+      "category": "Grant Management",
+      "description": "Prepare grant applications",
+      "priority": 1,
+      "estimated_time_minutes": 60,
+      "requires_human_review": true,
+      "status": "pending"
+    },
+    {
+      "id": "GM003",
+      "name": "Grant Budget Development",
+      "category": "Grant Management",
+      "description": "Develop grant budgets and narratives",
+      "priority": 1,
+      "estimated_time_minutes": 40,
+      "requires_human_review": false,
+      "status": "pending"
+    },
+    {
+      "id": "GM004",
+      "name": "Letter of Support Creation",
+      "category": "Grant Management",
+      "description": "Create letters of support for grant applications",
+      "priority": 1,
+      "estimated_time_minutes": 20,
+      "requires_human_review": false,
+      "status": "pending"
+    },
+    {
+      "id": "GM005",
+      "name": "Grant Award Tracking",
+      "category": "Grant Management",
+      "description": "Track grant awards and funding",
+      "priority": 2,
+      "estimated_time_minutes": 10,
+      "requires_human_review": false,
+      "status": "pending"
+    },
+    {
+      "id": "GM006",
+      "name": "Grant Progress Reporting",
+      "category": "Grant Management",
+      "description": "Prepare grant progress and interim reports",
+      "priority": 1,
+      "estimated_time_minutes": 35,
+      "requires_human_review": true,
+      "status": "pending"
+    },
+    {
+      "id": "GM007",
+      "name": "Grant Invoice Preparation",
+      "category": "Grant Management",
+      "description": "Prepare and submit grant invoices",
+      "priority": 1,
+      "estimated_time_minutes": 20,
+      "requires_human_review": false,
+      "status": "pending"
+    },
+    {
+      "id": "GM008",
+      "name": "Grant Compliance Documentation",
+      "category": "Grant Management",
+      "description": "Maintain grant compliance documentation",
+      "priority": 1,
+      "estimated_time_minutes": 20,
+      "requires_human_review": false,
+      "status": "pending"
+    },
+    {
+      "id": "GM009",
+      "name": "Final Grant Report",
+      "category": "Grant Management",
+      "description": "Prepare final grant reports",
+      "priority": 1,
+      "estimated_time_minutes": 50,
+      "requires_human_review": true,
+      "status": "pending"
+    },
+    {
+      "id": "GM010",
+      "name": "Grant Outcome Measurement",
+      "category": "Grant Management",
+      "description": "Measure and report grant outcomes",
+      "priority": 2,
+      "estimated_time_minutes": 30,
+      "requires_human_review": false,
+      "status": "pending"
+    },
+    {
+      "id": "GM011",
+      "name": "Funder Relationship Management",
+      "category": "Grant Management",
+      "description": "Manage relationships with funders",
+      "priority": 2,
+      "estimated_time_minutes": 25,
+      "requires_human_review": false,
+      "status": "pending"
+    },
+    {
+      "id": "GM012",
+      "name": "Grant Closeout Documentation",
+      "category": "Grant Management",
+      "description": "Prepare grant closeout documentation",
+      "priority": 1,
+      "estimated_time_minutes": 25,
+      "requires_human_review": false,
+      "status": "pending"
+    },
+    {
+      "id": "GM013",
+      "name": "Grant Audit Preparation",
+      "category": "Grant Management",
+      "description": "Prepare for grant audits",
+      "priority": 2,
+      "estimated_time_minutes": 30,
+      "requires_human_review": false,
+      "status": "pending"
+    },
+    {
+      "id": "GM014",
+      "name": "Foundation Relationships",
+      "category": "Grant Management",
+      "description": "Cultivate foundation relationships",
+      "priority": 2,
+      "estimated_time_minutes": 30,
+      "requires_human_review": false,
+      "status": "pending"
+    },
+    {
+      "id": "GM015",
+      "name": "Grant Pipeline Management",
+      "category": "Grant Management",
+      "description": "Track grant opportunities pipeline",
+      "priority": 2,
+      "estimated_time_minutes": 20,
+      "requires_human_review": false,
+      "status": "pending"
+    },
+    {
+      "id": "PM001",
+      "name": "Program Planning",
+      "category": "Program Management",
+      "description": "Plan and develop programs",
+      "priority": 1,
+      "estimated_time_minutes": 45,
+      "requires_human_review": true,
+      "status": "pending"
+    },
+    {
+      "id": "PM002",
+      "name": "Program Budget Development",
+      "category": "Program Management",
+      "description": "Develop program budgets",
+      "priority": 1,
+      "estimated_time_minutes": 30,
+      "requires_human_review": false,
+      "status": "pending"
+    },
+    {
+      "id": "PM003",
+      "name": "Program Schedule Coordination",
+      "category": "Program Management",
+      "description": "Coordinate program schedules and calendars",
+      "priority": 2,
+      "estimated_time_minutes": 15,
+      "requires_human_review": false,
+      "status": "pending"
+    },
+    {
+      "id": "PM004",
+      "name": "Curriculum Development",
+      "category": "Program Management",
+      "description": "Develop program curricula and materials",
+      "priority": 1,
+      "estimated_time_minutes": 45,
+      "requires_human_review": true,
+      "status": "pending"
+    },
+    {
+      "id": "PM005",
+      "name": "Participant Registration",
+      "category": "Program Management",
+      "description": "Manage participant registration and enrollment",
+      "priority": 1,
+      "estimated_time_minutes": 15,
+      "requires_human_review": false,
+      "status": "pending"
+    },
+    {
+      "id": "PM006",
+      "name": "Attendance Tracking",
+      "category": "Program Management",
+      "description": "Track program attendance and participation",
+      "priority": 2,
+      "estimated_time_minutes": 10,
+      "requires_human_review": false,
+      "status": "pending"
+    },
+    {
+      "id": "PM007",
+      "name": "Equipment and Supply Management",
+      "category": "Program Management",
+      "description": "Manage program equipment and supplies",
+      "priority": 2,
+      "estimated_time_minutes": 15,
+      "requires_human_review": false,
+      "status": "pending"
+    },
+    {
+      "id": "PM008",
+      "name": "Partner Coordination",
+      "category": "Program Management",
+      "description": "Coordinate with program partners",
+      "priority": 2,
+      "estimated_time_minutes": 20,
+      "requires_human_review": false,
+      "status": "pending"
+    },
+    {
+      "id": "PM009",
+      "name": "Program Evaluation",
+      "category": "Program Management",
+      "description": "Evaluate program effectiveness",
+      "priority": 1,
+      "estimated_time_minutes": 40,
+      "requires_human_review": false,
+      "status": "pending"
+    },
+    {
+      "id": "PM010",
+      "name": "Participant Feedback Collection",
+      "category": "Program Management",
+      "description": "Collect and analyze participant feedback",
+      "priority": 2,
+      "estimated_time_minutes": 15,
+      "requires_human_review": false,
+      "status": "pending"
+    },
+    {
+      "id": "PM011",
+      "name": "Program Documentation",
+      "category": "Program Management",
+      "description": "Maintain program documentation and records",
+      "priority": 2,
+      "estimated_time_minutes": 15,
+      "requires_human_review": false,
+      "status": "pending"
+    },
+    {
+      "id": "PM012",
+      "name": "Instructor/Facilitator Coordination",
+      "category": "Program Management",
+      "description": "Coordinate instructors and facilitators",
+      "priority": 2,
+      "estimated_time_minutes": 20,
+      "requires_human_review": false,
+      "status": "pending"
+    },
+    {
+      "id": "PM013",
+      "name": "Program Promotion",
+      "category": "Program Management",
+      "description": "Promote programs to audience",
+      "priority": 1,
+      "estimated_time_minutes": 25,
+      "requires_human_review": false,
+      "status": "pending"
+    },
+    {
+      "id": "PM014",
+      "name": "Quality Assurance Review",
+      "category": "Program Management",
+      "description": "Conduct quality assurance reviews",
+      "priority": 2,
+      "estimated_time_minutes": 25,
+      "requires_human_review": false,
+      "status": "pending"
+    },
+    {
+      "id": "PM015",
+      "name": "Program Reporting",
+      "category": "Program Management",
+      "description": "Generate program reports and metrics",
+      "priority": 2,
+      "estimated_time_minutes": 30,
+      "requires_human_review": false,
+      "status": "pending"
+    },
+    {
+      "id": "VC001",
+      "name": "Volunteer Recruitment",
+      "category": "Volunteer Coordination",
+      "description": "Recruit and attract volunteers",
+      "priority": 1,
+      "estimated_time_minutes": 25,
+      "requires_human_review": false,
+      "status": "pending"
+    },
+    {
+      "id": "VC002",
+      "name": "Volunteer Application Processing",
+      "category": "Volunteer Coordination",
+      "description": "Process volunteer applications",
+      "priority": 1,
+      "estimated_time_minutes": 20,
+      "requires_human_review": false,
+      "status": "pending"
+    },
+    {
+      "id": "VC003",
+      "name": "Volunteer Screening and Background Check",
+      "category": "Volunteer Coordination",
+      "description": "Screen volunteers and conduct background checks",
+      "priority": 1,
+      "estimated_time_minutes": 15,
+      "requires_human_review": false,
+      "status": "pending"
+    },
+    {
+      "id": "VC004",
+      "name": "Volunteer Training",
+      "category": "Volunteer Coordination",
+      "description": "Develop and deliver volunteer training",
+      "priority": 1,
+      "estimated_time_minutes": 40,
+      "requires_human_review": false,
+      "status": "pending"
+    },
+    {
+      "id": "VC005",
+      "name": "Volunteer Placement",
+      "category": "Volunteer Coordination",
+      "description": "Place volunteers in appropriate roles",
+      "priority": 1,
+      "estimated_time_minutes": 20,
+      "requires_human_review": false,
+      "status": "pending"
+    },
+    {
+      "id": "VC006",
+      "name": "Volunteer Hour Tracking",
+      "category": "Volunteer Coordination",
+      "description": "Track volunteer hours and contributions",
+      "priority": 2,
+      "estimated_time_minutes": 10,
+      "requires_human_review": false,
+      "status": "pending"
+    },
+    {
+      "id": "VC007",
+      "name": "Volunteer Appreciation",
+      "category": "Volunteer Coordination",
+      "description": "Organize volunteer appreciation events",
+      "priority": 2,
+      "estimated_time_minutes": 30,
+      "requires_human_review": false,
+      "status": "pending"
+    },
+    {
+      "id": "VC008",
+      "name": "Volunteer Supervision",
+      "category": "Volunteer Coordination",
+      "description": "Supervise and support volunteers",
+      "priority": 2,
+      "estimated_time_minutes": 20,
+      "requires_human_review": false,
+      "status": "pending"
+    },
+    {
+      "id": "VC009",
+      "name": "Volunteer Performance Evaluation",
+      "category": "Volunteer Coordination",
+      "description": "Evaluate volunteer performance",
+      "priority": 2,
+      "estimated_time_minutes": 20,
+      "requires_human_review": false,
+      "status": "pending"
+    },
+    {
+      "id": "VC010",
+      "name": "Volunteer Retention",
+      "category": "Volunteer Coordination",
+      "description": "Develop strategies for volunteer retention",
+      "priority": 2,
+      "estimated_time_minutes": 25,
+      "requires_human_review": false,
+      "status": "pending"
+    },
+    {
+      "id": "MO001",
+      "name": "Marketing Strategy Development",
+      "category": "Marketing/Outreach",
+      "description": "Develop marketing and outreach strategies",
+      "priority": 1,
+      "estimated_time_minutes": 40,
+      "requires_human_review": true,
+      "status": "pending"
+    },
+    {
+      "id": "MO002",
+      "name": "Website Content Management",
+      "category": "Marketing/Outreach",
+      "description": "Manage website content and updates",
+      "priority": 1,
+      "estimated_time_minutes": 20,
+      "requires_human_review": false,
+      "status": "pending"
+    },
+    {
+      "id": "MO003",
+      "name": "Social Media Content Creation",
+      "category": "Marketing/Outreach",
+      "description": "Create social media content",
+      "priority": 1,
+      "estimated_time_minutes": 25,
+      "requires_human_review": false,
+      "status": "pending"
+    },
+    {
+      "id": "MO004",
+      "name": "Newsletter Production",
+      "category": "Marketing/Outreach",
+      "description": "Produce and distribute newsletters",
+      "priority": 1,
+      "estimated_time_minutes": 30,
+      "requires_human_review": false,
+      "status": "pending"
+    },
+    {
+      "id": "MO005",
+      "name": "Press Release Distribution",
+      "category": "Marketing/Outreach",
+      "description": "Prepare and distribute press releases",
+      "priority": 1,
+      "estimated_time_minutes": 20,
+      "requires_human_review": false,
+      "status": "pending"
+    },
+    {
+      "id": "MO006",
+      "name": "Community Engagement Events",
+      "category": "Marketing/Outreach",
+      "description": "Plan and execute community engagement events",
+      "priority": 2,
+      "estimated_time_minutes": 40,
+      "requires_human_review": false,
+      "status": "pending"
+    },
+    {
+      "id": "MO007",
+      "name": "Media Relations",
+      "category": "Marketing/Outreach",
+      "description": "Manage media relations and inquiries",
+      "priority": 2,
+      "estimated_time_minutes": 20,
+      "requires_human_review": false,
+      "status": "pending"
+    },
+    {
+      "id": "MO008",
+      "name": "Brand Development",
+      "category": "Marketing/Outreach",
+      "description": "Develop and maintain brand identity",
+      "priority": 2,
+      "estimated_time_minutes": 30,
+      "requires_human_review": false,
+      "status": "pending"
+    },
+    {
+      "id": "MO009",
+      "name": "Marketing Campaign Execution",
+      "category": "Marketing/Outreach",
+      "description": "Execute marketing campaigns",
+      "priority": 1,
+      "estimated_time_minutes": 35,
+      "requires_human_review": false,
+      "status": "pending"
+    },
+    {
+      "id": "MO010",
+      "name": "Outreach Metric Analysis",
+      "category": "Marketing/Outreach",
+      "description": "Analyze marketing and outreach metrics",
+      "priority": 3,
+      "estimated_time_minutes": 25,
+      "requires_human_review": false,
+      "status": "pending"
+    },
+    {
+      "id": "FM001",
+      "name": "Budget Development",
+      "category": "Financial Management",
+      "description": "Develop organizational budgets",
+      "priority": 1,
+      "estimated_time_minutes": 45,
+      "requires_human_review": true,
+      "status": "pending"
+    },
+    {
+      "id": "FM002",
+      "name": "Financial Record Maintenance",
+      "category": "Financial Management",
+      "description": "Maintain financial records and transactions",
+      "priority": 1,
+      "estimated_time_minutes": 20,
+      "requires_human_review": false,
+      "status": "pending"
+    },
+    {
+      "id": "FM003",
+      "name": "Expense Tracking",
+      "category": "Financial Management",
+      "description": "Track expenses and expenditures",
+      "priority": 1,
+      "estimated_time_minutes": 15,
+      "requires_human_review": false,
+      "status": "pending"
+    },
+    {
+      "id": "FM004",
+      "name": "Budget Monitoring",
+      "category": "Financial Management",
+      "description": "Monitor budgets and spending",
+      "priority": 1,
+      "estimated_time_minutes": 20,
+      "requires_human_review": false,
+      "status": "pending"
+    },
+    {
+      "id": "FM005",
+      "name": "Financial Reporting",
+      "category": "Financial Management",
+      "description": "Prepare financial statements and reports",
+      "priority": 1,
+      "estimated_time_minutes": 40,
+      "requires_human_review": true,
+      "status": "pending"
+    },
+    {
+      "id": "FM006",
+      "name": "Tax Compliance",
+      "category": "Financial Management",
+      "description": "Manage tax compliance and filings",
+      "priority": 1,
+      "estimated_time_minutes": 30,
+      "requires_human_review": false,
+      "status": "pending"
+    },
+    {
+      "id": "FM007",
+      "name": "Audit Preparation",
+      "category": "Financial Management",
+      "description": "Prepare for financial audits",
+      "priority": 2,
+      "estimated_time_minutes": 35,
+      "requires_human_review": false,
+      "status": "pending"
+    },
+    {
+      "id": "FM008",
+      "name": "Cash Flow Management",
+      "category": "Financial Management",
+      "description": "Manage cash flow and projections",
+      "priority": 1,
+      "estimated_time_minutes": 25,
+      "requires_human_review": false,
+      "status": "pending"
+    },
+    {
+      "id": "FM009",
+      "name": "Vendor Invoice Processing",
+      "category": "Financial Management",
+      "description": "Process vendor invoices and payments",
+      "priority": 1,
+      "estimated_time_minutes": 15,
+      "requires_human_review": false,
+      "status": "pending"
+    },
+    {
+      "id": "FM010",
+      "name": "Financial Dashboard Maintenance",
+      "category": "Financial Management",
+      "description": "Maintain financial dashboards and reports",
+      "priority": 2,
+      "estimated_time_minutes": 20,
+      "requires_human_review": false,
+      "status": "pending"
+    },
+    {
+      "id": "IT001",
+      "name": "Outcome Measurement Framework",
+      "category": "Impact Tracking",
+      "description": "Develop outcome measurement frameworks",
+      "priority": 1,
+      "estimated_time_minutes": 40,
+      "requires_human_review": true,
+      "status": "pending"
+    },
+    {
+      "id": "IT002",
+      "name": "Impact Data Collection",
+      "category": "Impact Tracking",
+      "description": "Collect impact and outcome data",
+      "priority": 1,
+      "estimated_time_minutes": 30,
+      "requires_human_review": false,
+      "status": "pending"
+    },
+    {
+      "id": "IT003",
+      "name": "Impact Analysis and Reporting",
+      "category": "Impact Tracking",
+      "description": "Analyze and report on organizational impact",
+      "priority": 1,
+      "estimated_time_minutes": 45,
+      "requires_human_review": true,
+      "status": "pending"
+    },
+    {
+      "id": "IT004",
+      "name": "Stakeholder Communication",
+      "category": "Impact Tracking",
+      "description": "Communicate impact to stakeholders",
+      "priority": 2,
+      "estimated_time_minutes": 30,
+      "requires_human_review": false,
+      "status": "pending"
+    },
+    {
+      "id": "IT005",
+      "name": "Continuous Improvement Planning",
+      "category": "Impact Tracking",
+      "description": "Plan for continuous improvement based on impact data",
+      "priority": 2,
+      "estimated_time_minutes": 35,
+      "requires_human_review": false,
+      "status": "pending"
+    }
+  ]
+}
