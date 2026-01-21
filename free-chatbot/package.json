@@ -1,0 +1,25 @@
+{
+  "name": "free-ai-chatbot-agentx5",
+  "version": "1.0.0",
+  "description": "FREE AI Chatbot with AgentX5 Orchestration - No Monthly Fees",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "deploy": "vercel --prod"
+  },
+  "dependencies": {
+    "next": "^14.0.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "ai": "^3.0.0",
+    "@ai-sdk/google": "^0.0.10",
+    "@google/generative-ai": "^0.1.0",
+    "axios": "^1.6.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/react": "^18.2.0",
+    "typescript": "^5.0.0"
+  }
+}

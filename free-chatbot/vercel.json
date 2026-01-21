@@ -1,0 +1,31 @@
+{
+  "name": "free-ai-chatbot-agentx5",
+  "version": 2,
+  "buildCommand": "npm run build",
+  "devCommand": "npm run dev",
+  "installCommand": "npm install",
+  "framework": "nextjs",
+  "regions": ["iad1"],
+  "env": {
+    "GEMINI_API_KEY": "AIzaSyBqAbzJdyg7sP5tIhCddWk4Q1EEmSZSCT4",
+    "GOOGLE_PROJECT_ID": "gen-lang-client-0313025061",
+    "GOOGLE_PROJECT_NUMBER": "190831837188",
+    "GENSPARK_AGENT_ID": "5f80aa0f-403f-4fc1-b9e9-e53120da03d1",
+    "AGENTX5_TOTAL_AGENTS": "750"
+  },
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        },
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        }
+      ]
+    }
+  ]
+}
