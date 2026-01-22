@@ -1,0 +1,25 @@
+{
+  "name": "AgentX5 Assistant",
+  "short_name": "AgentX5",
+  "description": "Your permanent AI assistant for fraud disputes, automation, and system management",
+  "start_url": "/AGENTX5_IPHONE_DEPLOY.html",
+  "display": "standalone",
+  "background_color": "#667eea",
+  "theme_color": "#667eea",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'><rect fill='%23667eea' width='192' height='192'/><text y='140' font-size='120' fill='white' font-family='Arial'>🤖</text></svg>",
+      "sizes": "192x192",
+      "type": "image/svg+xml"
+    },
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><rect fill='%23667eea' width='512' height='512'/><text y='380' font-size='320' fill='white' font-family='Arial'>🤖</text></svg>",
+      "sizes": "512x512",
+      "type": "image/svg+xml"
+    }
+  ],
+  "categories": ["productivity", "finance", "utilities"],
+  "screenshots": [],
+  "prefer_related_applications": false
+}
