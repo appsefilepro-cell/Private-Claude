@@ -3,32 +3,35 @@ Remediation Engine
 Automatically checks for incomplete tasks, retries failed ingestion jobs, and updates CSV
 """
 
-import os
-import re
 import csv
 import json
 import logging
-from datetime import datetime
-from typing import List, Dict, Any
-from pathlib import Path
-
+import os
+import re
 # Import processors
 import sys
-sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'data-ingestion'))
+from datetime import datetime
+from pathlib import Path
+from typing import Any, Dict, List
+
+sys.path.append(os.path.join(os.path.dirname(__file__), "..", "data-ingestion"))
 
 try:
-    from ingestion_orchestrator import PDFProcessor, ExcelProcessor, CustomerContact, DataValidator
+    from ingestion_orchestrator import (CustomerContact, DataValidator,
+                                        ExcelProcessor, PDFProcessor)
+
     PROCESSORS_AVAILABLE = True
-except:
+except BaseException:
     PROCESSORS_AVAILABLE = False
     logging.warning("Ingestion processors not available")
 
 logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger('RemediationEngine')
+logger = logging.getLogger("RemediationEngine")
 
 
 class TaskStatus:
     """Track status of ingestion tasks"""
+
     PENDING = "pending"
     IN_PROGRESS = "in_progress"
     COMPLETED = "completed"
@@ -60,7 +63,7 @@ class RemediationEngine:
         timestamp = datetime.now().isoformat()
         log_entry = f"{timestamp} - {action}\n"
 
-        with open(self.remediation_log, 'a', encoding='utf-8') as f:
+        with open(self.remediation_log, "a", encoding="utf-8") as f:
             f.write(log_entry)
 
         logger.info(action)
@@ -72,7 +75,7 @@ class RemediationEngine:
             return self.discover_unprocessed_files()
 
         try:
-            with open(self.tasks_file, 'r') as f:
+            with open(self.tasks_file, "r") as f:
                 self.tasks = json.load(f)
             self.log_action(f"Loaded {len(self.tasks)} tasks from {self.tasks_file}")
             return self.tasks
@@ -88,7 +91,7 @@ class RemediationEngine:
             "data/dropbox",
             "data/onedrive",
             "data/sharepoint",
-            "data/local_files"
+            "data/local_files",
         ]
 
         for directory in search_dirs:
@@ -100,14 +103,14 @@ class RemediationEngine:
                     file_path = os.path.join(root, file)
                     ext = Path(file_path).suffix.lower()
 
-                    if ext in ['.pdf', '.xlsx', '.xls']:
+                    if ext in [".pdf", ".xlsx", ".xls"]:
                         task = {
                             "file_path": file_path,
                             "file_type": ext,
                             "status": TaskStatus.PENDING,
                             "retry_count": 0,
                             "error": None,
-                            "discovered_at": datetime.now().isoformat()
+                            "discovered_at": datetime.now().isoformat(),
                         }
                         tasks.append(task)
 
@@ -120,13 +123,13 @@ class RemediationEngine:
         incomplete = []
 
         for task in self.tasks:
-            status = task.get('status', TaskStatus.PENDING)
+            status = task.get("status", TaskStatus.PENDING)
 
             if status in [TaskStatus.PENDING, TaskStatus.FAILED]:
                 incomplete.append(task)
             elif status == TaskStatus.IN_PROGRESS:
                 # Task was in progress but didn't complete (likely crashed)
-                task['status'] = TaskStatus.RETRY
+                task["status"] = TaskStatus.RETRY
                 incomplete.append(task)
 
         self.log_action(f"Found {len(incomplete)} incomplete tasks")
@@ -139,48 +142,52 @@ class RemediationEngine:
         Returns:
             True if successful, False otherwise
         """
-        file_path = task['file_path']
-        file_type = task['file_type']
+        file_path = task["file_path"]
+        file_type = task["file_type"]
 
-        if task['retry_count'] >= self.max_retries:
+        if task["retry_count"] >= self.max_retries:
             self.log_action(f"Max retries exceeded for {file_path}")
-            task['status'] = TaskStatus.FAILED
+            task["status"] = TaskStatus.FAILED
             self.failed_count += 1
             return False
 
-        self.log_action(f"Retrying job {task['retry_count'] + 1}/{self.max_retries}: {file_path}")
-        task['retry_count'] += 1
-        task['status'] = TaskStatus.IN_PROGRESS
+        self.log_action(
+            f"Retrying job {task['retry_count'] + 1}/{self.max_retries}: {file_path}"
+        )
+        task["retry_count"] += 1
+        task["status"] = TaskStatus.IN_PROGRESS
 
         try:
             # Process the file
             contacts = []
 
-            if file_type == '.pdf' and PROCESSORS_AVAILABLE:
+            if file_type == ".pdf" and PROCESSORS_AVAILABLE:
                 contacts = PDFProcessor.extract_from_pdf(file_path)
-            elif file_type in ['.xlsx', '.xls'] and PROCESSORS_AVAILABLE:
+            elif file_type in [".xlsx", ".xls"] and PROCESSORS_AVAILABLE:
                 contacts = ExcelProcessor.extract_from_excel(file_path)
 
             # Save to CSV if we got contacts
             if contacts:
                 self.append_to_csv(contacts)
-                task['status'] = TaskStatus.COMPLETED
-                task['contacts_extracted'] = len(contacts)
-                task['completed_at'] = datetime.now().isoformat()
+                task["status"] = TaskStatus.COMPLETED
+                task["contacts_extracted"] = len(contacts)
+                task["completed_at"] = datetime.now().isoformat()
                 self.remediated_count += 1
-                self.log_action(f"Successfully processed {file_path}: {len(contacts)} contacts extracted")
+                self.log_action(
+                    f"Successfully processed {file_path}: {len(contacts)} contacts extracted"
+                )
                 return True
             else:
-                task['status'] = TaskStatus.COMPLETED
-                task['contacts_extracted'] = 0
-                task['completed_at'] = datetime.now().isoformat()
+                task["status"] = TaskStatus.COMPLETED
+                task["contacts_extracted"] = 0
+                task["completed_at"] = datetime.now().isoformat()
                 self.log_action(f"Processed {file_path}: no contacts found")
                 return True
 
         except Exception as e:
             error_msg = str(e)
-            task['error'] = error_msg
-            task['status'] = TaskStatus.FAILED
+            task["error"] = error_msg
+            task["status"] = TaskStatus.FAILED
             self.log_action(f"Failed to process {file_path}: {error_msg}")
             return False
 
@@ -189,15 +196,23 @@ class RemediationEngine:
         try:
             # Ensure CSV exists with headers
             if not os.path.exists(self.output_csv):
-                with open(self.output_csv, 'w', newline='', encoding='utf-8') as f:
+                with open(self.output_csv, "w", newline="", encoding="utf-8") as f:
                     writer = csv.writer(f)
-                    writer.writerow([
-                        "First Name", "Last Name", "Phone", "Email",
-                        "Mailing Address", "Tax Years", "Filing Status", "Dependents"
-                    ])
+                    writer.writerow(
+                        [
+                            "First Name",
+                            "Last Name",
+                            "Phone",
+                            "Email",
+                            "Mailing Address",
+                            "Tax Years",
+                            "Filing Status",
+                            "Dependents",
+                        ]
+                    )
 
             # Append contacts
-            with open(self.output_csv, 'a', newline='', encoding='utf-8') as f:
+            with open(self.output_csv, "a", newline="", encoding="utf-8") as f:
                 writer = csv.writer(f)
                 for contact in contacts:
                     writer.writerow(contact.to_csv_row())
@@ -211,7 +226,7 @@ class RemediationEngine:
     def save_tasks(self) -> None:
         """Save tasks to file"""
         try:
-            with open(self.tasks_file, 'w') as f:
+            with open(self.tasks_file, "w") as f:
                 json.dump(self.tasks, f, indent=2)
             self.log_action(f"Saved {len(self.tasks)} tasks to {self.tasks_file}")
         except Exception as e:
@@ -225,7 +240,7 @@ class RemediationEngine:
             "has_headers": False,
             "duplicate_emails": 0,
             "invalid_emails": 0,
-            "missing_data": 0
+            "missing_data": 0,
         }
 
         if not os.path.exists(self.output_csv):
@@ -235,7 +250,7 @@ class RemediationEngine:
         validation["exists"] = True
 
         try:
-            with open(self.output_csv, 'r', encoding='utf-8') as f:
+            with open(self.output_csv, "r", encoding="utf-8") as f:
                 reader = csv.reader(f)
                 rows = list(reader)
 
@@ -273,12 +288,18 @@ class RemediationEngine:
         report = {
             "timestamp": datetime.now().isoformat(),
             "total_tasks": len(self.tasks),
-            "completed_tasks": sum(1 for t in self.tasks if t['status'] == TaskStatus.COMPLETED),
-            "failed_tasks": sum(1 for t in self.tasks if t['status'] == TaskStatus.FAILED),
-            "pending_tasks": sum(1 for t in self.tasks if t['status'] == TaskStatus.PENDING),
+            "completed_tasks": sum(
+                1 for t in self.tasks if t["status"] == TaskStatus.COMPLETED
+            ),
+            "failed_tasks": sum(
+                1 for t in self.tasks if t["status"] == TaskStatus.FAILED
+            ),
+            "pending_tasks": sum(
+                1 for t in self.tasks if t["status"] == TaskStatus.PENDING
+            ),
             "remediated_count": self.remediated_count,
             "failed_count": self.failed_count,
-            "csv_validation": self.validate_csv()
+            "csv_validation": self.validate_csv(),
         }
 
         return report
@@ -317,13 +338,19 @@ class RemediationEngine:
         self.log_action(f"Report: {json.dumps(report, indent=2)}")
 
         # Check if we're at 100%
-        completion_rate = (report['completed_tasks'] / report['total_tasks'] * 100) if report['total_tasks'] > 0 else 100
+        completion_rate = (
+            (report["completed_tasks"] / report["total_tasks"] * 100)
+            if report["total_tasks"] > 0
+            else 100
+        )
         self.log_action(f"System Completion: {completion_rate:.1f}%")
 
         if completion_rate == 100:
             self.log_action("✅ SYSTEM IS 100% DEPLOYED AND COMPLIANT")
         else:
-            self.log_action(f"⚠️  System is {completion_rate:.1f}% complete - {report['pending_tasks'] + report['failed_tasks']} tasks remaining")
+            self.log_action(
+                f"⚠️  System is {completion_rate:.1f}% complete - {report['pending_tasks'] + report['failed_tasks']} tasks remaining"
+            )
 
         return report
 
@@ -333,11 +360,11 @@ def main():
     engine = RemediationEngine()
     report = engine.run()
 
-    print("\n" + "="*60)
+    print("\n" + "=" * 60)
     print("REMEDIATION REPORT")
-    print("="*60)
+    print("=" * 60)
     print(json.dumps(report, indent=2))
-    print("="*60)
+    print("=" * 60)
 
 
 if __name__ == "__main__":

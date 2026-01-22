@@ -3,15 +3,15 @@ Legal Document Generator
 Automates generation of court-ready legal documents using templates and case data
 """
 
-import os
 import json
 import logging
+import os
 from datetime import datetime
-from typing import Dict, Any, List
 from pathlib import Path
+from typing import Any, Dict, List
 
 logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger('LegalDocumentGenerator')
+logger = logging.getLogger("LegalDocumentGenerator")
 
 
 class LegalDocument:
@@ -28,7 +28,7 @@ class LegalDocument:
     def load_template(self, template_path: str) -> bool:
         """Load document template"""
         try:
-            with open(template_path, 'r') as f:
+            with open(template_path, "r") as f:
                 self.template = f.read()
             logger.info(f"Loaded template: {template_path}")
             return True
@@ -57,8 +57,8 @@ class LegalDocument:
         try:
             # In production, this would create a proper .docx file
             # For now, save as text
-            txt_path = self.output_path.replace('.docx', '.txt')
-            with open(txt_path, 'w') as f:
+            txt_path = self.output_path.replace(".docx", ".txt")
+            with open(txt_path, "w") as f:
                 f.write(self.generated_content)
 
             logger.info(f"Document saved: {txt_path}")
@@ -97,13 +97,15 @@ class LegalDocumentGenerator:
             return {}
 
         try:
-            with open(case_file, 'r') as f:
+            with open(case_file, "r") as f:
                 return json.load(f)
         except Exception as e:
             logger.error(f"Error loading case data: {e}")
             return {}
 
-    def generate_motion_summary_judgment(self, case_name: str, case_data: Dict[str, Any]) -> str:
+    def generate_motion_summary_judgment(
+        self, case_name: str, case_data: Dict[str, Any]
+    ) -> str:
         """Generate Motion for Summary Judgment"""
         template = """
 CAUSE NO. {{case_number}}
@@ -179,7 +181,7 @@ I hereby certify that a true and correct copy of the foregoing has been served o
             "attorney_address": case_data.get("attorney_address", ""),
             "attorney_phone": case_data.get("attorney_phone", ""),
             "attorney_email": case_data.get("attorney_email", "appsefilepro@gmail.com"),
-            "service_date": datetime.now().strftime("%B %d, %Y")
+            "service_date": datetime.now().strftime("%B %d, %Y"),
         }
 
         doc.populate_template(variables)
@@ -245,7 +247,7 @@ Sincerely,
             "attorney_name": case_data.get("attorney_name", "Thurman Malik Robinson"),
             "law_firm": case_data.get("law_firm", "APPS Holdings WY Inc."),
             "attorney_email": case_data.get("attorney_email", "appsefilepro@gmail.com"),
-            "attorney_phone": case_data.get("attorney_phone", "")
+            "attorney_phone": case_data.get("attorney_phone", ""),
         }
 
         doc.populate_template(variables)
@@ -254,7 +256,9 @@ Sincerely,
         logger.info(f"Generated Demand Letter: {output_path}")
         return output_path
 
-    def generate_discovery_interrogatories(self, case_name: str, case_data: Dict[str, Any]) -> str:
+    def generate_discovery_interrogatories(
+        self, case_name: str, case_data: Dict[str, Any]
+    ) -> str:
         """Generate Discovery Interrogatories"""
         template = """
 CAUSE NO. {{case_number}}
@@ -317,10 +321,12 @@ Attorney for Plaintiff
             "defendant_name": case_data.get("defendant_name", ""),
             "court_name": case_data.get("court_name", ""),
             "jurisdiction": case_data.get("jurisdiction", ""),
-            "interrogatories": case_data.get("interrogatories", standard_interrogatories),
+            "interrogatories": case_data.get(
+                "interrogatories", standard_interrogatories
+            ),
             "attorney_name": case_data.get("attorney_name", "Thurman Malik Robinson"),
             "bar_number": case_data.get("bar_number", ""),
-            "law_firm": case_data.get("law_firm", "APPS Holdings WY Inc.")
+            "law_firm": case_data.get("law_firm", "APPS Holdings WY Inc."),
         }
 
         doc.populate_template(variables)
@@ -341,13 +347,17 @@ Attorney for Plaintiff
         for doc_type in doc_types:
             try:
                 if doc_type == self.MOTION_SUMMARY_JUDGMENT:
-                    doc_path = self.generate_motion_summary_judgment(case_name, case_data)
+                    doc_path = self.generate_motion_summary_judgment(
+                        case_name, case_data
+                    )
                     generated_docs.append(doc_path)
                 elif doc_type == self.DEMAND_LETTER:
                     doc_path = self.generate_demand_letter(case_name, case_data)
                     generated_docs.append(doc_path)
                 elif doc_type == self.DISCOVERY_INTERROGATORIES:
-                    doc_path = self.generate_discovery_interrogatories(case_name, case_data)
+                    doc_path = self.generate_discovery_interrogatories(
+                        case_name, case_data
+                    )
                     generated_docs.append(doc_path)
                 else:
                     logger.warning(f"Unknown document type: {doc_type}")
@@ -367,7 +377,7 @@ def main():
     doc_types = [
         LegalDocumentGenerator.MOTION_SUMMARY_JUDGMENT,
         LegalDocumentGenerator.DEMAND_LETTER,
-        LegalDocumentGenerator.DISCOVERY_INTERROGATORIES
+        LegalDocumentGenerator.DISCOVERY_INTERROGATORIES,
     ]
 
     docs = generator.process_case(case_name, doc_types)

@@ -10,13 +10,14 @@ Strategy:
 - Target 94-96% win rate
 """
 
-import numpy as np
 import logging
 from datetime import datetime
-from typing import Dict, List, Any, Optional
+from typing import Any, Dict, List, Optional
+
+import numpy as np
 
 logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger('MomentumShort')
+logger = logging.getLogger("MomentumShort")
 
 
 class MomentumShortStrategy:
@@ -33,10 +34,10 @@ class MomentumShortStrategy:
 
     def __init__(self):
         self.criteria = {
-            'rsi_extreme': 80,  # RSI above this = extreme
-            'price_ma_ratio': 2.0,  # Price > 200% of MA = extended
-            'volume_spike': 3.0,  # Volume > 3x average
-            'momentum_threshold': 0.15  # 15% momentum reversal
+            "rsi_extreme": 80,  # RSI above this = extreme
+            "price_ma_ratio": 2.0,  # Price > 200% of MA = extended
+            "volume_spike": 3.0,  # Volume > 3x average
+            "momentum_threshold": 0.15,  # 15% momentum reversal
         }
         logger.info("=" * 70)
         logger.info("📉 MOMENTUM SHORT STRATEGY INITIALIZED")
@@ -45,78 +46,82 @@ class MomentumShortStrategy:
     def analyze_for_short(self, symbol: str, data: Dict) -> Dict:
         """Analyze momentum for shorting opportunity"""
         signal = {
-            'symbol': symbol,
-            'action': 'HOLD',
-            'confidence': 0.0,
-            'strategy': 'Momentum Short',
-            'reasons': [],
-            'risk_level': 'medium',
-            'timestamp': datetime.now().isoformat()
+            "symbol": symbol,
+            "action": "HOLD",
+            "confidence": 0.0,
+            "strategy": "Momentum Short",
+            "reasons": [],
+            "risk_level": "medium",
+            "timestamp": datetime.now().isoformat(),
         }
 
         score = 0
         max_score = 0
 
         # 1. EXTREME OVERBOUGHT (30 points)
-        rsi = data.get('rsi', 50)
-        if rsi > self.criteria['rsi_extreme']:
+        rsi = data.get("rsi", 50)
+        if rsi > self.criteria["rsi_extreme"]:
             score += 30
-            signal['reasons'].append(f"Extreme overbought: RSI = {rsi}")
+            signal["reasons"].append(f"Extreme overbought: RSI = {rsi}")
         elif rsi > 70:
             score += 15
-            signal['reasons'].append(f"Overbought: RSI = {rsi}")
+            signal["reasons"].append(f"Overbought: RSI = {rsi}")
         max_score += 30
 
         # 2. PRICE EXTENSION (25 points)
-        price = data.get('price', 0)
-        ma_50 = data.get('ma_50', price)
+        price = data.get("price", 0)
+        ma_50 = data.get("ma_50", price)
         if ma_50 > 0:
             price_ma_ratio = price / ma_50
-            if price_ma_ratio > self.criteria['price_ma_ratio']:
+            if price_ma_ratio > self.criteria["price_ma_ratio"]:
                 score += 25
-                signal['reasons'].append(f"Extreme extension: {price_ma_ratio:.2f}x above 50-day MA")
+                signal["reasons"].append(
+                    f"Extreme extension: {price_ma_ratio:.2f}x above 50-day MA"
+                )
             elif price_ma_ratio > 1.5:
                 score += 15
-                signal['reasons'].append(f"Extended: {price_ma_ratio:.2f}x above 50-day MA")
+                signal["reasons"].append(
+                    f"Extended: {price_ma_ratio:.2f}x above 50-day MA"
+                )
         max_score += 25
 
         # 3. VOLUME SPIKE (20 points)
-        volume = data.get('volume', 0)
-        avg_volume = data.get('avg_volume', volume)
+        volume = data.get("volume", 0)
+        avg_volume = data.get("avg_volume", volume)
         if avg_volume > 0:
             volume_ratio = volume / avg_volume
-            if volume_ratio > self.criteria['volume_spike']:
+            if volume_ratio > self.criteria["volume_spike"]:
                 score += 20
-                signal['reasons'].append(f"Volume spike: {volume_ratio:.1f}x average")
+                signal["reasons"].append(f"Volume spike: {volume_ratio:.1f}x average")
             elif volume_ratio > 2.0:
                 score += 10
-                signal['reasons'].append(f"High volume: {volume_ratio:.1f}x average")
+                signal["reasons"].append(f"High volume: {volume_ratio:.1f}x average")
         max_score += 20
 
         # 4. BEARISH DIVERGENCE (15 points)
-        if data.get('bearish_divergence', False):
+        if data.get("bearish_divergence", False):
             score += 15
-            signal['reasons'].append("Bearish divergence detected")
+            signal["reasons"].append("Bearish divergence detected")
         max_score += 15
 
         # 5. FAILED BREAKOUT (10 points)
-        if data.get('failed_breakout', False):
+        if data.get("failed_breakout", False):
             score += 10
-            signal['reasons'].append("Failed breakout pattern")
+            signal["reasons"].append("Failed breakout pattern")
         max_score += 10
 
         # Calculate confidence
-        signal['confidence'] = (score / max_score) if max_score > 0 else 0
+        signal["confidence"] = (score / max_score) if max_score > 0 else 0
 
         # Determine action
-        if signal['confidence'] >= 0.80:  # 80%+ confidence
-            signal['action'] = 'SHORT'
-            signal['risk_level'] = 'high_reward'
-        elif signal['confidence'] >= 0.65:
-            signal['action'] = 'SHORT_SMALL'
-            signal['risk_level'] = 'medium'
+        if signal["confidence"] >= 0.80:  # 80%+ confidence
+            signal["action"] = "SHORT"
+            signal["risk_level"] = "high_reward"
+        elif signal["confidence"] >= 0.65:
+            signal["action"] = "SHORT_SMALL"
+            signal["risk_level"] = "medium"
         else:
-            signal['action'] = 'HOLD'
+            signal["action"] = "HOLD"
 
         return signal
 

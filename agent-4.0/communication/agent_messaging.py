@@ -5,14 +5,14 @@ Agent-to-Agent Messaging System
 
 import json
 import logging
-from datetime import datetime
-from pathlib import Path
-from typing import Dict, List, Any, Optional
-from enum import Enum
 import queue
+from datetime import datetime
+from enum import Enum
+from pathlib import Path
+from typing import Any, Dict, List, Optional
 
 logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger('AgentMessaging')
+logger = logging.getLogger("AgentMessaging")
 
 
 class MessageType(Enum):
@@ -25,28 +25,33 @@ class MessageType(Enum):
 
 class AgentMessaging:
     """Inter-agent communication system"""
-    
+
     def __init__(self):
         self.message_queues: Dict[int, queue.Queue] = {}
         self.message_log: List[Dict] = []
-        
+
         for agent_id in range(1, 51):
             self.message_queues[agent_id] = queue.Queue()
-        
+
         logger.info("📡 Agent Messaging System initialized for 50 agents")
-    
-    def send_message(self, from_agent_id: int, to_agent_id: int, 
-                    message_type: MessageType, content: Dict[str, Any]) -> bool:
+
+    def send_message(
+        self,
+        from_agent_id: int,
+        to_agent_id: int,
+        message_type: MessageType,
+        content: Dict[str, Any],
+    ) -> bool:
         """Send message from one agent to another"""
         try:
             message = {
-                'from': from_agent_id,
-                'to': to_agent_id,
-                'type': message_type.value,
-                'content': content,
-                'timestamp': datetime.now().isoformat()
+                "from": from_agent_id,
+                "to": to_agent_id,
+                "type": message_type.value,
+                "content": content,
+                "timestamp": datetime.now().isoformat(),
             }
-            
+
             if to_agent_id in self.message_queues:
                 self.message_queues[to_agent_id].put(message)
                 self.message_log.append(message)
@@ -56,9 +61,10 @@ class AgentMessaging:
         except Exception as e:
             logger.error(f"❌ Message failed: {e}")
             return False
-    
-    def broadcast_message(self, from_agent_id: int, message_type: MessageType, 
-                         content: Dict[str, Any]) -> int:
+
+    def broadcast_message(
+        self, from_agent_id: int, message_type: MessageType, content: Dict[str, Any]
+    ) -> int:
         """Broadcast message to all agents"""
         count = 0
         for agent_id in self.message_queues.keys():
@@ -71,13 +77,13 @@ class AgentMessaging:
 
 if __name__ == "__main__":
     messaging = AgentMessaging()
-    
+
     # Demo: Trading Agent → Legal Agent
-    messaging.send_message(1, 11, MessageType.REQUEST_HELP, 
-                          {"action": "compliance_check"})
-    
+    messaging.send_message(
+        1, 11, MessageType.REQUEST_HELP, {"action": "compliance_check"}
+    )
+
     # Demo: Broadcast
-    messaging.broadcast_message(31, MessageType.BROADCAST, 
-                               {"message": "System update"})
-    
+    messaging.broadcast_message(31, MessageType.BROADCAST, {"message": "System update"})
+
     print(f"✅ Messaging demo complete. {len(messaging.message_log)} messages sent")

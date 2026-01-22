@@ -1,10 +1,4 @@
 {
-  "name": "AgentX5 Advanced Edition",
-  "image": "mcr.microsoft.com/devcontainers/python:3.11",
-  "features": {
-    "ghcr.io/devcontainers/features/docker-in-docker:2": {},
-    "ghcr.io/devcontainers/features/github-cli:1": {}
-  },
-  "postCreateCommand": "pip install -r requirements.txt",
-  "forwardPorts": [8000, 8080, 9090]
+  "image": "mcr.microsoft.com/devcontainers/universal:2",
+  "features": {}
 }

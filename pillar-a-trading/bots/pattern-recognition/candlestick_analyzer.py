@@ -4,13 +4,13 @@ Identifies the 12 key patterns from Candlestick Trading Bible
 """
 
 import json
+import logging
 import os
 from datetime import datetime
-from typing import List, Dict, Any, Tuple
-import logging
+from typing import Any, Dict, List, Tuple
 
 logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger('CandlestickAnalyzer')
+logger = logging.getLogger("CandlestickAnalyzer")
 
 
 class CandlestickPattern:
@@ -18,21 +18,21 @@ class CandlestickPattern:
 
     # Pattern definitions from Candlestick Trading Bible
     BULLISH_PATTERNS = [
-        'HAMMER',
-        'INVERTED_HAMMER',
-        'BULLISH_ENGULFING',
-        'MORNING_STAR',
-        'THREE_WHITE_SOLDIERS',
-        'DRAGONFLY_DOJI'
+        "HAMMER",
+        "INVERTED_HAMMER",
+        "BULLISH_ENGULFING",
+        "MORNING_STAR",
+        "THREE_WHITE_SOLDIERS",
+        "DRAGONFLY_DOJI",
     ]
 
     BEARISH_PATTERNS = [
-        'SHOOTING_STAR',
-        'HANGING_MAN',
-        'BEARISH_ENGULFING',
-        'EVENING_STAR',
-        'THREE_BLACK_CROWS',
-        'GRAVESTONE_DOJI'
+        "SHOOTING_STAR",
+        "HANGING_MAN",
+        "BEARISH_ENGULFING",
+        "EVENING_STAR",
+        "THREE_BLACK_CROWS",
+        "GRAVESTONE_DOJI",
     ]
 
     @staticmethod
@@ -47,21 +47,19 @@ class CandlestickPattern:
             return False, 0.0
 
         c = candles[-1]
-        body = abs(c['close'] - c['open'])
-        lower_shadow = min(c['open'], c['close']) - c['low']
-        upper_shadow = c['high'] - max(c['open'], c['close'])
+        body = abs(c["close"] - c["open"])
+        lower_shadow = min(c["open"], c["close"]) - c["low"]
+        upper_shadow = c["high"] - max(c["open"], c["close"])
 
-        is_hammer = (
-            lower_shadow >= 2 * body and
-            upper_shadow <= 0.1 * body and
-            body > 0
-        )
+        is_hammer = lower_shadow >= 2 * body and upper_shadow <= 0.1 * body and body > 0
 
         confidence = 0.75 if is_hammer else 0.0
         return is_hammer, confidence
 
     @staticmethod
-    def detect_engulfing(candles: List[Dict], bullish: bool = True) -> Tuple[bool, float]:
+    def detect_engulfing(
+        candles: List[Dict], bullish: bool = True
+    ) -> Tuple[bool, float]:
         """
         Detect Bullish or Bearish Engulfing pattern
         - Two candles
@@ -73,26 +71,26 @@ class CandlestickPattern:
         prev = candles[-2]
         curr = candles[-1]
 
-        prev_body_top = max(prev['open'], prev['close'])
-        prev_body_bottom = min(prev['open'], prev['close'])
-        curr_body_top = max(curr['open'], curr['close'])
-        curr_body_bottom = min(curr['open'], curr['close'])
+        prev_body_top = max(prev["open"], prev["close"])
+        prev_body_bottom = min(prev["open"], prev["close"])
+        curr_body_top = max(curr["open"], curr["close"])
+        curr_body_bottom = min(curr["open"], curr["close"])
 
         if bullish:
             # Bullish engulfing: prev is red, curr is green and engulfs
             is_engulfing = (
-                prev['close'] < prev['open'] and  # Previous is bearish
-                curr['close'] > curr['open'] and   # Current is bullish
-                curr_body_bottom < prev_body_bottom and
-                curr_body_top > prev_body_top
+                prev["close"] < prev["open"]  # Previous is bearish
+                and curr["close"] > curr["open"]  # Current is bullish
+                and curr_body_bottom < prev_body_bottom
+                and curr_body_top > prev_body_top
             )
         else:
             # Bearish engulfing: prev is green, curr is red and engulfs
             is_engulfing = (
-                prev['close'] > prev['open'] and  # Previous is bullish
-                curr['close'] < curr['open'] and   # Current is bearish
-                curr_body_bottom < prev_body_bottom and
-                curr_body_top > prev_body_top
+                prev["close"] > prev["open"]  # Previous is bullish
+                and curr["close"] < curr["open"]  # Current is bearish
+                and curr_body_bottom < prev_body_bottom
+                and curr_body_top > prev_body_top
             )
 
         confidence = 0.80 if is_engulfing else 0.0
@@ -109,8 +107,8 @@ class CandlestickPattern:
             return None, 0.0
 
         c = candles[-1]
-        body = abs(c['close'] - c['open'])
-        total_range = c['high'] - c['low']
+        body = abs(c["close"] - c["open"])
+        total_range = c["high"] - c["low"]
 
         if total_range == 0:
             return None, 0.0
@@ -121,22 +119,22 @@ class CandlestickPattern:
         if body_ratio > 0.1:
             return None, 0.0
 
-        lower_shadow = min(c['open'], c['close']) - c['low']
-        upper_shadow = c['high'] - max(c['open'], c['close'])
+        lower_shadow = min(c["open"], c["close"]) - c["low"]
+        upper_shadow = c["high"] - max(c["open"], c["close"])
 
         # Dragonfly Doji: long lower shadow, no upper shadow
         if lower_shadow > 2 * body and upper_shadow < 0.1 * total_range:
-            return 'DRAGONFLY_DOJI', 0.70
+            return "DRAGONFLY_DOJI", 0.70
 
         # Gravestone Doji: long upper shadow, no lower shadow
         if upper_shadow > 2 * body and lower_shadow < 0.1 * total_range:
-            return 'GRAVESTONE_DOJI', 0.70
+            return "GRAVESTONE_DOJI", 0.70
 
         # Long-legged Doji: long shadows on both sides
         if lower_shadow > body and upper_shadow > body:
-            return 'LONG_LEGGED_DOJI', 0.60
+            return "LONG_LEGGED_DOJI", 0.60
 
-        return 'DOJI', 0.50
+        return "DOJI", 0.50
 
     @staticmethod
     def detect_morning_star(candles: List[Dict]) -> Tuple[bool, float]:
@@ -154,16 +152,17 @@ class CandlestickPattern:
         star = candles[-2]
         third = candles[-1]
 
-        first_body = abs(first['close'] - first['open'])
-        star_body = abs(star['close'] - star['open'])
-        third_body = abs(third['close'] - third['open'])
+        first_body = abs(first["close"] - first["open"])
+        star_body = abs(star["close"] - star["open"])
+        third_body = abs(third["close"] - third["open"])
 
         is_morning_star = (
-            first['close'] < first['open'] and  # First is bearish
-            star_body < first_body * 0.3 and    # Star has small body
-            third['close'] > third['open'] and  # Third is bullish
-            third_body > first_body * 0.5 and   # Third has substantial body
-            third['close'] > (first['open'] + first['close']) / 2  # Third closes above midpoint
+            first["close"] < first["open"]  # First is bearish
+            and star_body < first_body * 0.3  # Star has small body
+            and third["close"] > third["open"]  # Third is bullish
+            and third_body > first_body * 0.5  # Third has substantial body
+            and third["close"]
+            > (first["open"] + first["close"]) / 2  # Third closes above midpoint
         )
 
         confidence = 0.85 if is_morning_star else 0.0
@@ -182,16 +181,17 @@ class CandlestickPattern:
         star = candles[-2]
         third = candles[-1]
 
-        first_body = abs(first['close'] - first['open'])
-        star_body = abs(star['close'] - star['open'])
-        third_body = abs(third['close'] - third['open'])
+        first_body = abs(first["close"] - first["open"])
+        star_body = abs(star["close"] - star["open"])
+        third_body = abs(third["close"] - third["open"])
 
         is_evening_star = (
-            first['close'] > first['open'] and  # First is bullish
-            star_body < first_body * 0.3 and    # Star has small body
-            third['close'] < third['open'] and  # Third is bearish
-            third_body > first_body * 0.5 and   # Third has substantial body
-            third['close'] < (first['open'] + first['close']) / 2  # Third closes below midpoint
+            first["close"] > first["open"]  # First is bullish
+            and star_body < first_body * 0.3  # Star has small body
+            and third["close"] < third["open"]  # Third is bearish
+            and third_body > first_body * 0.5  # Third has substantial body
+            and third["close"]
+            < (first["open"] + first["close"]) / 2  # Third closes below midpoint
         )
 
         confidence = 0.85 if is_evening_star else 0.0
@@ -229,12 +229,16 @@ class CandlestickAnalyzer:
             signals.append(("HAMMER", "BUY", conf))
 
         # Bullish Engulfing
-        is_bullish_eng, conf = self.pattern_detector.detect_engulfing(candles, bullish=True)
+        is_bullish_eng, conf = self.pattern_detector.detect_engulfing(
+            candles, bullish=True
+        )
         if is_bullish_eng:
             signals.append(("BULLISH_ENGULFING", "BUY", conf))
 
         # Bearish Engulfing
-        is_bearish_eng, conf = self.pattern_detector.detect_engulfing(candles, bullish=False)
+        is_bearish_eng, conf = self.pattern_detector.detect_engulfing(
+            candles, bullish=False
+        )
         if is_bearish_eng:
             signals.append(("BEARISH_ENGULFING", "SELL", conf))
 
@@ -251,13 +255,19 @@ class CandlestickAnalyzer:
         # Doji patterns
         doji_type, conf = self.pattern_detector.detect_doji(candles)
         if doji_type:
-            signal_type = "BUY" if "DRAGONFLY" in doji_type else "SELL" if "GRAVESTONE" in doji_type else "HOLD"
+            signal_type = (
+                "BUY"
+                if "DRAGONFLY" in doji_type
+                else "SELL" if "GRAVESTONE" in doji_type else "HOLD"
+            )
             signals.append((doji_type, signal_type, conf))
 
         # Return highest confidence signal
         if signals:
             best_signal = max(signals, key=lambda x: x[2])
-            return self._create_signal(best_signal[0], best_signal[1], best_signal[2], candles[-1])
+            return self._create_signal(
+                best_signal[0], best_signal[1], best_signal[2], candles[-1]
+            )
 
         return self._no_signal("No patterns detected")
 
@@ -273,7 +283,9 @@ class CandlestickAnalyzer:
         """
         return self.analyze(candles)
 
-    def _create_signal(self, pattern: str, signal_type: str, confidence: float, last_candle: Dict) -> Dict[str, Any]:
+    def _create_signal(
+        self, pattern: str, signal_type: str, confidence: float, last_candle: Dict
+    ) -> Dict[str, Any]:
         """Create a trading signal"""
         signal = {
             "timestamp": datetime.now().isoformat(),
@@ -281,8 +293,8 @@ class CandlestickAnalyzer:
             "pattern": pattern,
             "type": signal_type,
             "confidence": confidence,
-            "price": last_candle['close'],
-            "volume": last_candle.get('volume', 0)
+            "price": last_candle["close"],
+            "volume": last_candle.get("volume", 0),
         }
 
         self.signal_history.append(signal)
@@ -298,13 +310,13 @@ class CandlestickAnalyzer:
             "pattern": None,
             "type": "HOLD",
             "confidence": 0.0,
-            "reason": reason
+            "reason": reason,
         }
 
     def save_signals(self, output_file: str = "signals.json") -> None:
         """Save signal history to file"""
         try:
-            with open(output_file, 'w') as f:
+            with open(output_file, "w") as f:
                 json.dump(self.signal_history, f, indent=2)
             logger.info(f"Signals saved to {output_file}")
         except Exception as e:

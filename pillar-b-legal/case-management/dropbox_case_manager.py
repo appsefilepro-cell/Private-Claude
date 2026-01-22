@@ -13,17 +13,17 @@ Features:
 NO COST - Uses Dropbox Free tier (2GB storage)
 """
 
-import os
 import json
 import logging
+import os
+import urllib.parse
+import urllib.request
 from datetime import datetime
 from pathlib import Path
-from typing import Dict, List, Any, Optional
-import urllib.request
-import urllib.parse
+from typing import Any, Dict, List, Optional
 
 logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger('CaseManager')
+logger = logging.getLogger("CaseManager")
 
 
 class DropboxCaseManager:
@@ -47,7 +47,9 @@ class DropboxCaseManager:
         2. Create app → Scoped access → App folder
         3. Generate access token
         """
-        self.access_token = dropbox_access_token or os.getenv('DROPBOX_ACCESS_TOKEN', '')
+        self.access_token = dropbox_access_token or os.getenv(
+            "DROPBOX_ACCESS_TOKEN", ""
+        )
         self.base_path = Path(__file__).parent
         self.cases_path = self.base_path / "cases_index"
         self.cases_path.mkdir(exist_ok=True)
@@ -73,21 +75,21 @@ class DropboxCaseManager:
             /08_Billing_Records/
             /09_Client_Deliverables/
         """
-        client_name = case_info.get('client_name', 'Unknown Client')
-        case_number = case_info.get('case_number', 'PENDING')
-        case_id = f"{client_name} - {case_number}".replace(' ', '_')
+        client_name = case_info.get("client_name", "Unknown Client")
+        case_number = case_info.get("case_number", "PENDING")
+        case_id = f"{client_name} - {case_number}".replace(" ", "_")
 
         folders = {
-            'root': f"/Cases/{case_id}",
-            'intake': f"/Cases/{case_id}/01_Intake_Forms",
-            'correspondence': f"/Cases/{case_id}/02_Correspondence",
-            'court_filings': f"/Cases/{case_id}/03_Court_Filings",
-            'evidence': f"/Cases/{case_id}/04_Evidence",
-            'research': f"/Cases/{case_id}/05_Legal_Research",
-            'drafts': f"/Cases/{case_id}/06_Drafts",
-            'final': f"/Cases/{case_id}/07_Final_Documents",
-            'billing': f"/Cases/{case_id}/08_Billing_Records",
-            'client_deliverables': f"/Cases/{case_id}/09_Client_Deliverables"
+            "root": f"/Cases/{case_id}",
+            "intake": f"/Cases/{case_id}/01_Intake_Forms",
+            "correspondence": f"/Cases/{case_id}/02_Correspondence",
+            "court_filings": f"/Cases/{case_id}/03_Court_Filings",
+            "evidence": f"/Cases/{case_id}/04_Evidence",
+            "research": f"/Cases/{case_id}/05_Legal_Research",
+            "drafts": f"/Cases/{case_id}/06_Drafts",
+            "final": f"/Cases/{case_id}/07_Final_Documents",
+            "billing": f"/Cases/{case_id}/08_Billing_Records",
+            "client_deliverables": f"/Cases/{case_id}/09_Client_Deliverables",
         }
 
         # Create folders
@@ -96,16 +98,16 @@ class DropboxCaseManager:
 
         # Save case index locally
         case_index = {
-            'case_id': case_id,
-            'client_name': client_name,
-            'case_number': case_number,
-            'created_date': datetime.now().isoformat(),
-            'dropbox_folders': folders,
-            'case_info': case_info
+            "case_id": case_id,
+            "client_name": client_name,
+            "case_number": case_number,
+            "created_date": datetime.now().isoformat(),
+            "dropbox_folders": folders,
+            "case_info": case_info,
         }
 
         index_file = self.cases_path / f"{case_id}.json"
-        with open(index_file, 'w') as f:
+        with open(index_file, "w") as f:
             json.dump(case_index, f, indent=2)
 
         logger.info(f"✅ Created case folder structure for: {client_name}")
@@ -125,14 +127,11 @@ class DropboxCaseManager:
             url = "https://api.dropboxapi.com/2/files/create_folder_v2"
             headers = {
                 "Authorization": f"Bearer {self.access_token}",
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
             }
-            data = json.dumps({
-                "path": path,
-                "autorename": False
-            }).encode('utf-8')
+            data = json.dumps({"path": path, "autorename": False}).encode("utf-8")
 
-            req = urllib.request.Request(url, data=data, headers=headers, method='POST')
+            req = urllib.request.Request(url, data=data, headers=headers, method="POST")
             response = urllib.request.urlopen(req)
 
             if response.status == 200:
@@ -165,7 +164,7 @@ class DropboxCaseManager:
 
         try:
             # Read file
-            with open(local_file_path, 'rb') as f:
+            with open(local_file_path, "rb") as f:
                 file_data = f.read()
 
             # Upload file
@@ -173,15 +172,19 @@ class DropboxCaseManager:
             headers = {
                 "Authorization": f"Bearer {self.access_token}",
                 "Content-Type": "application/octet-stream",
-                "Dropbox-API-Arg": json.dumps({
-                    "path": dropbox_path,
-                    "mode": "add",
-                    "autorename": True,
-                    "mute": False
-                })
+                "Dropbox-API-Arg": json.dumps(
+                    {
+                        "path": dropbox_path,
+                        "mode": "add",
+                        "autorename": True,
+                        "mute": False,
+                    }
+                ),
             }
 
-            req = urllib.request.Request(url, data=file_data, headers=headers, method='POST')
+            req = urllib.request.Request(
+                url, data=file_data, headers=headers, method="POST"
+            )
             response = urllib.request.urlopen(req)
 
             if response.status == 200:
@@ -198,29 +201,30 @@ class DropboxCaseManager:
     def _create_public_link(self, dropbox_path: str) -> Optional[str]:
         """Create public sharing link for file"""
         try:
-            url = "https://api.dropboxapi.com/2/sharing/create_shared_link_with_settings"
+            url = (
+                "https://api.dropboxapi.com/2/sharing/create_shared_link_with_settings"
+            )
             headers = {
                 "Authorization": f"Bearer {self.access_token}",
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
             }
-            data = json.dumps({
-                "path": dropbox_path,
-                "settings": {
-                    "requested_visibility": "public"
-                }
-            }).encode('utf-8')
+            data = json.dumps(
+                {"path": dropbox_path, "settings": {"requested_visibility": "public"}}
+            ).encode("utf-8")
 
-            req = urllib.request.Request(url, data=data, headers=headers, method='POST')
+            req = urllib.request.Request(url, data=data, headers=headers, method="POST")
             response = urllib.request.urlopen(req)
 
             if response.status == 200:
-                result = json.loads(response.read().decode('utf-8'))
-                public_url = result.get('url', '')
+                result = json.loads(response.read().decode("utf-8"))
+                public_url = result.get("url", "")
 
                 # Convert to direct download link
                 if public_url:
-                    public_url = public_url.replace('www.dropbox.com', 'dl.dropboxusercontent.com')
-                    public_url = public_url.replace('?dl=0', '?dl=1')
+                    public_url = public_url.replace(
+                        "www.dropbox.com", "dl.dropboxusercontent.com"
+                    )
+                    public_url = public_url.replace("?dl=0", "?dl=1")
 
                 logger.info(f"🔗 Public link created")
                 return public_url
@@ -230,18 +234,22 @@ class DropboxCaseManager:
                 # Link already exists, get existing link
                 try:
                     url = "https://api.dropboxapi.com/2/sharing/list_shared_links"
-                    data = json.dumps({"path": dropbox_path}).encode('utf-8')
-                    req = urllib.request.Request(url, data=data, headers=headers, method='POST')
+                    data = json.dumps({"path": dropbox_path}).encode("utf-8")
+                    req = urllib.request.Request(
+                        url, data=data, headers=headers, method="POST"
+                    )
                     response = urllib.request.urlopen(req)
-                    result = json.loads(response.read().decode('utf-8'))
+                    result = json.loads(response.read().decode("utf-8"))
 
-                    if result.get('links'):
-                        public_url = result['links'][0]['url']
-                        public_url = public_url.replace('www.dropbox.com', 'dl.dropboxusercontent.com')
-                        public_url = public_url.replace('?dl=0', '?dl=1')
+                    if result.get("links"):
+                        public_url = result["links"][0]["url"]
+                        public_url = public_url.replace(
+                            "www.dropbox.com", "dl.dropboxusercontent.com"
+                        )
+                        public_url = public_url.replace("?dl=0", "?dl=1")
                         return public_url
 
-                except:
+                except BaseException:
                     pass
 
         except Exception as e:
@@ -257,10 +265,10 @@ class DropboxCaseManager:
             logger.error(f"❌ Case not found: {case_id}")
             return {}
 
-        with open(case_file, 'r') as f:
+        with open(case_file, "r") as f:
             case_data = json.load(f)
 
-        folders = case_data.get('dropbox_folders', {})
+        folders = case_data.get("dropbox_folders", {})
         links = {}
 
         # Get links for each folder
@@ -280,20 +288,18 @@ class DropboxCaseManager:
             url = "https://api.dropboxapi.com/2/files/list_folder"
             headers = {
                 "Authorization": f"Bearer {self.access_token}",
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
             }
-            data = json.dumps({
-                "path": folder_path
-            }).encode('utf-8')
+            data = json.dumps({"path": folder_path}).encode("utf-8")
 
-            req = urllib.request.Request(url, data=data, headers=headers, method='POST')
+            req = urllib.request.Request(url, data=data, headers=headers, method="POST")
             response = urllib.request.urlopen(req)
-            result = json.loads(response.read().decode('utf-8'))
+            result = json.loads(response.read().decode("utf-8"))
 
             files = []
-            for entry in result.get('entries', []):
-                if entry.get('.tag') == 'file':
-                    file_path = entry.get('path_display')
+            for entry in result.get("entries", []):
+                if entry.get(".tag") == "file":
+                    file_path = entry.get("path_display")
                     link = self._create_public_link(file_path)
                     if link:
                         files.append(link)
@@ -311,11 +317,11 @@ class DropboxCaseManager:
         if not case_file.exists():
             return "Case not found"
 
-        with open(case_file, 'r') as f:
+        with open(case_file, "r") as f:
             case_data = json.load(f)
 
-        client_name = case_data['client_name']
-        folders = case_data['dropbox_folders']
+        client_name = case_data["client_name"]
+        folders = case_data["dropbox_folders"]
 
         email = f"""
 Dear {client_name},
@@ -491,12 +497,14 @@ SAVINGS: $468-948 per year! 💰
 
 def main():
     """Demo of Dropbox Case Manager"""
-    print("""
+    print(
+        """
     ╔═══════════════════════════════════════════════════════════════════╗
     ║          FREE CASE MANAGEMENT SYSTEM                              ║
     ║            Powered by Dropbox (2GB Free)                          ║
     ╚═══════════════════════════════════════════════════════════════════╝
-    """)
+    """
+    )
 
     manager = DropboxCaseManager()
 
@@ -508,12 +516,12 @@ def main():
     print("=" * 70)
 
     example_case = {
-        'client_name': 'Thurman Robinson Estate',
-        'case_number': 'PROBATE-2025-001',
-        'case_type': 'Probate Administration',
-        'attorney_name': 'Your Name',
-        'attorney_email': 'appsefilepro@gmail.com',
-        'attorney_phone': 'Your Phone'
+        "client_name": "Thurman Robinson Estate",
+        "case_number": "PROBATE-2025-001",
+        "case_type": "Probate Administration",
+        "attorney_name": "Your Name",
+        "attorney_email": "appsefilepro@gmail.com",
+        "attorney_phone": "Your Phone",
     }
 
     folders = manager.create_case_folder(example_case)
@@ -525,7 +533,9 @@ def main():
 
     print("\n📧 Client Portal Email Preview:")
     print("=" * 70)
-    case_id = f"{example_case['client_name']} - {example_case['case_number']}".replace(' ', '_')
+    case_id = f"{example_case['client_name']} - {example_case['case_number']}".replace(
+        " ", "_"
+    )
     print(manager.generate_client_portal_email(case_id))
 
 

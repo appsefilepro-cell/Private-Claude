@@ -3,19 +3,19 @@ Gmail API Connector
 Connects to Gmail using OAuth 2.0 and downloads attachments
 """
 
-import os
-import json
 import base64
+import json
 import logging
+import os
 from datetime import datetime
-from typing import List, Dict, Any
+from typing import Any, Dict, List
 
 # Gmail API (would need google-auth and google-api-python-client in production)
 # from google.oauth2.credentials import Credentials
 # from googleapiclient.discovery import build
 
 logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger('GmailConnector')
+logger = logging.getLogger("GmailConnector")
 
 
 class GmailConnector:
@@ -71,12 +71,12 @@ class GmailConnector:
                 "3. Enable Gmail API",
                 "4. Create OAuth 2.0 credentials",
                 "5. Download credentials and update this file",
-                "6. Scopes needed: https://www.googleapis.com/auth/gmail.readonly"
-            ]
+                "6. Scopes needed: https://www.googleapis.com/auth/gmail.readonly",
+            ],
         }
 
         os.makedirs(os.path.dirname(self.credentials_file), exist_ok=True)
-        with open(self.credentials_file, 'w') as f:
+        with open(self.credentials_file, "w") as f:
             json.dump(template, f, indent=2)
 
         logger.info(f"Created template credentials file: {self.credentials_file}")
@@ -106,7 +106,9 @@ class GmailConnector:
 
         return emails
 
-    def download_attachment(self, message_id: str, attachment_id: str, filename: str) -> str:
+    def download_attachment(
+        self, message_id: str, attachment_id: str, filename: str
+    ) -> str:
         """
         Download an email attachment
 
@@ -143,11 +145,7 @@ class GmailConnector:
         Returns:
             Statistics dictionary
         """
-        stats = {
-            "emails_scanned": 0,
-            "attachments_downloaded": 0,
-            "errors": 0
-        }
+        stats = {"emails_scanned": 0, "attachments_downloaded": 0, "errors": 0}
 
         try:
             # Authenticate
@@ -199,7 +197,7 @@ class GmailConnector:
             "   - https://www.googleapis.com/auth/gmail.readonly",
             "7. Run the connector to complete OAuth flow",
             "",
-            "For detailed instructions, see: https://developers.google.com/gmail/api/quickstart/python"
+            "For detailed instructions, see: https://developers.google.com/gmail/api/quickstart/python",
         ]
 
 

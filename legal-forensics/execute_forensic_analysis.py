@@ -3,28 +3,31 @@ MASTER EXECUTION SCRIPT - Forensic Legal Data Analysis
 Activates Agent 3.0 and orchestrates 40-case litigation data extraction
 """
 
-import os
-import sys
 import json
 import logging
+import os
+import sys
 from datetime import datetime
+
+from data_source_connectors import MultiSourceOrchestrator
+from forensic_data_analyzer import ForensicDataAnalyzer
 
 # Add current directory to path for imports
 current_dir = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, current_dir)
 
-from forensic_data_analyzer import ForensicDataAnalyzer
-from data_source_connectors import MultiSourceOrchestrator
 
 logging.basicConfig(
     level=logging.INFO,
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
     handlers=[
-        logging.FileHandler(f'logs/forensic_execution_{datetime.now().strftime("%Y%m%d_%H%M%S")}.log'),
-        logging.StreamHandler()
-    ]
+        logging.FileHandler(
+            f'logs/forensic_execution_{datetime.now().strftime("%Y%m%d_%H%M%S")}.log'
+        ),
+        logging.StreamHandler(),
+    ],
 )
-logger = logging.getLogger('ForensicExecution')
+logger = logging.getLogger("ForensicExecution")
 
 
 def print_banner():
@@ -46,9 +49,9 @@ def main():
     """Main execution flow"""
     print_banner()
 
-    logger.info("="*80)
+    logger.info("=" * 80)
     logger.info("PHASE 1: INITIALIZATION")
-    logger.info("="*80)
+    logger.info("=" * 80)
 
     # Step 1: Initialize forensic analyzer
     logger.info("Initializing Forensic Data Analyzer...")
@@ -60,16 +63,18 @@ def main():
     orchestrator = MultiSourceOrchestrator()
     logger.info("✓ Data source connectors initialized")
 
-    logger.info("\n" + "="*80)
+    logger.info("\n" + "=" * 80)
     logger.info("PHASE 2: AUTHENTICATION & CONNECTION")
-    logger.info("="*80)
+    logger.info("=" * 80)
 
     # Step 3: Authenticate with all data sources
     logger.info("Attempting authentication with all data sources...")
     auth_results = orchestrator.authenticate_all()
 
     authenticated_count = sum(1 for result in auth_results.values() if result)
-    logger.info(f"\n✓ Authentication complete: {authenticated_count}/{len(auth_results)} sources connected")
+    logger.info(
+        f"\n✓ Authentication complete: {authenticated_count}/{len(auth_results)} sources connected"
+    )
 
     # Print detailed status
     connection_status = orchestrator.get_connection_status()
@@ -80,9 +85,9 @@ def main():
         print(f"  {icon} {source}: {status}")
     print("-" * 60)
 
-    logger.info("\n" + "="*80)
+    logger.info("\n" + "=" * 80)
     logger.info("PHASE 3: DATA COLLECTION")
-    logger.info("="*80)
+    logger.info("=" * 80)
 
     if authenticated_count == 0:
         logger.warning("⚠ No data sources authenticated")
@@ -92,7 +97,9 @@ def main():
         logger.info("2. See docs/API_SETUP_INSTRUCTIONS.md for detailed setup")
         logger.info("3. Re-run this script after configuration")
     else:
-        logger.info(f"Collecting documents from {authenticated_count} authenticated sources...")
+        logger.info(
+            f"Collecting documents from {authenticated_count} authenticated sources..."
+        )
         all_documents = orchestrator.collect_all_documents([])
         logger.info(f"✓ Collected {len(all_documents)} total documents")
 
@@ -105,9 +112,9 @@ def main():
         logger.info(f"✓ Indexed {stats['total_documents_indexed']} documents")
         logger.info(f"✓ Created {stats['total_mappings']} case-to-document mappings")
 
-    logger.info("\n" + "="*80)
+    logger.info("\n" + "=" * 80)
     logger.info("PHASE 4: CASE DOSSIER GENERATION")
-    logger.info("="*80)
+    logger.info("=" * 80)
 
     # Step 4: Generate all 40 case dossiers
     logger.info("Generating case dossiers for all 40 cases...")
@@ -117,9 +124,9 @@ def main():
     logger.info(f"✓ Generated all dossiers in {output_dir}/")
     logger.info(f"✓ Master report: {output_dir}/MASTER_ALL_40_CASES.md")
 
-    logger.info("\n" + "="*80)
+    logger.info("\n" + "=" * 80)
     logger.info("PHASE 5: COMPLETION & SUMMARY")
-    logger.info("="*80)
+    logger.info("=" * 80)
 
     # Final statistics
     stats = analyzer.get_statistics()
@@ -147,7 +154,7 @@ def main():
     else:
         print("\n✅ Full forensic analysis complete with real data.")
 
-    logger.info("="*80)
+    logger.info("=" * 80)
 
     return 0
 

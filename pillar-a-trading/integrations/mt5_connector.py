@@ -5,15 +5,15 @@ Connects Agent X2.0 trading system to MT5 platform
 Supports both demo and live accounts
 """
 
-import os
 import json
 import logging
+import os
 from datetime import datetime
-from typing import Dict, List, Any, Optional
 from pathlib import Path
+from typing import Any, Dict, List, Optional
 
 logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger('MT5Connector')
+logger = logging.getLogger("MT5Connector")
 
 
 class MT5Connector:
@@ -37,9 +37,9 @@ class MT5Connector:
         self.account_info = {}
 
         # Load credentials
-        self.login = int(os.getenv('MT5_LOGIN', '0'))
-        self.password = os.getenv('MT5_PASSWORD', '')
-        self.server = os.getenv('MT5_SERVER', 'Demo-Server')
+        self.login = int(os.getenv("MT5_LOGIN", "0"))
+        self.password = os.getenv("MT5_PASSWORD", "")
+        self.server = os.getenv("MT5_SERVER", "Demo-Server")
 
         logger.info(f"✅ MT5Connector initialized for {account_type.upper()} account")
 
@@ -49,6 +49,7 @@ class MT5Connector:
             # Try to import MT5 library
             try:
                 import MetaTrader5 as mt5
+
                 self.mt5 = mt5
             except ImportError:
                 logger.error("❌ MetaTrader5 library not installed")
@@ -62,7 +63,9 @@ class MT5Connector:
 
             # Login
             if self.login and self.password:
-                authorized = self.mt5.login(self.login, password=self.password, server=self.server)
+                authorized = self.mt5.login(
+                    self.login, password=self.password, server=self.server
+                )
 
                 if not authorized:
                     logger.error(f"❌ MT5 login failed: {self.mt5.last_error()}")
@@ -105,20 +108,20 @@ class MT5Connector:
             return {}
 
         return {
-            'login': account.login,
-            'server': account.server,
-            'balance': account.balance,
-            'equity': account.equity,
-            'margin': account.margin,
-            'margin_free': account.margin_free,
-            'margin_level': account.margin_level,
-            'profit': account.profit,
-            'currency': account.currency,
-            'leverage': account.leverage,
-            'trade_mode': account.trade_mode,
-            'limit_orders': account.limit_orders,
-            'margin_so_call': account.margin_so_call,
-            'margin_so_so': account.margin_so_so
+            "login": account.login,
+            "server": account.server,
+            "balance": account.balance,
+            "equity": account.equity,
+            "margin": account.margin,
+            "margin_free": account.margin_free,
+            "margin_level": account.margin_level,
+            "profit": account.profit,
+            "currency": account.currency,
+            "leverage": account.leverage,
+            "trade_mode": account.trade_mode,
+            "limit_orders": account.limit_orders,
+            "margin_so_call": account.margin_so_call,
+            "margin_so_so": account.margin_so_so,
         }
 
     def get_symbols(self, filter_str: str = "*") -> List[str]:
@@ -142,23 +145,25 @@ class MT5Connector:
             return None
 
         return {
-            'name': info.name,
-            'description': info.description,
-            'currency_base': info.currency_base,
-            'currency_profit': info.currency_profit,
-            'currency_margin': info.currency_margin,
-            'digits': info.digits,
-            'trade_contract_size': info.trade_contract_size,
-            'trade_mode': info.trade_mode,
-            'volume_min': info.volume_min,
-            'volume_max': info.volume_max,
-            'volume_step': info.volume_step,
-            'spread': info.spread,
-            'bid': info.bid,
-            'ask': info.ask
+            "name": info.name,
+            "description": info.description,
+            "currency_base": info.currency_base,
+            "currency_profit": info.currency_profit,
+            "currency_margin": info.currency_margin,
+            "digits": info.digits,
+            "trade_contract_size": info.trade_contract_size,
+            "trade_mode": info.trade_mode,
+            "volume_min": info.volume_min,
+            "volume_max": info.volume_max,
+            "volume_step": info.volume_step,
+            "spread": info.spread,
+            "bid": info.bid,
+            "ask": info.ask,
         }
 
-    def get_market_data(self, symbol: str, timeframe: str = "H1", bars: int = 100) -> Optional[List[Dict]]:
+    def get_market_data(
+        self, symbol: str, timeframe: str = "H1", bars: int = 100
+    ) -> Optional[List[Dict]]:
         """
         Get historical market data
 
@@ -172,15 +177,15 @@ class MT5Connector:
 
         # Map timeframe string to MT5 constant
         timeframe_map = {
-            'M1': self.mt5.TIMEFRAME_M1,
-            'M5': self.mt5.TIMEFRAME_M5,
-            'M15': self.mt5.TIMEFRAME_M15,
-            'M30': self.mt5.TIMEFRAME_M30,
-            'H1': self.mt5.TIMEFRAME_H1,
-            'H4': self.mt5.TIMEFRAME_H4,
-            'D1': self.mt5.TIMEFRAME_D1,
-            'W1': self.mt5.TIMEFRAME_W1,
-            'MN1': self.mt5.TIMEFRAME_MN1
+            "M1": self.mt5.TIMEFRAME_M1,
+            "M5": self.mt5.TIMEFRAME_M5,
+            "M15": self.mt5.TIMEFRAME_M15,
+            "M30": self.mt5.TIMEFRAME_M30,
+            "H1": self.mt5.TIMEFRAME_H1,
+            "H4": self.mt5.TIMEFRAME_H4,
+            "D1": self.mt5.TIMEFRAME_D1,
+            "W1": self.mt5.TIMEFRAME_W1,
+            "MN1": self.mt5.TIMEFRAME_MN1,
         }
 
         tf = timeframe_map.get(timeframe, self.mt5.TIMEFRAME_H1)
@@ -192,20 +197,29 @@ class MT5Connector:
 
         candles = []
         for rate in rates:
-            candles.append({
-                'time': datetime.fromtimestamp(rate['time']).isoformat(),
-                'open': rate['open'],
-                'high': rate['high'],
-                'low': rate['low'],
-                'close': rate['close'],
-                'volume': rate['tick_volume']
-            })
+            candles.append(
+                {
+                    "time": datetime.fromtimestamp(rate["time"]).isoformat(),
+                    "open": rate["open"],
+                    "high": rate["high"],
+                    "low": rate["low"],
+                    "close": rate["close"],
+                    "volume": rate["tick_volume"],
+                }
+            )
 
         return candles
 
-    def place_order(self, symbol: str, order_type: str, volume: float,
-                   price: float = None, sl: float = None, tp: float = None,
-                   comment: str = "Agent X2.0") -> Optional[Dict]:
+    def place_order(
+        self,
+        symbol: str,
+        order_type: str,
+        volume: float,
+        price: float = None,
+        sl: float = None,
+        tp: float = None,
+        comment: str = "Agent X2.0",
+    ) -> Optional[Dict]:
         """
         Place a trading order
 
@@ -233,8 +247,16 @@ class MT5Connector:
             "action": self.mt5.TRADE_ACTION_DEAL,
             "symbol": symbol,
             "volume": volume,
-            "type": self.mt5.ORDER_TYPE_BUY if order_type == "BUY" else self.mt5.ORDER_TYPE_SELL,
-            "price": price if price else (symbol_info.ask if order_type == "BUY" else symbol_info.bid),
+            "type": (
+                self.mt5.ORDER_TYPE_BUY
+                if order_type == "BUY"
+                else self.mt5.ORDER_TYPE_SELL
+            ),
+            "price": (
+                price
+                if price
+                else (symbol_info.ask if order_type == "BUY" else symbol_info.bid)
+            ),
             "sl": sl if sl else 0.0,
             "tp": tp if tp else 0.0,
             "deviation": 20,
@@ -255,16 +277,18 @@ class MT5Connector:
             logger.error(f"❌ Order rejected: {result.retcode} - {result.comment}")
             return None
 
-        logger.info(f"✅ Order executed: {order_type} {volume} {symbol} @ {result.price}")
+        logger.info(
+            f"✅ Order executed: {order_type} {volume} {symbol} @ {result.price}"
+        )
 
         return {
-            'ticket': result.order,
-            'symbol': symbol,
-            'order_type': order_type,
-            'volume': volume,
-            'price': result.price,
-            'comment': comment,
-            'time': datetime.now().isoformat()
+            "ticket": result.order,
+            "symbol": symbol,
+            "order_type": order_type,
+            "volume": volume,
+            "price": result.price,
+            "comment": comment,
+            "time": datetime.now().isoformat(),
         }
 
     def get_open_positions(self) -> List[Dict]:
@@ -278,19 +302,21 @@ class MT5Connector:
 
         result = []
         for pos in positions:
-            result.append({
-                'ticket': pos.ticket,
-                'symbol': pos.symbol,
-                'type': 'BUY' if pos.type == 0 else 'SELL',
-                'volume': pos.volume,
-                'price_open': pos.price_open,
-                'price_current': pos.price_current,
-                'profit': pos.profit,
-                'sl': pos.sl,
-                'tp': pos.tp,
-                'time': datetime.fromtimestamp(pos.time).isoformat(),
-                'comment': pos.comment
-            })
+            result.append(
+                {
+                    "ticket": pos.ticket,
+                    "symbol": pos.symbol,
+                    "type": "BUY" if pos.type == 0 else "SELL",
+                    "volume": pos.volume,
+                    "price_open": pos.price_open,
+                    "price_current": pos.price_current,
+                    "profit": pos.profit,
+                    "sl": pos.sl,
+                    "tp": pos.tp,
+                    "time": datetime.fromtimestamp(pos.time).isoformat(),
+                    "comment": pos.comment,
+                }
+            )
 
         return result
 
@@ -311,9 +337,15 @@ class MT5Connector:
             "action": self.mt5.TRADE_ACTION_DEAL,
             "symbol": pos.symbol,
             "volume": pos.volume,
-            "type": self.mt5.ORDER_TYPE_SELL if pos.type == 0 else self.mt5.ORDER_TYPE_BUY,
+            "type": (
+                self.mt5.ORDER_TYPE_SELL if pos.type == 0 else self.mt5.ORDER_TYPE_BUY
+            ),
             "position": ticket,
-            "price": self.mt5.symbol_info_tick(pos.symbol).bid if pos.type == 0 else self.mt5.symbol_info_tick(pos.symbol).ask,
+            "price": (
+                self.mt5.symbol_info_tick(pos.symbol).bid
+                if pos.type == 0
+                else self.mt5.symbol_info_tick(pos.symbol).ask
+            ),
             "deviation": 20,
             "magic": 202412,
             "comment": "Close by Agent X2.0",
@@ -346,19 +378,21 @@ class MT5Connector:
 
         result = []
         for deal in deals:
-            result.append({
-                'ticket': deal.ticket,
-                'order': deal.order,
-                'symbol': deal.symbol,
-                'type': 'BUY' if deal.type == 0 else 'SELL',
-                'volume': deal.volume,
-                'price': deal.price,
-                'profit': deal.profit,
-                'commission': deal.commission,
-                'swap': deal.swap,
-                'time': datetime.fromtimestamp(deal.time).isoformat(),
-                'comment': deal.comment
-            })
+            result.append(
+                {
+                    "ticket": deal.ticket,
+                    "order": deal.order,
+                    "symbol": deal.symbol,
+                    "type": "BUY" if deal.type == 0 else "SELL",
+                    "volume": deal.volume,
+                    "price": deal.price,
+                    "profit": deal.profit,
+                    "commission": deal.commission,
+                    "swap": deal.swap,
+                    "time": datetime.fromtimestamp(deal.time).isoformat(),
+                    "comment": deal.comment,
+                }
+            )
 
         return result
 
@@ -413,7 +447,9 @@ class MT5TradingBot:
             print("\n💼 OPEN POSITIONS")
             print("=" * 70)
             for pos in positions:
-                print(f"#{pos['ticket']} - {pos['type']} {pos['volume']} {pos['symbol']} @ {pos['price_open']}")
+                print(
+                    f"#{pos['ticket']} - {pos['type']} {pos['volume']} {pos['symbol']} @ {pos['price_open']}"
+                )
                 print(f"  Current: {pos['price_current']} | P/L: ${pos['profit']:.2f}")
 
     def stop(self):
@@ -425,12 +461,14 @@ class MT5TradingBot:
 
 def main():
     """Main entry point - demo of MT5 integration"""
-    print("""
+    print(
+        """
     ╔═══════════════════════════════════════════════════════════════════╗
     ║              METATRADER 5 (MT5) INTEGRATION                       ║
     ║            Connect Agent X2.0 to MT5 Platform                     ║
     ╚═══════════════════════════════════════════════════════════════════╝
-    """)
+    """
+    )
 
     # Try demo account first
     bot = MT5TradingBot(account_type="demo")
@@ -440,10 +478,12 @@ def main():
         print("\nAvailable symbols:")
 
         # Show some popular symbols
-        for symbol in ['EURUSD', 'GBPUSD', 'USDJPY', 'BTCUSD', 'XAUUSD'][:5]:
+        for symbol in ["EURUSD", "GBPUSD", "USDJPY", "BTCUSD", "XAUUSD"][:5]:
             info = bot.connector.get_symbol_info(symbol)
             if info:
-                print(f"  • {symbol}: Bid={info['bid']:.5f}, Ask={info['ask']:.5f}, Spread={info['spread']}")
+                print(
+                    f"  • {symbol}: Bid={info['bid']:.5f}, Ask={info['ask']:.5f}, Spread={info['spread']}"
+                )
 
         bot.stop()
     else:

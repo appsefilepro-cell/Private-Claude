@@ -3,15 +3,15 @@ Comprehensive Legal Document Generator
 Generates 100+ page court-ready legal documents with complete TOC, evidence, and damages
 """
 
-import os
 import json
 import logging
+import os
 from datetime import datetime
 from pathlib import Path
-from typing import Dict, Any, List
+from typing import Any, Dict, List
 
 logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger('LegalDocGen')
+logger = logging.getLogger("LegalDocGen")
 
 
 class ComprehensiveLegalDocumentGenerator:
@@ -28,19 +28,21 @@ class ComprehensiveLegalDocumentGenerator:
 
     def __init__(self):
         """Initialize legal document generator"""
-        self.templates_dir = Path(__file__).parent.parent / 'templates'
-        self.output_dir = Path(__file__).parent.parent / 'generated_docs'
+        self.templates_dir = Path(__file__).parent.parent / "templates"
+        self.output_dir = Path(__file__).parent.parent / "generated_docs"
         self.output_dir.mkdir(exist_ok=True)
         self.load_master_toc()
         logger.info("Comprehensive Legal Document Generator initialized")
 
     def load_master_toc(self):
         """Load master table of contents template"""
-        toc_file = self.templates_dir / 'MASTER_LEGAL_TOC.json'
-        with open(toc_file, 'r') as f:
-            self.master_toc = json.load(f)['master_toc']
+        toc_file = self.templates_dir / "MASTER_LEGAL_TOC.json"
+        with open(toc_file, "r") as f:
+            self.master_toc = json.load(f)["master_toc"]
 
-    def generate_motion_package(self, case_info: Dict[str, Any], motion_type: str) -> str:
+    def generate_motion_package(
+        self, case_info: Dict[str, Any], motion_type: str
+    ) -> str:
         """
         Generate complete motion package (100+ pages)
 
@@ -51,7 +53,9 @@ class ComprehensiveLegalDocumentGenerator:
         Returns:
             Path to generated document
         """
-        logger.info(f"Generating {motion_type} package for case {case_info.get('case_number')}")
+        logger.info(
+            f"Generating {motion_type} package for case {case_info.get('case_number')}"
+        )
 
         document = []
 
@@ -108,13 +112,13 @@ class ComprehensiveLegalDocumentGenerator:
             f"FOR THE {case_info.get('jurisdiction', 'COUNTY OF LOS ANGELES')}",
             "=" * 80,
             "",
-            case_info.get('plaintiff', 'PLAINTIFF NAME'),
+            case_info.get("plaintiff", "PLAINTIFF NAME"),
             "",
             "Plaintiff,",
             "",
             "v.",
             "",
-            case_info.get('defendant', 'DEFENDANT NAME'),
+            case_info.get("defendant", "DEFENDANT NAME"),
             "",
             "Defendant.",
             "",
@@ -138,50 +142,50 @@ class ComprehensiveLegalDocumentGenerator:
             f"Email: {case_info.get('email', 'appsefilepro@gmail.com')}",
             "",
             "=" * 80,
-            "[PAGE BREAK]"
+            "[PAGE BREAK]",
         ]
         return cover
 
     def generate_toc(self, case_info: Dict[str, Any], motion_type: str) -> List[str]:
         """Generate complete table of contents (3 pages)"""
-        toc = [
-            "TABLE OF CONTENTS",
-            "=" * 80,
-            ""
-        ]
+        toc = ["TABLE OF CONTENTS", "=" * 80, ""]
 
-        for section in self.master_toc['sections']:
+        for section in self.master_toc["sections"]:
             toc.append(f"{section['section']} ... Page {section['pages']}")
-            for subsection in section['subsections']:
+            for subsection in section["subsections"]:
                 toc.append(f"    {subsection}")
             toc.append("")
 
-        toc.extend([
-            "",
-            "=" * 80,
-            "TABLE OF AUTHORITIES",
-            "=" * 80,
-            "",
-            "CASES:",
-            "",
-            "Brown v. Board of Education, 347 U.S. 483 (1954)",
-            "Miranda v. Arizona, 384 U.S. 436 (1966)",
-            "Roe v. Wade, 410 U.S. 113 (1973)",
-            "[Additional cases to be added based on research]",
-            "",
-            "STATUTES:",
-            "",
-            "42 U.S.C. § 1983 (Civil Rights)",
-            "Cal. Civ. Proc. Code § 437c (Summary Judgment)",
-            "Cal. Civ. Code § 3294 (Punitive Damages)",
-            "[Additional statutes to be added]",
-            "",
-            "[PAGE BREAK]"
-        ])
+        toc.extend(
+            [
+                "",
+                "=" * 80,
+                "TABLE OF AUTHORITIES",
+                "=" * 80,
+                "",
+                "CASES:",
+                "",
+                "Brown v. Board of Education, 347 U.S. 483 (1954)",
+                "Miranda v. Arizona, 384 U.S. 436 (1966)",
+                "Roe v. Wade, 410 U.S. 113 (1973)",
+                "[Additional cases to be added based on research]",
+                "",
+                "STATUTES:",
+                "",
+                "42 U.S.C. § 1983 (Civil Rights)",
+                "Cal. Civ. Proc. Code § 437c (Summary Judgment)",
+                "Cal. Civ. Code § 3294 (Punitive Damages)",
+                "[Additional statutes to be added]",
+                "",
+                "[PAGE BREAK]",
+            ]
+        )
 
         return toc
 
-    def generate_notice_of_motion(self, case_info: Dict[str, Any], motion_type: str) -> List[str]:
+    def generate_notice_of_motion(
+        self, case_info: Dict[str, Any], motion_type: str
+    ) -> List[str]:
         """Generate notice of motion (3 pages)"""
         notice = [
             "NOTICE OF MOTION AND MOTION",
@@ -213,11 +217,13 @@ class ComprehensiveLegalDocumentGenerator:
             f"{case_info.get('attorney_name', 'Thurman Malik Robinson')}",
             "Attorney for Plaintiff",
             "",
-            "[PAGE BREAK]"
+            "[PAGE BREAK]",
         ]
         return notice
 
-    def generate_memorandum(self, case_info: Dict[str, Any], motion_type: str) -> List[str]:
+    def generate_memorandum(
+        self, case_info: Dict[str, Any], motion_type: str
+    ) -> List[str]:
         """Generate memorandum of points and authorities (27 pages)"""
         memo = [
             "MEMORANDUM OF POINTS AND AUTHORITIES",
@@ -232,55 +238,60 @@ class ComprehensiveLegalDocumentGenerator:
             "II. STATEMENT OF FACTS",
             "",
             "The following material facts are undisputed:",
-            ""
+            "",
         ]
 
         # Add 40+ paragraphs of facts
-        facts = case_info.get('facts', [])
+        facts = case_info.get("facts", [])
         if not facts:
-            facts = [f"[FACT PARAGRAPH {i}]: [Insert detailed factual statement here]" for i in range(1, 41)]
+            facts = [
+                f"[FACT PARAGRAPH {i}]: [Insert detailed factual statement here]"
+                for i in range(1, 41)
+            ]
 
         for i, fact in enumerate(facts, 1):
             memo.append(f"{i}. {fact}")
             memo.append("")
 
-        memo.extend([
-            "III. LEGAL STANDARD",
-            "",
-            "[INSERT APPLICABLE LEGAL STANDARD]",
-            "",
-            "Under California law, [RELEVANT STATUTE OR CASE LAW], the court must ",
-            "[STANDARD OF REVIEW]. The moving party bears the burden of [BURDEN].",
-            "",
-            "IV. ARGUMENT",
-            "",
-            "A. THE UNDISPUTED FACTS ESTABLISH [ELEMENT 1]",
-            "",
-            "[DETAILED LEGAL ARGUMENT WITH CASE LAW]",
-            "",
-            "B. THE EVIDENCE DEMONSTRATES [ELEMENT 2]",
-            "",
-            "[DETAILED LEGAL ARGUMENT WITH CASE LAW]",
-            "",
-            "C. NO TRIABLE ISSUE OF MATERIAL FACT EXISTS",
-            "",
-            "[DETAILED ARGUMENT]",
-            "",
-            "V. CONCLUSION",
-            "",
-            "For the foregoing reasons, Plaintiff respectfully requests that the Court ",
-            f"grant this motion and order {self.get_relief_description(motion_type)}.",
-            "",
-            f"Dated: {datetime.now().strftime('%B %d, %Y')}",
-            "",
-            f"Respectfully submitted,",
-            "",
-            f"_______________________",
-            f"{case_info.get('attorney_name', 'Thurman Malik Robinson')}",
-            "Attorney for Plaintiff",
-            "",
-            "[PAGE BREAK]"
-        ])
+        memo.extend(
+            [
+                "III. LEGAL STANDARD",
+                "",
+                "[INSERT APPLICABLE LEGAL STANDARD]",
+                "",
+                "Under California law, [RELEVANT STATUTE OR CASE LAW], the court must ",
+                "[STANDARD OF REVIEW]. The moving party bears the burden of [BURDEN].",
+                "",
+                "IV. ARGUMENT",
+                "",
+                "A. THE UNDISPUTED FACTS ESTABLISH [ELEMENT 1]",
+                "",
+                "[DETAILED LEGAL ARGUMENT WITH CASE LAW]",
+                "",
+                "B. THE EVIDENCE DEMONSTRATES [ELEMENT 2]",
+                "",
+                "[DETAILED LEGAL ARGUMENT WITH CASE LAW]",
+                "",
+                "C. NO TRIABLE ISSUE OF MATERIAL FACT EXISTS",
+                "",
+                "[DETAILED ARGUMENT]",
+                "",
+                "V. CONCLUSION",
+                "",
+                "For the foregoing reasons, Plaintiff respectfully requests that the Court ",
+                f"grant this motion and order {self.get_relief_description(motion_type)}.",
+                "",
+                f"Dated: {datetime.now().strftime('%B %d, %Y')}",
+                "",
+                f"Respectfully submitted,",
+                "",
+                f"_______________________",
+                f"{case_info.get('attorney_name', 'Thurman Malik Robinson')}",
+                "Attorney for Plaintiff",
+                "",
+                "[PAGE BREAK]",
+            ]
+        )
 
         return memo
 
@@ -297,26 +308,30 @@ class ComprehensiveLegalDocumentGenerator:
             "competently thereto if called as a witness.",
             "",
             "2. [DETAILED FACTUAL STATEMENTS]",
-            ""
+            "",
         ]
 
         # Add detailed facts (50+ paragraphs)
         for i in range(3, 53):
-            declaration.append(f"{i}. [FACTUAL STATEMENT {i}]: [Insert detailed statement]")
+            declaration.append(
+                f"{i}. [FACTUAL STATEMENT {i}]: [Insert detailed statement]"
+            )
             declaration.append("")
 
-        declaration.extend([
-            "I declare under penalty of perjury under the laws of the State of California ",
-            f"that the foregoing is true and correct. Executed on {datetime.now().strftime('%B %d, %Y')}, ",
-            f"at {case_info.get('city', 'Los Angeles')}, California.",
-            "",
-            "",
-            "_______________________",
-            case_info.get('plaintiff', 'PLAINTIFF NAME'),
-            "Declarant",
-            "",
-            "[PAGE BREAK]"
-        ])
+        declaration.extend(
+            [
+                "I declare under penalty of perjury under the laws of the State of California ",
+                f"that the foregoing is true and correct. Executed on {datetime.now().strftime('%B %d, %Y')}, ",
+                f"at {case_info.get('city', 'Los Angeles')}, California.",
+                "",
+                "",
+                "_______________________",
+                case_info.get("plaintiff", "PLAINTIFF NAME"),
+                "Declarant",
+                "",
+                "[PAGE BREAK]",
+            ]
+        )
 
         return declaration
 
@@ -352,10 +367,10 @@ class ComprehensiveLegalDocumentGenerator:
             "",
             "",
             "_______________________",
-            case_info.get('attorney_name', 'Thurman Malik Robinson'),
+            case_info.get("attorney_name", "Thurman Malik Robinson"),
             "Attorney for Plaintiff",
             "",
-            "[PAGE BREAK]"
+            "[PAGE BREAK]",
         ]
         return counsel_decl
 
@@ -398,13 +413,13 @@ class ComprehensiveLegalDocumentGenerator:
             "",
             "[INSERT WITNESS DECLARATIONS]",
             "",
-            "[PAGE BREAK]"
+            "[PAGE BREAK]",
         ]
         return evidence
 
     def generate_damages_calculation(self, case_info: Dict[str, Any]) -> List[str]:
         """Generate damages calculation section (15 pages)"""
-        damages = case_info.get('damages', {})
+        damages = case_info.get("damages", {})
 
         calc = [
             "DAMAGES CALCULATION",
@@ -453,11 +468,13 @@ class ComprehensiveLegalDocumentGenerator:
             f"GRAND TOTAL DAMAGES: $[TOTAL AMOUNT]",
             "=" * 80,
             "",
-            "[PAGE BREAK]"
+            "[PAGE BREAK]",
         ]
         return calc
 
-    def generate_proposed_order(self, case_info: Dict[str, Any], motion_type: str) -> List[str]:
+    def generate_proposed_order(
+        self, case_info: Dict[str, Any], motion_type: str
+    ) -> List[str]:
         """Generate proposed order (3 pages)"""
         order = [
             "PROPOSED ORDER",
@@ -488,7 +505,7 @@ class ComprehensiveLegalDocumentGenerator:
             f"Dated: _________________    _______________________",
             "                            JUDGE OF THE SUPERIOR COURT",
             "",
-            "[PAGE BREAK]"
+            "[PAGE BREAK]",
         ]
         return order
 
@@ -523,9 +540,9 @@ class ComprehensiveLegalDocumentGenerator:
             "",
             "",
             "_______________________",
-            case_info.get('server_name', '[NAME]'),
+            case_info.get("server_name", "[NAME]"),
             "",
-            "[PAGE BREAK]"
+            "[PAGE BREAK]",
         ]
         return pos
 
@@ -550,11 +567,13 @@ class ComprehensiveLegalDocumentGenerator:
             "",
             "[ADDITIONAL EXHIBITS AS NEEDED]",
             "",
-            "[PAGE BREAK]"
+            "[PAGE BREAK]",
         ]
         return index
 
-    def generate_certificate(self, case_info: Dict[str, Any], document: List[str]) -> List[str]:
+    def generate_certificate(
+        self, case_info: Dict[str, Any], document: List[str]
+    ) -> List[str]:
         """Generate certificate of compliance (2 pages)"""
         word_count = sum(len(line.split()) for line in document)
 
@@ -580,9 +599,9 @@ class ComprehensiveLegalDocumentGenerator:
             "",
             "",
             "_______________________",
-            case_info.get('attorney_name', 'Thurman Malik Robinson'),
+            case_info.get("attorney_name", "Thurman Malik Robinson"),
             "Attorney for Plaintiff",
-            ""
+            "",
         ]
         return cert
 
@@ -594,14 +613,14 @@ class ComprehensiveLegalDocumentGenerator:
             "compel": "compelling Defendant to provide complete responses to discovery",
             "sanctions": "imposing monetary sanctions against Defendant",
             "injunction": "granting a preliminary injunction",
-            "strike": "striking Defendant's answer for failure to comply"
+            "strike": "striking Defendant's answer for failure to comply",
         }
         return relief_map.get(motion_type, "granting the relief requested")
 
     def save_document(self, document: List[str], output_path: Path):
         """Save document to file"""
-        with open(output_path, 'w') as f:
-            f.write('\n'.join(document))
+        with open(output_path, "w") as f:
+            f.write("\n".join(document))
 
         logger.info(f"Document saved: {output_path}")
 
@@ -631,8 +650,8 @@ def main():
             "property": 10000,
             "pain_suffering": 1000000,
             "emotional_distress": 500000,
-            "punitive": 2000000
-        }
+            "punitive": 2000000,
+        },
     }
 
     # Generate motion package

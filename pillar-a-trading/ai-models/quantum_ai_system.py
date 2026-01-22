@@ -13,20 +13,22 @@ Features:
 - Ivy League quantitative methods
 """
 
-import numpy as np
 import json
 import logging
-from datetime import datetime
-from typing import Dict, List, Any, Tuple, Optional
 from dataclasses import dataclass
+from datetime import datetime
 from enum import Enum
+from typing import Any, Dict, List, Optional, Tuple
+
+import numpy as np
 
 logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger('QuantumAI')
+logger = logging.getLogger("QuantumAI")
 
 
 class QuantumVersion(Enum):
     """Quantum AI model versions"""
+
     V3_0 = "3.0"
     V3_4 = "3.4"
     V4_0 = "4.0"
@@ -35,6 +37,7 @@ class QuantumVersion(Enum):
 @dataclass
 class QuantumState:
     """Represents a quantum superposition state"""
+
     amplitudes: np.ndarray  # Complex amplitudes
     probabilities: np.ndarray  # Measurement probabilities
     coherence: float  # Quantum coherence measure
@@ -48,8 +51,10 @@ class QuantumDecisionEngine:
 
     def __init__(self, num_qubits: int = 8):
         self.num_qubits = num_qubits
-        self.state_space_size = 2 ** num_qubits
-        logger.info(f"✅ Quantum Decision Engine initialized ({num_qubits} qubits, {self.state_space_size} states)")
+        self.state_space_size = 2**num_qubits
+        logger.info(
+            f"✅ Quantum Decision Engine initialized ({num_qubits} qubits, {self.state_space_size} states)"
+        )
 
     def create_superposition(self, decisions: List[Dict]) -> QuantumState:
         """
@@ -66,7 +71,7 @@ class QuantumDecisionEngine:
 
         # Add phase based on decision confidence
         for i, decision in enumerate(decisions):
-            confidence = decision.get('confidence', 0.5)
+            confidence = decision.get("confidence", 0.5)
             # Higher confidence = more positive phase
             amplitudes[i] *= np.exp(1j * confidence * np.pi)
 
@@ -78,12 +83,12 @@ class QuantumDecisionEngine:
         coherence = np.abs(np.sum(amplitudes * np.conj(amplitudes))) / n
 
         return QuantumState(
-            amplitudes=amplitudes,
-            probabilities=probabilities,
-            coherence=coherence
+            amplitudes=amplitudes, probabilities=probabilities, coherence=coherence
         )
 
-    def quantum_interference(self, state: QuantumState, market_data: Dict) -> QuantumState:
+    def quantum_interference(
+        self, state: QuantumState, market_data: Dict
+    ) -> QuantumState:
         """
         Apply quantum interference based on market conditions
 
@@ -91,9 +96,9 @@ class QuantumDecisionEngine:
         Destructive interference suppresses bad decisions
         """
         # Extract market indicators
-        volatility = market_data.get('volatility', 0.2)
-        momentum = market_data.get('momentum', 0.0)
-        volume = market_data.get('volume_ratio', 1.0)
+        volatility = market_data.get("volatility", 0.2)
+        momentum = market_data.get("momentum", 0.0)
+        volume = market_data.get("volume_ratio", 1.0)
 
         # Create interference pattern
         interference = np.exp(1j * (momentum * volatility * np.pi))
@@ -108,12 +113,14 @@ class QuantumDecisionEngine:
         new_probabilities = np.abs(new_amplitudes) ** 2
         new_probabilities /= new_probabilities.sum()
 
-        coherence = np.abs(np.sum(new_amplitudes * np.conj(new_amplitudes))) / len(new_amplitudes)
+        coherence = np.abs(np.sum(new_amplitudes * np.conj(new_amplitudes))) / len(
+            new_amplitudes
+        )
 
         return QuantumState(
             amplitudes=new_amplitudes,
             probabilities=new_probabilities,
-            coherence=coherence
+            coherence=coherence,
         )
 
     def measure(self, state: QuantumState) -> int:
@@ -144,12 +151,16 @@ class QuantumDecisionEngine:
 
         # Get chosen decision
         chosen_decision = decisions[chosen_index].copy()
-        chosen_decision['quantum_probability'] = float(state.probabilities[chosen_index])
-        chosen_decision['quantum_coherence'] = float(state.coherence)
-        chosen_decision['quantum_enhanced'] = True
+        chosen_decision["quantum_probability"] = float(
+            state.probabilities[chosen_index]
+        )
+        chosen_decision["quantum_coherence"] = float(state.coherence)
+        chosen_decision["quantum_enhanced"] = True
 
-        logger.info(f"🎲 Quantum decision: {chosen_decision.get('action', 'UNKNOWN')} "
-                   f"(P={state.probabilities[chosen_index]:.2%}, Coherence={state.coherence:.2%})")
+        logger.info(
+            f"🎲 Quantum decision: {chosen_decision.get('action', 'UNKNOWN')} "
+            f"(P={state.probabilities[chosen_index]:.2%}, Coherence={state.coherence:.2%})"
+        )
 
         return chosen_decision
 
@@ -185,12 +196,18 @@ class QuantumMachineLearning:
                 if abs(correlation_matrix[i, j]) > 0.5:
                     # Strong correlation = entangle these features
                     entanglement_strength = abs(correlation_matrix[i, j])
-                    entangled[:, i] = (entangled[:, i] + entanglement_strength * entangled[:, j]) / 2
-                    entangled[:, j] = (entangled[:, j] + entanglement_strength * entangled[:, i]) / 2
+                    entangled[:, i] = (
+                        entangled[:, i] + entanglement_strength * entangled[:, j]
+                    ) / 2
+                    entangled[:, j] = (
+                        entangled[:, j] + entanglement_strength * entangled[:, i]
+                    ) / 2
 
         return entangled
 
-    def quantum_pattern_recognition(self, data: np.ndarray, patterns: List[str]) -> Dict[str, float]:
+    def quantum_pattern_recognition(
+        self, data: np.ndarray, patterns: List[str]
+    ) -> Dict[str, float]:
         """
         Quantum pattern recognition using interference
 
@@ -204,10 +221,12 @@ class QuantumMachineLearning:
             template = self._generate_pattern_template(pattern_name, len(data))
 
             # Calculate quantum overlap (interference)
-            overlap = np.abs(np.dot(data, template)) / (np.linalg.norm(data) * np.linalg.norm(template))
+            overlap = np.abs(np.dot(data, template)) / (
+                np.linalg.norm(data) * np.linalg.norm(template)
+            )
 
             # Apply quantum amplification
-            quantum_score = overlap ** 2  # Born rule
+            quantum_score = overlap**2  # Born rule
 
             pattern_scores[pattern_name] = float(quantum_score)
 
@@ -216,11 +235,13 @@ class QuantumMachineLearning:
     def _generate_pattern_template(self, pattern_name: str, length: int) -> np.ndarray:
         """Generate template for pattern matching"""
         templates = {
-            'BULLISH_MOMENTUM': np.linspace(0, 1, length),
-            'BEARISH_MOMENTUM': np.linspace(1, 0, length),
-            'CONSOLIDATION': np.ones(length) * 0.5,
-            'BREAKOUT': np.concatenate([np.ones(length//2) * 0.5, np.linspace(0.5, 1, length//2)]),
-            'REVERSAL': np.sin(np.linspace(0, np.pi, length))
+            "BULLISH_MOMENTUM": np.linspace(0, 1, length),
+            "BEARISH_MOMENTUM": np.linspace(1, 0, length),
+            "CONSOLIDATION": np.ones(length) * 0.5,
+            "BREAKOUT": np.concatenate(
+                [np.ones(length // 2) * 0.5, np.linspace(0.5, 1, length // 2)]
+            ),
+            "REVERSAL": np.sin(np.linspace(0, np.pi, length)),
         }
 
         return templates.get(pattern_name, np.zeros(length))
@@ -249,12 +270,14 @@ class QuantumMachineLearning:
             cov_state = np.cov(label_data.T)
 
             self.learned_patterns[label] = {
-                'mean': mean_state,
-                'covariance': cov_state,
-                'samples': len(label_data)
+                "mean": mean_state,
+                "covariance": cov_state,
+                "samples": len(label_data),
             }
 
-        logger.info(f"✅ Quantum training complete - learned {len(unique_labels)} patterns")
+        logger.info(
+            f"✅ Quantum training complete - learned {len(unique_labels)} patterns"
+        )
 
     def quantum_predict(self, new_data: np.ndarray) -> Tuple[Any, float]:
         """
@@ -274,13 +297,15 @@ class QuantumMachineLearning:
 
         for label, pattern in self.learned_patterns.items():
             # Quantum state overlap
-            diff = entangled - pattern['mean']
+            diff = entangled - pattern["mean"]
             # Mahalanobis distance (quantum metric)
             try:
-                inv_cov = np.linalg.inv(pattern['covariance'] + np.eye(len(pattern['mean'])) * 1e-6)
+                inv_cov = np.linalg.inv(
+                    pattern["covariance"] + np.eye(len(pattern["mean"])) * 1e-6
+                )
                 distance = np.sqrt(np.dot(np.dot(diff, inv_cov), diff))
                 overlap = 1 / (1 + distance)  # Convert distance to similarity
-            except:
+            except BaseException:
                 overlap = 0.0
 
             if overlap > max_overlap:
@@ -308,59 +333,59 @@ class QuantumRealTimeProcessor:
         Quantum: Process ALL streams simultaneously
         """
         results = {
-            'timestamp': datetime.now().isoformat(),
-            'streams_processed': len(data_streams),
-            'quantum_parallel': True,
-            'analyses': []
+            "timestamp": datetime.now().isoformat(),
+            "streams_processed": len(data_streams),
+            "quantum_parallel": True,
+            "analyses": [],
         }
 
         # Simulate quantum parallelization
         # In real quantum computer, this would happen simultaneously
         for stream in data_streams:
             analysis = self._analyze_stream_quantum(stream)
-            results['analyses'].append(analysis)
+            results["analyses"].append(analysis)
 
         # Quantum aggregation (interference-based)
-        results['aggregated_signal'] = self._quantum_aggregate(results['analyses'])
+        results["aggregated_signal"] = self._quantum_aggregate(results["analyses"])
 
         return results
 
     def _analyze_stream_quantum(self, stream: Dict) -> Dict:
         """Analyze single stream using quantum algorithms"""
-        data = np.array(stream.get('data', []))
+        data = np.array(stream.get("data", []))
 
         if len(data) == 0:
-            return {'error': 'No data'}
+            return {"error": "No data"}
 
         # Quantum Fourier Transform (frequency analysis)
         fft = np.fft.fft(data)
-        dominant_freq = np.argmax(np.abs(fft[:len(fft)//2]))
+        dominant_freq = np.argmax(np.abs(fft[: len(fft) // 2]))
 
         # Quantum phase estimation
         phase = np.angle(fft[dominant_freq])
 
         return {
-            'source': stream.get('source', 'unknown'),
-            'dominant_frequency': int(dominant_freq),
-            'phase': float(phase),
-            'amplitude': float(np.abs(fft[dominant_freq])),
-            'quantum_processed': True
+            "source": stream.get("source", "unknown"),
+            "dominant_frequency": int(dominant_freq),
+            "phase": float(phase),
+            "amplitude": float(np.abs(fft[dominant_freq])),
+            "quantum_processed": True,
         }
 
     def _quantum_aggregate(self, analyses: List[Dict]) -> str:
         """Aggregate multiple analyses using quantum interference"""
         if not analyses:
-            return 'HOLD'
+            return "HOLD"
 
         # Convert phases to quantum amplitudes
         amplitudes = []
         for analysis in analyses:
-            if 'phase' in analysis:
-                amp = analysis['amplitude'] * np.exp(1j * analysis['phase'])
+            if "phase" in analysis:
+                amp = analysis["amplitude"] * np.exp(1j * analysis["phase"])
                 amplitudes.append(amp)
 
         if not amplitudes:
-            return 'HOLD'
+            return "HOLD"
 
         # Quantum interference - add all amplitudes
         total_amplitude = sum(amplitudes)
@@ -371,9 +396,9 @@ class QuantumRealTimeProcessor:
 
         # Decision based on interferometric result
         if signal_strength > len(amplitudes) * 0.7:
-            return 'BUY' if signal_phase > 0 else 'SELL'
+            return "BUY" if signal_phase > 0 else "SELL"
         else:
-            return 'HOLD'
+            return "HOLD"
 
 
 class QuantumAISystem:
@@ -406,23 +431,27 @@ class QuantumAISystem:
         """Load capabilities based on version"""
         capabilities = {
             QuantumVersion.V3_0: {
-                'max_qubits': 8,
-                'parallel_streams': 5,
-                'pattern_complexity': 'basic',
-                'phd_algorithms': ['quantum_annealing']
+                "max_qubits": 8,
+                "parallel_streams": 5,
+                "pattern_complexity": "basic",
+                "phd_algorithms": ["quantum_annealing"],
             },
             QuantumVersion.V3_4: {
-                'max_qubits': 12,
-                'parallel_streams': 10,
-                'pattern_complexity': 'advanced',
-                'phd_algorithms': ['quantum_annealing', 'variational_eigensolver']
+                "max_qubits": 12,
+                "parallel_streams": 10,
+                "pattern_complexity": "advanced",
+                "phd_algorithms": ["quantum_annealing", "variational_eigensolver"],
             },
             QuantumVersion.V4_0: {
-                'max_qubits': 16,
-                'parallel_streams': 20,
-                'pattern_complexity': 'expert',
-                'phd_algorithms': ['quantum_annealing', 'variational_eigensolver', 'quantum_approximate_optimization']
-            }
+                "max_qubits": 16,
+                "parallel_streams": 20,
+                "pattern_complexity": "expert",
+                "phd_algorithms": [
+                    "quantum_annealing",
+                    "variational_eigensolver",
+                    "quantum_approximate_optimization",
+                ],
+            },
         }
 
         return capabilities.get(self.version, capabilities[QuantumVersion.V4_0])
@@ -436,49 +465,59 @@ class QuantumAISystem:
         logger.info(f"🔬 Quantum AI v{self.version.value} analyzing market...")
 
         # 1. Process real-time data streams in quantum parallel
-        data_streams = market_data.get('streams', [])
+        data_streams = market_data.get("streams", [])
         rt_analysis = self.realtime_processor.quantum_parallel_analysis(data_streams)
 
         # 2. Generate possible decisions
         decisions = [
-            {'action': 'BUY', 'confidence': 0.7, 'reason': 'Bullish pattern'},
-            {'action': 'SELL', 'confidence': 0.6, 'reason': 'Bearish pattern'},
-            {'action': 'HOLD', 'confidence': 0.8, 'reason': 'Consolidation'}
+            {"action": "BUY", "confidence": 0.7, "reason": "Bullish pattern"},
+            {"action": "SELL", "confidence": 0.6, "reason": "Bearish pattern"},
+            {"action": "HOLD", "confidence": 0.8, "reason": "Consolidation"},
         ]
 
         # 3. Quantum decision making
         quantum_decision = self.decision_engine.decide(decisions, market_data)
 
         # 4. Quantum pattern recognition
-        if 'price_data' in market_data:
-            price_data = np.array(market_data['price_data'])
+        if "price_data" in market_data:
+            price_data = np.array(market_data["price_data"])
             patterns = self.ml_system.quantum_pattern_recognition(
                 price_data,
-                ['BULLISH_MOMENTUM', 'BEARISH_MOMENTUM', 'CONSOLIDATION', 'BREAKOUT', 'REVERSAL']
+                [
+                    "BULLISH_MOMENTUM",
+                    "BEARISH_MOMENTUM",
+                    "CONSOLIDATION",
+                    "BREAKOUT",
+                    "REVERSAL",
+                ],
             )
-            quantum_decision['recognized_patterns'] = patterns
+            quantum_decision["recognized_patterns"] = patterns
 
         # 5. Aggregate results
         result = {
-            'version': self.version.value,
-            'timestamp': datetime.now().isoformat(),
-            'decision': quantum_decision,
-            'realtime_analysis': rt_analysis,
-            'quantum_enhanced': True,
-            'confidence_level': quantum_decision.get('quantum_probability', 0.0),
-            'coherence': quantum_decision.get('quantum_coherence', 0.0),
-            'phd_algorithms_used': self.capabilities['phd_algorithms'],
-            'recommendation': quantum_decision.get('action', 'HOLD')
+            "version": self.version.value,
+            "timestamp": datetime.now().isoformat(),
+            "decision": quantum_decision,
+            "realtime_analysis": rt_analysis,
+            "quantum_enhanced": True,
+            "confidence_level": quantum_decision.get("quantum_probability", 0.0),
+            "coherence": quantum_decision.get("quantum_coherence", 0.0),
+            "phd_algorithms_used": self.capabilities["phd_algorithms"],
+            "recommendation": quantum_decision.get("action", "HOLD"),
         }
 
-        logger.info(f"✅ Quantum analysis complete: {result['recommendation']} "
-                   f"(Confidence: {result['confidence_level']:.2%})")
+        logger.info(
+            f"✅ Quantum analysis complete: {result['recommendation']} "
+            f"(Confidence: {result['confidence_level']:.2%})"
+        )
 
         return result
 
     def train(self, historical_data: np.ndarray, labels: np.ndarray):
         """Train quantum ML models"""
-        logger.info(f"🎓 Training Quantum AI v{self.version.value} with PhD-level algorithms...")
+        logger.info(
+            f"🎓 Training Quantum AI v{self.version.value} with PhD-level algorithms..."
+        )
         self.ml_system.quantum_train(historical_data, labels)
 
     def predict(self, new_data: np.ndarray) -> Tuple[Any, float]:
@@ -488,12 +527,14 @@ class QuantumAISystem:
 
 def main():
     """Demo of Quantum AI System"""
-    print("""
+    print(
+        """
     ╔═══════════════════════════════════════════════════════════════════╗
     ║              QUANTUM AI TRADING SYSTEM                            ║
     ║         v3.0 | v3.4 | v4.0 - PhD-Level Algorithms                 ║
     ╚═══════════════════════════════════════════════════════════════════╝
-    """)
+    """
+    )
 
     # Initialize all versions
     for version in [QuantumVersion.V3_0, QuantumVersion.V3_4, QuantumVersion.V4_0]:
@@ -505,15 +546,15 @@ def main():
 
         # Demo analysis
         market_data = {
-            'volatility': 0.25,
-            'momentum': 0.6,
-            'volume_ratio': 1.3,
-            'price_data': np.random.randn(100).cumsum(),
-            'streams': [
-                {'source': 'Technical', 'data': np.random.randn(50)},
-                {'source': 'Fundamental', 'data': np.random.randn(50)},
-                {'source': 'Sentiment', 'data': np.random.randn(50)}
-            ]
+            "volatility": 0.25,
+            "momentum": 0.6,
+            "volume_ratio": 1.3,
+            "price_data": np.random.randn(100).cumsum(),
+            "streams": [
+                {"source": "Technical", "data": np.random.randn(50)},
+                {"source": "Fundamental", "data": np.random.randn(50)},
+                {"source": "Sentiment", "data": np.random.randn(50)},
+            ],
         }
 
         result = system.analyze_market(market_data)

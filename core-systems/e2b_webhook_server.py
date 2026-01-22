@@ -13,35 +13,35 @@ import os
 import sys
 from datetime import datetime
 from pathlib import Path
-from typing import Dict, Any, List
+from typing import Any, Dict, List
 
-from flask import Flask, request, jsonify
-from flask_cors import CORS
 from dotenv import load_dotenv
+from flask import Flask, jsonify, request
+from flask_cors import CORS
 
 # Add parent to path
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
 # Load environment
-load_dotenv(Path(__file__).parent.parent / 'config' / '.env')
+load_dotenv(Path(__file__).parent.parent / "config" / ".env")
 load_dotenv()
 
 # Configure logging
 logging.basicConfig(
     level=logging.INFO,
-    format='%(asctime)s | %(levelname)-8s | %(name)s | %(message)s',
-    datefmt='%Y-%m-%d %H:%M:%S'
+    format="%(asctime)s | %(levelname)-8s | %(name)s | %(message)s",
+    datefmt="%Y-%m-%d %H:%M:%S",
 )
-logger = logging.getLogger('E2BWebhook')
+logger = logging.getLogger("E2BWebhook")
 
 # Initialize Flask app
 app = Flask(__name__)
 CORS(app)  # Enable CORS for webhook access
 
 # Configuration
-E2B_API_KEY = os.getenv('E2B_API_KEY', 'e2b_fcc08e8c733b3eab00bdb3ad5857f5966afc2773')
-WEBHOOK_SECRET = os.getenv('E2B_WEBHOOK_SECRET', '')
-PORT = int(os.getenv('E2B_WEBHOOK_PORT', '5000'))
+E2B_API_KEY = os.getenv("E2B_API_KEY", "e2b_fcc08e8c733b3eab00bdb3ad5857f5966afc2773")
+WEBHOOK_SECRET = os.getenv("E2B_WEBHOOK_SECRET", "")
+PORT = int(os.getenv("E2B_WEBHOOK_PORT", "5000"))
 
 # Webhook event storage
 webhook_events: List[Dict] = []
@@ -52,19 +52,25 @@ MAX_EVENTS = 1000  # Keep last 1000 events
 # WEBHOOK HANDLERS
 # ============================================================================
 
-@app.route('/health', methods=['GET'])
+
+@app.route("/health", methods=["GET"])
 def health_check():
     """Health check endpoint"""
-    return jsonify({
-        "status": "healthy",
-        "service": "E2B Webhook Server",
-        "version": "5.0.0",
-        "timestamp": datetime.now().isoformat(),
-        "events_received": len(webhook_events)
-    }), 200
+    return (
+        jsonify(
+            {
+                "status": "healthy",
+                "service": "E2B Webhook Server",
+                "version": "5.0.0",
+                "timestamp": datetime.now().isoformat(),
+                "events_received": len(webhook_events),
+            }
+        ),
+        200,
+    )
 
 
-@app.route('/webhook/e2b', methods=['POST'])
+@app.route("/webhook/e2b", methods=["POST"])
 def e2b_webhook():
     """
     Main E2B webhook endpoint
@@ -80,18 +86,21 @@ def e2b_webhook():
 
         # Verify webhook secret if configured
         if WEBHOOK_SECRET:
-            auth_header = request.headers.get('Authorization', '')
-            if not auth_header.startswith('Bearer ') or auth_header[7:] != WEBHOOK_SECRET:
+            auth_header = request.headers.get("Authorization", "")
+            if (
+                not auth_header.startswith("Bearer ")
+                or auth_header[7:] != WEBHOOK_SECRET
+            ):
                 logger.warning("Invalid webhook authentication")
                 return jsonify({"error": "Unauthorized"}), 401
 
         # Process webhook event
         event = {
-            "id": data.get('id', f"event_{len(webhook_events)}"),
-            "type": data.get('type', 'unknown'),
+            "id": data.get("id", f"event_{len(webhook_events)}"),
+            "type": data.get("type", "unknown"),
             "timestamp": datetime.now().isoformat(),
             "data": data,
-            "headers": dict(request.headers)
+            "headers": dict(request.headers),
         }
 
         # Store event
@@ -104,30 +113,35 @@ def e2b_webhook():
         logger.info(f"📥 Received E2B webhook: {event['type']} (ID: {event['id']})")
 
         # Route to appropriate handler
-        event_type = event['type']
+        event_type = event["type"]
         result = route_webhook_event(event)
 
         # Save to file
         save_webhook_event(event)
 
-        return jsonify({
-            "status": "received",
-            "event_id": event['id'],
-            "processed": True,
-            "result": result
-        }), 200
+        return (
+            jsonify(
+                {
+                    "status": "received",
+                    "event_id": event["id"],
+                    "processed": True,
+                    "result": result,
+                }
+            ),
+            200,
+        )
 
     except Exception as e:
         logger.error(f"❌ Error processing webhook: {e}")
         return jsonify({"error": str(e)}), 500
 
 
-@app.route('/webhook/e2b/sandbox_started', methods=['POST'])
+@app.route("/webhook/e2b/sandbox_started", methods=["POST"])
 def sandbox_started():
     """Handle sandbox started events"""
     try:
         data = request.get_json()
-        sandbox_id = data.get('sandbox_id')
+        sandbox_id = data.get("sandbox_id")
 
         logger.info(f"🚀 E2B Sandbox started: {sandbox_id}")
 
@@ -135,7 +149,7 @@ def sandbox_started():
             "type": "sandbox_started",
             "sandbox_id": sandbox_id,
             "timestamp": datetime.now().isoformat(),
-            "data": data
+            "data": data,
         }
 
         webhook_events.append(event)
@@ -148,12 +162,12 @@ def sandbox_started():
         return jsonify({"error": str(e)}), 500
 
 
-@app.route('/webhook/e2b/sandbox_stopped', methods=['POST'])
+@app.route("/webhook/e2b/sandbox_stopped", methods=["POST"])
 def sandbox_stopped():
     """Handle sandbox stopped events"""
     try:
         data = request.get_json()
-        sandbox_id = data.get('sandbox_id')
+        sandbox_id = data.get("sandbox_id")
 
         logger.info(f"⏹️  E2B Sandbox stopped: {sandbox_id}")
 
@@ -161,7 +175,7 @@ def sandbox_stopped():
             "type": "sandbox_stopped",
             "sandbox_id": sandbox_id,
             "timestamp": datetime.now().isoformat(),
-            "data": data
+            "data": data,
         }
 
         webhook_events.append(event)
@@ -174,22 +188,24 @@ def sandbox_stopped():
         return jsonify({"error": str(e)}), 500
 
 
-@app.route('/webhook/e2b/code_executed', methods=['POST'])
+@app.route("/webhook/e2b/code_executed", methods=["POST"])
 def code_executed():
     """Handle code execution events"""
     try:
         data = request.get_json()
-        execution_id = data.get('execution_id')
-        success = data.get('success', False)
+        execution_id = data.get("execution_id")
+        success = data.get("success", False)
 
-        logger.info(f"💻 Code executed in E2B: {execution_id} ({'✅' if success else '❌'})")
+        logger.info(
+            f"💻 Code executed in E2B: {execution_id} ({'✅' if success else '❌'})"
+        )
 
         event = {
             "type": "code_executed",
             "execution_id": execution_id,
             "success": success,
             "timestamp": datetime.now().isoformat(),
-            "data": data
+            "data": data,
         }
 
         webhook_events.append(event)
@@ -206,7 +222,7 @@ def code_executed():
         return jsonify({"error": str(e)}), 500
 
 
-@app.route('/webhook/zapier', methods=['POST'])
+@app.route("/webhook/zapier", methods=["POST"])
 def zapier_webhook():
     """
     Zapier webhook endpoint
@@ -219,7 +235,7 @@ def zapier_webhook():
             "id": f"zapier_{len(webhook_events)}",
             "type": "zapier_trigger",
             "timestamp": datetime.now().isoformat(),
-            "data": data
+            "data": data,
         }
 
         webhook_events.append(event)
@@ -230,18 +246,17 @@ def zapier_webhook():
 
         save_webhook_event(event)
 
-        return jsonify({
-            "status": "received",
-            "event_id": event['id'],
-            "result": result
-        }), 200
+        return (
+            jsonify({"status": "received", "event_id": event["id"], "result": result}),
+            200,
+        )
 
     except Exception as e:
         logger.error(f"❌ Error processing Zapier webhook: {e}")
         return jsonify({"error": str(e)}), 500
 
 
-@app.route('/webhook/trading', methods=['POST'])
+@app.route("/webhook/trading", methods=["POST"])
 def trading_webhook():
     """
     Trading signal webhook
@@ -254,7 +269,7 @@ def trading_webhook():
             "id": f"trade_{len(webhook_events)}",
             "type": "trading_signal",
             "timestamp": datetime.now().isoformat(),
-            "data": data
+            "data": data,
         }
 
         webhook_events.append(event)
@@ -265,36 +280,36 @@ def trading_webhook():
 
         save_webhook_event(event)
 
-        return jsonify({
-            "status": "received",
-            "event_id": event['id'],
-            "result": result
-        }), 200
+        return (
+            jsonify({"status": "received", "event_id": event["id"], "result": result}),
+            200,
+        )
 
     except Exception as e:
         logger.error(f"❌ Error processing trading webhook: {e}")
         return jsonify({"error": str(e)}), 500
 
 
-@app.route('/events', methods=['GET'])
+@app.route("/events", methods=["GET"])
 def get_events():
     """Get recent webhook events"""
-    limit = int(request.args.get('limit', 50))
-    event_type = request.args.get('type')
+    limit = int(request.args.get("limit", 50))
+    event_type = request.args.get("type")
 
     events = webhook_events[-limit:]
 
     if event_type:
-        events = [e for e in events if e.get('type') == event_type]
+        events = [e for e in events if e.get("type") == event_type]
 
-    return jsonify({
-        "total": len(webhook_events),
-        "returned": len(events),
-        "events": events
-    }), 200
+    return (
+        jsonify(
+            {"total": len(webhook_events), "returned": len(events), "events": events}
+        ),
+        200,
+    )
 
 
-@app.route('/events/clear', methods=['POST'])
+@app.route("/events/clear", methods=["POST"])
 def clear_events():
     """Clear all webhook events"""
     global webhook_events
@@ -302,26 +317,24 @@ def clear_events():
     webhook_events = []
     logger.info(f"🗑️  Cleared {count} webhook events")
 
-    return jsonify({
-        "status": "cleared",
-        "count": count
-    }), 200
+    return jsonify({"status": "cleared", "count": count}), 200
 
 
 # ============================================================================
 # EVENT PROCESSORS
 # ============================================================================
 
+
 def route_webhook_event(event: Dict) -> Dict[str, Any]:
     """Route webhook event to appropriate handler"""
-    event_type = event.get('type', 'unknown')
+    event_type = event.get("type", "unknown")
 
     handlers = {
-        'sandbox_started': handle_sandbox_started,
-        'sandbox_stopped': handle_sandbox_stopped,
-        'code_executed': handle_code_executed,
-        'trading_signal': handle_trading_signal,
-        'zapier_trigger': handle_zapier_trigger,
+        "sandbox_started": handle_sandbox_started,
+        "sandbox_stopped": handle_sandbox_stopped,
+        "code_executed": handle_code_executed,
+        "trading_signal": handle_trading_signal,
+        "zapier_trigger": handle_zapier_trigger,
     }
 
     handler = handlers.get(event_type, handle_unknown_event)
@@ -386,14 +399,14 @@ def trigger_alert(event: Dict):
 def save_webhook_event(event: Dict):
     """Save webhook event to file"""
     try:
-        log_dir = Path(__file__).parent.parent / 'logs' / 'webhooks'
+        log_dir = Path(__file__).parent.parent / "logs" / "webhooks"
         log_dir.mkdir(parents=True, exist_ok=True)
 
-        date_str = datetime.now().strftime('%Y-%m-%d')
-        log_file = log_dir / f'webhooks_{date_str}.jsonl'
+        date_str = datetime.now().strftime("%Y-%m-%d")
+        log_file = log_dir / f"webhooks_{date_str}.jsonl"
 
-        with open(log_file, 'a') as f:
-            f.write(json.dumps(event) + '\n')
+        with open(log_file, "a") as f:
+            f.write(json.dumps(event) + "\n")
 
     except Exception as e:
         logger.error(f"Failed to save webhook event: {e}")
@@ -403,16 +416,17 @@ def save_webhook_event(event: Dict):
 # MAIN
 # ============================================================================
 
+
 def main():
     """Start webhook server"""
-    print("\n" + "="*70)
+    print("\n" + "=" * 70)
     print("🌐 E2B WEBHOOK SERVER - Agent X5.0")
-    print("="*70 + "\n")
+    print("=" * 70 + "\n")
 
     print(f"📡 Starting webhook server on port {PORT}...")
     print(f"🔑 E2B API Key: {E2B_API_KEY[:20]}...")
     print(f"🔒 Webhook Secret: {'Configured' if WEBHOOK_SECRET else 'Not set'}")
-    print("\n" + "="*70)
+    print("\n" + "=" * 70)
     print("ENDPOINTS:")
     print(f"  GET  /health                    - Health check")
     print(f"  POST /webhook/e2b               - E2B events")
@@ -423,18 +437,13 @@ def main():
     print(f"  POST /webhook/trading           - Trading signals")
     print(f"  GET  /events                    - Get recent events")
     print(f"  POST /events/clear              - Clear events")
-    print("="*70 + "\n")
+    print("=" * 70 + "\n")
 
     print(f"🚀 Server running at http://0.0.0.0:{PORT}")
     print("Press Ctrl+C to stop\n")
 
     # Run server
-    app.run(
-        host='0.0.0.0',
-        port=PORT,
-        debug=False,
-        threaded=True
-    )
+    app.run(host="0.0.0.0", port=PORT, debug=False, threaded=True)
 
 
 if __name__ == "__main__":

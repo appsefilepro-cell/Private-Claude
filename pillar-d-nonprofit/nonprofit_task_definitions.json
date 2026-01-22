@@ -3,14 +3,14 @@
   "name": "Nonprofit Automation",
   "total_tasks": 100,
   "categories": [
+    "Program Management",
     "Financial Management",
-    "Volunteer Coordination",
+    "Marketing/Outreach",
+    "Fundraising",
     "Impact Tracking",
     "Grant Management",
-    "Donor Management",
-    "Program Management",
-    "Fundraising",
-    "Marketing/Outreach"
+    "Volunteer Coordination",
+    "Donor Management"
   ],
   "tasks": [
     {

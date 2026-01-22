@@ -5,28 +5,30 @@ Executive-grade automation orchestrator for multi-pillar trading operations
 
 import asyncio
 import json
+import logging
 import os
 import time
-import logging
 from datetime import datetime
-from typing import Dict, Any, List
-import requests
 from enum import Enum
+from typing import Any, Dict, List
+
+import requests
 
 # Configure logging
 logging.basicConfig(
     level=logging.INFO,
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
     handlers=[
-        logging.FileHandler('logs/agent_3_orchestrator.log'),
-        logging.StreamHandler()
-    ]
+        logging.FileHandler("logs/agent_3_orchestrator.log"),
+        logging.StreamHandler(),
+    ],
 )
-logger = logging.getLogger('Agent3.0')
+logger = logging.getLogger("Agent3.0")
 
 
 class SignalType(Enum):
     """Trading signal types"""
+
     BUY = "BUY"
     SELL = "SELL"
     HOLD = "HOLD"
@@ -34,6 +36,7 @@ class SignalType(Enum):
 
 class ConfidenceLevel(Enum):
     """Signal confidence levels"""
+
     HIGH = 0.75
     MEDIUM = 0.50
     LOW = 0.25
@@ -52,22 +55,28 @@ class Agent3Orchestrator:
         self.decision_log = []
 
         # API Endpoints
-        self.sharepoint_api = os.getenv('SHAREPOINT_API', self.config.get('sharepoint_api'))
-        self.zapier_webhook = os.getenv('ZAPIER_WEBHOOK_URL', self.config.get('zapier_webhook'))
-        self.kraken_api_key = os.getenv('KRAKEN_API_KEY', self.config.get('kraken_api_key'))
+        self.sharepoint_api = os.getenv(
+            "SHAREPOINT_API", self.config.get("sharepoint_api")
+        )
+        self.zapier_webhook = os.getenv(
+            "ZAPIER_WEBHOOK_URL", self.config.get("zapier_webhook")
+        )
+        self.kraken_api_key = os.getenv(
+            "KRAKEN_API_KEY", self.config.get("kraken_api_key")
+        )
 
         # Risk parameters
-        self.confidence_threshold = float(os.getenv('CONFIDENCE_THRESHOLD', '0.75'))
-        self.max_position_size = float(os.getenv('MAX_POSITION_SIZE', '0.02'))
-        self.risk_per_trade = float(os.getenv('RISK_PER_TRADE', '0.01'))
+        self.confidence_threshold = float(os.getenv("CONFIDENCE_THRESHOLD", "0.75"))
+        self.max_position_size = float(os.getenv("MAX_POSITION_SIZE", "0.02"))
+        self.risk_per_trade = float(os.getenv("RISK_PER_TRADE", "0.01"))
 
         logger.info("Agent 3.0 Orchestrator initialized")
 
     def load_config(self) -> Dict[str, Any]:
         """Load configuration from config file"""
-        config_path = 'config/agent_3_config.json'
+        config_path = "config/agent_3_config.json"
         if os.path.exists(config_path):
-            with open(config_path, 'r') as f:
+            with open(config_path, "r") as f:
                 return json.load(f)
         return {}
 
@@ -78,9 +87,9 @@ class Agent3Orchestrator:
         """
         try:
             # Check for signals from pattern recognition bot
-            signal_file = 'pillar-a-trading/bots/pattern-recognition/signals.json'
+            signal_file = "pillar-a-trading/bots/pattern-recognition/signals.json"
             if os.path.exists(signal_file):
-                with open(signal_file, 'r') as f:
+                with open(signal_file, "r") as f:
                     signals = json.load(f)
                     if signals:
                         return signals[-1]  # Return most recent signal
@@ -102,9 +111,9 @@ class Agent3Orchestrator:
         if not signal:
             return {"action": "NO_SIGNAL", "reason": "No signal received"}
 
-        confidence = signal.get('confidence', 0)
-        signal_type = signal.get('type', 'HOLD')
-        pair = signal.get('pair', 'UNKNOWN')
+        confidence = signal.get("confidence", 0)
+        signal_type = signal.get("type", "HOLD")
+        pair = signal.get("pair", "UNKNOWN")
 
         decision = {
             "timestamp": datetime.now().isoformat(),
@@ -112,20 +121,24 @@ class Agent3Orchestrator:
             "signal_type": signal_type,
             "confidence": confidence,
             "action": "LOG_ONLY",
-            "reason": ""
+            "reason": "",
         }
 
         # Apply risk management rules
         if confidence >= self.confidence_threshold:
-            if signal_type in ['BUY', 'SELL']:
-                decision['action'] = "EXECUTE"
-                decision['position_size'] = self.calculate_position_size(signal)
-                decision['reason'] = f"High confidence {signal_type} signal"
-                logger.info(f"EXECUTE decision for {pair}: {signal_type} @ confidence {confidence}")
+            if signal_type in ["BUY", "SELL"]:
+                decision["action"] = "EXECUTE"
+                decision["position_size"] = self.calculate_position_size(signal)
+                decision["reason"] = f"High confidence {signal_type} signal"
+                logger.info(
+                    f"EXECUTE decision for {pair}: {signal_type} @ confidence {confidence}"
+                )
             else:
-                decision['reason'] = "High confidence but HOLD signal"
+                decision["reason"] = "High confidence but HOLD signal"
         else:
-            decision['reason'] = f"Confidence {confidence} below threshold {self.confidence_threshold}"
+            decision["reason"] = (
+                f"Confidence {confidence} below threshold {self.confidence_threshold}"
+            )
 
         self.decision_log.append(decision)
         return decision
@@ -151,11 +164,7 @@ class Agent3Orchestrator:
             return False
 
         try:
-            response = requests.post(
-                self.zapier_webhook,
-                json=decision,
-                timeout=10
-            )
+            response = requests.post(self.zapier_webhook, json=decision, timeout=10)
             response.raise_for_status()
             logger.info(f"Decision sent to Zapier: {decision['action']}")
             return True
@@ -178,9 +187,9 @@ class Agent3Orchestrator:
             # Log locally as fallback
             log_file = f"logs/trade_log_{datetime.now().strftime('%Y%m%d')}.json"
             try:
-                with open(log_file, 'a') as f:
+                with open(log_file, "a") as f:
                     json.dump(decision, f)
-                    f.write('\n')
+                    f.write("\n")
                 return True
             except Exception as e:
                 logger.error(f"Error logging locally: {e}")
@@ -189,7 +198,9 @@ class Agent3Orchestrator:
         try:
             # Log to SharePoint
             # In production, this would use Microsoft Graph API
-            logger.info(f"Logged to SharePoint: {decision['pair']} - {decision['action']}")
+            logger.info(
+                f"Logged to SharePoint: {decision['pair']} - {decision['action']}"
+            )
             return True
         except Exception as e:
             logger.error(f"Error logging to SharePoint: {e}")
@@ -198,7 +209,7 @@ class Agent3Orchestrator:
     def monitor_legal_operations(self) -> None:
         """Monitor legal document automation triggers (Pillar B)"""
         try:
-            evidence_dir = 'pillar-b-legal/case-management/evidence'
+            evidence_dir = "pillar-b-legal/case-management/evidence"
             if os.path.exists(evidence_dir):
                 # Check for new evidence files
                 files = os.listdir(evidence_dir)
@@ -210,9 +221,9 @@ class Agent3Orchestrator:
     def monitor_federal_contracting(self) -> None:
         """Monitor federal contracting opportunities (Pillar C)"""
         try:
-            opps_file = 'pillar-c-federal/sam-monitoring/opportunities.json'
+            opps_file = "pillar-c-federal/sam-monitoring/opportunities.json"
             if os.path.exists(opps_file):
-                with open(opps_file, 'r') as f:
+                with open(opps_file, "r") as f:
                     opps = json.load(f)
                 logger.info(f"Federal contracting: {len(opps)} opportunities monitored")
         except Exception as e:
@@ -221,9 +232,9 @@ class Agent3Orchestrator:
     def monitor_grant_intelligence(self) -> None:
         """Monitor non-profit grant opportunities (Pillar D)"""
         try:
-            grants_file = 'pillar-d-nonprofit/grant-intelligence/pipeline.json'
+            grants_file = "pillar-d-nonprofit/grant-intelligence/pipeline.json"
             if os.path.exists(grants_file):
-                with open(grants_file, 'r') as f:
+                with open(grants_file, "r") as f:
                     grants = json.load(f)
                 logger.info(f"Grant intelligence: {len(grants)} grants in pipeline")
         except Exception as e:
@@ -281,8 +292,8 @@ class Agent3Orchestrator:
             "config": {
                 "confidence_threshold": self.confidence_threshold,
                 "max_position_size": self.max_position_size,
-                "risk_per_trade": self.risk_per_trade
-            }
+                "risk_per_trade": self.risk_per_trade,
+            },
         }
 
 
@@ -299,7 +310,7 @@ async def main():
 
 if __name__ == "__main__":
     # Create logs directory if it doesn't exist
-    os.makedirs('logs', exist_ok=True)
+    os.makedirs("logs", exist_ok=True)
 
     # Run the orchestrator
     asyncio.run(main())

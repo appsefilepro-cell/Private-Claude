@@ -7,37 +7,39 @@ Uses REAL Anthropic API key from environment
 """
 
 import asyncio
+import json
 import logging
 import os
 import sys
 from datetime import datetime
 from pathlib import Path
-from typing import Dict, List, Optional, Any
-import json
+from typing import Any, Dict, List, Optional
+
+from dotenv import load_dotenv
 
 # Add parent to path
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
 try:
     from anthropic import Anthropic, AsyncAnthropic
+
     ANTHROPIC_AVAILABLE = True
 except ImportError:
     ANTHROPIC_AVAILABLE = False
     print("⚠️  anthropic package not installed. Run: pip install anthropic")
 
-from dotenv import load_dotenv
 
 # Load environment
-load_dotenv(Path(__file__).parent.parent / 'config' / '.env')
+load_dotenv(Path(__file__).parent.parent / "config" / ".env")
 load_dotenv()  # Also try from current directory
 
 # Configure logging
 logging.basicConfig(
     level=logging.INFO,
-    format='%(asctime)s | %(levelname)-8s | %(name)s | %(message)s',
-    datefmt='%Y-%m-%d %H:%M:%S'
+    format="%(asctime)s | %(levelname)-8s | %(name)s | %(message)s",
+    datefmt="%Y-%m-%d %H:%M:%S",
 )
-logger = logging.getLogger('ClaudeAPI24x7')
+logger = logging.getLogger("ClaudeAPI24x7")
 
 
 class ClaudeAPI247:
@@ -48,9 +50,9 @@ class ClaudeAPI247:
 
     def __init__(self):
         """Initialize Claude API connection"""
-        self.api_key = os.getenv('ANTHROPIC_API_KEY', '')
+        self.api_key = os.getenv("ANTHROPIC_API_KEY", "")
 
-        if not self.api_key or self.api_key.startswith('your_'):
+        if not self.api_key or self.api_key.startswith("your_"):
             logger.error("❌ ANTHROPIC_API_KEY not configured in .env file")
             logger.info("Please add your API key to config/.env:")
             logger.info("ANTHROPIC_API_KEY=sk-ant-api03-...")
@@ -78,7 +80,9 @@ class ClaudeAPI247:
         """Check if Claude API is available"""
         return self.client is not None and self.async_client is not None
 
-    async def analyze_task(self, task_description: str, context: Dict = None) -> Dict[str, Any]:
+    async def analyze_task(
+        self, task_description: str, context: Dict = None
+    ) -> Dict[str, Any]:
         """
         Analyze a task using Claude API
 
@@ -92,7 +96,7 @@ class ClaudeAPI247:
         if not self.is_available():
             return {
                 "error": "Claude API not available",
-                "suggestion": "Please configure ANTHROPIC_API_KEY in .env"
+                "suggestion": "Please configure ANTHROPIC_API_KEY in .env",
             }
 
         try:
@@ -117,10 +121,7 @@ Format as JSON."""
             response = await self.async_client.messages.create(
                 model=self.model,
                 max_tokens=self.max_tokens,
-                messages=[{
-                    "role": "user",
-                    "content": prompt
-                }]
+                messages=[{"role": "user", "content": prompt}],
             )
 
             content = response.content[0].text
@@ -134,7 +135,9 @@ Format as JSON."""
 
             result["timestamp"] = datetime.now().isoformat()
             result["model_used"] = self.model
-            result["tokens_used"] = response.usage.input_tokens + response.usage.output_tokens
+            result["tokens_used"] = (
+                response.usage.input_tokens + response.usage.output_tokens
+            )
 
             return result
 
@@ -143,10 +146,7 @@ Format as JSON."""
             return {"error": str(e)}
 
     async def agent_conversation(
-        self,
-        message: str,
-        agent_id: int = None,
-        maintain_context: bool = True
+        self, message: str, agent_id: int = None, maintain_context: bool = True
     ) -> str:
         """
         Have a conversation with Claude API as an agent
@@ -160,7 +160,9 @@ Format as JSON."""
             Claude's response
         """
         if not self.is_available():
-            return "ERROR: Claude API not available. Please configure ANTHROPIC_API_KEY."
+            return (
+                "ERROR: Claude API not available. Please configure ANTHROPIC_API_KEY."
+            )
 
         try:
             # Build messages with context
@@ -175,10 +177,7 @@ Current agent: Agent #{agent_id or 'Master CFO'}
 Your role: Provide expert analysis, task breakdown, and intelligent decision-making.
 Keep responses concise and actionable."""
 
-            messages.append({
-                "role": "user",
-                "content": message
-            })
+            messages.append({"role": "user", "content": message})
 
             logger.info(f"💬 Agent conversation (Agent #{agent_id or 'Master'})...")
 
@@ -186,21 +185,17 @@ Keep responses concise and actionable."""
                 model=self.model,
                 max_tokens=self.max_tokens,
                 system=system_prompt,
-                messages=messages
+                messages=messages,
             )
 
             reply = response.content[0].text
 
             # Update conversation history
             if maintain_context:
-                self.conversation_history.append({
-                    "role": "user",
-                    "content": message
-                })
-                self.conversation_history.append({
-                    "role": "assistant",
-                    "content": reply
-                })
+                self.conversation_history.append({"role": "user", "content": message})
+                self.conversation_history.append(
+                    {"role": "assistant", "content": reply}
+                )
 
                 # Keep only last 10 exchanges
                 if len(self.conversation_history) > 20:
@@ -234,9 +229,7 @@ Keep responses concise and actionable."""
         logger.info(f"📊 Batch analyzing {len(tasks)} tasks...")
 
         # Run all analyses in parallel
-        results = await asyncio.gather(*[
-            self.analyze_task(task) for task in tasks
-        ])
+        results = await asyncio.gather(*[self.analyze_task(task) for task in tasks])
 
         logger.info(f"✅ Batch analysis complete")
         return results
@@ -253,21 +246,25 @@ Keep responses concise and actionable."""
             return
 
         logger.info("🔄 Starting 24/7 continuous monitoring...")
-        logger.info(f"Check interval: {check_interval} seconds ({check_interval/60:.1f} minutes)")
+        logger.info(
+            f"Check interval: {check_interval} seconds ({check_interval/60:.1f} minutes)"
+        )
 
         iteration = 0
         while True:
             try:
                 iteration += 1
                 logger.info(f"\n{'='*70}")
-                logger.info(f"🔍 Monitoring iteration #{iteration} - {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
+                logger.info(
+                    f"🔍 Monitoring iteration #{iteration} - {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}"
+                )
                 logger.info(f"{'='*70}\n")
 
                 # Check system status
                 status_check = await self.agent_conversation(
                     "Quick system health check: Any issues with Agent X5.0?",
                     agent_id=1,  # Master CFO
-                    maintain_context=False
+                    maintain_context=False,
                 )
 
                 logger.info(f"Status: {status_check[:200]}...")
@@ -303,9 +300,9 @@ class ClaudeTaskRouter:
         Returns:
             Routed task with analysis
         """
-        task_id = task.get('id', f"task_{len(self.task_queue)}")
-        description = task.get('description', '')
-        context = task.get('context', {})
+        task_id = task.get("id", f"task_{len(self.task_queue)}")
+        description = task.get("description", "")
+        context = task.get("context", {})
 
         logger.info(f"🎯 Routing task: {task_id}")
 
@@ -316,7 +313,7 @@ class ClaudeTaskRouter:
             "task_id": task_id,
             "original_task": task,
             "claude_analysis": analysis,
-            "timestamp": datetime.now().isoformat()
+            "timestamp": datetime.now().isoformat(),
         }
 
         # Store result
@@ -332,9 +329,9 @@ class ClaudeTaskRouter:
 
         logger.info(f"📬 Processing {len(self.task_queue)} tasks...")
 
-        results = await asyncio.gather(*[
-            self.route_task(task) for task in self.task_queue
-        ])
+        results = await asyncio.gather(
+            *[self.route_task(task) for task in self.task_queue]
+        )
 
         # Clear queue after processing
         self.task_queue = []
@@ -346,11 +343,12 @@ class ClaudeTaskRouter:
 # CLI INTERFACE
 # ========================================
 
+
 async def main():
     """Main CLI entry point"""
-    print("\n" + "="*70)
+    print("\n" + "=" * 70)
     print("🤖 CLAUDE API 24/7 INTEGRATION - Agent X5.0")
-    print("="*70 + "\n")
+    print("=" * 70 + "\n")
 
     claude = ClaudeAPI247()
 
@@ -368,41 +366,42 @@ async def main():
     print("🧪 Testing API connection...\n")
     response = await claude.agent_conversation(
         "Hello! Confirm you're connected to Agent X5.0 and ready for 24/7 operation.",
-        agent_id=1
+        agent_id=1,
     )
     print(f"Claude: {response}\n")
 
     # Example task analysis
-    print("\n" + "="*70)
+    print("\n" + "=" * 70)
     print("📋 Example: Task Analysis")
-    print("="*70 + "\n")
+    print("=" * 70 + "\n")
 
     task = "Set up automated trading for BTC/USDT with paper trading mode"
-    analysis = await claude.analyze_task(task, {
-        "system": "Agent X5.0",
-        "available_agents": "30 trading agents (IDs 82-111)",
-        "current_mode": "PAPER"
-    })
+    analysis = await claude.analyze_task(
+        task,
+        {
+            "system": "Agent X5.0",
+            "available_agents": "30 trading agents (IDs 82-111)",
+            "current_mode": "PAPER",
+        },
+    )
 
     print(f"Analysis:\n{json.dumps(analysis, indent=2)}\n")
 
     # Demonstrate 24/7 monitoring (just one iteration for demo)
-    print("\n" + "="*70)
+    print("\n" + "=" * 70)
     print("🔄 24/7 Monitoring Demo (1 iteration)")
-    print("="*70 + "\n")
+    print("=" * 70 + "\n")
     print("(In production, this runs continuously)")
     print("Checking system health...\n")
 
     status = await claude.agent_conversation(
-        "System status check for Agent X5.0",
-        agent_id=1,
-        maintain_context=False
+        "System status check for Agent X5.0", agent_id=1, maintain_context=False
     )
     print(f"Status: {status}\n")
 
-    print("="*70)
+    print("=" * 70)
     print("✅ Claude API 24/7 Integration Test Complete")
-    print("="*70 + "\n")
+    print("=" * 70 + "\n")
 
     return 0
 

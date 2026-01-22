@@ -11,18 +11,18 @@ Supports:
 - Free signal services
 """
 
-import imaplib
 import email
-from email.header import decode_header
-import re
+import imaplib
 import json
 import logging
+import re
 from datetime import datetime
-from typing import Dict, List, Any, Optional
+from email.header import decode_header
 from pathlib import Path
+from typing import Any, Dict, List, Optional
 
 logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger('SignalParser')
+logger = logging.getLogger("SignalParser")
 
 
 class EmailSMSSignalParser:
@@ -65,7 +65,9 @@ class EmailSMSSignalParser:
             logger.error(f"Gmail connection error: {e}")
             return False
 
-    def parse_email_signals(self, search_criteria: str = "UNSEEN", limit: int = 100) -> List[Dict]:
+    def parse_email_signals(
+        self, search_criteria: str = "UNSEEN", limit: int = 100
+    ) -> List[Dict]:
         """
         Parse trading signals from emails
 
@@ -103,16 +105,20 @@ class EmailSMSSignalParser:
                         body = self._get_email_body(msg)
 
                         # Parse trading signals from subject and body
-                        signal_data = self._extract_signals_from_text(subject + " " + body)
+                        signal_data = self._extract_signals_from_text(
+                            subject + " " + body
+                        )
 
                         if signal_data:
-                            signal_data.update({
-                                'source': 'Email',
-                                'from': from_email,
-                                'subject': subject,
-                                'date': date,
-                                'email_id': email_id.decode()
-                            })
+                            signal_data.update(
+                                {
+                                    "source": "Email",
+                                    "from": from_email,
+                                    "subject": subject,
+                                    "date": date,
+                                    "email_id": email_id.decode(),
+                                }
+                            )
                             signals.append(signal_data)
 
             self.signals_extracted.extend(signals)
@@ -140,12 +146,12 @@ class EmailSMSSignalParser:
                 if part.get_content_type() == "text/plain":
                     try:
                         body += part.get_payload(decode=True).decode()
-                    except:
+                    except BaseException:
                         pass
         else:
             try:
                 body = msg.get_payload(decode=True).decode()
-            except:
+            except BaseException:
                 pass
 
         return body
@@ -164,49 +170,65 @@ class EmailSMSSignalParser:
         signal = {}
 
         # Action (BUY, SELL, LONG, SHORT)
-        action_match = re.search(r'\b(BUY|SELL|LONG|SHORT|CALL|PUT)\b', text, re.IGNORECASE)
+        action_match = re.search(
+            r"\b(BUY|SELL|LONG|SHORT|CALL|PUT)\b", text, re.IGNORECASE
+        )
         if action_match:
-            signal['action'] = action_match.group(1).upper()
+            signal["action"] = action_match.group(1).upper()
         else:
             return None  # No valid action found
 
         # Symbol
         # Matches: AAPL, BTC, BTCUSD, EUR/USD, SPY, etc.
-        symbol_match = re.search(r'\b([A-Z]{2,5}(?:/[A-Z]{3})?)\b', text)
+        symbol_match = re.search(r"\b([A-Z]{2,5}(?:/[A-Z]{3})?)\b", text)
         if symbol_match:
-            signal['symbol'] = symbol_match.group(1)
+            signal["symbol"] = symbol_match.group(1)
 
         # Entry price
         # Matches: $195.50, 195.50, @195.50, Entry: 195.50
-        entry_match = re.search(r'(?:@|Entry:?|Price:?)\s*\$?([0-9,]+\.?[0-9]*)', text, re.IGNORECASE)
+        entry_match = re.search(
+            r"(?:@|Entry:?|Price:?)\s*\$?([0-9,]+\.?[0-9]*)", text, re.IGNORECASE
+        )
         if entry_match:
-            signal['entry_price'] = float(entry_match.group(1).replace(',', ''))
+            signal["entry_price"] = float(entry_match.group(1).replace(",", ""))
 
         # Take Profit (TP)
-        tp_match = re.search(r'(?:TP|Target|Take Profit|🎯):?\s*\$?([0-9,]+\.?[0-9]*)', text, re.IGNORECASE)
+        tp_match = re.search(
+            r"(?:TP|Target|Take Profit|🎯):?\s*\$?([0-9,]+\.?[0-9]*)",
+            text,
+            re.IGNORECASE,
+        )
         if tp_match:
-            signal['take_profit'] = float(tp_match.group(1).replace(',', ''))
+            signal["take_profit"] = float(tp_match.group(1).replace(",", ""))
 
         # Stop Loss (SL)
-        sl_match = re.search(r'(?:SL|Stop Loss|Stop|⛔):?\s*\$?([0-9,]+\.?[0-9]*)', text, re.IGNORECASE)
+        sl_match = re.search(
+            r"(?:SL|Stop Loss|Stop|⛔):?\s*\$?([0-9,]+\.?[0-9]*)", text, re.IGNORECASE
+        )
         if sl_match:
-            signal['stop_loss'] = float(sl_match.group(1).replace(',', ''))
+            signal["stop_loss"] = float(sl_match.group(1).replace(",", ""))
 
         # Risk/Reward Ratio
-        if 'take_profit' in signal and 'entry_price' in signal and 'stop_loss' in signal:
-            profit = abs(signal['take_profit'] - signal['entry_price'])
-            risk = abs(signal['entry_price'] - signal['stop_loss'])
-            signal['risk_reward_ratio'] = profit / risk if risk > 0 else 0
+        if (
+            "take_profit" in signal
+            and "entry_price" in signal
+            and "stop_loss" in signal
+        ):
+            profit = abs(signal["take_profit"] - signal["entry_price"])
+            risk = abs(signal["entry_price"] - signal["stop_loss"])
+            signal["risk_reward_ratio"] = profit / risk if risk > 0 else 0
 
         # Confidence/Win Rate
-        confidence_match = re.search(r'(?:Confidence|Accuracy|Win Rate):?\s*([0-9]+)%', text, re.IGNORECASE)
+        confidence_match = re.search(
+            r"(?:Confidence|Accuracy|Win Rate):?\s*([0-9]+)%", text, re.IGNORECASE
+        )
         if confidence_match:
-            signal['confidence'] = float(confidence_match.group(1)) / 100
+            signal["confidence"] = float(confidence_match.group(1)) / 100
 
-        signal['raw_text'] = text
-        signal['parsed_at'] = datetime.now().isoformat()
+        signal["raw_text"] = text
+        signal["parsed_at"] = datetime.now().isoformat()
 
-        return signal if 'symbol' in signal else None
+        return signal if "symbol" in signal else None
 
     def parse_telegram_signals(self, chat_id: str) -> List[Dict]:
         """
@@ -247,17 +269,17 @@ class EmailSMSSignalParser:
             signals = []
 
             # Read SMS export file
-            with open(sms_file, 'r') as f:
-                sms_data = json.load(f) if sms_file.endswith('.json') else []
+            with open(sms_file, "r") as f:
+                sms_data = json.load(f) if sms_file.endswith(".json") else []
 
             for sms in sms_data:
-                text = sms.get('text', sms.get('body', ''))
+                text = sms.get("text", sms.get("body", ""))
                 signal = self._extract_signals_from_text(text)
 
                 if signal:
-                    signal['source'] = 'SMS'
-                    signal['from'] = sms.get('from', sms.get('address', ''))
-                    signal['date'] = sms.get('date', '')
+                    signal["source"] = "SMS"
+                    signal["from"] = sms.get("from", sms.get("address", ""))
+                    signal["date"] = sms.get("date", "")
                     signals.append(signal)
 
             self.signals_extracted.extend(signals)
@@ -275,34 +297,38 @@ class EmailSMSSignalParser:
             return {}
 
         stats = {
-            'total_signals': len(self.signals_extracted),
-            'by_source': {},
-            'by_action': {},
-            'by_symbol': {},
-            'avg_risk_reward': 0.0,
-            'signals_with_tp_sl': 0
+            "total_signals": len(self.signals_extracted),
+            "by_source": {},
+            "by_action": {},
+            "by_symbol": {},
+            "avg_risk_reward": 0.0,
+            "signals_with_tp_sl": 0,
         }
 
         for signal in self.signals_extracted:
             # By source
-            source = signal.get('source', 'Unknown')
-            stats['by_source'][source] = stats['by_source'].get(source, 0) + 1
+            source = signal.get("source", "Unknown")
+            stats["by_source"][source] = stats["by_source"].get(source, 0) + 1
 
             # By action
-            action = signal.get('action', 'UNKNOWN')
-            stats['by_action'][action] = stats['by_action'].get(action, 0) + 1
+            action = signal.get("action", "UNKNOWN")
+            stats["by_action"][action] = stats["by_action"].get(action, 0) + 1
 
             # By symbol
-            symbol = signal.get('symbol', 'UNKNOWN')
-            stats['by_symbol'][symbol] = stats['by_symbol'].get(symbol, 0) + 1
+            symbol = signal.get("symbol", "UNKNOWN")
+            stats["by_symbol"][symbol] = stats["by_symbol"].get(symbol, 0) + 1
 
             # Signals with TP/SL
-            if 'take_profit' in signal and 'stop_loss' in signal:
-                stats['signals_with_tp_sl'] += 1
+            if "take_profit" in signal and "stop_loss" in signal:
+                stats["signals_with_tp_sl"] += 1
 
         # Average risk/reward
-        rr_ratios = [s['risk_reward_ratio'] for s in self.signals_extracted if 'risk_reward_ratio' in s]
-        stats['avg_risk_reward'] = sum(rr_ratios) / len(rr_ratios) if rr_ratios else 0
+        rr_ratios = [
+            s["risk_reward_ratio"]
+            for s in self.signals_extracted
+            if "risk_reward_ratio" in s
+        ]
+        stats["avg_risk_reward"] = sum(rr_ratios) / len(rr_ratios) if rr_ratios else 0
 
         return stats
 
@@ -313,15 +339,17 @@ class EmailSMSSignalParser:
             output_path.parent.mkdir(parents=True, exist_ok=True)
 
             data = {
-                'timestamp': datetime.now().isoformat(),
-                'total_signals': len(self.signals_extracted),
-                'signals': self.signals_extracted
+                "timestamp": datetime.now().isoformat(),
+                "total_signals": len(self.signals_extracted),
+                "signals": self.signals_extracted,
             }
 
-            with open(output_path, 'w') as f:
+            with open(output_path, "w") as f:
                 json.dump(data, f, indent=2)
 
-            logger.info(f"💾 Saved {len(self.signals_extracted)} signals to {output_file}")
+            logger.info(
+                f"💾 Saved {len(self.signals_extracted)} signals to {output_file}"
+            )
 
         except Exception as e:
             logger.error(f"Error saving signals: {e}")
@@ -329,12 +357,14 @@ class EmailSMSSignalParser:
 
 def main():
     """Demo of Email/SMS Signal Parser"""
-    print("""
+    print(
+        """
     ╔═══════════════════════════════════════════════════════════════════╗
     ║           EMAIL & SMS SIGNAL PARSER                               ║
     ║      Import Free Signals from Email, SMS, Telegram                ║
     ╚═══════════════════════════════════════════════════════════════════╝
-    """)
+    """
+    )
 
     parser = EmailSMSSignalParser()
 

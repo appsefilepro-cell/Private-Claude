@@ -3,25 +3,29 @@ Zapier MCP (Model Context Protocol) Connector
 Integrates Agent X2.0 with Zapier via MCP endpoint
 """
 
-import os
 import json
-import requests
 import logging
-from typing import Dict, Any, List, Optional
+import os
 from datetime import datetime
 from pathlib import Path
+from typing import Any, Dict, List, Optional
+
+import requests
 
 logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger('ZapierMCP')
+logger = logging.getLogger("ZapierMCP")
 
 # Load environment variables from config/.env
 try:
     from dotenv import load_dotenv
-    config_path = Path(__file__).parent.parent.parent / 'config' / '.env'
+
+    config_path = Path(__file__).parent.parent.parent / "config" / ".env"
     load_dotenv(config_path)
     logger.info(f"Loaded environment variables from {config_path}")
 except ImportError:
-    logger.warning("python-dotenv not installed. Install with: pip install python-dotenv")
+    logger.warning(
+        "python-dotenv not installed. Install with: pip install python-dotenv"
+    )
 
 
 class ZapierMCPConnector:
@@ -31,16 +35,18 @@ class ZapierMCPConnector:
     """
 
     def __init__(self):
-        self.endpoint = os.getenv('ZAPIER_MCP_ENDPOINT', 'https://mcp.zapier.com/api/mcp/mcp')
-        self.bearer_token = os.getenv('ZAPIER_MCP_BEARER_TOKEN')
-        self.webhook_url = os.getenv('ZAPIER_WEBHOOK_URL')
+        self.endpoint = os.getenv(
+            "ZAPIER_MCP_ENDPOINT", "https://mcp.zapier.com/api/mcp/mcp"
+        )
+        self.bearer_token = os.getenv("ZAPIER_MCP_BEARER_TOKEN")
+        self.webhook_url = os.getenv("ZAPIER_WEBHOOK_URL")
 
         if not self.bearer_token:
             logger.warning("ZAPIER_MCP_BEARER_TOKEN not configured in .env")
 
         self.headers = {
-            'Authorization': f'Bearer {self.bearer_token}',
-            'Content-Type': 'application/json'
+            "Authorization": f"Bearer {self.bearer_token}",
+            "Content-Type": "application/json",
         }
 
         logger.info("Zapier MCP Connector initialized")
@@ -53,33 +59,26 @@ class ZapierMCPConnector:
             Status dictionary
         """
         try:
-            response = requests.get(
-                self.endpoint,
-                headers=self.headers,
-                timeout=10
-            )
+            response = requests.get(self.endpoint, headers=self.headers, timeout=10)
 
             if response.status_code == 200:
                 logger.info("✓ Zapier MCP connection successful")
                 return {
                     "connected": True,
                     "status_code": response.status_code,
-                    "endpoint": self.endpoint
+                    "endpoint": self.endpoint,
                 }
             else:
                 logger.warning(f"Zapier MCP returned status {response.status_code}")
                 return {
                     "connected": False,
                     "status_code": response.status_code,
-                    "error": response.text
+                    "error": response.text,
                 }
 
         except Exception as e:
             logger.error(f"Zapier MCP connection failed: {e}")
-            return {
-                "connected": False,
-                "error": str(e)
-            }
+            return {"connected": False, "error": str(e)}
 
     def list_available_actions(self) -> List[Dict[str, Any]]:
         """
@@ -93,12 +92,12 @@ class ZapierMCPConnector:
                 self.endpoint,
                 headers=self.headers,
                 json={"method": "list_actions"},
-                timeout=10
+                timeout=10,
             )
 
             if response.status_code == 200:
                 data = response.json()
-                actions = data.get('actions', [])
+                actions = data.get("actions", [])
                 logger.info(f"Found {len(actions)} Zapier actions")
                 return actions
             else:
@@ -129,9 +128,9 @@ class ZapierMCPConnector:
                 json={
                     "method": "trigger_zap",
                     "zap_name": zap_name,
-                    "payload": payload
+                    "payload": payload,
                 },
-                timeout=30
+                timeout=30,
             )
 
             if response.status_code == 200:
@@ -141,22 +140,19 @@ class ZapierMCPConnector:
                     "success": True,
                     "zap_name": zap_name,
                     "response": result,
-                    "timestamp": datetime.now().isoformat()
+                    "timestamp": datetime.now().isoformat(),
                 }
             else:
                 logger.error(f"Zap trigger failed: {response.status_code}")
                 return {
                     "success": False,
                     "error": response.text,
-                    "status_code": response.status_code
+                    "status_code": response.status_code,
                 }
 
         except Exception as e:
             logger.error(f"Error triggering Zap: {e}")
-            return {
-                "success": False,
-                "error": str(e)
-            }
+            return {"success": False, "error": str(e)}
 
     def send_trading_signal(self, signal: Dict[str, Any]) -> Dict[str, Any]:
         """
@@ -175,11 +171,15 @@ class ZapierMCPConnector:
         Returns:
             Zapier response
         """
-        logger.info(f"Sending trading signal: {signal.get('action')} {signal.get('pair')}")
+        logger.info(
+            f"Sending trading signal: {signal.get('action')} {signal.get('pair')}"
+        )
 
         return self.trigger_zap("Trading Signal Handler", signal)
 
-    def log_to_sheets(self, data: Dict[str, Any], sheet_name: str = "Trade Log") -> Dict[str, Any]:
+    def log_to_sheets(
+        self, data: Dict[str, Any], sheet_name: str = "Trade Log"
+    ) -> Dict[str, Any]:
         """
         Log data to Google Sheets via Zapier
 
@@ -193,12 +193,14 @@ class ZapierMCPConnector:
         payload = {
             "sheet_name": sheet_name,
             "timestamp": datetime.now().isoformat(),
-            "data": data
+            "data": data,
         }
 
         return self.trigger_zap("Log to Google Sheets", payload)
 
-    def send_email_alert(self, subject: str, body: str, recipients: List[str] = None) -> Dict[str, Any]:
+    def send_email_alert(
+        self, subject: str, body: str, recipients: List[str] = None
+    ) -> Dict[str, Any]:
         """
         Send email alert via Zapier
 
@@ -211,13 +213,13 @@ class ZapierMCPConnector:
             Zapier response
         """
         if recipients is None:
-            recipients = [os.getenv('ALERT_EMAIL', 'appsefilepro@gmail.com')]
+            recipients = [os.getenv("ALERT_EMAIL", "appsefilepro@gmail.com")]
 
         payload = {
             "subject": subject,
             "body": body,
             "recipients": recipients,
-            "timestamp": datetime.now().isoformat()
+            "timestamp": datetime.now().isoformat(),
         }
 
         logger.info(f"Sending email alert: {subject}")
@@ -241,7 +243,9 @@ class ZapierMCPConnector:
         logger.info(f"Uploading to SharePoint: {file_data.get('filename')}")
         return self.trigger_zap("Upload to SharePoint", file_data)
 
-    def create_case_notification(self, case_number: int, case_caption: str, status: str) -> Dict[str, Any]:
+    def create_case_notification(
+        self, case_number: int, case_caption: str, status: str
+    ) -> Dict[str, Any]:
         """
         Create notification for legal case update
 
@@ -258,7 +262,7 @@ class ZapierMCPConnector:
             "case_caption": case_caption,
             "status": status,
             "timestamp": datetime.now().isoformat(),
-            "url": f"https://appsholdingswyinc.sharepoint.com/Legal/Case_{case_number:02d}"
+            "url": f"https://appsholdingswyinc.sharepoint.com/Legal/Case_{case_number:02d}",
         }
 
         logger.info(f"Creating case notification: Case {case_number} - {status}")
@@ -279,31 +283,18 @@ class ZapierMCPConnector:
             return {"success": False, "error": "Webhook URL not configured"}
 
         try:
-            response = requests.post(
-                self.webhook_url,
-                json=data,
-                timeout=10
-            )
+            response = requests.post(self.webhook_url, json=data, timeout=10)
 
             if response.status_code == 200:
                 logger.info("✓ Webhook triggered successfully")
-                return {
-                    "success": True,
-                    "status_code": response.status_code
-                }
+                return {"success": True, "status_code": response.status_code}
             else:
                 logger.error(f"Webhook failed: {response.status_code}")
-                return {
-                    "success": False,
-                    "status_code": response.status_code
-                }
+                return {"success": False, "status_code": response.status_code}
 
         except Exception as e:
             logger.error(f"Webhook error: {e}")
-            return {
-                "success": False,
-                "error": str(e)
-            }
+            return {"success": False, "error": str(e)}
 
     def get_spending_status(self) -> Dict[str, Any]:
         """
@@ -314,9 +305,7 @@ class ZapierMCPConnector:
         """
         try:
             response = requests.get(
-                f"{self.endpoint}/status",
-                headers=self.headers,
-                timeout=10
+                f"{self.endpoint}/status", headers=self.headers, timeout=10
             )
 
             if response.status_code == 200:
@@ -324,15 +313,12 @@ class ZapierMCPConnector:
             else:
                 return {
                     "status": "unknown",
-                    "note": "Spending cap may be active. Resets at 3am."
+                    "note": "Spending cap may be active. Resets at 3am.",
                 }
 
         except Exception as e:
             logger.warning(f"Could not check spending status: {e}")
-            return {
-                "status": "unknown",
-                "note": "Spending cap resets at 3am"
-            }
+            return {"status": "unknown", "note": "Spending cap resets at 3am"}
 
 
 def main():
@@ -351,7 +337,7 @@ def main():
     spending = connector.get_spending_status()
     print(f"   Spending: {json.dumps(spending, indent=2)}")
 
-    if status.get('connected'):
+    if status.get("connected"):
         # List available actions
         print("\n3. Listing available Zapier actions...")
         actions = connector.list_available_actions()
@@ -361,7 +347,7 @@ def main():
         print("\n4. Testing email alert...")
         result = connector.send_email_alert(
             subject="Zapier MCP Test",
-            body="This is a test email from Agent X2.0 Zapier MCP connector"
+            body="This is a test email from Agent X2.0 Zapier MCP connector",
         )
         print(f"   Result: {json.dumps(result, indent=2)}")
 

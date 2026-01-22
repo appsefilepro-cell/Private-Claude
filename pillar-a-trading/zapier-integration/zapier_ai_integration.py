@@ -30,15 +30,16 @@ FREE ZAPIER APPS FOR TRADING DATA:
 10. Code by Zapier - Custom Python logic
 """
 
-import os
 import json
-import requests
 import logging
+import os
 from datetime import datetime
-from typing import Dict, List, Any, Optional
+from typing import Any, Dict, List, Optional
+
+import requests
 
 logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger('ZapierAI')
+logger = logging.getLogger("ZapierAI")
 
 
 class ZapierAIIntegration:
@@ -48,8 +49,10 @@ class ZapierAIIntegration:
     """
 
     def __init__(self):
-        self.mcp_endpoint = os.getenv('ZAPIER_MCP_ENDPOINT', 'https://mcp.zapier.com/api/mcp/mcp')
-        self.bearer_token = os.getenv('ZAPIER_MCP_BEARER_TOKEN', '')
+        self.mcp_endpoint = os.getenv(
+            "ZAPIER_MCP_ENDPOINT", "https://mcp.zapier.com/api/mcp/mcp"
+        )
+        self.bearer_token = os.getenv("ZAPIER_MCP_BEARER_TOKEN", "")
         self.webhook_urls = self._load_webhook_urls()
         logger.info("=" * 70)
         logger.info("🤖 ZAPIER AI INTEGRATION INITIALIZED")
@@ -58,11 +61,11 @@ class ZapierAIIntegration:
     def _load_webhook_urls(self) -> Dict:
         """Load Zapier webhook URLs for various triggers"""
         return {
-            'trade_signal': os.getenv('ZAPIER_TRADE_SIGNAL_WEBHOOK', ''),
-            'market_alert': os.getenv('ZAPIER_MARKET_ALERT_WEBHOOK', ''),
-            'daily_summary': os.getenv('ZAPIER_DAILY_SUMMARY_WEBHOOK', ''),
-            'high_confidence_trade': os.getenv('ZAPIER_HIGH_CONFIDENCE_WEBHOOK', ''),
-            'error_alert': os.getenv('ZAPIER_ERROR_ALERT_WEBHOOK', '')
+            "trade_signal": os.getenv("ZAPIER_TRADE_SIGNAL_WEBHOOK", ""),
+            "market_alert": os.getenv("ZAPIER_MARKET_ALERT_WEBHOOK", ""),
+            "daily_summary": os.getenv("ZAPIER_DAILY_SUMMARY_WEBHOOK", ""),
+            "high_confidence_trade": os.getenv("ZAPIER_HIGH_CONFIDENCE_WEBHOOK", ""),
+            "error_alert": os.getenv("ZAPIER_ERROR_ALERT_WEBHOOK", ""),
         }
 
     def analyze_with_chatgpt(self, prompt: str) -> Dict:
@@ -74,32 +77,30 @@ class ZapierAIIntegration:
         try:
             # Create Zap trigger for ChatGPT analysis
             data = {
-                'prompt': prompt,
-                'model': 'gpt-3.5-turbo',  # Free tier
-                'max_tokens': 500,
-                'temperature': 0.3  # Low temperature for factual analysis
+                "prompt": prompt,
+                "model": "gpt-3.5-turbo",  # Free tier
+                "max_tokens": 500,
+                "temperature": 0.3,  # Low temperature for factual analysis
             }
 
             # Send to Zapier webhook
-            if self.webhook_urls.get('trade_signal'):
+            if self.webhook_urls.get("trade_signal"):
                 response = requests.post(
-                    self.webhook_urls['trade_signal'],
-                    json=data,
-                    timeout=30
+                    self.webhook_urls["trade_signal"], json=data, timeout=30
                 )
 
                 return {
-                    'analysis': response.json() if response.status_code == 200 else {},
-                    'model': 'ChatGPT',
-                    'via': 'Zapier AI',
-                    'free': True
+                    "analysis": response.json() if response.status_code == 200 else {},
+                    "model": "ChatGPT",
+                    "via": "Zapier AI",
+                    "free": True,
                 }
 
-            return {'error': 'Webhook not configured'}
+            return {"error": "Webhook not configured"}
 
         except Exception as e:
             logger.error(f"ChatGPT analysis error: {e}")
-            return {'error': str(e)}
+            return {"error": str(e)}
 
     def analyze_with_claude(self, prompt: str) -> Dict:
         """
@@ -109,35 +110,35 @@ class ZapierAIIntegration:
         """
         try:
             data = {
-                'prompt': prompt,
-                'model': 'claude-3-haiku',  # Fast and free
-                'max_tokens': 1000
+                "prompt": prompt,
+                "model": "claude-3-haiku",  # Fast and free
+                "max_tokens": 1000,
             }
 
             # Claude provides better reasoning for complex market analysis
             # Send via Zapier MCP
             headers = {
-                'Authorization': f'Bearer {self.bearer_token}',
-                'Content-Type': 'application/json'
+                "Authorization": f"Bearer {self.bearer_token}",
+                "Content-Type": "application/json",
             }
 
             response = requests.post(
                 self.mcp_endpoint,
                 headers=headers,
-                json={'action': 'claude_analyze', 'data': data},
-                timeout=30
+                json={"action": "claude_analyze", "data": data},
+                timeout=30,
             )
 
             return {
-                'analysis': response.json() if response.status_code == 200 else {},
-                'model': 'Claude',
-                'via': 'Zapier MCP',
-                'free': True
+                "analysis": response.json() if response.status_code == 200 else {},
+                "model": "Claude",
+                "via": "Zapier MCP",
+                "free": True,
             }
 
         except Exception as e:
             logger.error(f"Claude analysis error: {e}")
-            return {'error': str(e)}
+            return {"error": str(e)}
 
     def analyze_with_gemini(self, prompt: str) -> Dict:
         """
@@ -146,24 +147,20 @@ class ZapierAIIntegration:
         FREE via Zapier AI Actions
         """
         try:
-            data = {
-                'prompt': prompt,
-                'model': 'gemini-pro',
-                'temperature': 0.2
-            }
+            data = {"prompt": prompt, "model": "gemini-pro", "temperature": 0.2}
 
             # Gemini is great for pattern recognition
             return {
-                'analysis': 'Gemini analysis via Zapier',
-                'model': 'Gemini',
-                'via': 'Zapier AI',
-                'free': True,
-                'note': 'Configure Gemini Zap for full functionality'
+                "analysis": "Gemini analysis via Zapier",
+                "model": "Gemini",
+                "via": "Zapier AI",
+                "free": True,
+                "note": "Configure Gemini Zap for full functionality",
             }
 
         except Exception as e:
             logger.error(f"Gemini analysis error: {e}")
-            return {'error': str(e)}
+            return {"error": str(e)}
 
     def get_consensus_ai_signal(self, market_data: Dict) -> Dict:
         """
@@ -202,23 +199,25 @@ class ZapierAIIntegration:
 
         # Combine results for consensus
         consensus = {
-            'timestamp': datetime.now().isoformat(),
-            'symbol': market_data.get('symbol'),
-            'ai_models_used': ['ChatGPT', 'Claude', 'Gemini'],
-            'chatgpt': chatgpt_analysis,
-            'claude': claude_analysis,
-            'gemini': gemini_analysis,
-            'consensus_signal': 'HOLD',  # Default
-            'consensus_confidence': 0.0,
-            'agreement_level': 'low',
-            'via': 'Zapier AI (FREE)'
+            "timestamp": datetime.now().isoformat(),
+            "symbol": market_data.get("symbol"),
+            "ai_models_used": ["ChatGPT", "Claude", "Gemini"],
+            "chatgpt": chatgpt_analysis,
+            "claude": claude_analysis,
+            "gemini": gemini_analysis,
+            "consensus_signal": "HOLD",  # Default
+            "consensus_confidence": 0.0,
+            "agreement_level": "low",
+            "via": "Zapier AI (FREE)",
         }
 
         # Calculate consensus (simplified - in production, parse AI responses)
         # When all 3 AIs agree, confidence is 91-95%!
 
-        logger.info(f"✅ AI Consensus: {consensus['consensus_signal']} "
-                   f"@ {consensus['consensus_confidence']:.0f}% confidence")
+        logger.info(
+            f"✅ AI Consensus: {consensus['consensus_signal']} "
+            f"@ {consensus['consensus_confidence']:.0f}% confidence"
+        )
 
         return consensus
 
@@ -229,31 +228,31 @@ class ZapierAIIntegration:
         This creates a permanent record of all trades
         """
         try:
-            if not self.webhook_urls.get('trade_signal'):
+            if not self.webhook_urls.get("trade_signal"):
                 logger.warning("Google Sheets webhook not configured")
                 return False
 
             # Format trade data for Google Sheets
             sheets_data = {
-                'timestamp': trade_data.get('timestamp'),
-                'symbol': trade_data.get('symbol'),
-                'action': trade_data.get('action'),
-                'price': trade_data.get('price'),
-                'quantity': trade_data.get('quantity'),
-                'confidence': trade_data.get('confidence'),
-                'profit_loss': trade_data.get('profit_loss', 0),
-                'account': trade_data.get('account')
+                "timestamp": trade_data.get("timestamp"),
+                "symbol": trade_data.get("symbol"),
+                "action": trade_data.get("action"),
+                "price": trade_data.get("price"),
+                "quantity": trade_data.get("quantity"),
+                "confidence": trade_data.get("confidence"),
+                "profit_loss": trade_data.get("profit_loss", 0),
+                "account": trade_data.get("account"),
             }
 
             # Send to Zapier webhook → Google Sheets
             response = requests.post(
-                self.webhook_urls['trade_signal'],
-                json=sheets_data,
-                timeout=10
+                self.webhook_urls["trade_signal"], json=sheets_data, timeout=10
             )
 
             if response.status_code == 200:
-                logger.info(f"✅ Trade logged to Google Sheets: {trade_data.get('symbol')}")
+                logger.info(
+                    f"✅ Trade logged to Google Sheets: {trade_data.get('symbol')}"
+                )
                 return True
             else:
                 logger.error(f"Failed to log trade: {response.status_code}")
@@ -263,7 +262,9 @@ class ZapierAIIntegration:
             logger.error(f"Google Sheets logging error: {e}")
             return False
 
-    def send_email_alert(self, subject: str, body: str, priority: str = 'normal') -> bool:
+    def send_email_alert(
+        self, subject: str, body: str, priority: str = "normal"
+    ) -> bool:
         """
         Send email alert via Zapier Gmail integration (FREE)
 
@@ -274,17 +275,15 @@ class ZapierAIIntegration:
         """
         try:
             email_data = {
-                'subject': subject,
-                'body': body,
-                'priority': priority,
-                'timestamp': datetime.now().isoformat()
+                "subject": subject,
+                "body": body,
+                "priority": priority,
+                "timestamp": datetime.now().isoformat(),
             }
 
-            if self.webhook_urls.get('market_alert'):
+            if self.webhook_urls.get("market_alert"):
                 response = requests.post(
-                    self.webhook_urls['market_alert'],
-                    json=email_data,
-                    timeout=10
+                    self.webhook_urls["market_alert"], json=email_data, timeout=10
                 )
 
                 if response.status_code == 200:
@@ -310,12 +309,12 @@ class ZapierAIIntegration:
             logger.info("📱 Monitoring WallStreetBets for trending stocks...")
 
             return {
-                'trending_stocks': ['GME', 'AMC', 'TSLA'],  # Placeholder
-                'sentiment': 'bullish',
-                'mentions_24h': 1250,
-                'source': 'Reddit WallStreetBets',
-                'via': 'Zapier RSS Feed',
-                'free': True
+                "trending_stocks": ["GME", "AMC", "TSLA"],  # Placeholder
+                "sentiment": "bullish",
+                "mentions_24h": 1250,
+                "source": "Reddit WallStreetBets",
+                "via": "Zapier RSS Feed",
+                "free": True,
             }
 
         except Exception as e:
@@ -334,57 +333,57 @@ class ZapierAIIntegration:
         5. news_alerts - Monitor financial news
         """
         workflows = {
-            'high_confidence_trade': {
-                'name': 'Auto-Execute High Confidence Trades',
-                'trigger': 'Webhook - Trade Signal',
-                'filter': 'Confidence >= 0.91',
-                'actions': [
-                    'Send to MT5 for execution',
-                    'Log to Google Sheets',
-                    'Send email alert',
-                    'Post to Slack/Discord'
-                ]
+            "high_confidence_trade": {
+                "name": "Auto-Execute High Confidence Trades",
+                "trigger": "Webhook - Trade Signal",
+                "filter": "Confidence >= 0.91",
+                "actions": [
+                    "Send to MT5 for execution",
+                    "Log to Google Sheets",
+                    "Send email alert",
+                    "Post to Slack/Discord",
+                ],
             },
-            'daily_summary': {
-                'name': 'Daily Performance Report',
-                'trigger': 'Schedule - Every day at 7:00 AM',
-                'actions': [
-                    'Aggregate trading statistics',
-                    'Generate PDF report with ChatGPT',
-                    'Send email with attachment',
-                    'Update Google Sheets dashboard'
-                ]
+            "daily_summary": {
+                "name": "Daily Performance Report",
+                "trigger": "Schedule - Every day at 7:00 AM",
+                "actions": [
+                    "Aggregate trading statistics",
+                    "Generate PDF report with ChatGPT",
+                    "Send email with attachment",
+                    "Update Google Sheets dashboard",
+                ],
             },
-            'error_monitoring': {
-                'name': 'System Error Alerts',
-                'trigger': 'Webhook - Error Event',
-                'actions': [
-                    'Send urgent email',
-                    'Post to Slack',
-                    'Log to error tracking sheet',
-                    'Trigger remediation workflow'
-                ]
+            "error_monitoring": {
+                "name": "System Error Alerts",
+                "trigger": "Webhook - Error Event",
+                "actions": [
+                    "Send urgent email",
+                    "Post to Slack",
+                    "Log to error tracking sheet",
+                    "Trigger remediation workflow",
+                ],
             },
-            'social_sentiment': {
-                'name': 'Social Media Sentiment Tracker',
-                'trigger': 'RSS Feed - Reddit/Twitter',
-                'actions': [
-                    'Analyze sentiment with Claude AI',
-                    'Calculate mention frequency',
-                    'Update sentiment database',
-                    'Alert if trending'
-                ]
+            "social_sentiment": {
+                "name": "Social Media Sentiment Tracker",
+                "trigger": "RSS Feed - Reddit/Twitter",
+                "actions": [
+                    "Analyze sentiment with Claude AI",
+                    "Calculate mention frequency",
+                    "Update sentiment database",
+                    "Alert if trending",
+                ],
             },
-            'news_alerts': {
-                'name': 'Financial News Monitor',
-                'trigger': 'RSS Feed - Bloomberg/CNBC/Reuters',
-                'actions': [
-                    'Extract key information with AI',
-                    'Analyze impact on holdings',
-                    'Send relevant alerts',
-                    'Update market context'
-                ]
-            }
+            "news_alerts": {
+                "name": "Financial News Monitor",
+                "trigger": "RSS Feed - Bloomberg/CNBC/Reuters",
+                "actions": [
+                    "Extract key information with AI",
+                    "Analyze impact on holdings",
+                    "Send relevant alerts",
+                    "Update market context",
+                ],
+            },
         }
 
         workflow = workflows.get(workflow_type, {})
@@ -396,25 +395,27 @@ class ZapierAIIntegration:
 
 def main():
     """Demo of Zapier AI Integration"""
-    print("""
+    print(
+        """
     ╔═══════════════════════════════════════════════════════════════════╗
     ║           ZAPIER AI INTEGRATION - 91-95% ACCURACY                 ║
     ║      ChatGPT + Claude + Gemini Consensus via Zapier (FREE)        ║
     ╚═══════════════════════════════════════════════════════════════════╝
-    """)
+    """
+    )
 
     integrator = ZapierAIIntegration()
 
     # Demo: Get AI consensus on a trade
     market_data = {
-        'symbol': 'AAPL',
-        'price': 195.50,
-        'change_24h': 2.3,
-        'volume': 52000000,
-        'rsi': 62,
-        'macd': 'bullish',
-        'news_sentiment': 'positive',
-        'social_sentiment': 'bullish'
+        "symbol": "AAPL",
+        "price": 195.50,
+        "change_24h": 2.3,
+        "volume": 52000000,
+        "rsi": 62,
+        "macd": "bullish",
+        "news_sentiment": "positive",
+        "social_sentiment": "bullish",
     }
 
     print("\n📊 Getting AI Consensus Signal...")
@@ -429,14 +430,19 @@ def main():
     print("\n\n📋 Available Zapier Workflows:")
     print("=" * 70)
 
-    workflows = ['high_confidence_trade', 'daily_summary', 'error_monitoring',
-                'social_sentiment', 'news_alerts']
+    workflows = [
+        "high_confidence_trade",
+        "daily_summary",
+        "error_monitoring",
+        "social_sentiment",
+        "news_alerts",
+    ]
 
     for wf in workflows:
         template = integrator.create_automated_workflow(wf)
         print(f"\n{template.get('name')}:")
         print(f"  Trigger: {template.get('trigger')}")
-        if 'filter' in template:
+        if "filter" in template:
             print(f"  Filter: {template.get('filter')}")
         print(f"  Actions: {len(template.get('actions', []))}")
 

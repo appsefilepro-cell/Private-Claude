@@ -7,22 +7,24 @@ import os
 import sys
 from datetime import datetime
 
+from zapier_mcp_connector import ZapierMCPConnector
+
 # Add current directory to path
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-
-from zapier_mcp_connector import ZapierMCPConnector
 
 
 def print_banner():
     """Print status banner"""
-    print("""
+    print(
+        """
 ╔══════════════════════════════════════════════════════════════╗
 ║                                                              ║
 ║           ZAPIER MCP CONNECTION STATUS CHECKER               ║
 ║                   Agent X2.0 Integration                     ║
 ║                                                              ║
 ╚══════════════════════════════════════════════════════════════╝
-""")
+"""
+    )
 
 
 def main():
@@ -39,22 +41,26 @@ def main():
     print("\n📋 CONFIGURATION:")
     print("-" * 64)
     print(f"  Endpoint: {connector.endpoint}")
-    print(f"  Bearer Token: {'✓ Configured' if connector.bearer_token else '✗ Not Configured'}")
-    print(f"  Webhook URL: {'✓ Configured' if connector.webhook_url else '✗ Not Configured'}")
+    print(
+        f"  Bearer Token: {'✓ Configured' if connector.bearer_token else '✗ Not Configured'}"
+    )
+    print(
+        f"  Webhook URL: {'✓ Configured' if connector.webhook_url else '✗ Not Configured'}"
+    )
 
     # Check connection
     print("\n🔌 CONNECTION STATUS:")
     print("-" * 64)
     status = connector.check_connection()
 
-    if status.get('connected'):
+    if status.get("connected"):
         print("  Status: ✅ CONNECTED")
         print(f"  HTTP Status: {status.get('status_code')}")
     else:
         print("  Status: ❌ NOT CONNECTED")
-        if 'error' in status:
+        if "error" in status:
             print(f"  Error: {status['error']}")
-        if 'status_code' in status:
+        if "status_code" in status:
             print(f"  HTTP Status: {status['status_code']}")
 
     # Check spending status
@@ -62,21 +68,21 @@ def main():
     print("-" * 64)
     spending = connector.get_spending_status()
 
-    if spending.get('status') == 'active':
+    if spending.get("status") == "active":
         print("  Status: ✅ ACTIVE (Within limits)")
-    elif spending.get('status') == 'cap_reached':
+    elif spending.get("status") == "cap_reached":
         print("  Status: ⚠️  CAP REACHED")
         print("  Reset Time: 3:00 AM")
     else:
         print("  Status: ⚠️  UNKNOWN")
-        if 'note' in spending:
+        if "note" in spending:
             print(f"  Note: {spending['note']}")
 
     # Show next steps
     print("\n📌 NEXT STEPS:")
     print("-" * 64)
 
-    if not status.get('connected'):
+    if not status.get("connected"):
         print("  1. Verify bearer token is correct in config/.env")
         print("  2. Check if spending cap has been reached")
         print("  3. Wait until 3:00 AM for cap reset if needed")

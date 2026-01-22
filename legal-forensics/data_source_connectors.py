@@ -3,15 +3,15 @@ Multi-Source Data Connectors for Forensic Legal Analysis
 Integrates Gmail, Dropbox, SharePoint, OneDrive for case document extraction
 """
 
-import os
 import json
 import logging
-from typing import List, Dict, Any, Optional
-from datetime import datetime
+import os
 from abc import ABC, abstractmethod
+from datetime import datetime
+from typing import Any, Dict, List, Optional
 
 logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger('DataConnectors')
+logger = logging.getLogger("DataConnectors")
 
 
 class DataSourceConnector(ABC):
@@ -110,7 +110,7 @@ class SharePointForensicConnector(DataSourceConnector):
 
     def __init__(self):
         self.access_token = None
-        self.site_url = os.getenv('SHAREPOINT_SITE_URL', '')
+        self.site_url = os.getenv("SHAREPOINT_SITE_URL", "")
         self.authenticated = False
 
         # Target SharePoint folders
@@ -119,16 +119,16 @@ class SharePointForensicConnector(DataSourceConnector):
             "/SharePoint Share Folder",
             "/Dr",
             "/Legal Operations",
-            "/Case Files"
+            "/Case Files",
         ]
 
     def authenticate(self) -> bool:
         """Authenticate with SharePoint via Microsoft Graph API"""
         logger.info("SharePoint: Attempting authentication")
 
-        tenant_id = os.getenv('MICROSOFT_TENANT_ID')
-        client_id = os.getenv('MICROSOFT_CLIENT_ID')
-        client_secret = os.getenv('MICROSOFT_CLIENT_SECRET')
+        tenant_id = os.getenv("MICROSOFT_TENANT_ID")
+        client_id = os.getenv("MICROSOFT_CLIENT_ID")
+        client_secret = os.getenv("MICROSOFT_CLIENT_SECRET")
 
         if not all([tenant_id, client_id, client_secret]):
             logger.error("SharePoint credentials not configured in .env")
@@ -190,11 +190,13 @@ class SharePointForensicConnector(DataSourceConnector):
             files = self.list_files(folder)
             for file in files:
                 # Check if any keyword matches filename or path
-                filename_lower = file.get('name', '').lower()
-                path_lower = file.get('path', '').lower()
+                filename_lower = file.get("name", "").lower()
+                path_lower = file.get("path", "").lower()
 
-                if any(kw.lower() in filename_lower or kw.lower() in path_lower
-                       for kw in case_keywords):
+                if any(
+                    kw.lower() in filename_lower or kw.lower() in path_lower
+                    for kw in case_keywords
+                ):
                     documents.append(file)
 
         return documents
@@ -245,7 +247,7 @@ class DropboxForensicConnector(DataSourceConnector):
     """
 
     def __init__(self):
-        self.access_token = os.getenv('DROPBOX_ACCESS_TOKEN')
+        self.access_token = os.getenv("DROPBOX_ACCESS_TOKEN")
         self.dbx = None
         self.authenticated = False
 
@@ -305,7 +307,7 @@ class MultiSourceOrchestrator:
             ("SharePoint", self.sharepoint),
             ("OneDrive Business", self.onedrive_business),
             ("OneDrive Personal", self.onedrive_personal),
-            ("Dropbox", self.dropbox)
+            ("Dropbox", self.dropbox),
         ]
 
     def authenticate_all(self) -> Dict[str, bool]:
@@ -348,8 +350,8 @@ class MultiSourceOrchestrator:
 
                 # Add source metadata
                 for doc in docs:
-                    doc['source'] = name
-                    doc['collected_at'] = datetime.now().isoformat()
+                    doc["source"] = name
+                    doc["collected_at"] = datetime.now().isoformat()
 
                 all_documents.extend(docs)
                 logger.info(f"Collected {len(docs)} documents from {name}")
@@ -366,7 +368,9 @@ class MultiSourceOrchestrator:
         for name, connector in self.all_connectors:
             if connector.authenticated:
                 status[name] = "CONNECTED"
-            elif hasattr(connector, 'credentials_path') and not os.path.exists(connector.credentials_path):
+            elif hasattr(connector, "credentials_path") and not os.path.exists(
+                connector.credentials_path
+            ):
                 status[name] = "MISSING CREDENTIALS"
             else:
                 status[name] = "NOT AUTHENTICATED"
@@ -384,16 +388,16 @@ def main():
     auth_results = orchestrator.authenticate_all()
 
     # Print status
-    print("\n" + "="*60)
+    print("\n" + "=" * 60)
     print("DATA SOURCE CONNECTION STATUS")
-    print("="*60)
+    print("=" * 60)
 
     status = orchestrator.get_connection_status()
     for source, state in status.items():
         icon = "✓" if state == "CONNECTED" else "✗"
         print(f"{icon} {source}: {state}")
 
-    print("="*60)
+    print("=" * 60)
 
     # Print configuration instructions
     print("\nTO ENABLE DATA COLLECTION:")

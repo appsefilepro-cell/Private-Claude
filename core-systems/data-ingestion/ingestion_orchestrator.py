@@ -4,18 +4,19 @@ Handles ingestion from Gmail, Dropbox, OneDrive, SharePoint
 Extracts customer contact details from emails, PDFs, and Excel sheets
 """
 
-import os
-import re
 import csv
 import json
 import logging
+import os
+import re
 from datetime import datetime
-from typing import List, Dict, Any, Optional
 from pathlib import Path
+from typing import Any, Dict, List, Optional
 
 # PDF processing
 try:
     import fitz  # PyMuPDF
+
     PDF_AVAILABLE = True
 except ImportError:
     PDF_AVAILABLE = False
@@ -24,13 +25,14 @@ except ImportError:
 # Excel processing
 try:
     from openpyxl import load_workbook
+
     EXCEL_AVAILABLE = True
 except ImportError:
     EXCEL_AVAILABLE = False
     logging.warning("openpyxl not available, Excel processing disabled")
 
 logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger('IngestionOrchestrator')
+logger = logging.getLogger("IngestionOrchestrator")
 
 
 class CustomerContact:
@@ -56,7 +58,7 @@ class CustomerContact:
             "mailing_address": self.mailing_address,
             "tax_years": ", ".join(map(str, self.tax_years)),
             "filing_status": self.filing_status,
-            "dependents": self.dependents
+            "dependents": self.dependents,
         }
 
     def to_csv_row(self) -> List[str]:
@@ -69,7 +71,7 @@ class CustomerContact:
             self.mailing_address,
             ", ".join(map(str, self.tax_years)),
             self.filing_status,
-            str(self.dependents)
+            str(self.dependents),
         ]
 
 
@@ -86,11 +88,11 @@ class DataValidator:
     def normalize_phone(phone: str) -> str:
         """Normalize phone to E.164 format"""
         # Remove all non-digit characters
-        digits = re.sub(r'\D', '', phone)
+        digits = re.sub(r"\D", "", phone)
 
         # Add country code if missing (assume US)
         if len(digits) == 10:
-            digits = '1' + digits
+            digits = "1" + digits
 
         # Format to E.164
         if len(digits) == 11:
@@ -106,7 +108,7 @@ class DataValidator:
             r"Name:\s*(.+)",
             r"Full Name:\s*(.+)",
             r"Client Name:\s*(.+)",
-            r"Taxpayer Name:\s*(.+)"
+            r"Taxpayer Name:\s*(.+)",
         ]
 
         for pattern in patterns:
@@ -137,13 +139,17 @@ class DataValidator:
             r"Phone:\s*(.+)",
             r"Tel:\s*(.+)",
             r"Cell:\s*(.+)",
-            r"\(?\d{3}\)?[-.\s]?\d{3}[-.\s]?\d{4}"
+            r"\(?\d{3}\)?[-.\s]?\d{3}[-.\s]?\d{4}",
         ]
 
         for pattern in patterns:
             match = re.search(pattern, text, re.IGNORECASE)
             if match:
-                phone = match.group(1) if 'Phone' in pattern or 'Tel' in pattern or 'Cell' in pattern else match.group(0)
+                phone = (
+                    match.group(1)
+                    if "Phone" in pattern or "Tel" in pattern or "Cell" in pattern
+                    else match.group(0)
+                )
                 return DataValidator.normalize_phone(phone)
 
         return None
@@ -196,7 +202,9 @@ class PDFProcessor:
                 contact.tax_years = [int(year) for year in tax_years]
 
             # Filing status
-            status_match = re.search(r"Filing Status:\s*(.+?)(?:\n|$)", text, re.IGNORECASE)
+            status_match = re.search(
+                r"Filing Status:\s*(.+?)(?:\n|$)", text, re.IGNORECASE
+            )
             if status_match:
                 contact.filing_status = status_match.group(1).strip()
 
@@ -207,7 +215,9 @@ class PDFProcessor:
 
             if contact.email or contact.phone:  # Only add if we have contact info
                 contacts.append(contact)
-                logger.info(f"Extracted contact from PDF: {contact.first_name} {contact.last_name}")
+                logger.info(
+                    f"Extracted contact from PDF: {contact.first_name} {contact.last_name}"
+                )
 
         except Exception as e:
             logger.error(f"Error processing PDF {pdf_path}: {e}")
@@ -244,33 +254,35 @@ class ExcelProcessor:
 
                     header = str(headers[idx]).lower()
 
-                    if 'first' in header and 'name' in header:
+                    if "first" in header and "name" in header:
                         contact.first_name = str(value) if value else ""
-                    elif 'last' in header and 'name' in header:
+                    elif "last" in header and "name" in header:
                         contact.last_name = str(value) if value else ""
-                    elif 'email' in header:
+                    elif "email" in header:
                         if value and DataValidator.validate_email(str(value)):
                             contact.email = str(value)
-                    elif 'phone' in header:
+                    elif "phone" in header:
                         if value:
                             contact.phone = DataValidator.normalize_phone(str(value))
-                    elif 'address' in header:
+                    elif "address" in header:
                         contact.mailing_address = str(value) if value else ""
-                    elif 'tax' in header and 'year' in header:
+                    elif "tax" in header and "year" in header:
                         if value:
                             contact.tax_years = [int(value)]
-                    elif 'filing' in header and 'status' in header:
+                    elif "filing" in header and "status" in header:
                         contact.filing_status = str(value) if value else ""
-                    elif 'dependent' in header:
+                    elif "dependent" in header:
                         if value:
                             try:
                                 contact.dependents = int(value)
-                            except:
+                            except BaseException:
                                 contact.dependents = 0
 
                 if contact.email or contact.phone:  # Only add if we have contact info
                     contacts.append(contact)
-                    logger.info(f"Extracted contact from Excel: {contact.first_name} {contact.last_name}")
+                    logger.info(
+                        f"Extracted contact from Excel: {contact.first_name} {contact.last_name}"
+                    )
 
         except Exception as e:
             logger.error(f"Error processing Excel {excel_path}: {e}")
@@ -282,8 +294,14 @@ class IngestionOrchestrator:
     """Main orchestrator for data ingestion"""
 
     CSV_HEADERS = [
-        "First Name", "Last Name", "Phone", "Email",
-        "Mailing Address", "Tax Years", "Filing Status", "Dependents"
+        "First Name",
+        "Last Name",
+        "Phone",
+        "Email",
+        "Mailing Address",
+        "Tax Years",
+        "Filing Status",
+        "Dependents",
     ]
 
     def __init__(self, output_file: str = "customer_contact_list.csv"):
@@ -296,7 +314,7 @@ class IngestionOrchestrator:
             "excel_processed": 0,
             "contacts_extracted": 0,
             "duplicates_removed": 0,
-            "errors": 0
+            "errors": 0,
         }
 
         # Ensure output CSV exists with headers
@@ -307,7 +325,7 @@ class IngestionOrchestrator:
     def _init_csv(self) -> None:
         """Initialize CSV file with headers if it doesn't exist"""
         if not os.path.exists(self.output_file):
-            with open(self.output_file, 'w', newline='', encoding='utf-8') as f:
+            with open(self.output_file, "w", newline="", encoding="utf-8") as f:
                 writer = csv.writer(f)
                 writer.writerow(self.CSV_HEADERS)
             logger.info(f"Created new CSV: {self.output_file}")
@@ -332,13 +350,13 @@ class IngestionOrchestrator:
         try:
             ext = Path(file_path).suffix.lower()
 
-            if ext == '.pdf':
+            if ext == ".pdf":
                 contacts = PDFProcessor.extract_from_pdf(file_path)
                 self.contacts.extend(contacts)
                 self.stats["pdf_processed"] += 1
                 self.stats["contacts_extracted"] += len(contacts)
 
-            elif ext in ['.xlsx', '.xls']:
+            elif ext in [".xlsx", ".xls"]:
                 contacts = ExcelProcessor.extract_from_excel(file_path)
                 self.contacts.extend(contacts)
                 self.stats["excel_processed"] += 1
@@ -372,7 +390,7 @@ class IngestionOrchestrator:
     def save_to_csv(self) -> None:
         """Save all contacts to CSV"""
         try:
-            with open(self.output_file, 'a', newline='', encoding='utf-8') as f:
+            with open(self.output_file, "a", newline="", encoding="utf-8") as f:
                 writer = csv.writer(f)
                 for contact in self.contacts:
                     writer.writerow(contact.to_csv_row())
@@ -387,7 +405,7 @@ class IngestionOrchestrator:
         log_entry = {
             "timestamp": datetime.now().isoformat(),
             "stats": self.stats,
-            "output_file": self.output_file
+            "output_file": self.output_file,
         }
 
         try:
@@ -396,12 +414,12 @@ class IngestionOrchestrator:
             # Append to log file
             logs = []
             if os.path.exists(self.log_file):
-                with open(self.log_file, 'r') as f:
+                with open(self.log_file, "r") as f:
                     logs = json.load(f)
 
             logs.append(log_entry)
 
-            with open(self.log_file, 'w') as f:
+            with open(self.log_file, "w") as f:
                 json.dump(logs, f, indent=2)
 
             logger.info(f"Log saved to {self.log_file}")
@@ -438,7 +456,7 @@ def main():
         "data/dropbox",
         "data/onedrive",
         "data/sharepoint",
-        "data/local_files"
+        "data/local_files",
     ]
 
     orchestrator = IngestionOrchestrator()

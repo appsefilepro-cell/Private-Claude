@@ -3,16 +3,16 @@ Forensic Legal Data Analyzer - Agent 3.0 Integration
 Comprehensive multi-source litigation data extraction and case assembly
 """
 
-import os
 import json
 import logging
-from datetime import datetime
-from typing import List, Dict, Any, Optional
-from pathlib import Path
+import os
 import re
+from datetime import datetime
+from pathlib import Path
+from typing import Any, Dict, List, Optional
 
 logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger('ForensicAnalyzer')
+logger = logging.getLogger("ForensicAnalyzer")
 
 
 class Case:
@@ -43,7 +43,7 @@ class Case:
             "chronology": self.chronology,
             "evidence": self.evidence,
             "witnesses": self.witnesses,
-            "damages": self.damages
+            "damages": self.damages,
         }
 
 
@@ -58,23 +58,50 @@ class ForensicDataAnalyzer:
         {
             "number": 1,
             "caption": "Thurman Malik Robinson, Jr. & APPS Holdings WY, Inc. v. City of Los Angeles; LAPD; Adilah Robinson; Does 1-50",
-            "keywords": ["LAPD", "police", "excessive force", "1983", "ADA", "assault", "battery", "Adilah Robinson", "City of Los Angeles"],
+            "keywords": [
+                "LAPD",
+                "police",
+                "excessive force",
+                "1983",
+                "ADA",
+                "assault",
+                "battery",
+                "Adilah Robinson",
+                "City of Los Angeles",
+            ],
             "jurisdiction": "U.S. District Court, Central District of California",
-            "claims": ["42 USC 1983", "ADA", "Assault & Battery", "IIED", "Defamation", "Negligence", "Monell", "Fraud"]
+            "claims": [
+                "42 USC 1983",
+                "ADA",
+                "Assault & Battery",
+                "IIED",
+                "Defamation",
+                "Negligence",
+                "Monell",
+                "Fraud",
+            ],
         },
         {
             "number": 2,
             "caption": "Thurman Malik Robinson, Jr. & APPS Holdings WY, Inc. v. New Forest Houston / Novu Apartments",
-            "keywords": ["Novu", "New Forest", "eviction", "ADA", "FHA", "lease", "apartment"],
+            "keywords": [
+                "Novu",
+                "New Forest",
+                "eviction",
+                "ADA",
+                "FHA",
+                "lease",
+                "apartment",
+            ],
             "jurisdiction": "Harris County Civil Court / Southern District of Texas",
-            "claims": ["ADA", "FHA", "Breach of Lease", "Wrongful Eviction", "IIED"]
+            "claims": ["ADA", "FHA", "Breach of Lease", "Wrongful Eviction", "IIED"],
         },
         {
             "number": 3,
             "caption": "Thurman Malik Robinson, Jr. & APPS Holdings WY, Inc. v. BMO Harris Bank",
             "keywords": ["BMO", "bank", "ADA", "financial", "accessibility"],
             "jurisdiction": "Southern District of Texas",
-            "claims": ["ADA Violations", "Financial Harm", "Emotional Distress"]
+            "claims": ["ADA Violations", "Financial Harm", "Emotional Distress"],
         },
         # Add all 40 cases here - template provided
     ]
@@ -113,44 +140,46 @@ class ForensicDataAnalyzer:
         self.global_document_index.append(doc_metadata)
 
         # Map to cases based on keywords
-        doc_text = doc_metadata.get('content_preview', '').lower()
-        doc_filename = doc_metadata.get('filename', '').lower()
+        doc_text = doc_metadata.get("content_preview", "").lower()
+        doc_filename = doc_metadata.get("filename", "").lower()
 
         for case_num, case in self.cases.items():
             # Check if any case keywords appear in document
             for keyword in case.keywords:
                 if keyword.lower() in doc_text or keyword.lower() in doc_filename:
-                    if doc_metadata['id'] not in self.case_mapping:
-                        self.case_mapping[doc_metadata['id']] = []
-                    if case_num not in self.case_mapping[doc_metadata['id']]:
-                        self.case_mapping[doc_metadata['id']].append(case_num)
-                        logger.debug(f"Mapped doc {doc_metadata['id']} to Case {case_num}")
+                    if doc_metadata["id"] not in self.case_mapping:
+                        self.case_mapping[doc_metadata["id"]] = []
+                    if case_num not in self.case_mapping[doc_metadata["id"]]:
+                        self.case_mapping[doc_metadata["id"]].append(case_num)
+                        logger.debug(
+                            f"Mapped doc {doc_metadata['id']} to Case {case_num}"
+                        )
 
     def extract_entities(self, text: str) -> Dict[str, List[str]]:
         """Extract entities from text using regex patterns"""
         entities = {
-            'emails': [],
-            'phones': [],
-            'dates': [],
-            'names': [],
-            'dollar_amounts': []
+            "emails": [],
+            "phones": [],
+            "dates": [],
+            "names": [],
+            "dollar_amounts": [],
         }
 
         # Email regex
-        email_pattern = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'
-        entities['emails'] = re.findall(email_pattern, text)
+        email_pattern = r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b"
+        entities["emails"] = re.findall(email_pattern, text)
 
         # Phone regex (various formats)
-        phone_pattern = r'(\+?1[-.]?)?\(?\d{3}\)?[-.]?\d{3}[-.]?\d{4}'
-        entities['phones'] = re.findall(phone_pattern, text)
+        phone_pattern = r"(\+?1[-.]?)?\(?\d{3}\)?[-.]?\d{3}[-.]?\d{4}"
+        entities["phones"] = re.findall(phone_pattern, text)
 
         # Date regex (MM/DD/YYYY, etc)
-        date_pattern = r'\b\d{1,2}[/-]\d{1,2}[/-]\d{2,4}\b'
-        entities['dates'] = re.findall(date_pattern, text)
+        date_pattern = r"\b\d{1,2}[/-]\d{1,2}[/-]\d{2,4}\b"
+        entities["dates"] = re.findall(date_pattern, text)
 
         # Dollar amounts
-        dollar_pattern = r'\$[\d,]+\.?\d{0,2}'
-        entities['dollar_amounts'] = re.findall(dollar_pattern, text)
+        dollar_pattern = r"\$[\d,]+\.?\d{0,2}"
+        entities["dollar_amounts"] = re.findall(dollar_pattern, text)
 
         return entities
 
@@ -166,24 +195,26 @@ class ForensicDataAnalyzer:
 
         # Get all documents mapped to this case
         relevant_docs = [
-            doc for doc in self.global_document_index
-            if doc['id'] in self.case_mapping and case_number in self.case_mapping[doc['id']]
+            doc
+            for doc in self.global_document_index
+            if doc["id"] in self.case_mapping
+            and case_number in self.case_mapping[doc["id"]]
         ]
 
         # Extract events from documents
         for doc in relevant_docs:
             # Create event entry
             event = {
-                'date': doc.get('created_date', ''),
-                'description': f"Document: {doc['filename']}",
-                'source_doc': doc['path'],
-                'source_id': doc['id'],
-                'entities': self.extract_entities(doc.get('content_preview', ''))
+                "date": doc.get("created_date", ""),
+                "description": f"Document: {doc['filename']}",
+                "source_doc": doc["path"],
+                "source_id": doc["id"],
+                "entities": self.extract_entities(doc.get("content_preview", "")),
             }
             events.append(event)
 
         # Sort by date
-        events.sort(key=lambda x: x['date'])
+        events.sort(key=lambda x: x["date"])
 
         return events
 
@@ -309,16 +340,16 @@ class ForensicDataAnalyzer:
             # Save individual dossier
             filename = f"case_{case_num:02d}_dossier.md"
             filepath = os.path.join(output_dir, filename)
-            with open(filepath, 'w') as f:
+            with open(filepath, "w") as f:
                 f.write(dossier)
 
             # Add to master report
             master_report += dossier
-            master_report += "\n\n" + "="*80 + "\n\n"
+            master_report += "\n\n" + "=" * 80 + "\n\n"
 
         # Save master report
         master_filepath = os.path.join(output_dir, "MASTER_ALL_40_CASES.md")
-        with open(master_filepath, 'w') as f:
+        with open(master_filepath, "w") as f:
             f.write(master_report)
 
         logger.info(f"Generated all dossiers in {output_dir}")
@@ -330,8 +361,11 @@ class ForensicDataAnalyzer:
             "total_cases": len(self.cases),
             "total_documents_indexed": len(self.global_document_index),
             "total_mappings": sum(len(cases) for cases in self.case_mapping.values()),
-            "cases_with_evidence": sum(1 for case_num in self.cases.keys()
-                                       if any(case_num in cases for cases in self.case_mapping.values()))
+            "cases_with_evidence": sum(
+                1
+                for case_num in self.cases.keys()
+                if any(case_num in cases for cases in self.case_mapping.values())
+            ),
         }
 
 

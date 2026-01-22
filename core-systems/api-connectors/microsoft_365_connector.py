@@ -3,17 +3,17 @@ Microsoft 365 Connector
 Connects to OneDrive and SharePoint using Microsoft Graph API
 """
 
-import os
 import json
 import logging
+import os
 from datetime import datetime
-from typing import List, Dict, Any
+from typing import Any, Dict, List
 
 # Microsoft Graph API (would need msal and requests in production)
 # from msal import ConfidentialClientApplication
 
 logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger('Microsoft365Connector')
+logger = logging.getLogger("Microsoft365Connector")
 
 
 class Microsoft365Connector:
@@ -90,12 +90,12 @@ class Microsoft365Connector:
                 "   - Sites.Read.All (SharePoint)",
                 "   - Mail.Read (if needed)",
                 "10. Grant admin consent for the permissions",
-                "11. Update this file with your credentials"
-            ]
+                "11. Update this file with your credentials",
+            ],
         }
 
         os.makedirs(os.path.dirname(self.credentials_file), exist_ok=True)
-        with open(self.credentials_file, 'w') as f:
+        with open(self.credentials_file, "w") as f:
             json.dump(template, f, indent=2)
 
         logger.info(f"Created template credentials file: {self.credentials_file}")
@@ -123,7 +123,9 @@ class Microsoft365Connector:
 
         return files
 
-    def list_sharepoint_files(self, site_path: str = "/Shared Documents") -> List[Dict[str, Any]]:
+    def list_sharepoint_files(
+        self, site_path: str = "/Shared Documents"
+    ) -> List[Dict[str, Any]]:
         """
         List files in SharePoint
 
@@ -146,7 +148,9 @@ class Microsoft365Connector:
 
         return files
 
-    def download_file(self, file_id: str, filename: str, source: str = "onedrive") -> str:
+    def download_file(
+        self, file_id: str, filename: str, source: str = "onedrive"
+    ) -> str:
         """
         Download a file from OneDrive or SharePoint
 
@@ -159,7 +163,11 @@ class Microsoft365Connector:
             Path to downloaded file
         """
         try:
-            download_dir = self.download_dir_onedrive if source == "onedrive" else self.download_dir_sharepoint
+            download_dir = (
+                self.download_dir_onedrive
+                if source == "onedrive"
+                else self.download_dir_sharepoint
+            )
 
             # In production:
             # url = f"https://graph.microsoft.com/v1.0/me/drive/items/{file_id}/content"
@@ -178,7 +186,9 @@ class Microsoft365Connector:
             logger.error(f"Error downloading file: {e}")
             return None
 
-    def create_sharepoint_folder(self, folder_name: str, parent_path: str = "/Shared Documents") -> bool:
+    def create_sharepoint_folder(
+        self, folder_name: str, parent_path: str = "/Shared Documents"
+    ) -> bool:
         """
         Create a folder in SharePoint
 
@@ -247,29 +257,26 @@ class Microsoft365Connector:
             "/Shared Documents/Legal Operations/02_Active_Cases/BMO_Dispute",
             "/Shared Documents/Legal Operations/02_Active_Cases/United_Airlines",
             "/Shared Documents/Legal Operations/03_Automation_Output",
-
             # Trading Operations (Pillar A)
             "/Shared Documents/Trading Operations",
             "/Shared Documents/Trading Operations/Trade_Logs",
             "/Shared Documents/Trading Operations/Performance_Reports",
             "/Shared Documents/Trading Operations/Compliance",
-
             # Federal Contracting (Pillar C)
             "/Shared Documents/Federal Contracting",
             "/Shared Documents/Federal Contracting/8a_Application_Package",
             "/Shared Documents/Federal Contracting/Opportunities",
             "/Shared Documents/Federal Contracting/Proposals",
-
             # Grant Intelligence (Pillar D)
             "/Shared Documents/Grant Intelligence",
             "/Shared Documents/Grant Intelligence/Resource_Library",
-            "/Shared Documents/Grant Intelligence/Active_Grants"
+            "/Shared Documents/Grant Intelligence/Active_Grants",
         ]
 
         try:
             for folder_path in folders:
                 # Extract folder name and parent path
-                parts = folder_path.rsplit('/', 1)
+                parts = folder_path.rsplit("/", 1)
                 parent = parts[0] if len(parts) > 1 else "/"
                 folder_name = parts[1] if len(parts) > 1 else parts[0]
 
@@ -293,7 +300,7 @@ class Microsoft365Connector:
             "onedrive_files": 0,
             "sharepoint_files": 0,
             "downloaded": 0,
-            "errors": 0
+            "errors": 0,
         }
 
         try:
@@ -308,7 +315,7 @@ class Microsoft365Connector:
 
             for file in onedrive_files:
                 try:
-                    self.download_file(file.get('id'), file.get('name'), 'onedrive')
+                    self.download_file(file.get("id"), file.get("name"), "onedrive")
                     stats["downloaded"] += 1
                 except Exception as e:
                     logger.error(f"Error downloading OneDrive file: {e}")
@@ -320,7 +327,7 @@ class Microsoft365Connector:
 
             for file in sharepoint_files:
                 try:
-                    self.download_file(file.get('id'), file.get('name'), 'sharepoint')
+                    self.download_file(file.get("id"), file.get("name"), "sharepoint")
                     stats["downloaded"] += 1
                 except Exception as e:
                     logger.error(f"Error downloading SharePoint file: {e}")
@@ -376,7 +383,7 @@ class Microsoft365Connector:
             f"Your SharePoint: {self.sharepoint_site}",
             "",
             "For detailed documentation:",
-            "https://docs.microsoft.com/en-us/graph/auth-v2-service"
+            "https://docs.microsoft.com/en-us/graph/auth-v2-service",
         ]
 
 
