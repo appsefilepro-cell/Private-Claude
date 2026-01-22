@@ -1,0 +1,38 @@
+{
+  "title": "Merge ALL 120 Pull Requests - AgentX5",
+  "description": "Auto-merge all open PRs in Private-Claude repository",
+  "trigger": {
+    "app": "GitHub",
+    "event": "New or Updated Pull Request",
+    "config": {
+      "account": "appsefilepro-cell",
+      "repo": "Private-Claude",
+      "state": "open"
+    }
+  },
+  "steps": [
+    {
+      "action": "Filter",
+      "continue_only_if": "Pull Request Mergeable is True"
+    },
+    {
+      "action": "GitHub - Merge Pull Request",
+      "config": {
+        "pr_number": "{{trigger.pull_request.number}}",
+        "merge_method": "squash",
+        "commit_title": "✅ AUTO: Merged by Zapier AgentX5",
+        "delete_branch": true
+      }
+    }
+  ],
+  "schedule": "Every hour",
+  "instructions": [
+    "IMPORT THIS TO ZAPIER:",
+    "1. Go to https://zapier.com/app/zaps",
+    "2. Click 'Create Zap'",
+    "3. Click 'Import' and paste this JSON",
+    "4. Connect your GitHub account",
+    "5. Turn ON the Zap",
+    "6. It will merge all 120 PRs automatically over next few hours"
+  ]
+}
