@@ -1,0 +1,58 @@
+{
+  "trigger": {
+    "type": "webhook",
+    "url": "https://hooks.zapier.com/hooks/catch/YOUR_WEBHOOK_ID/",
+    "method": "POST",
+    "description": "Complete all 120 pull requests via Zapier automation"
+  },
+  "steps": [
+    {
+      "step": 1,
+      "action": "GitHub - Get Pull Requests",
+      "config": {
+        "repo": "appsefilepro-cell/Private-Claude",
+        "state": "open",
+        "base": "main"
+      }
+    },
+    {
+      "step": 2,
+      "action": "Filter - Only process mergeable PRs",
+      "config": {
+        "condition": "mergeable == true"
+      }
+    },
+    {
+      "step": 3,
+      "action": "GitHub - Merge Pull Request",
+      "config": {
+        "merge_method": "squash",
+        "commit_title": "✅ AUTO: Merged via Zapier automation",
+        "auto_merge": true
+      }
+    },
+    {
+      "step": 4,
+      "action": "Looping - Process all 120 PRs",
+      "config": {
+        "loop_on": "pull_requests",
+        "max_iterations": 120
+      }
+    }
+  ],
+  "schedule": "Run immediately",
+  "status": "READY TO ACTIVATE",
+  "instructions": [
+    "1. Go to zapier.com/app/zaps",
+    "2. Click 'Create Zap'",
+    "3. Import this JSON configuration",
+    "4. Connect your GitHub account",
+    "5. Turn on the Zap",
+    "6. All 120 PRs will be processed automatically"
+  ],
+  "alternative_free_method": {
+    "tool": "GitHub CLI (gh)",
+    "command": "for pr in $(gh pr list --limit 120 --json number --jq '.[].number'); do gh pr merge $pr --auto --squash; done",
+    "description": "Use GitHub CLI to auto-merge all PRs (100% FREE)"
+  }
+}
